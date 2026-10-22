@@ -1,2 +1,19 @@
-[]
-
+[
+  {
+    "id": "1sec-u1",
+    "grade": "1Sec",
+    "unit": "Unité 1: Le club de ma classe",
+    "title": "Unité 1: Le club de ma classe",
+    "lessons": [
+      {
+        "id": "l1",
+        "title": "Lesson 1: Se présenter",
+        "content": "Bienvenue dans le cours de français!",
+        "vocabulary": [
+          {"fr": "Un élève", "ar": "تلميذ"},
+          {"fr": "Un copain", "ar": "صديق"}
+        ]
+      }
+    ]
+  }
+]
