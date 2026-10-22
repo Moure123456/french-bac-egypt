@@ -1,2 +1,92 @@
-[]
-
+{
+  "meta": {
+    "version": 1,
+    "note": "Three original graded reading stories (A1, A2, B1). Each story is split into paragraphs; every paragraph has the French text (fr) and a detailed Arabic translation (ar). The full French text is the paragraphs joined in order. Each story also has key vocabulary and comprehension questions with Arabic explanations."
+  },
+  "stories": [
+    {
+      "id": "chat-biscotte",
+      "level": "A1",
+      "level_ar": "مبتدئ",
+      "title_fr": "Le chat de Mona",
+      "title_ar": "قط منى",
+      "theme_ar": "الحيوانات الأليفة والمساعدة",
+      "paragraphs": [
+        { "fr": "Mona a un petit chat. Il s’appelle Biscotte. Il est blanc et il a les yeux verts.", "ar": "لدى منى قط صغير اسمه «بيسكوت». لونه أبيض وعيناه خضراوان." },
+        { "fr": "Chaque matin, Biscotte attend Mona devant la porte. Mona lui donne du lait et un peu de poisson.", "ar": "كل صباح ينتظر بيسكوت منى أمام الباب، فتعطيه منى حليباً وقليلاً من السمك." },
+        { "fr": "Un jour, Biscotte monte sur le grand arbre du jardin. Il ne peut pas descendre. Il miaule très fort.", "ar": "في يوم من الأيام تسلّق بيسكوت الشجرة الكبيرة في الحديقة ولم يستطع النزول، فأخذ يموء بصوت عالٍ جداً." },
+        { "fr": "Mona appelle son frère Omar. Omar prend une échelle et aide le chat. Biscotte saute dans les bras de Mona.", "ar": "نادت منى أخاها عمر. أحضر عمر سلّماً وساعد القط، فقفز بيسكوت إلى حضن منى." },
+        { "fr": "Mona est très contente. Maintenant, Biscotte reste dans le jardin, mais il ne monte plus sur l’arbre !", "ar": "فرحت منى كثيراً. والآن يبقى بيسكوت في الحديقة، لكنه لم يعد يتسلق الشجرة!" }
+      ],
+      "vocabulary": [
+        { "fr": "le chat", "ar": "القط" },
+        { "fr": "le lait", "ar": "الحليب" },
+        { "fr": "l’arbre", "ar": "الشجرة" },
+        { "fr": "l’échelle", "ar": "السلّم" },
+        { "fr": "descendre", "ar": "ينزل" },
+        { "fr": "miauler", "ar": "يموء" }
+      ],
+      "questions": [
+        { "id": "q1", "type": "choice", "prompt_fr": "Comment s’appelle le chat de Mona ?", "options": ["Biscotte", "Minou", "Zizi", "Omar"], "correct": "Biscotte", "answer_fr": "Le chat de Mona s’appelle Biscotte.", "why_ar": "الفقرة الأولى تقول: Il s’appelle Biscotte، أي اسمه بيسكوت.", "rule_ar": "استخرج الإجابة من الفقرة المناسبة في القصة." },
+        { "id": "q2", "type": "choice", "prompt_fr": "Où monte le chat ?", "options": ["Sur le toit", "Sur le grand arbre", "Sur la table", "Sur le mur"], "correct": "Sur le grand arbre", "answer_fr": "Le chat monte sur le grand arbre du jardin.", "why_ar": "الفقرة الثالثة تذكر أن القط تسلّق الشجرة الكبيرة في الحديقة.", "rule_ar": "استخرج الإجابة من الفقرة المناسبة في القصة." },
+        { "id": "q3", "type": "choice", "prompt_fr": "Qui aide le chat ?", "options": ["Omar", "Le père", "Un voisin", "La mère"], "correct": "Omar", "answer_fr": "Omar aide le chat avec une échelle.", "why_ar": "الفقرة الرابعة تقول إن عمر أخذ سلّماً وساعد القط.", "rule_ar": "استخرج الإجابة من الفقرة المناسبة في القصة." }
+      ]
+    },
+    {
+      "id": "jour-du-match",
+      "level": "A2",
+      "level_ar": "أساسي",
+      "title_fr": "Le jour du match",
+      "title_ar": "يوم المباراة",
+      "theme_ar": "الرياضة والصداقة",
+      "paragraphs": [
+        { "fr": "Karim est élève au lycée. Il adore le football et il joue dans l’équipe de son lycée. Samedi dernier, il avait un match très important contre le lycée voisin.", "ar": "كريم تلميذ في المدرسة الثانوية. يعشق كرة القدم ويلعب في فريق مدرسته. يوم السبت الماضي كانت لديه مباراة مهمة جداً ضد المدرسة المجاورة." },
+        { "fr": "Le matin, Karim s’est levé tôt. Il a pris un bon petit-déjeuner et il a préparé son sac. Mais quand il est arrivé au stade, il a vu qu’il avait oublié ses chaussures de sport !", "ar": "في الصباح استيقظ كريم مبكراً، وتناول فطوراً جيداً وجهّز حقيبته. لكن عندما وصل إلى الملعب اكتشف أنه نسي حذاءه الرياضي!" },
+        { "fr": "Karim était très inquiet. Son ami Youssef lui a dit : « Ne t’inquiète pas, j’ai une paire en plus. » Les chaussures étaient un peu grandes, mais Karim a accepté avec joie.", "ar": "كان كريم قلقاً جداً. قال له صديقه يوسف: «لا تقلق، معي زوج إضافي.» كان الحذاء كبيراً قليلاً، لكن كريم قبله بسرور." },
+        { "fr": "Pendant le match, Karim a marqué un but magnifique. Son équipe a gagné deux à un. Tout le monde a applaudi.", "ar": "أثناء المباراة سجّل كريم هدفاً رائعاً. فاز فريقه بهدفين مقابل هدف، وصفّق الجميع." },
+        { "fr": "Après le match, Karim a remercié Youssef. Il a compris une leçon importante : un bon ami est plus précieux qu’une victoire.", "ar": "بعد المباراة شكر كريم يوسف. وتعلّم درساً مهماً: الصديق الجيد أثمن من الفوز." }
+      ],
+      "vocabulary": [
+        { "fr": "le match", "ar": "المباراة" },
+        { "fr": "le stade", "ar": "الملعب" },
+        { "fr": "l’équipe", "ar": "الفريق" },
+        { "fr": "marquer un but", "ar": "يسجّل هدفاً" },
+        { "fr": "oublier", "ar": "ينسى" },
+        { "fr": "remercier", "ar": "يشكر" }
+      ],
+      "questions": [
+        { "id": "q1", "type": "choice", "prompt_fr": "Pourquoi Karim est-il inquiet ?", "options": ["Il a perdu son sac", "Il a oublié ses chaussures de sport", "Il est malade", "Il est en retard"], "correct": "Il a oublié ses chaussures de sport", "answer_fr": "Karim est inquiet parce qu’il a oublié ses chaussures de sport.", "why_ar": "الفقرة الثانية تقول إنه اكتشف في الملعب أنه نسي حذاءه الرياضي.", "rule_ar": "استخرج الإجابة من الفقرة المناسبة في القصة." },
+        { "id": "q2", "type": "choice", "prompt_fr": "Qui prête des chaussures à Karim ?", "options": ["Youssef", "Omar", "L’entraîneur", "Son père"], "correct": "Youssef", "answer_fr": "Youssef prête une paire de chaussures à Karim.", "why_ar": "في الفقرة الثالثة قال يوسف إن معه زوجاً إضافياً من الأحذية.", "rule_ar": "استخرج الإجابة من الفقرة المناسبة في القصة." },
+        { "id": "q3", "type": "choice", "prompt_fr": "Quel est le score final du match ?", "options": ["Deux à un", "Un à zéro", "Trois à deux", "Zéro à zéro"], "correct": "Deux à un", "answer_fr": "Le match se termine par deux à un.", "why_ar": "الفقرة الرابعة تقول: Son équipe a gagné deux à un.", "rule_ar": "انتبه إلى الأرقام في النص." }
+      ]
+    },
+    {
+      "id": "lettre-avenir",
+      "level": "B1",
+      "level_ar": "متوسط",
+      "title_fr": "Une lettre pour l’avenir",
+      "title_ar": "رسالة إلى المستقبل",
+      "theme_ar": "التوتر قبل الامتحانات والإصرار",
+      "paragraphs": [
+        { "fr": "Sara est en troisième secondaire. Depuis le début de l’année, elle travaille beaucoup, mais à l’approche des examens, elle se sent stressée. Elle dort mal et elle a peur de décevoir ses parents.", "ar": "سارة في الصف الثالث الثانوي. تدرس كثيراً منذ بداية العام، لكن مع اقتراب الامتحانات تشعر بالتوتر. تنام نوماً سيئاً وتخاف أن تخيّب أمل والديها." },
+        { "fr": "Un soir, sa grand-mère lui conseille : « Écris une lettre à la Sara de l’année prochaine. Raconte-lui comment tu te sens aujourd’hui. » Sara trouve l’idée étrange, mais elle prend un stylo.", "ar": "في إحدى الليالي نصحتها جدتها: «اكتبي رسالة إلى سارة في العام القادم، واحكي لها كيف تشعرين اليوم.» وجدت سارة الفكرة غريبة، لكنها أخذت قلماً." },
+        { "fr": "Elle écrit : « Aujourd’hui, j’ai peur, mais je sais que j’ai fait de mon mieux. Si je réussis, je serai fière de moi. Si j’échoue, j’essaierai encore, parce que l’échec n’est pas la fin du monde. »", "ar": "كتبت: «اليوم أنا خائفة، لكنني أعلم أنني بذلت أقصى جهدي. إن نجحت فسأفخر بنفسي. وإن أخفقت فسأحاول مرة أخرى، لأن الفشل ليس نهاية العالم.»" },
+        { "fr": "En relisant sa lettre, Sara se sent plus calme. Elle comprend que le stress diminue quand on organise son temps et qu’on fait des pauses. Dès le lendemain, elle établit un emploi du temps réaliste et elle fait une promenade chaque soir.", "ar": "عندما أعادت قراءة رسالتها شعرت بهدوء أكبر. فهمت أن التوتر يقل عندما ننظّم وقتنا ونأخذ فترات راحة. ومنذ اليوم التالي وضعت جدولاً واقعياً وصارت تتنزه كل مساء." },
+        { "fr": "Le jour de l’examen, Sara est détendue. Elle ne pense pas au résultat, mais seulement à répondre le mieux possible. Quand elle sort de la salle, elle sourit : elle a déjà gagné, car elle a vaincu sa peur.", "ar": "في يوم الامتحان كانت سارة مسترخية. لم تفكر في النتيجة، بل في أن تجيب بأفضل ما تستطيع. وعندما خرجت من القاعة ابتسمت: لقد ربحت بالفعل لأنها انتصرت على خوفها." }
+      ],
+      "vocabulary": [
+        { "fr": "le stress", "ar": "التوتر" },
+        { "fr": "décevoir", "ar": "يخيّب الأمل" },
+        { "fr": "l’échec", "ar": "الفشل" },
+        { "fr": "réussir", "ar": "ينجح" },
+        { "fr": "un emploi du temps", "ar": "جدول زمني" },
+        { "fr": "fier / fière", "ar": "فخور / فخورة" }
+      ],
+      "questions": [
+        { "id": "q1", "type": "choice", "prompt_fr": "Qui conseille à Sara d’écrire une lettre ?", "options": ["Sa grand-mère", "Sa mère", "Son professeur", "Son amie"], "correct": "Sa grand-mère", "answer_fr": "C’est sa grand-mère qui conseille à Sara d’écrire une lettre.", "why_ar": "الفقرة الثانية تقول إن الجدة هي التي نصحتها بكتابة الرسالة.", "rule_ar": "استخرج الإجابة من الفقرة المناسبة في القصة." },
+        { "id": "q2", "type": "choice", "prompt_fr": "Comment Sara se sent-elle après avoir relu sa lettre ?", "options": ["Plus calme", "Plus stressée", "Triste", "En colère"], "correct": "Plus calme", "answer_fr": "Après avoir relu sa lettre, Sara se sent plus calme.", "why_ar": "الفقرة الرابعة تذكر أنها شعرت بهدوء أكبر بعد إعادة قراءة الرسالة.", "rule_ar": "ابحث عن الكلمات الدالة على الشعور في الفقرة." },
+        { "id": "q3", "type": "choice", "prompt_fr": "Que fait Sara dès le lendemain ?", "options": ["Elle établit un emploi du temps réaliste", "Elle arrête d’étudier", "Elle change de lycée", "Elle part en vacances"], "correct": "Elle établit un emploi du temps réaliste", "answer_fr": "Dès le lendemain, Sara établit un emploi du temps réaliste.", "why_ar": "الفقرة الرابعة تقول إنها وضعت جدولاً واقعياً منذ اليوم التالي.", "rule_ar": "dès le lendemain تعني منذ اليوم التالي مباشرة." }
+      ]
+    }
+  ]
+}
