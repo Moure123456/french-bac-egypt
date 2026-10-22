@@ -1,2 +1,256 @@
-[]
-
+{
+  "meta": {
+    "version": 2,
+    "note": "Complete phonetics course: 25 sounds (oral vowels, semi-vowels, consonants, nasal vowels), 16 pronunciation and reading rules (mute letters, liaison, spelling-to-sound), and 14 contrast sets of similar sounds. Every example has its IPA transcription and an Arabic meaning, and can be read aloud with the browser voice."
+  },
+  "groups": [
+    {
+      "id": "vowels",
+      "title_fr": "Les voyelles orales",
+      "title_ar": "الأصوات المتحركة الفموية",
+      "intro_ar": "تُنطق بخروج الهواء من الفم فقط. الفرنسية فيها متحركات أكثر من العربية، وأهم ما يميزها وضع الشفاه (مستديرة أو ممدودة) وارتفاع اللسان.",
+      "sounds": [
+        { "ipa": "a", "letters": "a, à", "name_ar": "صوت a", "how_ar": "افتح فمك بشكل واسع وأبقِ شفتيك مسترخيتين.", "place_ar": "اللسان منخفض في مقدمة الفم.", "why_ar": "الحرفان a وà يُنطقان [a] دائماً تقريباً.", "tip_ar": "يشبه الفتحة العربية لكن بدون تفخيم.", "examples": [{ "fr": "ami", "ipa": "ami", "ar": "صديق" }, { "fr": "chat", "ipa": "ʃa", "ar": "قط" }, { "fr": "table", "ipa": "tabl", "ar": "طاولة" }, { "fr": "là", "ipa": "la", "ar": "هناك" }] },
+        { "ipa": "e", "letters": "é, er, ez, et", "name_ar": "صوت é المغلق", "how_ar": "الفم نصف مغلق والشفتان ممدودتان كأنك تبتسم.", "place_ar": "اللسان مرتفع في مقدمة الفم.", "why_ar": "علامة accent aigu (é) وكذلك النهايات er وez وet تعطي هذا الصوت، ولا يُنطق r ولا z ولا t.", "tip_ar": "لا تنطق الراء في parler.", "examples": [{ "fr": "été", "ipa": "ete", "ar": "صيف" }, { "fr": "café", "ipa": "kafe", "ar": "قهوة" }, { "fr": "parler", "ipa": "paʁle", "ar": "يتكلم" }, { "fr": "nez", "ipa": "ne", "ar": "أنف" }] },
+        { "ipa": "ɛ", "letters": "è, ê, ai, ei, e", "name_ar": "صوت è المفتوح", "how_ar": "الفم نصف مفتوح والشفتان ممدودتان.", "place_ar": "اللسان في مقدمة الفم، أخفض من [e].", "why_ar": "accent grave وcirconflexe وai وei تعطي هذا الصوت، وكذلك e قبل حرف ساكن منطوق في المقطع نفسه.", "tip_ar": "فرّق بين [e] و[ɛ]: les ≠ lait.", "examples": [{ "fr": "mère", "ipa": "mɛʁ", "ar": "أم" }, { "fr": "fête", "ipa": "fɛt", "ar": "عيد" }, { "fr": "lait", "ipa": "lɛ", "ar": "حليب" }, { "fr": "belle", "ipa": "bɛl", "ar": "جميلة" }] },
+        { "ipa": "i", "letters": "i, î, y", "name_ar": "صوت i", "how_ar": "شفتان ممدودتان وفم شبه مغلق.", "place_ar": "اللسان مرتفع جداً في مقدمة الفم.", "why_ar": "الحروف i وî وy تنطق ياءً قصيرة واضحة.", "tip_ar": "يشبه الكسرة الطويلة العربية لكنه أقصر.", "examples": [{ "fr": "ici", "ipa": "isi", "ar": "هنا" }, { "fr": "midi", "ipa": "midi", "ar": "ظهر" }, { "fr": "livre", "ipa": "livʁ", "ar": "كتاب" }, { "fr": "style", "ipa": "stil", "ar": "أسلوب" }] },
+        { "ipa": "u", "letters": "ou, où", "name_ar": "صوت ou", "how_ar": "استدر الشفتين وقدّمهما قليلاً وأبقِ الفم شبه مغلق.", "place_ar": "اللسان مرتفع في مؤخرة الفم.", "why_ar": "اجتماع الحرفين ou يعطي صوتاً واحداً هو [u] ولا ينطق كل حرف وحده.", "tip_ar": "يشبه الضمة الطويلة العربية.", "examples": [{ "fr": "rouge", "ipa": "ʁuʒ", "ar": "أحمر" }, { "fr": "tout", "ipa": "tu", "ar": "كل" }, { "fr": "jour", "ipa": "ʒuʁ", "ar": "يوم" }, { "fr": "vous", "ipa": "vu", "ar": "أنتم" }] },
+        { "ipa": "y", "letters": "u, û", "name_ar": "صوت u الفرنسي", "how_ar": "انطق [i] ثم استدر شفتيك مع إبقاء لسانك في مكانه.", "place_ar": "اللسان في مقدمة الفم والشفتان مستديرتان.", "why_ar": "الحرف u وحده يعطي هذا الصوت، وهو غير موجود في العربية.", "tip_ar": "قارن tu [ty] مع tout [tu].", "examples": [{ "fr": "tu", "ipa": "ty", "ar": "أنت" }, { "fr": "rue", "ipa": "ʁy", "ar": "شارع" }, { "fr": "sur", "ipa": "syʁ", "ar": "فوق" }, { "fr": "musique", "ipa": "myzik", "ar": "موسيقى" }] },
+        { "ipa": "o", "letters": "o, ô, au, eau", "name_ar": "صوت o المغلق", "how_ar": "استدر الشفتين والفم نصف مغلق.", "place_ar": "اللسان في مؤخرة الفم ومرتفع قليلاً.", "why_ar": "au وeau وô تعطي [o]، وكذلك o في آخر الكلمة أو قبل صوت [z] مثل rose.", "tip_ar": "لا تنطق a ولا u في eau.", "examples": [{ "fr": "eau", "ipa": "o", "ar": "ماء" }, { "fr": "gâteau", "ipa": "gato", "ar": "كعكة" }, { "fr": "mot", "ipa": "mo", "ar": "كلمة" }, { "fr": "rose", "ipa": "ʁoz", "ar": "وردة" }] },
+        { "ipa": "ɔ", "letters": "o", "name_ar": "صوت o المفتوح", "how_ar": "استدر الشفتين والفم نصف مفتوح.", "place_ar": "اللسان في مؤخرة الفم، أخفض من [o].", "why_ar": "الحرف o المتبوع بحرف ساكن منطوق (غير z) يُنطق مفتوحاً.", "tip_ar": "قارن paume [pom] مع pomme [pɔm].", "examples": [{ "fr": "porte", "ipa": "pɔʁt", "ar": "باب" }, { "fr": "école", "ipa": "ekɔl", "ar": "مدرسة" }, { "fr": "pomme", "ipa": "pɔm", "ar": "تفاحة" }, { "fr": "sport", "ipa": "spɔʁ", "ar": "رياضة" }] },
+        { "ipa": "ø", "letters": "eu, œu", "name_ar": "صوت eu المغلق", "how_ar": "انطق [e] ثم استدر شفتيك مع بقاء اللسان في مكانه.", "place_ar": "اللسان في مقدمة الفم والشفتان مستديرتان.", "why_ar": "eu في آخر المقطع أو قبل [z] تنطق [ø]، وهو غير موجود في العربية.", "tip_ar": "تدرب عليه أمام المرآة.", "examples": [{ "fr": "peu", "ipa": "pø", "ar": "قليل" }, { "fr": "deux", "ipa": "dø", "ar": "اثنان" }, { "fr": "bleu", "ipa": "blø", "ar": "أزرق" }, { "fr": "heureux", "ipa": "øʁø", "ar": "سعيد" }] },
+        { "ipa": "œ", "letters": "eu, œu", "name_ar": "صوت eu المفتوح", "how_ar": "انطق [ɛ] ثم استدر شفتيك مع بقاء اللسان في مكانه.", "place_ar": "اللسان في مقدمة الفم والفم نصف مفتوح والشفتان مستديرتان.", "why_ar": "eu وœu قبل حرف ساكن منطوق (غير z) تنطق [œ] المفتوحة.", "tip_ar": "قارن peu [pø] مع peur [pœʁ].", "examples": [{ "fr": "peur", "ipa": "pœʁ", "ar": "خوف" }, { "fr": "sœur", "ipa": "sœʁ", "ar": "أخت" }, { "fr": "fleur", "ipa": "flœʁ", "ar": "زهرة" }, { "fr": "heure", "ipa": "œʁ", "ar": "ساعة" }] },
+        { "ipa": "ə", "letters": "e", "name_ar": "الـ e الصامتة (e caduc)", "how_ar": "صوت خفيف جداً مع شفتين مستديرتين قليلاً.", "place_ar": "اللسان في وسط الفم.", "why_ar": "e بدون علامة في مقطع غير مشدد يضعف أو يسقط، خاصة في آخر الكلمة أو وسطها.", "tip_ar": "في je وle ينطق بخفة، وفي samedi يسقط تقريباً.", "examples": [{ "fr": "le", "ipa": "lə", "ar": "الـ" }, { "fr": "je", "ipa": "ʒə", "ar": "أنا" }, { "fr": "petit", "ipa": "pəti", "ar": "صغير" }, { "fr": "samedi", "ipa": "samdi", "ar": "السبت" }] }
+      ]
+    },
+    {
+      "id": "semivowels",
+      "title_fr": "Les semi-voyelles",
+      "title_ar": "أشباه المتحركات",
+      "intro_ar": "أصوات سريعة تنزلق إلى المتحرك التالي في المقطع نفسه، فلا تُشكّل مقطعاً مستقلاً.",
+      "sounds": [
+        { "ipa": "j", "letters": "i, y + متحرك, ill, ail, eil", "name_ar": "صوت الياء [j]", "how_ar": "ارفع وسط اللسان نحو الحنك كما في الياء ثم انتقل بسرعة إلى المتحرك التالي.", "place_ar": "وسط الحنك.", "why_ar": "i أو y قبل متحرك، وكذلك ill وail وeil، تنطق [j].", "tip_ar": "تشبه الياء في كلمة «ياسر».", "examples": [{ "fr": "piano", "ipa": "pjano", "ar": "بيانو" }, { "fr": "yeux", "ipa": "jø", "ar": "عيون" }, { "fr": "fille", "ipa": "fij", "ar": "بنت" }, { "fr": "travail", "ipa": "tʁavaj", "ar": "عمل" }] },
+        { "ipa": "w", "letters": "ou + متحرك, oi", "name_ar": "صوت الواو [w]", "how_ar": "استدر الشفتين كما في [u] ثم انتقل بسرعة إلى المتحرك التالي.", "place_ar": "الشفتان مستديرتان واللسان في مؤخرة الفم.", "why_ar": "ou قبل متحرك وoi تعطي [w]: oui وmoi.", "tip_ar": "تشبه الواو في كلمة «ولد».", "examples": [{ "fr": "oui", "ipa": "wi", "ar": "نعم" }, { "fr": "moi", "ipa": "mwa", "ar": "أنا" }, { "fr": "voiture", "ipa": "vwatyʁ", "ar": "سيارة" }, { "fr": "jouer", "ipa": "ʒwe", "ar": "يلعب" }] },
+        { "ipa": "ɥ", "letters": "u + متحرك", "name_ar": "صوت [ɥ]", "how_ar": "استدر الشفتين كما في [y] ثم انتقل بسرعة إلى المتحرك التالي.", "place_ar": "اللسان في مقدمة الفم والشفتان مستديرتان.", "why_ar": "الحرف u قبل متحرك ينطق [ɥ]: nuit وhuit وlui.", "tip_ar": "لا تنطقها [w] فتختلط huit مع oui.", "examples": [{ "fr": "nuit", "ipa": "nɥi", "ar": "ليل" }, { "fr": "huit", "ipa": "ɥit", "ar": "ثمانية" }, { "fr": "lui", "ipa": "lɥi", "ar": "هو" }, { "fr": "cuisine", "ipa": "kɥizin", "ar": "مطبخ" }] }
+      ]
+    },
+    {
+      "id": "consonants",
+      "title_fr": "Les consonnes difficiles",
+      "title_ar": "الأصوات الساكنة الصعبة",
+      "intro_ar": "هذه الأصوات تتعب متحدثي العربية، لأن بعضها غير موجود لدينا أو يُنطق بطريقة مختلفة.",
+      "sounds": [
+        { "ipa": "ʁ", "letters": "r", "name_ar": "الراء الفرنسية", "how_ar": "ارفع مؤخرة اللسان نحو سقف الحلق مع احتكاك خفيف.", "place_ar": "اللهاة وأقصى الحلق، وليست طرف اللسان.", "why_ar": "الراء الفرنسية تخرج من الخلف، فهي ليست راءً مكررة كالعربية.", "tip_ar": "تشبه الغين الخفيفة، ولا تطلها ولا ترددها.", "examples": [{ "fr": "rue", "ipa": "ʁy", "ar": "شارع" }, { "fr": "rouge", "ipa": "ʁuʒ", "ar": "أحمر" }, { "fr": "mari", "ipa": "maʁi", "ar": "زوج" }, { "fr": "sœur", "ipa": "sœʁ", "ar": "أخت" }] },
+        { "ipa": "ʒ", "letters": "j, g+e/i/y", "name_ar": "صوت j", "how_ar": "اقترب بوسط اللسان من الحنك مع اهتزاز الوترين الصوتيين.", "place_ar": "وسط الحنك الصلب.", "why_ar": "j ينطق دائماً هكذا، وكذلك g قبل e وi وy. أما قبل a وo وu فهو [g].", "tip_ar": "يشبه الجيم في «جراج» و«مساج» كما ينطقهما المصريون.", "examples": [{ "fr": "je", "ipa": "ʒə", "ar": "أنا" }, { "fr": "rouge", "ipa": "ʁuʒ", "ar": "أحمر" }, { "fr": "gens", "ipa": "ʒɑ̃", "ar": "ناس" }, { "fr": "jaune", "ipa": "ʒon", "ar": "أصفر" }] },
+        { "ipa": "ʃ", "letters": "ch", "name_ar": "صوت ch", "how_ar": "انطقه كالشين العربية مع تقريب الشفتين قليلاً.", "place_ar": "وسط الحنك.", "why_ar": "اجتماع الحرفين ch يعطي هذا الصوت الواحد.", "tip_ar": "لا تنطق t ولا k قبله.", "examples": [{ "fr": "chat", "ipa": "ʃa", "ar": "قط" }, { "fr": "chaud", "ipa": "ʃo", "ar": "ساخن" }, { "fr": "riche", "ipa": "ʁiʃ", "ar": "غني" }, { "fr": "chambre", "ipa": "ʃɑ̃bʁ", "ar": "غرفة" }] },
+        { "ipa": "ɲ", "letters": "gn", "name_ar": "صوت gn", "how_ar": "ضع وسط اللسان على الحنك وأخرج صوت النون مع الأنف.", "place_ar": "وسط الحنك مع خروج الهواء من الأنف.", "why_ar": "gn صوت واحد ولا ينطق g فيه منفصلاً.", "tip_ar": "انطق «ني» كصوت واحد سريع دون فصل بين النون والياء.", "examples": [{ "fr": "montagne", "ipa": "mɔ̃taɲ", "ar": "جبل" }, { "fr": "signe", "ipa": "siɲ", "ar": "علامة" }, { "fr": "ligne", "ipa": "liɲ", "ar": "خط" }, { "fr": "gagner", "ipa": "gaɲe", "ar": "يفوز" }] },
+        { "ipa": "p", "letters": "p", "name_ar": "صوت p", "how_ar": "أغلق الشفتين ثم افتحهما بسرعة دون اهتزاز الوترين.", "place_ar": "الشفتان معاً.", "why_ar": "هو النظير المهموس لـ [b]، وغير موجود في العربية الفصحى.", "tip_ar": "ضع ورقة أمام فمك وانطق pain: ستتحرك الورقة أكثر منها مع bain.", "examples": [{ "fr": "pain", "ipa": "pɛ̃", "ar": "خبز" }, { "fr": "papa", "ipa": "papa", "ar": "أبي" }, { "fr": "pomme", "ipa": "pɔm", "ar": "تفاحة" }, { "fr": "pour", "ipa": "puʁ", "ar": "من أجل" }] },
+        { "ipa": "v", "letters": "v", "name_ar": "صوت v", "how_ar": "ضع الأسنان العليا على الشفة السفلى مع اهتزاز الوترين.", "place_ar": "الأسنان العليا والشفة السفلى.", "why_ar": "هو النظير المجهور لـ [f]، وليس فاءً.", "tip_ar": "ضع يدك على حلقك لتشعر بالاهتزاز.", "examples": [{ "fr": "vous", "ipa": "vu", "ar": "أنتم" }, { "fr": "vie", "ipa": "vi", "ar": "حياة" }, { "fr": "avoir", "ipa": "avwaʁ", "ar": "يملك" }, { "fr": "voiture", "ipa": "vwatyʁ", "ar": "سيارة" }] },
+        { "ipa": "z", "letters": "z, s بين متحركين", "name_ar": "صوت z", "how_ar": "نفس وضع السين مع اهتزاز الوترين.", "place_ar": "طرف اللسان خلف الأسنان العليا.", "why_ar": "s بين متحركين يُنطق [z]، بينما ss يُنطق [s]. لذلك تختلف poison عن poisson.", "tip_ar": "قارن poison وpoisson.", "examples": [{ "fr": "rose", "ipa": "ʁoz", "ar": "وردة" }, { "fr": "maison", "ipa": "mɛzɔ̃", "ar": "بيت" }, { "fr": "poison", "ipa": "pwazɔ̃", "ar": "سم" }, { "fr": "musée", "ipa": "myze", "ar": "متحف" }] }
+      ]
+    },
+    {
+      "id": "nasals",
+      "title_fr": "Les voyelles nasales",
+      "title_ar": "الأصوات الأنفية (Voyelles nasales)",
+      "intro_ar": "يخرج الهواء من الفم والأنف معاً. القاعدة: إذا جاء n أو m بعد متحرك وتبعه حرف ساكن أو انتهت الكلمة، فلا ينطق n أو m، بل يتحول المتحرك إلى أنفي. وإذا تبعه متحرك أو كان مضاعفاً (nn, mm) فلا يتحول.",
+      "sounds": [
+        { "ipa": "ɑ̃", "letters": "an, am, en, em", "name_ar": "الأنفي an", "how_ar": "افتح فمك بوضع [a] الخلفي ودع الهواء يمر من الأنف مع شفتين غير مستديرتين.", "place_ar": "اللسان منخفض وخلفي، والسقف الرخو منخفض.", "why_ar": "n أو m بعد a أو e يجعلان المتحرك أنفياً ولا ينطقان.", "tip_ar": "لا تنطق n في النهاية. ومع وجود متحرك بعد n يعود n عادياً: année.", "examples": [{ "fr": "enfant", "ipa": "ɑ̃fɑ̃", "ar": "طفل" }, { "fr": "dans", "ipa": "dɑ̃", "ar": "في" }, { "fr": "vent", "ipa": "vɑ̃", "ar": "ريح" }, { "fr": "lampe", "ipa": "lɑ̃p", "ar": "مصباح" }] },
+        { "ipa": "ɛ̃", "letters": "in, im, ain, aim, ein, yn, ym", "name_ar": "الأنفي in", "how_ar": "انطق [ɛ] المفتوحة مع تمرير الهواء من الأنف والشفتان ممدودتان.", "place_ar": "اللسان في مقدمة الفم.", "why_ar": "in وain وein تعطي هذا الأنفي. وكذلك en بعد i أو é مثل bien وexamen.", "tip_ar": "قارن pain [pɛ̃] مع peine [pɛn].", "examples": [{ "fr": "pain", "ipa": "pɛ̃", "ar": "خبز" }, { "fr": "vin", "ipa": "vɛ̃", "ar": "نبيذ" }, { "fr": "main", "ipa": "mɛ̃", "ar": "يد" }, { "fr": "bien", "ipa": "bjɛ̃", "ar": "جيد" }] },
+        { "ipa": "ɔ̃", "letters": "on, om", "name_ar": "الأنفي on", "how_ar": "استدر شفتيك وأخرج الهواء من الأنف مع فم نصف مغلق.", "place_ar": "اللسان في مؤخرة الفم والشفتان مستديرتان.", "why_ar": "on وom قبل b وp تعطي الأنفي ولا ينطق n أو m.", "tip_ar": "لا تنهِ الصوت بحرف n.", "examples": [{ "fr": "bon", "ipa": "bɔ̃", "ar": "جيد" }, { "fr": "nom", "ipa": "nɔ̃", "ar": "اسم" }, { "fr": "maison", "ipa": "mɛzɔ̃", "ar": "بيت" }, { "fr": "pont", "ipa": "pɔ̃", "ar": "جسر" }] },
+        { "ipa": "œ̃", "letters": "un, um", "name_ar": "الأنفي un", "how_ar": "انطق [œ] مع تمرير الهواء من الأنف والشفتان مستديرتان.", "place_ar": "اللسان في مقدمة الفم والفم نصف مفتوح.", "why_ar": "un وum في نهاية المقطع تعطي هذا الأنفي. ويقتصر استخدامه على كلمات قليلة.", "tip_ar": "كثير من المتحدثين ينطقونه كـ [ɛ̃]، فلا تقلق إن اختلطا عليك.", "examples": [{ "fr": "un", "ipa": "œ̃", "ar": "واحد" }, { "fr": "brun", "ipa": "bʁœ̃", "ar": "بني" }, { "fr": "lundi", "ipa": "lœ̃di", "ar": "الاثنين" }, { "fr": "parfum", "ipa": "paʁfœ̃", "ar": "عطر" }] }
+      ]
+    }
+  ],
+  "rule_groups": [
+    {
+      "id": "mute",
+      "title_fr": "Les lettres muettes et la liaison",
+      "title_ar": "الحروف الصامتة والوصل",
+      "intro_ar": "كثير من الحروف الأخيرة تُكتب ولا تُنطق. تعلّم القاعدة ثم الاستثناءات.",
+      "rules": [
+        { "id": "m1", "title_fr": "Les consonnes finales muettes", "title_ar": "الحروف الساكنة الأخيرة الصامتة",
+          "rule_ar": "في آخر الكلمة لا تُنطق غالباً الحروف: s وt وd وx وz وp وg.",
+          "why_ar": "حافظ الإملاء على حروف كانت تنطق قديماً. وتظهر هذه الحروف في النطق عند التأنيث أو الاشتقاق: petit ← petite، grand ← grande.",
+          "examples": [{ "fr": "petit", "ipa": "pəti", "ar": "صغير" }, { "fr": "grand", "ipa": "gʁɑ̃", "ar": "كبير" }, { "fr": "trop", "ipa": "tʁo", "ar": "كثيراً" }, { "fr": "nez", "ipa": "ne", "ar": "أنف" }, { "fr": "deux", "ipa": "dø", "ar": "اثنان" }, { "fr": "long", "ipa": "lɔ̃", "ar": "طويل" }, { "fr": "beaucoup", "ipa": "boku", "ar": "كثيراً" }, { "fr": "temps", "ipa": "tɑ̃", "ar": "وقت" }],
+          "exceptions_ar": "قد يُنطق الحرف الأخير عند الوصل قبل كلمة تبدأ بمتحرك: petit ami [pətitami]." },
+        { "id": "m2", "title_fr": "Le s du pluriel", "title_ar": "s الجمع وs المخاطب",
+          "rule_ar": "علامة الجمع s في الأسماء والصفات، وs في تصريف tu، لا تُنطق.",
+          "why_ar": "لذلك لا يختلف نطق المفرد عن الجمع، ونفرق بينهما بالأداة (le / les) أو بالسياق.",
+          "examples": [{ "fr": "un élève", "ipa": "œ̃nelɛv", "ar": "تلميذ" }, { "fr": "des élèves", "ipa": "dezelɛv", "ar": "تلاميذ" }, { "fr": "tu parles", "ipa": "typaʁl", "ar": "أنت تتكلم" }, { "fr": "les livres", "ipa": "lelivʁ", "ar": "الكتب" }],
+          "exceptions_ar": "يُنطق s الأخير في بعض الكلمات مثل fils [fis] وautobus [otobys] وbus [bys]." },
+        { "id": "m3", "title_fr": "Le e muet et le féminin", "title_ar": "e الصامتة والتأنيث",
+          "rule_ar": "الـ e الأخيرة لا تُنطق، لكنها تجعل الحرف الساكن قبلها منطوقاً. لذلك يظهر الحرف الأخير في المؤنث.",
+          "why_ar": "في المذكر يكون الحرف الأخير صامتاً، وعند إضافة e للتأنيث يصبح هو آخر حرف منطوق: petit [pəti] ← petite [pətit].",
+          "examples": [{ "fr": "petit", "ipa": "pəti", "ar": "صغير" }, { "fr": "petite", "ipa": "pətit", "ar": "صغيرة" }, { "fr": "grand", "ipa": "gʁɑ̃", "ar": "كبير" }, { "fr": "grande", "ipa": "gʁɑ̃d", "ar": "كبيرة" }, { "fr": "français", "ipa": "fʁɑ̃sɛ", "ar": "فرنسي" }, { "fr": "française", "ipa": "fʁɑ̃sɛz", "ar": "فرنسية" }] },
+        { "id": "m4", "title_fr": "La terminaison -ent des verbes", "title_ar": "النهاية ent في الأفعال",
+          "rule_ar": "النهاية ent في تصريف ils وelles لا تُنطق.",
+          "why_ar": "هي علامة صرفية فقط، فننطق الفعل كما ننطقه مع il وelle.",
+          "examples": [{ "fr": "ils parlent", "ipa": "ilpaʁl", "ar": "هم يتكلمون" }, { "fr": "elles mangent", "ipa": "ɛlmɑ̃ʒ", "ar": "هن يأكلن" }, { "fr": "ils finissent", "ipa": "ilfinis", "ar": "هم ينهون" }],
+          "exceptions_ar": "في الأسماء والظروف تُنطق ent [ɑ̃]: souvent [suvɑ̃]، moment [mɔmɑ̃]، vraiment [vʁɛmɑ̃]." },
+        { "id": "m5", "title_fr": "La terminaison -er", "title_ar": "النهاية er",
+          "rule_ar": "في مصدر أفعال er وفي أسماء كثيرة تنتهي بـ er لا تُنطق r، وتنطق النهاية [e].",
+          "why_ar": "النهاية er صرفية، وتُنطق [e] مثل é.",
+          "examples": [{ "fr": "parler", "ipa": "paʁle", "ar": "يتكلم" }, { "fr": "manger", "ipa": "mɑ̃ʒe", "ar": "يأكل" }, { "fr": "boulanger", "ipa": "bulɑ̃ʒe", "ar": "خباز" }, { "fr": "premier", "ipa": "pʁəmje", "ar": "أول" }],
+          "exceptions_ar": "تُنطق r في بعض الكلمات بعد e فتصير [ɛʁ]: mer [mɛʁ]، hiver [ivɛʁ]، cher [ʃɛʁ]، fier [fjɛʁ]، super [sypɛʁ]." },
+        { "id": "m6", "title_fr": "Les consonnes finales prononcées (CaReFuL)", "title_ar": "الحروف الأخيرة المنطوقة (قاعدة CaReFuL)",
+          "rule_ar": "الحروف c وr وf وl في آخر الكلمة تُنطق غالباً. تذكّرها بكلمة CaReFuL.",
+          "why_ar": "هذه الحروف حافظت على نطقها في كلمات كثيرة، وهي عكس الحروف الصامتة السابقة.",
+          "examples": [{ "fr": "sac", "ipa": "sak", "ar": "حقيبة" }, { "fr": "bar", "ipa": "baʁ", "ar": "حانة" }, { "fr": "jour", "ipa": "ʒuʁ", "ar": "يوم" }, { "fr": "neuf", "ipa": "nœf", "ar": "تسعة" }, { "fr": "chef", "ipa": "ʃɛf", "ar": "رئيس" }, { "fr": "animal", "ipa": "animal", "ar": "حيوان" }, { "fr": "hôtel", "ipa": "otɛl", "ar": "فندق" }],
+          "exceptions_ar": "لا يُنطق الحرف الأخير في: tabac [taba]، estomac [ɛstɔma]، porc [pɔʁ]، clef [kle]، gentil [ʒɑ̃ti]. وللجمع: œuf [œf] ← œufs [ø]، bœuf [bœf] ← bœufs [bø]." },
+        { "id": "m7", "title_fr": "Le h muet et le h aspiré", "title_ar": "h الصامتة و h المنفوخة",
+          "rule_ar": "الحرف h لا يُنطق أبداً في الفرنسية. لكن h الصامتة تسمح بالحذف (l’homme) والوصل، وh المنفوخة تمنع الحذف والوصل (le héros).",
+          "why_ar": "الفرق في القاعدة الصرفية وليس في الصوت: نتعامل مع h الصامتة كأنها حرف متحرك، ومع h المنفوخة كأنها حرف ساكن.",
+          "examples": [{ "fr": "l’homme", "ipa": "lɔm", "ar": "الرجل" }, { "fr": "l’hôtel", "ipa": "lotɛl", "ar": "الفندق" }, { "fr": "le héros", "ipa": "ləeʁo", "ar": "البطل" }, { "fr": "la honte", "ipa": "laɔ̃t", "ar": "العار" }, { "fr": "les haricots", "ipa": "leaʁiko", "ar": "الفاصوليا" }],
+          "exceptions_ar": "تعرف h المنفوخة من القاموس حيث تُميَّز بعلامة خاصة. والقاعدة: les hommes [lezɔm] بوصل، لكن les héros [leeʁo] بدون وصل." },
+        { "id": "m8", "title_fr": "La liaison", "title_ar": "الوصل (Liaison)",
+          "rule_ar": "ننطق الحرف الأخير الصامت إذا جاءت بعده كلمة تبدأ بمتحرك أو h صامتة وكانتا مرتبطتين في المعنى. s وx تنطقان [z]، وd تنطق [t].",
+          "why_ar": "الهدف تسهيل الانتقال بين الكلمتين. والوصل واجب بين الأداة والاسم، والضمير والفعل، والصفة والاسم.",
+          "examples": [{ "fr": "les amis", "ipa": "lezami", "ar": "الأصدقاء" }, { "fr": "vous avez", "ipa": "vuzave", "ar": "لديكم" }, { "fr": "un ami", "ipa": "œ̃nami", "ar": "صديق" }, { "fr": "ils ont", "ipa": "ilzɔ̃", "ar": "هم لديهم" }, { "fr": "grand homme", "ipa": "gʁɑ̃tɔm", "ar": "رجل عظيم" }, { "fr": "petit ami", "ipa": "pətitami", "ar": "صديق صغير" }],
+          "exceptions_ar": "لا وصل بعد et (et ami [eami])، ولا مع h المنفوخة (les héros [leeʁo])، ولا بين الاسم المفرد والصفة بعده." }
+      ]
+    },
+    {
+      "id": "reading",
+      "title_fr": "Les règles de lecture",
+      "title_ar": "قواعد القراءة (من الكتابة إلى الصوت)",
+      "intro_ar": "قواعد تحدد كيف ننطق الحروف حسب موضعها وما يجاورها.",
+      "rules": [
+        { "id": "r1", "title_fr": "Le c : doux ou dur", "title_ar": "الحرف c بين الناعم والقاسي",
+          "rule_ar": "c قبل e وi وy ينطق [s]. وقبل a وo وu أو قبل حرف ساكن ينطق [k]. أما ç فينطق [s] دائماً.",
+          "why_ar": "الحرف c يغيّر نطقه حسب الحرف المتحرك التالي. وتوضع الذيل (cédille) تحت c لإبقاء نطق [s] قبل a وo وu.",
+          "examples": [{ "fr": "cinéma", "ipa": "sinema", "ar": "سينما" }, { "fr": "cycle", "ipa": "sikl", "ar": "دورة" }, { "fr": "café", "ipa": "kafe", "ar": "قهوة" }, { "fr": "classe", "ipa": "klas", "ar": "فصل" }, { "fr": "garçon", "ipa": "gaʁsɔ̃", "ar": "ولد" }, { "fr": "leçon", "ipa": "ləsɔ̃", "ar": "درس" }] },
+        { "id": "r2", "title_fr": "Le g : doux ou dur", "title_ar": "الحرف g بين الناعم والقاسي",
+          "rule_ar": "g قبل e وi وy ينطق [ʒ]. وقبل a وo وu أو قبل حرف ساكن ينطق [g]. وgu قبل e وi ينطق [g]. وge قبل a وo ينطق [ʒ].",
+          "why_ar": "نفس منطق الحرف c. ونضيف u لإبقاء [g] قبل e وi، ونضيف e لإبقاء [ʒ] قبل a وo.",
+          "examples": [{ "fr": "gens", "ipa": "ʒɑ̃", "ar": "ناس" }, { "fr": "girafe", "ipa": "ʒiʁaf", "ar": "زرافة" }, { "fr": "gare", "ipa": "gaʁ", "ar": "محطة" }, { "fr": "guitare", "ipa": "gitaʁ", "ar": "غيتار" }, { "fr": "mangeons", "ipa": "mɑ̃ʒɔ̃", "ar": "نأكل" }, { "fr": "gomme", "ipa": "gɔm", "ar": "ممحاة" }] },
+        { "id": "r3", "title_fr": "Le s : [s] ou [z]", "title_ar": "الحرف s بين [s] و[z]",
+          "rule_ar": "s في بداية الكلمة أو بعد حرف ساكن أو مضاعفاً (ss) ينطق [s]. وبين متحركين ينطق [z].",
+          "why_ar": "نضاعف s (ss) بين متحركين لنبقي نطق [s]، فنفرق بين poison وpoisson.",
+          "examples": [{ "fr": "sac", "ipa": "sak", "ar": "حقيبة" }, { "fr": "classe", "ipa": "klas", "ar": "فصل" }, { "fr": "poisson", "ipa": "pwasɔ̃", "ar": "سمكة" }, { "fr": "poison", "ipa": "pwazɔ̃", "ar": "سم" }, { "fr": "rose", "ipa": "ʁoz", "ar": "وردة" }, { "fr": "musée", "ipa": "myze", "ar": "متحف" }] },
+        { "id": "r4", "title_fr": "Les groupes de lettres", "title_ar": "مجموعات الحروف",
+          "rule_ar": "ch ينطق [ʃ]، وgn ينطق [ɲ]، وph ينطق [f]، وqu ينطق [k]، وth ينطق [t]، وou ينطق [u]، وoi ينطق [wa]، وau وeau ينطقان [o].",
+          "why_ar": "هذه مجموعات تُنطق كصوت واحد، فلا ننطق حروفها منفصلة.",
+          "examples": [{ "fr": "chat", "ipa": "ʃa", "ar": "قط" }, { "fr": "montagne", "ipa": "mɔ̃taɲ", "ar": "جبل" }, { "fr": "photo", "ipa": "fɔto", "ar": "صورة" }, { "fr": "question", "ipa": "kɛstjɔ̃", "ar": "سؤال" }, { "fr": "thé", "ipa": "te", "ar": "شاي" }, { "fr": "étoile", "ipa": "etwal", "ar": "نجمة" }] },
+        { "id": "r5", "title_fr": "Les accents et le tréma", "title_ar": "علامات التشكيل والتريما",
+          "rule_ar": "é ينطق [e]، وè وê تنطقان [ɛ]، وç تنطق [s]. والتريما (ë وï) تفصل بين متحركين متجاورين فننطق كل واحد وحده.",
+          "why_ar": "العلامات تحدد نطق الحرف: é مغلقة وè مفتوحة، والتريما تمنع دمج المتحركين.",
+          "examples": [{ "fr": "été", "ipa": "ete", "ar": "صيف" }, { "fr": "mère", "ipa": "mɛʁ", "ar": "أم" }, { "fr": "forêt", "ipa": "fɔʁɛ", "ar": "غابة" }, { "fr": "Noël", "ipa": "nɔɛl", "ar": "عيد الميلاد" }, { "fr": "naïf", "ipa": "naif", "ar": "ساذج" }] },
+        { "id": "r6", "title_fr": "La nasalisation", "title_ar": "متى يكون المتحرك أنفياً؟",
+          "rule_ar": "المتحرك + n أو m يصبح أنفياً إذا تبعه حرف ساكن أو انتهت الكلمة. فإذا تبعه متحرك أو كان n أو m مضاعفاً فلا يكون أنفياً وينطق n أو m عادياً.",
+          "why_ar": "عندما يتبع n متحركاً ينتقل إليه في المقطع التالي فيُنطق، أما في النهاية فيذوب في المتحرك السابق.",
+          "examples": [{ "fr": "bon", "ipa": "bɔ̃", "ar": "جيد" }, { "fr": "bonne", "ipa": "bɔn", "ar": "جيدة" }, { "fr": "an", "ipa": "ɑ̃", "ar": "سنة" }, { "fr": "année", "ipa": "ane", "ar": "عام" }, { "fr": "un", "ipa": "œ̃", "ar": "واحد" }, { "fr": "une", "ipa": "yn", "ar": "واحدة" }],
+          "exceptions_ar": "في بعض الكلمات المركبة مع en أو im تنطق n مع تحول المتحرك: ennemi [ɛnmi]، immense [imɑ̃s]." },
+        { "id": "r7", "title_fr": "Le groupe -ti- = [sj]", "title_ar": "المجموعة ti تنطق [sj]",
+          "rule_ar": "المجموعة ti قبل متحرك تنطق غالباً [sj] في كلمات مثل nation وattention وpatient.",
+          "why_ar": "هذا تطور تاريخي في النطق مع بقاء الإملاء.",
+          "examples": [{ "fr": "nation", "ipa": "nasjɔ̃", "ar": "أمة" }, { "fr": "attention", "ipa": "atɑ̃sjɔ̃", "ar": "انتباه" }, { "fr": "patient", "ipa": "pasjɑ̃", "ar": "صبور" }, { "fr": "information", "ipa": "ɛ̃fɔʁmasjɔ̃", "ar": "معلومة" }],
+          "exceptions_ar": "تبقى [t] بعد s: question [kɛstjɔ̃]. وفي كلمات مثل amitié [amitje] وpartie [paʁti] وفي أول الكلمة تنطق [ti]." },
+        { "id": "r8", "title_fr": "Le groupe -ill- = [ij]", "title_ar": "المجموعة ill تنطق [ij]",
+          "rule_ar": "المجموعة ill بعد متحرك تنطق [j] مثل الياء، وail وeil في آخر الكلمة تنطق [aj] و[ɛj].",
+          "why_ar": "الحرفان ll مع i يعطيان ياءً منزلقة بعد المتحرك.",
+          "examples": [{ "fr": "fille", "ipa": "fij", "ar": "بنت" }, { "fr": "famille", "ipa": "famij", "ar": "عائلة" }, { "fr": "travail", "ipa": "tʁavaj", "ar": "عمل" }, { "fr": "soleil", "ipa": "sɔlɛj", "ar": "شمس" }],
+          "exceptions_ar": "تنطق [il] في: ville [vil]، mille [mil]، tranquille [tʁɑ̃kil]، Lille [lil]." }
+      ]
+    }
+  ],
+  "contrasts": [
+    { "id": "c1", "sounds": ["u", "y"], "title_ar": "الفرق بين [u] و[y]", "explanation_ar": "في [u] تكون الشفتان مستديرتين واللسان في الخلف. وفي [y] تكون الشفتان مستديرتين لكن اللسان في الأمام كما في [i]. غيّر الصوت فيتغير المعنى.",
+      "pairs": [
+        [{ "fr": "tout", "ipa": "tu", "ar": "كل" }, { "fr": "tu", "ipa": "ty", "ar": "أنت" }],
+        [{ "fr": "vous", "ipa": "vu", "ar": "أنتم" }, { "fr": "vu", "ipa": "vy", "ar": "مرئي" }],
+        [{ "fr": "roue", "ipa": "ʁu", "ar": "عجلة" }, { "fr": "rue", "ipa": "ʁy", "ar": "شارع" }],
+        [{ "fr": "sous", "ipa": "su", "ar": "تحت" }, { "fr": "su", "ipa": "sy", "ar": "معروف" }],
+        [{ "fr": "pour", "ipa": "puʁ", "ar": "من أجل" }, { "fr": "pur", "ipa": "pyʁ", "ar": "نقي" }]
+      ], "tip_ar": "انطق [i] وأبقِ لسانك ثم استدر شفتيك فتحصل على [y]." },
+    { "id": "c2", "sounds": ["i", "y"], "title_ar": "الفرق بين [i] و[y]", "explanation_ar": "اللسان في نفس المكان في الصوتين، والفرق في الشفاه: ممدودة في [i] ومستديرة في [y].",
+      "pairs": [
+        [{ "fr": "si", "ipa": "si", "ar": "إذا" }, { "fr": "su", "ipa": "sy", "ar": "معروف" }],
+        [{ "fr": "lit", "ipa": "li", "ar": "سرير" }, { "fr": "lu", "ipa": "ly", "ar": "مقروء" }],
+        [{ "fr": "dit", "ipa": "di", "ar": "قال" }, { "fr": "du", "ipa": "dy", "ar": "من الـ" }],
+        [{ "fr": "vit", "ipa": "vi", "ar": "يعيش" }, { "fr": "vu", "ipa": "vy", "ar": "مرئي" }]
+      ], "tip_ar": "انظر إلى شفتيك في المرآة: تبتسم مع [i] وتستدير مع [y]." },
+    { "id": "c3", "sounds": ["e", "ɛ"], "title_ar": "الفرق بين [e] و[ɛ]", "explanation_ar": "[e] مغلقة والفم شبه مغلق، و[ɛ] مفتوحة والفم نصف مفتوح. وفي بعض اللهجات الفرنسية يقل الفرق بينهما في آخر الكلمة، لكن تعلّمهما مفيد للفهم والكتابة.",
+      "pairs": [
+        [{ "fr": "les", "ipa": "le", "ar": "الـ (جمع)" }, { "fr": "lait", "ipa": "lɛ", "ar": "حليب" }],
+        [{ "fr": "et", "ipa": "e", "ar": "و" }, { "fr": "est", "ipa": "ɛ", "ar": "يكون" }],
+        [{ "fr": "mes", "ipa": "me", "ar": "ما يخصني (جمع)" }, { "fr": "mais", "ipa": "mɛ", "ar": "لكن" }],
+        [{ "fr": "ces", "ipa": "se", "ar": "هؤلاء" }, { "fr": "sept", "ipa": "sɛt", "ar": "سبعة" }],
+        [{ "fr": "parlé", "ipa": "paʁle", "ar": "تكلم" }, { "fr": "parlais", "ipa": "paʁlɛ", "ar": "كنت أتكلم" }]
+      ], "tip_ar": "افتح فمك قليلاً أكثر لنطق [ɛ]." },
+    { "id": "c4", "sounds": ["o", "ɔ"], "title_ar": "الفرق بين [o] و[ɔ]", "explanation_ar": "[o] مغلقة والشفتان مستديرتان بقوة، و[ɔ] مفتوحة وشفتاها أقل استدارة والفم أكثر انفتاحاً.",
+      "pairs": [
+        [{ "fr": "paume", "ipa": "pom", "ar": "راحة اليد" }, { "fr": "pomme", "ipa": "pɔm", "ar": "تفاحة" }],
+        [{ "fr": "saut", "ipa": "so", "ar": "قفزة" }, { "fr": "sotte", "ipa": "sɔt", "ar": "حمقاء" }],
+        [{ "fr": "côte", "ipa": "kot", "ar": "ضلع / ساحل" }, { "fr": "cote", "ipa": "kɔt", "ar": "تقدير / درجة" }],
+        [{ "fr": "nôtre", "ipa": "notʁ", "ar": "ما يخصنا" }, { "fr": "notre", "ipa": "nɔtʁ", "ar": "لنا" }]
+      ], "tip_ar": "تذكر القاعدة: o في آخر الكلمة مغلقة، وo قبل حرف ساكن منطوق مفتوحة." },
+    { "id": "c5", "sounds": ["ø", "œ"], "title_ar": "الفرق بين [ø] و[œ]", "explanation_ar": "[ø] مغلقة في آخر المقطع أو قبل [z]، و[œ] مفتوحة قبل حرف ساكن منطوق.",
+      "pairs": [
+        [{ "fr": "peu", "ipa": "pø", "ar": "قليل" }, { "fr": "peur", "ipa": "pœʁ", "ar": "خوف" }],
+        [{ "fr": "jeûne", "ipa": "ʒøn", "ar": "صيام" }, { "fr": "jeune", "ipa": "ʒœn", "ar": "شاب" }],
+        [{ "fr": "veut", "ipa": "vø", "ar": "يريد" }, { "fr": "veulent", "ipa": "vœl", "ar": "يريدون" }],
+        [{ "fr": "heureux", "ipa": "øʁø", "ar": "سعيد" }, { "fr": "heure", "ipa": "œʁ", "ar": "ساعة" }]
+      ], "tip_ar": "انطق [e] أو [ɛ] ثم استدر شفتيك دون تحريك اللسان." },
+    { "id": "c6", "sounds": ["ɑ̃", "ɛ̃", "ɔ̃"], "title_ar": "الفرق بين الأنفيات [ɑ̃] و[ɛ̃] و[ɔ̃]", "explanation_ar": "ثلاثة أصوات أنفية تتشابه على الأذن. الفرق في وضع الفم: واسع وغير مستدير في [ɑ̃]، وممدود في [ɛ̃]، ومستدير في [ɔ̃].",
+      "pairs": [
+        [{ "fr": "vent", "ipa": "vɑ̃", "ar": "ريح" }, { "fr": "vin", "ipa": "vɛ̃", "ar": "نبيذ" }, { "fr": "vont", "ipa": "vɔ̃", "ar": "يذهبون" }],
+        [{ "fr": "banc", "ipa": "bɑ̃", "ar": "مقعد" }, { "fr": "bain", "ipa": "bɛ̃", "ar": "استحمام" }, { "fr": "bon", "ipa": "bɔ̃", "ar": "جيد" }],
+        [{ "fr": "temps", "ipa": "tɑ̃", "ar": "وقت" }, { "fr": "teint", "ipa": "tɛ̃", "ar": "بشرة" }, { "fr": "ton", "ipa": "tɔ̃", "ar": "لك" }],
+        [{ "fr": "pan", "ipa": "pɑ̃", "ar": "جزء" }, { "fr": "pain", "ipa": "pɛ̃", "ar": "خبز" }, { "fr": "pont", "ipa": "pɔ̃", "ar": "جسر" }]
+      ], "tip_ar": "لا تنطق n في آخر الكلمة بل اترك الهواء يمر من الأنف." },
+    { "id": "c7", "sounds": ["ɛ̃", "ɛn"], "title_ar": "الفرق بين المتحرك الأنفي والمتحرك الفموي + n", "explanation_ar": "في المذكر يكون المتحرك أنفياً ولا ينطق n، وفي المؤنث يكون المتحرك فموياً وينطق n.",
+      "pairs": [
+        [{ "fr": "bon", "ipa": "bɔ̃", "ar": "جيد" }, { "fr": "bonne", "ipa": "bɔn", "ar": "جيدة" }],
+        [{ "fr": "plein", "ipa": "plɛ̃", "ar": "ممتلئ" }, { "fr": "pleine", "ipa": "plɛn", "ar": "ممتلئة" }],
+        [{ "fr": "chien", "ipa": "ʃjɛ̃", "ar": "كلب" }, { "fr": "chienne", "ipa": "ʃjɛn", "ar": "كلبة" }],
+        [{ "fr": "un", "ipa": "œ̃", "ar": "واحد" }, { "fr": "une", "ipa": "yn", "ar": "واحدة" }],
+        [{ "fr": "an", "ipa": "ɑ̃", "ar": "سنة" }, { "fr": "âne", "ipa": "ɑn", "ar": "حمار" }]
+      ], "tip_ar": "هذا الفرق يساعدك على معرفة المذكر من المؤنث عند السماع." },
+    { "id": "c8", "sounds": ["p", "b"], "title_ar": "الفرق بين [p] و[b]", "explanation_ar": "[p] مهموسة بلا اهتزاز في الحلق، و[b] مجهورة مع اهتزاز. والعربية فيها [b] فقط.",
+      "pairs": [
+        [{ "fr": "pain", "ipa": "pɛ̃", "ar": "خبز" }, { "fr": "bain", "ipa": "bɛ̃", "ar": "استحمام" }],
+        [{ "fr": "poule", "ipa": "pul", "ar": "دجاجة" }, { "fr": "boule", "ipa": "bul", "ar": "كرة" }],
+        [{ "fr": "peau", "ipa": "po", "ar": "جلد" }, { "fr": "beau", "ipa": "bo", "ar": "جميل" }],
+        [{ "fr": "pas", "ipa": "pa", "ar": "خطوة" }, { "fr": "bas", "ipa": "ba", "ar": "منخفض" }]
+      ], "tip_ar": "ضع يدك على حلقك: تشعر باهتزاز مع [b] فقط." },
+    { "id": "c9", "sounds": ["f", "v"], "title_ar": "الفرق بين [f] و[v]", "explanation_ar": "[f] مهموسة و[v] مجهورة، ومخرجهما واحد: الأسنان العليا والشفة السفلى.",
+      "pairs": [
+        [{ "fr": "fin", "ipa": "fɛ̃", "ar": "نهاية" }, { "fr": "vin", "ipa": "vɛ̃", "ar": "نبيذ" }],
+        [{ "fr": "faux", "ipa": "fo", "ar": "خاطئ" }, { "fr": "veau", "ipa": "vo", "ar": "عجل" }],
+        [{ "fr": "fous", "ipa": "fu", "ar": "مجانين" }, { "fr": "vous", "ipa": "vu", "ar": "أنتم" }],
+        [{ "fr": "fer", "ipa": "fɛʁ", "ar": "حديد" }, { "fr": "verre", "ipa": "vɛʁ", "ar": "كأس" }]
+      ], "tip_ar": "اشعر باهتزاز الحلق مع [v]." },
+    { "id": "c10", "sounds": ["s", "z"], "title_ar": "الفرق بين [s] و[z]", "explanation_ar": "[s] مهموسة و[z] مجهورة. والإملاء يحدد: ss أو c أو ç تعطي [s]، وs بين متحركين تعطي [z].",
+      "pairs": [
+        [{ "fr": "poisson", "ipa": "pwasɔ̃", "ar": "سمكة" }, { "fr": "poison", "ipa": "pwazɔ̃", "ar": "سم" }],
+        [{ "fr": "dessert", "ipa": "desɛʁ", "ar": "حلوى" }, { "fr": "désert", "ipa": "dezɛʁ", "ar": "صحراء" }],
+        [{ "fr": "russe", "ipa": "ʁys", "ar": "روسي" }, { "fr": "ruse", "ipa": "ʁyz", "ar": "حيلة" }],
+        [{ "fr": "coussin", "ipa": "kusɛ̃", "ar": "وسادة" }, { "fr": "cousin", "ipa": "kuzɛ̃", "ar": "ابن العم" }]
+      ], "tip_ar": "الكلمة المكتوبة بـ ss تنطق [s]، وبـ s مفردة بين متحركين تنطق [z]." },
+    { "id": "c11", "sounds": ["ʃ", "ʒ", "s"], "title_ar": "الفرق بين [ʃ] و[ʒ] و[s]", "explanation_ar": "[ʃ] كالشين، و[ʒ] مثل الجيم في جراج، و[s] كالسين. [ʃ] و[s] مهموسان، و[ʒ] مجهور.",
+      "pairs": [
+        [{ "fr": "chou", "ipa": "ʃu", "ar": "كرنب" }, { "fr": "joue", "ipa": "ʒu", "ar": "خد" }, { "fr": "sous", "ipa": "su", "ar": "تحت" }],
+        [{ "fr": "bouche", "ipa": "buʃ", "ar": "فم" }, { "fr": "bouge", "ipa": "buʒ", "ar": "يتحرك" }],
+        [{ "fr": "chat", "ipa": "ʃa", "ar": "قط" }, { "fr": "sa", "ipa": "sa", "ar": "ما يخصه" }]
+      ], "tip_ar": "اجعل لسانك أبعد قليلاً عن الأسنان لنطق [ʃ] و[ʒ]." },
+    { "id": "c12", "sounds": ["ʁ", "l"], "title_ar": "الفرق بين [ʁ] و[l]", "explanation_ar": "[l] يخرج من طرف اللسان خلف الأسنان العليا، و[ʁ] من مؤخرة الحلق. الخلط بينهما يغيّر المعنى.",
+      "pairs": [
+        [{ "fr": "rue", "ipa": "ʁy", "ar": "شارع" }, { "fr": "lu", "ipa": "ly", "ar": "مقروء" }],
+        [{ "fr": "rit", "ipa": "ʁi", "ar": "يضحك" }, { "fr": "lit", "ipa": "li", "ar": "سرير" }],
+        [{ "fr": "rire", "ipa": "ʁiʁ", "ar": "ضحك" }, { "fr": "lire", "ipa": "liʁ", "ar": "قراءة" }],
+        [{ "fr": "rond", "ipa": "ʁɔ̃", "ar": "مستدير" }, { "fr": "long", "ipa": "lɔ̃", "ar": "طويل" }]
+      ], "tip_ar": "اللسان ساكن في الأمام مع [ʁ] ويلمس الأسنان مع [l]." },
+    { "id": "c13", "sounds": ["ʒ", "g"], "title_ar": "الفرق بين [ʒ] و[g]", "explanation_ar": "الحرف g ينطق [ʒ] قبل e وi وy، وينطق [g] قبل a وo وu وفي gu قبل e وi.",
+      "pairs": [
+        [{ "fr": "gens", "ipa": "ʒɑ̃", "ar": "ناس" }, { "fr": "gant", "ipa": "gɑ̃", "ar": "قفاز" }],
+        [{ "fr": "gîte", "ipa": "ʒit", "ar": "مأوى" }, { "fr": "guide", "ipa": "gid", "ar": "دليل" }],
+        [{ "fr": "geste", "ipa": "ʒɛst", "ar": "إيماءة" }, { "fr": "guêpe", "ipa": "gɛp", "ar": "دبور" }]
+      ], "tip_ar": "انتبه إلى الحرف الذي يلي g." },
+    { "id": "c14", "sounds": ["w", "ɥ"], "title_ar": "الفرق بين [w] و[ɥ]", "explanation_ar": "[w] تبدأ من وضع [u] (ou)، و[ɥ] تبدأ من وضع [y] (u). الفرق في مكان اللسان.",
+      "pairs": [
+        [{ "fr": "oui", "ipa": "wi", "ar": "نعم" }, { "fr": "huit", "ipa": "ɥit", "ar": "ثمانية" }],
+        [{ "fr": "Louis", "ipa": "lwi", "ar": "لويس" }, { "fr": "lui", "ipa": "lɥi", "ar": "هو" }]
+      ], "tip_ar": "ابدأ بصوت [y] ثم اندفع نحو المتحرك التالي لنطق [ɥ]." }
+  ]
+}
