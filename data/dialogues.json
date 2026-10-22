@@ -1,1 +1,136 @@
-
+{
+  "meta": {
+    "version": 2,
+    "note": "8 everyday and school conversations. Each line has the French text (fr), the Arabic translation (ar), the IPA transcription (ipa) and an approximate pronunciation written in Arabic letters (pron_ar). The Arabic spelling is only a rough aid: the IPA and the audio are the reference. Symbols used in pron_ar: پ = p, ڤ = v, ج = ʒ (as in garage), يُ = the French u, and nasal vowels are pronounced without the final n."
+  },
+  "dialogues": [
+    {
+      "id": "presentation", "level": "1sec",
+      "title_fr": "Se présenter", "title_ar": "التعارف",
+      "context_ar": "نور تلتقي توما، طالباً فرنسياً يزور مصر، وتتعارفان.",
+      "speakers": [{ "name": "Nour", "role_ar": "طالبة مصرية" }, { "name": "Thomas", "role_ar": "طالب فرنسي" }],
+      "lines": [
+        { "who": "Nour", "fr": "Bonjour ! Je m’appelle Nour. Et toi ?", "ar": "مرحباً! اسمي نور. وأنت؟", "ipa": "bɔ̃ʒuʁ ʒə mapɛl nuʁ e twa", "pron_ar": "بونجور! جُ مَابِل نُور. إي تْوا؟" },
+        { "who": "Thomas", "fr": "Moi, c’est Thomas. Je suis français.", "ar": "أنا توما. أنا فرنسي.", "ipa": "mwa sɛ tɔma ʒə sɥi fʁɑ̃sɛ", "pron_ar": "مْوا، سِيه تُوما. جُ سْوِي فْرَانْسِيه." },
+        { "who": "Nour", "fr": "Enchantée ! Tu habites où ?", "ar": "تشرفت بمعرفتك! أين تسكن؟", "ipa": "ɑ̃ʃɑ̃te ty abit u", "pron_ar": "آنشانتيه! تيُ آبِيت أُو؟" },
+        { "who": "Thomas", "fr": "J’habite à Paris, mais je passe l’été en Égypte.", "ar": "أسكن في باريس، لكنني أقضي الصيف في مصر.", "ipa": "ʒabit a paʁi mɛ ʒə pas lete ɑ̃neʒipt", "pron_ar": "جَابِت آ پَارِي، مِيه جُ پَاس لِيتيه آنِيجِيپت." },
+        { "who": "Nour", "fr": "Tu aimes l’Égypte ?", "ar": "هل تحب مصر؟", "ipa": "ty ɛm leʒipt", "pron_ar": "تيُ إِيم لِيجِيپت؟" },
+        { "who": "Thomas", "fr": "Oui, beaucoup ! Les gens sont très gentils.", "ar": "نعم، كثيراً! الناس لطفاء جداً.", "ipa": "wi boku le ʒɑ̃ sɔ̃ tʁɛ ʒɑ̃ti", "pron_ar": "وِي، بُوكو! لِيه جان سون تْرِيه جانتي." },
+        { "who": "Nour", "fr": "Merci ! Je peux te présenter mes amis ?", "ar": "شكراً! هل يمكنني أن أقدّمك إلى أصدقائي؟", "ipa": "mɛʁsi ʒə pø tə pʁezɑ̃te mezami", "pron_ar": "مِيرسي! جُ پُو تُ پْرِيزانتيه مِيزَامي؟" },
+        { "who": "Thomas", "fr": "Avec plaisir !", "ar": "بكل سرور!", "ipa": "avɛk plɛziʁ", "pron_ar": "آڤِيك پْلِيزِير!" }
+      ]
+    },
+    {
+      "id": "chemin", "level": "1sec",
+      "title_fr": "Demander son chemin", "title_ar": "السؤال عن الاتجاهات",
+      "context_ar": "سائح يسأل أحد المارة عن المحطة ومكتب البريد.",
+      "speakers": [{ "name": "Le touriste", "role_ar": "سائح" }, { "name": "Le passant", "role_ar": "أحد المارة" }],
+      "lines": [
+        { "who": "Le touriste", "fr": "Excusez-moi, où est la gare, s’il vous plaît ?", "ar": "عفواً، أين المحطة من فضلك؟", "ipa": "ɛkskyzemwa u ɛ la gaʁ silvuplɛ", "pron_ar": "إِكسْكيُزِيمْوا، أُو إِيه لا جَار، سِيل ڤُو پْلِيه؟" },
+        { "who": "Le passant", "fr": "La gare ? Allez tout droit, puis tournez à gauche.", "ar": "المحطة؟ اذهب مباشرة ثم انعطف يساراً.", "ipa": "la gaʁ ale tu dʁwa pɥi tuʁne a goʃ", "pron_ar": "لا جَار؟ آلِيه تو دْرْوا، پْوِي تُورْنِيه آ جُوش." },
+        { "who": "Le touriste", "fr": "C’est loin d’ici ?", "ar": "هل هي بعيدة من هنا؟", "ipa": "sɛ lwɛ̃ disi", "pron_ar": "سِيه لْوَان دِيسي؟" },
+        { "who": "Le passant", "fr": "Non, c’est à cinq minutes à pied.", "ar": "لا، تبعد خمس دقائق سيراً على الأقدام.", "ipa": "nɔ̃ sɛta sɛ̃k minyt a pje", "pron_ar": "نون، سِيتَا سَانْك مِينِيُت آ پْيِيه." },
+        { "who": "Le touriste", "fr": "Et la poste, elle est où ?", "ar": "وأين مكتب البريد؟", "ipa": "e la pɔst ɛl ɛ u", "pron_ar": "إي لا پُوست، إِيل إِيه أُو؟" },
+        { "who": "Le passant", "fr": "En face de la gare, à côté de la pharmacie.", "ar": "أمام المحطة، بجانب الصيدلية.", "ipa": "ɑ̃ fas də la gaʁ a kote də la faʁmasi", "pron_ar": "آن فَاس دُ لا جَار، آ كُوتيه دُ لا فَارْمَاسي." },
+        { "who": "Le touriste", "fr": "Merci beaucoup, vous êtes très aimable !", "ar": "شكراً جزيلاً، أنت لطيف جداً!", "ipa": "mɛʁsi boku vuzɛt tʁɛzɛmabl", "pron_ar": "مِيرسي بُوكو، ڤُوزِيت تْرِيزِيمَابْل!" },
+        { "who": "Le passant", "fr": "De rien. Bonne journée !", "ar": "العفو. يوماً سعيداً!", "ipa": "də ʁjɛ̃ bɔn ʒuʁne", "pron_ar": "دُ رْيَان. بُون جُورْنِيه!" }
+      ]
+    },
+    {
+      "id": "vetements", "level": "2sec",
+      "title_fr": "Acheter des vêtements", "title_ar": "شراء الملابس",
+      "context_ar": "سارة تبحث عن فستان لحفلة في محل ملابس.",
+      "speakers": [{ "name": "La vendeuse", "role_ar": "بائعة" }, { "name": "Sara", "role_ar": "زبونة" }],
+      "lines": [
+        { "who": "La vendeuse", "fr": "Bonjour mademoiselle, je peux vous aider ?", "ar": "مرحباً آنسة، هل يمكنني مساعدتك؟", "ipa": "bɔ̃ʒuʁ madmwazɛl ʒə pø vuzede", "pron_ar": "بونجور مَادْمْوازِيل، جُ پُو ڤُوزِيدِيه؟" },
+        { "who": "Sara", "fr": "Oui, je cherche une robe pour une fête.", "ar": "نعم، أبحث عن فستان لحفلة.", "ipa": "wi ʒə ʃɛʁʃ yn ʁɔb puʁ yn fɛt", "pron_ar": "وي، جُ شِيرش يُن رُوب پُور يُن فِيت." },
+        { "who": "La vendeuse", "fr": "Quelle taille faites-vous ?", "ar": "ما مقاسك؟", "ipa": "kɛl taj fɛtvu", "pron_ar": "كِيل تَاي فِيت ڤُو؟" },
+        { "who": "Sara", "fr": "Je fais du trente-huit. Vous l’avez en bleu ?", "ar": "مقاسي 38. هل لديكم اللون الأزرق؟", "ipa": "ʒə fɛ dy tʁɑ̃tɥit vu lave ɑ̃ blø", "pron_ar": "جُ فِيه ديُ تْرَانْتْوِيت. ڤُو لَافِيه آن بْلُو؟" },
+        { "who": "La vendeuse", "fr": "Oui, la voici. Vous pouvez l’essayer, les cabines sont là-bas.", "ar": "نعم، ها هو. يمكنك تجربته، غرف القياس هناك.", "ipa": "wi la vwasi vu puve lesɛje le kabin sɔ̃ laba", "pron_ar": "وي، لا ڤْواسي. ڤُو پُوڤِيه لِيسِيِيه، لِيه كَابِين سون لَابَا." },
+        { "who": "Sara", "fr": "Elle me va très bien. Combien coûte-t-elle ?", "ar": "يناسبني جداً. بكم سعره؟", "ipa": "ɛl mə va tʁɛ bjɛ̃ kɔ̃bjɛ̃ kutɛl", "pron_ar": "إِيل مُ ڤَا تْرِيه بْيَان. كُونْبْيَان كُوتِيل؟" },
+        { "who": "La vendeuse", "fr": "Elle coûte soixante euros, mais il y a une réduction de vingt pour cent.", "ar": "ثمنه ستون يورو، لكن هناك تخفيض عشرون بالمئة.", "ipa": "ɛl kut swasɑ̃tøʁo mɛ il ja yn ʁedyksjɔ̃ də vɛ̃ puʁ sɑ̃", "pron_ar": "إِيل كُوت سْوَاسَانْتُورو، مِيه إِيل يَا يُن رِيدِيُكسيون دُ ڤَان پُور سان." },
+        { "who": "Sara", "fr": "Parfait, je la prends !", "ar": "ممتاز، سآخذه!", "ipa": "paʁfɛ ʒə la pʁɑ̃", "pron_ar": "پَارْفِيه، جُ لا پْرَان!" }
+      ]
+    },
+    {
+      "id": "restaurant", "level": "2sec",
+      "title_fr": "Au restaurant", "title_ar": "في المطعم",
+      "context_ar": "عمر ومنى يطلبان العشاء من النادل ثم يطلبان الحساب.",
+      "speakers": [{ "name": "Le serveur", "role_ar": "نادل" }, { "name": "Omar", "role_ar": "زبون" }, { "name": "Mona", "role_ar": "زبونة" }],
+      "lines": [
+        { "who": "Le serveur", "fr": "Bonsoir ! Voici la carte. Vous avez choisi ?", "ar": "مساء الخير! تفضلوا قائمة الطعام. هل اخترتم؟", "ipa": "bɔ̃swaʁ vwasi la kaʁt vuzave ʃwazi", "pron_ar": "بونسْوار! ڤْواسي لا كَارت. ڤُوزَافِيه شْوَازِي؟" },
+        { "who": "Omar", "fr": "Oui. Pour moi, un poulet avec du riz, s’il vous plaît.", "ar": "نعم. بالنسبة لي دجاج مع أرز من فضلك.", "ipa": "wi puʁ mwa œ̃ pulɛ avɛk dy ʁi silvuplɛ", "pron_ar": "وي. پُور مْوا، آن پُولِيه آڤِيك ديُ ري، سِيل ڤُو پْلِيه." },
+        { "who": "Mona", "fr": "Moi, je voudrais une salade et une soupe.", "ar": "وأنا أريد سلطة وشوربة.", "ipa": "mwa ʒə vudʁɛ yn salad e yn sup", "pron_ar": "مْوا، جُ ڤُودْرِيه يُن سَالَاد إي يُن سُوپ." },
+        { "who": "Le serveur", "fr": "Très bien. Et comme boisson ?", "ar": "حسناً. وماذا تشربون؟", "ipa": "tʁɛ bjɛ̃ e kɔm bwasɔ̃", "pron_ar": "تْرِيه بْيَان. إي كُوم بْواسون؟" },
+        { "who": "Omar", "fr": "Une bouteille d’eau, s’il vous plaît.", "ar": "زجاجة ماء من فضلك.", "ipa": "yn butɛj do silvuplɛ", "pron_ar": "يُن بُوتِيّ دُو، سِيل ڤُو پْلِيه." },
+        { "who": "Le serveur", "fr": "Voilà vos plats. Bon appétit !", "ar": "تفضلوا أطباقكم. بالهناء والشفاء!", "ipa": "vwala vo pla bɔnapeti", "pron_ar": "ڤْوَالَا ڤُو پْلَا. بُونَابِيتي!" },
+        { "who": "Mona", "fr": "Merci ! L’addition, s’il vous plaît.", "ar": "شكراً! الحساب من فضلك.", "ipa": "mɛʁsi ladisjɔ̃ silvuplɛ", "pron_ar": "مِيرسي! لَادِيسيون، سِيل ڤُو پْلِيه." },
+        { "who": "Le serveur", "fr": "Voilà, cela fait trente-cinq euros.", "ar": "تفضل، المجموع خمسة وثلاثون يورو.", "ipa": "vwala səla fɛ tʁɑ̃tsɛ̃køʁo", "pron_ar": "ڤْوَالَا سُلَا فِيه تْرَانْتْسَانْكُورو." }
+      ]
+    },
+    {
+      "id": "sport", "level": "2sec",
+      "title_fr": "Parler du sport préféré", "title_ar": "الحديث عن الرياضة المفضلة",
+      "context_ar": "كريم ونور يتحدثان عن الرياضة التي يحبانها.",
+      "speakers": [{ "name": "Karim", "role_ar": "طالب" }, { "name": "Nour", "role_ar": "طالبة" }],
+      "lines": [
+        { "who": "Karim", "fr": "Tu fais du sport, Nour ?", "ar": "هل تمارسين الرياضة يا نور؟", "ipa": "ty fɛ dy spɔʁ nuʁ", "pron_ar": "تيُ فِيه ديُ سْپُور نُور؟" },
+        { "who": "Nour", "fr": "Oui, je joue au basket deux fois par semaine.", "ar": "نعم، ألعب كرة السلة مرتين في الأسبوع.", "ipa": "wi ʒə ʒu o baskɛt dø fwa paʁ səmɛn", "pron_ar": "وي، جُ جُو أُو بَاسْكِيت دُو فْوَا پَار سُمِين." },
+        { "who": "Nour", "fr": "Et toi, quel est ton sport préféré ?", "ar": "وأنت، ما رياضتك المفضلة؟", "ipa": "e twa kɛlɛ tɔ̃ spɔʁ pʁefeʁe", "pron_ar": "إي تْوا، كِيلِيه تون سْپُور پْرِيفِيرِيه؟" },
+        { "who": "Karim", "fr": "J’adore le football. Je joue dans l’équipe de mon lycée.", "ar": "أعشق كرة القدم. ألعب في فريق مدرستي.", "ipa": "ʒadɔʁ lə futbol ʒə ʒu dɑ̃ lekip də mɔ̃ lise", "pron_ar": "جَادُور لُ فُوتْبُول. جُ جُو دان لِيكِيپ دُ مون لِيسيه." },
+        { "who": "Nour", "fr": "Vous gagnez souvent ?", "ar": "هل تفوزون كثيراً؟", "ipa": "vu gaɲe suvɑ̃", "pron_ar": "ڤُو جَانْيِيه سُوڤان؟" },
+        { "who": "Karim", "fr": "Pas toujours, mais nous nous entraînons chaque samedi.", "ar": "ليس دائماً، لكننا نتدرب كل سبت.", "ipa": "pa tuʒuʁ mɛ nu nuzɑ̃tʁɛnɔ̃ ʃak samdi", "pron_ar": "پَا تُوجُور، مِيه نُو نُوزَانْتْرِينون شَاك سَامْدِي." },
+        { "who": "Nour", "fr": "Le sport, c’est bon pour la santé et pour le moral !", "ar": "الرياضة مفيدة للصحة وللمعنويات!", "ipa": "lə spɔʁ sɛ bɔ̃ puʁ la sɑ̃te e puʁ lə mɔʁal", "pron_ar": "لُ سْپُور، سِيه بون پُور لا سانتيه إي پُور لُ مُورَال!" },
+        { "who": "Karim", "fr": "Tout à fait d’accord. Viens jouer avec nous samedi !", "ar": "أوافقك تماماً. تعالَ العب معنا السبت!", "ipa": "tutafɛ dakɔʁ vjɛ̃ ʒue avɛk nu samdi", "pron_ar": "تُوتَافِيه دَاكُور. ڤْيَان جُوِيه آڤِيك نُو سَامْدِي!" }
+      ]
+    },
+    {
+      "id": "classe", "level": "3sec",
+      "title_fr": "En classe : poser une question", "title_ar": "في الفصل: طرح سؤال على المعلم",
+      "context_ar": "سارة لم تفهم تمريناً في حصة الفرنسية فتسأل المعلم.",
+      "speakers": [{ "name": "Le professeur", "role_ar": "معلم" }, { "name": "Sara", "role_ar": "تلميذة" }],
+      "lines": [
+        { "who": "Le professeur", "fr": "Bonjour la classe ! Ouvrez vos livres à la page douze.", "ar": "صباح الخير يا تلاميذ! افتحوا كتبكم على الصفحة الثانية عشرة.", "ipa": "bɔ̃ʒuʁ la klas uvʁe vo livʁ a la paʒ duz", "pron_ar": "بونجور لا كْلَاس! أُوڤْرِيه ڤُو لِيڤْر آ لا پَاج دُوز." },
+        { "who": "Sara", "fr": "Excusez-moi, monsieur, je n’ai pas compris l’exercice.", "ar": "عفواً يا أستاذ، لم أفهم التمرين.", "ipa": "ɛkskyzemwa məsjø ʒə ne pa kɔ̃pʁi lɛgzɛʁsis", "pron_ar": "إِكسْكيُزِيمْوا، مُسْيُو، جُ نِيه پَا كونْپْرِي لِيجْزِيرسِيس." },
+        { "who": "Le professeur", "fr": "Je vais l’expliquer. Il faut mettre le verbe au passé composé.", "ar": "سأشرحه. يجب أن نضع الفعل في الماضي المركب.", "ipa": "ʒə vɛ lɛksplike il fo mɛtʁ lə vɛʁb o pase kɔ̃poze", "pron_ar": "جُ ڤِيه لِيكْسْپْلِيكِيه. إِيل فُو مِيتْر لُ ڤِيرْب أُو پَاسِيه كونْپُوزِيه." },
+        { "who": "Sara", "fr": "Donc, « nous mangeons » devient « nous avons mangé » ?", "ar": "إذن، «nous mangeons» تصبح «nous avons mangé»؟", "ipa": "dɔ̃k nu mɑ̃ʒɔ̃ dəvjɛ̃ nuzavɔ̃ mɑ̃ʒe", "pron_ar": "دونك، نُو مَانجون دُڤْيَان نُوزَافون مَانجِيه؟" },
+        { "who": "Le professeur", "fr": "Exactement ! Très bien, Sara.", "ar": "بالضبط! أحسنتِ يا سارة.", "ipa": "ɛgzaktəmɑ̃ tʁɛ bjɛ̃ saʁa", "pron_ar": "إِجْزَاكْتُمَان! تْرِيه بْيَان، سَارَا." },
+        { "who": "Sara", "fr": "Est-ce que je peux poser une autre question ?", "ar": "هل يمكنني أن أطرح سؤالاً آخر؟", "ipa": "ɛskə ʒə pø poze yn otʁ kɛstjɔ̃", "pron_ar": "إِسْكُ جُ پُو پُوزِيه يُن أُوتْر كِيسْتيون؟" },
+        { "who": "Le professeur", "fr": "Bien sûr. N’hésitez jamais à demander.", "ar": "بالطبع. لا تترددوا أبداً في السؤال.", "ipa": "bjɛ̃ syʁ nezitez ʒamɛ a dəmɑ̃de", "pron_ar": "بْيَان سِيُر. نِيزِيتِيه جَامِيه آ دُمَانْدِيه." },
+        { "who": "Le professeur", "fr": "Pour demain, faites l’exercice quatre à la maison.", "ar": "للغد، حلّوا التمرين الرابع في البيت.", "ipa": "puʁ dəmɛ̃ fɛt lɛgzɛʁsis katʁ a la mɛzɔ̃", "pron_ar": "پُور دُمَان، فِيت لِيجْزِيرسِيس كَاتْر آ لا مِيزون." }
+      ]
+    },
+    {
+      "id": "medecin", "level": "3sec",
+      "title_fr": "Chez le médecin", "title_ar": "عند الطبيب",
+      "context_ar": "عمر يشكو من ألم في الحلق فيزور الطبيب.",
+      "speakers": [{ "name": "Le médecin", "role_ar": "طبيب" }, { "name": "Omar", "role_ar": "مريض" }],
+      "lines": [
+        { "who": "Le médecin", "fr": "Bonjour Omar. Qu’est-ce qui ne va pas ?", "ar": "مرحباً عمر. ما المشكلة؟", "ipa": "bɔ̃ʒuʁ ɔmaʁ kɛski nə va pa", "pron_ar": "بونجور أُومَار. كِيسْكِي نُ ڤَا پَا؟" },
+        { "who": "Omar", "fr": "J’ai mal à la gorge et je tousse beaucoup.", "ar": "أشعر بألم في الحلق وأسعل كثيراً.", "ipa": "ʒe mal a la gɔʁʒ e ʒə tus boku", "pron_ar": "جِيه مَال آ لا جُورج إي جُ تُوس بُوكو." },
+        { "who": "Le médecin", "fr": "Depuis quand ?", "ar": "منذ متى؟", "ipa": "dəpɥi kɑ̃", "pron_ar": "دُپْوِي كان؟" },
+        { "who": "Omar", "fr": "Depuis trois jours. J’ai aussi un peu de fièvre.", "ar": "منذ ثلاثة أيام. ولدي أيضاً حمى خفيفة.", "ipa": "dəpɥi tʁwa ʒuʁ ʒe osi œ̃ pø də fjɛvʁ", "pron_ar": "دُپْوِي تْرْوا جُور. جِيه أُوسي آن پُو دُ فْيِيڤْر." },
+        { "who": "Le médecin", "fr": "Ouvrez la bouche. Oui, la gorge est rouge.", "ar": "افتح فمك. نعم، الحلق محمرّ.", "ipa": "uvʁe la buʃ wi la gɔʁʒ ɛ ʁuʒ", "pron_ar": "أُوڤْرِيه لا بُوش. وي، لا جُورج إِيه رُوج." },
+        { "who": "Le médecin", "fr": "Prenez ce sirop trois fois par jour et buvez beaucoup d’eau.", "ar": "تناول هذا الشراب ثلاث مرات يومياً واشرب كثيراً من الماء.", "ipa": "pʁəne sə siʁo tʁwa fwa paʁ ʒuʁ e byve boku do", "pron_ar": "پْرُنِيه سُ سِيرُو تْرْوا فْوَا پَار جُور إي بيُڤِيه بُوكو دُو." },
+        { "who": "Omar", "fr": "Je dois rester à la maison ?", "ar": "هل يجب أن أبقى في البيت؟", "ipa": "ʒə dwa ʁɛste a la mɛzɔ̃", "pron_ar": "جُ دْوا رِيسْتِيه آ لا مِيزون؟" },
+        { "who": "Le médecin", "fr": "Oui, reposez-vous deux jours. Bon rétablissement !", "ar": "نعم، ارتح يومين. الشفاء العاجل!", "ipa": "wi ʁəpozevu dø ʒuʁ bɔ̃ ʁetablismɑ̃", "pron_ar": "وي، رُپُوزِيڤُو دُو جُور. بون رِيتَابْلِيسْمان!" }
+      ]
+    },
+    {
+      "id": "telephone", "level": "1sec",
+      "title_fr": "Inviter un ami au téléphone", "title_ar": "دعوة صديق بالهاتف",
+      "context_ar": "يوسف يتصل بكريم ليدعوه إلى السينما.",
+      "speakers": [{ "name": "Youssef", "role_ar": "طالب" }, { "name": "Karim", "role_ar": "طالب" }],
+      "lines": [
+        { "who": "Youssef", "fr": "Allô ? Karim ? C’est Youssef.", "ar": "ألو؟ كريم؟ أنا يوسف.", "ipa": "alo kaʁim sɛ jusɛf", "pron_ar": "آلُو؟ كَرِيم؟ سِيه يُوسِف." },
+        { "who": "Karim", "fr": "Salut Youssef ! Ça va ?", "ar": "مرحباً يوسف! كيف الحال؟", "ipa": "saly jusɛf sa va", "pron_ar": "ساليُ يُوسِف! سَا ڤَا؟" },
+        { "who": "Youssef", "fr": "Ça va bien. Tu es libre samedi après-midi ?", "ar": "بخير. هل أنت متفرغ بعد ظهر السبت؟", "ipa": "sa va bjɛ̃ ty ɛ libʁ samdi apʁɛmidi", "pron_ar": "سَا ڤَا بْيَان. تيُ إِيه لِيبْر سَامْدِي آپْرِيمِيدِي؟" },
+        { "who": "Karim", "fr": "Oui, pourquoi ?", "ar": "نعم، لماذا؟", "ipa": "wi puʁkwa", "pron_ar": "وي، پُورْكْوَا؟" },
+        { "who": "Youssef", "fr": "Je vais au cinéma avec des amis. Tu veux venir ?", "ar": "سأذهب إلى السينما مع أصدقاء. هل تريد المجيء؟", "ipa": "ʒə vɛ o sinema avɛk dezami ty vø vəniʁ", "pron_ar": "جُ ڤِيه أُو سِينِيمَا آڤِيك دِيزَامِي. تيُ ڤُو ڤُنِير؟" },
+        { "who": "Karim", "fr": "Avec plaisir ! À quelle heure ?", "ar": "بكل سرور! في أي ساعة؟", "ipa": "avɛk plɛziʁ a kɛl œʁ", "pron_ar": "آڤِيك پْلِيزِير! آ كِيل أُور؟" },
+        { "who": "Youssef", "fr": "À quinze heures, devant le cinéma.", "ar": "في الثالثة عصراً أمام السينما.", "ipa": "a kɛ̃zœʁ dəvɑ̃ lə sinema", "pron_ar": "آ كَانْزُور، دُڤان لُ سِينِيمَا." },
+        { "who": "Karim", "fr": "D’accord, à samedi ! Merci de m’inviter.", "ar": "حسناً، إلى السبت! شكراً على الدعوة.", "ipa": "dakɔʁ a samdi mɛʁsi də mɛ̃vite", "pron_ar": "دَاكُور، آ سَامْدِي! مِيرسي دُ مَانڤِيتِيه." }
+      ]
+    }
+  ]
+}
