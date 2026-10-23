@@ -1,124 +1,114 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="fr" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Le Français Au Bac | الفرنسية للثانوية العامة</title>
-  <meta name="theme-color" content="#0b3d91">
-  <meta name="description" content="تطبيق Le Français Au Bac لتعلم اللغة الفرنسية لطلاب الثانوية العامة - مسيو محمود أبوبكر السويدى">
-  <link rel="manifest" href="./manifest.json">
-  <link rel="stylesheet" href="./styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Français Au Bac 🇫🇷</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- خلفية علم فرنسا -->
+  <!-- خلفية علم فرنسا المتموج -->
   <div class="french-flag-bg"></div>
 
   <!-- الشريط العلوي -->
-  <header class="topbar">
-    <button id="menuBtn" class="menu-btn" aria-label="القائمة">☰</button>
-    <h1 class="app-title">Le Français Au Bac 🇫🇷</h1>
-    <button id="installBtn" class="install-btn" hidden>📲 تثبيت التطبيق على الجوال</button>
+  <header class="app-header">
+    <div class="header-container">
+      <h1 class="logo">Le Français Au Bac 🇫🇷</h1>
+      <button id="menu-toggle" class="menu-btn" onclick="toggleMenu()">☰</button>
+    </div>
   </header>
 
-  <div class="layout">
+  <!-- القائمة الجانبية المترجمة -->
+  <nav id="side-nav" class="side-nav">
+    <button class="close-btn" onclick="toggleMenu()">×</button>
+    <ul>
+      <li><a href="#" onclick="showSection('curriculum'); toggleMenu();">📚 دروس الكتاب والحلول</a></li>
+      <li><a href="#" onclick="showSection('grammar'); toggleMenu();">✍️ قواعد اللغة (Grammaire)</a></li>
+      <li><a href="#" onclick="showSection('phonetics'); toggleMenu();">🗣️ الصوتيات والنطق (Phonétique)</a></li>
+      <li><a href="#" onclick="showSection('dictionary'); toggleMenu();">📖 القاموس المصغر (Dictionnaire)</a></li>
+      <li><a href="#" onclick="showSection('dialogues'); toggleMenu();">💬 المحادثات الناطقة (Dialogues)</a></li>
+      <li><a href="#" onclick="showSection('stories'); toggleMenu();">🧚 قصص الأطفال (Contes)</a></li>
+      <li><a href="#" onclick="showSection('songs'); toggleMenu();">🎵 أغاني الأطفال (Chansons)</a></li>
+      <li><a href="#" onclick="showSection('exams'); toggleMenu();">📝 امتحانات الثانوية العامة</a></li>
+      <li><a href="#" onclick="showSection('ai-bot'); toggleMenu();">🤖 المساعد الذكي</a></li>
+    </ul>
+  </nav>
 
-    <!-- القائمة الجانبية -->
-    <nav id="sidebar" class="sidebar" aria-label="القائمة الرئيسية">
-      <ul class="nav-menu">
-        <li><button class="nav-btn active" data-section="lessons">دروس الكتاب والحلول 📚</button></li>
-        <li><button class="nav-btn" data-section="grammar">قواعد اللغة (Grammaire) ✍️</button></li>
-        <li><button class="nav-btn" data-section="phonetics">الصوتيات والنطق (Phonétique) 🗣️</button></li>
-        <li><button class="nav-btn" data-section="dictionary">القاموس المصغر (Dictionnaire) 📖</button></li>
-        <li><button class="nav-btn" data-section="dialogues">المحادثات الناطقة (Dialogues) 💬</button></li>
-        <li><button class="nav-btn" data-section="tales">قصص الأطفال (Contes) 🧚</button></li>
-        <li><button class="nav-btn" data-section="songs">أغاني الأطفال (Chansons) 🎵</button></li>
-        <li><button class="nav-btn" data-section="exams">امتحانات الثانوية العامة 📝</button></li>
-        <li><button class="nav-btn" data-section="assistant">المساعد الذكي 🤖</button></li>
-      </ul>
-    </nav>
+  <main class="main-content">
+    
+    <!-- 1. قسم دروس الكتاب -->
+    <section id="curriculum" class="app-section active">
+      <h2>📚 دروس الكتاب والحلول</h2>
+      <div id="curriculum-container" class="cards-container"></div>
+    </section>
 
-    <!-- المحتوى الرئيسي -->
-    <main class="content">
+    <!-- 2. قسم القواعد -->
+    <section id="grammar" class="app-section">
+      <h2>✍️ قواعد اللغة (Grammaire)</h2>
+      <div id="grammar-container" class="cards-container"></div>
+    </section>
 
-      <section id="sec-lessons" class="section active">
-        <h2>دروس الكتاب والحلول 📚</h2>
-        <div id="lessonsBox" class="box"><p class="loading">جارٍ التحميل...</p></div>
-      </section>
+    <!-- 3. قسم الصوتيات -->
+    <section id="phonetics" class="app-section">
+      <h2>🗣️ الصوتيات والنطق (Phonétique)</h2>
+      <div id="phonetics-container" class="cards-container"></div>
+    </section>
 
-      <section id="sec-grammar" class="section">
-        <h2>قواعد اللغة (Grammaire) ✍️</h2>
-        <div id="grammarBox" class="box"><p class="loading">جارٍ التحميل...</p></div>
-      </section>
+    <!-- 4. قسم القاموس -->
+    <section id="dictionary" class="app-section">
+      <h2>📖 القاموس المصغر (Dictionnaire)</h2>
+      <input type="text" id="dict-search" placeholder="ابحث بالفرنسية أو بالعربية..." onkeyup="filterDictionary()">
+      <div id="dictionary-container" class="cards-container"></div>
+    </section>
 
-      <section id="sec-phonetics" class="section">
-        <h2>الصوتيات والنطق (Phonétique) 🗣️</h2>
-        <div id="phoneticsBox" class="box"><p class="loading">جارٍ التحميل...</p></div>
-      </section>
+    <!-- 5. قسم المحادثات -->
+    <section id="dialogues" class="app-section">
+      <h2>💬 المحادثات الناطقة (Dialogues)</h2>
+      <div id="dialogues-container" class="cards-container"></div>
+    </section>
 
-      <section id="sec-dictionary" class="section">
-        <h2>القاموس المصغر (Dictionnaire) 📖</h2>
-        <input id="dictSearch" class="search-input" type="search" placeholder="ابحث بالفرنسية أو بالعربية... / Rechercher">
-        <div id="dictionaryBox" class="box"><p class="loading">جارٍ التحميل...</p></div>
-      </section>
+    <!-- 6. قسم القصص -->
+    <section id="stories" class="app-section">
+      <h2>🧚 قصص الأطفال (Contes)</h2>
+      <div id="stories-container" class="cards-container"></div>
+    </section>
 
-      <section id="sec-dialogues" class="section">
-        <h2>المحادثات الناطقة (Dialogues) 💬</h2>
-        <button id="toggleArBtn" class="btn">إخفاء / إظهار الترجمة العربية</button>
-        <div id="dialoguesBox" class="box"><p class="loading">جارٍ التحميل...</p></div>
-      </section>
+    <!-- 7. قسم الأغاني -->
+    <section id="songs" class="app-section">
+      <h2>🎵 أغاني الأطفال (Chansons)</h2>
+      <div id="songs-container" class="cards-container"></div>
+    </section>
 
-      <section id="sec-tales" class="section">
-        <h2>قصص الأطفال (Contes) 🧚</h2>
-        <div id="talesBox" class="box"><p class="loading">جارٍ التحميل...</p></div>
-      </section>
+    <!-- 8. قسم الامتحانات -->
+    <section id="exams" class="app-section">
+      <h2>📝 امتحانات الثانوية العامة</h2>
+      <div id="exams-container" class="cards-container"></div>
+    </section>
 
-      <section id="sec-songs" class="section">
-        <h2>أغاني الأطفال (Chansons) 🎵</h2>
-        <div id="songsBox" class="box"><p class="loading">جارٍ التحميل...</p></div>
-      </section>
+    <!-- 9. قسم المساعد الذكي -->
+    <section id="ai-bot" class="app-section">
+      <h2>🤖 المساعد الذكي المحلية</h2>
+      <div class="chat-box" id="chat-box">
+        <div class="msg bot">Bonjour ! 👋 أنا مدرس اللغة الفرنسية الذكي. اسألني عن منهجك أي وقت!</div>
+      </div>
+      <div class="chat-input-container">
+        <input type="text" id="chat-input" placeholder="اكتب سؤالك هنا...">
+        <button onclick="sendChatMessage()">إرسال ✉️</button>
+      </div>
+    </section>
 
-      <section id="sec-exams" class="section">
-        <h2>امتحانات الثانوية العامة 📝</h2>
-        <div id="examsBox" class="box"><p class="loading">جارٍ التحميل...</p></div>
-      </section>
+  </main>
 
-      <section id="sec-assistant" class="section">
-        <h2>المساعد الذكي 🤖</h2>
-        <div class="box chat-box">
-          <div class="chat-settings">
-            <select id="aiProvider">
-              <option value="gemini">Google Gemini</option>
-              <option value="openai">OpenAI</option>
-            </select>
-            <input id="aiKey" type="password" placeholder="أدخل مفتاح API هنا" autocomplete="off">
-            <button id="aiSaveKey" class="btn">حفظ المفتاح</button>
-          </div>
-          <div id="chatLog" class="chat-log" aria-live="polite">
-            <div class="msg bot">Bonjour ! 👋 أنا مدرس اللغة الفرنسية الذكي. اسألني بالعربية أو الفرنسية.</div>
-          </div>
-          <div class="chat-input">
-            <textarea id="chatText" rows="2" placeholder="اكتب سؤالك هنا... / Posez votre question"></textarea>
-            <button id="chatSend" class="btn primary">إرسال ✉️</button>
-          </div>
-        </div>
-      </section>
-
-    </main>
-  </div>
-
-  <!-- التذييل الرسمي -->
+  <!-- تذييل الصفحة الرسمي -->
   <footer class="site-footer">
-    <p>جميع الحقوق محفوظة © <strong>مسيو/ محمود أبوبكر السويدى</strong></p>
-    <p>
-      <a class="wa-link" href="https://wa.me/201040294647" target="_blank" rel="noopener">
-        💬 تواصل معنا عبر الواتساب
-      </a>
-    </p>
+    <p>جميع الحقوق محفوظة © - إعداد وتطوير: <strong>مسيو/ محمود أبوبكر السويدى</strong> - مدرس اللغة الفرنسية</p>
+    <a href="https://wa.me/201040294647" target="_blank" class="wa-btn">
+      💬 للتواصل والاستفسارات التعليمية عبر الواتساب
+    </a>
   </footer>
 
-  <div id="toast" class="toast" role="status" hidden></div>
-
-  <script src="./app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
