@@ -1,7 +1,22 @@
 {
   "meta": {
     "version": 2,
-    "note": "Complete phonetics course: 25 sounds (oral vowels, semi-vowels, consonants, nasal vowels), 16 pronunciation and reading rules (mute letters, liaison, spelling-to-sound), and 14 contrast sets of similar sounds. Every example has its IPA transcription and an Arabic meaning, and can be read aloud with the browser voice."
+    "title": {
+      "fr": "Phonétique française : sons, lettres et prononciation",
+      "ar": "الصوتيات الفرنسية: الأصوات والحروف والنطق",
+      "phonetic": {
+        "fr": "/fɔnetik fʁɑ̃sɛz sɔ̃ lɛtʁ e pʁɔnɔ̃sjasjɔ̃/",
+        "ar": "فونيتيك فرونسيز: سون، لِتر إي برونونسياسيون"
+      }
+    },
+    "note": {
+      "fr": "Cours complet de phonétique : 25 sons (voyelles orales, semi-voyelles, consonnes, voyelles nasales), 16 règles de prononciation et de lecture (lettres muettes, liaison, de l’écrit au son) et 14 séries de sons proches à comparer. Chaque exemple a sa transcription phonétique et son sens en arabe, et peut être lu à voix haute avec la voix du navigateur.",
+      "ar": "دورة صوتيات كاملة: 25 صوتاً (متحركات فموية، وأشباه متحركات، وسواكن، ومتحركات أنفية)، و16 قاعدة للنطق والقراءة (الحروف الصامتة، والوصل، والانتقال من الكتابة إلى الصوت)، و14 مجموعة من الأصوات المتشابهة للمقارنة. لكل مثال نطقه الصوتي ومعناه بالعربية، ويمكن الاستماع إليه بصوت المتصفح.",
+      "phonetic": {
+        "fr": "/kuʁ kɔ̃plɛ də fɔnetik vɛ̃tsɛ̃k sɔ̃ vwajɛl ɔʁal səmivwajɛl kɔ̃sɔn vwajɛl nazal sɛz ʁɛɡl də pʁɔnɔ̃sjasjɔ̃ e də lɛktyʁ lɛtʁ myɛt ljɛzɔ̃ də lekʁi o sɔ̃ e katɔʁz seʁi də sɔ̃ pʁɔʃ a kɔ̃paʁe/ /ʃak ɛɡzɑ̃pl a sa tʁɑ̃skʁipsjɔ̃ fɔnetik e sɔ̃ sɑ̃s ɑ̃ aʁab e pø ɛtʁ ly a vwa ot avɛk la vwa dy naviɡatœʁ/",
+        "ar": "كور كونبلي دو فونيتيك: فانتسانك سون (فوايِيل أورال، سيميفوايِيل، كونسون، فوايِيل نازال)، سيز ريغل دو برونونسياسيون إي دو لكتير (لِتر ميويت، ليزون، دو ليكري أو سون) إي كاتورز سيري دو سون بروش آ كونباريه. شاك إيغزومبل آ سا ترونسكريبسيون فونيتيك إي سون سونس أون آراب، إي بو إيتر لي آ فوا أوت أفيك لا فوا دو نافيغاتور."
+      }
+    }
   },
   "groups": [
     {
