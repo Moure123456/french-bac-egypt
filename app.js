@@ -1,4 +1,4 @@
-/* ===== Le Français Au Bac — app.js ===== */
+/* ===== Le Français Au Bac — app.js (النسخة الكاملة، بدون grammar-builtin.js) ===== */
 (() => {
   'use strict';
 
@@ -11,6 +11,12 @@
     .replace(/[\u0300-\u036f\u064B-\u065F\u0640]/g, '')
     .replace(/ة/g, 'ه').replace(/ى/g, 'ي')
     .replace(/[^\p{L}\p{N}\s]/gu, ' ').replace(/\s+/g, ' ').trim();
+
+  /* حاوية المحتوى داخل القسم (تحفظ عنوان القسم) */
+  const bodyOf = id => {
+    const sec = document.getElementById(id);
+    return sec ? (sec.querySelector('.body') || sec) : null;
+  };
 
   /* ---------- Toast ---------- */
   let toastTimer;
@@ -105,7 +111,7 @@
   window.speakText = speak;
   window.addEventListener('pagehide', () => { try { synth && synth.cancel(); } catch (e) {} });
 
-  /* ---------- جلب البيانات (مسارات نسبية مباشرة) ---------- */
+  /* ---------- جلب البيانات (مسارات نسبية مع محاولات بديلة) ---------- */
   const FILES = {
     curriculum: './data/curriculum.json', grammar: './data/grammar.json',
     phonetics: './data/phonetics.json', dictionary: './data/dictionary.json',
@@ -113,19 +119,32 @@
     stories: './data/stories.json', exams: './data/exams.json'
   };
   const DATA = {};
+
   async function loadJSON(url) {
-    try { const r = await fetch(url); if (!r.ok) return null; return await r.json(); }
-    catch (e) { return null; }
+    const name = url.split('/').pop();
+    const base = location.pathname.replace(/[^/]*$/, '');
+    const cands = [...new Set([url, 'data/' + name, name, base + 'data/' + name, base + name])];
+    for (const c of cands) {
+      try {
+        const r = await fetch(c, { cache: 'no-cache' });
+        if (!r.ok) continue;
+        return await r.json();
+      } catch (e) {}
+    }
+    return null;
   }
+
   async function loadAll() {
     await Promise.all(Object.entries(FILES).map(async ([k, u]) => { DATA[k] = await loadJSON(u); }));
+    // عرض القواعد فور جلب البيانات
+    renderGrammar(DATA.grammar);
   }
 
   /* ---------- أدوات مرنة لقراءة أي بنية JSON ---------- */
-  const TITLE_KEYS = ['title_ar', 'title', 'titre', 'name_ar', 'name', 'rule_ar', 'rule', 'topic', 'lesson', 'heading', 'question', 'word', 'fr'];
+  const TITLE_KEYS = ['title_ar', 'title', 'title_fr', 'titre', 'name_ar', 'name', 'rule_ar', 'rule', 'topic', 'lesson', 'heading', 'question', 'word', 'fr'];
   const LABELS = {
     fr: 'Français', ar: 'عربي', translation: 'الترجمة', translation_ar: 'الترجمة',
-    example: 'مثال', examples: 'أمثلة', explanation: 'الشرح', answer: 'الإجابة',
+    example: 'مثال', examples: 'أمثلة', explanation: 'الشرح', explanation_ar: 'الشرح', answer: 'الإجابة',
     question: 'السؤال', why: 'لماذا؟', rule: 'القاعدة', text: 'النص', level: 'المستوى'
   };
 
@@ -202,7 +221,7 @@
   }
 
   function mountGeneric(id, data, opts = {}) {
-    const el = $('#' + id); if (!el) return;
+    const el = bodyOf(id); if (!el) return;
     if (!data) return emptyMsg(el, 'المحتوى غير متاح حالياً.');
     const entries = topEntries(data);
     const useTabs = entries.length > 1 && entries.length <= 8;
@@ -235,6 +254,89 @@
     if (tg) tg.addEventListener('click', () => el.classList.toggle('ar-hidden'));
   }
 
+  /* ---------- القواعد: تسطيح grammar.json ثم عرض كل قاعدة في كارت ---------- */
+  const RULE_TITLE = ['title_fr', 'title', 'title_ar', 'rule', 'name', 'topic'];
+  const RULE_BODY = ['explanation_ar', 'explanation', 'examples', 'example'];
+
+  function isRule(o) {
+    return RULE_TITLE.some(k => typeof o[k] === 'string' && o[k].trim()) &&
+           RULE_BODY.some(k => o[k] != null && o[k] !== '');
+  }
+
+  // يمشي داخل أي عمق (levels / units / rules / مصفوفات) ويجمع القواعد في مصفوفة واحدة
+  function flattenGrammar(data) {
+    const out = [];
+    const seen = new Set();
+    const visit = (node, level) => {
+      if (!node || typeof node !== 'object' || seen.has(node)) return;
+      seen.add(node);
+      if (Array.isArray(node)) { node.forEach(x => visit(x, level)); return; }
+      const lv = node.level || node.level_ar || level;
+      if (isRule(node)) { out.push({ ...node, _level: node.level || level || '' }); return; }
+      Object.entries(node).forEach(([k, v]) => {
+        if (v && typeof v === 'object') {
+          // اسم المفتاح مثل 1sec / 2sec / 3sec يُعتبر اسم المستوى
+          const isLevelKey = /sec|level|niveau|مستوى|ثانوي/i.test(k) && !/^(rules|examples|levels)$/i.test(k);
+          visit(v, isLevelKey ? k : lv);
+        }
+      });
+    };
+    visit(data, '');
+    return out;
+  }
+
+  function renderGrammar(data) {
+    const el = bodyOf('grammar'); if (!el) return;
+    const rules = flattenGrammar(data);
+    if (!rules.length) {
+      return emptyMsg(el, 'تعذّر تحميل قواعد اللغة. تأكد من وجود الملف data/grammar.json داخل مجلد data بنفس الاسم.');
+    }
+
+    const sayBtn = t => (t && /[A-Za-zÀ-ÿ]/.test(t))
+      ? `<button class="spk" type="button" data-lang="fr-FR" data-say="${esc(encodeURIComponent(String(t)))}" aria-label="استمع بالفرنسية">🔊</button>` : '';
+
+    const exampleHTML = ex => {
+      if (ex == null || ex === '') return '';
+      if (typeof ex === 'string') return `<div class="ex"><div class="ex-fr" dir="ltr">${esc(ex)} ${sayBtn(ex)}</div></div>`;
+      const fr = ex.fr || ex.french || ex.example || ex.text || '';
+      const ar = ex.ar || ex.arabic || ex.translation || ex.translation_ar || '';
+      if (!fr && !ar) return '';
+      return `<div class="ex"><div class="ex-fr" dir="ltr">${esc(fr)} ${sayBtn(fr)}</div>${ar ? `<div class="ex-ar" data-k="ar">${esc(ar)}</div>` : ''}</div>`;
+    };
+
+    const cardHTML = r => {
+      const tFr = r.title_fr || r.title || '';
+      const tAr = r.title_ar || '';
+      const expl = r.explanation_ar || r.explanation || '';
+      const raw = r.examples != null ? r.examples : r.example;
+      const exs = Array.isArray(raw) ? raw : (raw ? [raw] : []);
+      return `<div class="card gcard">
+        <h3 class="g-title">
+          ${tAr ? `<span>${esc(tAr)}</span>` : ''}
+          ${tFr ? `<span class="g-fr" dir="ltr">${esc(tFr)}</span> ${sayBtn(tFr)}` : ''}
+          ${r._level ? `<em class="lvl">${esc(r._level)}</em>` : ''}
+        </h3>
+        ${expl ? `<p class="gexp">${esc(expl)}</p>` : ''}
+        ${exs.length ? `<h5 class="gh">أمثلة</h5>${exs.map(exampleHTML).join('')}` : ''}
+      </div>`;
+    };
+
+    el.innerHTML = `
+      <div class="tools">
+        <input type="search" class="search g-search" placeholder="🔎 ابحث في القواعد..." aria-label="بحث">
+        <button type="button" class="btn-toggle-ar">إظهار / إخفاء الترجمة العربية</button>
+      </div>
+      <div class="count">${rules.length} قاعدة</div>
+      <div class="g-area">${rules.map(cardHTML).join('')}</div>`;
+
+    const q = el.querySelector('.g-search');
+    q.addEventListener('input', () => {
+      const v = norm(q.value);
+      el.querySelectorAll('.gcard').forEach(c => { c.style.display = (!v || norm(c.textContent).includes(v)) ? '' : 'none'; });
+    });
+    el.querySelector('.btn-toggle-ar').addEventListener('click', () => el.classList.toggle('ar-hidden'));
+  }
+
   /* ---------- القاموس (استخراج تلقائي عند غياب الملف) ---------- */
   const FR_K = ['fr', 'french', 'word', 'mot', 'francais', 'français'];
   const AR_K = ['ar', 'arabic', 'meaning', 'translation', 'translation_ar', 'arabic_meaning'];
@@ -253,7 +355,7 @@
     return out;
   }
   function mountDictionary() {
-    const el = $('#dictionary'); if (!el) return;
+    const el = bodyOf('dictionary'); if (!el) return;
     let words = pairsFrom(DATA.dictionary);
     if (!words.length) words = pairsFrom(findByKey(DATA.curriculum, /dict|vocab|mots|words/i));
     if (!words.length) words = pairsFrom(findByKey(DATA.grammar, /dict|vocab|mots|words/i));
@@ -387,9 +489,10 @@
     setupInstall();
     mountChat();
     go((location.hash || '').replace('#', '') || 'lessons');
-    await loadAll();
+
+    await loadAll(); // يجلب كل الملفات ثم يعرض القواعد داخلياً عبر renderGrammar
+
     mountGeneric('lessons', DATA.curriculum);
-    mountGeneric('grammar', DATA.grammar);
     mountGeneric('phonetics', DATA.phonetics);
     mountGeneric('exams', DATA.exams);
     mountDictionary();
