@@ -211,7 +211,8 @@
 
       safe('grammar', function () {
         DATA.grammarRules = flattenGrammar(DATA.grammar);
-        renderGrammar(DATA.grammarRules);
+        DATA.conjugations = getConjugations(DATA.grammar);
+        renderGrammar(DATA.grammarRules, DATA.conjugations);
       });
     });
   }
@@ -379,7 +380,7 @@
     if (tg) tg.addEventListener('click', function () { el.classList.toggle('ar-hidden'); });
   }
 
-  /* ---------- القواعد: تسطيح بسيط وآمن ثم عرض ---------- */
+  /* ---------- القواعد: تسطيح + تمارين + تصريف ---------- */
   var RULE_TITLE = ['title_fr', 'title', 'title_ar', 'rule', 'name', 'topic'];
   var RULE_BODY = ['explanation_ar', 'explanation', 'examples', 'example'];
 
@@ -406,7 +407,8 @@
           node.forEach(function (x) { visit(x, level); });
           return;
         }
-        var lv = node.level || node.level_ar || level;
+        // حاوية مستوى: كائن له id ومصفوفة rules
+        var lv = node.level || node.level_ar || ((Array.isArray(node.rules) && node.id) ? node.id : '') || level;
         if (isRule(node)) {
           var copy = {};
           Object.keys(node).forEach(function (k) { copy[k] = node[k]; });
@@ -416,6 +418,7 @@
         }
         Object.keys(node).forEach(function (k) {
           var v = node[k];
+          if (k === 'conjugations' || k === 'meta') return;
           if (v && typeof v === 'object') {
             var isLevelKey = /sec|level|niveau/i.test(k) && !/^(rules|examples|levels)$/i.test(k);
             visit(v, isLevelKey ? k : lv);
@@ -429,10 +432,25 @@
     return out;
   }
 
+  function getConjugations(data) {
+    try {
+      if (!data) return [];
+      if (Array.isArray(data.conjugations)) return data.conjugations;
+      var f = findByKey(data, /conjug/i);
+      return Array.isArray(f) ? f : [];
+    } catch (e) { return []; }
+  }
+
   function sayFr(t) {
-    t = String(t || '');
+    t = String(t || '').replace(/_+/g, ' ... ');
     if (!/[A-Za-z\u00C0-\u00FF]/.test(t)) return '';
     return '<button class="spk" type="button" data-lang="fr-FR" data-say="' + esc(encodeURIComponent(t)) + '" aria-label="استمع بالفرنسية">🔊</button>';
+  }
+
+  function sayAr(t) {
+    t = String(t || '');
+    if (!hasArabic(t)) return '';
+    return '<button class="spk" type="button" data-say="' + esc(encodeURIComponent(t)) + '" aria-label="استمع للشرح">🔊</button>';
   }
 
   function exampleHTML(ex) {
@@ -447,48 +465,228 @@
       (ar ? '<div class="ex-ar" data-k="ar">' + esc(ar) + '</div>' : '') + '</div>';
   }
 
+  function exerciseHTML(x, idx) {
+    var prompt = x.prompt_fr || x.prompt || x.question || '';
+    var ans = (x.answer !== undefined && x.answer !== null) ? String(x.answer) : '';
+    var hint = x.hint_ar || x.hint || '';
+    var isChoice = Array.isArray(x.options) && x.options.length > 0 && x.type !== 'text';
+    var h = '<div class="exo" data-ans="' + esc(encodeURIComponent(ans)) + '" data-hint="' + esc(encodeURIComponent(hint)) + '">';
+    h += '<div class="exo-q" dir="ltr"><b>' + (idx + 1) + '.</b> ' + esc(prompt) + ' ' + sayFr(prompt) + '</div>';
+    if (isChoice) {
+      h += '<div class="opts" dir="ltr">' + x.options.map(function (o) {
+        return '<button type="button" class="opt" data-v="' + esc(encodeURIComponent(String(o))) + '">' + esc(o) + '</button>';
+      }).join('') + '</div>';
+    } else {
+      h += '<div class="txt"><input type="text" class="exo-in" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة"><button type="button" class="chk">تحقق</button></div>';
+    }
+    h += '<div class="fb"></div></div>';
+    return h;
+  }
+
   function grammarCard(r) {
     var tFr = r.title_fr || r.title || '';
     var tAr = r.title_ar || '';
     var expl = r.explanation_ar || r.explanation || '';
     var raw = (r.examples !== undefined && r.examples !== null) ? r.examples : r.example;
     var exs = Array.isArray(raw) ? raw : (raw ? [raw] : []);
+    var exos = Array.isArray(r.exercises) ? r.exercises : [];
     var h = '<div class="card gcard"><h3 class="g-title">';
     if (tAr) h += '<span>' + esc(tAr) + '</span>';
     if (tFr) h += '<span class="g-fr" dir="ltr">' + esc(tFr) + '</span> ' + sayFr(tFr);
     if (r._level) h += '<em class="lvl">' + esc(r._level) + '</em>';
     h += '</h3>';
-    if (expl) h += '<p class="gexp">' + esc(expl) + '</p>';
+    if (expl) h += '<p class="gexp">' + esc(expl) + ' ' + sayAr(expl) + '</p>';
     if (exs.length) h += '<h5 class="gh">أمثلة</h5>' + exs.map(exampleHTML).join('');
+    if (exos.length) {
+      h += '<h5 class="gh">تدريبات <span class="gscore"></span> <button type="button" class="reset-ex">↺ إعادة</button></h5>' +
+        exos.map(exerciseHTML).join('');
+    }
     h += '</div>';
     return h;
   }
 
-  function renderGrammar(rules) {
+  /* ---------- التصحيح التلقائي ---------- */
+  function normAns(s) {
+    return String(s || '').toLowerCase()
+      .replace(/[\u2019\u2018`\u00B4]/g, "'")
+      .replace(/\s+/g, ' ')
+      .replace(/\s*([?!.:,;])/g, '$1')
+      .replace(/[?!.]+$/, '')
+      .trim();
+  }
+
+  function updateScore(card) {
+    if (!card) return;
+    var all = $$('.exo', card);
+    var done = all.filter(function (e) { return e.getAttribute('data-done'); }).length;
+    var ok = all.filter(function (e) { return e.getAttribute('data-ok'); }).length;
+    var el = $('.gscore', card);
+    if (!el) return;
+    if (!done) { el.textContent = ''; return; }
+    el.textContent = '(' + ok + ' / ' + all.length + ')' + (done === all.length && ok === all.length ? ' 🎉' : '');
+  }
+
+  function finishExo(exo, ok) {
+    exo.setAttribute('data-done', '1');
+    if (ok) exo.setAttribute('data-ok', '1');
+    var ans = decodeURIComponent(exo.getAttribute('data-ans') || '');
+    var hint = decodeURIComponent(exo.getAttribute('data-hint') || '');
+    var fb = $('.fb', exo);
+    fb.className = 'fb ' + (ok ? 'good' : 'bad');
+    fb.innerHTML = (ok ? '✅ إجابة صحيحة' : '❌ الإجابة الصحيحة: <b dir="ltr">' + esc(ans) + '</b>') +
+      (hint ? '<div class="hint">💡 ' + esc(hint) + '</div>' : '');
+    updateScore(exo.closest('.gcard'));
+  }
+
+  function answerChoice(btn) {
+    var exo = btn.closest('.exo');
+    if (!exo || exo.getAttribute('data-done')) return;
+    var v = decodeURIComponent(btn.getAttribute('data-v') || '');
+    var ans = decodeURIComponent(exo.getAttribute('data-ans') || '');
+    $$('.opt', exo).forEach(function (b) {
+      b.disabled = true;
+      var bv = decodeURIComponent(b.getAttribute('data-v') || '');
+      if (bv === ans) b.classList.add('ok');
+      else if (b === btn) b.classList.add('bad');
+    });
+    finishExo(exo, v === ans);
+  }
+
+  function answerText(btn) {
+    var exo = btn.closest('.exo');
+    if (!exo || exo.getAttribute('data-done')) return;
+    var inp = $('.exo-in', exo);
+    if (!inp || !inp.value.trim()) { toast('اكتب إجابتك أولاً'); return; }
+    var ans = decodeURIComponent(exo.getAttribute('data-ans') || '');
+    inp.disabled = true;
+    btn.disabled = true;
+    finishExo(exo, normAns(inp.value) === normAns(ans));
+  }
+
+  function resetCard(btn) {
+    var card = btn.closest('.gcard');
+    if (!card) return;
+    $$('.exo', card).forEach(function (exo) {
+      exo.removeAttribute('data-done');
+      exo.removeAttribute('data-ok');
+      var fb = $('.fb', exo);
+      fb.className = 'fb';
+      fb.innerHTML = '';
+      $$('.opt', exo).forEach(function (b) {
+        b.disabled = false;
+        b.classList.remove('ok');
+        b.classList.remove('bad');
+      });
+      var inp = $('.exo-in', exo);
+      if (inp) { inp.value = ''; inp.disabled = false; }
+      var c = $('.chk', exo);
+      if (c) c.disabled = false;
+    });
+    updateScore(card);
+  }
+
+  /* ---------- جداول التصريف ---------- */
+  var PRON_D = ['je', 'tu', 'il / elle', 'nous', 'vous', 'ils / elles'];
+  var PRON_S = ['je', 'tu', 'il', 'nous', 'vous', 'ils'];
+
+  function pronForm(i, form, sub, forSpeech) {
+    var pr = forSpeech ? PRON_S[i] : PRON_D[i];
+    var vowel = /^[aeiouyh\u00E0\u00E2\u00E4\u00E9\u00E8\u00EA\u00EB\u00EE\u00EF\u00F4\u00F6\u00F9\u00FB\u00FC]/i.test(form);
+    if (i === 0) {
+      if (sub) return (vowel ? "que j'" : 'que je ') + form;
+      return (vowel ? "j'" : 'je ') + form;
+    }
+    if (sub) {
+      if (i === 2) return forSpeech ? "qu'il " + form : "qu'il / elle " + form;
+      if (i === 5) return forSpeech ? "qu'ils " + form : "qu'ils / elles " + form;
+      return 'que ' + pr + ' ' + form;
+    }
+    return pr + ' ' + form;
+  }
+
+  function conjHTML(c) {
+    var h = '<details class="node d0"><summary>' + esc(c.verb) + ' <small>' + esc(c.group_ar || '') + '</small></summary><div class="inner">';
+    (c.tenses || []).forEach(function (t) {
+      var sub = /subjonctif/i.test(t.name_fr || '');
+      h += '<table class="gtable"><caption dir="ltr">' + esc(t.name_fr || '') + '</caption>';
+      (t.forms || []).forEach(function (f, i) {
+        h += '<tr><td dir="ltr">' + esc(pronForm(i, f, sub, false)) + '</td><td>' + sayFr(pronForm(i, f, sub, true)) + '</td></tr>';
+      });
+      h += '</table>';
+    });
+    h += '</div></details>';
+    return h;
+  }
+
+  var LEVEL_NAMES = { '1sec': '1 ثانوي', '2sec': '2 ثانوي', '3sec': '3 ثانوي' };
+
+  function renderGrammar(rules, conj) {
     var el = bodyOf('grammar');
     if (!el) return;
-    if (!rules || !rules.length) {
+    conj = conj || [];
+    if ((!rules || !rules.length) && !conj.length) {
       emptyMsg(el, 'تعذّر تحميل ملف القواعد ./data/grammar.json — تأكد من وجوده داخل مجلد data بنفس الاسم.');
       return;
     }
+    rules = rules || [];
+
+    var items = rules.map(function (r) {
+      return { r: r, hay: norm(JSON.stringify(r)) };
+    });
+    var levels = [];
+    rules.forEach(function (r) {
+      if (r._level && levels.indexOf(r._level) === -1) levels.push(r._level);
+    });
+
+    var tabsHtml = '<button type="button" class="tab on" data-lv="all">الكل</button>' +
+      levels.map(function (l) {
+        return '<button type="button" class="tab" data-lv="' + esc(l) + '">' + esc(LEVEL_NAMES[l] || l) + '</button>';
+      }).join('') +
+      (conj.length ? '<button type="button" class="tab" data-lv="conj">التصريف</button>' : '');
+
     el.innerHTML =
       '<div class="tools">' +
         '<input type="search" class="search g-search" placeholder="🔎 ابحث في القواعد..." aria-label="بحث">' +
         '<button type="button" class="btn-toggle-ar">إظهار / إخفاء الترجمة العربية</button>' +
       '</div>' +
-      '<div class="count">' + rules.length + ' قاعدة</div>' +
-      '<div class="g-area">' + rules.map(grammarCard).join('') + '</div>';
+      '<div class="tabs g-tabs">' + tabsHtml + '</div>' +
+      '<div class="count"></div>' +
+      '<div class="g-area"></div>';
 
-    var q = $('.g-search', el);
-    q.addEventListener('input', function () {
-      var v = norm(q.value);
-      $$('.gcard', el).forEach(function (c) {
-        c.style.display = (!v || norm(c.textContent).indexOf(v) !== -1) ? '' : 'none';
+    var search = $('.g-search', el);
+    var area = $('.g-area', el);
+    var cnt = $('.count', el);
+    var cur = 'all';
+
+    function draw() {
+      var q = norm(search.value);
+      if (cur === 'conj') {
+        var cl = conj.filter(function (c) { return !q || norm(c.verb).indexOf(q) !== -1; });
+        cnt.textContent = cl.length + ' فعل';
+        area.innerHTML = cl.length ? '<div class="card">' + cl.map(conjHTML).join('') + '</div>' : '<div class="empty">لا توجد نتائج.</div>';
+        return;
+      }
+      var list = items.filter(function (it) {
+        var lvOk = (cur === 'all') || it.r._level === cur;
+        return lvOk && (!q || it.hay.indexOf(q) !== -1);
       });
+      cnt.textContent = list.length + ' قاعدة';
+      area.innerHTML = list.length ? list.map(function (it) { return grammarCard(it.r); }).join('') : '<div class="empty">لا توجد نتائج.</div>';
+    }
+
+    $('.g-tabs', el).addEventListener('click', function (ev) {
+      var b = ev.target.closest('.tab');
+      if (!b) return;
+      $$('.g-tabs .tab', el).forEach(function (x) { x.classList.remove('on'); });
+      b.classList.add('on');
+      cur = b.getAttribute('data-lv');
+      draw();
     });
+    search.addEventListener('input', draw);
     $('.btn-toggle-ar', el).addEventListener('click', function () {
       el.classList.toggle('ar-hidden');
     });
+    draw();
   }
 
   /* ---------- القاموس (يُستخرج من الدروس والقواعد) ---------- */
@@ -522,7 +720,7 @@
     if (!el) return;
     var words = pairsFrom(findByKey(DATA.curriculum, /dict|vocab|mots|words/i));
     if (!words.length) words = pairsFrom(DATA.curriculum);
-    words = words.concat(pairsFrom(DATA.grammarRules)).concat(pairsFrom(DATA.dialogues));
+    words = words.concat(pairsFrom(DATA.dialogues));
     var seen = {};
     words = words.filter(function (w) {
       var k = w.fr.toLowerCase();
@@ -567,7 +765,7 @@
     out = out || [];
     if (out.length >= 12 || depth > 3) return out;
     Object.keys(o).forEach(function (k) {
-      if (out.length >= 12 || k === '_level' || k === TITLE_KEYS[0] || k === TITLE_KEYS[1]) return;
+      if (out.length >= 12 || k === '_level' || k === 'id' || k === 'exercises' || k === TITLE_KEYS[0] || k === TITLE_KEYS[1]) return;
       var v = o[k];
       if (typeof v === 'string' && v.trim()) {
         out.push(v.trim());
@@ -596,6 +794,17 @@
           src: pair[0], title: title, lines: lines,
           th: norm(title), hay: norm(title + ' ' + lines.join(' '))
         });
+      });
+    });
+    (DATA.conjugations || []).forEach(function (c) {
+      var lines = (c.tenses || []).map(function (t) {
+        return t.name_fr + ': ' + (t.forms || []).join(', ');
+      });
+      if (!lines.length) return;
+      var title = 'تصريف ' + c.verb;
+      INDEX.push({
+        src: 'التصريف', title: title, lines: lines,
+        th: norm(title), hay: norm(title + ' ' + lines.join(' '))
       });
     });
   }
@@ -712,10 +921,24 @@
       speak(decodeURIComponent(s.dataset.say || ''), s.dataset.lang || null, s);
       return;
     }
+    var opt = e.target.closest('.opt');
+    if (opt) { answerChoice(opt); return; }
+    var chk = e.target.closest('.chk');
+    if (chk) { answerText(chk); return; }
+    var rs = e.target.closest('.reset-ex');
+    if (rs) { resetCard(rs); return; }
     var n = e.target.closest('[data-nav]');
     if (n) go(n.dataset.nav);
     if (e.target.closest('#menu-btn')) document.body.classList.toggle('menu-open');
     if (e.target.id === 'scrim') document.body.classList.remove('menu-open');
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && e.target && e.target.classList && e.target.classList.contains('exo-in')) {
+      var exo = e.target.closest('.exo');
+      var c = exo ? $('.chk', exo) : null;
+      if (c) answerText(c);
+    }
   });
 
   /* ---------- التشغيل ---------- */
