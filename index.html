@@ -3,107 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0055A5">
   <title>Le Français Au Bac</title>
-  <meta name="theme-color" content="#14286b">
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Newsreader:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <a class="skip" href="#main">تخطَّ إلى المحتوى</a>
+  <div class="french-flag-bg"></div>
 
   <header class="topbar">
-    <button class="icon-btn" id="menuBtn" aria-label="القائمة" aria-controls="sidebar" aria-expanded="false">☰</button>
-    <span class="topbar-title">Le Français Au Bac</span>
-    <button class="pill install" id="installBtn" type="button" hidden data-ar="تثبيت التطبيق على الجوال" data-fr="Installer l’application">تثبيت التطبيق على الجوال</button>
-    <button class="pill" id="dirBtn" type="button">FR · LTR</button>
+    <button id="menu-btn" class="icon-btn" type="button" aria-label="القائمة">☰</button>
+    <h1>Le Français Au Bac <span>🇫🇷</span></h1>
+    <button id="install-btn" class="install" type="button" hidden>تثبيت التطبيق على الجوال</button>
   </header>
 
-  <div class="scrim" id="scrim" hidden></div>
+  <div id="scrim" class="scrim"></div>
 
-  <aside class="sidebar" id="sidebar" aria-label="الأقسام">
-    <div class="brand">
-      <span class="brand-mark" aria-hidden="true">Fr</span>
-      <div>
-        <strong class="brand-name">Le Français Au Bac</strong>
-        <small data-ar="فرنساوي الثانوية العامة" data-fr="Français – Thanaweya Amma">فرنساوي الثانوية العامة</small>
-      </div>
-    </div>
-
-    <nav class="nav" id="nav">
-      <a href="#lessons"   data-section="lessons"   data-ar="دروس المنهج المدرسي"   data-fr="Leçons du manuel">دروس المنهج المدرسي</a>
-      <a href="#solutions" data-section="solutions" data-ar="حلول أسئلة الكتاب المدرسي" data-fr="Corrigés du manuel">حلول أسئلة الكتاب المدرسي</a>
-      <a href="#grammar"   data-section="grammar"   data-ar="قواعد اللغة"            data-fr="Grammaire">قواعد اللغة</a>
-      <a href="#phonetics" data-section="phonetics" data-ar="الصوتيات والنطق"        data-fr="Phonétique">الصوتيات والنطق</a>
-      <a href="#dictionary" data-section="dictionary" data-ar="القاموس المصغر"       data-fr="Dictionnaire">القاموس المصغر</a>
-      <a href="#dialogues" data-section="dialogues" data-ar="المحادثات الناطقة"      data-fr="Dialogues">المحادثات الناطقة</a>
-      <a href="#tales"     data-section="tales"     data-ar="قصص الأطفال"            data-fr="Contes">قصص الأطفال</a>
-      <a href="#exams"     data-section="exams"     data-ar="امتحانات الثانوية العامة" data-fr="Examens du Bac">امتحانات الثانوية العامة</a>
-      <a href="#assistant" data-section="assistant" data-ar="الشات الذكي"            data-fr="Assistant IA">الشات الذكي</a>
+  <div class="layout">
+    <nav class="sidebar" aria-label="الأقسام">
+      <button data-nav="lessons" class="on" type="button">📚 دروس الكتاب والحلول</button>
+      <button data-nav="grammar" type="button">✍️ Grammaire</button>
+      <button data-nav="phonetics" type="button">🗣️ Phonétique</button>
+      <button data-nav="dictionary" type="button">📖 Dictionnaire</button>
+      <button data-nav="dialogues" type="button">💬 Dialogues</button>
+      <button data-nav="tales" type="button">🧚 Contes</button>
+      <button data-nav="exams" type="button">📝 امتحانات الثانوية العامة</button>
+      <button data-nav="chat" type="button">🤖 المساعد الذكي</button>
     </nav>
-  </aside>
 
-  <main class="main" id="main" tabindex="-1">
+    <main class="content">
+      <section id="lessons" class="sec on"><h2>دروس الكتاب المدرسي وحلول الأسئلة</h2><div class="body"><div class="empty">جارٍ التحميل…</div></div></section>
+      <section id="grammar" class="sec"><h2>Grammaire — القواعد</h2><div class="body"></div></section>
+      <section id="phonetics" class="sec"><h2>Phonétique — الصوتيات</h2><div class="body"></div></section>
+      <section id="dictionary" class="sec"><h2>Dictionnaire — القاموس</h2><div class="body"></div></section>
+      <section id="dialogues" class="sec"><h2>Dialogues — حوارات يومية</h2><div class="body"></div></section>
+      <section id="tales" class="sec"><h2>Contes — قصص مبسطة</h2><div class="body"></div></section>
+      <section id="exams" class="sec"><h2>Examens du Bac — نماذج امتحانات</h2><div class="body"></div></section>
 
-    <section class="panel" id="lessons" data-title-ar="دروس المنهج المدرسي" data-title-fr="Leçons du manuel">
-      <h1 data-ar="دروس المنهج المدرسي" data-fr="Leçons du manuel">دروس المنهج المدرسي</h1>
-      <div class="tabs" role="tablist">
-        <button role="tab" aria-selected="true"  data-year="1sec">1Sec</button>
-        <button role="tab" aria-selected="false" data-year="2sec">2Sec</button>
-        <button role="tab" aria-selected="false" data-year="3sec">3Sec</button>
-      </div>
-      <div class="year" id="year-1sec"><div class="lesson-list" data-year-list="1sec"><p class="empty" data-ar="جارٍ تحميل الدروس..." data-fr="Chargement des leçons…">جارٍ تحميل الدروس...</p></div></div>
-      <div class="year" id="year-2sec" hidden><div class="lesson-list" data-year-list="2sec"><p class="empty" data-ar="جارٍ تحميل الدروس..." data-fr="Chargement des leçons…">جارٍ تحميل الدروس...</p></div></div>
-      <div class="year" id="year-3sec" hidden><div class="lesson-list" data-year-list="3sec"><p class="empty" data-ar="جارٍ تحميل الدروس..." data-fr="Chargement des leçons…">جارٍ تحميل الدروس...</p></div></div>
-    </section>
+      <section id="chat" class="sec">
+        <h2>المساعد الذكي 🤖</h2>
+        <div class="chips">
+          <button class="chip" type="button">passé composé</button>
+          <button class="chip" type="button">الضمائر</button>
+          <button class="chip" type="button">أحرف الأنف</button>
+          <button class="chip" type="button">les articles</button>
+        </div>
+        <div id="chat-log" class="chat-log" aria-live="polite"></div>
+        <form id="chat-form" class="chat-form">
+          <input id="chat-input" type="text" placeholder="اكتب سؤالك بالعربية أو الفرنسية…" autocomplete="off">
+          <button type="submit">إرسال</button>
+        </form>
+      </section>
+    </main>
+  </div>
 
-    <section class="panel" id="solutions" hidden data-title-ar="حلول أسئلة الكتاب المدرسي" data-title-fr="Corrigés du manuel">
-      <h1 data-ar="حلول أسئلة الكتاب المدرسي" data-fr="Corrigés du manuel">حلول أسئلة الكتاب المدرسي</h1>
-      <div id="solutionsHost"><p class="empty" data-ar="جارٍ تحميل الحلول..." data-fr="Chargement des corrigés…">جارٍ تحميل الحلول...</p></div>
-    </section>
+  <footer class="site-footer">
+    <p>جميع الحقوق محفوظة © - إعداد وتطوير: مسيو/ محمود أبوبكر السويدى - مدرس اللغة الفرنسية</p>
+    <a class="wa-btn" href="https://wa.me/201040294647" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true" fill="currentColor"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.3.7 4.5 1.8 6.3L4 28l6.9-1.8A12 12 0 0 0 16 27c6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-4 1 1.1-3.9-.3-.4A9.8 9.8 0 1 1 16 24.800zm5.400-7.300c-.3-.1-1.800-.9-2-1-.3-.1-.5-.1-.7.1l-1 1.200c-.2.200-.4.200-.6.100-1.800-.9-3-1.600-4.200-3.600-.3-.5.300-.5.900-1.600.1-.2 0-.4 0-.5l-.9-2.100c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.5.100-.8.400-.3.300-1 1-1 2.400s1 2.800 1.200 3c.1.200 2 3.100 4.900 4.300 1.800.8 2.500.8 3.400.7.600-.1 1.800-.7 2-1.400.3-.7.300-1.300.2-1.400-.1-.1-.3-.2-.6-.3z"/></svg>
+      <span>للتواصل والاستفسارات التعليمية عبر الواتساب</span>
+    </a>
+  </footer>
 
-    <section class="panel" id="grammar" hidden data-title-ar="قواعد اللغة" data-title-fr="Grammaire">
-      <h1 data-ar="قواعد اللغة" data-fr="Grammaire">قواعد اللغة</h1>
-      <div id="grammarHost"><p class="empty" data-ar="جارٍ تحميل القواعد..." data-fr="Chargement de la grammaire…">جارٍ تحميل القواعد...</p></div>
-    </section>
-
-    <section class="panel" id="phonetics" hidden data-title-ar="الصوتيات والنطق" data-title-fr="Phonétique">
-      <h1 data-ar="الصوتيات والنطق" data-fr="Phonétique">الصوتيات والنطق</h1>
-      <div id="voiceCheck"></div>
-      <div id="phoneticsHost"><p class="empty" data-ar="جارٍ تحميل الأصوات..." data-fr="Chargement des sons…">جارٍ تحميل الأصوات...</p></div>
-    </section>
-
-    <section class="panel" id="dictionary" hidden data-title-ar="القاموس المصغر" data-title-fr="Dictionnaire">
-      <h1 data-ar="القاموس المصغر" data-fr="Dictionnaire">القاموس المصغر</h1>
-      <div id="dictionaryHost"><p class="empty" data-ar="جارٍ تحميل القاموس..." data-fr="Chargement du dictionnaire…">جارٍ تحميل القاموس...</p></div>
-    </section>
-
-    <section class="panel" id="dialogues" hidden data-title-ar="المحادثات الناطقة" data-title-fr="Dialogues">
-      <h1 data-ar="المحادثات الناطقة" data-fr="Dialogues">المحادثات الناطقة</h1>
-      <div id="dialoguesHost"><p class="empty" data-ar="جارٍ تحميل المحادثات..." data-fr="Chargement des dialogues…">جارٍ تحميل المحادثات...</p></div>
-    </section>
-
-    <section class="panel" id="tales" hidden data-title-ar="قصص الأطفال" data-title-fr="Contes">
-      <h1 data-ar="قصص الأطفال" data-fr="Contes">قصص الأطفال</h1>
-      <div id="talesHost"><p class="empty" data-ar="جارٍ تحميل القصص..." data-fr="Chargement des contes…">جارٍ تحميل القصص...</p></div>
-      <div id="storiesHost"></div>
-    </section>
-
-    <section class="panel" id="exams" hidden data-title-ar="امتحانات الثانوية العامة" data-title-fr="Examens du Bac">
-      <h1 data-ar="امتحانات الثانوية العامة" data-fr="Examens du Bac">امتحانات الثانوية العامة</h1>
-      <div id="examsHost"><p class="empty" data-ar="جارٍ تحميل الامتحانات..." data-fr="Chargement des examens…">جارٍ تحميل الامتحانات...</p></div>
-    </section>
-
-    <section class="panel" id="assistant" hidden data-title-ar="الشات الذكي" data-title-fr="Assistant IA">
-      <h1 data-ar="الشات الذكي" data-fr="Assistant IA">الشات الذكي</h1>
-      <div id="assistantHost"></div>
-    </section>
-
-  </main>
-
-  <script src="app.js"></script>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="./app.js"></script>
 </body>
 </html>
