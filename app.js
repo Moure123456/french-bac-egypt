@@ -1,4 +1,4 @@
-/* ===== Le Français Au Bac — app.js (نسخة نظيفة) ===== */
+/* ===== Le Français Au Bac — app.js ===== */
 (function () {
   'use strict';
 
@@ -173,21 +173,10 @@
     try { if (synth) synth.cancel(); } catch (e) {}
   });
 
-  /* ---------- جلب البيانات ---------- */
-  var FILES = {
-    curriculum: './data/curriculum.json',
-    grammar: './data/grammar.json',
-    phonetics: './data/phonetics.json',
-    dictionary: './data/dictionary.json',
-    dialogues: './data/dialogues.json',
-    tales: './data/tales.json',
-    stories: './data/stories.json',
-    songs: './data/songs.json',
-    exams: './data/exams.json'
-  };
+  /* ---------- جلب البيانات: الملفات الموجودة فعلياً فقط ---------- */
   var DATA = {};
 
-  function loadJSON(url) {
+  function fetchJson(url) {
     var name = url.split('/').pop();
     var cands = [url, 'data/' + name];
     var i = 0;
@@ -204,11 +193,22 @@
     return next();
   }
 
-  function loadAll() {
-    var keys = Object.keys(FILES);
-    return Promise.all(keys.map(function (k) {
-      return loadJSON(FILES[k]).then(function (d) { DATA[k] = d; });
-    })).then(function () {
+  function loadAllData() {
+    return Promise.all([
+      fetchJson('./data/curriculum.json'),
+      fetchJson('./data/grammar.json'),
+      fetchJson('./data/phonetics.json'),
+      fetchJson('./data/dialogues.json'),
+      fetchJson('./data/stories.json'),
+      fetchJson('./data/exams.json')
+    ]).then(function (res) {
+      DATA.curriculum = res[0];
+      DATA.grammar = res[1];
+      DATA.phonetics = res[2];
+      DATA.dialogues = res[3];
+      DATA.stories = res[4];
+      DATA.exams = res[5];
+
       safe('grammar', function () {
         DATA.grammarRules = flattenGrammar(DATA.grammar);
         renderGrammar(DATA.grammarRules);
@@ -491,7 +491,7 @@
     });
   }
 
-  /* ---------- القاموس ---------- */
+  /* ---------- القاموس (يُستخرج من الدروس والقواعد) ---------- */
   var FR_K = ['fr', 'french', 'word', 'mot', 'francais'];
   var AR_K = ['ar', 'arabic', 'meaning', 'translation', 'translation_ar', 'arabic_meaning'];
 
@@ -507,14 +507,6 @@
   function pairsFrom(root) {
     var out = [];
     if (!root) return out;
-    if (!Array.isArray(root) && typeof root === 'object') {
-      var vals = Object.keys(root).map(function (k) { return root[k]; });
-      var allStr = vals.length > 0 && vals.every(function (v) { return typeof v === 'string'; });
-      if (allStr) {
-        Object.keys(root).forEach(function (f) { out.push({ fr: f, ar: root[f], ex: '' }); });
-        return out;
-      }
-    }
     walkObjs(root, function (o) {
       var f = firstString(o, FR_K);
       var a = firstString(o, AR_K);
@@ -528,9 +520,9 @@
   function mountDictionary() {
     var el = bodyOf('dictionary');
     if (!el) return;
-    var words = pairsFrom(DATA.dictionary);
-    if (!words.length) words = pairsFrom(findByKey(DATA.curriculum, /dict|vocab|mots|words/i));
-    if (!words.length) words = pairsFrom(DATA.curriculum).concat(pairsFrom(DATA.grammarRules));
+    var words = pairsFrom(findByKey(DATA.curriculum, /dict|vocab|mots|words/i));
+    if (!words.length) words = pairsFrom(DATA.curriculum);
+    words = words.concat(pairsFrom(DATA.grammarRules)).concat(pairsFrom(DATA.dialogues));
     var seen = {};
     words = words.filter(function (w) {
       var k = w.fr.toLowerCase();
@@ -732,19 +724,16 @@
     safe('chat', mountChat);
     safe('nav', function () { go((location.hash || '').replace('#', '') || 'lessons'); });
 
-    loadAll().then(function () {
+    loadAllData().then(function () {
       safe('lessons', function () { mountGeneric('lessons', DATA.curriculum); });
       safe('phonetics', function () { mountGeneric('phonetics', DATA.phonetics); });
       safe('exams', function () { mountGeneric('exams', DATA.exams); });
       safe('dictionary', mountDictionary);
       safe('dialogues', function () {
-        mountGeneric('dialogues', DATA.dialogues || findByKey(DATA.curriculum, /dialog/i), { arToggle: true });
+        mountGeneric('dialogues', DATA.dialogues, { arToggle: true });
       });
       safe('tales', function () {
-        mountGeneric('tales', DATA.stories || DATA.tales || findByKey(DATA.curriculum, /stor|tale|conte/i), { arToggle: true });
-      });
-      safe('songs', function () {
-        mountGeneric('songs', DATA.songs || findByKey(DATA.curriculum, /song|chanson/i), { arToggle: true });
+        mountGeneric('tales', DATA.stories, { arToggle: true });
       });
       safe('index', buildIndex);
     }).catch(function (e) {
