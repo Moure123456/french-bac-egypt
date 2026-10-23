@@ -2,70 +2,123 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0055A5">
-  <title>Le Français Au Bac</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Le Français Au Bac | الفرنسية للثانوية العامة</title>
+  <meta name="theme-color" content="#0b3d91">
+  <meta name="description" content="تطبيق Le Français Au Bac لتعلم اللغة الفرنسية لطلاب الثانوية العامة - مسيو محمود أبوبكر السويدى">
   <link rel="manifest" href="./manifest.json">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
+
+  <!-- خلفية علم فرنسا -->
   <div class="french-flag-bg"></div>
 
+  <!-- الشريط العلوي -->
   <header class="topbar">
-    <button id="menu-btn" class="icon-btn" type="button" aria-label="القائمة">☰</button>
-    <h1>Le Français Au Bac <span>🇫🇷</span></h1>
-    <button id="install-btn" class="install" type="button" hidden>تثبيت التطبيق على الجوال</button>
+    <button id="menuBtn" class="menu-btn" aria-label="القائمة">☰</button>
+    <h1 class="app-title">Le Français Au Bac 🇫🇷</h1>
+    <button id="installBtn" class="install-btn" hidden>📲 تثبيت التطبيق على الجوال</button>
   </header>
 
-  <div id="scrim" class="scrim"></div>
-
   <div class="layout">
-    <nav class="sidebar" aria-label="الأقسام">
-      <button data-nav="lessons" class="on" type="button">📚 دروس الكتاب والحلول</button>
-      <button data-nav="grammar" type="button">✍️ Grammaire</button>
-      <button data-nav="phonetics" type="button">🗣️ Phonétique</button>
-      <button data-nav="dictionary" type="button">📖 Dictionnaire</button>
-      <button data-nav="dialogues" type="button">💬 Dialogues</button>
-      <button data-nav="tales" type="button">🧚 Contes</button>
-      <button data-nav="exams" type="button">📝 امتحانات الثانوية العامة</button>
-      <button data-nav="chat" type="button">🤖 المساعد الذكي</button>
+
+    <!-- القائمة الجانبية -->
+    <nav id="sidebar" class="sidebar" aria-label="القائمة الرئيسية">
+      <ul class="nav-menu">
+        <li><button class="nav-btn active" data-section="lessons">دروس الكتاب والحلول 📚</button></li>
+        <li><button class="nav-btn" data-section="grammar">قواعد اللغة (Grammaire) ✍️</button></li>
+        <li><button class="nav-btn" data-section="phonetics">الصوتيات والنطق (Phonétique) 🗣️</button></li>
+        <li><button class="nav-btn" data-section="dictionary">القاموس المصغر (Dictionnaire) 📖</button></li>
+        <li><button class="nav-btn" data-section="dialogues">المحادثات الناطقة (Dialogues) 💬</button></li>
+        <li><button class="nav-btn" data-section="tales">قصص الأطفال (Contes) 🧚</button></li>
+        <li><button class="nav-btn" data-section="songs">أغاني الأطفال (Chansons) 🎵</button></li>
+        <li><button class="nav-btn" data-section="exams">امتحانات الثانوية العامة 📝</button></li>
+        <li><button class="nav-btn" data-section="assistant">المساعد الذكي 🤖</button></li>
+      </ul>
     </nav>
 
+    <!-- المحتوى الرئيسي -->
     <main class="content">
-      <section id="lessons" class="sec on"><h2>دروس الكتاب المدرسي وحلول الأسئلة</h2><div class="body"><div class="empty">جارٍ التحميل…</div></div></section>
-      <section id="grammar" class="sec"><h2>Grammaire — القواعد</h2><div class="body"></div></section>
-      <section id="phonetics" class="sec"><h2>Phonétique — الصوتيات</h2><div class="body"></div></section>
-      <section id="dictionary" class="sec"><h2>Dictionnaire — القاموس</h2><div class="body"></div></section>
-      <section id="dialogues" class="sec"><h2>Dialogues — حوارات يومية</h2><div class="body"></div></section>
-      <section id="tales" class="sec"><h2>Contes — قصص مبسطة</h2><div class="body"></div></section>
-      <section id="exams" class="sec"><h2>Examens du Bac — نماذج امتحانات</h2><div class="body"></div></section>
 
-      <section id="chat" class="sec">
-        <h2>المساعد الذكي 🤖</h2>
-        <div class="chips">
-          <button class="chip" type="button">passé composé</button>
-          <button class="chip" type="button">الضمائر</button>
-          <button class="chip" type="button">أحرف الأنف</button>
-          <button class="chip" type="button">les articles</button>
-        </div>
-        <div id="chat-log" class="chat-log" aria-live="polite"></div>
-        <form id="chat-form" class="chat-form">
-          <input id="chat-input" type="text" placeholder="اكتب سؤالك بالعربية أو الفرنسية…" autocomplete="off">
-          <button type="submit">إرسال</button>
-        </form>
+      <section id="sec-lessons" class="section active">
+        <h2>دروس الكتاب والحلول 📚</h2>
+        <div id="lessonsBox" class="box"><p class="loading">جارٍ التحميل...</p></div>
       </section>
+
+      <section id="sec-grammar" class="section">
+        <h2>قواعد اللغة (Grammaire) ✍️</h2>
+        <div id="grammarBox" class="box"><p class="loading">جارٍ التحميل...</p></div>
+      </section>
+
+      <section id="sec-phonetics" class="section">
+        <h2>الصوتيات والنطق (Phonétique) 🗣️</h2>
+        <div id="phoneticsBox" class="box"><p class="loading">جارٍ التحميل...</p></div>
+      </section>
+
+      <section id="sec-dictionary" class="section">
+        <h2>القاموس المصغر (Dictionnaire) 📖</h2>
+        <input id="dictSearch" class="search-input" type="search" placeholder="ابحث بالفرنسية أو بالعربية... / Rechercher">
+        <div id="dictionaryBox" class="box"><p class="loading">جارٍ التحميل...</p></div>
+      </section>
+
+      <section id="sec-dialogues" class="section">
+        <h2>المحادثات الناطقة (Dialogues) 💬</h2>
+        <button id="toggleArBtn" class="btn">إخفاء / إظهار الترجمة العربية</button>
+        <div id="dialoguesBox" class="box"><p class="loading">جارٍ التحميل...</p></div>
+      </section>
+
+      <section id="sec-tales" class="section">
+        <h2>قصص الأطفال (Contes) 🧚</h2>
+        <div id="talesBox" class="box"><p class="loading">جارٍ التحميل...</p></div>
+      </section>
+
+      <section id="sec-songs" class="section">
+        <h2>أغاني الأطفال (Chansons) 🎵</h2>
+        <div id="songsBox" class="box"><p class="loading">جارٍ التحميل...</p></div>
+      </section>
+
+      <section id="sec-exams" class="section">
+        <h2>امتحانات الثانوية العامة 📝</h2>
+        <div id="examsBox" class="box"><p class="loading">جارٍ التحميل...</p></div>
+      </section>
+
+      <section id="sec-assistant" class="section">
+        <h2>المساعد الذكي 🤖</h2>
+        <div class="box chat-box">
+          <div class="chat-settings">
+            <select id="aiProvider">
+              <option value="gemini">Google Gemini</option>
+              <option value="openai">OpenAI</option>
+            </select>
+            <input id="aiKey" type="password" placeholder="أدخل مفتاح API هنا" autocomplete="off">
+            <button id="aiSaveKey" class="btn">حفظ المفتاح</button>
+          </div>
+          <div id="chatLog" class="chat-log" aria-live="polite">
+            <div class="msg bot">Bonjour ! 👋 أنا مدرس اللغة الفرنسية الذكي. اسألني بالعربية أو الفرنسية.</div>
+          </div>
+          <div class="chat-input">
+            <textarea id="chatText" rows="2" placeholder="اكتب سؤالك هنا... / Posez votre question"></textarea>
+            <button id="chatSend" class="btn primary">إرسال ✉️</button>
+          </div>
+        </div>
+      </section>
+
     </main>
   </div>
 
+  <!-- التذييل الرسمي -->
   <footer class="site-footer">
-    <p>جميع الحقوق محفوظة © - إعداد وتطوير: مسيو/ محمود أبوبكر السويدى - مدرس اللغة الفرنسية</p>
-    <a class="wa-btn" href="https://wa.me/201040294647" target="_blank" rel="noopener noreferrer">
-      <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true" fill="currentColor"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.3.7 4.5 1.8 6.3L4 28l6.9-1.8A12 12 0 0 0 16 27c6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-4 1 1.1-3.9-.3-.4A9.8 9.8 0 1 1 16 24.800zm5.400-7.300c-.3-.1-1.800-.9-2-1-.3-.1-.5-.1-.7.1l-1 1.200c-.2.200-.4.200-.6.100-1.800-.9-3-1.600-4.200-3.600-.3-.5.300-.5.900-1.600.1-.2 0-.4 0-.5l-.9-2.100c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.5.100-.8.400-.3.300-1 1-1 2.400s1 2.800 1.200 3c.1.200 2 3.100 4.900 4.300 1.800.8 2.500.8 3.400.7.600-.1 1.800-.7 2-1.400.3-.7.300-1.300.2-1.400-.1-.1-.3-.2-.6-.3z"/></svg>
-      <span>للتواصل والاستفسارات التعليمية عبر الواتساب</span>
-    </a>
+    <p>جميع الحقوق محفوظة © <strong>مسيو/ محمود أبوبكر السويدى</strong></p>
+    <p>
+      <a class="wa-link" href="https://wa.me/201040294647" target="_blank" rel="noopener">
+        💬 تواصل معنا عبر الواتساب
+      </a>
+    </p>
   </footer>
 
-  <div id="toast" class="toast" role="status"></div>
+  <div id="toast" class="toast" role="status" hidden></div>
+
   <script src="./app.js"></script>
 </body>
 </html>
