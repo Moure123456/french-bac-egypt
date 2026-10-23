@@ -1,7 +1,27 @@
 {
  "meta": {
   "version": 2,
-  "note": "Original units written for this app on typical secondary-school themes (vocabulary, reading texts, situations, e-mails, exercises with Arabic explanations). They are not the text of any published textbook. To add a real textbook unit, copy the structure of a unit in \"units\"."
+  "title": {
+   "fr": "Cours de français – Programme du secondaire",
+   "ar": "منهج اللغة الفرنسية – المرحلة الثانوية",
+   "phonetic": {
+    "fr": "/kuʁ də fʁɑ̃sɛ pʁɔɡʁam dy səɡɔ̃dɛʁ/",
+    "ar": "كور دو فرونسيه – بروغرام دي سوغوندير"
+   }
+  },
+  "note": {
+   "fr": "Unités originales écrites pour cette application sur des thèmes courants du secondaire (vocabulaire, textes de lecture, situations, e-mails et exercices avec explications en arabe). Elles ne reprennent le texte d’aucun manuel publié. Pour ajouter une unité d’un vrai manuel, copiez la structure d’une unité de « units ».",
+   "ar": "وحدات أصلية كُتبت خصيصاً لهذا التطبيق حول موضوعات شائعة في المرحلة الثانوية (مفردات، ونصوص قراءة، ومواقف، ورسائل إلكترونية، وتمارين بشروح عربية). وهي ليست نصاً من أي كتاب مدرسي منشور. لإضافة وحدة من كتاب حقيقي انسخ بنية أي وحدة داخل «units».",
+   "phonetic": {
+    "fr": "/ynite ɔʁiʒinal ekʁite puʁ sɛt aplikasjɔ̃ syʁ de tɛm kuʁɑ̃ dy səɡɔ̃dɛʁ vɔkabylɛʁ tɛkst də lɛktyʁ sitɥasjɔ̃ imɛl e ɛɡzɛʁsis avɛk ɛksplikasjɔ̃ ɑ̃ aʁab/ /ɛl nə ʁəpʁɛn lə tɛkst dokœ̃ manɥɛl pyblije/ /puʁ aʒute yn ynite dœ̃ vʁɛ manɥɛl kɔpje la stʁyktyʁ dyn ynite də junits/",
+    "ar": "يونيتيه أوريجينال إيكريتيه بور سيت أبليكاسيون سور دي تيم كورون دي سوغوندير (فوكابيلير، تيكست دو لكتير، سيتواسيون، إيميل إي إيغزيرسيس أفيك إكسبليكاسيون أون آراب). إيل نو رو برين لو تيكست دوكان مانويل بوبليه. بور أجوتيه أون يونيتيه دان فريه مانويل كوبيه لا ستريكتير دون يونيتيه دو «يونتس»."
+   }
+  },
+  "image": "images/eiffel.jpg",
+  "image_alt": {
+   "fr": "La tour Eiffel illuminée à Paris, symbole de la France",
+   "ar": "برج إيفل المضاء في باريس، رمز فرنسا"
+  }
  },
  "years": [
   {
@@ -34,12 +54,7 @@
        "id": "q1",
        "type": "choice",
        "prompt_fr": "Complétez : Nous ___ égyptiens.",
-       "options": [
-        "sommes",
-        "avons",
-        "êtes",
-        "sont"
-       ],
+       "options": ["sommes", "avons", "êtes", "sont"],
        "answer_fr": "Nous sommes égyptiens.",
        "correct": "sommes",
        "why_ar": "الجملة تعبّر عن الجنسية، والجنسية تُقال مع être. والفاعل nous يأخذ الصيغة sommes.",
@@ -49,12 +64,7 @@
        "id": "q2",
        "type": "choice",
        "prompt_fr": "Complétez : Elle ___ quinze ans.",
-       "options": [
-        "est",
-        "a",
-        "ont",
-        "as"
-       ],
+       "options": ["est", "a", "ont", "as"],
        "answer_fr": "Elle a quinze ans.",
        "correct": "a",
        "why_ar": "بالفرنسية نقول «تملك» خمسة عشر عاماً، فنستخدم avoir وليس être. والفاعل elle مفرد غائب فيأخذ a.",
@@ -81,114 +91,39 @@
      "theme_ar": "التعارف والعائلة والجنسيات",
      "vocabulary": {
       "noms_masculins": [
-       [
-        "le prénom",
-        "الاسم الأول"
-       ],
-       [
-        "le nom",
-        "اسم العائلة"
-       ],
-       [
-        "l’âge",
-        "العمر"
-       ],
-       [
-        "le pays",
-        "البلد"
-       ],
-       [
-        "le frère",
-        "الأخ"
-       ]
+       ["le prénom", "الاسم الأول"],
+       ["le nom", "اسم العائلة"],
+       ["l’âge", "العمر"],
+       ["le pays", "البلد"],
+       ["le frère", "الأخ"]
       ],
       "noms_feminins": [
-       [
-        "la famille",
-        "العائلة"
-       ],
-       [
-        "la sœur",
-        "الأخت"
-       ],
-       [
-        "la ville",
-        "المدينة"
-       ],
-       [
-        "la nationalité",
-        "الجنسية"
-       ],
-       [
-        "la profession",
-        "المهنة"
-       ]
+       ["la famille", "العائلة"],
+       ["la sœur", "الأخت"],
+       ["la ville", "المدينة"],
+       ["la nationalité", "الجنسية"],
+       ["la profession", "المهنة"]
       ],
       "verbes": [
-       [
-        "s’appeler",
-        "يُسمّى"
-       ],
-       [
-        "habiter",
-        "يسكن"
-       ],
-       [
-        "avoir",
-        "يملك"
-       ],
-       [
-        "être",
-        "يكون"
-       ],
-       [
-        "présenter",
-        "يقدّم / يعرّف"
-       ]
+       ["s’appeler", "يُسمّى"],
+       ["habiter", "يسكن"],
+       ["avoir", "يملك"],
+       ["être", "يكون"],
+       ["présenter", "يقدّم / يعرّف"]
       ],
       "adjectifs": [
-       [
-        "égyptien / égyptienne",
-        "مصري / مصرية"
-       ],
-       [
-        "français / française",
-        "فرنسي / فرنسية"
-       ],
-       [
-        "jeune",
-        "صغير السن"
-       ],
-       [
-        "sympa",
-        "لطيف"
-       ],
-       [
-        "content / contente",
-        "سعيد / سعيدة"
-       ]
+       ["égyptien / égyptienne", "مصري / مصرية"],
+       ["français / française", "فرنسي / فرنسية"],
+       ["jeune", "صغير السن"],
+       ["sympa", "لطيف"],
+       ["content / contente", "سعيد / سعيدة"]
       ],
       "expressions": [
-       [
-        "Comment tu t’appelles ?",
-        "ما اسمك؟"
-       ],
-       [
-        "Je m’appelle…",
-        "اسمي …"
-       ],
-       [
-        "Enchanté(e) !",
-        "تشرفت بمعرفتك!"
-       ],
-       [
-        "J’ai … ans.",
-        "عمري … عاماً."
-       ],
-       [
-        "Je viens d’Égypte.",
-        "أنا من مصر."
-       ]
+       ["Comment tu t’appelles ?", "ما اسمك؟"],
+       ["Je m’appelle…", "اسمي …"],
+       ["Enchanté(e) !", "تشرفت بمعرفتك!"],
+       ["J’ai … ans.", "عمري … عاماً."],
+       ["Je viens d’Égypte.", "أنا من مصر."]
       ]
      },
      "texts": [
@@ -206,31 +141,11 @@
        "title_fr": "Première rencontre",
        "title_ar": "أول لقاء",
        "lines": [
-        {
-         "who": "Léa",
-         "fr": "Salut ! Je m’appelle Léa. Et toi ?",
-         "ar": "مرحباً! اسمي ليا. وأنت؟"
-        },
-        {
-         "who": "Karim",
-         "fr": "Moi, c’est Karim. Je suis égyptien. Et toi, tu es française ?",
-         "ar": "أنا كريم. أنا مصري. وأنتِ، هل أنتِ فرنسية؟"
-        },
-        {
-         "who": "Léa",
-         "fr": "Oui, je suis française. J’habite à Lyon.",
-         "ar": "نعم، أنا فرنسية. أسكن في ليون."
-        },
-        {
-         "who": "Karim",
-         "fr": "Enchanté, Léa !",
-         "ar": "تشرفت بمعرفتك يا ليا!"
-        },
-        {
-         "who": "Léa",
-         "fr": "Enchantée, Karim !",
-         "ar": "وأنا أيضاً يا كريم!"
-        }
+        { "who": "Léa", "fr": "Salut ! Je m’appelle Léa. Et toi ?", "ar": "مرحباً! اسمي ليا. وأنت؟" },
+        { "who": "Karim", "fr": "Moi, c’est Karim. Je suis égyptien. Et toi, tu es française ?", "ar": "أنا كريم. أنا مصري. وأنتِ، هل أنتِ فرنسية؟" },
+        { "who": "Léa", "fr": "Oui, je suis française. J’habite à Lyon.", "ar": "نعم، أنا فرنسية. أسكن في ليون." },
+        { "who": "Karim", "fr": "Enchanté, Léa !", "ar": "تشرفت بمعرفتك يا ليا!" },
+        { "who": "Léa", "fr": "Enchantée, Karim !", "ar": "وأنا أيضاً يا كريم!" }
        ]
       },
       {
@@ -251,12 +166,7 @@
        "correct": "suis",
        "why_ar": "الجنسية تُعبَّر عنها بالفعل être، وتصريفه مع je هو suis.",
        "rule_ar": "être للهوية والجنسية والمهنة.",
-       "options": [
-        "suis",
-        "ai",
-        "m’appelle",
-        "habite"
-       ]
+       "options": ["suis", "ai", "m’appelle", "habite"]
       },
       {
        "id": "x2",
@@ -266,12 +176,7 @@
        "correct": "ai",
        "why_ar": "العمر يُقال بالفعل avoir، وتصريفه مع je هو ai.",
        "rule_ar": "العمر ← avoir.",
-       "options": [
-        "ai",
-        "suis",
-        "es",
-        "a"
-       ]
+       "options": ["ai", "suis", "es", "a"]
       },
       {
        "id": "x3",
@@ -281,12 +186,7 @@
        "correct": "t’appelles",
        "why_ar": "الفاعل tu يتطلب الضمير te (t’) والنهاية es.",
        "rule_ar": "s’appeler ← je m’appelle, tu t’appelles.",
-       "options": [
-        "t’appelles",
-        "t’appelle",
-        "m’appelle",
-        "s’appelle"
-       ]
+       "options": ["t’appelles", "t’appelle", "m’appelle", "s’appelle"]
       },
       {
        "id": "x4",
@@ -307,114 +207,39 @@
      "theme_ar": "الروتين اليومي والمدرسة",
      "vocabulary": {
       "noms_masculins": [
-       [
-        "le cours",
-        "الحصة"
-       ],
-       [
-        "le professeur",
-        "المعلم"
-       ],
-       [
-        "le cahier",
-        "الكراسة"
-       ],
-       [
-        "le matin",
-        "الصباح"
-       ],
-       [
-        "le déjeuner",
-        "الغداء"
-       ]
+       ["le cours", "الحصة"],
+       ["le professeur", "المعلم"],
+       ["le cahier", "الكراسة"],
+       ["le matin", "الصباح"],
+       ["le déjeuner", "الغداء"]
       ],
       "noms_feminins": [
-       [
-        "l’école",
-        "المدرسة"
-       ],
-       [
-        "la classe",
-        "الفصل"
-       ],
-       [
-        "la récréation",
-        "الفسحة"
-       ],
-       [
-        "la leçon",
-        "الدرس"
-       ],
-       [
-        "la matière",
-        "المادة الدراسية"
-       ]
+       ["l’école", "المدرسة"],
+       ["la classe", "الفصل"],
+       ["la récréation", "الفسحة"],
+       ["la leçon", "الدرس"],
+       ["la matière", "المادة الدراسية"]
       ],
       "verbes": [
-       [
-        "commencer",
-        "يبدأ"
-       ],
-       [
-        "finir",
-        "ينتهي"
-       ],
-       [
-        "étudier",
-        "يدرس"
-       ],
-       [
-        "déjeuner",
-        "يتناول الغداء"
-       ],
-       [
-        "rentrer",
-        "يعود"
-       ]
+       ["commencer", "يبدأ"],
+       ["finir", "ينتهي"],
+       ["étudier", "يدرس"],
+       ["déjeuner", "يتناول الغداء"],
+       ["rentrer", "يعود"]
       ],
       "adjectifs": [
-       [
-        "difficile",
-        "صعب"
-       ],
-       [
-        "facile",
-        "سهل"
-       ],
-       [
-        "intéressant / intéressante",
-        "ممتع"
-       ],
-       [
-        "fatigué / fatiguée",
-        "متعب"
-       ],
-       [
-        "ponctuel / ponctuelle",
-        "منضبط في مواعيده"
-       ]
+       ["difficile", "صعب"],
+       ["facile", "سهل"],
+       ["intéressant / intéressante", "ممتع"],
+       ["fatigué / fatiguée", "متعب"],
+       ["ponctuel / ponctuelle", "منضبط في مواعيده"]
       ],
       "expressions": [
-       [
-        "À quelle heure… ?",
-        "في أي ساعة؟"
-       ],
-       [
-        "Il est huit heures.",
-        "الساعة الثامنة."
-       ],
-       [
-        "Je me lève à sept heures.",
-        "أستيقظ في السابعة."
-       ],
-       [
-        "J’ai cours de français.",
-        "لدي حصة فرنسية."
-       ],
-       [
-        "À demain !",
-        "إلى الغد!"
-       ]
+       ["À quelle heure… ?", "في أي ساعة؟"],
+       ["Il est huit heures.", "الساعة الثامنة."],
+       ["Je me lève à sept heures.", "أستيقظ في السابعة."],
+       ["J’ai cours de français.", "لدي حصة فرنسية."],
+       ["À demain !", "إلى الغد!"]
       ]
      },
      "texts": [
@@ -432,26 +257,10 @@
        "title_fr": "Quelle heure est-il ?",
        "title_ar": "كم الساعة؟",
        "lines": [
-        {
-         "who": "Omar",
-         "fr": "Mona, quelle heure est-il ?",
-         "ar": "منى، كم الساعة؟"
-        },
-        {
-         "who": "Mona",
-         "fr": "Il est huit heures moins dix.",
-         "ar": "الساعة الثامنة إلا عشر دقائق."
-        },
-        {
-         "who": "Omar",
-         "fr": "Vite ! Le cours de français commence dans dix minutes !",
-         "ar": "أسرعي! حصة الفرنسية تبدأ بعد عشر دقائق!"
-        },
-        {
-         "who": "Mona",
-         "fr": "Ne t’inquiète pas, la classe est tout près.",
-         "ar": "لا تقلق، الفصل قريب جداً."
-        }
+        { "who": "Omar", "fr": "Mona, quelle heure est-il ?", "ar": "منى، كم الساعة؟" },
+        { "who": "Mona", "fr": "Il est huit heures moins dix.", "ar": "الساعة الثامنة إلا عشر دقائق." },
+        { "who": "Omar", "fr": "Vite ! Le cours de français commence dans dix minutes !", "ar": "أسرعي! حصة الفرنسية تبدأ بعد عشر دقائق!" },
+        { "who": "Mona", "fr": "Ne t’inquiète pas, la classe est tout près.", "ar": "لا تقلق، الفصل قريب جداً." }
        ]
       },
       {
@@ -472,12 +281,7 @@
        "correct": "commencent",
        "why_ar": "الفاعل les cours جمع غائب، فنضيف ent.",
        "rule_ar": "المضارع: ils/elles ← ent.",
-       "options": [
-        "commencent",
-        "commence",
-        "commençons",
-        "commencez"
-       ]
+       "options": ["commencent", "commence", "commençons", "commencez"]
       },
       {
        "id": "x2",
@@ -487,12 +291,7 @@
        "correct": "moins",
        "why_ar": "بعد منتصف الساعة نقول الساعة التالية moins + عدد الدقائق المتبقية.",
        "rule_ar": "moins للدقائق قبل الساعة التالية.",
-       "options": [
-        "moins",
-        "et",
-        "à",
-        "de"
-       ]
+       "options": ["moins", "et", "à", "de"]
       },
       {
        "id": "x3",
@@ -502,12 +301,7 @@
        "correct": "se lève",
        "why_ar": "الفاعل Mona مفرد غائب، فنستخدم se lève.",
        "rule_ar": "الفعل الانعكاسي: elle se lève.",
-       "options": [
-        "se lève",
-        "se levez",
-        "se lèvent",
-        "se levons"
-       ]
+       "options": ["se lève", "se levez", "se lèvent", "se levons"]
       },
       {
        "id": "x4",
@@ -552,12 +346,7 @@
        "id": "q1",
        "type": "choice",
        "prompt_fr": "Hier, nous ___ au cinéma. (aller)",
-       "options": [
-        "avons allé",
-        "sommes allés",
-        "avons allés",
-        "sommes allé"
-       ],
+       "options": ["avons allé", "sommes allés", "avons allés", "sommes allé"],
        "answer_fr": "Hier, nous sommes allés au cinéma.",
        "correct": "sommes allés",
        "why_ar": "aller من أفعال الحركة فيأخذ être، والفاعل nous جمع فيُضاف s إلى allé.",
@@ -567,12 +356,7 @@
        "id": "q2",
        "type": "choice",
        "prompt_fr": "Elle ___ un gâteau hier. (faire)",
-       "options": [
-        "a fait",
-        "est fait",
-        "a faite",
-        "est faite"
-       ],
+       "options": ["a fait", "est fait", "a faite", "est faite"],
        "answer_fr": "Elle a fait un gâteau hier.",
        "correct": "a fait",
        "why_ar": "faire ليس من أفعال الحركة فيأخذ avoir. والمفعول به un gâteau يأتي بعد الفعل، فلا يتغير اسم المفعول.",
@@ -599,114 +383,39 @@
      "theme_ar": "العطلات والسفر والذكريات",
      "vocabulary": {
       "noms_masculins": [
-       [
-        "le voyage",
-        "الرحلة"
-       ],
-       [
-        "le billet",
-        "التذكرة"
-       ],
-       [
-        "le sport",
-        "الرياضة"
-       ],
-       [
-        "le musée",
-        "المتحف"
-       ],
-       [
-        "le passeport",
-        "جواز السفر"
-       ]
+       ["le voyage", "الرحلة"],
+       ["le billet", "التذكرة"],
+       ["le sport", "الرياضة"],
+       ["le musée", "المتحف"],
+       ["le passeport", "جواز السفر"]
       ],
       "noms_feminins": [
-       [
-        "la plage",
-        "الشاطئ"
-       ],
-       [
-        "la valise",
-        "الحقيبة"
-       ],
-       [
-        "les vacances",
-        "العطلة"
-       ],
-       [
-        "la visite",
-        "الزيارة"
-       ],
-       [
-        "la photo",
-        "الصورة"
-       ]
+       ["la plage", "الشاطئ"],
+       ["la valise", "الحقيبة"],
+       ["les vacances", "العطلة"],
+       ["la visite", "الزيارة"],
+       ["la photo", "الصورة"]
       ],
       "verbes": [
-       [
-        "voyager",
-        "يسافر"
-       ],
-       [
-        "visiter",
-        "يزور"
-       ],
-       [
-        "nager",
-        "يسبح"
-       ],
-       [
-        "réserver",
-        "يحجز"
-       ],
-       [
-        "partir",
-        "يغادر"
-       ]
+       ["voyager", "يسافر"],
+       ["visiter", "يزور"],
+       ["nager", "يسبح"],
+       ["réserver", "يحجز"],
+       ["partir", "يغادر"]
       ],
       "adjectifs": [
-       [
-        "ensoleillé / ensoleillée",
-        "مشمس"
-       ],
-       [
-        "fatigant / fatigante",
-        "مرهق"
-       ],
-       [
-        "magnifique",
-        "رائع"
-       ],
-       [
-        "inoubliable",
-        "لا يُنسى"
-       ],
-       [
-        "lointain / lointaine",
-        "بعيد"
-       ]
+       ["ensoleillé / ensoleillée", "مشمس"],
+       ["fatigant / fatigante", "مرهق"],
+       ["magnifique", "رائع"],
+       ["inoubliable", "لا يُنسى"],
+       ["lointain / lointaine", "بعيد"]
       ],
       "expressions": [
-       [
-        "Bon voyage !",
-        "رحلة سعيدة!"
-       ],
-       [
-        "Je rêve de visiter Paris.",
-        "أحلم بزيارة باريس."
-       ],
-       [
-        "Qu’est-ce que tu fais pendant les vacances ?",
-        "ماذا تفعل في العطلة؟"
-       ],
-       [
-        "C’était magnifique !",
-        "كان رائعاً!"
-       ],
-       [
-        "On part en vacances.",
-        "سنسافر في عطلة."
-       ]
+       ["Bon voyage !", "رحلة سعيدة!"],
+       ["Je rêve de visiter Paris.", "أحلم بزيارة باريس."],
+       ["Qu’est-ce que tu fais pendant les vacances ?", "ماذا تفعل في العطلة؟"],
+       ["C’était magnifique !", "كان رائعاً!"],
+       ["On part en vacances.", "سنسافر في عطلة."]
       ]
      },
      "texts": [
@@ -724,31 +433,11 @@
        "title_fr": "À l’agence de voyages",
        "title_ar": "في وكالة السفر",
        "lines": [
-        {
-         "who": "Le client",
-         "fr": "Bonjour, je voudrais réserver deux billets pour Paris.",
-         "ar": "مرحباً، أريد حجز تذكرتين إلى باريس."
-        },
-        {
-         "who": "L’employée",
-         "fr": "Bien sûr. Pour quelle date ?",
-         "ar": "بالتأكيد. لأي تاريخ؟"
-        },
-        {
-         "who": "Le client",
-         "fr": "Pour le 15 juillet, aller-retour.",
-         "ar": "ليوم 15 يوليو، ذهاب وعودة."
-        },
-        {
-         "who": "L’employée",
-         "fr": "Voilà. Cela fait quatre cents euros au total.",
-         "ar": "تفضل. المجموع أربعمائة يورو."
-        },
-        {
-         "who": "Le client",
-         "fr": "Très bien, je les prends. Merci !",
-         "ar": "حسناً، سآخذهما. شكراً!"
-        }
+        { "who": "Le client", "fr": "Bonjour, je voudrais réserver deux billets pour Paris.", "ar": "مرحباً، أريد حجز تذكرتين إلى باريس." },
+        { "who": "L’employée", "fr": "Bien sûr. Pour quelle date ?", "ar": "بالتأكيد. لأي تاريخ؟" },
+        { "who": "Le client", "fr": "Pour le 15 juillet, aller-retour.", "ar": "ليوم 15 يوليو، ذهاب وعودة." },
+        { "who": "L’employée", "fr": "Voilà. Cela fait quatre cents euros au total.", "ar": "تفضل. المجموع أربعمائة يورو." },
+        { "who": "Le client", "fr": "Très bien, je les prends. Merci !", "ar": "حسناً، سآخذهما. شكراً!" }
        ]
       },
       {
@@ -769,12 +458,7 @@
        "correct": "sommes allés",
        "why_ar": "حدث منتهٍ في الماضي ← passé composé، وaller يأخذ être فيتفق مع nous.",
        "rule_ar": "أفعال الحركة مع être.",
-       "options": [
-        "sommes allés",
-        "avons allé",
-        "irons",
-        "allons"
-       ]
+       "options": ["sommes allés", "avons allé", "irons", "allons"]
       },
       {
        "id": "x2",
@@ -784,12 +468,7 @@
        "correct": "était",
        "why_ar": "وصف الطقس في الماضي يكون بالـ imparfait.",
        "rule_ar": "imparfait للوصف.",
-       "options": [
-        "était",
-        "a été",
-        "est",
-        "sera"
-       ]
+       "options": ["était", "a été", "est", "sera"]
       },
       {
        "id": "x3",
@@ -799,12 +478,7 @@
        "correct": "rêve de",
        "why_ar": "الفعل rêver يتبعه حرف الجر de قبل المصدر.",
        "rule_ar": "rêver de + مصدر.",
-       "options": [
-        "rêve de",
-        "rêve",
-        "rêvons",
-        "rêve à"
-       ]
+       "options": ["rêve de", "rêve", "rêvons", "rêve à"]
       },
       {
        "id": "x4",
@@ -825,114 +499,39 @@
      "theme_ar": "الغذاء المتوازن والعلاج والنصائح",
      "vocabulary": {
       "noms_masculins": [
-       [
-        "le médecin",
-        "الطبيب"
-       ],
-       [
-        "le médicament",
-        "الدواء"
-       ],
-       [
-        "le petit-déjeuner",
-        "الفطور"
-       ],
-       [
-        "le légume",
-        "الخضار"
-       ],
-       [
-        "le sommeil",
-        "النوم"
-       ]
+       ["le médecin", "الطبيب"],
+       ["le médicament", "الدواء"],
+       ["le petit-déjeuner", "الفطور"],
+       ["le légume", "الخضار"],
+       ["le sommeil", "النوم"]
       ],
       "noms_feminins": [
-       [
-        "la santé",
-        "الصحة"
-       ],
-       [
-        "la fièvre",
-        "الحمى"
-       ],
-       [
-        "la fatigue",
-        "التعب"
-       ],
-       [
-        "la pharmacie",
-        "الصيدلية"
-       ],
-       [
-        "l’alimentation",
-        "التغذية"
-       ]
+       ["la santé", "الصحة"],
+       ["la fièvre", "الحمى"],
+       ["la fatigue", "التعب"],
+       ["la pharmacie", "الصيدلية"],
+       ["l’alimentation", "التغذية"]
       ],
       "verbes": [
-       [
-        "manger",
-        "يأكل"
-       ],
-       [
-        "boire",
-        "يشرب"
-       ],
-       [
-        "se soigner",
-        "يتعالج"
-       ],
-       [
-        "dormir",
-        "ينام"
-       ],
-       [
-        "éviter",
-        "يتجنب"
-       ]
+       ["manger", "يأكل"],
+       ["boire", "يشرب"],
+       ["se soigner", "يتعالج"],
+       ["dormir", "ينام"],
+       ["éviter", "يتجنب"]
       ],
       "adjectifs": [
-       [
-        "sain / saine",
-        "صحي"
-       ],
-       [
-        "malade",
-        "مريض"
-       ],
-       [
-        "équilibré / équilibrée",
-        "متوازن"
-       ],
-       [
-        "gras / grasse",
-        "دسم"
-       ],
-       [
-        "fatigué / fatiguée",
-        "متعب"
-       ]
+       ["sain / saine", "صحي"],
+       ["malade", "مريض"],
+       ["équilibré / équilibrée", "متوازن"],
+       ["gras / grasse", "دسم"],
+       ["fatigué / fatiguée", "متعب"]
       ],
       "expressions": [
-       [
-        "J’ai mal à la tête.",
-        "أشعر بألم في رأسي."
-       ],
-       [
-        "Il faut manger des fruits.",
-        "يجب أكل الفاكهة."
-       ],
-       [
-        "Vous devriez vous reposer.",
-        "عليك أن ترتاح."
-       ],
-       [
-        "Bon rétablissement !",
-        "الشفاء العاجل!"
-       ],
-       [
-        "Avoir de la fièvre.",
-        "أن تكون مصاباً بحمى."
-       ]
+       ["J’ai mal à la tête.", "أشعر بألم في رأسي."],
+       ["Il faut manger des fruits.", "يجب أكل الفاكهة."],
+       ["Vous devriez vous reposer.", "عليك أن ترتاح."],
+       ["Bon rétablissement !", "الشفاء العاجل!"],
+       ["Avoir de la fièvre.", "أن تكون مصاباً بحمى."]
       ]
      },
      "texts": [
@@ -950,31 +549,11 @@
        "title_fr": "Chez le médecin",
        "title_ar": "عند الطبيب",
        "lines": [
-        {
-         "who": "Le médecin",
-         "fr": "Bonjour Omar, qu’est-ce qui ne va pas ?",
-         "ar": "مرحباً عمر، ما المشكلة؟"
-        },
-        {
-         "who": "Omar",
-         "fr": "J’ai mal à la gorge et j’ai de la fièvre depuis hier.",
-         "ar": "أشعر بألم في الحلق ولدي حمى منذ أمس."
-        },
-        {
-         "who": "Le médecin",
-         "fr": "Vous devriez rester au lit et boire beaucoup d’eau.",
-         "ar": "عليك أن تبقى في الفراش وتشرب كثيراً من الماء."
-        },
-        {
-         "who": "Omar",
-         "fr": "Est-ce que je dois prendre des médicaments ?",
-         "ar": "هل يجب أن أتناول أدوية؟"
-        },
-        {
-         "who": "Le médecin",
-         "fr": "Oui, je vous prescris un sirop. Revenez dans trois jours si ça ne va pas mieux.",
-         "ar": "نعم، سأصف لك شراباً. عد بعد ثلاثة أيام إذا لم تتحسن."
-        }
+        { "who": "Le médecin", "fr": "Bonjour Omar, qu’est-ce qui ne va pas ?", "ar": "مرحباً عمر، ما المشكلة؟" },
+        { "who": "Omar", "fr": "J’ai mal à la gorge et j’ai de la fièvre depuis hier.", "ar": "أشعر بألم في الحلق ولدي حمى منذ أمس." },
+        { "who": "Le médecin", "fr": "Vous devriez rester au lit et boire beaucoup d’eau.", "ar": "عليك أن تبقى في الفراش وتشرب كثيراً من الماء." },
+        { "who": "Omar", "fr": "Est-ce que je dois prendre des médicaments ?", "ar": "هل يجب أن أتناول أدوية؟" },
+        { "who": "Le médecin", "fr": "Oui, je vous prescris un sirop. Revenez dans trois jours si ça ne va pas mieux.", "ar": "نعم، سأصف لك شراباً. عد بعد ثلاثة أيام إذا لم تتحسن." }
        ]
       },
       {
@@ -995,12 +574,7 @@
        "correct": "manger",
        "why_ar": "بعد il faut نستخدم المصدر عند التعبير عن نصيحة عامة.",
        "rule_ar": "il faut + مصدر.",
-       "options": [
-        "manger",
-        "mangeons",
-        "mangé",
-        "mangent"
-       ]
+       "options": ["manger", "mangeons", "mangé", "mangent"]
       },
       {
        "id": "x2",
@@ -1010,12 +584,7 @@
        "correct": "devrais",
        "why_ar": "النصيحة المهذبة تُقال بالـ conditionnel: devr- + ais.",
        "rule_ar": "conditionnel للنصيحة.",
-       "options": [
-        "devrais",
-        "devras",
-        "dois",
-        "devais"
-       ]
+       "options": ["devrais", "devras", "dois", "devais"]
       },
       {
        "id": "x3",
@@ -1025,12 +594,7 @@
        "correct": "à la",
        "why_ar": "tête مؤنث مفرد، فنقول à la tête.",
        "rule_ar": "avoir mal à + أداة التعريف.",
-       "options": [
-        "à la",
-        "au",
-        "aux",
-        "à l’"
-       ]
+       "options": ["à la", "au", "aux", "à l’"]
       },
       {
        "id": "x4",
@@ -1075,12 +639,7 @@
        "id": "q1",
        "type": "choice",
        "prompt_fr": "Il faut que tu ___ tes devoirs. (faire)",
-       "options": [
-        "fais",
-        "fasses",
-        "feras",
-        "ferais"
-       ],
+       "options": ["fais", "fasses", "feras", "ferais"],
        "answer_fr": "Il faut que tu fasses tes devoirs.",
        "correct": "fasses",
        "why_ar": "التعبير il faut que يتطلب الـ subjonctif، وصيغة faire الشاذة مع tu هي fasses.",
@@ -1090,12 +649,7 @@
        "id": "q2",
        "type": "choice",
        "prompt_fr": "Je pense que tu ___ raison. (avoir)",
-       "options": [
-        "as",
-        "aies",
-        "auras",
-        "ait"
-       ],
+       "options": ["as", "aies", "auras", "ait"],
        "answer_fr": "Je pense que tu as raison.",
        "correct": "as",
        "why_ar": "penser que في الإثبات تعبّر عن اعتقاد مؤكد فيأتي بعدها المضارع العادي (indicatif) وليس الـ subjonctif.",
@@ -1122,114 +676,39 @@
      "theme_ar": "البيئة والتلوث وحماية الطبيعة",
      "vocabulary": {
       "noms_masculins": [
-       [
-        "l’environnement",
-        "البيئة"
-       ],
-       [
-        "le réchauffement climatique",
-        "الاحتباس الحراري"
-       ],
-       [
-        "le déchet",
-        "النفاية"
-       ],
-       [
-        "le recyclage",
-        "إعادة التدوير"
-       ],
-       [
-        "le gaspillage",
-        "الهدر"
-       ]
+       ["l’environnement", "البيئة"],
+       ["le réchauffement climatique", "الاحتباس الحراري"],
+       ["le déchet", "النفاية"],
+       ["le recyclage", "إعادة التدوير"],
+       ["le gaspillage", "الهدر"]
       ],
       "noms_feminins": [
-       [
-        "la pollution",
-        "التلوث"
-       ],
-       [
-        "la planète",
-        "الكوكب"
-       ],
-       [
-        "l’énergie",
-        "الطاقة"
-       ],
-       [
-        "la nature",
-        "الطبيعة"
-       ],
-       [
-        "la forêt",
-        "الغابة"
-       ]
+       ["la pollution", "التلوث"],
+       ["la planète", "الكوكب"],
+       ["l’énergie", "الطاقة"],
+       ["la nature", "الطبيعة"],
+       ["la forêt", "الغابة"]
       ],
       "verbes": [
-       [
-        "protéger",
-        "يحمي"
-       ],
-       [
-        "polluer",
-        "يلوّث"
-       ],
-       [
-        "recycler",
-        "يعيد التدوير"
-       ],
-       [
-        "gaspiller",
-        "يهدر"
-       ],
-       [
-        "sauvegarder",
-        "يصون"
-       ]
+       ["protéger", "يحمي"],
+       ["polluer", "يلوّث"],
+       ["recycler", "يعيد التدوير"],
+       ["gaspiller", "يهدر"],
+       ["sauvegarder", "يصون"]
       ],
       "adjectifs": [
-       [
-        "écologique",
-        "صديق للبيئة"
-       ],
-       [
-        "polluant / polluante",
-        "ملوِّث"
-       ],
-       [
-        "renouvelable",
-        "متجدد"
-       ],
-       [
-        "menacé / menacée",
-        "مهدَّد"
-       ],
-       [
-        "responsable",
-        "مسؤول"
-       ]
+       ["écologique", "صديق للبيئة"],
+       ["polluant / polluante", "ملوِّث"],
+       ["renouvelable", "متجدد"],
+       ["menacé / menacée", "مهدَّد"],
+       ["responsable", "مسؤول"]
       ],
       "expressions": [
-       [
-        "Il faut que nous protégions la planète.",
-        "يجب أن نحمي الكوكب."
-       ],
-       [
-        "Trier les déchets.",
-        "فرز النفايات."
-       ],
-       [
-        "Économiser l’énergie.",
-        "توفير الطاقة."
-       ],
-       [
-        "À cause de la pollution…",
-        "بسبب التلوث …"
-       ],
-       [
-        "Il est urgent d’agir.",
-        "من الملحّ أن نتحرك."
-       ]
+       ["Il faut que nous protégions la planète.", "يجب أن نحمي الكوكب."],
+       ["Trier les déchets.", "فرز النفايات."],
+       ["Économiser l’énergie.", "توفير الطاقة."],
+       ["À cause de la pollution…", "بسبب التلوث …"],
+       ["Il est urgent d’agir.", "من الملحّ أن نتحرك."]
       ]
      },
      "texts": [
@@ -1247,26 +726,10 @@
        "title_fr": "Un débat au lycée",
        "title_ar": "نقاش في المدرسة",
        "lines": [
-        {
-         "who": "Nour",
-         "fr": "Je pense qu’il faut interdire les sacs en plastique.",
-         "ar": "أعتقد أنه يجب منع الأكياس البلاستيكية."
-        },
-        {
-         "who": "Youssef",
-         "fr": "Je suis d’accord, mais il faudrait aussi que les usines polluent moins.",
-         "ar": "أوافق، لكن ينبغي أيضاً أن تلوّث المصانع أقل."
-        },
-        {
-         "who": "Nour",
-         "fr": "Oui, et que chacun trie ses déchets à la maison.",
-         "ar": "نعم، وأن يفرز كل شخص نفاياته في البيت."
-        },
-        {
-         "who": "Youssef",
-         "fr": "Tu as raison. Commençons par notre lycée !",
-         "ar": "معكِ حق. لنبدأ بمدرستنا!"
-        }
+        { "who": "Nour", "fr": "Je pense qu’il faut interdire les sacs en plastique.", "ar": "أعتقد أنه يجب منع الأكياس البلاستيكية." },
+        { "who": "Youssef", "fr": "Je suis d’accord, mais il faudrait aussi que les usines polluent moins.", "ar": "أوافق، لكن ينبغي أيضاً أن تلوّث المصانع أقل." },
+        { "who": "Nour", "fr": "Oui, et que chacun trie ses déchets à la maison.", "ar": "نعم، وأن يفرز كل شخص نفاياته في البيت." },
+        { "who": "Youssef", "fr": "Tu as raison. Commençons par notre lycée !", "ar": "معكِ حق. لنبدأ بمدرستنا!" }
        ]
       },
       {
@@ -1287,12 +750,7 @@
        "correct": "protégions",
        "why_ar": "il faut que يتطلب subjonctif، وصيغته مع nous هي protégions.",
        "rule_ar": "il faut que + subjonctif.",
-       "options": [
-        "protégions",
-        "protégeons",
-        "protégerons",
-        "protégerions"
-       ]
+       "options": ["protégions", "protégeons", "protégerons", "protégerions"]
       },
       {
        "id": "x2",
@@ -1302,12 +760,7 @@
        "correct": "Bien que",
        "why_ar": "المعنى تعارض (وقّعوا لكن التلوث مستمر)، ويُعبَّر عنه بـ bien que + subjonctif.",
        "rule_ar": "bien que + subjonctif.",
-       "options": [
-        "Bien que",
-        "Parce que",
-        "Donc",
-        "Puisque"
-       ]
+       "options": ["Bien que", "Parce que", "Donc", "Puisque"]
       },
       {
        "id": "x3",
@@ -1317,12 +770,7 @@
        "correct": "vivront",
        "why_ar": "si + présent ← futur simple.",
        "rule_ar": "si + présent ← futur.",
-       "options": [
-        "vivront",
-        "vivraient",
-        "vivent",
-        "vivaient"
-       ]
+       "options": ["vivront", "vivraient", "vivent", "vivaient"]
       },
       {
        "id": "x4",
@@ -1343,114 +791,39 @@
      "theme_ar": "التكنولوجيا والدراسة والتوجيه",
      "vocabulary": {
       "noms_masculins": [
-       [
-        "l’ordinateur",
-        "الحاسوب"
-       ],
-       [
-        "le réseau social",
-        "شبكة التواصل الاجتماعي"
-       ],
-       [
-        "le smartphone",
-        "الهاتف الذكي"
-       ],
-       [
-        "le diplôme",
-        "الشهادة"
-       ],
-       [
-        "l’avenir",
-        "المستقبل"
-       ]
+       ["l’ordinateur", "الحاسوب"],
+       ["le réseau social", "شبكة التواصل الاجتماعي"],
+       ["le smartphone", "الهاتف الذكي"],
+       ["le diplôme", "الشهادة"],
+       ["l’avenir", "المستقبل"]
       ],
       "noms_feminins": [
-       [
-        "la technologie",
-        "التكنولوجيا"
-       ],
-       [
-        "l’université",
-        "الجامعة"
-       ],
-       [
-        "la carrière",
-        "المسار المهني"
-       ],
-       [
-        "l’information",
-        "المعلومة"
-       ],
-       [
-        "la bourse",
-        "المنحة"
-       ]
+       ["la technologie", "التكنولوجيا"],
+       ["l’université", "الجامعة"],
+       ["la carrière", "المسار المهني"],
+       ["l’information", "المعلومة"],
+       ["la bourse", "المنحة"]
       ],
       "verbes": [
-       [
-        "étudier",
-        "يدرس"
-       ],
-       [
-        "apprendre",
-        "يتعلم"
-       ],
-       [
-        "naviguer",
-        "يتصفح"
-       ],
-       [
-        "utiliser",
-        "يستخدم"
-       ],
-       [
-        "réussir",
-        "ينجح"
-       ]
+       ["étudier", "يدرس"],
+       ["apprendre", "يتعلم"],
+       ["naviguer", "يتصفح"],
+       ["utiliser", "يستخدم"],
+       ["réussir", "ينجح"]
       ],
       "adjectifs": [
-       [
-        "numérique",
-        "رقمي"
-       ],
-       [
-        "indispensable",
-        "لا غنى عنه"
-       ],
-       [
-        "dangereux / dangereuse",
-        "خطير"
-       ],
-       [
-        "connecté / connectée",
-        "متصل"
-       ],
-       [
-        "motivé / motivée",
-        "متحمس"
-       ]
+       ["numérique", "رقمي"],
+       ["indispensable", "لا غنى عنه"],
+       ["dangereux / dangereuse", "خطير"],
+       ["connecté / connectée", "متصل"],
+       ["motivé / motivée", "متحمس"]
       ],
       "expressions": [
-       [
-        "À mon avis…",
-        "في رأيي …"
-       ],
-       [
-        "D’une part… d’autre part…",
-        "من جهة … ومن جهة أخرى …"
-       ],
-       [
-        "En conclusion…",
-        "في الختام …"
-       ],
-       [
-        "Poursuivre des études supérieures.",
-        "مواصلة الدراسة الجامعية."
-       ],
-       [
-        "Être accro aux écrans.",
-        "أن تكون مدمناً على الشاشات."
-       ]
+       ["À mon avis…", "في رأيي …"],
+       ["D’une part… d’autre part…", "من جهة … ومن جهة أخرى …"],
+       ["En conclusion…", "في الختام …"],
+       ["Poursuivre des études supérieures.", "مواصلة الدراسة الجامعية."],
+       ["Être accro aux écrans.", "أن تكون مدمناً على الشاشات."]
       ]
      },
      "texts": [
@@ -1468,31 +841,11 @@
        "title_fr": "Choisir son orientation",
        "title_ar": "اختيار التخصص",
        "lines": [
-        {
-         "who": "Sara",
-         "fr": "Bonjour, je voudrais des conseils pour choisir mes études.",
-         "ar": "مرحباً، أريد نصائح لاختيار دراستي."
-        },
-        {
-         "who": "Le conseiller",
-         "fr": "Quelles matières aimez-vous le plus ?",
-         "ar": "ما المواد التي تحبينها أكثر؟"
-        },
-        {
-         "who": "Sara",
-         "fr": "J’aime l’informatique et les langues.",
-         "ar": "أحب الحاسوب واللغات."
-        },
-        {
-         "who": "Le conseiller",
-         "fr": "Alors vous pourriez étudier l’ingénierie ou la traduction. Si vous aviez une bourse, où voudriez-vous étudier ?",
-         "ar": "إذن يمكنك دراسة الهندسة أو الترجمة. لو حصلتِ على منحة، أين تودين الدراسة؟"
-        },
-        {
-         "who": "Sara",
-         "fr": "J’aimerais étudier en France.",
-         "ar": "أود الدراسة في فرنسا."
-        }
+        { "who": "Sara", "fr": "Bonjour, je voudrais des conseils pour choisir mes études.", "ar": "مرحباً، أريد نصائح لاختيار دراستي." },
+        { "who": "Le conseiller", "fr": "Quelles matières aimez-vous le plus ?", "ar": "ما المواد التي تحبينها أكثر؟" },
+        { "who": "Sara", "fr": "J’aime l’informatique et les langues.", "ar": "أحب الحاسوب واللغات." },
+        { "who": "Le conseiller", "fr": "Alors vous pourriez étudier l’ingénierie ou la traduction. Si vous aviez une bourse, où voudriez-vous étudier ?", "ar": "إذن يمكنك دراسة الهندسة أو الترجمة. لو حصلتِ على منحة، أين تودين الدراسة؟" },
+        { "who": "Sara", "fr": "J’aimerais étudier en France.", "ar": "أود الدراسة في فرنسا." }
        ]
       },
       {
@@ -1513,12 +866,7 @@
        "correct": "étudierais",
        "why_ar": "si + imparfait ← conditionnel présent.",
        "rule_ar": "si + imparfait ← conditionnel.",
-       "options": [
-        "étudierais",
-        "étudierai",
-        "étudie",
-        "étudiais"
-       ]
+       "options": ["étudierais", "étudierai", "étudie", "étudiais"]
       },
       {
        "id": "x2",
@@ -1528,12 +876,7 @@
        "correct": "utilisent",
        "why_ar": "il faut que + subjonctif، وفي أفعال er يشبه subjonctif مع ils المضارع: utilisent.",
        "rule_ar": "subjonctif présent des verbes en -er.",
-       "options": [
-        "utilisent",
-        "utilisaient",
-        "utiliseront",
-        "utiliseraient"
-       ]
+       "options": ["utilisent", "utilisaient", "utiliseront", "utiliseraient"]
       },
       {
        "id": "x3",
@@ -1543,12 +886,7 @@
        "correct": "D’une part",
        "why_ar": "D’autre part تسبقها D’une part لعرض جانبين للموضوع.",
        "rule_ar": "d’une part… d’autre part…",
-       "options": [
-        "D’une part",
-        "En conclusion",
-        "Pourtant",
-        "Alors"
-       ]
+       "options": ["D’une part", "En conclusion", "Pourtant", "Alors"]
       },
       {
        "id": "x4",
