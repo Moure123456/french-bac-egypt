@@ -1,26 +1,38 @@
 [
   {
     "id": "g1",
-    "title": "Les Articles Définis et Indéfinis (أدوات التعريف والتنكير)",
-    "explanation": "تستخدم أدوات التنكير (un, une, des) للنكرة، وأدوات التعريف (le, la, l', les) للمعرفة حسب جنس وعدد الاسم.",
-    "example": "Le livre de français / Un stylo bleu."
+    "title": "أدوات التعريف والتنكير (Articles)",
+    "explanation": "المعرّفة: le (مذكر) – la (مؤنث) – les (جمع) – l’ قبل حرف متحرك. والنكرة: un (مذكر) – une (مؤنث) – des (جمع).",
+    "example": "Le livre est sur la table. / J'ai une amie à Paris."
   },
   {
     "id": "g2",
-    "title": "Les Adjectifs Possessifs (صفات الملكية)",
-    "explanation": "تتحدد صفة الملكية حسب المالك والشيء المملوك: (mon, ma, mes) للمتكلم، (ton, ta, tes) للمخاطب، (son, sa, ses) للغائب.",
-    "example": "C'est mon cahier et ma trousse."
+    "title": "أدوات التبعيض (Articles partitifs)",
+    "explanation": "تستخدم مع ما لا يُعدّ: du (مذكر) – de la (مؤنث) – de l’ (قبل متحرك) – des (جمع). وبعد النفي تحول إلى de/d’.",
+    "example": "Je mange du pain. / Je n'ai pas d'argent."
   },
   {
     "id": "g3",
-    "title": "Le Futur Proche (المستقبل القريب)",
-    "explanation": "يتكون المستقبل القريب من تصريف فعل Aller في المضارع + الفعل في المصدر (Infinitif).",
-    "example": "Je vais étudier le français ce soir."
+    "title": "صفات الملكية (Adjectifs possessifs)",
+    "explanation": "mon, ma, mes – ton, ta, tes – son, sa, ses – notre, nos – votre, vos – leur, leurs. تتبع الشيء المملوك.",
+    "example": "C'est mon stylo et ma serviette."
   },
   {
     "id": "g4",
-    "title": "Le Passé Composé (الماضي المركب)",
-    "explanation": "يتكون من تصريف الفعل المساعد (Avoir أو Être) في المضارع + اسم المفعول (Participe Passé) من الفعل الأصلي.",
-    "example": "J'ai fini mes devoirs hier."
+    "title": "المضارع للأفعال المنتظمة (Présent -er)",
+    "explanation": "نحذف er ونضيف نهايات المجموعة الأولى: e, es, e, ons, ez, ent.",
+    "example": "Je parle français. / Nous mangeons à midi."
+  },
+  {
+    "id": "g5",
+    "title": "الماضي المركب (Passé composé)",
+    "explanation": "يتكون من تصريف (avoir أو être) في المضارع + اسم المفعول (participe passé).",
+    "example": "Hier, j'ai mangé une pizza. / Nous sommes allés au cinéma."
+  },
+  {
+    "id": "g6",
+    "title": "المستقبل البسيط (Futur simple)",
+    "explanation": "نضيف إلى مصدر الفعل النهايات التالية: ai, as, a, ons, ez, ont.",
+    "example": "Demain, j'irai au club. / Nous regarderons le film."
   }
 ]
