@@ -175,20 +175,55 @@
 
   /* ---------- جلب البيانات: الملفات الموجودة فعلياً فقط ---------- */
   var DATA = {};
+  var LOADLOG = [];
 
+  // مسارات بديلة للملف الواحد
+  function dataCandidates(url) {
+    var name = url.split('/').pop();
+    var parts = location.pathname.split('/').filter(Boolean);
+    var base = location.pathname.replace(/[^/]*$/, '');
+    var list = [
+      url,                       // ./data/x.json
+      'data/' + name,
+      '/data/' + name,
+      base + 'data/' + name,
+      '../data/' + name,
+      name,                      // الملف بجانب index.html
+      base + name
+    ];
+    // مسار احتياطي أخير عبر jsDelivr من المستودع نفسه (يعمل إن كان الملف داخل المستودع)
+    var host = location.hostname;
+    if (/\.github\.io$/.test(host)) {
+      var user = host.split('.')[0];
+      var repo = (parts.length && !/\.html?$/i.test(parts[0])) ? parts[0] : (user + '.github.io');
+      list.push('https://cdn.jsdelivr.net/gh/' + user + '/' + repo + '@main/data/' + name);
+    }
+    var seen = {};
+    return list.filter(function (c) {
+      if (seen[c]) return false;
+      seen[c] = true;
+      return true;
+    });
+  }
+
+  // جلب مع كسر الكاش وتجربة كل المسارات
   function fetchJson(url) {
     var name = url.split('/').pop();
-    var cands = [url, 'data/' + name];
+    var cands = dataCandidates(url);
     var i = 0;
     function next() {
       if (i >= cands.length) return Promise.resolve(null);
       var c = cands[i++];
-      return fetch(c, { cache: 'no-cache' })
+      var bust = c + (c.indexOf('?') === -1 ? '?v=' : '&v=') + Date.now();
+      return fetch(bust, { cache: 'no-store' })
         .then(function (r) {
-          if (!r.ok) return next();
-          return r.json().catch(function () { return next(); });
+          if (!r.ok) { LOADLOG.push(name + ' @ ' + c + ' → HTTP ' + r.status); return next(); }
+          return r.text().then(function (t) {
+            try { return JSON.parse(t.replace(/^\uFEFF/, '')); }
+            catch (e) { LOADLOG.push(name + ' @ ' + c + ' → JSON غير صالح'); return next(); }
+          });
         })
-        .catch(function () { return next(); });
+        .catch(function (e) { LOADLOG.push(name + ' @ ' + c + ' → ' + e.message); return next(); });
     }
     return next();
   }
@@ -625,7 +660,18 @@
     if (!el) return;
     conj = conj || [];
     if ((!rules || !rules.length) && !conj.length) {
-      emptyMsg(el, 'تعذّر تحميل ملف القواعد ./data/grammar.json — تأكد من وجوده داخل مجلد data بنفس الاسم.');
+      var why;
+      if (DATA.grammar) {
+        why = 'تم تحميل الملف لكن لم أجد قواعد بداخله. المفاتيح الرئيسية: ' + Object.keys(DATA.grammar).join(', ');
+        emptyMsg(el, esc(why));
+      } else {
+        var logs = LOADLOG.filter(function (l) { return l.indexOf('grammar.json') === 0; });
+        why = '<div>تعذّر تحميل ./data/grammar.json</div>' +
+          (logs.length
+            ? '<div dir="ltr" style="text-align:left;font-size:.8rem;margin-top:8px;word-break:break-all;">' + logs.map(esc).join('<br>') + '</div>'
+            : '<div>سبب غير معروف</div>');
+        emptyMsg(el, why);
+      }
       return;
     }
     rules = rules || [];
@@ -689,7 +735,7 @@
     draw();
   }
 
-  /* ---------- القاموس (يُستخرج من الدروس والقواعد) ---------- */
+  /* ---------- القاموس (يُستخرج من الدروس والحوارات) ---------- */
   var FR_K = ['fr', 'french', 'word', 'mot', 'francais'];
   var AR_K = ['ar', 'arabic', 'meaning', 'translation', 'translation_ar', 'arabic_meaning'];
 
@@ -887,7 +933,7 @@
     window.scrollTo(0, 0);
   }
 
-  /* ---------- PWA ---------- */
+  /* ---------- PWA: إلغاء الـ service worker القديم ومسح مخزنه ---------- */
   var deferredPrompt = null;
   window.addEventListener('beforeinstallprompt', function (e) {
     e.preventDefault();
@@ -909,8 +955,15 @@
         b.hidden = true;
       });
     }
-    if (/^https?:$/.test(location.protocol) && 'serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./service-worker.js').catch(function () {});
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function (regs) {
+        regs.forEach(function (r) { r.unregister(); });
+      }).catch(function () {});
+      if (window.caches) {
+        caches.keys().then(function (ks) {
+          ks.forEach(function (k) { caches.delete(k); });
+        }).catch(function () {});
+      }
     }
   }
 
