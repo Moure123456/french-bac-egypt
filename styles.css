@@ -154,3 +154,21 @@ ul.plain { padding-right: 20px; margin: 6px 0; }
   .wa-btn { width: 100%; padding: 12px 14px; }
   .wa-btn span { font-size: .85rem; }
 }
+.exo { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; margin: 8px 0; }
+.exo-q { font-weight: 700; margin-bottom: 8px; text-align: left; }
+.opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.opt { background: #f2f6fc; border: 1.5px solid var(--line); border-radius: 10px; padding: 8px 14px; font-size: 1rem; cursor: pointer; font-family: inherit; }
+.opt:disabled { cursor: default; }
+.opt.ok { background: #d9f7e3; border-color: #22a553; color: #14703a; font-weight: 700; }
+.opt.bad { background: #fde1df; border-color: var(--red); color: #a3231a; }
+.txt { display: flex; gap: 8px; }
+.exo-in { flex: 1; padding: 9px 12px; border: 1.5px solid var(--line); border-radius: 10px; font-size: 1rem; font-family: inherit; }
+.chk { background: var(--blue); color: #fff; border: 0; border-radius: 10px; padding: 0 18px; font-family: inherit; font-weight: 700; cursor: pointer; }
+.fb { margin-top: 8px; border-radius: 10px; }
+.fb.good, .fb.bad { padding: 8px 10px; }
+.fb.good { background: #e6f9ec; color: #14703a; }
+.fb.bad { background: #fdeceb; color: #a3231a; }
+.fb .hint { margin-top: 4px; color: var(--text); font-size: .92rem; }
+.reset-ex { background: transparent; border: 1px solid var(--muted); color: var(--muted); border-radius: 14px; padding: 2px 10px; font-family: inherit; font-size: .8rem; cursor: pointer; margin-inline-start: 8px; }
+.gscore { color: var(--blue); font-weight: 700; margin-inline-start: 6px; }
+details.node summary small { color: var(--muted); font-weight: 400; margin-inline-start: 6px; }
