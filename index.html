@@ -4,108 +4,149 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Le Français Au Bac 🇫🇷</title>
-  <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* تنسيقات شاملة مدمجة لضمان عدم تخريب الواجهة */
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+    body { background-color: #f4f7f6; color: #333; direction: ltr; min-height: 100vh; position: relative; }
+    
+    /* خلفية علم فرنسا */
+    .french-flag-bg {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(90deg, rgba(0,35,149,0.05) 33%, rgba(255,255,255,0.05) 33%, rgba(255,255,255,0.05) 66%, rgba(237,41,57,0.05) 66%);
+      z-index: -1; pointer-events: none;
+    }
+
+    /* الهيدر */
+    .app-header { background: #0055A5; color: white; padding: 15px 20px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    .header-container { display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto; }
+    .logo { font-size: 1.2rem; font-weight: bold; }
+    .menu-btn { background: transparent; border: 1px solid white; color: white; font-size: 1.2rem; padding: 5px 12px; border-radius: 5px; cursor: pointer; }
+
+    /* القائمة الجانبية المنسدلة */
+    .side-nav {
+      position: fixed; top: 0; right: -280px; width: 280px; height: 100%;
+      background: #ffffff; box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+      transition: right 0.3s ease; z-index: 200; padding: 20px; text-align: right; dir: rtl;
+    }
+    .side-nav.open { right: 0; }
+    .close-btn { background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #333; float: left; }
+    .side-nav ul { list-style: none; margin-top: 40px; }
+    .side-nav li { margin-bottom: 15px; }
+    .side-nav a { text-decoration: none; color: #0055A5; font-weight: 600; font-size: 1rem; display: block; padding: 8px; border-bottom: 1px solid #eee; }
+
+    /* التحكم في عرض وإخفاء الأقسام (SPA) */
+    .main-content { max-width: 900px; margin: 20px auto; padding: 15px; }
+    .app-section { display: none; } /* إخفاء جميع الأقسام افتراضياً */
+    .app-section.active { display: block; } /* إظهار القسم النشط فقط */
+
+    /* الكروت والبطاقات */
+    .card { background: white; padding: 18px; margin-bottom: 15px; border-radius: 10px; border-left: 5px solid #0055A5; box-shadow: 0 2px 5px rgba(0,0,0,0.05); text-align: left; }
+    .card h3 { color: #0055A5; margin-bottom: 8px; font-size: 1.1rem; }
+    .card p { margin-bottom: 10px; line-height: 1.6; color: #444; }
+    .card button { background: #0055A5; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 0.9rem; }
+    .card button:hover { background: #003d7a; }
+
+    /* الشات والتذييل */
+    .site-footer { background: #002395; color: white; text-align: center; padding: 20px; margin-top: 40px; }
+    .wa-btn { display: inline-block; background: #25D366; color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; margin-top: 10px; font-weight: bold; }
+    #dict-search { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 15px; text-align: right; }
+    .chat-box { background: white; border: 1px solid #ddd; height: 250px; overflow-y: auto; padding: 10px; border-radius: 8px; margin-bottom: 10px; }
+    .msg { padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; max-width: 80%; font-size: 0.9rem; }
+    .msg.bot { background: #e3f2fd; color: #0d47a1; float: left; clear: both; }
+    .msg.user { background: #0055A5; color: white; float: right; clear: both; }
+    .chat-input-container { display: flex; gap: 5px; }
+    .chat-input-container input { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+    .chat-input-container button { background: #0055A5; color: white; border: none; padding: 10px 15px; border-radius: 5px; }
+  </style>
 </head>
 <body>
 
-  <!-- خلفية علم فرنسا المتموج -->
   <div class="french-flag-bg"></div>
 
-  <!-- الشريط العلوي -->
   <header class="app-header">
     <div class="header-container">
       <h1 class="logo">Le Français Au Bac 🇫🇷</h1>
-      <button id="menu-toggle" class="menu-btn" onclick="toggleMenu()">☰</button>
+      <button class="menu-btn" onclick="toggleMenu()">☰ القائمة</button>
     </div>
   </header>
 
-  <!-- القائمة الجانبية المترجمة -->
   <nav id="side-nav" class="side-nav">
     <button class="close-btn" onclick="toggleMenu()">×</button>
     <ul>
-      <li><a href="#" onclick="showSection('curriculum'); toggleMenu();">📚 دروس الكتاب والحلول</a></li>
-      <li><a href="#" onclick="showSection('grammar'); toggleMenu();">✍️ قواعد اللغة (Grammaire)</a></li>
-      <li><a href="#" onclick="showSection('phonetics'); toggleMenu();">🗣️ الصوتيات والنطق (Phonétique)</a></li>
-      <li><a href="#" onclick="showSection('dictionary'); toggleMenu();">📖 القاموس المصغر (Dictionnaire)</a></li>
-      <li><a href="#" onclick="showSection('dialogues'); toggleMenu();">💬 المحادثات الناطقة (Dialogues)</a></li>
-      <li><a href="#" onclick="showSection('stories'); toggleMenu();">🧚 قصص الأطفال (Contes)</a></li>
-      <li><a href="#" onclick="showSection('songs'); toggleMenu();">🎵 أغاني الأطفال (Chansons)</a></li>
-      <li><a href="#" onclick="showSection('exams'); toggleMenu();">📝 امتحانات الثانوية العامة</a></li>
-      <li><a href="#" onclick="showSection('ai-bot'); toggleMenu();">🤖 المساعد الذكي</a></li>
+      <li><a href="javascript:void(0)" onclick="showSection('curriculum'); toggleMenu();">📚 دروس الكتاب والحلول</a></li>
+      <li><a href="javascript:void(0)" onclick="showSection('grammar'); toggleMenu();">✍️ قواعد اللغة (Grammaire)</a></li>
+      <li><a href="javascript:void(0)" onclick="showSection('phonetics'); toggleMenu();">🗣️ الصوتيات والنطق (Phonétique)</a></li>
+      <li><a href="javascript:void(0)" onclick="showSection('dictionary'); toggleMenu();">📖 القاموس المصغر (Dictionnaire)</a></li>
+      <li><a href="javascript:void(0)" onclick="showSection('dialogues'); toggleMenu();">💬 المحادثات الناطقة (Dialogues)</a></li>
+      <li><a href="javascript:void(0)" onclick="showSection('stories'); toggleMenu();">🧚 قصص الأطفال (Contes)</a></li>
+      <li><a href="javascript:void(0)" onclick="showSection('songs'); toggleMenu();">🎵 أغاني الأطفال (Chansons)</a></li>
+      <li><a href="javascript:void(0)" onclick="showSection('exams'); toggleMenu();">📝 امتحانات الثانوية العامة</a></li>
+      <li><a href="javascript:void(0)" onclick="showSection('ai-bot'); toggleMenu();">🤖 المساعد الذكي</a></li>
     </ul>
   </nav>
 
   <main class="main-content">
     
-    <!-- 1. قسم دروس الكتاب -->
     <section id="curriculum" class="app-section active">
       <h2>📚 دروس الكتاب والحلول</h2>
-      <div id="curriculum-container" class="cards-container"></div>
+      <div id="curriculum-container"></div>
     </section>
 
-    <!-- 2. قسم القواعد -->
     <section id="grammar" class="app-section">
       <h2>✍️ قواعد اللغة (Grammaire)</h2>
-      <div id="grammar-container" class="cards-container"></div>
+      <div id="grammar-container"></div>
     </section>
 
-    <!-- 3. قسم الصوتيات -->
     <section id="phonetics" class="app-section">
       <h2>🗣️ الصوتيات والنطق (Phonétique)</h2>
-      <div id="phonetics-container" class="cards-container"></div>
+      <div id="phonetics-container"></div>
     </section>
 
-    <!-- 4. قسم القاموس -->
     <section id="dictionary" class="app-section">
       <h2>📖 القاموس المصغر (Dictionnaire)</h2>
       <input type="text" id="dict-search" placeholder="ابحث بالفرنسية أو بالعربية..." onkeyup="filterDictionary()">
-      <div id="dictionary-container" class="cards-container"></div>
+      <div id="dictionary-container"></div>
     </section>
 
-    <!-- 5. قسم المحادثات -->
     <section id="dialogues" class="app-section">
       <h2>💬 المحادثات الناطقة (Dialogues)</h2>
-      <div id="dialogues-container" class="cards-container"></div>
+      <div id="dialogues-container"></div>
     </section>
 
-    <!-- 6. قسم القصص -->
     <section id="stories" class="app-section">
       <h2>🧚 قصص الأطفال (Contes)</h2>
-      <div id="stories-container" class="cards-container"></div>
+      <div id="stories-container"></div>
     </section>
 
-    <!-- 7. قسم الأغاني -->
     <section id="songs" class="app-section">
       <h2>🎵 أغاني الأطفال (Chansons)</h2>
-      <div id="songs-container" class="cards-container"></div>
+      <div id="songs-container"></div>
     </section>
 
-    <!-- 8. قسم الامتحانات -->
     <section id="exams" class="app-section">
       <h2>📝 امتحانات الثانوية العامة</h2>
-      <div id="exams-container" class="cards-container"></div>
+      <div id="exams-container"></div>
     </section>
 
-    <!-- 9. قسم المساعد الذكي -->
     <section id="ai-bot" class="app-section">
-      <h2>🤖 المساعد الذكي المحلية</h2>
+      <h2>🤖 المساعد الذكي</h2>
       <div class="chat-box" id="chat-box">
-        <div class="msg bot">Bonjour ! 👋 أنا مدرس اللغة الفرنسية الذكي. اسألني عن منهجك أي وقت!</div>
+        <div class="msg bot">Bonjour ! 👋 أنا مدرس اللغة الفرنسية الذكي. اسألني عن منهجك في أي وقت!</div>
       </div>
       <div class="chat-input-container">
         <input type="text" id="chat-input" placeholder="اكتب سؤالك هنا...">
-        <button onclick="sendChatMessage()">إرسال ✉️</button>
+        <button onclick="sendChatMessage()">إرسال</button>
       </div>
     </section>
 
   </main>
 
-  <!-- تذييل الصفحة الرسمي -->
   <footer class="site-footer">
     <p>جميع الحقوق محفوظة © - إعداد وتطوير: <strong>مسيو/ محمود أبوبكر السويدى</strong> - مدرس اللغة الفرنسية</p>
     <a href="https://wa.me/201040294647" target="_blank" class="wa-btn">
-      💬 للتواصل والاستفسارات التعليمية عبر الواتساب
+      💬 للتواصل معنا عبر الواتساب
     </a>
   </footer>
 
