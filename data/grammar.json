@@ -1,7 +1,22 @@
 {
   "meta": {
     "version": 2,
-    "note": "Complete grammar course (A1 to B1) arranged by year: 11 rules per year, 3 auto-graded exercises per rule, and conjugation tables. Compare the rule order with the table of contents of the official textbook and move rules between years if needed."
+    "title": {
+      "fr": "Cours de grammaire française (A1 à B1)",
+      "ar": "دورة القواعد الفرنسية (من A1 إلى B1)",
+      "phonetic": {
+        "fr": "/kuʁ də ɡʁamɛʁ fʁɑ̃sɛz a œ̃ a be œ̃/",
+        "ar": "كور دو غرامير فرونسيز (آ أون آ بيه أون)"
+      }
+    },
+    "note": {
+      "fr": "Cours complet de grammaire organisé par année : règles, exercices corrigés automatiquement et tableaux de conjugaison. Comparez l’ordre des règles avec la table des matières du manuel officiel.",
+      "ar": "دورة قواعد كاملة مرتبة حسب السنة: قواعد، وتمارين بتصحيح تلقائي، وجداول تصريف. قارن ترتيب القواعد بفهرس الكتاب الرسمي.",
+      "phonetic": {
+        "fr": "/kuʁ kɔ̃plɛ də ɡʁamɛʁ ɔʁɡanize paʁ ane ʁɛɡl ɛɡzɛʁsis kɔʁiʒe otɔmatikmɑ̃ e tablo də kɔ̃ʒyɡɛzɔ̃/ /kɔ̃paʁe lɔʁdʁ de ʁɛɡl avɛk la tabl de matjɛʁ dy manɥɛl ɔfisjɛl/",
+        "ar": "كور كونبلي دو غرامير أورغانيزيه بار آنيه: ريغل، إيغزيرسيس كوريجيه أوتوماتيكمون إي تابلو دو كونجوغيزون. كونباريه لوردر دي ريغل أفيك لا تابل دي ماتيير دي مانويل أوفيسيال."
+      }
+    }
   },
   "levels": [
     {
