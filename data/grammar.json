@@ -1,1 +1,531 @@
-
+{
+  "meta": {
+    "version": 2,
+    "note": "Complete grammar course (A1 to B1) arranged by year: 11 rules per year, 3 auto-graded exercises per rule, and conjugation tables. Compare the rule order with the table of contents of the official textbook and move rules between years if needed."
+  },
+  "levels": [
+    {
+      "id": "1sec",
+      "rules": [
+        {
+          "id": "articles",
+          "title_fr": "Les articles définis et indéfinis",
+          "title_ar": "أدوات التعريف والتنكير",
+          "explanation_ar": "المعرّفة: le (مذكر) – la (مؤنث) – les (جمع) – l’ قبل حرف متحرك أو h صامتة. والنكرة: un (مذكر) – une (مؤنث) – des (جمع). تتبع الأداة جنس الاسم وعدده.",
+          "examples": ["Le livre est sur la table.", "J’ai une amie à Paris.", "Les élèves ont des cahiers.", "L’école est grande."],
+          "exercises": [
+            { "id": "a1", "type": "choice", "prompt_fr": "___ livre est sur la table. (défini)", "options": ["Le", "La", "Les", "Une"], "answer": "Le", "hint_ar": "livre اسم مذكر مفرد، والمطلوب أداة تعريف، فنستخدم le." },
+            { "id": "a2", "type": "choice", "prompt_fr": "J’ai ___ amie à Paris. (indéfini)", "options": ["un", "une", "des", "le"], "answer": "une", "hint_ar": "amie مؤنث مفرد، والمطلوب أداة نكرة، فنستخدم une." },
+            { "id": "a3", "type": "text", "prompt_fr": "Mettez au pluriel : le professeur → ___ professeurs", "answer": "les", "hint_ar": "جمع le هو les، ونضيف s إلى الاسم." }
+          ]
+        },
+        {
+          "id": "partitifs",
+          "title_fr": "Les articles partitifs",
+          "title_ar": "أدوات التبعيض",
+          "explanation_ar": "نستخدمها مع ما لا يُعدّ (الطعام والشراب): du (مذكر) – de la (مؤنث) – de l’ (قبل حرف متحرك) – des (جمع). وبعد النفي وبعد التعبيرات الدالة على الكمية تتحول إلى de أو d’.",
+          "examples": ["Je mange du pain.", "Elle boit de l’eau.", "Il ne veut pas de sucre.", "J’ai beaucoup de travail."],
+          "exercises": [
+            { "id": "p1", "type": "choice", "prompt_fr": "Je mange ___ riz.", "options": ["du", "de la", "des", "de l’"], "answer": "du", "hint_ar": "riz اسم مذكر لا يُعدّ، فنستخدم du." },
+            { "id": "p2", "type": "choice", "prompt_fr": "Elle boit ___ eau.", "options": ["de l’", "du", "de la", "des"], "answer": "de l’", "hint_ar": "eau يبدأ بحرف متحرك، فنستخدم de l’ مع المؤنث والمذكر." },
+            { "id": "p3", "type": "text", "prompt_fr": "Je n’ai pas ___ argent. (négation)", "answer": "d’", "hint_ar": "بعد النفي تتحول أداة التبعيض إلى de، وتصبح d’ قبل الحرف المتحرك." }
+          ]
+        },
+        {
+          "id": "present-er",
+          "title_fr": "Le présent des verbes en -er",
+          "title_ar": "المضارع للأفعال المنتهية بـ er",
+          "explanation_ar": "نحذف er ونضيف النهايات: e, es, e, ons, ez, ent. وفي بعض الأفعال تغيير إملائي: manger ← nous mangeons، وcommencer ← nous commençons، وacheter ← j’achète. انظر جدول parler وmanger في تبويب التصريف.",
+          "examples": ["Je parle français.", "Nous mangeons à midi.", "Elles restent à la maison.", "J’achète du pain."],
+          "exercises": [
+            { "id": "e1", "type": "choice", "prompt_fr": "Nous ___ français. (parler)", "options": ["parlons", "parlez", "parlent", "parle"], "answer": "parlons", "hint_ar": "مع nous تكون النهاية ons." },
+            { "id": "e2", "type": "text", "prompt_fr": "Elles ___ à la maison. (rester)", "answer": "restent", "hint_ar": "مع elles تكون النهاية ent." },
+            { "id": "e3", "type": "choice", "prompt_fr": "Nous ___ à midi. (manger)", "options": ["mangeons", "mangons", "mangent", "mangez"], "answer": "mangeons", "hint_ar": "في manger نضيف e قبل ons للحفاظ على نطق g الناعمة." }
+          ]
+        },
+        {
+          "id": "irreguliers",
+          "title_fr": "Les verbes irréguliers du présent",
+          "title_ar": "المضارع للأفعال الشاذة",
+          "explanation_ar": "من أهم الأفعال الشاذة: être (je suis) – avoir (j’ai) – aller (je vais) – faire (je fais) – venir (je viens) – prendre (je prends) – pouvoir (je peux) – vouloir (je veux). تُحفظ تصريفاتها، وتجدها في تبويب التصريف.",
+          "examples": ["Je vais à l’école.", "Vous faites du sport.", "Ils ont quinze ans.", "Elle prend le bus."],
+          "exercises": [
+            { "id": "i1", "type": "choice", "prompt_fr": "Je ___ à l’école. (aller)", "options": ["vais", "vas", "va", "vont"], "answer": "vais", "hint_ar": "تصريف aller مع je هو vais." },
+            { "id": "i2", "type": "choice", "prompt_fr": "Vous ___ du sport. (faire)", "options": ["faites", "faisez", "font", "fais"], "answer": "faites", "hint_ar": "تصريف faire مع vous شاذ: faites." },
+            { "id": "i3", "type": "text", "prompt_fr": "Ils ___ quinze ans. (avoir)", "answer": "ont", "hint_ar": "تصريف avoir مع ils هو ont، والعمر يُقال بـ avoir." }
+          ]
+        },
+        {
+          "id": "feminin",
+          "title_fr": "Le féminin des noms et des adjectifs",
+          "title_ar": "المؤنث في الأسماء والصفات",
+          "explanation_ar": "القاعدة العامة: نضيف e (étudiant ← étudiante). وهناك تغييرات: -er ← -ère (boulanger ← boulangère)، -eur ← -euse (danseur ← danseuse)، -teur ← -trice (acteur ← actrice)، -eux ← -euse (heureux ← heureuse)، -on ← -onne (bon ← bonne)، -el ← -elle، -en ← -enne (égyptien ← égyptienne)، -f ← -ve (sportif ← sportive). والكلمات المنتهية بـ e لا تتغير (jeune, rouge).",
+          "examples": ["Un étudiant, une étudiante.", "Un acteur, une actrice.", "Il est égyptien, elle est égyptienne.", "Il est sportif, elle est sportive."],
+          "exercises": [
+            { "id": "f1", "type": "choice", "prompt_fr": "Le féminin de « égyptien » est :", "options": ["égyptienne", "égyptiene", "égyptiens", "égyptienn"], "answer": "égyptienne", "hint_ar": "النهاية -en تصبح -enne في المؤنث." },
+            { "id": "f2", "type": "choice", "prompt_fr": "Le féminin de « acteur » est :", "options": ["actrice", "acteure", "acteuse", "actère"], "answer": "actrice", "hint_ar": "النهاية -teur تصبح -trice." },
+            { "id": "f3", "type": "text", "prompt_fr": "Donnez le féminin de « sportif ».", "answer": "sportive", "hint_ar": "النهاية -f تصبح -ve." }
+          ]
+        },
+        {
+          "id": "pluriel",
+          "title_fr": "Le pluriel des noms et des adjectifs",
+          "title_ar": "الجمع في الأسماء والصفات",
+          "explanation_ar": "القاعدة العامة: نضيف s. المنتهية بـ s أو x أو z لا تتغير (un fils ← des fils). -al ← -aux (journal ← journaux)، -eau و-eu ← x (gâteau ← gâteaux، jeu ← jeux)، وأغلب كلمات -ou تأخذ s (trou ← trous) وبعضها x (bijou ← bijoux). حالات خاصة: œil ← yeux.",
+          "examples": ["Un journal, des journaux.", "Un gâteau, des gâteaux.", "Un cheval, des chevaux.", "Un œil, des yeux."],
+          "exercises": [
+            { "id": "pl1", "type": "choice", "prompt_fr": "Le pluriel de « journal » est :", "options": ["journaux", "journals", "journales", "journeaux"], "answer": "journaux", "hint_ar": "النهاية -al تصبح -aux في الجمع." },
+            { "id": "pl2", "type": "choice", "prompt_fr": "Le pluriel de « gâteau » est :", "options": ["gâteaux", "gâteaus", "gâteau", "gâteauxs"], "answer": "gâteaux", "hint_ar": "النهاية -eau تأخذ x في الجمع." },
+            { "id": "pl3", "type": "text", "prompt_fr": "Mettez au pluriel : un cheval → des ___", "answer": "chevaux", "hint_ar": "cheval ينتهي بـ -al فيصبح chevaux." }
+          ]
+        },
+        {
+          "id": "possessifs",
+          "title_fr": "Les adjectifs possessifs",
+          "title_ar": "صفات الملكية",
+          "explanation_ar": "mon, ma, mes – ton, ta, tes – son, sa, ses – notre, nos – votre, vos – leur, leurs. تتفق الصفة مع الشيء المملوك لا مع المالك. وقبل المؤنث المبدوء بحرف متحرك نستخدم mon وton وson (mon amie).",
+          "examples": ["Ma mère est professeur.", "Elle aime son amie Sara.", "Nous aimons notre école.", "Ils invitent leurs amis."],
+          "exercises": [
+            { "id": "po1", "type": "choice", "prompt_fr": "___ mère est professeur. (je)", "options": ["Ma", "Mon", "Mes", "Ta"], "answer": "Ma", "hint_ar": "mère مؤنث مفرد والمالك je، فنستخدم ma." },
+            { "id": "po2", "type": "choice", "prompt_fr": "Elle aime ___ amie Sara. (elle)", "options": ["son", "sa", "ses", "leur"], "answer": "son", "hint_ar": "amie مؤنث يبدأ بحرف متحرك فنستخدم son بدل sa." },
+            { "id": "po3", "type": "choice", "prompt_fr": "Nous aimons ___ école. (nous)", "options": ["notre", "nos", "votre", "leur"], "answer": "notre", "hint_ar": "école مفرد والمالك nous، فنستخدم notre." }
+          ]
+        },
+        {
+          "id": "demonstratifs",
+          "title_fr": "Les adjectifs démonstratifs",
+          "title_ar": "صفات الإشارة",
+          "explanation_ar": "ce (مذكر مفرد) – cet (مذكر مفرد قبل حرف متحرك أو h صامتة) – cette (مؤنث مفرد) – ces (جمع للمذكر والمؤنث). ونضيف -ci للقريب و-là للبعيد عند المقارنة.",
+          "examples": ["Ce livre est intéressant.", "Cet homme est médecin.", "Cette robe est belle.", "Ces élèves sont sérieux."],
+          "exercises": [
+            { "id": "d1", "type": "choice", "prompt_fr": "___ livre est intéressant.", "options": ["Ce", "Cet", "Cette", "Ces"], "answer": "Ce", "hint_ar": "livre مذكر مفرد يبدأ بحرف ساكن، فنستخدم ce." },
+            { "id": "d2", "type": "choice", "prompt_fr": "___ homme est médecin.", "options": ["Cet", "Ce", "Cette", "Ces"], "answer": "Cet", "hint_ar": "homme مذكر يبدأ بحرف h صامتة، فنستخدم cet." },
+            { "id": "d3", "type": "choice", "prompt_fr": "Je préfère ___ robes.", "options": ["ces", "cette", "ce", "cet"], "answer": "ces", "hint_ar": "robes جمع، فنستخدم ces." }
+          ]
+        },
+        {
+          "id": "negation",
+          "title_fr": "La phrase négative",
+          "title_ar": "النفي",
+          "explanation_ar": "نضع ne قبل الفعل وpas بعده: Je ne parle pas. وتصبح ne ← n’ قبل الحرف المتحرك. صيغ أخرى: ne ... jamais (أبداً) – ne ... rien (لا شيء) – ne ... plus (لم يعد) – ne ... personne (لا أحد). وفي الماضي المركب يحيط النفي بالفعل المساعد: Je n’ai pas mangé. وبعد النفي تتحول الأداة النكرة وأداة التبعيض إلى de.",
+          "examples": ["Je ne parle pas anglais.", "Nous n’avons pas de temps.", "Il ne mange jamais de viande.", "Elle n’a pas mangé."],
+          "exercises": [
+            { "id": "n1", "type": "choice", "prompt_fr": "Je ___ parle ___ anglais.", "options": ["ne ... pas", "pas ... ne", "n’ ... pas", "ne ... pas de"], "answer": "ne ... pas", "hint_ar": "parle يبدأ بحرف ساكن فنستخدم ne ثم pas بعد الفعل." },
+            { "id": "n2", "type": "choice", "prompt_fr": "Nous ___ avons ___ de temps.", "options": ["n’ ... pas", "ne ... pas", "n’ ... jamais", "ne ... plus"], "answer": "n’ ... pas", "hint_ar": "avons يبدأ بحرف متحرك فتصبح ne ← n’، والنفي العادي pas." },
+            { "id": "n3", "type": "text", "prompt_fr": "Mettez à la forme négative : J’aime le café.", "answer": "Je n’aime pas le café", "hint_ar": "نضع n’ قبل aime وpas بعدها." }
+          ]
+        },
+        {
+          "id": "interrogation",
+          "title_fr": "L’interrogation",
+          "title_ar": "السؤال",
+          "explanation_ar": "ثلاث طرق: بالتنغيم (Tu aimes le français ?)، وبـ est-ce que (Est-ce que tu aimes le français ?)، وبالقلب (Aimes-tu le français ?). أدوات الاستفهام: qui (من) – que أو qu’est-ce que (ماذا) – où (أين) – quand (متى) – comment (كيف) – pourquoi (لماذا) – combien (كم) – quel أو quelle (أي).",
+          "examples": ["Où habitez-vous ?", "Comment tu t’appelles ?", "Est-ce que tu aimes le français ?", "Combien coûte ce livre ?"],
+          "exercises": [
+            { "id": "q1", "type": "choice", "prompt_fr": "___ habitez-vous ? – À Alexandrie.", "options": ["Où", "Qui", "Quand", "Pourquoi"], "answer": "Où", "hint_ar": "الإجابة مكان (Alexandrie)، فنسأل بـ où." },
+            { "id": "q2", "type": "choice", "prompt_fr": "___ tu t’appelles ? – Je m’appelle Nour.", "options": ["Comment", "Combien", "Où", "Quand"], "answer": "Comment", "hint_ar": "نسأل عن الاسم بـ Comment tu t’appelles ؟" },
+            { "id": "q3", "type": "text", "prompt_fr": "Posez la question avec est-ce que : Tu aimes le français. → ___", "answer": "Est-ce que tu aimes le français ?", "hint_ar": "نضع Est-ce que قبل الجملة الخبرية ونغير علامة الترقيم." }
+          ]
+        },
+        {
+          "id": "contractes",
+          "title_fr": "Les articles contractés et les prépositions de lieu",
+          "title_ar": "الأدوات المدمجة وحروف الجر المكانية",
+          "explanation_ar": "à + le = au – à + les = aux – de + le = du – de + les = des، أما à la وà l’ وde la وde l’ فلا تتغير. مع المدن نستخدم à (à Paris)، ومع الدول المؤنثة en (en Égypte)، ومع الدول المذكرة au (au Maroc)، ومع الجمع aux (aux États-Unis).",
+          "examples": ["Je vais au cinéma.", "Elle habite en Égypte.", "Il revient de l’école.", "Nous parlons des vacances."],
+          "exercises": [
+            { "id": "c1", "type": "choice", "prompt_fr": "Je vais ___ cinéma.", "options": ["au", "à la", "aux", "à l’"], "answer": "au", "hint_ar": "à + le cinéma = au cinéma." },
+            { "id": "c2", "type": "choice", "prompt_fr": "Elle habite ___ Égypte.", "options": ["en", "au", "à", "aux"], "answer": "en", "hint_ar": "Égypte دولة مؤنثة تبدأ بحرف متحرك، فنستخدم en." },
+            { "id": "c3", "type": "choice", "prompt_fr": "Il revient ___ école.", "options": ["de l’", "du", "de la", "des"], "answer": "de l’", "hint_ar": "école يبدأ بحرف متحرك فنستخدم de l’." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2sec",
+      "rules": [
+        {
+          "id": "cod",
+          "title_fr": "Les pronoms COD",
+          "title_ar": "ضمائر المفعول به المباشر",
+          "explanation_ar": "نستبدل المفعول به المباشر بـ: le (مذكر مفرد) – la (مؤنث مفرد) – l’ (قبل حرف متحرك) – les (جمع). ويوضع الضمير قبل الفعل. ومع me وte وnous وvous تتغير حسب المتكلم.",
+          "examples": ["Je vois Marie. → Je la vois.", "Il mange les pommes. → Il les mange.", "Tu prends le livre ? Oui, je le prends."],
+          "exercises": [
+            { "id": "cod1", "type": "choice", "prompt_fr": "Je vois Marie. → Je ___ vois.", "options": ["le", "la", "les", "lui"], "answer": "la", "hint_ar": "Marie مؤنث مفرد، فنستبدلها بـ la." },
+            { "id": "cod2", "type": "text", "prompt_fr": "Il mange les pommes. → Il ___ mange.", "answer": "les", "hint_ar": "les pommes جمع، فنستبدلها بـ les." },
+            { "id": "cod3", "type": "choice", "prompt_fr": "Tu prends le livre ? Oui, je ___ prends.", "options": ["le", "la", "les", "leur"], "answer": "le", "hint_ar": "le livre مذكر مفرد، فنستبدله بـ le." }
+          ]
+        },
+        {
+          "id": "coi",
+          "title_fr": "Les pronoms COI",
+          "title_ar": "ضمائر المفعول به غير المباشر",
+          "explanation_ar": "نستبدل مفعولاً به مسبوقاً بـ à (لشخص) بـ: me – te – lui (مفرد مذكر أو مؤنث) – nous – vous – leur (جمع). أفعال شائعة: parler à, donner à, téléphoner à, écrire à, répondre à. ويوضع الضمير قبل الفعل.",
+          "examples": ["Je parle à Marie. → Je lui parle.", "Il donne un cadeau à ses parents. → Il leur donne un cadeau.", "Tu écris à ton ami ? Oui, je lui écris."],
+          "exercises": [
+            { "id": "coi1", "type": "choice", "prompt_fr": "Je parle à Marie. → Je ___ parle.", "options": ["lui", "la", "leur", "le"], "answer": "lui", "hint_ar": "à Marie شخص مفرد، فنستبدلها بـ lui." },
+            { "id": "coi2", "type": "choice", "prompt_fr": "Il donne un cadeau à ses parents. → Il ___ donne un cadeau.", "options": ["leur", "lui", "les", "leurs"], "answer": "leur", "hint_ar": "à ses parents جمع، فنستبدلها بـ leur." },
+            { "id": "coi3", "type": "text", "prompt_fr": "Tu téléphones à ton ami ? Oui, je ___ téléphone.", "answer": "lui", "hint_ar": "ton ami شخص مفرد مسبوق بـ à، فنستخدم lui." }
+          ]
+        },
+        {
+          "id": "passe-compose",
+          "title_fr": "Le passé composé",
+          "title_ar": "الماضي المركب",
+          "explanation_ar": "المساعد (avoir أو être) في المضارع + اسم المفعول (participe passé). اسم المفعول: -er ← é (parlé)، -ir ← i (fini)، -re ← u (vendu)، وشاذة: eu, été, fait, pris, vu, dit, écrit. أفعال الحركة (aller, venir, partir, arriver, entrer, sortir, tomber, rester, naître, mourir) والأفعال الانعكاسية تأخذ être ويتفق اسم المفعول مع الفاعل. والباقي يأخذ avoir.",
+          "examples": ["Hier, j’ai mangé une pizza.", "Nous sommes allés au cinéma.", "Elle a fait un gâteau.", "Elles sont arrivées en retard."],
+          "exercises": [
+            { "id": "pc1", "type": "choice", "prompt_fr": "Hier, nous ___ au cinéma. (aller)", "options": ["avons allé", "sommes allés", "avons allés", "sommes allé"], "answer": "sommes allés", "hint_ar": "aller من أفعال الحركة فيأخذ être، والفاعل nous جمع فيُضاف s." },
+            { "id": "pc2", "type": "choice", "prompt_fr": "Elle ___ un gâteau hier. (faire)", "options": ["a fait", "est fait", "a faite", "est faite"], "answer": "a fait", "hint_ar": "faire يأخذ avoir، والمفعول به بعد الفعل فلا اتفاق." },
+            { "id": "pc3", "type": "text", "prompt_fr": "Mettez au passé composé : Les élèves arrivent à l’école.", "answer": "Les élèves sont arrivés à l’école", "hint_ar": "arriver يأخذ être، والفاعل les élèves جمع مذكر فنكتب arrivés." }
+          ]
+        },
+        {
+          "id": "imparfait",
+          "title_fr": "L’imparfait",
+          "title_ar": "الماضي الناقص",
+          "explanation_ar": "نأخذ جذر nous في المضارع (nous parlons ← parl-) ونضيف: ais, ais, ait, ions, iez, aient. الاستثناء: être ← ét- (j’étais). يُستخدم للوصف والعادة في الماضي والأحداث المستمرة.",
+          "examples": ["Quand j’étais petit, j’allais au parc.", "Il faisait beau.", "Nous finissions nos devoirs chaque soir."],
+          "exercises": [
+            { "id": "im1", "type": "choice", "prompt_fr": "Quand j’étais petit, je ___ au parc. (aller)", "options": ["allais", "allai", "irais", "vais"], "answer": "allais", "hint_ar": "العادة في الماضي ← imparfait: جذر nous allons ← all- + ais." },
+            { "id": "im2", "type": "choice", "prompt_fr": "Il ___ beau hier matin. (faire)", "options": ["faisait", "fait", "ferait", "faisais"], "answer": "faisait", "hint_ar": "وصف الطقس في الماضي ← imparfait: fais- + ait." },
+            { "id": "im3", "type": "text", "prompt_fr": "Nous ___ nos devoirs chaque soir. (finir)", "answer": "finissions", "hint_ar": "جذر nous finissons ← finiss- + ions." }
+          ]
+        },
+        {
+          "id": "pc-imparfait",
+          "title_fr": "Le passé composé et l’imparfait",
+          "title_ar": "الماضي المركب مقابل الماضي الناقص",
+          "explanation_ar": "الماضي المركب لحدث انتهى في لحظة محددة (Soudain, la porte s’est ouverte). والماضي الناقص للوصف والعادة والحدث الجاري الذي قُوطع (Il dormait quand le téléphone a sonné).",
+          "examples": ["Il dormait quand le téléphone a sonné.", "Chaque été, nous allions à la plage.", "Soudain, la porte s’est ouverte."],
+          "exercises": [
+            { "id": "pi1", "type": "choice", "prompt_fr": "Hier, il ___ quand le téléphone a sonné. (dormir)", "options": ["dormait", "a dormi", "dort", "dormira"], "answer": "dormait", "hint_ar": "حدث جارٍ في الماضي قاطعه حدث آخر ← imparfait." },
+            { "id": "pi2", "type": "choice", "prompt_fr": "Chaque été, nous ___ à la plage.", "options": ["allions", "sommes allés", "irons", "allons"], "answer": "allions", "hint_ar": "كلمة chaque été تدل على عادة في الماضي ← imparfait." },
+            { "id": "pi3", "type": "choice", "prompt_fr": "Soudain, la porte ___.", "options": ["s’est ouverte", "s’ouvrait", "s’ouvre", "s’ouvrira"], "answer": "s’est ouverte", "hint_ar": "كلمة soudain تدل على حدث مفاجئ منتهٍ ← passé composé." }
+          ]
+        },
+        {
+          "id": "futur-simple",
+          "title_fr": "Le futur simple",
+          "title_ar": "المستقبل البسيط",
+          "explanation_ar": "نضيف إلى المصدر النهايات: ai, as, a, ons, ez, ont. وفي أفعال re نحذف e (vendre ← vendrai). جذور شاذة: aller ← ir، faire ← fer، être ← ser، avoir ← aur، pouvoir ← pourr، venir ← viendr، voir ← verr.",
+          "examples": ["Demain, j’irai au club.", "Nous regarderons le film.", "Vous finirez vos devoirs."],
+          "exercises": [
+            { "id": "fs1", "type": "choice", "prompt_fr": "Demain, je ___ au club. (aller)", "options": ["irai", "vais", "allerai", "ira"], "answer": "irai", "hint_ar": "aller له جذر شاذ في المستقبل هو ir." },
+            { "id": "fs2", "type": "text", "prompt_fr": "Nous ___ le film demain. (regarder)", "answer": "regarderons", "hint_ar": "المصدر regarder + ons." },
+            { "id": "fs3", "type": "choice", "prompt_fr": "Vous ___ vos devoirs ce soir. (finir)", "options": ["finirez", "finissez", "finirai", "finira"], "answer": "finirez", "hint_ar": "المصدر finir + ez مع vous." }
+          ]
+        },
+        {
+          "id": "futur-proche",
+          "title_fr": "Le futur proche et le passé récent",
+          "title_ar": "المستقبل القريب والماضي القريب",
+          "explanation_ar": "المستقبل القريب: aller في المضارع + مصدر (Je vais partir). والماضي القريب: venir في المضارع + de + مصدر (Elle vient d’arriver).",
+          "examples": ["Je vais partir dans cinq minutes.", "Elle vient d’arriver.", "Nous allons manger."],
+          "exercises": [
+            { "id": "fp1", "type": "choice", "prompt_fr": "Je ___ partir dans cinq minutes. (futur proche)", "options": ["vais", "viens de", "suis", "ai"], "answer": "vais", "hint_ar": "المستقبل القريب = aller + مصدر." },
+            { "id": "fp2", "type": "choice", "prompt_fr": "Elle ___ arriver. (passé récent)", "options": ["vient d’", "va", "vient", "a"], "answer": "vient d’", "hint_ar": "الماضي القريب = venir + de، وتصبح d’ قبل الحرف المتحرك." },
+            { "id": "fp3", "type": "text", "prompt_fr": "Nous ___ manger. (futur proche)", "answer": "allons", "hint_ar": "تصريف aller مع nous هو allons." }
+          ]
+        },
+        {
+          "id": "imperatif",
+          "title_fr": "L’impératif",
+          "title_ar": "الأمر",
+          "explanation_ar": "له ثلاث صيغ: tu وnous وvous، بدون ضمير الفاعل. في أفعال er نحذف s مع tu (Parle !). الشاذ: être ← sois, soyons, soyez – avoir ← aie, ayons, ayez – aller ← va, allons, allez. وفي النفي: Ne parle pas !",
+          "examples": ["Parle plus lentement !", "Soyez à l’heure !", "Va à l’école !", "Ne parlez pas !"],
+          "exercises": [
+            { "id": "ip1", "type": "choice", "prompt_fr": "(Parler, tu) ___ plus lentement !", "options": ["Parle", "Parles", "Parlez", "Parlons"], "answer": "Parle", "hint_ar": "أفعال er تفقد s مع tu في الأمر." },
+            { "id": "ip2", "type": "choice", "prompt_fr": "(Être, vous) ___ à l’heure !", "options": ["Soyez", "Êtes", "Soyons", "Sois"], "answer": "Soyez", "hint_ar": "أمر être مع vous هو soyez." },
+            { "id": "ip3", "type": "text", "prompt_fr": "(Aller, tu) ___ à l’école !", "answer": "Va", "hint_ar": "أمر aller مع tu هو va بدون s." }
+          ]
+        },
+        {
+          "id": "comparatif",
+          "title_fr": "Le comparatif et le superlatif",
+          "title_ar": "المقارنة وصيغة التفضيل",
+          "explanation_ar": "المقارنة: plus ... que (أكثر) – moins ... que (أقل) – aussi ... que (مثل). الشاذ: bon ← meilleur، bien ← mieux. التفضيل: le/la/les plus أو moins + صفة (Elle est la plus grande). ويُستخدم de بعد التفضيل (le plus grand de la classe).",
+          "examples": ["Cette voiture est plus rapide que l’autre.", "Ce gâteau est meilleur que celui-là.", "Elle chante mieux que moi.", "C’est le plus grand de la classe."],
+          "exercises": [
+            { "id": "cp1", "type": "choice", "prompt_fr": "Cette voiture est ___ rapide que l’autre. (supériorité)", "options": ["plus", "aussi", "moins", "très"], "answer": "plus", "hint_ar": "التفوق يُعبَّر عنه بـ plus ... que." },
+            { "id": "cp2", "type": "choice", "prompt_fr": "Ce gâteau est ___ que celui-là. (bon, supériorité)", "options": ["meilleur", "plus bon", "mieux", "bonner"], "answer": "meilleur", "hint_ar": "مقارنة bon تكون meilleur وليس plus bon." },
+            { "id": "cp3", "type": "text", "prompt_fr": "Elle chante ___ que moi. (bien, supériorité)", "answer": "mieux", "hint_ar": "مقارنة bien (ظرف) تكون mieux." }
+          ]
+        },
+        {
+          "id": "y-en",
+          "title_fr": "Les pronoms y et en",
+          "title_ar": "الضميران y و en",
+          "explanation_ar": "y يحل محل مكان مسبوق بـ à أو dans أو chez، أو شيء مسبوق بـ à. en يحل محل شيء مسبوق بـ de أو بأداة تبعيض، أو محل كمية (J’en ai deux). ويوضعان قبل الفعل.",
+          "examples": ["Tu vas au Caire ? Oui, j’y vais.", "Tu veux du thé ? Oui, j’en veux.", "As-tu des frères ? J’en ai deux."],
+          "exercises": [
+            { "id": "ye1", "type": "choice", "prompt_fr": "Tu vas au Caire ? Oui, j’___ vais.", "options": ["y", "en", "le", "lui"], "answer": "y", "hint_ar": "au Caire مكان، فنستبدله بـ y." },
+            { "id": "ye2", "type": "choice", "prompt_fr": "Tu veux du thé ? Oui, j’___ veux.", "options": ["en", "y", "le", "la"], "answer": "en", "hint_ar": "du thé مسبوق بأداة تبعيض، فنستبدله بـ en." },
+            { "id": "ye3", "type": "choice", "prompt_fr": "As-tu des frères ? Oui, j’___ ai deux.", "options": ["en", "y", "les", "leur"], "answer": "en", "hint_ar": "نستخدم en مع الكمية (deux) للأسماء المسبوقة بـ des." }
+          ]
+        },
+        {
+          "id": "pronominaux",
+          "title_fr": "Les verbes pronominaux",
+          "title_ar": "الأفعال الانعكاسية",
+          "explanation_ar": "تُصرَّف مع ضمير يعود على الفاعل: je me – tu te – il/elle se – nous nous – vous vous – ils/elles se. في الماضي المركب تأخذ être (Elle s’est levée). أمثلة: se lever, se promener, s’habiller, se coucher.",
+          "examples": ["Je me lève à sept heures.", "Elles se promènent dans le parc.", "Nous nous habillons.", "Hier, elle s’est levée tôt."],
+          "exercises": [
+            { "id": "pr1", "type": "choice", "prompt_fr": "Je ___ lève à sept heures.", "options": ["me", "te", "se", "nous"], "answer": "me", "hint_ar": "الفاعل je يأخذ الضمير me." },
+            { "id": "pr2", "type": "choice", "prompt_fr": "Elles ___ promènent dans le parc.", "options": ["se", "me", "nous", "vous"], "answer": "se", "hint_ar": "الفاعل elles يأخذ الضمير se." },
+            { "id": "pr3", "type": "choice", "prompt_fr": "Hier, elle ___ levée tôt.", "options": ["s’est", "s’a", "est", "a"], "answer": "s’est", "hint_ar": "الأفعال الانعكاسية تأخذ être في الماضي المركب مع ضمير se." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3sec",
+      "rules": [
+        {
+          "id": "relatifs",
+          "title_fr": "Les pronoms relatifs",
+          "title_ar": "ضمائر الوصل",
+          "explanation_ar": "qui تحل محل الفاعل. que تحل محل المفعول به المباشر. où للمكان والزمان. dont تحل محل مركب بـ de (parler de ← le livre dont je parle).",
+          "examples": ["Voici l’étudiant qui parle trois langues.", "Le livre que je lis est intéressant.", "La ville où j’habite est grande.", "Le film dont je parle est célèbre."],
+          "exercises": [
+            { "id": "rl1", "type": "choice", "prompt_fr": "Le livre ___ je lis est intéressant.", "options": ["qui", "que", "dont", "où"], "answer": "que", "hint_ar": "livre هو المفعول به لـ lis، فنستخدم que." },
+            { "id": "rl2", "type": "choice", "prompt_fr": "Voici l’étudiant ___ parle trois langues.", "options": ["qui", "que", "dont", "où"], "answer": "qui", "hint_ar": "l’étudiant هو الفاعل لـ parle، فنستخدم qui." },
+            { "id": "rl3", "type": "choice", "prompt_fr": "Le film ___ je parle est célèbre.", "options": ["dont", "que", "qui", "où"], "answer": "dont", "hint_ar": "الفعل parler يأخذ de (parler de ce film)، فنستخدم dont." }
+          ]
+        },
+        {
+          "id": "hypothese",
+          "title_fr": "L’hypothèse avec « si »",
+          "title_ar": "الجملة الشرطية بـ si",
+          "explanation_ar": "si + مضارع ← مستقبل (شرط ممكن). si + imparfait ← conditionnel présent (شرط غير محتمل). si + plus-que-parfait ← conditionnel passé (شرط مستحيل في الماضي). ولا نضع conditionnel بعد si مباشرة.",
+          "examples": ["S’il pleut demain, nous resterons à la maison.", "Si j’avais le temps, je voyagerais.", "Si tu avais étudié, tu aurais réussi."],
+          "exercises": [
+            { "id": "hy1", "type": "choice", "prompt_fr": "Si j’avais le temps, je ___ voyager.", "options": ["pourrai", "pourrais", "pouvais", "puisse"], "answer": "pourrais", "hint_ar": "بعد si + imparfait نستخدم conditionnel présent: pourrais." },
+            { "id": "hy2", "type": "choice", "prompt_fr": "S’il pleut demain, nous ___ à la maison.", "options": ["resterons", "resterions", "restons", "resterai"], "answer": "resterons", "hint_ar": "بعد si + مضارع نستخدم المستقبل: resterons." },
+            { "id": "hy3", "type": "text", "prompt_fr": "Si tu étudiais, tu ___ . (réussir)", "answer": "réussirais", "hint_ar": "si + imparfait ← conditionnel: réussir + ais." }
+          ]
+        },
+        {
+          "id": "subjonctif",
+          "title_fr": "Le subjonctif présent",
+          "title_ar": "المضارع الالتزامي (Subjonctif)",
+          "explanation_ar": "نأخذ جذر ils في المضارع ونضيف: e, es, e, ions, iez, ent. يُستخدم بعد الضرورة (il faut que) والرغبة (vouloir que) والشك والشعور (être content que) وبعد bien que وpour que. الشاذ: être ← sois، avoir ← aie، aller ← aille، faire ← fasse، pouvoir ← puisse، savoir ← sache. وبعد penser que في الإثبات نستخدم indicatif.",
+          "examples": ["Il faut que tu fasses tes devoirs.", "Je veux que vous arriviez à l’heure.", "Je pense que tu as raison.", "Bien qu’il soit fatigué, il travaille."],
+          "exercises": [
+            { "id": "sj1", "type": "choice", "prompt_fr": "Il faut que nous ___ à l’heure. (être)", "options": ["soyons", "sommes", "serons", "serions"], "answer": "soyons", "hint_ar": "il faut que يتطلب subjonctif، وصيغة être مع nous هي soyons." },
+            { "id": "sj2", "type": "choice", "prompt_fr": "Je pense que tu ___ raison. (avoir)", "options": ["as", "aies", "auras", "ait"], "answer": "as", "hint_ar": "penser que في الإثبات تتبعها indicatif وليس subjonctif." },
+            { "id": "sj3", "type": "text", "prompt_fr": "Je veux que vous ___ à l’heure. (arriver)", "answer": "arriviez", "hint_ar": "vouloir que + subjonctif: جذر ils arrivent ← arriv- + iez." }
+          ]
+        },
+        {
+          "id": "conditionnel",
+          "title_fr": "Le conditionnel présent",
+          "title_ar": "الشرطي (Conditionnel présent)",
+          "explanation_ar": "جذر المستقبل + نهايات الماضي الناقص: ais, ais, ait, ions, iez, aient (je parlerais). يُستخدم للأدب (Je voudrais un café)، وللنصيحة (Tu devrais étudier)، وللأمنية، وللشرط مع si + imparfait.",
+          "examples": ["Je voudrais un café, s’il vous plaît.", "Tu devrais étudier plus.", "Nous pourrions voyager si nous avions de l’argent."],
+          "exercises": [
+            { "id": "cd1", "type": "choice", "prompt_fr": "Je ___ un café, s’il vous plaît. (vouloir, politesse)", "options": ["voudrais", "voudrai", "veux", "voulais"], "answer": "voudrais", "hint_ar": "للطلب المهذب نستخدم conditionnel: voudr- + ais." },
+            { "id": "cd2", "type": "choice", "prompt_fr": "Tu ___ étudier plus. (devoir, conseil)", "options": ["devrais", "devras", "dois", "devais"], "answer": "devrais", "hint_ar": "النصيحة تُقال بالـ conditionnel: devr- + ais." },
+            { "id": "cd3", "type": "text", "prompt_fr": "Nous ___ voyager si nous avions de l’argent. (pouvoir)", "answer": "pourrions", "hint_ar": "جذر pouvoir في المستقبل pourr- + ions." }
+          ]
+        },
+        {
+          "id": "plus-que-parfait",
+          "title_fr": "Le plus-que-parfait",
+          "title_ar": "الماضي التام (Plus-que-parfait)",
+          "explanation_ar": "المساعد (avoir أو être) في الماضي الناقص + اسم المفعول (j’avais mangé، elle était allée). يعبّر عن حدث سبق حدثاً آخر في الماضي.",
+          "examples": ["Quand je suis arrivé, le film avait déjà commencé.", "Elle m’a dit qu’elle était allée à Paris la veille.", "Nous avions déjà mangé quand tu es venu."],
+          "exercises": [
+            { "id": "pq1", "type": "choice", "prompt_fr": "Quand je suis arrivé, le film ___ déjà.", "options": ["avait commencé", "a commencé", "commençait", "commencera"], "answer": "avait commencé", "hint_ar": "بدأ الفيلم قبل وصولي، فنستخدم plus-que-parfait." },
+            { "id": "pq2", "type": "choice", "prompt_fr": "Elle m’a dit qu’elle ___ à Paris la veille.", "options": ["était allée", "est allée", "allait", "irait"], "answer": "était allée", "hint_ar": "la veille تدل على سبق الزمن، وaller يأخذ être فنقول était allée." },
+            { "id": "pq3", "type": "text", "prompt_fr": "Nous ___ déjà mangé quand tu es venu. (avoir)", "answer": "avions", "hint_ar": "plus-que-parfait: avoir في imparfait مع nous هو avions." }
+          ]
+        },
+        {
+          "id": "passif",
+          "title_fr": "La voix passive",
+          "title_ar": "المبني للمجهول",
+          "explanation_ar": "être (بزمن الفعل المعلوم) + اسم المفعول متفقاً مع الفاعل الجديد + par. المفعول به في الجملة المعلومة يصبح فاعلاً: Le professeur corrige les copies ← Les copies sont corrigées par le professeur.",
+          "examples": ["Les copies sont corrigées par le professeur.", "Cette lettre a été écrite hier.", "La porte est fermée par Marie."],
+          "exercises": [
+            { "id": "ps1", "type": "choice", "prompt_fr": "Le professeur corrige les copies. → Les copies ___ par le professeur.", "options": ["sont corrigées", "est corrigé", "ont corrigé", "sont corrigés"], "answer": "sont corrigées", "hint_ar": "les copies مؤنث جمع، والفعل في المضارع: sont + corrigées." },
+            { "id": "ps2", "type": "choice", "prompt_fr": "Cette lettre a été ___ hier. (écrire)", "options": ["écrite", "écrit", "écrits", "écrire"], "answer": "écrite", "hint_ar": "اسم المفعول يتفق مع lettre المؤنث المفرد." },
+            { "id": "ps3", "type": "text", "prompt_fr": "Passif : Marie ferme la porte. → La porte ___ par Marie.", "answer": "est fermée", "hint_ar": "الفعل في المضارع: est + fermée مؤنث مفرد." }
+          ]
+        },
+        {
+          "id": "discours-indirect",
+          "title_fr": "Le discours indirect",
+          "title_ar": "الكلام غير المباشر",
+          "explanation_ar": "عند الفعل في الماضي (dit, demandé) نغيّر الأزمنة: présent ← imparfait، passé composé ← plus-que-parfait، futur ← conditionnel. وتتغير الإشارات: demain ← le lendemain، hier ← la veille، aujourd’hui ← ce jour-là. وللسؤال بنعم أو لا نستخدم si.",
+          "examples": ["Il a dit qu’il était fatigué.", "Elle a dit qu’elle partirait le lendemain.", "Il m’a demandé si je venais."],
+          "exercises": [
+            { "id": "di1", "type": "choice", "prompt_fr": "Il a dit : « Je suis fatigué. » → Il a dit qu’il ___ fatigué.", "options": ["était", "est", "sera", "serait"], "answer": "était", "hint_ar": "présent يتحول إلى imparfait بعد فعل في الماضي." },
+            { "id": "di2", "type": "choice", "prompt_fr": "Elle a dit : « Je partirai demain. » → Elle a dit qu’elle ___ le lendemain.", "options": ["partirait", "partira", "partait", "serait partie"], "answer": "partirait", "hint_ar": "futur يتحول إلى conditionnel وdemain إلى le lendemain." },
+            { "id": "di3", "type": "choice", "prompt_fr": "Il m’a demandé : « Tu viens ? » → Il m’a demandé ___ je venais.", "options": ["si", "que", "qui", "quoi"], "answer": "si", "hint_ar": "السؤال بنعم أو لا يتحول إلى si في الكلام غير المباشر." }
+          ]
+        },
+        {
+          "id": "cause-consequence",
+          "title_fr": "L’expression de la cause et de la conséquence",
+          "title_ar": "التعبير عن السبب والنتيجة",
+          "explanation_ar": "السبب: parce que (لأن)، car، puisque (بما أن)، à cause de (بسبب، سلبي)، grâce à (بفضل، إيجابي). النتيجة: donc (إذن)، alors، c’est pourquoi، si bien que، tellement ... que. وتصبح parce que ← parce qu’ قبل الحرف المتحرك.",
+          "examples": ["Je reste à la maison parce qu’il pleut.", "Il a travaillé dur, donc il a réussi.", "Il a échoué à cause de sa paresse.", "Elle a réussi grâce à ses efforts."],
+          "exercises": [
+            { "id": "cc1", "type": "choice", "prompt_fr": "Je reste à la maison ___ il pleut.", "options": ["parce qu’", "parce que", "donc", "mais"], "answer": "parce qu’", "hint_ar": "نعبّر عن السبب بـ parce que، وتحذف e قبل il." },
+            { "id": "cc2", "type": "choice", "prompt_fr": "Il a travaillé dur, ___ il a réussi.", "options": ["donc", "car", "parce que", "bien que"], "answer": "donc", "hint_ar": "النجاح نتيجة للعمل، والنتيجة نعبّر عنها بـ donc." },
+            { "id": "cc3", "type": "choice", "prompt_fr": "Il a échoué ___ sa paresse.", "options": ["à cause de", "grâce à", "pour", "malgré"], "answer": "à cause de", "hint_ar": "السبب سلبي (الفشل) فنستخدم à cause de." }
+          ]
+        },
+        {
+          "id": "but-opposition",
+          "title_fr": "L’expression du but et de l’opposition",
+          "title_ar": "التعبير عن الهدف والتعارض",
+          "explanation_ar": "الهدف: pour que وafin que + subjonctif (عند اختلاف الفاعلين)، وpour وafin de + مصدر (عند اتحاد الفاعل). التعارض: bien que وquoique + subjonctif، وmais وcependant وpourtant، وmalgré + اسم.",
+          "examples": ["Je t’explique pour que tu comprennes.", "Bien qu’il soit malade, il va à l’école.", "Il est sorti malgré la pluie."],
+          "exercises": [
+            { "id": "bo1", "type": "choice", "prompt_fr": "Je t’explique pour que tu ___. (comprendre)", "options": ["comprennes", "comprends", "comprendras", "comprendrais"], "answer": "comprennes", "hint_ar": "pour que يتطلب subjonctif: comprenne ← comprennes مع tu." },
+            { "id": "bo2", "type": "choice", "prompt_fr": "___ il soit malade, il va à l’école.", "options": ["Bien que", "Parce que", "Puisque", "Donc"], "answer": "Bien que", "hint_ar": "المعنى تعارض (مريض لكنه يذهب)، ويُعبَّر عنه بـ bien que + subjonctif." },
+            { "id": "bo3", "type": "choice", "prompt_fr": "Il est sorti ___ la pluie.", "options": ["malgré", "à cause de", "grâce à", "car"], "answer": "malgré", "hint_ar": "خرج رغم المطر، والتعارض مع اسم يكون بـ malgré." }
+          ]
+        },
+        {
+          "id": "gerondif",
+          "title_fr": "Le gérondif et le participe présent",
+          "title_ar": "الجيرونديف واسم الفاعل",
+          "explanation_ar": "نأخذ جذر nous في المضارع ونضيف ant (parlons ← parlant). الجيرونديف = en + participe présent، ويدل على حدثين متزامنين أو على الطريقة (Il lit en mangeant). الشاذ: être ← étant، avoir ← ayant، savoir ← sachant.",
+          "examples": ["Il lit en mangeant son repas.", "Elle chante en travaillant.", "En finissant tôt, j’ai pu sortir."],
+          "exercises": [
+            { "id": "ge1", "type": "choice", "prompt_fr": "Il lit en ___ son repas. (manger)", "options": ["mangeant", "mangé", "manger", "mange"], "answer": "mangeant", "hint_ar": "جذر nous mangeons ← mange- + ant، ونحتفظ بحرف e." },
+            { "id": "ge2", "type": "choice", "prompt_fr": "Le gérondif de « finir » est :", "options": ["en finissant", "en finissent", "en finit", "en finirant"], "answer": "en finissant", "hint_ar": "جذر nous finissons ← finiss- + ant." },
+            { "id": "ge3", "type": "text", "prompt_fr": "Elle chante en ___ . (travailler)", "answer": "travaillant", "hint_ar": "جذر nous travaillons ← travaill- + ant." }
+          ]
+        },
+        {
+          "id": "accord-participe",
+          "title_fr": "L’accord du participe passé",
+          "title_ar": "اتفاق اسم المفعول",
+          "explanation_ar": "مع être يتفق اسم المفعول مع الفاعل (Elles sont allées). ومع avoir يتفق مع المفعول به المباشر فقط إذا جاء قبل الفعل (Les fleurs que j’ai achetées، Je l’ai vue). وإن جاء بعد الفعل فلا اتفاق (J’ai acheté des fleurs).",
+          "examples": ["Les fleurs que j’ai achetées sont belles.", "Elles sont allées à la plage.", "Marie, je l’ai vue hier."],
+          "exercises": [
+            { "id": "ap1", "type": "choice", "prompt_fr": "Les fleurs que j’ai ___ sont belles. (acheter)", "options": ["achetées", "acheté", "achetés", "acheter"], "answer": "achetées", "hint_ar": "المفعول به les fleurs (مؤنث جمع) جاء قبل الفعل، فيتفق معه." },
+            { "id": "ap2", "type": "choice", "prompt_fr": "Elles sont ___ à la plage. (aller)", "options": ["allées", "allés", "allé", "aller"], "answer": "allées", "hint_ar": "مع être يتفق مع الفاعل elles (مؤنث جمع)." },
+            { "id": "ap3", "type": "choice", "prompt_fr": "Marie, je l’ai ___ hier. (voir)", "options": ["vue", "vu", "vus", "vues"], "answer": "vue", "hint_ar": "l’ يعود على Marie (مؤنث مفرد) وجاء قبل الفعل، فنكتب vue." }
+          ]
+        }
+      ]
+    }
+  ],
+  "conjugations": [
+    { "verb": "être", "group_ar": "فعل شاذ", "tenses": [
+      { "name_fr": "Présent", "forms": ["suis", "es", "est", "sommes", "êtes", "sont"] },
+      { "name_fr": "Imparfait", "forms": ["étais", "étais", "était", "étions", "étiez", "étaient"] },
+      { "name_fr": "Futur simple", "forms": ["serai", "seras", "sera", "serons", "serez", "seront"] },
+      { "name_fr": "Passé composé", "forms": ["ai été", "as été", "a été", "avons été", "avez été", "ont été"] },
+      { "name_fr": "Conditionnel présent", "forms": ["serais", "serais", "serait", "serions", "seriez", "seraient"] },
+      { "name_fr": "Subjonctif présent", "forms": ["sois", "sois", "soit", "soyons", "soyez", "soient"] }
+    ] },
+    { "verb": "avoir", "group_ar": "فعل شاذ", "tenses": [
+      { "name_fr": "Présent", "forms": ["ai", "as", "a", "avons", "avez", "ont"] },
+      { "name_fr": "Imparfait", "forms": ["avais", "avais", "avait", "avions", "aviez", "avaient"] },
+      { "name_fr": "Futur simple", "forms": ["aurai", "auras", "aura", "aurons", "aurez", "auront"] },
+      { "name_fr": "Passé composé", "forms": ["ai eu", "as eu", "a eu", "avons eu", "avez eu", "ont eu"] },
+      { "name_fr": "Conditionnel présent", "forms": ["aurais", "aurais", "aurait", "aurions", "auriez", "auraient"] },
+      { "name_fr": "Subjonctif présent", "forms": ["aie", "aies", "ait", "ayons", "ayez", "aient"] }
+    ] },
+    { "verb": "aller", "group_ar": "فعل شاذ (يأخذ être في الماضي المركب)", "tenses": [
+      { "name_fr": "Présent", "forms": ["vais", "vas", "va", "allons", "allez", "vont"] },
+      { "name_fr": "Imparfait", "forms": ["allais", "allais", "allait", "allions", "alliez", "allaient"] },
+      { "name_fr": "Futur simple", "forms": ["irai", "iras", "ira", "irons", "irez", "iront"] },
+      { "name_fr": "Passé composé", "forms": ["suis allé", "es allé", "est allé", "sommes allés", "êtes allés", "sont allés"] },
+      { "name_fr": "Conditionnel présent", "forms": ["irais", "irais", "irait", "irions", "iriez", "iraient"] },
+      { "name_fr": "Subjonctif présent", "forms": ["aille", "ailles", "aille", "allions", "alliez", "aillent"] }
+    ] },
+    { "verb": "faire", "group_ar": "فعل شاذ", "tenses": [
+      { "name_fr": "Présent", "forms": ["fais", "fais", "fait", "faisons", "faites", "font"] },
+      { "name_fr": "Imparfait", "forms": ["faisais", "faisais", "faisait", "faisions", "faisiez", "faisaient"] },
+      { "name_fr": "Futur simple", "forms": ["ferai", "feras", "fera", "ferons", "ferez", "feront"] },
+      { "name_fr": "Passé composé", "forms": ["ai fait", "as fait", "a fait", "avons fait", "avez fait", "ont fait"] },
+      { "name_fr": "Conditionnel présent", "forms": ["ferais", "ferais", "ferait", "ferions", "feriez", "feraient"] },
+      { "name_fr": "Subjonctif présent", "forms": ["fasse", "fasses", "fasse", "fassions", "fassiez", "fassent"] }
+    ] },
+    { "verb": "pouvoir", "group_ar": "فعل شاذ", "tenses": [
+      { "name_fr": "Présent", "forms": ["peux", "peux", "peut", "pouvons", "pouvez", "peuvent"] },
+      { "name_fr": "Imparfait", "forms": ["pouvais", "pouvais", "pouvait", "pouvions", "pouviez", "pouvaient"] },
+      { "name_fr": "Futur simple", "forms": ["pourrai", "pourras", "pourra", "pourrons", "pourrez", "pourront"] },
+      { "name_fr": "Conditionnel présent", "forms": ["pourrais", "pourrais", "pourrait", "pourrions", "pourriez", "pourraient"] },
+      { "name_fr": "Subjonctif présent", "forms": ["puisse", "puisses", "puisse", "puissions", "puissiez", "puissent"] }
+    ] },
+    { "verb": "vouloir", "group_ar": "فعل شاذ", "tenses": [
+      { "name_fr": "Présent", "forms": ["veux", "veux", "veut", "voulons", "voulez", "veulent"] },
+      { "name_fr": "Futur simple", "forms": ["voudrai", "voudras", "voudra", "voudrons", "voudrez", "voudront"] },
+      { "name_fr": "Conditionnel présent", "forms": ["voudrais", "voudrais", "voudrait", "voudrions", "voudriez", "voudraient"] },
+      { "name_fr": "Subjonctif présent", "forms": ["veuille", "veuilles", "veuille", "voulions", "vouliez", "veuillent"] }
+    ] },
+    { "verb": "savoir", "group_ar": "فعل شاذ", "tenses": [
+      { "name_fr": "Présent", "forms": ["sais", "sais", "sait", "savons", "savez", "savent"] },
+      { "name_fr": "Imparfait", "forms": ["savais", "savais", "savait", "savions", "saviez", "savaient"] },
+      { "name_fr": "Futur simple", "forms": ["saurai", "sauras", "saura", "saurons", "saurez", "sauront"] },
+      { "name_fr": "Subjonctif présent", "forms": ["sache", "saches", "sache", "sachions", "sachiez", "sachent"] }
+    ] },
+    { "verb": "venir", "group_ar": "فعل شاذ (يأخذ être في الماضي المركب)", "tenses": [
+      { "name_fr": "Présent", "forms": ["viens", "viens", "vient", "venons", "venez", "viennent"] },
+      { "name_fr": "Imparfait", "forms": ["venais", "venais", "venait", "venions", "veniez", "venaient"] },
+      { "name_fr": "Futur simple", "forms": ["viendrai", "viendras", "viendra", "viendrons", "viendrez", "viendront"] },
+      { "name_fr": "Passé composé", "forms": ["suis venu", "es venu", "est venu", "sommes venus", "êtes venus", "sont venus"] },
+      { "name_fr": "Subjonctif présent", "forms": ["vienne", "viennes", "vienne", "venions", "veniez", "viennent"] }
+    ] },
+    { "verb": "prendre", "group_ar": "فعل شاذ", "tenses": [
+      { "name_fr": "Présent", "forms": ["prends", "prends", "prend", "prenons", "prenez", "prennent"] },
+      { "name_fr": "Imparfait", "forms": ["prenais", "prenais", "prenait", "prenions", "preniez", "prenaient"] },
+      { "name_fr": "Futur simple", "forms": ["prendrai", "prendras", "prendra", "prendrons", "prendrez", "prendront"] },
+      { "name_fr": "Passé composé", "forms": ["ai pris", "as pris", "a pris", "avons pris", "avez pris", "ont pris"] },
+      { "name_fr": "Subjonctif présent", "forms": ["prenne", "prennes", "prenne", "prenions", "preniez", "prennent"] }
+    ] },
+    { "verb": "voir", "group_ar": "فعل شاذ", "tenses": [
+      { "name_fr": "Présent", "forms": ["vois", "vois", "voit", "voyons", "voyez", "voient"] },
+      { "name_fr": "Imparfait", "forms": ["voyais", "voyais", "voyait", "voyions", "voyiez", "voyaient"] },
+      { "name_fr": "Futur simple", "forms": ["verrai", "verras", "verra", "verrons", "verrez", "verront"] },
+      { "name_fr": "Passé composé", "forms": ["ai vu", "as vu", "a vu", "avons vu", "avez vu", "ont vu"] },
+      { "name_fr": "Subjonctif présent", "forms": ["voie", "voies", "voie", "voyions", "voyiez", "voient"] }
+    ] },
+    { "verb": "dire", "group_ar": "فعل شاذ", "tenses": [
+      { "name_fr": "Présent", "forms": ["dis", "dis", "dit", "disons", "dites", "disent"] },
+      { "name_fr": "Imparfait", "forms": ["disais", "disais", "disait", "disions", "disiez", "disaient"] },
+      { "name_fr": "Futur simple", "forms": ["dirai", "diras", "dira", "dirons", "direz", "diront"] },
+      { "name_fr": "Passé composé", "forms": ["ai dit", "as dit", "a dit", "avons dit", "avez dit", "ont dit"] },
+      { "name_fr": "Subjonctif présent", "forms": ["dise", "dises", "dise", "disions", "disiez", "disent"] }
+    ] },
+    { "verb": "parler", "group_ar": "المجموعة الأولى (er)", "tenses": [
+      { "name_fr": "Présent", "forms": ["parle", "parles", "parle", "parlons", "parlez", "parlent"] },
+      { "name_fr": "Imparfait", "forms": ["parlais", "parlais", "parlait", "parlions", "parliez", "parlaient"] },
+      { "name_fr": "Futur simple", "forms": ["parlerai", "parleras", "parlera", "parlerons", "parlerez", "parleront"] },
+      { "name_fr": "Passé composé", "forms": ["ai parlé", "as parlé", "a parlé", "avons parlé", "avez parlé", "ont parlé"] },
+      { "name_fr": "Conditionnel présent", "forms": ["parlerais", "parlerais", "parlerait", "parlerions", "parleriez", "parleraient"] },
+      { "name_fr": "Subjonctif présent", "forms": ["parle", "parles", "parle", "parlions", "parliez", "parlent"] }
+    ] },
+    { "verb": "manger", "group_ar": "المجموعة الأولى (er) مع تغيير إملائي", "tenses": [
+      { "name_fr": "Présent", "forms": ["mange", "manges", "mange", "mangeons", "mangez", "mangent"] },
+      { "name_fr": "Imparfait", "forms": ["mangeais", "mangeais", "mangeait", "mangions", "mangiez", "mangeaient"] }
+    ] },
+    { "verb": "finir", "group_ar": "المجموعة الثانية (ir)", "tenses": [
+      { "name_fr": "Présent", "forms": ["finis", "finis", "finit", "finissons", "finissez", "finissent"] },
+      { "name_fr": "Imparfait", "forms": ["finissais", "finissais", "finissait", "finissions", "finissiez", "finissaient"] },
+      { "name_fr": "Futur simple", "forms": ["finirai", "finiras", "finira", "finirons", "finirez", "finiront"] },
+      { "name_fr": "Passé composé", "forms": ["ai fini", "as fini", "a fini", "avons fini", "avez fini", "ont fini"] },
+      { "name_fr": "Conditionnel présent", "forms": ["finirais", "finirais", "finirait", "finirions", "finiriez", "finiraient"] },
+      { "name_fr": "Subjonctif présent", "forms": ["finisse", "finisses", "finisse", "finissions", "finissiez", "finissent"] }
+    ] },
+    { "verb": "vendre", "group_ar": "المجموعة الثالثة (re)", "tenses": [
+      { "name_fr": "Présent", "forms": ["vends", "vends", "vend", "vendons", "vendez", "vendent"] },
+      { "name_fr": "Imparfait", "forms": ["vendais", "vendais", "vendait", "vendions", "vendiez", "vendaient"] },
+      { "name_fr": "Futur simple", "forms": ["vendrai", "vendras", "vendra", "vendrons", "vendrez", "vendront"] },
+      { "name_fr": "Passé composé", "forms": ["ai vendu", "as vendu", "a vendu", "avons vendu", "avez vendu", "ont vendu"] },
+      { "name_fr": "Subjonctif présent", "forms": ["vende", "vendes", "vende", "vendions", "vendiez", "vendent"] }
+    ] },
+    { "verb": "se lever", "group_ar": "فعل انعكاسي (يأخذ être في الماضي المركب)", "tenses": [
+      { "name_fr": "Présent", "forms": ["me lève", "te lèves", "se lève", "nous levons", "vous levez", "se lèvent"] },
+      { "name_fr": "Passé composé", "forms": ["me suis levé", "t’es levé", "s’est levé", "nous sommes levés", "vous êtes levés", "se sont levés"] }
+    ] }
+  ]
+}
