@@ -1,1 +1,47 @@
-
+[
+  {
+    "id": 1,
+    "title_fr": "Ah! vous dirai-je, maman",
+    "title_ar": "آه! سأقول لك يا أمي",
+    "category": "الأرقام والحروف",
+    "type": "mélodie / مغناة",
+    "lyrics_fr": "Ah! vous dirai-je, maman,\nCe qui cause mon tourment.\nPapa veut que je raisonne,\nComme une grande personne.",
+    "lyrics_ar": "آه! سأقول لك يا أمي،\nما هو سبب حيرتي.\nأبي يريدني أن أفكر،\nكشخص كبير."
+  },
+  {
+    "id": 2,
+    "title_fr": "Une souris verte",
+    "title_ar": "فأرة خضراء",
+    "category": "الحيوانات والمرح",
+    "type": "comptine / منطوقة ومغناة",
+    "lyrics_fr": "Une souris verte\nQui courait dans l'herbe,\nJe l'attrape par la queue,\nJe la montre à ces messieurs.",
+    "lyrics_ar": "فأرة خضراء\nكانت تركض في العشب،\nأمسكها من ذيلها،\nوأريها لهؤلاء السادة."
+  },
+  {
+    "id": 3,
+    "title_fr": "Frère Jacques",
+    "title_ar": "الأخ جاك",
+    "category": "الوقت والأنشطة اليومية",
+    "type": "mélodie / مغناة",
+    "lyrics_fr": "Frère Jacques, Frère Jacques,\nDormez-vous? Dormez-vous?\nSonnent les matines! Sonnent les matines!\nDing, dang, dong.",
+    "lyrics_ar": "الأخ جاك، الأخ جاك،\nهل أنتنائم؟ هل أنتنائم؟\nأجراس الصباح ترن! أجراس الصباح ترن!\nدينغ، دانغ، دونغ."
+  },
+  {
+    "id": 4,
+    "title_fr": "Au clair de la lune",
+    "title_ar": "في ضوء القمر",
+    "category": "أناشيد هادئة",
+    "type": "mélodie / مغناة",
+    "lyrics_fr": "Au clair de la lune,\nMon ami Pierrot,\nPrête-moi ta plume\nPour écrire un mot.",
+    "lyrics_ar": "في ضوء القمر،\nيا صديقي بييرو،\nأعرني قلمك\nلأكتب كلمة."
+  },
+  {
+    "id": 5,
+    "title_fr": "Tête, épaules, genoux et pieds",
+    "title_ar": "رأس، كتفان، ركبتان وأقدام",
+    "category": "أعضاء الجسم",
+    "type": "interactive / تفاعلية حركية",
+    "lyrics_fr": "Tête, épaules, genoux et pieds,\nGenoux et pieds.\nTête, épaules, genoux et pieds,\nYeux, oreilles, bouche et nez.",
+    "lyrics_ar": "رأس، كتفان، ركبتان وأقدام،\nركبتان وأقدام.\nرأس، كتفان، ركبتان وأقدام،\nعينان، أذنان، فم وأنف."
+  }
+]
