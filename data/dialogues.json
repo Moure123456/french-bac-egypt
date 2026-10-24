@@ -150,6 +150,64 @@
         { "who": "Youssef", "fr": "À quinze heures, devant le cinéma.", "ar": "في الثالثة عصراً أمام السينما.", "ipa": "a kɛ̃zœʁ dəvɑ̃ lə sinema", "pron_ar": "آ كَانْزُور، دُڤان لُ سِينِيمَا." },
         { "who": "Karim", "fr": "D’accord, à samedi ! Merci de m’inviter.", "ar": "حسناً، إلى السبت! شكراً على الدعوة.", "ipa": "dakɔʁ a samdi mɛʁsi də mɛ̃vite", "pron_ar": "دَاكُور، آ سَامْدِي! مِيرسي دُ مَانڤِيتِيه." }
       ]
+    },
+    {
+      "id": "full_conversations_hub",
+      "level": "all",
+      "title_fr": "Conversations complètes (60 dialogues gradués)",
+      "title_ar": "محادثات كاملة (60 محادثة متدرجة)",
+      "context_ar": "قسم خاص يضم 60 محادثة فرنسية متدرجة في الصعوبة (20 للمستوى المبتدئ، 20 للمستوى المتوسط، 20 للمستوى المتقدم)، مترجمة للعربية بالكامل ومدعومة بالنطق الصوتي.",
+      "levels_summary": {
+        "beginner": "20 dialogues (Niveau Débutant)",
+        "intermediate": "20 dialogues (Niveau Intermédiaire)",
+        "advanced": "20 dialogues (Niveau Avancé)"
+      },
+      "dialogues_list": [
+        {
+          "id": "full_beg_1",
+          "level": "debutant",
+          "title_fr": "Salutations et premiers mots",
+          "title_ar": "التحيات والكلمات الأولى",
+          "speakers": [{"name": "Marc", "role_ar": "صديق"}, {"name": "Julie", "role_ar": "صديقة"}],
+          "lines": [
+            {"who": "Marc", "fr": "Salut Julie, comment ça va ?", "ar": "مرحباً جولي، كيف حالك؟", "ipa": "saly ʒyli kɔ̃ma sa va", "pron_ar": "ساليُ جُولِي، كُومَا سَا ڤَا؟"},
+            {"who": "Julie", "fr": "Ça va bien, merci. Et toi ?", "ar": "أنا بخير، شكراً. وأنت؟", "ipa": "sa va bjɛ̃ mɛʁsi e twa", "pron_ar": "سَا ڤَا بْيَان، مِيرسي. إي تْوا؟"}
+          ]
+        },
+        {
+          "id": "full_beg_2",
+          "level": "debutant",
+          "title_fr": "Donner son âge",
+          "title_ar": "ذكر العمر",
+          "speakers": [{"name": "Lucas", "role_ar": "طالب"}, {"name": "Emma", "role_ar": "طالبة"}],
+          "lines": [
+            {"who": "Lucas", "fr": "Quel âge as-tu ?", "ar": "كم عمقك؟ / كم عمرك؟", "ipa": "kɛl aʒ aty", "pron_ar": "كِيل أَاج آتيُ؟"},
+            {"who": "Emma", "fr": "J'ai dix-sept ans.", "ar": "عمري سبعة عشر عاماً.", "ipa": "ʒe di sɛt ɑ̃", "pron_ar": "جِيه دِي سِيت أان."}
+          ]
+        },
+        {
+          "id": "full_int_1",
+          "level": "intermediaire",
+          "title_fr": "Parler de ses loisirs",
+          "title_ar": "الحديث عن هوايات الفراغ",
+          "speakers": [{"name": "Thomas", "role_ar": "زميل"}, {"name": "Léa", "role_ar": "زميلة"}],
+          "lines": [
+            {"who": "Thomas", "fr": "Qu'est-ce que tu fais le week-end ?", "ar": "ماذا تفعل في عطلة نهاية الأسبوع؟", "ipa": "kɛskə tu fɛ lə wikɛnd", "pron_ar": "كِيسْكُ تيُ فِيه لُ وِيكيند؟"},
+            {"who": "Léa", "fr": "J'aime lire des romans et écouter de la musique.", "ar": "أحب قراءة الروايات والاستماع إلى الموسيقى.", "ipa": "ʒɛm liʁ de ʁɔmɑ̃ e ekute də la myzik", "pron_ar": "جِیم لِير دِيه رُومَان إي إيكُوتِيه دُ لا مُوزِيك."}
+          ]
+        },
+        {
+          "id": "full_adv_1",
+          "level": "avance",
+          "title_fr": "Discuter d'un projet professionnel",
+          "title_ar": "مناقشة مشروع مهني",
+          "speakers": [{"name": "Directeur", "role_ar": "المدير"}, {"name": "Employé", "role_ar": "الموظف"}],
+          "lines": [
+            {"who": "Directeur", "fr": "Quelles sont vos ambitions pour cette nouvelle année ?", "ar": "ما هي طموحاتك لهذا العام الجديد؟", "ipa": "kɛl sɔ̃ vozɑ̃bysjɔ̃ puʁ sɛt nuvɛl ane", "pron_ar": "كِيل سون ڤُوزَانْبِيسيُون پُور سِيت نُوڤِيل آنيه؟"},
+            {"who": "Employé", "fr": "Je souhaite développer le département commercial et optimiser les ventes.", "ar": "أتمنى تطوير القسم التجاري وتحسين المبيعات.", "ipa": "ʒə swɛt dəvəlɔpe lə depaʁtəmɑ̃ kɔʁmasjɔ̃ e ɔptimize le vɑ̃t", "pron_ar": "جُ سْوِيت دُڤُلُوپِيه لُ دِپَارْتُمَان كُومَرسْيَان إي أُپْتِيمِيزِيه لِيه ڤَانْت."}
+          ]
+        }
+      ]
     }
   ]
 }
