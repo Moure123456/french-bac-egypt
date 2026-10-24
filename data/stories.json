@@ -1,272 +1,546 @@
-[
-  {
-    "id": "story_1",
-    "title": "Le Petit Chat Charly",
-    "title_ar": "القط الصغير تشارلي",
-    "level": "Débutant (مبتدئ)",
-    "audio_lang": "fr-FR",
-    "content": "C'est l'histoire d'un petit chat noir. Il s'appelle Charly. Charly aime jouer dans le jardin et boire du lait chaud.",
-    "translation": "هذه قصة قط صغير أسود. اسمه تشارلي. يحب تشارلي اللعب في الحديقة وشرب الحليب الدافيء."
-  },
-  {
-    "id": "story_2",
-    "title": "La Tortue Rapide",
-    "title_ar": "السلحفاة السريعة",
-    "level": "Débutant (مبتدئ)",
-    "audio_lang": "fr-FR",
-    "content": "Une petite tortue marche dans la forêt. Elle voit une pomme rouge sur l'herbe. La tortue mange la pomme avec joie.",
-    "translation": "سلحفاة صغيرة تمشي في الغابة. ترى تفاحة حمراء على العشب. تأكل السلحفاة التفاحة بسعادة."
-  },
-  {
-    "id": "story_3",
-    "title": "Le Chien Fidèle",
-    "title_ar": "الكلب الوفي",
-    "level": "Débutant (مبتدئ)",
-    "audio_lang": "fr-FR",
-    "content": "Max est un grand chien blanc. Il garde la maison de son maître. Max court vite et joue avec le ballon.",
-    "translation": "ماكس كلب أبيض كبير. يحرس منزل صاحبه. يجري ماكس بسرعة ويلعب بالكرة."
-  },
-  {
-    "id": "story_4",
-    "title": "L'Oiseau Chanteur",
-    "title_ar": "الطائر المغرد",
-    "level": "Débutant (مبتدئ)",
-    "audio_lang": "fr-FR",
-    "content": "Dans l'arbre vert, un petit oiseau chante une belle chanson le matin. Tous les animaux écoutent sa douce voix.",
-    "translation": "في الشجرة الخضراء، طائر صغير يغني أغنية جميلة في الصباح. كل الحيوانات تستمع لصوته اللطيف."
-  },
-  {
-    "id": "story_5",
-    "title": "Le Papillon Coloré",
-    "title_ar": "الفراشة الملونة",
-    "level": "Débutant (مبتدئ)",
-    "audio_lang": "fr-FR",
-    "content": "Un beau papillon vole de fleur en fleur. Ses ailes sont rouges, jaunes et bleues. Il danse dans le vent.",
-    "translation": "فراشة جميلة تطير من زهرة إلى زهرة. أجنحتها حمراء، صفراء وزرقاء. ترقص في الهواء."
-  },
-  {
-    "id": "story_6",
-    "title": "La Pomme Rouge",
-    "title_ar": "التفاحة الحمراء",
-    "level": "Débutant (مبتدئ)",
-    "audio_lang": "fr-FR",
-    "content": "Sur la table de la cuisine, il y a une grande pomme rouge. L'enfant la prend et la croque avec appétit.",
-    "translation": "على طاولة المطبخ، توجد تفاحة حمراء كبيرة. يأخذها الطفل ويقضمها بشهية."
-  },
-  {
-    "id": "story_7",
-    "title": "Le Petit Poisson",
-    "title_ar": "السمكة الصغيرة",
-    "level": "Débutant (مبتدئ)",
-    "audio_lang": "fr-FR",
-    "content": "Nemo est un petit poisson orange. Il nage dans la mer bleue avec ses amis les poissons. Il aime explorer les coraux.",
-    "translation": "نيمو سمكة برتقالية صغيرة. تسبح في البحر الأزرق مع أصدقائها الأسماك. تحب استكشاف الشعاب المرجانية."
-  },
-  {
-    "id": "story_8",
-    "title": "L'Étoile Brillante",
-    "title_ar": "النجمة الساطعة",
-    "level": "Débutant (مبتدئ)",
-    "audio_lang": "fr-FR",
-    "content": "Le soir arrive. Dans le ciel noir, une petite étoile brille très fort. Elle éclaire la nuit pour les enfants.",
-    "translation": "يحل المساء. في السماء السوداء، تنجم صغيرة تلمع بقوة. تضيء الليل للأطفال."
-  },
-  {
-    "id": "story_9",
-    "title": "Le Soleil Chaud",
-    "title_ar": "الشمس الدافئة",
-    "level": "Débutant (مبتدئ)",
-    "audio_lang": "fr-FR",
-    "content": "Le soleil se lève le matin. Il apporte la lumière et la chaleur. Les fleurs s'ouvrent pour saluer le nouveau jour.",
-    "translation": "تشرق الشمس في الصباح. تجلب النور والحرارة. تتفتح الزهور لتحية اليوم الجديد."
-  },
-  {
-    "id": "story_10",
-    "title": "La Lune Douce",
-    "title_ar": "القمر اللطيف",
-    "level": "Débutant (مبتدئ)",
-    "audio_lang": "fr-FR",
-    "content": "La lune ronde brille comme une lampe argentée dans la nuit. Elle veille sur les enfants qui dorment tranquillement.",
-    "translation": "القمر المستدير يلمع كالمصباح الفضي في الليل. يسهر على الأطفال النائمين بهدوء."
-  },
-  {
-    "id": "story_11",
-    "title": "Le Lapin Rapide",
-    "title_ar": "الأرنب السريع",
-    "level": "Débutant (مبتدئ)",
-    "audio_lang": "fr-FR",
-    "content": "Panpan est un petit lapin gris avec de longues oreilles. Il adore manger des carottes fraîches et sauter dans l'herbe.",
-    "translation": "بانبان أرنب رمادي صغير له أذنان طويلتان. يعشق أكل الجزر الطازج والقفز في العشب."
-  },
-  {
-    "id": "story_12",
-    "title": "L'Arbre Vert",
-    "title_ar": "الشجرة الخضراء",
-    "level": "Débutant (مبتدئ)",
-    "audio_lang": "fr-FR",
-    "content": "C'est un grand chêne dans le parc. Ses branches offrent de l'ombre en été et abritent les petits oiseaux.",
-    "translation": "هذه شجرة بلوط كبيرة في المنتزه. توفر أفرانها الظل في الصيف وتأوي الطيور الصغيرة."
-  },
-  {
-    "id": "story_13",
-    "title": "La Fleur Jaune",
-    "title_ar": "الزهرة الصفراء",
-    "level": "Débutant (مبتدئ)",
-    "audio_lang": "fr-FR",
-    "content": "Une jolie fleur jaune pousse près du ruisseau. Les abeilles viennent butiner son doux nectar tous les jours.",
-    "translation": "زهرة صفراء جميلة تنمو قرب الجدول. تأتي النحل لامتصاص رحيقها الحلو كل يوم."
-  },
-  {
-    "id": "story_14",
-    "title": "Le Livre Magique",
-    "title_ar": "الكتاب السحري",
-    "level": "Intermédiaire (متوسط)",
-    "audio_lang": "fr-FR",
-    "content": "Thomas ouvre un vieux livre sur son bureau. Chaque page raconte une aventure extraordinaire dans des pays lointains.",
-    "translation": "يفتح توماس كتاباً قديمًا على مكتبه. تحكي كل صفحة مغامرة استثنائية في بلاد بعيدة."
-  },
-  {
-    "id": "story_15",
-    "title": "Le Ballon Rouge",
-    "title_ar": "الكرة الحمراء",
-    "level": "Débutant (مبتدئ)",
-    "audio_lang": "fr-FR",
-    "content": "L'enfant court dans la rue en tenant un ballon rouge. Le ballon s'envole haut dans le ciel bleu et disparaît.",
-    "translation": "يجري الطفل في الشارع مسكاً كرة حمراء. تطير الكرة عالية في السماء الزرقاء وتختفي."
-  },
-  {
-    "id": "story_16",
-    "title": "La Voiture Bleue",
-    "title_ar": "السيارة الزرقاء",
-    "level": "Débutant (مبتدئ)",
-    "audio_lang": "fr-FR",
-    "content": "Papa conduit une petite voiture bleue. Toute la famille voyage vers la mer pour passer un weekend inoubliable.",
-    "translation": "يقود الأبي سيارة زرقاء صغيرة. تسافر العائلة بأكملها نحو البحر لقضاء عطلة نهاية أسبوع لا تنسى."
-  },
-  {
-    "id": "story_17",
-    "title": "Le Train Rapide",
-    "title_ar": "القطار السريع",
-    "level": "Intermédiaire (متوسط)",
-    "audio_lang": "fr-FR",
-    "content": "Le train quitte la gare avec un grand sifflement. Il traverse les champs verts et les tunnels sombres à toute vitesse.",
-    "translation": "يغادر القطار المحطة بصوت صفير كبير. يعبر الحقول الخضراء والأنفاق المظلمة بسرعة فائقة."
-  },
-  {
-    "id": "story_18",
-    "title": "L'Ourson Brun",
-    "title_ar": "الدبدوب البني",
-    "level": "Débutant (مبتدئ)",
-    "audio_lang": "fr-FR",
-    "content": "Un petit ours en peluche marron attend sur le lit de la petite fille. Il porte un nœud rouge autour du cou.",
-    "translation": "دب محشو بني صغير ينتظر على سرير الفتاة الصغيرة. يرتدي عقدة حمراء حول رقبته."
-  },
-  {
-    "id": "story_19",
-    "title": "La Maisonnette",
-    "title_ar": "المنزل الصغير",
-    "level": "Débutant (مبتدئ)",
-    "audio_lang": "fr-FR",
-    "content": "Au fond du jardin, il y a une petite maison en bois. Les enfants aiment y jouer et raconter des secrets.",
-    "translation": "في عمق الحديقة، يوجد منزل خشبي صغير. يحب الأطفال اللعب فيه ورواية الأسرار."
-  },
-  {
-    "id": "story_20",
-    "title": "Le Petit Garçon",
-    "title_ar": "الولد الصغير",
-    "level": "Débutant (مبتدئ)",
-    "audio_lang": "fr-FR",
-    "content": "Lucas a sept ans. Il aime aller à l'école, dessiner des animaux sur son cahier et apprendre le français avec passion.",
-    "translation": "لوكاس عمره سبع سنوات. يحب الذهاب إلى المدرسة، رسم الحيوانات على كراسته وتعلم اللغة الفرنسية بشغف."
-  },
-  {
-    "id": "story_21",
-    "title": "Un Dimanche au Marché",
-    "title_ar": "يوم أحد في السوق",
-    "level": "Débutant (A2 - مبتدئ علوي)",
-    "audio_lang": "fr-FR",
-    "content": "Chaque dimanche matin, Sophie va au marché de son village. Elle achète des légumes frais, du fromage local et une baguette bien chaude. Les vendeurs sont toujours souriants et l'ambiance est très conviviale.",
-    "translation": "في صباح كل يوم أحد، تذهب صوفي إلى سوق قريتها. تشتري خضروات طازجة، وجبناً محلياً، ورغيف خبز طازج ودافئ. الباعة دائماً مبتسمون والأجواء ودية للغاية."
-  },
-  {
-    "id": "story_22",
-    "title": "La Visite du Musée",
-    "title_ar": "زيارة المتحف",
-    "level": "Intermédiaire (B1 - متوسط)",
-    "audio_lang": "fr-FR",
-    "content": "Pendant les vacances, les élèves ont visité le musée d'histoire naturelle. Un guide passionné leur a expliqué l'évolution des espèces à travers les siècles. Les enfants ont pris des notes enthousiastes dans leurs carnets.",
-    "translation": "خلال العطلة، زار الطلاب متحف التاريخ الطبيعي. شرح لهم مرشد شغوف تطور الكائنات عبر القرون. قام الأطفال بتدوين ملاحظات بحماس في دفاترهم."
-  },
-  {
-    "id": "story_23",
-    "title": "Le Mystère de l'Horloge",
-    "title_ar": "سر الساعة القديمة",
-    "level": "Intermédiaire (B1 - متوسط)",
-    "audio_lang": "fr-FR",
-    "content": "Dans le grenier de son grand-père, Julien a trouvé une vieille horloge qui s'est mise à sonner soudainement à minuit. En s'approchant, il a découvert une petite carte cachée derrière le cadran.",
-    "translation": "في علية جده، وجد جوليان ساعة قديمة بدأت بالدق فجأة عند منتصف الليل. وعند الاقتراب منها، اكتشف بطاقة صغيرة مخبأة خلف قرص الساعة."
-  },
-  {
-    "id": "story_24",
-    "title": "Un Voyage en Train",
-    "title_ar": "رحلة بالقطار",
-    "level": "Intermédiaire (B1/B2 - متوسط مرتفع)",
-    "audio_lang": "fr-FR",
-    "content": "Installée près de la fenêtre, Claire observait les paysages magnifiques qui défilaient. Entre montagnes enneigées et vallées verdoyantes, ce trajet vers les Alpes s'annonçait inoubliable pour la jeune voyagiste.",
-    "translation": "جلست كلير بجوار النافذة، وكانت تتأمل المناظر الطبيعية الخلابة التي تمر أمامها. بين الجبال المغطاة بالثلوج والوديان الخضراء، كانت هذه الرحلة نحو جبال الألب تعد بذكرى لا تُنسى للمسافرة الشابة."
-  },
-  {
-    "id": "story_25",
-    "title": "La Recette Secret de Grand-Mère",
-    "title_ar": "وصفة الجدة السرية",
-    "level": "Intermédiaire (B2 - متوسط مرتفع)",
-    "audio_lang": "fr-FR",
-    "content": "Chaque automne, la famille se réunit pour préparer la fameuse tarte aux pommes. Grand-mère transmet précieusement son savoir-faire aux plus jeunes, révélant enfin l'ingrédient secret qui rend sa pâte si croustillante.",
-    "translation": "في كل خريف، تجتمع العائلة لتحضير فطيرة التفاح الشهيرة. تنقل الجدة مهاراتها بكل عناية إلى الأحفاد، كاشفةً أخيراً عن المكون السري الذي يجعل عجينتها هشة ومقرمشة."
-  },
-  {
-    "id": "story_26",
-    "title": "L'Importance des Forêts",
-    "title_ar": "أهمية الغابات",
-    "level": "Avancé (B2/C1 - متقدم)",
-    "audio_lang": "fr-FR",
-    "content": "Les forêts jouent un rôle crucial dans le maintien de l'équilibre écologique de notre planète. En absorbant le dioxyde de carbone et en abritant une biodiversité riche, elles représentent un véritable poumon vert qu'il convient de protéger urgemment.",
-    "translation": "تلعب الغابات دوراً حيوياً في الحفاظ على التوازن البيئي لكوكبنا. فمن خلال امتصاص ثاني أكسيد الكربون وإيواء تنوع بيولوجي غني، تمثل رئة خضراء حقيقية يجدر بنا حمايتها بشكل عاجل."
-  },
-  {
-    "id": "story_27",
-    "title": "La Révolution Numérique",
-    "title_ar": "الثورة الرقمية",
-    "level": "Avancé (C1 - متقدم)",
-    "audio_lang": "fr-FR",
-    "content": "L'avènement des nouvelles technologies a profondément transformé nos modes de communication et de travail. Bien que ces innovations facilitent le quotidien, elles soulèvent également des questions éthiques quant à la protection de la vie privée.",
-    "translation": "لقد أدى ظهور التقنيات الحديثة إلى تغيير عميق في أساليب التواصل والعمل لدينا. ورغم أن هذه الابتكارات تسهل الحياة اليومية، إلا أنها تثير أيضاً تساؤلات أخلاقية تتعلق بحماية الخصوصية."
-  },
-  {
-    "id": "story_28",
-    "title": "L'Art de la Littérature",
-    "title_ar": "فن الأدب",
-    "level": "Avancé (C1 - متقدم)",
-    "audio_lang": "fr-FR",
-    "content": "La littérature ne se contente pas de raconter des histoires ; elle reflète les préoccupations sociétales et explore les profondeurs de l'âme humaine. À travers les mots, les auteurs réussissent à éveiller les consciences et susciter des émotions intenses.",
-    "translation": "لا يقتصر الأدب على سرد القصص فحسب؛ بل يعكس الاهتمامات المجتمعية ويستكشف أعماق الروح البشرية. ومن خلال الكلمات، ينجح الكتاب في إيقاظ الضمائر وإثارة مشاعر جياشة."
-  },
-  {
-    "id": "story_29",
-    "title": "L'Énergie Renouvelable",
-    "title_ar": "الطاقة المتجددة",
-    "level": "Avancé (C1/C2 - متقدم عالٍ)",
-    "audio_lang": "fr-FR",
-    "content": "Face au changement climatique, la transition vers des sources d'énergie propres est devenue une priorité absolue. La mise en œuvre d'infrastructures solaires et éoliennes permet de réduire la dépendance aux énergies fossiles tout en préservant l'environnement.",
-    "translation": "في مواجهة التغير المناخي، أصبح الانتقال نحو مصادر الطاقة النظيفة أولوية مطلقة. وإن إنشاء البنى التحتية الشمسية والهوائية يتيح تقليل الاعتماد على الوقود الأحفوري مع الحفاظ على البيئة في الوقت ذاته."
-  },
-  {
-    "id": "story_30",
-    "title": "L'Héritage Culturel et l'Avenir",
-    "title_ar": "الإرث الثقافي والمستقبل",
-    "level": "Avancé (C2 - متقدم متخصص)",
-    "audio_lang": "fr-FR",
-    "content": "Préserver notre patrimoine culturel ne constitue pas un simple regard vers le passé, mais un ancrage indispensable pour bâtir l'avenir. C'est en tirant parti des enseignements de l'histoire que l'humanité peut appréhender sereinement les défis contemporains.",
-    "translation": "إن الحفاظ على تراثنا الثقافي لا يشكل مجرد نظرة إلى الماضي، بل هو ركيزة لا غنى عنها لبناء المستقبل. فمن خلال الاستفادة من دروس التاريخ، تستطيع البشرية مواجهة التحديات المعاصرة بكل ثبات وحكمة."
-  }
-]
+{
+  "stories": [
+    {
+      "id": "story_1",
+      "title": "Le Petit Chat Charly",
+      "title_ar": "القط الصغير تشارلي",
+      "level": "Débutant (مبتدئ)",
+      "audio_lang": "fr-FR",
+      "content": "C'est l'histoire d'un petit chat noir. Il s'appelle Charly. Charly aime jouer dans le jardin et boire du lait chaud.",
+      "translation": "هذه قصة قط صغير أسود. اسمه تشارلي. يحب تشارلي اللعب في الحديقة وشرب الحليب الدافيء."
+    },
+    {
+      "id": "story_2",
+      "title": "La Tortue Rapide",
+      "title_ar": "السلحفاة السريعة",
+      "level": "Débutant (مبتدئ)",
+      "audio_lang": "fr-FR",
+      "content": "Une petite tortue marche dans la forêt. Elle voit une pomme rouge sur l'herbe. La tortue mange la pomme avec joie.",
+      "translation": "سلحفاة صغيرة تمشي في الغابة. ترى تفاحة حمراء على العشب. تأكل السلحفاة التفاحة بسعادة."
+    },
+    {
+      "id": "story_3",
+      "title": "Le Chien Fidèle",
+      "title_ar": "الكلب الوفي",
+      "level": "Débutant (مبتدئ)",
+      "audio_lang": "fr-FR",
+      "content": "Max est un grand chien blanc. Il garde la maison de son maître. Max court vite et joue avec le ballon.",
+      "translation": "ماكس كلب أبيض كبير. يحرس منزل صاحبه. يجري ماكس بسرعة ويلعب بالكرة."
+    },
+    {
+      "id": "story_4",
+      "title": "L'Oiseau Chanteur",
+      "title_ar": "الطائر المغرد",
+      "level": "Débutant (مبتدئ)",
+      "audio_lang": "fr-FR",
+      "content": "Dans l'arbre vert, un petit oiseau chante une belle chanson le matin. Tous les animaux écoutent sa douce voix.",
+      "translation": "في الشجرة الخضراء، طائر صغير يغني أغنية جميلة في الصباح. كل الحيوانات تستمع لصوته اللطيف."
+    },
+    {
+      "id": "story_5",
+      "title": "Le Papillon Coloré",
+      "title_ar": "الفراشة الملونة",
+      "level": "Débutant (مبتدئ)",
+      "audio_lang": "fr-FR",
+      "content": "Un beau papillon vole de fleur en fleur. Ses ailes sont rouges, jaunes et bleues. Il danse dans le vent.",
+      "translation": "فراشة جميلة تطير من زهرة إلى زهرة. أجنحتها حمراء، صفراء وزرقاء. ترقص في الهواء."
+    },
+    {
+      "id": "story_6",
+      "title": "La Pomme Rouge",
+      "title_ar": "التفاحة الحمراء",
+      "level": "Débutant (مبتدئ)",
+      "audio_lang": "fr-FR",
+      "content": "Sur la table de la cuisine, il y a une grande pomme rouge. L'enfant la prend et la croque avec appétit.",
+      "translation": "على طاولة المطبخ، توجد تفاحة حمراء كبيرة. يأخذها الطفل ويقضمها بشهية."
+    },
+    {
+      "id": "story_7",
+      "title": "Le Petit Poisson",
+      "title_ar": "السمكة الصغيرة",
+      "level": "Débutant (مبتدئ)",
+      "audio_lang": "fr-FR",
+      "content": "Nemo est un petit poisson orange. Il nage dans la mer bleue avec ses amis les poissons. Il aime explorer les coraux.",
+      "translation": "نيمو سمكة برتقالية صغيرة. تسبح في البحر الأزرق مع أصدقائها الأسماك. تحب استكشاف الشعاب المرجانية."
+    },
+    {
+      "id": "story_8",
+      "title": "L'Étoile Brillante",
+      "title_ar": "النجمة الساطعة",
+      "level": "Débutant (مبتدئ)",
+      "audio_lang": "fr-FR",
+      "content": "Le soir arrive. Dans le ciel noir, une petite étoile brille très fort. Elle éclaire la nuit pour les enfants.",
+      "translation": "يحل المساء. في السماء السوداء، تنجم صغيرة تلمع بقوة. تضيء الليل للأطفال."
+    },
+    {
+      "id": "story_9",
+      "title": "Le Soleil Chaud",
+      "title_ar": "الشمس الدافئة",
+      "level": "Débutant (مبتدئ)",
+      "audio_lang": "fr-FR",
+      "content": "Le soleil se lève le matin. Il apporte la lumière et la chaleur. Les fleurs s'ouvrent pour saluer le nouveau jour.",
+      "translation": "تشرق الشمس في الصباح. تجلب النور والحرارة. تتفتح الزهور لتحية اليوم الجديد."
+    },
+    {
+      "id": "story_10",
+      "title": "La Lune Douce",
+      "title_ar": "القمر اللطيف",
+      "level": "Débutant (مبتدئ)",
+      "audio_lang": "fr-FR",
+      "content": "La lune ronde brille comme une lampe argentée dans la nuit. Elle veille sur les enfants qui dorment tranquillement.",
+      "translation": "القمر المستدير يلمع كالمصباح الفضي في الليل. يسهر على الأطفال النائمين بهدوء."
+    },
+    {
+      "id": "story_11",
+      "title": "Le Lapin Rapide",
+      "title_ar": "الأرنب السريع",
+      "level": "Débutant (مبتدئ)",
+      "audio_lang": "fr-FR",
+      "content": "Panpan est un petit lapin gris avec de longues oreilles. Il adore manger des carottes fraîches et sauter dans l'herbe.",
+      "translation": "بانبان أرنب رمادي صغير له أذنان طويلتان. يعشق أكل الجزر الطازج والقفز في العشب."
+    },
+    {
+      "id": "story_12",
+      "title": "L'Arbre Vert",
+      "title_ar": "الشجرة الخضراء",
+      "level": "Débutant (مبتدئ)",
+      "audio_lang": "fr-FR",
+      "content": "C'est un grand chêne dans le parc. Ses branches offrent de l'ombre en été et abritent les petits oiseaux.",
+      "translation": "هذه شجرة بلوط كبيرة في المنتزه. توفر أفرانها الظل في الصيف وتأوي الطيور الصغيرة."
+    },
+    {
+      "id": "story_13",
+      "title": "La Fleur Jaune",
+      "title_ar": "الزهرة الصفراء",
+      "level": "Débutant (مبتدئ)",
+      "audio_lang": "fr-FR",
+      "content": "Une jolie fleur jaune pousse près du ruisseau. Les abeilles viennent butiner son doux nectar tous les jours.",
+      "translation": "زهرة صفراء جميلة تنمو قرب الجدول. تأتي النحل لامتصاص رحيقها الحلو كل يوم."
+    },
+    {
+      "id": "story_14",
+      "title": "Le Livre Magique",
+      "title_ar": "الكتاب السحري",
+      "level": "Intermédiaire (متوسط)",
+      "audio_lang": "fr-FR",
+      "content": "Thomas ouvre un vieux livre sur son bureau. Chaque page raconte une aventure extraordinaire dans des pays lointains.",
+      "translation": "يفتح توماس كتاباً قديمًا على مكتبه. تحكي كل صفحة مغامرة استثنائية في بلاد بعيدة."
+    },
+    {
+      "id": "story_15",
+      "title": "Le Ballon Rouge",
+      "title_ar": "الكرة الحمراء",
+      "level": "Débutant (مبتدئ)",
+      "audio_lang": "fr-FR",
+      "content": "L'enfant court dans la rue en tenant un ballon rouge. Le ballon s'envole haut dans le ciel bleu et disparaît.",
+      "translation": "يجري الطفل في الشارع مسكاً كرة حمراء. تطير الكرة عالية في السماء الزرقاء وتختفي."
+    },
+    {
+      "id": "story_16",
+      "title": "La Voiture Bleue",
+      "title_ar": "السيارة الزرقاء",
+      "level": "Débutant (مبتدئ)",
+      "audio_lang": "fr-FR",
+      "content": "Papa conduit une petite voiture bleue. Toute la famille voyage vers la mer pour passer un weekend inoubliable.",
+      "translation": "يقود الأبي سيارة زرقاء صغيرة. تسافر العائلة بأكملها نحو البحر لقضاء عطلة نهاية أسبوع لا تنسى."
+    },
+    {
+      "id": "story_17",
+      "title": "Le Train Rapide",
+      "title_ar": "القطار السريع",
+      "level": "Intermédiaire (متوسط)",
+      "audio_lang": "fr-FR",
+      "content": "Le train quitte la gare avec un grand sifflement. Il traverse les champs verts et les tunnels sombres à toute vitesse.",
+      "translation": "يغادر القطار المحطة بصوت صفير كبير. يعبر الحقول الخضراء والأنفاق المظلمة بسرعة فائقة."
+    },
+    {
+      "id": "story_18",
+      "title": "L'Ourson Brun",
+      "title_ar": "الدبدوب البني",
+      "level": "Débutant (مبتدئ)",
+      "audio_lang": "fr-FR",
+      "content": "Un petit ours en peluche marron attend sur le lit de la petite fille. Il porte un nœud rouge autour du cou.",
+      "translation": "دب محشو بني صغير ينتظر على سرير الفتاة الصغيرة. يرتدي عقدة حمراء حول رقبته."
+    },
+    {
+      "id": "story_19",
+      "title": "La Maisonnette",
+      "title_ar": "المنزل الصغير",
+      "level": "Débutant (مبتدئ)",
+      "audio_lang": "fr-FR",
+      "content": "Au fond du jardin, il y a une petite maison en bois. Les enfants aiment y jouer et raconter des secrets.",
+      "translation": "في عمق الحديقة، يوجد منزل خشبي صغير. يحب الأطفال اللعب فيه ورواية الأسرار."
+    },
+    {
+      "id": "story_20",
+      "title": "Le Petit Garçon",
+      "title_ar": "الولد الصغير",
+      "level": "Débutant (مبتدئ)",
+      "audio_lang": "fr-FR",
+      "content": "Lucas a sept ans. Il aime aller à l'école, dessiner des animaux sur son cahier et apprendre le français avec passion.",
+      "translation": "لوكاس عمره سبع سنوات. يحب الذهاب إلى المدرسة، رسم الحيوانات على كراسته وتعلم اللغة الفرنسية بشغف."
+    },
+    {
+      "id": "story_21",
+      "title": "Un Dimanche au Marché",
+      "title_ar": "يوم أحد في السوق",
+      "level": "Débutant (A2 - مبتدئ علوي)",
+      "audio_lang": "fr-FR",
+      "content": "Chaque dimanche matin, Sophie va au marché de son village. Elle achète des légumes frais, du fromage local et une baguette bien chaude. Les vendeurs sont toujours souriants et l'ambiance est très conviviale.",
+      "translation": "في صباح كل يوم أحد، تذهب صوفي إلى سوق قريتها. تشتري خضروات طازجة، وجبناً محلياً، ورغيف خبز طازج ودافئ. الباعة دائماً مبتسمون والأجواء ودية للغاية."
+    },
+    {
+      "id": "story_22",
+      "title": "La Visite du Musée",
+      "title_ar": "زيارة المتحف",
+      "level": "Intermédiaire (B1 - متوسط)",
+      "audio_lang": "fr-FR",
+      "content": "Pendant les vacances, les élèves ont visité le musée d'histoire naturelle. Un guide passionné leur a expliqué l'évolution des espèces à travers les siècles. Les enfants ont pris des notes enthousiastes dans leurs carnets.",
+      "translation": "خلال العطلة، زار الطلاب متحف التاريخ الطبيعي. شرح لهم مرشد شغوف تطور الكائنات عبر القرون. قام الأطفال بتدوين ملاحظات بحماس في دفاترهم."
+    },
+    {
+      "id": "story_23",
+      "title": "Le Mystère de l'Horloge",
+      "title_ar": "سر الساعة القديمة",
+      "level": "Intermédiaire (B1 - متوسط)",
+      "audio_lang": "fr-FR",
+      "content": "Dans le grenier de son grand-père, Julien a trouvé une vieille horloge qui s'est mise à sonner soudainement à minuit. En s'approchant, il a découvert une petite carte cachée derrière le cadran.",
+      "translation": "في علية جده، وجد جوليان ساعة قديمة بدأت بالدق فجأة عند منتصف الليل. وعند الاقتراب منها، اكتشف بطاقة صغيرة مخبأة خلف قرص الساعة."
+    },
+    {
+      "id": "story_24",
+      "title": "Un Voyage en Train",
+      "title_ar": "رحلة بالقطار",
+      "level": "Intermédiaire (B1/B2 - متوسط مرتفع)",
+      "audio_lang": "fr-FR",
+      "content": "Installée près de la fenêtre, Claire observait les paysages magnifiques qui défilaient. Entre montagnes enneigées et vallées verdoyantes, ce trajet vers les Alpes s'annonçait inoubliable pour la jeune voyagiste.",
+      "translation": "جلست كلير بجوار النافذة، وكانت تتأمل المناظر الطبيعية الخلابة التي تمر أمامها. بين الجبال المغطاة بالثلوج والوديان الخضراء، كانت هذه الرحلة نحو جبال الألب تعد بذكرى لا تُنسى للمسافرة الشابة."
+    },
+    {
+      "id": "story_25",
+      "title": "La Recette Secret de Grand-Mère",
+      "title_ar": "وصفة الجدة السرية",
+      "level": "Intermédiaire (B2 - متوسط مرتفع)",
+      "audio_lang": "fr-FR",
+      "content": "Chaque automne, la famille se réunit pour préparer la fameuse tarte aux pommes. Grand-mère transmet précieusement son savoir-faire aux plus jeunes, révélant enfin l'ingrédient secret qui rend sa pâte si croustillante.",
+      "translation": "في كل خريف، تجتمع العائلة لتحضير فطيرة التفاح الشهيرة. تنقل الجدة مهاراتها بكل عناية إلى الأحفاد، كاشفةً أخيراً عن المكون السري الذي يجعل عجينتها هشة ومقرمشة."
+    },
+    {
+      "id": "story_26",
+      "title": "L'Importance des Forêts",
+      "title_ar": "أهمية الغابات",
+      "level": "Avancé (B2/C1 - متقدم)",
+      "audio_lang": "fr-FR",
+      "content": "Les forêts jouent un rôle crucial dans le maintien de l'équilibre écologique de notre planète. En absorbant le dioxyde de carbone et en abritant une biodiversité riche, elles représentent un véritable poumon vert qu'il convient de protéger urgemment.",
+      "translation": "تلعب الغابات دوراً حيوياً في الحفاظ على التوازن البيئي لكوكبنا. فمن خلال امتصاص ثاني أكسيد الكربون وإيواء تنوع بيولوجي غني، تمثل رئة خضراء حقيقية يجدر بنا حمايتها بشكل عاجل."
+    },
+    {
+      "id": "story_27",
+      "title": "La Révolution Numérique",
+      "title_ar": "الثورة الرقمية",
+      "level": "Avancé (C1 - متقدم)",
+      "audio_lang": "fr-FR",
+      "content": "L'avènement des nouvelles technologies a profondément transformé nos modes de communication et de travail. Bien que ces innovations facilitent le quotidien, elles soulèvent également des questions éthiques quant à la protection de la vie privée.",
+      "translation": "لقد أدى ظهور التقنيات الحديثة إلى تغيير عميق في أساليب التواصل والعمل لدينا. ورغم أن هذه الابتكارات تسهل الحياة اليومية، إلا أنها تثير أيضاً تساؤلات أخلاقية تتعلق بحماية الخصوصية."
+    },
+    {
+      "id": "story_28",
+      "title": "L'Art de la Littérature",
+      "title_ar": "فن الأدب",
+      "level": "Avancé (C1 - متقدم)",
+      "audio_lang": "fr-FR",
+      "content": "La littérature ne se contente pas de raconter des histoires ; elle reflète les préoccupations sociétales et explore les profondeurs de l'âme humaine. À travers les mots, les auteurs réussissent à éveiller les consciences et susciter des émotions intenses.",
+      "translation": "لا يقتصر الأدب على سرد القصص فحسب؛ بل يعكس الاهتمامات المجتمعية ويستكشف أعماق الروح البشرية. ومن خلال الكلمات، ينجح الكتاب في إيقاظ الضمائر وإثارة مشاعر جياشة."
+    },
+    {
+      "id": "story_29",
+      "title": "L'Énergie Renouvelable",
+      "title_ar": "الطاقة المتجددة",
+      "level": "Avancé (C1/C2 - متقدم عالٍ)",
+      "audio_lang": "fr-FR",
+      "content": "Face au changement climatique, la transition vers des sources d'énergie propres est devenue une priorité absolue. La mise en œuvre d'infrastructures solaires et éoliennes permet de réduire la dépendance aux énergies fossiles tout en préservant l'environnement.",
+      "translation": "في مواجهة التغير المناخي، أصبح الانتقال نحو مصادر الطاقة النظيفة أولوية مطلقة. وإن إنشاء البنى التحتية الشمسية والهوائية يتيح تقليل الاعتماد على الوقود الأحفوري مع الحفاظ على البيئة في الوقت ذاته."
+    },
+    {
+      "id": "story_30",
+      "title": "L'Héritage Culturel et l'Avenir",
+      "title_ar": "الإرث الثقافي والمستقبل",
+      "level": "Avancé (C2 - متقدم متخصص)",
+      "audio_lang": "fr-FR",
+      "content": "Préserver notre patrimoine culturel ne constitue pas un simple regard vers le passé, mais un ancrage indispensable pour bâtir l'avenir. C'est en tirant parti des enseignements de l'histoire que l'humanité peut appréhender sereinement les défis contemporains.",
+      "translation": "إن الحفاظ على تراثنا الثقافي لا يشكل مجرد نظرة إلى الماضي، بل هو ركيزة لا غنى عنها لبناء المستقبل. فمن خلال الاستفادة من دروس التاريخ، تستطيع البشرية مواجهة التحديات المعاصرة بكل ثبات وحكمة."
+    }
+  ],
+  "songs": [
+    {
+      "id": "song_1",
+      "title": "Frère Jacques",
+      "title_ar": "الأخ جاك",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Frère Jacques, Frère Jacques,\nDormez-vous? Dormez-vous?\nSonnent les matines! Sonnent les matines!\nDing, dang, dong. Ding, dang, dong.",
+    "translation": "يا أخ جاك، يا أخ جاك،\nهل أنت نائم؟ هل أنت نائم؟\nأجراس الصباح تدق! أجراس الصباح تدق!\nدينغ، دانغ، دونغ."
+    },
+    {
+      "id": "song_2",
+      "title": "Au Clair de la Lune",
+      "title_ar": "على ضوء القمر",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Au clair de la lune, mon ami Pierrot,\nPrête-moi ta plume pour écrire un mot.\nMa chandelle est morte, je n'ai plus de feu.\nOuvre-moi ta porte, pour l'amour de Dieu.",
+      "translation": "على ضوء القمر، يا صديقي بييرو،\nأعرني قلمك لأكتب كلمة.\nشمعتي انطفأت، ولم يعد لدي نار.\nافتح لي بابك، لوجه الله."
+    },
+    {
+      "id": "song_3",
+      "title": "Une Souris Verte",
+      "title_ar": "فأرة خضراء",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Une souris verte qui courait dans l'herbe,\nJe l'attrape par la queue, je la montre à ces messieurs.\nCes messieurs me disent : trempez-la dans l'huile,\nTrempez-la dans l'eau, ça fera un escargot tout chaud.",
+      "translation": "فأرة خضراء كانت تجري في العشب،\nأمسكتها من ذيلها، وأريتها لهؤلاء السادة.\nقال لي هؤلاء السادة: اغمسها في الزيت،\nاغمسها في الماء، ستصبح حلزوناً دافئاً."
+    },
+    {
+      "id": "song_4",
+      "title": "Ainsi font, font, font",
+      "title_ar": "هكذا تفعل الدمى",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Ainsi font, font, font, les petites marionnettes.\nLes petites marionnettes font, font, font,\ntrois petits tours et puis s'en vont.",
+      "translation": "هكذا تفعل، تفعل، تفعل الدمى الصغيرة.\nالدمى الصغيرة تفعل، تفعل، تفعل،\nثلاث دورات صغيرة ثم تذهب."
+    },
+    {
+      "id": "song_5",
+      "title": "Bateau sur l'eau",
+      "title_ar": "قارب على الماء",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Bateau sur l'eau,\nLa rivière, la rivière,\nBateau sur l'eau,\nLa rivière au bord de l'eau.\nLe petit bateau a chaviré,\nTous les enfants sont tombés dans l'eau !",
+      "translation": "قارب على الماء،\nالنهر، النهر،\nقارب على الماء،\nالنهر على حافة الماء.\nالقارب الصغير انقلب،\nكل الأطفال وقعوا في الماء!"
+    },
+    {
+      "id": "song_6",
+      "title": "Il était un petit navire",
+      "title_ar": "كان هناك سفينة صغيرة",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Il était un petit navire, qui n'avait ja-ja-jamais navigué,\nOhé ! Ohé !\nIl naviguait sur les mers, il naviguait sur les mers.",
+      "translation": "كانت هناك سفينة صغيرة، لم تبحر أبداً أبداً،\nأهيه! أهيه!\nكانت تبحر في البحار، كانت تبحر في البحار."
+    },
+    {
+      "id": "song_7",
+      "title": "Meunier, tu dors",
+      "title_ar": "أيها الطحان، أنت نائم",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Meunier, tu dors, ton moulin va trop vite,\nMeunier, tu dors, ton moulin va trop fort.\nTon moulin va, ton moulin va.",
+      "translation": "أيها الطحان، أنت نائم، مطحنتك تدور بسرعة فائقة،\nأيها الطحان، أنت نائم، مطحنتك تدور بقوة.\nمطحنتك تدور، مطحنتك تدور."
+    },
+    {
+      "id": "song_8",
+      "title": "Ah ! Les crocodiles",
+      "title_ar": "آه! التماسيح",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Un grand crocodile s'en allait à la guerre,\nDisant au revoir à ses petits enfants.\nTra la la la la, ri re, tra la la la la, ro.",
+      "translation": "تمساح كبير كان ذاهباً إلى الحرب،\nمودعاً أطفاله الصغار.\nترا لا لا لا لا، ري ري، ترا لا لا لا لا، رو."
+    },
+    {
+      "id": "song_9",
+      "title": "Promenons-nous dans les bois",
+      "title_ar": "لنتمشى في الغابة",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Promenons-nous dans les bois, pendant que le loup n'y est pas.\nSi le loup y était, il nous mangerait.\nMais comme il n'y est pas, il ne nous mangera pas. Loup, y es-tu ?",
+      "translation": "لنتمشى في الغابة، بينما الذئب ليس هنا.\nلو كان الذئب هنا، لأكلنا.\nولكن بما أنه ليس هنا، فلن يأكلنا. أيها الذئب، هل أنت هنا؟"
+    },
+    {
+      "id": "song_10",
+      "title": "Savez-vous planter les choux",
+      "title_ar": "هل تعرفون كيف تزرعون الكرنب؟",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Savez-vous planter les choux, à la mode de chez nous ?\nOn les plante avec les doigts, à la mode, à la mode de chez nous.",
+      "translation": "هل تعرفون كيف تزرعون الكرنب، على طريقة بلدنا؟\nنزرعه بالأصابع، على طريقة، على طريقة بلدنا."
+    },
+    {
+      "id": "song_11",
+      "title": "Alouette, gentille alouette",
+      "title_ar": "أيتها القبرة اللطيفة",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Alouette, gentille alouette,\nAlouette, je te plumerai.\nJe plumerai la tête, je plumerai la tête,\nEt la tête, et la tête, alouette !",
+      "translation": "أيتها القبرة، القبرة اللطيفة،\nالقبرة، سوف أنظف ريشك.\nسأنتزع ريش الرأس، سأنتزع ريش الرأس،\nوالرأس، والرأس، أيها القبرة!"
+    },
+    {
+      "id": "song_12",
+      "title": "Une poule sur un mur",
+      "title_ar": "دجاجة على جدار",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Une poule sur un mur, qui picore du pain dur.\nPicoti, picota, lève la queue et puis s'en va.",
+      "translation": "دجاجة على جدار، تنقر خبزاً قاسياً.\nتيك توك، ترفع ذيلها ثم تمضي."
+    },
+    {
+      "id": "song_13",
+      "title": "Fais dodo, Colas mon petit frère",
+      "title_ar": "نم يا كولاس يا أخي الصغير",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Fais dodo, Colas mon petit frère,\nFais dodo, t'auras du lolo.\nMaman est en haut, qui fait du gateau.",
+      "translation": "نم يا كولاس يا أخي الصغير،\nنم، وستحصل على الحليب.\nالأم في الأعلى تصنع الكعكة."
+    },
+    {
+      "id": "song_14",
+      "title": "Dansons la capucine",
+      "title_ar": "لنرقص الكابوسين",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Dansons la capucine, y'a pas de pain chez moi.\nY'en a chez la voisine, mais ce n'est pas pour moi.",
+      "translation": "لنرقص الكابوسين، ليس هناك خبز في بيتي.\nيوجد عند الجارة، ولكنه ليس لي."
+    },
+    {
+      "id": "song_15",
+      "title": "Il pleut, il pleut, bergère",
+      "title_ar": "تمطر، تمطر، ايتها الراعية",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Il pleut, il pleut, bergère, rentre tes blancs moutons.\nIl pleut, il pleut, bergère, rentre les tous.",
+      "translation": "تمطر، تمطر، أيتها الراعية، أدخلي خرافك البيضاء.\nتمطر، تمطر، أيتها الراعية، أدخليهم كلهم."
+    },
+    {
+      "id": "song_16",
+      "title": "Cadet Rousselle",
+      "title_ar": "كادي روسيل",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Cadet Rousselle a trois maisons, qui n'ont ni poutres ni cloisons.\nC'est pour y loger les hirondelles, que direz-vous d'Cadet Rousselle ?",
+      "translation": "كادي روسيل لديه ثلاثة منازل، ليس لها عوارض ولا قواطع.\nذلك لإيواء السنونو، فماذا ستفولون عن كادي روسيل؟"
+    },
+    {
+      "id": "song_17",
+      "title": "Jean Petit qui danse",
+      "title_ar": "جان بوتي يرقص",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Jean Petit qui danse, Jean Petit qui danse,\nDe son doigt il danse, de son doigt il danse.\nAinsi danse Jean Petit !",
+      "translation": "جان بوتي يرقص، جان بوتي يرقص،\nبإببه يرقص، بإببه يرقص.\nهكذا يرقص جان بوتي!"
+    },
+    {
+      "id": "song_18",
+      "title": "Gai, gai, l'chanson",
+      "title_ar": "فرح، فرح، الأغنية",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Gai, gai, l'chanson, nous irons dans les bois,\nNous y cueillerons la violette au mois de mai.",
+      "translation": "فرح، فرح، الأغنية، سنذهب إلى الغابة،\nسنقطف هناك البنفسج في شهر مايو."
+    },
+    {
+      "id": "song_19",
+      "title": "Do, ré, mi, la façola",
+      "title_ar": "دو، ري، مي، فا، صول",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Do, ré, mi, la façola, la petite chatte est là.\nElle danse sur les notes pour amuser les enfants.",
+      "translation": "دو، ري، مي، فا، صول، القطة الصغيرة هنا.\nترقص على النغمات لتسلية الأطفال."
+    },
+    {
+      "id": "song_20",
+      "title": "Sur le pont d'Avignon",
+      "title_ar": "على جسر أفينيون",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Sur le pont d'Avignon, l'on y danse, l'on y danse.\nSur le pont d'Avignon, l'on y danse tout en rond.",
+      "translation": "على جسر أفينيون، نحن نرقص، نحن نرقص.\nعلى جسر أفينيون، نحن نرقص في دوائر."
+    },
+    {
+      "id": "song_21",
+      "title": "Un grand cerf",
+      "title_ar": "أيل كبير",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Dans sa maison, un grand cerf, regardait par la fenêtre.\nUn lapin venait à lui, et frappa ainsi.",
+      "translation": "في بيته، أيل كبير، كان ينظر من النافذة.\nأتى إليه أرنب، وضرب هكذا."
+    },
+    {
+      "id": "song_22",
+      "title": "Mon beau sapin",
+      "title_ar": "شجرتي الجميلة",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Mon beau sapin, roi des forêts, que j'aime ta verdure.\nQuand par l'hiver, bois et vallées, sont dépouillés de leurs beauté.",
+      "translation": "شجرتي الجميلة، ملكة الغابات، ما أحب خضرتك.\nعندما تخلع الغابات والوديان جمالها في الشتاء."
+    },
+    {
+      "id": "song_23",
+      "title": "Il court, il court, le furet",
+      "title_ar": "النمس يجري ويهرب",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Il court, il court, le furet, le bois, le bois, mesdames.\nIl court, il court, le furet, le bois, le bois, messieurs.",
+      "translation": "يجري، يجري النمس، في الغابة، في الغابة يا سيدات.\nيجري، يجري النمس، في الغابة، في الغابة يا سادة."
+    },
+    {
+      "id": "song_24",
+      "title": "La famille Tortue",
+      "title_ar": "عائلة السلاحف",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Jamais on n'a vu, jamais on ne verra,\nLa famille Tortue courir après les rats.",
+      "translation": "لم نرى أبداً، ولن نرى أبداً،\nعائلة السلاحف تجري خلف الفئران."
+    },
+    {
+      "id": "song_25",
+      "title": "Pirouette, cacahuète",
+      "title_ar": "بيرويت، كاكاوية",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "C'est l'histoire de pirouette, qui monta sur un mât.\nIl s'est cassé la binette, ohé ohé !",
+      "translation": "هذه قصة بيرويت، الذي صعد على السواري.\nلقد كسر أنفه، أهيه أهيه!"
+    },
+    {
+      "id": "song_26",
+      "title": "Petit escargot",
+      "title_ar": "الحلزون الصغير",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Petit escargot, porte sur son dos,\nSa maisonnette, aussitôt qu'il pleut,\nIl se met bien au chaud.",
+      "translation": "الحلزون الصغير، يحمل على ظهره،\nمنزله الصغير، فور أن تمطر،\nيختبئ ويدفئ نفسه."
+    },
+    {
+      "id": "song_27",
+      "title": "1, 2, 3, nous irons au bois",
+      "title_ar": "1، 2، 3، سنذهب إلى الغابة",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Un, deux, trois, nous irons au bois.\nQuatre, cinq, six, cueillir des cerises.\nSept, huit, neuf, dans mon panier neuf.",
+      "translation": "واحد، اثنان، ثلاثة، سنذهب إلى الغابة.\nأربعة، خمسة، ستة، لنقطف الكرز.\nسبعة، ثمانية، تسعة، في سلتني الجديدة."
+    },
+    {
+      "id": "song_28",
+      "title": "Ah, les belles fleurs",
+      "title_ar": "آه، الزهور الجميلة",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Ah, les belles fleurs que voilà dans les champs,\nLes enfants les cueillent en chantant.",
+      "translation": "آه، ما أجمال الزهور التي هناك في الحقول،\nيقطفها الأطفال وهم يغنون."
+    },
+    {
+      "id": "song_29",
+      "title": "Les petits poissons dans l'eau",
+      "title_ar": "الأسماك الصغير في الماء",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Les petits poissons dans l'eau, nagent, nagent, nagent, nagent, nagent,\nLes petits poissons dans l'eau, nagent aussi bien que les gros.",
+      "translation": "الأسماك الصغيرة في الماء، تسبح، تسبح، تسبح،\nالأسماك الصغيرة في الماء، تسبح بمهارة مثل الكبيرة."
+    },
+    {
+      "id": "song_30",
+      "title": "Berceuse pour un bébé",
+      "title_ar": "تهويدة لطفل صغير",
+      "level": "Enfants",
+      "audio_lang": "fr-FR",
+      "content": "Dors bien mon petit ange, les étoiles veillent sur toi.\nLa lune t'envoie de doux rêves jusqu'au matin.",
+      "translation": "نم جيداً يا ملاكي الصغير، النجوم تسهر عليك.\nالقمر يرسل لك أحلاماً جميلة حتى الصباح."
+    }
+  ]
+}
