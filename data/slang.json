@@ -1,1 +1,19 @@
-
+{
+  "songs": [
+    { "id": 1, "title": "L'alphabet", "file": "data/song1.mp3" },
+    { "id": 2, "title": "Les nombres", "file": "data/song2.mp3" },
+    { "id": 3, "title": "Les couleurs", "file": "data/song3.mp3" },
+    { "id": 4, "title": "Les jours de la semaine", "file": "data/song4.mp3" },
+    { "id": 5, "title": "Les mois de l'année", "file": "data/song5.mp3" },
+    { "id": 6, "title": "Les parties du corps", "file": "data/song6.mp3" },
+    { "id": 7, "title": "La famille", "file": "data/song7.mp3" },
+    { "id": 8, "title": "Les animaux", "file": "data/song8.mp3" },
+    { "id": 9, "title": "Les 4 saisons", "file": "data/song9.mp3" },
+    { "id": 10, "title": "Les salutations", "file": "data/song10.mp3" },
+    { "id": 11, "title": "Les vêtements", "file": "data/song11.mp3" },
+    { "id": 12, "title": "La nourriture", "file": "data/song12.mp3" },
+    { "id": 13, "title": "La maison", "file": "data/song13.mp3" },
+    { "id": 14, "title": "L'école", "file": "data/song14.mp3" },
+    { "id": 15, "title": "Frère Jacques", "file": "data/song15.mp3" }
+  ]
+}
