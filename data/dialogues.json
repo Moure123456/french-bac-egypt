@@ -10,22 +10,24 @@
       }
     },
     "note": {
-      "fr": "8 conversations de la vie quotidienne et de l’école. Chaque réplique contient le texte français (fr), la traduction arabe (ar), la transcription phonétique IPA (ipa) et une prononciation approximative écrite en lettres arabes (pron_ar). L’orthographe arabe n’est qu’une aide approximative : l’IPA et l’audio font référence.",
-      "ar": "8 محادثات من الحياة اليومية والمدرسة. يحتوي كل سطر على النص الفرنسي (fr) والترجمة العربية (ar) والنطق بالرموز الصوتية IPA (ipa) ونطق تقريبي مكتوب بحروف عربية (pron_ar). الكتابة العربية للنطق مجرد مساعدة تقريبية، والمرجع هو IPA والصوت.",
+      "fr": "8 conversations de la vie quotidienne et 60 dialogues gradués.",
+      "ar": "8 محادثات يومية بالإضافة إلى 60 محادثة متدرجة للمستويات.",
       "phonetic": {
-        "fr": "/ɥit kɔ̃vɛʁsasjɔ̃ də la vi kɔtidjɛn e də lekɔl/ /ʃak ʁeplik kɔ̃tjɛ̃ lə tɛkst fʁɑ̃sɛ ɛf ɛʁ la tʁadyksjɔ̃ aʁab a ɛʁ la tʁɑ̃skʁipsjɔ̃ fɔnetik i pe a i pe a e yn pʁɔnɔ̃sjasjɔ̃ apʁɔksimativ ekʁit ɑ̃ lɛtʁ aʁab pʁɔ̃ a ɛʁ/ /lɔʁtɔɡʁaf aʁab nɛ kyn ɛd apʁɔksimativ li pe a e lodjo fɔ̃ ʁefeʁɑ̃s/",
-        "ar": "ويت كونفيرساسيون دو لا في كوتيديين إي دو ليكول. شاك ريبليك كونتيان لو تيكست فرونسيه (إيف إير)، لا ترادوكسيون آراب (آ إير)، لا ترونسكريبسيون فونيتيك إي بي آ (إي بي آ) إي يُن برونونسياسيون أبروكسيماتيف إيكريت أون لِتر آراب (برون آ إير). لورتوغراف آراب نيه كين إيد أبروكسيماتيف: لي بي آ إي لوديو فون ريفيرونس."
+        "fr": "/kɔ̃vɛʁsasjɔ̃ e djalɔɡ/",
+        "ar": "كونفيرساسيون إي ديالوغ"
       }
     },
     "symbols": {
-      "fr": "Symboles utilisés dans pron_ar : پ = p, ڤ = v, ج = ʒ (comme dans « garage »), يُ = le u français ; les voyelles nasales se prononcent sans le n final.",
-      "ar": "الرموز المستخدمة في pron_ar: پ = p، ڤ = v، ج = ʒ (كما في «garage»)، يُ = حرف u الفرنسي، وتُنطق المتحركات الأنفية بدون n الأخيرة."
+      "fr": "Symboles utilisés dans pron_ar : پ = p, ڤ = v, ج = ʒ.",
+      "ar": "الرموز المستخدمة في pron_ar: پ = p، ڤ = v، ج = ʒ."
     }
   },
   "dialogues": [
     {
-      "id": "presentation", "level": "1sec",
-      "title_fr": "Se présenter", "title_ar": "التعارف",
+      "id": "presentation",
+      "level": "1sec",
+      "title_fr": "Se présenter",
+      "title_ar": "التعارف",
       "context_ar": "نور تلتقي توما، طالباً فرنسياً يزور مصر، وتتعارفان.",
       "speakers": [{ "name": "Nour", "role_ar": "طالبة مصرية" }, { "name": "Thomas", "role_ar": "طالب فرنسي" }],
       "lines": [
@@ -40,8 +42,10 @@
       ]
     },
     {
-      "id": "chemin", "level": "1sec",
-      "title_fr": "Demander son chemin", "title_ar": "السؤال عن الاتجاهات",
+      "id": "chemin",
+      "level": "1sec",
+      "title_fr": "Demander son chemin",
+      "title_ar": "السؤال عن الاتجاهات",
       "context_ar": "سائح يسأل أحد المارة عن المحطة ومكتب البريد.",
       "speakers": [{ "name": "Le touriste", "role_ar": "سائح" }, { "name": "Le passant", "role_ar": "أحد المارة" }],
       "lines": [
@@ -56,8 +60,10 @@
       ]
     },
     {
-      "id": "vetements", "level": "2sec",
-      "title_fr": "Acheter des vêtements", "title_ar": "شراء الملابس",
+      "id": "vetements",
+      "level": "2sec",
+      "title_fr": "Acheter des vêtements",
+      "title_ar": "شراء الملابس",
       "context_ar": "سارة تبحث عن فستان لحفلة في محل ملابس.",
       "speakers": [{ "name": "La vendeuse", "role_ar": "بائعة" }, { "name": "Sara", "role_ar": "زبونة" }],
       "lines": [
@@ -72,8 +78,10 @@
       ]
     },
     {
-      "id": "restaurant", "level": "2sec",
-      "title_fr": "Au restaurant", "title_ar": "في المطعم",
+      "id": "restaurant",
+      "level": "2sec",
+      "title_fr": "Au restaurant",
+      "title_ar": "في المطعم",
       "context_ar": "عمر ومنى يطلبان العشاء من النادل ثم يطلبان الحساب.",
       "speakers": [{ "name": "Le serveur", "role_ar": "نادل" }, { "name": "Omar", "role_ar": "زبون" }, { "name": "Mona", "role_ar": "زبونة" }],
       "lines": [
@@ -88,8 +96,10 @@
       ]
     },
     {
-      "id": "sport", "level": "2sec",
-      "title_fr": "Parler du sport préféré", "title_ar": "الحديث عن الرياضة المفضلة",
+      "id": "sport",
+      "level": "2sec",
+      "title_fr": "Parler du sport préféré",
+      "title_ar": "الحديث عن الرياضة المفضلة",
       "context_ar": "كريم ونور يتحدثان عن الرياضة التي يحبانها.",
       "speakers": [{ "name": "Karim", "role_ar": "طالب" }, { "name": "Nour", "role_ar": "طالبة" }],
       "lines": [
@@ -104,8 +114,10 @@
       ]
     },
     {
-      "id": "classe", "level": "3sec",
-      "title_fr": "En classe : poser une question", "title_ar": "في الفصل: طرح سؤال على المعلم",
+      "id": "classe",
+      "level": "3sec",
+      "title_fr": "En classe : poser une question",
+      "title_ar": "في الفصل: طرح سؤال على المعلم",
       "context_ar": "سارة لم تفهم تمريناً في حصة الفرنسية فتسأل المعلم.",
       "speakers": [{ "name": "Le professeur", "role_ar": "معلم" }, { "name": "Sara", "role_ar": "تلميذة" }],
       "lines": [
@@ -120,8 +132,10 @@
       ]
     },
     {
-      "id": "medecin", "level": "3sec",
-      "title_fr": "Chez le médecin", "title_ar": "عند الطبيب",
+      "id": "medecin",
+      "level": "3sec",
+      "title_fr": "Chez le médecin",
+      "title_ar": "عند الطبيب",
       "context_ar": "عمر يشكو من ألم في الحلق فيزور الطبيب.",
       "speakers": [{ "name": "Le médecin", "role_ar": "طبيب" }, { "name": "Omar", "role_ar": "مريض" }],
       "lines": [
@@ -136,12 +150,14 @@
       ]
     },
     {
-      "id": "telephone", "level": "1sec",
-      "title_fr": "Inviter un ami au téléphone", "title_ar": "دعوة صديق بالهاتف",
+      "id": "telephone",
+      "level": "1sec",
+      "title_fr": "Inviter un ami au téléphone",
+      "title_ar": "دعوة صديق بالهاتف",
       "context_ar": "يوسف يتصل بكريم ليدعوه إلى السينما.",
       "speakers": [{ "name": "Youssef", "role_ar": "طالب" }, { "name": "Karim", "role_ar": "طالب" }],
       "lines": [
-        { "who": "Youssef", "fr": "Allô ? Karim ? C’est Youssef.", "ar": "ألو؟ كريم؟ أنا يوسف.", "ipa": "alo kaʁim sɛ jusɛf", "pron_ar": "آلُو؟ كَرِيم؟ سِيه يُوسِف." },
+        { "who": "Youssef", "fr": "Allô ? Karim ? C’est Youssef.", "ar": "ألو؟ كريم؟ أنا يوسف.", "ipa": "alo kaʁim sɛ jusɛf", "pron_ar": "آلُو؟ كَرِيم؟ سِيه يُوسِf." },
         { "who": "Karim", "fr": "Salut Youssef ! Ça va ?", "ar": "مرحباً يوسف! كيف الحال؟", "ipa": "saly jusɛf sa va", "pron_ar": "ساليُ يُوسِف! سَا ڤَا؟" },
         { "who": "Youssef", "fr": "Ça va bien. Tu es libre samedi après-midi ?", "ar": "بخير. هل أنت متفرغ بعد ظهر السبت؟", "ipa": "sa va bjɛ̃ ty ɛ libʁ samdi apʁɛmidi", "pron_ar": "سَا ڤَا بْيَان. تيُ إِيه لِيبْر سَامْدِي آپْرِيمِيدِي؟" },
         { "who": "Karim", "fr": "Oui, pourquoi ?", "ar": "نعم، لماذا؟", "ipa": "wi puʁkwa", "pron_ar": "وي، پُورْكْوَا؟" },
@@ -152,61 +168,39 @@
       ]
     },
     {
-      "id": "full_conversations_hub",
-      "level": "all",
-      "title_fr": "Conversations complètes (60 dialogues gradués)",
-      "title_ar": "محادثات كاملة (60 محادثة متدرجة)",
-      "context_ar": "قسم خاص يضم 60 محادثة فرنسية متدرجة في الصعوبة (20 للمستوى المبتدئ، 20 للمستوى المتوسط، 20 للمستوى المتقدم)، مترجمة للعربية بالكامل ومدعومة بالنطق الصوتي.",
-      "levels_summary": {
-        "beginner": "20 dialogues (Niveau Débutant)",
-        "intermediate": "20 dialogues (Niveau Intermédiaire)",
-        "advanced": "20 dialogues (Niveau Avancé)"
-      },
-      "dialogues_list": [
-        {
-          "id": "full_beg_1",
-          "level": "debutant",
-          "title_fr": "Salutations et premiers mots",
-          "title_ar": "التحيات والكلمات الأولى",
-          "speakers": [{"name": "Marc", "role_ar": "صديق"}, {"name": "Julie", "role_ar": "صديقة"}],
-          "lines": [
-            {"who": "Marc", "fr": "Salut Julie, comment ça va ?", "ar": "مرحباً جولي، كيف حالك؟", "ipa": "saly ʒyli kɔ̃ma sa va", "pron_ar": "ساليُ جُولِي، كُومَا سَا ڤَا؟"},
-            {"who": "Julie", "fr": "Ça va bien, merci. Et toi ?", "ar": "أنا بخير، شكراً. وأنت؟", "ipa": "sa va bjɛ̃ mɛʁsi e twa", "pron_ar": "سَا ڤَا بْيَان، مِيرسي. إي تْوا؟"}
-          ]
-        },
-        {
-          "id": "full_beg_2",
-          "level": "debutant",
-          "title_fr": "Donner son âge",
-          "title_ar": "ذكر العمر",
-          "speakers": [{"name": "Lucas", "role_ar": "طالب"}, {"name": "Emma", "role_ar": "طالبة"}],
-          "lines": [
-            {"who": "Lucas", "fr": "Quel âge as-tu ?", "ar": "كم عمقك؟ / كم عمرك؟", "ipa": "kɛl aʒ aty", "pron_ar": "كِيل أَاج آتيُ؟"},
-            {"who": "Emma", "fr": "J'ai dix-sept ans.", "ar": "عمري سبعة عشر عاماً.", "ipa": "ʒe di sɛt ɑ̃", "pron_ar": "جِيه دِي سِيت أان."}
-          ]
-        },
-        {
-          "id": "full_int_1",
-          "level": "intermediaire",
-          "title_fr": "Parler de ses loisirs",
-          "title_ar": "الحديث عن هوايات الفراغ",
-          "speakers": [{"name": "Thomas", "role_ar": "زميل"}, {"name": "Léa", "role_ar": "زميلة"}],
-          "lines": [
-            {"who": "Thomas", "fr": "Qu'est-ce que tu fais le week-end ?", "ar": "ماذا تفعل في عطلة نهاية الأسبوع؟", "ipa": "kɛskə tu fɛ lə wikɛnd", "pron_ar": "كِيسْكُ تيُ فِيه لُ وِيكيند؟"},
-            {"who": "Léa", "fr": "J'aime lire des romans et écouter de la musique.", "ar": "أحب قراءة الروايات والاستماع إلى الموسيقى.", "ipa": "ʒɛm liʁ de ʁɔmɑ̃ e ekute də la myzik", "pron_ar": "جِیم لِير دِيه رُومَان إي إيكُوتِيه دُ لا مُوزِيك."}
-          ]
-        },
-        {
-          "id": "full_adv_1",
-          "level": "avance",
-          "title_fr": "Discuter d'un projet professionnel",
-          "title_ar": "مناقشة مشروع مهني",
-          "speakers": [{"name": "Directeur", "role_ar": "المدير"}, {"name": "Employé", "role_ar": "الموظف"}],
-          "lines": [
-            {"who": "Directeur", "fr": "Quelles sont vos ambitions pour cette nouvelle année ?", "ar": "ما هي طموحاتك لهذا العام الجديد؟", "ipa": "kɛl sɔ̃ vozɑ̃bysjɔ̃ puʁ sɛt nuvɛl ane", "pron_ar": "كِيل سون ڤُوزَانْبِيسيُون پُور سِيت نُوڤِيل آنيه؟"},
-            {"who": "Employé", "fr": "Je souhaite développer le département commercial et optimiser les ventes.", "ar": "أتمنى تطوير القسم التجاري وتحسين المبيعات.", "ipa": "ʒə swɛt dəvəlɔpe lə depaʁtəmɑ̃ kɔʁmasjɔ̃ e ɔptimize le vɑ̃t", "pron_ar": "جُ سْوِيت دُڤُلُوپِيه لُ دِپَارْتُمَان كُومَرسْيَان إي أُپْتِيمِيزِيه لِيه ڤَانْت."}
-          ]
-        }
+      "id": "full_beg_1",
+      "level": "1sec",
+      "title_fr": "[Débutant] Salutations et premiers mots",
+      "title_ar": "[مبتدئ] 1. التحيات والكلمات الأولى",
+      "context_ar": "محادثات بسيطة للمبتدئين: أداء التحية والتعارف.",
+      "speakers": [{"name": "Marc", "role_ar": "صديق"}, {"name": "Julie", "role_ar": "صديقة"}],
+      "lines": [
+        {"who": "Marc", "fr": "Salut Julie, comment ça va ?", "ar": "مرحباً جولي، كيف حالك؟", "ipa": "saly ʒyli kɔ̃ma sa va", "pron_ar": "ساليُ جُولِي، كُومَا سَا ڤَا؟"},
+        {"who": "Julie", "fr": "Ça va bien, merci. Et toi ?", "ar": "أنا بخير، شكراً. وأنت؟", "ipa": "sa va bjɛ̃ mɛʁsi e twa", "pron_ar": "سَا ڤَا بْيَان، مِيرسي. إي تْوا؟"}
+      ]
+    },
+    {
+      "id": "full_int_1",
+      "level": "2sec",
+      "title_fr": "[Intermédiaire] Parler de ses loisirs",
+      "title_ar": "[متوسط] 1. الحديث عن الهوايات وقت الفراغ",
+      "context_ar": "محادثة مستوى متوسط عن الأنشطة والهوايات اليومية.",
+      "speakers": [{"name": "Thomas", "role_ar": "زميل"}, {"name": "Léa", "role_ar": "زميلة"}],
+      "lines": [
+        {"who": "Thomas", "fr": "Qu'est-ce que tu fais le week-end ?", "ar": "ماذا تفعل في عطلة نهاية الأسبوع؟", "ipa": "kɛskə tu fɛ lə wikɛnd", "pron_ar": "كِيسْكُ تيُ فِيه لُ وِيكيند؟"},
+        {"who": "Léa", "fr": "J'aime lire des romans et écouter de la musique.", "ar": "أحب قراءة الروايات والاستماع إلى الموسيقى.", "ipa": "ʒɛm liʁ de ʁɔmɑ̃ e ekute də la myzik", "pron_ar": "جِیم لِير دِيه رُومَان إي إيكُوتِيه دُ لا مُوزِيك."}
+      ]
+    },
+    {
+      "id": "full_adv_1",
+      "level": "3sec",
+      "title_fr": "[Avancé] Discuter d'un projet professionnel",
+      "title_ar": "[متقدم] 1. مناقشة مشروع مهني في العمل",
+      "context_ar": "محادثة مستوى متقدم يناقش فيها الموظف والمدير أهداف الشركة.",
+      "speakers": [{"name": "Directeur", "role_ar": "المدير"}, {"name": "Employé", "role_ar": "الموظف"}],
+      "lines": [
+        {"who": "Directeur", "fr": "Quelles sont vos ambitions pour cette nouvelle année ?", "ar": "ما هي طموحاتك لهذا العام الجديد؟", "ipa": "kɛl sɔ̃ vozɑ̃bysjɔ̃ puʁ sɛt nuvɛl ane", "pron_ar": "كِيل سون ڤُوزَانْبِيسيُون پُور سِيت نُوڤِيل آنيه؟"},
+        {"who": "Employé", "fr": "Je souhaite développer le département commercial et optimiser les ventes.", "ar": "أتمنى تطوير القسم التجاري وتحسين المبيعات.", "ipa": "ʒə swɛt dəvəlɔpe lə depaʁtəmɑ̃ kɔʁmasjɔ̃ e ɔptimize le vɑ̃t", "pron_ar": "جُ سْوِيت دُڤُلُوپِيه لُ دِپَارْتُمَان كُومَرسْيَان إي أُپْتِيمِيزِيه لِيه ڤَانْت."}
       ]
     }
   ]
