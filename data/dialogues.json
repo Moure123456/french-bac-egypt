@@ -1,7 +1,26 @@
 {
   "meta": {
     "version": 2,
-    "note": "8 everyday and school conversations. Each line has the French text (fr), the Arabic translation (ar), the IPA transcription (ipa) and an approximate pronunciation written in Arabic letters (pron_ar). The Arabic spelling is only a rough aid: the IPA and the audio are the reference. Symbols used in pron_ar: پ = p, ڤ = v, ج = ʒ (as in garage), يُ = the French u, and nasal vowels are pronounced without the final n."
+    "title": {
+      "fr": "Conversations et dialogues du quotidien",
+      "ar": "محادثات وحوارات يومية",
+      "phonetic": {
+        "fr": "/kɔ̃vɛʁsasjɔ̃ e djalɔɡ dy kɔtidjɛ̃/",
+        "ar": "كونفيرساسيون إي ديالوغ دي كوتيديان"
+      }
+    },
+    "note": {
+      "fr": "8 conversations de la vie quotidienne et de l’école. Chaque réplique contient le texte français (fr), la traduction arabe (ar), la transcription phonétique IPA (ipa) et une prononciation approximative écrite en lettres arabes (pron_ar). L’orthographe arabe n’est qu’une aide approximative : l’IPA et l’audio font référence.",
+      "ar": "8 محادثات من الحياة اليومية والمدرسة. يحتوي كل سطر على النص الفرنسي (fr) والترجمة العربية (ar) والنطق بالرموز الصوتية IPA (ipa) ونطق تقريبي مكتوب بحروف عربية (pron_ar). الكتابة العربية للنطق مجرد مساعدة تقريبية، والمرجع هو IPA والصوت.",
+      "phonetic": {
+        "fr": "/ɥit kɔ̃vɛʁsasjɔ̃ də la vi kɔtidjɛn e də lekɔl/ /ʃak ʁeplik kɔ̃tjɛ̃ lə tɛkst fʁɑ̃sɛ ɛf ɛʁ la tʁadyksjɔ̃ aʁab a ɛʁ la tʁɑ̃skʁipsjɔ̃ fɔnetik i pe a i pe a e yn pʁɔnɔ̃sjasjɔ̃ apʁɔksimativ ekʁit ɑ̃ lɛtʁ aʁab pʁɔ̃ a ɛʁ/ /lɔʁtɔɡʁaf aʁab nɛ kyn ɛd apʁɔksimativ li pe a e lodjo fɔ̃ ʁefeʁɑ̃s/",
+        "ar": "ويت كونفيرساسيون دو لا في كوتيديين إي دو ليكول. شاك ريبليك كونتيان لو تيكست فرونسيه (إيف إير)، لا ترادوكسيون آراب (آ إير)، لا ترونسكريبسيون فونيتيك إي بي آ (إي بي آ) إي يُن برونونسياسيون أبروكسيماتيف إيكريت أون لِتر آراب (برون آ إير). لورتوغراف آراب نيه كين إيد أبروكسيماتيف: لي بي آ إي لوديو فون ريفيرونس."
+      }
+    },
+    "symbols": {
+      "fr": "Symboles utilisés dans pron_ar : پ = p, ڤ = v, ج = ʒ (comme dans « garage »), يُ = le u français ; les voyelles nasales se prononcent sans le n final.",
+      "ar": "الرموز المستخدمة في pron_ar: پ = p، ڤ = v، ج = ʒ (كما في «garage»)، يُ = حرف u الفرنسي، وتُنطق المتحركات الأنفية بدون n الأخيرة."
+    }
   },
   "dialogues": [
     {
