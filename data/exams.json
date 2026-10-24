@@ -1,95 +1,87 @@
 {
+  "exams": [
+    {
+      "id": "exam_1",
+      "title": "Examen 1 - نماذج امتحانات",
+      "questions": [
+        {
+          "question": "Choisissez la bonne réponse...",
+          "options": ["Option A", "Option B", "Option C"],
+          "answer": "Option A"
+        }
+      ]
+    }
+  ],
   "grammaire": [
     {
       "id": "gram_1",
-      "icon": "book-open",
       "title": "La Structure de la Phrase",
       "title_ar": "تركيب الجملة في الفرنسية",
       "level": "Débutant",
       "audio_lang": "fr-FR",
-      "explanation": "La phrase simple en français se compose de trois éléments principaux : le Sujet, le Verbe et le Complément (S + V + C).",
-      "explanation_ar": "تتكون الجملة البسيطة في اللغة الفرنسية من ثلاثة عناصر أساسية: الفاعل، الفعل، والمفعول به (S + V + C).",
+      "content": "La phrase simple en français se compose de trois éléments principaux : le Sujet, le Verbe et le Complément (S + V + C).",
+      "translation": "تتكون الجملة البسيطة في اللغة الفرنسية من ثلاثة عناصر أساسية: الفاعل، الفعل، والمفعول به.",
       "examples": [
         {
           "fr": "Le professeur explique la leçon.",
           "ar": "المعلم يشرح الدرس."
-        },
-        {
-          "fr": "Paul mange une pomme.",
-          "ar": "بول يأكل تفاحة."
         }
       ]
     },
     {
       "id": "gram_2",
-      "icon": "map-pin",
       "title": "Les Prépositions",
-      "title_ar": "حروف الجر (Les Prépositions)",
+      "title_ar": "حروف الجر",
+      "level": "Débutant",
       "audio_lang": "fr-FR",
-      "explanation": "Les prépositions servent à lier des mots dans la phrase. Exemples : à, de, dans, sur, sous, avec, pour.",
-      "explanation_ar": "تُستخدم حروف الجر لربط الكلمات في الجملة. أمثلة: في/إلى (à)، من/عن (de)، في/داخل (dans)، على (sur)، تحت (sous)، مع (avec)، لأجل (pour).",
+      "content": "Les prépositions servent à lier des mots dans la phrase (à, de, dans, sur, sous, avec, pour).",
+      "translation": "تُستخدم حروف الجر لربط الكلمات في الجملة.",
       "examples": [
         {
           "fr": "Je vais à l'école avec mon ami.",
           "ar": "أنا أذهب إلى المدرسة مع صديقي."
-        },
-        {
-          "fr": "Le livre est sur la table.",
-          "ar": "الكتاب على الطاولة."
         }
       ]
     },
     {
       "id": "gram_3",
-      "icon": "user-check",
       "title": "Les Adjectifs Possessifs",
-      "title_ar": "أدوات الملكية (Les Adjectifs Possessifs)",
+      "title_ar": "أدوات الملكية",
+      "level": "Débutant",
       "audio_lang": "fr-FR",
-      "explanation": "Ils expriment la possession : (mon, ma, mes) pour 'je' ; (ton, ta, tes) pour 'tu' ; (son, sa, ses) pour 'il/elle'.",
-      "explanation_ar": "تُستخدم للتعبير عن الملكية: (mon, ma, mes) للمتكلم 'أنا'؛ (ton, ta, tes) للمخاطب 'أنت'؛ (son, sa, ses) للغائب 'هو/هي'.",
+      "content": "Ils expriment la possession : mon, ma, mes / ton, ta, tes / son, sa, ses.",
+      "translation": "تُستخدم للتعبير عن الملكية للمتكلم والمخاطب والغائب.",
       "examples": [
         {
           "fr": "Mon père aime sa voiture.",
           "ar": "أبي يحب سيارته."
-        },
-        {
-          "fr": "J'aime mes études.",
-          "ar": "أنا أحب دراستي."
         }
       ]
     },
     {
       "id": "gram_4",
-      "icon": "pie-chart",
       "title": "Les Articles Partitifs",
-      "title_ar": "أدوات التجزئة (Les Articles Partitifs)",
+      "title_ar": "أدوات التجزئة",
+      "level": "Débutant",
       "audio_lang": "fr-FR",
-      "explanation": "On utilise (du, de la, de l', des) pour désigner une quantité indéterminée d'une chose qu'on ne peut pas compter.",
-      "explanation_ar": "نستخدم (du, de la, de l', des) للتعبير عن كمية غير محدودة من شيء لا يمكن عده (الأطعمة والمشروبات والمواد).",
+      "content": "On utilise (du, de la, de l', des) pour une quantité indéterminée.",
+      "translation": "نستخدم أدوات التجزئة للتعبير عن كمية غير محدودة من الأشياء التي لا تُعد.",
       "examples": [
         {
           "fr": "Je bois du lait et mange de la viande.",
-          "ar": "أشرب بعض الحليب وآكل بعض اللحم."
-        },
-        {
-          "fr": "Il achète de l'eau et des fruits.",
-          "ar": "هو يشتري بعض الماء والفاكهة."
+          "ar": "أشرب الحليب وآكل اللحم."
         }
       ]
     },
     {
       "id": "gram_5",
-      "icon": "file-text",
-      "title": "Participe Présent et Participe Passé",
+      "title": "Participe Présent et Passé",
       "title_ar": "اسم الفاعل واسم المفعول",
+      "level": "Intermédiaire",
       "audio_lang": "fr-FR",
-      "explanation": "Le participe présent finit souvent par '-ant' (parlant). Le participe passé s'utilise pour les temps composés (parlé, fini, vendu).",
-      "explanation_ar": "ينتهي اسم الفاعل (Participe Présent) غالباً بـ '-ant' (مُتحدثاً). بينما يُستخدم اسم المفعول (Participe Passé) لبناء الأزمنة المركبة.",
+      "content": "Le participe présent finit par '-ant'. Le participe passé s'utilise pour les temps composés.",
+      "translation": "ينتهي اسم الفاعل بـ '-ant'، بينما يُستخدم اسم المفعول في الأزمنة المركبة.",
       "examples": [
-        {
-          "fr": "En étudiant bien, tu réussiras.",
-          "ar": "بالدراسة الجيدة (بكونك تدرس جيداً)، ستنجح."
-        },
         {
           "fr": "J'ai fini mon devoir.",
           "ar": "أنهيت واجبي."
@@ -98,65 +90,57 @@
     },
     {
       "id": "gram_6",
-      "icon": "corner-up-right",
-      "title": "Les Compléments Directs et Indirects",
-      "title_ar": "المفعول المباشر وغير المباشر (COD / COI)",
+      "title": "Compléments Directs et Indirects",
+      "title_ar": "المفعول المباشر وغير المباشر",
+      "level": "Intermédiaire",
       "audio_lang": "fr-FR",
-      "explanation": "Le COD est relié directement au verbe sans préposition. Le COI est relié au verbe par une préposition (à, de).",
-      "explanation_ar": "المفعول المباشر (COD) يرتبط بالفعل مباشرة بدون حرف جر. بينما المفعول غير المباشر (COI) يسبقه حرف جر مثل (à, de).",
+      "content": "Le COD est relié directement au verbe. Le COI est relié par une préposition.",
+      "translation": "المفعول المباشر يرتبط بالفعل مباشرة، بينما غير المباشر يتطلب حرف جر.",
       "examples": [
         {
-          "fr": "Je vois mon ami. (COD)",
-          "ar": "أنا أرى صديقي. (مفعول مباشر)"
-        },
-        {
-          "fr": "Je parle à mon ami. (COI)",
-          "ar": "أنا أتحدث إلى صديقي. (مفعول غير مباشر)"
+          "fr": "Je vois mon ami (COD). Je parle à mon ami (COI).",
+          "ar": "أرى صديقي (مباشر). أتحدث إلى صديقي (غير مباشر)."
         }
       ]
     },
     {
       "id": "gram_7",
-      "icon": "repeat",
       "title": "Voix Active et Voix Passive",
       "title_ar": "المبني للمعلوم والمبني للمجهول",
+      "level": "Intermédiaire",
       "audio_lang": "fr-FR",
-      "explanation": "À la voix active, le sujet fait l'action. À la voix passive, le sujet subit l'action avec l'auxiliaire 'être' + participe passé.",
-      "explanation_ar": "في المبني للمعلوم يقوم الفاعل بالفعل. وفي المبني للمجهول يقع الفعل على الفاعل باستخدام الفعل المساعد 'être' + اسم المفعول.",
+      "content": "À la voix passive, le sujet subit l'action avec l'auxiliaire 'être' + participe passé.",
+      "translation": "في المبني للمجهول يقع الفعل على الفاعل باستخدام الفعل المساعد être واسم المفعول.",
       "examples": [
         {
-          "fr": "Le chat mange la souris. (Active)",
-          "ar": "القط يأكل الفأر. (مبني للمعلوم)"
-        },
-        {
-          "fr": "La souris est mangée par le chat. (Passive)",
-          "ar": "الفأر يُؤكل بواسطة القط. (مبني للمجهول)"
+          "fr": "La souris est mangée par le chat.",
+          "ar": "الفأر يُؤكل بواسطة القط."
         }
       ]
     },
     {
       "id": "gram_8",
-      "icon": "clock",
       "title": "Le Présent de l'Indicatif",
-      "title_ar": "زمن المضارع (Le Présent)",
+      "title_ar": "زمن المضارع",
+      "level": "Débutant",
       "audio_lang": "fr-FR",
-      "explanation": "Le présent exprime une action qui se déroule au moment où l'on parle ou une habitude.",
-      "explanation_ar": "يعبر المضارع عن حدث يقع في لحظة الكلام أو يعبر عن عادة تكرارية.",
+      "content": "Le présent exprime une action qui se déroule au moment où l'on parle.",
+      "translation": "يعبر المضارع عن حدث يقع في وقت الكلام الحالي.",
       "examples": [
         {
           "fr": "Aujourd'hui, nous étudions le français.",
-          "ar": "اليوم، نحن نذكر/نتعلم اللغة الفرنسية."
+          "ar": "اليوم ندرس اللغة الفرنسية."
         }
       ]
     },
     {
       "id": "gram_9",
-      "icon": "fast-forward",
       "title": "Le Futur Proche",
-      "title_ar": "المستقبل القريب (Le Futur Proche)",
+      "title_ar": "المستقبل القريب",
+      "level": "Débutant",
       "audio_lang": "fr-FR",
-      "explanation": "Il s'utilise pour une action imminente. Formation : Verbe Aller au présent + Verbe à l'infinitif.",
-      "explanation_ar": "يعبر عن حدث وشيك الوقوع جداً. التكوين: تصريف فعل (Aller) في المضارع + الفعل في المصدر.",
+      "content": "Formation : Verbe Aller au présent + Verbe à l'infinitif.",
+      "translation": "التكوين: تصريف فعل Aller في المضارع + الفعل في المصدر.",
       "examples": [
         {
           "fr": "Je vais visiter Paris demain.",
@@ -166,12 +150,12 @@
     },
     {
       "id": "gram_10",
-      "icon": "calendar",
       "title": "Le Futur Simple",
-      "title_ar": "المستقبل البسيط (Le Futur Simple)",
+      "title_ar": "المستقبل البسيط",
+      "level": "Intermédiaire",
       "audio_lang": "fr-FR",
-      "explanation": "Il exprime une action à venir plus lointaine. On prend l'infinitif et on ajoute : -ai, -as, -a, -ons, -ez, -ont.",
-      "explanation_ar": "يعبر عن حدث في المستقبل البعيد. التكوين: المصدر + النهايات (-ai, -as, -a, -ons, -ez, -ont).",
+      "content": "Formation : Infinitif + endings (-ai, -as, -a, -ons, -ez, -ont).",
+      "translation": "التكوين: الفعل في المصدر + نهايات المستقبل البسيط.",
       "examples": [
         {
           "fr": "L'année prochaine, nous voyagerons en France.",
@@ -181,12 +165,12 @@
     },
     {
       "id": "gram_11",
-      "icon": "rewind",
       "title": "Le Passé Récent",
-      "title_ar": "الماضي القريب (Le Passé Récent)",
+      "title_ar": "الماضي القريب",
+      "level": "Débutant",
       "audio_lang": "fr-FR",
-      "explanation": "Il exprime une action venant de se terminer. Formation : Venir au présent + de + Infinitif.",
-      "explanation_ar": "يعبر عن حدث انتهى لتوه قبل لحظات. التكوين: تصريف فعل (Venir) في المضارع + de + الفعل في المصدر.",
+      "content": "Formation : Venir au présent + de + Infinitif.",
+      "translation": "التكوين: تصريف فعل Venir في المضارع + de + المصدر.",
       "examples": [
         {
           "fr": "Je viens de finir mon travail.",
@@ -196,27 +180,27 @@
     },
     {
       "id": "gram_12",
-      "icon": "check-circle",
       "title": "Le Passé Composé",
-      "title_ar": "الماضي المركب (Le Passé Composé)",
+      "title_ar": "الماضي المركب",
+      "level": "Intermédiaire",
       "audio_lang": "fr-FR",
-      "explanation": "Il exprime une action ponctuelle et terminée dans le passé. Formation : Avoir ou Être au présent + Participe passé.",
-      "explanation_ar": "يعبر عن حدث محدد وانتهى تماماً في الماضي. التكوين: فعل Avoir أو Être في المضارع + اسم المفعول.",
+      "content": "Formation : Avoir ou Être au présent + Participe passé.",
+      "translation": "التكوين: فعل Avoir أو Être في المضارع + اسم المفعول.",
       "examples": [
         {
-          "fr": "Hier, j'ai regardé un film intéressant.",
-          "ar": "أمس، شاهدتُ فيلماً ممتعاً."
+          "fr": "Hier, j'ai regardé un film.",
+          "ar": "أمس، شاهدت فيلماً."
         }
       ]
     },
     {
       "id": "gram_13",
-      "icon": "history",
       "title": "L'Imparfait",
-      "title_ar": "الماضي الناقص (L'Imparfait)",
+      "title_ar": "الماضي الناقص",
+      "level": "Intermédiaire",
       "audio_lang": "fr-FR",
-      "explanation": "Il s'utilise pour la description, les habitudes du passé ou des actions longues. Endings : -ais, -ais, -ait, -ions, -iez, -aient.",
-      "explanation_ar": "يُستخدم للوصف، العادات القديمة، أو أحداث استمرت لفترة في الماضي. النهايات: (-ais, -ais, -ait, -ions, -iez, -aient).",
+      "content": "S'utilise pour la description et les habitudes du passé. Endings : -ais, -ais, -ait, -ions, -iez, -aient.",
+      "translation": "يُستخدم للوصف والعادات القديمة في الماضي.",
       "examples": [
         {
           "fr": "Quand j'étais petit, j'habitais à la campagne.",
@@ -226,16 +210,16 @@
     },
     {
       "id": "gram_14",
-      "icon": "layers",
       "title": "Le Plus-que-parfait",
-      "title_ar": "الماضي التام (Le Plus-que-parfait)",
+      "title_ar": "الماضي التام",
+      "level": "Avancé",
       "audio_lang": "fr-FR",
-      "explanation": "Il exprime une action passée qui s'est produite avant une autre action passée. Formation : Avoir/Être à l'imparfait + Participe passé.",
-      "explanation_ar": "يعبر عن حدث في الماضي تم قبل حدث آخر في الماضي أيضاً. التكوين: (Avoir/Être) في الماضي الناقص + اسم المفعول.",
+      "content": "Formation : Avoir/Être à l'imparfait + Participe passé.",
+      "translation": "التكوين: تصريف (Avoir/Être) في الماضي الناقص + اسم المفعول.",
       "examples": [
         {
           "fr": "Quand il est arrivé, j'avais déjà mangé.",
-          "ar": "عندما وصل هو، كنتُ قد أكلتُ بالفعل."
+          "ar": "عندما وصل، كنت قد أكلت بالفعل."
         }
       ]
     }
