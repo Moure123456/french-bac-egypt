@@ -1,1 +1,131 @@
-
+{
+  "prose_quotes": [
+    {
+      "id": 1,
+      "author": "Victor Hugo",
+      "quote_fr": "Aimer, c'est agir.",
+      "quote_ar": "أن تحب، فهذا يعني أن تعمل وتتحرك."
+    },
+    {
+      "id": 2,
+      "author": "Albert Camus",
+      "quote_fr": "Au milieu de l'hiver, j'ai découvert en moi un invincible été.",
+      "quote_ar": "في منتصف الشتاء، اكتشفت في داخلي صيفاً لا يقهر."
+    },
+    {
+      "id": 3,
+      "author": "Antoine de Saint-Exupéry",
+      "quote_fr": "On ne voit bien qu'qu'avec le cœur. L'essentiel est invisible pour les yeux.",
+      "quote_ar": "لا يرى المرء جيداً إلا بقلبه. فكل ما هو أساسي لا يرى بالعين."
+    },
+    {
+      "id": 4,
+      "author": "Honoré de Balzac",
+      "quote_fr": "Le secret des grandes fortunes sans cause apparente est un crime oublié, parce qu'il a été proprement fait.",
+      "quote_ar": "سر الثروات الكبيرة التي لا سبب ظاهر لها هو جريمة منسية، لأنها ارتكبت بإتقان."
+    },
+    {
+      "id": 5,
+      "author": "Jean-Paul Sartre",
+      "quote_fr": "L'homme est condamné à être libre.",
+      "quote_ar": "الإنسان محكوم عليه بأن يكون حراً."
+    }
+  ],
+  "poetry_quotes": [
+    {
+      "id": 1,
+      "poet": "Charles Baudelaire (شعر حديث)",
+      "quote_fr": "Sois sage, ô ma douleur, et tiens-toi plus tranquille.",
+      "quote_ar": "كوني عاقلة يا أحزاني، وكوني أكثر هدوءاً."
+    },
+    {
+      "id": 2,
+      "poet": "Paul Verlaine (شعر حديث)",
+      "quote_fr": "De la musique avant toute chose.",
+      "quote_ar": "الموسيقى قبل كل شيء."
+    },
+    {
+      "id": 3,
+      "poet": "Jean de La Fontaine (شعر كلاسيكي قديم)",
+      "quote_fr": "Rien ne sert de courir ; il faut partir à point.",
+      "quote_ar": "لا جدوى من الجري السريع؛ بل يجب الانطلاق في الوقت المناسب."
+    },
+    {
+      "id": 4,
+      "poet": "Arthur Rimbaud (شعر حديث)",
+      "quote_fr": "Éternelle mer, Mer mêlée au soleil.",
+      "quote_ar": "أيتها البحار الأبدية، يا بحراً امتزج بالشمس."
+    },
+    {
+      "id": 5,
+      "poet": "Pierre Corneille (شعر كلاسيكي قديم)",
+      "quote_fr": "À vaincre sans péril, on triomphe sans gloire.",
+      "quote_ar": "حين ننتصر بلا مخاطر، فإننا ننتصر بلا مجد."
+    }
+  ],
+  "authors_directory": [
+    {
+      "name": "Victor Hugo",
+      "era": "القرن التاسع عشر (رومانسية)",
+      "major_works": ["Les Misérables", "Notre-Dame de Paris"]
+    },
+    {
+      "name": "Molière",
+      "era": "القرن السابع عشر (كلاسيكية/مسرح)",
+      "major_works": ["Le Misanthrope", "L'Avare"]
+    },
+    {
+      "name": "Albert Camus",
+      "era": "القرن العشرين (عبثية/وجودية)",
+      "major_works": ["L'Étranger", "La Peste"]
+    },
+    {
+      "name": "Jean-Paul Sartre",
+      "era": "القرن العشرين (وجودية)",
+      "major_works": ["La Nausée", "Huis clos"]
+    },
+    {
+      "name": "Voltaire",
+      "era": "عصر التنوير (القرن الثامن عشر)",
+      "major_works": ["Candide", "Traité de la tolérance"]
+    },
+    {
+      "name": "Guy de Maupassant",
+      "era": "القرن التاسع عشر (واقعية)",
+      "major_works": ["Boule de Suif", "Bel-Ami"]
+    }
+  ],
+  "french_presidents": [
+    { "order": 1, "name": "Charles de Gaulle", "years": "1959 - 1969" },
+    { "order": 2, "name": "Georges Pompidou", "years": "1969 - 1974" },
+    { "order": 3, "name": "Valéry Giscard d'Estaing", "years": "1974 - 1981" },
+    { "order": 4, "name": "François Mitterrand", "years": "1981 - 1995" },
+    { "order": 5, "name": "Jacques Chirac", "years": "1995 - 2007" },
+    { "order": 6, "name": "Nicolas Sarkozy", "years": "2007 - 2012" },
+    { "order": 7, "name": "François Hollande", "years": "2012 - 2017" },
+    { "order": 8, "name": "Emmanuel Macron", "years": "2017 - حتى الآن" }
+  ],
+  "ai_literary_insights": [
+    {
+      "id": 1,
+      "author": "Victor Hugo",
+      "quote_fr": "Aimer, c'est agir.",
+      "insight_ar": "💡 إضاءة ذكية: يربط فيكتور هوغو هنا بين العاطفة والعمل؛ فالإحباط والحب الحقيقي ليس مجرد مشاعر صامتة، بل هو فعل وتغيير على أرض الواقع.",
+      "critical_question": "Comment l'amour peut-il se transformer en action concrète selon vous ?"
+    },
+    {
+      "id": 2,
+      "author": "Albert Camus",
+      "quote_fr": "Au milieu de l'hiver, j'ai découvert en moi un invincible été.",
+      "insight_ar": "💡 إضاءة ذكية: تعبير مجازي عميق عن القدرة البشرية على الصمود؛ فالقوة الداخلية قادرة على قهر أقصى ظروف القسوة والصعاب.",
+      "critical_question": "Quel rôle joue la résilience face aux épreuves de la vie ?"
+    },
+    {
+      "id": 3,
+      "author": "Antoine de Saint-Exupéry",
+      "quote_fr": "On ne voit bien qu'qu'avec le cœur. L'essentiel est invisible pour les yeux.",
+      "insight_ar": "💡 إضاءة ذكية: فلسفة ترتكز على أن الجوهر والقيم الحقيقية (كالصدق والمحبة) تُحس ولا يُكتفى برؤيتها بالعين المجردة.",
+      "critical_question": "Pourquoi les apparences sont-elles parfois trompeuses en littérature ?"
+    }
+  ]
+}
