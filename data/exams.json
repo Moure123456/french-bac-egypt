@@ -1,7 +1,22 @@
 {
   "meta": {
     "version": 3,
-    "note": "Five original model exams (40 marks each, 60 minutes) built on three parts: reading comprehension (two passages, four multiple-choice questions each), everyday situations, and grammar. Plus complete Grammaire section."
+    "title": {
+      "fr": "Examens du baccalauréat : modèles et entraînement",
+      "ar": "امتحانات الثانوية العامة: نماذج وتدريب",
+      "phonetic": {
+        "fr": "/ɛɡzamɛ̃ dy bakalɔʁea mɔdɛl e ɑ̃tʁɛnmɑ̃/",
+        "ar": "إيغزامان دي باكالوريا: موديل إي أونترينمون"
+      }
+    },
+    "note": {
+      "fr": "Cinq modèles d’examens originaux (40 points chacun, 60 minutes) en trois parties : compréhension de l’écrit (deux textes, quatre questions à choix multiple chacun), situations de la vie quotidienne et grammaire. Au total : 10 textes, 40 questions de lecture, 20 questions de situation et 40 questions de grammaire. Chaque question a la bonne réponse, une explication en arabe et la règle correspondante. Les points et la durée sont modifiables pour chaque examen : alignez-les sur les spécifications officielles en vigueur publiées par le ministère de l’Éducation.",
+      "ar": "خمسة نماذج امتحانات أصلية (40 درجة لكل نموذج، ومدة 60 دقيقة) من ثلاثة أجزاء: فهم المقروء (قطعتان، في كل منهما أربعة أسئلة اختيار من متعدد)، ومواقف الحياة اليومية، والقواعد. المجموع: 10 قطع، و40 سؤال قراءة، و20 سؤال مواقف، و40 سؤال قواعد. لكل سؤال الإجابة الصحيحة وشرح بالعربية والقاعدة المرتبطة به. الدرجات والمدة قابلة للتعديل لكل امتحان: طابقها مع المواصفات الرسمية الحالية الصادرة عن وزارة التربية والتعليم.",
+      "phonetic": {
+        "fr": "/sɛ̃k mɔdɛl dɛɡzamɛ̃ ɔʁiʒino kaʁɑ̃t pwɛ̃ ʃakœ̃ swasɑ̃t minyt ɑ̃ tʁwa paʁti kɔ̃pʁeɑ̃sjɔ̃ də lekʁi dø tɛkst katʁ kɛstjɔ̃ a ʃwa myltipl ʃakœ̃ sitɥasjɔ̃ də la vi kɔtidjɛn e ɡʁamɛʁ/ /o tɔtal dis tɛkst kaʁɑ̃t kɛstjɔ̃ də lɛktyʁ vɛ̃ kɛstjɔ̃ də sitɥasjɔ̃ e kaʁɑ̃t kɛstjɔ̃ də ɡʁamɛʁ/ /ʃak kɛstjɔ̃ a la bɔn ʁepɔ̃s yn ɛksplikasjɔ̃ ɑ̃ aʁab e la ʁɛɡl kɔʁɛspɔ̃dɑ̃t/ /le pwɛ̃ e la dyʁe sɔ̃ mɔdifjabl puʁ ʃak ɛɡzamɛ̃ aliɲe le syʁ le spesifikasjɔ̃ ɔfisjɛl ɑ̃ viɡœʁ pyblije paʁ lə ministɛʁ də ledykasjɔ̃/",
+        "ar": "سانك موديل ديغزامان أوريجينو كارانت بوان شاكان سواسانت مينيت أون تروا بارتي: كونبريانسيون دو ليكري (دو تيكست، كاتر كيستيون آ شوا ميلتيبل شاكان)، سيتواسيون دو لا في كوتيديين إي غرامير. أو توتال: ديس تيكست، كارانت كيستيون دو ليكتير، فان كيستيون دو سيتواسيون إي كارانت كيستيون دو غرامير. شاك كيستيون آ لا بون ريبونس، يُن إيكسبليكاسيون أون آراب إي لا ريغل كوريسبوندانت. لي بوان إي لا ديريه سون موديفيابل بور شاك إيغزامان: أليني لي سور لي سبيسيفيكاسيون أوفيسيال أون فيغور بيبليه بار لو مينيستير دو ليديكاسيون."
+      }
+    }
   },
   "exams": [
     {
