@@ -11,8 +11,14 @@
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
   }
-  function hasArabic(t) { return /[\u0600-\u06FF]/.test(t); }
-  function hasLetters(t) { return /[A-Za-z\u00C0-\u00FF\u0600-\u06FF]/.test(t); }
+
+  // نطاقات الحروف العربية (بما فيها پ وڤ)، والرموز الصوتية IPA، والحروف اللاتينية
+  var ARABIC_RE = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/;
+  var ARABIC_RE_G = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]+/g;
+  var IPA_RE = /[\u0250-\u02AF\u0303\u02C8\u02CC\u00F8\u014B]/;
+  var LATIN_RE = /[A-Za-z\u00C0-\u00FF\u0152\u0153]/;
+
+  function hasArabic(t) { return ARABIC_RE.test(t); }
 
   function norm(s) {
     return String(s || '').toLowerCase()
@@ -52,7 +58,39 @@
     toastTimer = setTimeout(function () { t.classList.remove('show'); }, 2500);
   }
 
-  /* ---------- النطق الصوتي (TTS) ---------- */
+  /* ---------- تنظيف النص قبل النطق: فرنسي صافٍ فقط ---------- */
+  function cleanFrench(t) {
+    var s = String(t === null || t === undefined ? '' : t);
+    // وسوم HTML
+    s = s.replace(/<[^>]*>/g, ' ');
+    // الرموز الصوتية المائلة بين شرطات /.../ (مع إبقاء التواريخ والكسور مثل /05/)
+    s = s.replace(/\/(?=\S)[^\/\n]*?\S\//g, function (m) {
+      return /^\/[\d\s]*\/$/.test(m) ? m : ' ';
+    });
+    // رموز صوتية بين أقواس مربعة [..]
+    s = s.replace(/\[[^\]\n]*\]/g, function (m) { return IPA_RE.test(m) ? ' ' : m; });
+    // حذف كل الحروف العربية
+    s = s.replace(ARABIC_RE_G, ' ');
+    // حذف أي كلمة بقيت فيها رموز صوتية IPA
+    s = s.split(/\s+/).filter(function (w) { return w && !IPA_RE.test(w); }).join(' ');
+    // الفراغات والأسهم والرموز
+    s = s.replace(/_{2,}/g, ' ... ')
+      .replace(/[\u2192\u2190\u2260]/g, ', ')
+      .replace(/[*#~^|]/g, ' ');
+    s = s.replace(/\(\s*\)/g, ' ').replace(/\s+/g, ' ').trim();
+    return s;
+  }
+
+  // نص فرنسي صافٍ صالح للنطق، أو نص فارغ إن كان عربياً أو مختلطاً أو رموزاً صوتية
+  function frText(t) {
+    if (t === null || t === undefined) return '';
+    var s = String(t);
+    if (ARABIC_RE.test(s)) return '';
+    var c = cleanFrench(s);
+    return LATIN_RE.test(c) ? c : '';
+  }
+
+  /* ---------- النطق الصوتي (TTS): الفرنسية فقط fr-FR ---------- */
   var synth = ('speechSynthesis' in window) ? window.speechSynthesis : null;
   var voices = [];
   var activeBtn = null;
@@ -65,15 +103,13 @@
     try { synth.onvoiceschanged = refreshVoices; } catch (e) {}
   }
 
-  function pickVoice(lang) {
-    var l = lang.toLowerCase();
-    var p = l.slice(0, 2);
+  function pickFrenchVoice() {
     var i;
     for (i = 0; i < voices.length; i++) {
-      if (voices[i].lang.replace('_', '-').toLowerCase() === l) return voices[i];
+      if (voices[i].lang.replace('_', '-').toLowerCase() === 'fr-fr') return voices[i];
     }
     for (i = 0; i < voices.length; i++) {
-      if (voices[i].lang.toLowerCase().indexOf(p) === 0) return voices[i];
+      if (voices[i].lang.toLowerCase().indexOf('fr') === 0) return voices[i];
     }
     return null;
   }
@@ -104,36 +140,33 @@
     return out;
   }
 
-  function buildUtterances(clean, forcedLang) {
-    var segs = forcedLang
-      ? [clean]
-      : (clean.match(/[\u0600-\u06FF\s\d.,\u060C\u061F!:\u061B()\u00AB\u00BB\-]+|[^\u0600-\u06FF]+/g) || [clean]);
+  function buildUtterances(clean) {
     var list = [];
-    segs.forEach(function (seg) {
-      if (!seg.trim() || !hasLetters(seg)) return;
-      var lang = forcedLang || (hasArabic(seg) ? 'ar-SA' : 'fr-FR');
-      chunkText(seg.trim()).forEach(function (part) {
-        var u = new SpeechSynthesisUtterance(part);
-        u.lang = lang;
-        u.rate = (lang === 'fr-FR') ? 0.9 : 0.95;
-        u.pitch = 1;
-        u.volume = 1;
-        var v = pickVoice(lang);
-        if (v) u.voice = v;
-        list.push(u);
-      });
+    var v = pickFrenchVoice();
+    chunkText(clean).forEach(function (part) {
+      var u = new SpeechSynthesisUtterance(part);
+      u.lang = 'fr-FR';
+      u.rate = 0.9;
+      u.pitch = 1;
+      u.volume = 1;
+      if (v) u.voice = v;
+      list.push(u);
     });
     return list;
   }
 
+  // المعامل الثاني (lang) يُهمَل عمداً: اللغة دائماً fr-FR والنص فرنسي فقط
   function speak(text, lang, btn) {
     try {
       if (!synth || typeof SpeechSynthesisUtterance === 'undefined') {
         toast('المتصفح لا يدعم النطق الصوتي');
         return;
       }
-      var clean = String(text || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-      if (!clean) return;
+      var clean = cleanFrench(text);
+      if (!clean || !LATIN_RE.test(clean)) {
+        toast('لا يوجد نص فرنسي للنطق');
+        return;
+      }
 
       var wasBusy = synth.speaking || synth.pending;
       var sameBtn = btn && btn === activeBtn;
@@ -143,7 +176,7 @@
 
       var run = function () {
         try {
-          var utts = buildUtterances(clean, lang);
+          var utts = buildUtterances(clean);
           if (!utts.length) return;
           if (btn) {
             activeBtn = btn;
@@ -173,7 +206,7 @@
     try { if (synth) synth.cancel(); } catch (e) {}
   });
 
-  /* ---------- جلب البيانات: الملفات الموجودة فعلياً فقط ---------- */
+  /* ---------- جلب البيانات: الملفات الموجودة فعلياً + songs.json ---------- */
   var DATA = {};
   var LOADLOG = [];
 
@@ -235,7 +268,8 @@
       fetchJson('./data/phonetics.json'),
       fetchJson('./data/dialogues.json'),
       fetchJson('./data/stories.json'),
-      fetchJson('./data/exams.json')
+      fetchJson('./data/exams.json'),
+      fetchJson('./data/songs.json')
     ]).then(function (res) {
       DATA.curriculum = res[0];
       DATA.grammar = res[1];
@@ -243,6 +277,7 @@
       DATA.dialogues = res[3];
       DATA.stories = res[4];
       DATA.exams = res[5];
+      DATA.songs = res[6];
 
       safe('grammar', function () {
         DATA.grammarRules = flattenGrammar(DATA.grammar);
@@ -258,18 +293,32 @@
     fr: 'Français', ar: 'عربي', translation: 'الترجمة', translation_ar: 'الترجمة',
     example: 'مثال', examples: 'أمثلة', explanation: 'الشرح', explanation_ar: 'الشرح',
     answer: 'الإجابة', question: 'السؤال', why: 'لماذا؟', rule: 'القاعدة',
-    text: 'النص', level: 'المستوى'
+    text: 'النص', level: 'المستوى',
+    meta: 'معلومات القسم', years: 'الصفوف الدراسية', exams: 'نماذج الامتحانات',
+    dialogues: 'الحوارات', groups: 'الأصوات', rule_groups: 'قواعد القراءة والنطق',
+    contrasts: 'المقارنة بين الأصوات', songs: 'الأغاني', title: 'العنوان', note: 'ملاحظة',
+    phonetic: 'النطق الصوتي', image_alt: 'وصف الصورة'
   };
 
-  function walkObjs(n, cb, seen) {
+  // مفاتيح لا يُنطق محتواها أبداً (معرّفات، رموز صوتية، أسماء متحدثين، صور ...)
+  var NOSPEAK = ['id', 'level', 'type', 'who', 'name', 'role', 'role_ar', 'number', 'version',
+    'ipa', 'phonetic', 'pron_ar', 'pron', 'letters', 'sounds', 'symbols', 'duration_min',
+    'marks', 'image', 'image_alt', 'speakers'];
+
+  // مفاتيح تُستثنى من القاموس والبحث الذكي (بيانات تعريفية ورموز صوتية صرفة)
+  var SKIP_KEYS = ['meta', 'phonetic'];
+
+  function walkObjs(n, cb, seen, skip) {
     seen = seen || [];
     if (!n || typeof n !== 'object') return;
     if (seen.indexOf(n) !== -1) return;
     seen.push(n);
     var arr = Array.isArray(n);
     if (!arr) cb(n);
-    var kids = arr ? n : Object.keys(n).map(function (k) { return n[k]; });
-    kids.forEach(function (x) { walkObjs(x, cb, seen); });
+    var kids = arr ? n : Object.keys(n).filter(function (k) {
+      return !skip || skip.indexOf(k) === -1;
+    }).map(function (k) { return n[k]; });
+    kids.forEach(function (x) { walkObjs(x, cb, seen, skip); });
   }
 
   function findByKey(root, re) {
@@ -295,26 +344,28 @@
   }
 
   /* ---------- العرض العام ---------- */
+  // زر الصوت: يظهر فقط للنص الفرنسي الصافي، ويحمل النص الفرنسي المنظّف
   function speakBtn(t) {
-    t = String(t);
-    if (!hasLetters(t)) return '';
-    return '<button class="spk" type="button" data-say="' + esc(encodeURIComponent(t)) + '" aria-label="استمع">🔊</button>';
+    var c = frText(t);
+    if (!c) return '';
+    return '<button class="spk" type="button" data-lang="fr-FR" data-say="' + esc(encodeURIComponent(c)) + '" aria-label="استمع بالفرنسية">🔊</button>';
   }
 
-  function render(n, depth) {
+  function render(n, depth, noSpeak) {
     depth = depth || 0;
     if (n === null || n === undefined || n === '') return '';
+    var sp = function (t) { return noSpeak ? '' : speakBtn(t); };
     if (typeof n !== 'object') {
-      return '<p class="line">' + esc(n) + speakBtn(n) + '</p>';
+      return '<p class="line">' + esc(n) + sp(n) + '</p>';
     }
     if (Array.isArray(n)) {
       var allPrim = n.every(function (x) { return typeof x !== 'object'; });
       if (allPrim) {
         return '<ul class="plain">' + n.map(function (x) {
-          return '<li>' + esc(x) + speakBtn(x) + '</li>';
+          return '<li>' + esc(x) + sp(x) + '</li>';
         }).join('') + '</ul>';
       }
-      return n.map(function (x) { return render(x, depth); }).join('');
+      return n.map(function (x) { return render(x, depth, noSpeak); }).join('');
     }
     var tkeys = TITLE_KEYS.filter(function (k) {
       return typeof n[k] === 'string' && n[k].trim();
@@ -325,10 +376,16 @@
       var v = n[k];
       if (tkeys.indexOf(k) !== -1 || v === null || v === undefined || v === '') return;
       var label = LABELS[k] || k;
+      var ns = noSpeak || NOSPEAK.indexOf(k) !== -1;
       if (typeof v !== 'object') {
-        body += '<div class="kv" data-k="' + esc(k) + '"><b>' + esc(label) + '</b><span>' + esc(v) + '</span>' + speakBtn(v) + '</div>';
+        if (k === 'image') {
+          var altO = (n.image_alt && typeof n.image_alt === 'object') ? n.image_alt : {};
+          body += '<img src="' + esc(v) + '" alt="' + esc(altO.fr || '') + '" loading="lazy" style="display:block;max-width:100%;border-radius:14px;margin:10px auto;" onerror="this.style.display=\'none\'">';
+        } else {
+          body += '<div class="kv" data-k="' + esc(k) + '"><b>' + esc(label) + '</b><span>' + esc(v) + '</span>' + (ns ? '' : speakBtn(v)) + '</div>';
+        }
       } else {
-        body += '<div class="sub" data-k="' + esc(k) + '"><h5>' + esc(label) + '</h5>' + render(v, depth + 1) + '</div>';
+        body += '<div class="sub" data-k="' + esc(k) + '"><h5>' + esc(label) + '</h5>' + render(v, depth + 1, ns) + '</div>';
       }
     });
     if (!title) return '<div class="blk">' + body + '</div>';
@@ -415,6 +472,23 @@
     if (tg) tg.addEventListener('click', function () { el.classList.toggle('ar-hidden'); });
   }
 
+  /* ---------- قسم الأغاني: data/songs.json ---------- */
+  function mountSongs() {
+    var sec = document.getElementById('songs') || document.getElementById('soon-chansons');
+    if (!sec) return;
+    // إن لم يوجد الملف تبقى بطاقة "قيد الإعداد" كما هي
+    if (!DATA.songs) return;
+    var body = sec.querySelector('.body');
+    if (!body) {
+      var card = sec.querySelector('.soon-card');
+      body = document.createElement('div');
+      body.className = 'body';
+      if (card && card.parentNode) card.parentNode.replaceChild(body, card);
+      else sec.appendChild(body);
+    }
+    mountGeneric(sec.id, DATA.songs, { arToggle: true });
+  }
+
   /* ---------- القواعد: تسطيح + تمارين + تصريف ---------- */
   var RULE_TITLE = ['title_fr', 'title', 'title_ar', 'rule', 'name', 'topic'];
   var RULE_BODY = ['explanation_ar', 'explanation', 'examples', 'example'];
@@ -476,16 +550,9 @@
     } catch (e) { return []; }
   }
 
+  // زر نطق فرنسي للعناوين والأمثلة والتمارين (النص الفرنسي فقط)
   function sayFr(t) {
-    t = String(t || '').replace(/_+/g, ' ... ');
-    if (!/[A-Za-z\u00C0-\u00FF]/.test(t)) return '';
-    return '<button class="spk" type="button" data-lang="fr-FR" data-say="' + esc(encodeURIComponent(t)) + '" aria-label="استمع بالفرنسية">🔊</button>';
-  }
-
-  function sayAr(t) {
-    t = String(t || '');
-    if (!hasArabic(t)) return '';
-    return '<button class="spk" type="button" data-say="' + esc(encodeURIComponent(t)) + '" aria-label="استمع للشرح">🔊</button>';
+    return speakBtn(t);
   }
 
   function exampleHTML(ex) {
@@ -530,7 +597,8 @@
     if (tFr) h += '<span class="g-fr" dir="ltr">' + esc(tFr) + '</span> ' + sayFr(tFr);
     if (r._level) h += '<em class="lvl">' + esc(r._level) + '</em>';
     h += '</h3>';
-    if (expl) h += '<p class="gexp">' + esc(expl) + ' ' + sayAr(expl) + '</p>';
+    // الشرح العربي يبقى كما هو، بدون زر صوت (الصوت للفرنسية فقط)
+    if (expl) h += '<p class="gexp">' + esc(expl) + '</p>';
     if (exs.length) h += '<h5 class="gh">أمثلة</h5>' + exs.map(exampleHTML).join('');
     if (exos.length) {
       h += '<h5 class="gh">تدريبات <span class="gscore"></span> <button type="button" class="reset-ex">↺ إعادة</button></h5>' +
@@ -735,7 +803,7 @@
     draw();
   }
 
-  /* ---------- القاموس (يُستخرج من الدروس والحوارات) ---------- */
+  /* ---------- القاموس: بدون meta ولا الرموز الصوتية ---------- */
   var FR_K = ['fr', 'french', 'word', 'mot', 'francais'];
   var AR_K = ['ar', 'arabic', 'meaning', 'translation', 'translation_ar', 'arabic_meaning'];
 
@@ -748,25 +816,57 @@
     return '';
   }
 
+  // كلمة صالحة للقاموس: فرنسية صافية (لا رموز IPA ولا عربية) ومعناها عربي
+  function validWord(f, a) {
+    if (!f || !a) return false;
+    f = f.trim();
+    if (f.length > 60) return false;
+    if (hasArabic(f)) return false;
+    if (IPA_RE.test(f)) return false;
+    if (/^\/.*\/$/.test(f)) return false;
+    return hasArabic(a);
+  }
+
+  // أزواج الكائنات التي فيها fr وar، مع تجاهل meta وphonetic تماماً
   function pairsFrom(root) {
     var out = [];
     if (!root) return out;
     walkObjs(root, function (o) {
       var f = firstString(o, FR_K);
       var a = firstString(o, AR_K);
-      if (f && a && f.length <= 60 && !hasArabic(f)) {
+      if (validWord(f, a)) {
         out.push({ fr: f.trim(), ar: a.trim(), ex: o.example || o.exemple || '' });
       }
-    });
+    }, null, SKIP_KEYS);
+    return out;
+  }
+
+  // مفردات الوحدات: vocabulary = { فئة: [[فرنسي، عربي], ...] }
+  function vocabPairs(root) {
+    var out = [];
+    if (!root) return out;
+    walkObjs(root, function (o) {
+      var v = o.vocabulary;
+      if (!v || typeof v !== 'object' || Array.isArray(v)) return;
+      Object.keys(v).forEach(function (cat) {
+        var arr = v[cat];
+        if (!Array.isArray(arr)) return;
+        arr.forEach(function (p) {
+          if (Array.isArray(p) && typeof p[0] === 'string' && typeof p[1] === 'string' && validWord(p[0], p[1])) {
+            out.push({ fr: p[0].trim(), ar: p[1].trim(), ex: '' });
+          }
+        });
+      });
+    }, null, SKIP_KEYS);
     return out;
   }
 
   function mountDictionary() {
     var el = bodyOf('dictionary');
     if (!el) return;
-    var words = pairsFrom(findByKey(DATA.curriculum, /dict|vocab|mots|words/i));
-    if (!words.length) words = pairsFrom(DATA.curriculum);
-    words = words.concat(pairsFrom(DATA.dialogues));
+    var words = vocabPairs(DATA.curriculum)
+      .concat(pairsFrom(DATA.curriculum))
+      .concat(pairsFrom(DATA.dialogues));
     var seen = {};
     words = words.filter(function (w) {
       var k = w.fr.toLowerCase();
@@ -793,7 +893,7 @@
       area.innerHTML = list.slice(0, 200).map(function (w) {
         return '<div class="word"><div class="w-fr" dir="ltr">' + esc(w.fr) + '</div>' +
           '<div class="w-ar">' + esc(w.ar) + '</div>' +
-          '<button class="spk" type="button" data-say="' + esc(encodeURIComponent(w.fr)) + '" data-lang="fr-FR" aria-label="استمع">🔊</button>' +
+          speakBtn(w.fr) +
           (w.ex ? '<div class="w-ex" dir="ltr">' + esc(w.ex) + '</div>' : '') + '</div>';
       }).join('');
     }
@@ -811,7 +911,8 @@
     out = out || [];
     if (out.length >= 12 || depth > 3) return out;
     Object.keys(o).forEach(function (k) {
-      if (out.length >= 12 || k === '_level' || k === 'id' || k === 'exercises' || k === TITLE_KEYS[0] || k === TITLE_KEYS[1]) return;
+      if (out.length >= 12 || k === '_level' || k === 'id' || k === 'exercises' ||
+          k === 'meta' || k === 'phonetic' || k === TITLE_KEYS[0] || k === TITLE_KEYS[1]) return;
       var v = o[k];
       if (typeof v === 'string' && v.trim()) {
         out.push(v.trim());
@@ -840,7 +941,7 @@
           src: pair[0], title: title, lines: lines,
           th: norm(title), hay: norm(title + ' ' + lines.join(' '))
         });
-      });
+      }, null, SKIP_KEYS);
     });
     (DATA.conjugations || []).forEach(function (c) {
       var lines = (c.tenses || []).map(function (t) {
@@ -881,8 +982,10 @@
     }
     return scored.map(function (x) {
       var e = x.e;
-      var say = e.title + '. ' + e.lines.slice(0, 4).join('. ');
-      return '<div class="ans"><div class="ans-h">📘 ' + esc(e.title) + ' <small>(' + e.src + ')</small>' + speakBtn(say) + '</div><ul>' +
+      // الصوت للأسطر الفرنسية الصافية فقط
+      var frLines = e.lines.filter(function (l) { return frText(l); }).slice(0, 3);
+      var say = frLines.join('. ');
+      return '<div class="ans"><div class="ans-h">📘 ' + esc(e.title) + ' <small>(' + e.src + ')</small>' + (say ? speakBtn(say) : '') + '</div><ul>' +
         e.lines.slice(0, 6).map(function (l) {
           return '<li>' + esc(l.length > 260 ? l.slice(0, 260) + '…' : l) + '</li>';
         }).join('') + '</ul></div>';
@@ -971,7 +1074,7 @@
   document.addEventListener('click', function (e) {
     var s = e.target.closest('.spk');
     if (s) {
-      speak(decodeURIComponent(s.dataset.say || ''), s.dataset.lang || null, s);
+      speak(decodeURIComponent(s.dataset.say || ''), 'fr-FR', s);
       return;
     }
     var opt = e.target.closest('.opt');
@@ -1011,6 +1114,7 @@
       safe('tales', function () {
         mountGeneric('tales', DATA.stories, { arToggle: true });
       });
+      safe('songs', mountSongs);
       safe('index', buildIndex);
     }).catch(function (e) {
       try { console.error('[start]', e); } catch (_) {}
