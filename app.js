@@ -351,6 +351,128 @@
     return '<button class="spk" type="button" data-lang="fr-FR" data-say="' + esc(encodeURIComponent(c)) + '" aria-label="استمع بالفرنسية">🔊</button>';
   }
 
+  /* ---------- أدوات قسم الصوتيات (Phonétique): نطق الحرف/المقطع الفرنسي الصافي ---------- */
+  // تنظيف نص صوتي: يحذف الأقواس المربعة [...] والكلمات العربية الشارحة (مثل "صوت")
+  // ولا يُخفي الزر لمجرد وجود رموز IPA أو شرح عربي حول النص
+  function cleanPhon(t) {
+    var s = String(t === null || t === undefined ? '' : t);
+    s = s.replace(/\[[^\]\n]*\]/g, ' ');
+    s = s.replace(ARABIC_RE_G, ' ');
+    s = s.replace(/[+=<>\u2192\u2190\u2260]/g, ' ');
+    s = s.split(/\s+/).filter(function (w) { return w && !IPA_RE.test(w); }).join(' ');
+    s = s.replace(/\s+,/g, ',').replace(/,(\s*,)+/g, ',').replace(/\s+/g, ' ');
+    s = s.replace(/^[\s,;:.\-]+/, '').replace(/[\s,;:\-]+$/, '').trim();
+    return s;
+  }
+
+  function phText(t) {
+    var c = cleanPhon(t);
+    return LATIN_RE.test(c) ? c : '';
+  }
+
+  function phBtn(t) {
+    var c = phText(t);
+    if (!c) return '';
+    return '<button class="spk" type="button" data-lang="fr-FR" data-say="' + esc(encodeURIComponent(c)) + '" aria-label="استمع بالفرنسية">🔊</button>';
+  }
+
+  // أول حرف/مقطع من قائمة الحروف: "é, er, ez, et" ← "é"
+  function phFirstToken(letters) {
+    var c = cleanPhon(letters);
+    if (!c) return '';
+    return c.split(/\s*,\s*/)[0];
+  }
+
+  var PH_LABELS = {
+    intro_ar: 'مقدمة', how_ar: 'طريقة النطق', place_ar: 'مكان النطق', why_ar: 'السبب',
+    tip_ar: 'نصيحة', rule_ar: 'القاعدة', exceptions_ar: 'استثناءات', explanation_ar: 'الشرح'
+  };
+
+  function phRow(key, text) {
+    if (!text) return '';
+    return '<div class="kv" data-k="' + esc(key) + '"><b>' + esc(PH_LABELS[key] || key) + '</b><span>' + esc(text) + '</span></div>';
+  }
+
+  function phExampleHTML(ex) {
+    if (!ex || typeof ex !== 'object') return '';
+    var fr = ex.fr || '';
+    var ar = ex.ar || '';
+    if (!fr && !ar) return '';
+    var ipa = ex.ipa ? '<span dir="ltr" style="color:var(--muted);font-weight:400;margin-inline-start:6px;">[' + esc(ex.ipa) + ']</span>' : '';
+    return '<div class="ex"><div class="ex-fr" dir="ltr">' + esc(fr) + ipa + ' ' + phBtn(fr) + '</div>' +
+      (ar ? '<div class="ex-ar" data-k="ar">' + esc(ar) + '</div>' : '') + '</div>';
+  }
+
+  function phExamples(list) {
+    if (!Array.isArray(list) || !list.length) return '';
+    return '<h5 class="gh">أمثلة</h5>' + list.map(phExampleHTML).join('');
+  }
+
+  function phSoundHTML(s) {
+    var ipa = s.ipa ? ' — [' + s.ipa + ']' : '';
+    var title = (s.name_ar || s.ipa || '') + ipa;
+    var letters = s.letters || '';
+    var first = phFirstToken(letters);
+    if (!first && s.ipa && !IPA_RE.test(s.ipa)) first = s.ipa;
+    var h = '<details class="node d1"><summary>' + phBtn(first) + ' ' + esc(title) + '</summary><div class="inner">';
+    if (letters) {
+      h += '<div class="kv" data-k="letters"><b>الحروف</b><span dir="ltr">' + esc(letters) + '</span>' + phBtn(letters) + '</div>';
+    }
+    h += phRow('how_ar', s.how_ar) + phRow('place_ar', s.place_ar) + phRow('why_ar', s.why_ar) + phRow('tip_ar', s.tip_ar);
+    h += phExamples(s.examples);
+    return h + '</div></details>';
+  }
+
+  function phGroupHTML(g) {
+    var title = pickTitle(g) || g.id || '';
+    var h = '<details class="node d0" open><summary>' + esc(title) + '</summary><div class="inner">';
+    h += phRow('intro_ar', g.intro_ar);
+    h += (g.sounds || []).map(phSoundHTML).join('');
+    return h + '</div></details>';
+  }
+
+  function phRuleHTML(r) {
+    var title = pickTitle(r) || r.id || '';
+    var h = '<details class="node d1"><summary>' + phBtn(r.title_fr) + ' ' + esc(title) + '</summary><div class="inner">';
+    h += phRow('rule_ar', r.rule_ar) + phRow('why_ar', r.why_ar) + phRow('exceptions_ar', r.exceptions_ar);
+    h += phExamples(r.examples);
+    return h + '</div></details>';
+  }
+
+  function phRuleGroupHTML(g) {
+    var title = pickTitle(g) || g.id || '';
+    var h = '<details class="node d0" open><summary>' + esc(title) + '</summary><div class="inner">';
+    h += phRow('intro_ar', g.intro_ar);
+    h += (g.rules || []).map(phRuleHTML).join('');
+    return h + '</div></details>';
+  }
+
+  function phContrastHTML(c) {
+    var title = c.title_ar || c.title_fr || c.id || '';
+    var sounds = Array.isArray(c.sounds) ? c.sounds.map(function (x) { return '[' + x + ']'; }).join('  ≠  ') : '';
+    var h = '<details class="node d1"><summary>' + esc(title) + '</summary><div class="inner">';
+    if (sounds) h += '<div class="kv" data-k="sounds"><b>الأصوات</b><span dir="ltr">' + esc(sounds) + '</span></div>';
+    h += phRow('explanation_ar', c.explanation_ar);
+    (c.pairs || []).forEach(function (pair) {
+      if (!Array.isArray(pair)) return;
+      h += '<div class="blk" style="border-top:1px dashed var(--line);margin-top:6px;padding-top:6px;">' + pair.map(phExampleHTML).join('') + '</div>';
+    });
+    h += phRow('tip_ar', c.tip_ar);
+    return h + '</div></details>';
+  }
+
+  // عارض قسم الصوتيات: يرجع للعارض العام تلقائياً إن حدث أي خطأ
+  function renderPhoneticsNode(node, key) {
+    try {
+      if (key === 'groups' && Array.isArray(node)) return node.map(phGroupHTML).join('');
+      if (key === 'rule_groups' && Array.isArray(node)) return node.map(phRuleGroupHTML).join('');
+      if (key === 'contrasts' && Array.isArray(node)) return node.map(phContrastHTML).join('');
+    } catch (e) {
+      try { console.error('[renderPhoneticsNode]', e); } catch (_) {}
+    }
+    return render(node, 0);
+  }
+
   function render(n, depth, noSpeak) {
     depth = depth || 0;
     if (n === null || n === undefined || n === '') return '';
@@ -410,7 +532,7 @@
       return Object.keys(d).map(function (k) {
         var v = d[k];
         var lbl = (v && typeof v === 'object' && !Array.isArray(v) && pickTitle(v)) || LABELS[k] || k;
-        return { label: lbl, node: v };
+        return { label: lbl, node: v, key: k };
       });
     }
     return [{ label: '', node: d }];
@@ -431,6 +553,11 @@
     if (!el) return;
     if (!data) { emptyMsg(el, 'المحتوى غير متاح حالياً.'); return; }
     var entries = topEntries(data);
+    // تبويبات إضافية اختيارية (مثل قاموس المنهج المصغر داخل الدروس)
+    if (opts.extraTabs) {
+      opts.extraTabs.forEach(function (t) { if (t) entries.push(t); });
+    }
+    var renderNode = opts.renderNode || function (n) { return render(n, 0); };
     var useTabs = entries.length > 1 && entries.length <= 8;
     el.innerHTML =
       '<div class="tools">' +
@@ -441,13 +568,21 @@
       '<div class="area"></div>';
     var area = $('.area', el);
     var search = $('.search', el);
+    var curIdx = 0;
 
     function show(i) {
+      curIdx = i;
+      var e = entries[i];
+      if (e && e.custom) {
+        area.innerHTML = '';
+        e.custom(area, search.value);
+        return;
+      }
       if (useTabs) {
-        area.innerHTML = '<div class="card">' + render(entries[i].node, 0) + '</div>';
+        area.innerHTML = '<div class="card">' + renderNode(e.node, e.key) + '</div>';
       } else {
-        area.innerHTML = entries.map(function (e) {
-          return '<div class="card">' + render(e.node, 0) + '</div>';
+        area.innerHTML = entries.filter(function (x) { return !x.custom; }).map(function (x) {
+          return '<div class="card">' + renderNode(x.node, x.key) + '</div>';
         }).join('');
       }
       if (search.value) filterNodes(area, search.value);
@@ -467,9 +602,166 @@
       });
     }
     show(0);
-    search.addEventListener('input', function () { filterNodes(area, search.value); });
+    search.addEventListener('input', function () {
+      var e = entries[curIdx];
+      if (e && e.custom) {
+        if (e.onSearch) e.onSearch(search.value);
+        return;
+      }
+      filterNodes(area, search.value);
+    });
     var tg = $('.btn-toggle-ar', el);
     if (tg) tg.addEventListener('click', function () { el.classList.toggle('ar-hidden'); });
+  }
+
+  /* ---------- قاموس المنهج المصغّر (تبويب داخل دروس الكتاب والحلول) ---------- */
+  // يجمع مفردات كل الوحدات (vocabulary) في الصفوف الأول والثاني والثالث الثانوي
+  function curriculumWords() {
+    var map = {};
+    var list = [];
+    var seen = [];
+    (function visit(node, year) {
+      if (!node || typeof node !== 'object' || seen.indexOf(node) !== -1) return;
+      seen.push(node);
+      if (Array.isArray(node)) {
+        node.forEach(function (x) { visit(x, year); });
+        return;
+      }
+      var y = (typeof node.id === 'string' && /^[0-9]sec$/i.test(node.id)) ? node.id.toLowerCase() : year;
+      var v = node.vocabulary;
+      if (v && typeof v === 'object' && !Array.isArray(v)) {
+        Object.keys(v).forEach(function (cat) {
+          var arr = v[cat];
+          if (!Array.isArray(arr)) return;
+          arr.forEach(function (p) {
+            if (!(Array.isArray(p) && typeof p[0] === 'string' && typeof p[1] === 'string')) return;
+            var fr = p[0].trim();
+            var ar = p[1].trim();
+            if (!fr || !ar || hasArabic(fr)) return;
+            var k = fr.toLowerCase();
+            var it = map[k];
+            if (!it) { it = map[k] = { fr: fr, ar: ar, cat: cat, years: [] }; list.push(it); }
+            if (y && it.years.indexOf(y) === -1) it.years.push(y);
+          });
+        });
+      }
+      Object.keys(node).forEach(function (k) {
+        if (k === 'meta' || k === 'vocabulary') return;
+        var c = node[k];
+        if (c && typeof c === 'object') visit(c, y);
+      });
+    })(DATA.curriculum, '');
+    return list;
+  }
+
+  // الكلمة الرئيسية للترتيب الأبجدي: نتجاهل الأداة (le/la/l’/les/un/une) وضمير الانعكاس (se/s’)
+  function dictHead(it) {
+    var h = it.fr.replace(/^[«"“\s\u2026]+/, '');
+    if (/^noms/.test(it.cat)) h = h.replace(/^(?:l[\u2019']|(?:les|le|la|une|un|des)\s+)/i, '');
+    else if (it.cat === 'verbes') h = h.replace(/^(?:s[\u2019']|se\s+)/i, '');
+    return h;
+  }
+
+  function buildMiniDictTab() {
+    var raw = curriculumWords();
+    if (!raw.length) return null;
+    var words = raw.map(function (it) {
+      var base = norm(dictHead(it));
+      return {
+        fr: it.fr,
+        ar: it.ar,
+        years: it.years.slice().sort(),
+        base: base,
+        letter: /^[a-z]/.test(base) ? base.charAt(0).toUpperCase() : '#'
+      };
+    }).sort(function (a, b) {
+      if (a.base < b.base) return -1;
+      if (a.base > b.base) return 1;
+      return a.fr < b.fr ? -1 : (a.fr > b.fr ? 1 : 0);
+    });
+    var state = null;
+
+    function yearLabel(y) { return LEVEL_NAMES[y] || y; }
+
+    function paint() {
+      if (!state) return;
+      var q = norm(state.query);
+      var list = words.filter(function (w) {
+        var yOk = state.year === 'all' || w.years.indexOf(state.year) !== -1;
+        return yOk && (!q || norm(w.fr).indexOf(q) !== -1 || norm(w.ar).indexOf(q) !== -1);
+      });
+      state.count.textContent = list.length + ' كلمة';
+      if (!list.length) {
+        state.bar.innerHTML = '';
+        state.list.innerHTML = '<div class="empty">لا توجد نتائج.</div>';
+        return;
+      }
+      var groups = [];
+      var idx = {};
+      list.forEach(function (w) {
+        if (idx[w.letter] === undefined) { idx[w.letter] = groups.length; groups.push({ letter: w.letter, items: [] }); }
+        groups[idx[w.letter]].items.push(w);
+      });
+      state.bar.innerHTML = groups.map(function (g) {
+        return '<button type="button" class="md-jump" data-l="' + esc(g.letter) + '" style="border:1px solid var(--line);background:#fff;color:var(--blue);border-radius:8px;padding:4px 10px;font-weight:700;cursor:pointer;font-family:inherit;">' + esc(g.letter) + '</button>';
+      }).join('');
+      state.list.innerHTML = groups.map(function (g) {
+        return '<h4 data-md-letter="' + esc(g.letter) + '" style="margin:16px 0 6px;color:var(--red);border-bottom:2px solid var(--line);padding-bottom:4px;font-size:1.1rem;scroll-margin-top:70px;">' + esc(g.letter) + '</h4>' +
+          '<div class="dict-list">' + g.items.map(function (w) {
+            var say = w.fr.replace(/\s*\/\s*/g, ', ');
+            return '<div class="word"><div class="w-fr" dir="ltr">' + esc(w.fr) + '</div>' +
+              '<div class="w-ar">' + esc(w.ar) + '</div>' +
+              speakBtn(say) +
+              '<div class="w-ex" style="text-align:right;font-style:normal;">' + esc(w.years.map(yearLabel).join(' · ')) + '</div></div>';
+          }).join('') + '</div>';
+      }).join('');
+    }
+
+    return {
+      label: '📖 قاموس المنهج',
+      custom: function (area, q) {
+        var years = [];
+        words.forEach(function (w) {
+          w.years.forEach(function (y) { if (years.indexOf(y) === -1) years.push(y); });
+        });
+        years.sort();
+        area.innerHTML =
+          '<div class="md-years" style="display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:6px;">' +
+            '<button type="button" class="tab on" data-y="all">الكل</button>' +
+            years.map(function (y) {
+              return '<button type="button" class="tab" data-y="' + esc(y) + '">' + esc(yearLabel(y)) + '</button>';
+            }).join('') +
+          '</div>' +
+          '<div class="count md-count"></div>' +
+          '<div class="md-bar" style="display:flex;flex-wrap:wrap;gap:4px;margin:6px 0 10px;"></div>' +
+          '<div class="md-list"></div>';
+        state = {
+          year: 'all',
+          query: q || '',
+          count: area.querySelector('.md-count'),
+          bar: area.querySelector('.md-bar'),
+          list: area.querySelector('.md-list')
+        };
+        area.querySelector('.md-years').addEventListener('click', function (ev) {
+          var b = ev.target.closest('.tab');
+          if (!b) return;
+          $$('.md-years .tab', area).forEach(function (x) { x.classList.remove('on'); });
+          b.classList.add('on');
+          state.year = b.getAttribute('data-y');
+          paint();
+        });
+        state.bar.addEventListener('click', function (ev) {
+          var b = ev.target.closest('.md-jump');
+          if (!b) return;
+          var h = state.list.querySelector('[data-md-letter="' + b.getAttribute('data-l') + '"]');
+          if (h && h.scrollIntoView) h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+        paint();
+      },
+      onSearch: function (q) {
+        if (state) { state.query = q; paint(); }
+      }
+    };
   }
 
   /* ---------- قسم الأغاني: data/songs.json ---------- */
@@ -1074,6 +1366,7 @@
   document.addEventListener('click', function (e) {
     var s = e.target.closest('.spk');
     if (s) {
+      if (s.closest('summary')) e.preventDefault();
       speak(decodeURIComponent(s.dataset.say || ''), 'fr-FR', s);
       return;
     }
@@ -1104,8 +1397,12 @@
     safe('nav', function () { go((location.hash || '').replace('#', '') || 'lessons'); });
 
     loadAllData().then(function () {
-      safe('lessons', function () { mountGeneric('lessons', DATA.curriculum); });
-      safe('phonetics', function () { mountGeneric('phonetics', DATA.phonetics); });
+      safe('lessons', function () {
+        mountGeneric('lessons', DATA.curriculum, { extraTabs: [buildMiniDictTab()] });
+      });
+      safe('phonetics', function () {
+        mountGeneric('phonetics', DATA.phonetics, { renderNode: renderPhoneticsNode });
+      });
       safe('exams', function () { mountGeneric('exams', DATA.exams); });
       safe('dictionary', mountDictionary);
       safe('dialogues', function () {
