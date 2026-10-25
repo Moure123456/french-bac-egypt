@@ -22,6 +22,7 @@
   <div class="layout">
     <nav class="sidebar" aria-label="الأقسام">
       <button data-nav="lessons" class="on" type="button">📚 دروس الكتاب والحلول</button>
+      <button data-nav="bac" type="button">🎓 منهج البكالوريا (2Sec & 3Sec)</button>
       <button data-nav="grammar" type="button">✍️ Grammaire</button>
       <button data-nav="phonetics" type="button">🗣️ Phonétique</button>
       <button data-nav="dictionary" type="button">📖 Dictionnaire</button>
@@ -38,6 +39,15 @@
 
     <main class="content">
       <section id="lessons" class="sec on"><h2>دروس الكتاب المدرسي وحلول الأسئلة</h2><div class="body"><div class="empty">جارٍ التحميل…</div></div></section>
+
+      <!-- قسم منهج البكالوريا -->
+      <section id="bac" class="sec">
+        <h2>🎓 منهج البكالوريا (الثانية والثالثة الثانوي)</h2>
+        <div id="bac-content-container" class="body">
+          <div class="empty">جارٍ تحميل وحدات البكالوريا وتمارين الكتاب المدرسي…</div>
+        </div>
+      </section>
+
       <section id="grammar" class="sec"><h2>Grammaire — القواعد</h2><div class="body"></div></section>
       <section id="phonetics" class="sec"><h2>Phonétique — الصوتيات</h2><div class="body"></div></section>
       <section id="dictionary" class="sec"><h2>Dictionnaire — القاموس</h2><div class="body"></div></section>
@@ -128,5 +138,6 @@
 
   <div id="toast" class="toast" role="status"></div>
   <script src="./app.js"></script>
+  <script src="./bac.js"></script>
 </body>
 </html>
