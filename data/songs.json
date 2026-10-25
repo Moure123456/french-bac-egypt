@@ -1,90 +1,122 @@
 [
   {
-    "title": "Gims & Orelsan - Piste 16",
-    "file": "data/gims_orelsan_16.mp3"
-  },
-  {
-    "title": "Gims & Orelsan - Piste 17",
-    "file": "data/gims_orelsan_17.mp3"
-  },
-  {
-    "title": "Gims & Orelsan - Piste 18",
-    "file": "data/gims_orelsan_18.mp3"
-  },
-  {
-    "title": "Gims & Orelsan - Piste 19",
-    "file": "data/gims_orelsan_19.mp3"
-  },
-  {
-    "title": "Gims & Orelsan - Piste 20",
-    "file": "data/gims_orelsan_20.mp3"
-  },
-  {
     "title": "Gims & Orelsan - Piste 6",
-    "file": "data/gims_orelsan_6.mp3"
+    "file": "gims_orelsan_6.mp3"
   },
   {
     "title": "Gims & Orelsan - Piste 7",
-    "file": "data/gims_orelsan_7.mp3"
+    "file": "gims_orelsan_7.mp3"
+  },
+  {
+    "title": "Gims & Orelsan - Piste 8",
+    "file": "gims_orelsan_8.mp3"
+  },
+  {
+    "title": "Gims & Orelsan - Piste 9",
+    "file": "gims_orelsan_9.mp3"
+  },
+  {
+    "title": "Gims & Orelsan - Piste 10",
+    "file": "gims_orelsan_10.mp3"
+  },
+  {
+    "title": "Gims & Orelsan - Piste 11",
+    "file": "gims_orelsan_11.mp3"
+  },
+  {
+    "title": "Gims & Orelsan - Piste 12",
+    "file": "gims_orelsan_12.mp3"
+  },
+  {
+    "title": "Gims & Orelsan - Piste 13",
+    "file": "gims_orelsan_13.mp3"
+  },
+  {
+    "title": "Gims & Orelsan - Piste 14",
+    "file": "gims_orelsan_14.mp3"
+  },
+  {
+    "title": "Gims & Orelsan - Piste 15",
+    "file": "gims_orelsan_15.mp3"
+  },
+  {
+    "title": "Gims & Orelsan - Piste 16",
+    "file": "gims_orelsan_16.mp3"
+  },
+  {
+    "title": "Gims & Orelsan - Piste 17",
+    "file": "gims_orelsan_17.mp3"
+  },
+  {
+    "title": "Gims & Orelsan - Piste 18",
+    "file": "gims_orelsan_18.mp3"
+  },
+  {
+    "title": "Gims & Orelsan - Piste 19",
+    "file": "gims_orelsan_19.mp3"
+  },
+  {
+    "title": "Gims & Orelsan - Piste 20",
+    "file": "gims_orelsan_20.mp3"
   },
   {
     "title": "Chanson - Song 1",
-    "file": "data/song1.mp3"
+    "file": "song1.mp3"
   },
   {
     "title": "Chanson - Song _1",
-    "file": "data/song_1.mp3"
+    "file": "song_1.mp3"
   },
   {
     "title": "Chanson - Song 2",
-    "file": "data/song2.mp3"
+    "file": "song2.mp3"
   },
   {
     "title": "Chanson - Song _2",
-    "file": "data/song_2.mp3"
+    "file": "song_2.mp3"
   },
   {
     "title": "Chanson - Song 3",
-    "file": "data/song3.mp3"
+    "file": "song3.mp3"
   },
   {
     "title": "Chanson - Song _3",
-    "file": "data/song_3.mp3"
+    "file": "song_3.mp3"
   },
   {
     "title": "Chanson - Song 4",
-    "file": "data/song4.mp3"
+    "file": "song4.mp3"
   },
   {
     "title": "Chanson - Song _4",
-    "file": "data/song_4.mp3"
+    "file": "song_4.mp3"
   },
   {
     "title": "Chanson - Song 5",
-    "file": "data/song5.mp3"
+    "file": "song5.mp3"
   },
   {
     "title": "Chanson - Song 6",
-    "file": "data/song6.mp3"
+    "file": "song6.mp3"
   },
   {
     "title": "Chanson - Song 7",
-    "file": "data/song7.mp3"
+    "file": "song7.mp3"
   },
   {
     "title": "Chanson - Song 8",
-    "file": "data/song8.mp3"
+    "file": "song8.mp3"
   },
   {
     "title": "Chanson - Song 9",
-    "file": "data/song9.mp3"
+    "file": "song9.mp3"
   },
   {
     "title": "Chanson - Song 10",
-    "file": "data/song10.mp3"
+    "file": "song10.mp3"
   },
   {
     "title": "Chanson - Song 11",
-    "file": "data/song11.mp3"
+    "file": "song11.mp3"
   }
 ]
