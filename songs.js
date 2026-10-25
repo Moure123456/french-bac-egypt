@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+Document.addEventListener("DOMContentLoaded", function () {
     const songsNavBtn = document.querySelector('[data-nav="soon-chansons"]');
     const songsContainer = document.getElementById("songs-content-container");
 
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         songsContainer.innerHTML = `<div class="empty">جارٍ تحميل الأغاني والمقاطع الصوتية... 🎵</div>`;
 
-        fetch('songs.json')
+        fetch('data/songs.json')
             .then(response => {
                 if (!response.ok) {
                     throw new Error("تعسّر تحميل ملف songs.json");
