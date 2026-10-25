@@ -1,4 +1,4 @@
-Document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
     const songsNavBtn = document.querySelector('[data-nav="soon-chansons"]');
     const songsContainer = document.getElementById("songs-content-container");
 
