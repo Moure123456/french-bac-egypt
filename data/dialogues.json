@@ -1,20 +1,20 @@
 {
   "meta": {
-    "version": 3,
+    "version": 4,
     "title": {
-      "fr": "Conversations et dialogues du quotidien",
-      "ar": "محادثات وحوارات يومية",
+      "fr": "Conversations, Dialogues et Programme du Bac",
+      "ar": "محادثات وحوارات ومنهج البكالوريا الحديث",
       "phonetic": {
         "fr": "/kɔ̃vɛʁsasjɔ̃ e djalɔɡ dy kɔtidjɛ̃/",
         "ar": "كونفيرساسيون إي ديالوغ دي كوتيديان"
       }
     },
     "note": {
-      "fr": "18 conversations de la vie quotidienne et dialogues gradués.",
-      "ar": "18 محادثة يومية بالإضافة إلى الحوارات المتدرجة للمستويات.",
+      "fr": "Conversations de la vie quotidienne et programme officiel du Baccalauréat.",
+      "ar": "محادثات يومية ومنهج البكالوريا الحديث للثانوية العامة متكامل ومنظم.",
       "phonetic": {
-        "fr": "/kɔ̃vɛʁsasjɔ̃ e djalɔɡ/",
-        "ar": "كونفيرساسيون إي ديالوغ"
+        "fr": "/pʁɔɡʁam dy bak/",
+        "ar": "پروگرام دي باك"
       }
     },
     "symbols": {
@@ -236,7 +236,7 @@
       "speakers": [{"name": "Amine", "role_ar": "أمين"}, {"name": "Hassan", "role_ar": "حسن"}],
       "lines": [
         {"who": "Amine", "fr": "Quel temps fait-il aujourd'hui ?", "ar": "كيف هي حالة الطقس اليوم؟", "ipa": "kɛl tɑ̃ fɛt‿il oʒuʁdɥi", "pron_ar": "كِيل تان فِيت-إيل أُوجُوردْوِي؟"},
-        {"who": "Hassan", "fr": "Il fait très froid et le cielo est couvert.", "ar": "الجو بارد جداً والسماء غائمة.", "ipa": "il fɛ tʁɛ fʁwa e lə sjɛl ɛ kuvɛʁ", "pron_ar": "إيل فِيه تْرِيه فْرْوا إي لُ سْيِيل إِيه كُوڤِير."}
+        {"who": "Hassan", "fr": "Il fait très froid et le ciel est couvert.", "ar": "الجو بارد جداً والسماء غائمة.", "ipa": "il fɛ tʁɛ fʁwa e lə sjɛl ɛ kuvɛʁ", "pron_ar": "إيل فِيه تْرِيه فْرْوا إي لُ سْيِيل إِيه كُوڤِير."}
       ]
     },
     {
@@ -247,7 +247,7 @@
       "context_ar": "شراء دواء للصداع.",
       "speakers": [{"name": "Le pharmacien", "role_ar": "صيدلي"}, {"name": "Samir", "role_ar": "سمير"}],
       "lines": [
-        { "who": "Samir", "fr": "Bonjour, j'ai mal à la tête. Avez-vous de l'aspirine ?", "ar": "مرحباً، أعر بألم في الرأس. هل لديك أسبرين؟", "ipa": "bɔ̃ʒuʁ ʒe mal a la tɛt avɛv vu də l‿aspiʁin", "pron_ar": "بونجور، جِيه مَال آ لَا تِيت. أڤِيزْڤُو دُ لَاسْپِيرِين؟" },
+        { "who": "Samir", "fr": "Bonjour, j'ai mal à la tête. Avez-vous de l'aspirine ?", "ar": "مرحباً، أشعر بألم في الرأس. هل لديك أسبرين؟", "ipa": "bɔ̃ʒuʁ ʒe mal a la tɛt avɛv vu də l‿aspiʁin", "pron_ar": "بونجور، جِيه مَال آ لَا تِيت. أڤِيزْڤُو دُ لَاسْپِيرِين؟" },
         { "who": "Le pharmacien", "fr": "Oui, tenez. Prenez un comprimé avec un verre d'eau.", "ar": "نعم، تفضل. تناول قرصاً واحداً مع كوب ماء.", "ipa": "wi təne pʁəne œ̃ kɔ̃pʁime avɛk œ̃ vɛʁ d‿o", "pron_ar": "وي، تُونِيه. پْرُنِيه آن كُونْپْرِيمِيه آڤِيك آن ڤِير دُو." }
       ]
     },
@@ -284,7 +284,7 @@
       "speakers": [{"name": "Nabil", "role_ar": "نبيل"}, {"name": "Tarek", "role_ar": "طارق"}],
       "lines": [
         { "who": "Nabil", "fr": "On se retrouve cet après-midi pour réviser le français ?", "ar": "هل نلتقي بعد ظهر اليوم لمراجعة اللغة الفرنسية؟", "ipa": "ɔ̃ sə ʁtʁuv sɛt apʁɛmidi puʁ ʁevize lə fʁɑ̃sɛ", "pron_ar": "ون سُ رُوترُوڤ سِيت آپْرِيمِيدِي پُور رِيڤِيزِيه لُ فْرَانْسِيه؟" },
-        { "who": "Tarek", "fr": "D'accord, à dix-حuit heures chez moi.", "ar": "حسناً، في تمام السادسة مساءً عندي.", "ipa": "dakɔʁ a diɥit œʁ ʃe mwa", "pron_ar": "دَاكُور، آ دِيزْوِيت أُور شِيه مْوا." }
+        { "who": "Tarek", "fr": "D'accord, à dix-huit heures chez moi.", "ar": "حسناً، في تمام السادسة مساءً عندي.", "ipa": "dakɔʁ a diɥit œʁ ʃe mwa", "pron_ar": "دَاكُور، آ دِيزْوِيت أُور شِيه مْوا." }
       ]
     },
     {
@@ -308,7 +308,7 @@
       "speakers": [{"name": "Le professeur", "role_ar": "المعلم"}, {"name": "Les élèves", "role_ar": "التلاميذ"}],
       "lines": [
         { "who": "Le professeur", "fr": "Faites attention, s'il vous plaît ! Écoutez bien.", "ar": "انتبهوا من فضلك! استمعوا جيداً.", "ipa": "fɛt atɛnsjɔ̃ silvuplɛ ekute bjɛ̃", "pron_ar": "فِيت آتَانسيون، سِيل ڤُو پْلِيه! إيكُوتِيه بْيَان." },
-        { "who": "Les élèves", "fr": "Oui, monsieur, nous écoutons.", "ar": "نعم يا استاذ، نحن نستمع.", "ipa": "wi məsjø nu zekutɔ̃", "pron_ar": "وي، مُسْيُو، نُو زِيكُوتون." }
+        { "who": "Les élèves", "fr": "Oui, monsieur, nous écoutons.", "ar": "نعم يا أستاذ، نحن نستمع.", "ipa": "wi məsjø nu zekutɔ̃", "pron_ar": "وي، مُسْيُو، نُو زِيكُوتون." }
       ]
     },
     {
@@ -320,7 +320,56 @@
       "speakers": [{"name": "Karim", "role_ar": "كريم"}, {"name": "Mona", "role_ar": "منى"}],
       "lines": [
         { "who": "Karim", "fr": "Je suis très heureux ! J'ai réussi mon examen.", "ar": "أنا سعيد جداً! لقد نجحت في امتحاني.", "ipa": "ʒə sɥi tʁɛ œʁø ʒe ʁesy mɔ̃n egzamɛn", "pron_ar": "جُ سْوِي تْرِيه أُورُو! جِيه رِيسِي مون إيجْزَامَان." },
-        { "who": "Mona", "fr": "Fلicitations ! C'est une excellente nouvelle.", "ar": "مبروك! هذه أخبار ممتازة.", "ipa": "fesitasjɔ̃ sɛ yn eksɛlɑ̃t nuvɛl", "pron_ar": "فِيلِيسِيتَاسيون! سِيه يُن إِيكْسِيلَانْت نُوڤِيل." }
+        { "who": "Mona", "fr": "Félicitations ! C'est une excellente nouvelle.", "ar": "مبروك! هذه أخبار ممتازة.", "ipa": "fesitasjɔ̃ sɛ yn eksɛlɑ̃t nuvɛl", "pron_ar": "فِيلِيسِيتَاسيون! سِيه يُن إِيكْسِيلَانْت نُوڤِيل." }
+      ]
+    },
+    {
+      "id": "bac_2sec_u1",
+      "level": "2sec",
+      "title_fr": "Bac 2e Sec - Unité 1 : Le club des sportifs",
+      "title_ar": "بكالوريا ثانية ثانوي - الوحدة الأولى: نادي الرياضيين",
+      "context_ar": "منهج الصف الثاني الثانوي الحديث - وحدة الرياضة والألعاب.",
+      "speakers": [{"name": "Professeur", "role_ar": "معلم"}, {"name": "Élève", "role_ar": "طالب"}],
+      "lines": [
+        { "who": "Professeur", "fr": "Aujourd'hui, nous étudions les sports et les équipements.", "ar": "اليوم ندرس الرياضات والتجهيزات الرياضية.", "ipa": "oʒuʁdɥi nuzetydjɔ̃ le spɔʁ e le ekipmɑ̃", "pron_ar": "أُوجُوردْوِي، نُوزِيتِيدْيون لِيه سْپُور إي لِيه إيكِيپْمَان." },
+        { "who": "Élève", "fr": "Quel sport est-ce que tu préfères, monsieur ?", "ar": "أي رياضة تفضلها يا استاذ؟", "ipa": "kɛl spɔʁ ɛskə ty pʁəfɛʁ məsjø", "pron_ar": "كِيل سْپُور إِسْكُ تيُ پْرِيفِير، مُسْيُو؟" },
+        { "who": "Professeur", "fr": "Je préfère le football et le basketball.", "ar": "أنا أفضل كرة القدم وكرة السلة.", "ipa": "ʒə pʁəfɛʁ lə futbol e lə baskɛt", "pron_ar": "جُ پْرِيفِير لُ فُوتْبُول إي لُ بَاسْكِيت." }
+      ]
+    },
+    {
+      "id": "bac_2sec_u2",
+      "level": "2sec",
+      "title_fr": "Bac 2e Sec - Unité 2 : Le club des gourmands",
+      "title_ar": "بكالوريا ثانية ثانوي - الوحدة الثانية: نادي الأكيلين (الطعام والشراب)",
+      "context_ar": "منهج الصف الثاني الثانوي الحديث - الأغذية والمشروبات والكميات.",
+      "speakers": [{"name": "Mère", "role_ar": "الأم"}, {"name": "Fils", "role_ar": "الابن"}],
+      "lines": [
+        { "who": "Mère", "fr": "Qu'est-ce que tu veux manger ce soir ?", "ar": "ماذا تريد أن تأكل هذا المساء؟", "ipa": "kɛskə tu vø mɑ̃ʒe sə swaʁ", "pron_ar": "كِيسْكُ تيُ ڤُو مَانجِيه سُ سْوَار؟" },
+        { "who": "Fils", "fr": "Je voudrais un peu de poulet et du jus de fruit.", "ar": "أريد القليل من الدجاج وعصير الفواكه.", "ipa": "ʒə vudʁɛ œ̃ pø də pulɛ e dy ʒy də fʁɥi", "pron_ar": "جُ ڤُودْرِيه آن پُو دُ پُولِيه إي ديُ جُي دُ فْرْوِي." }
+      ]
+    },
+    {
+      "id": "bac_3sec_u1",
+      "level": "3sec",
+      "title_fr": "Bac 3e Sec - Unité 1 : Le club des ecologistes",
+      "title_ar": "بكالوريا ثالثة ثانوي - الوحدة الأولى: نادي المهتمين بالبيئة",
+      "context_ar": "منهج الصف الثالث الثانوي الحديث - الحفاظ على البيئة والطبيعة.",
+      "speakers": [{"name": "Animateur", "role_ar": "رئيس النادي"}, {"name": "Jeune", "role_ar": "شاب"}],
+      "lines": [
+        { "who": "Animateur", "fr": "Il faut protéger notre planète contre la pollution.", "ar": "يجب أن نحمي كوكبنا ضد التلوث.", "ipa": "il fo pʁɔteʒe nɔtʁ planɛt kɑ̃tʁə la pɔlysjɔ̃", "pron_ar": "إيل فُو پْرُوتِيجِيه نُوتر پْلَانِيت كَانْتْرُ لَا پُولِيسيون." },
+        { "who": "Jeune", "fr": "Comment pouvons-nous aider ? En recyclant les déchets ?", "ar": "كيف يمكننا المساعدة؟ عبر إعادة تدوير النفايات؟", "ipa": "kɔmɛ̃ puvɔ̃-nu ede ɑ̃ ʁsiklɑ̃ le deʃɛ", "pron_ar": "كُومَان پُوڤون-نُو إِيدِيه؟ آن رِيسِيكْلَان لِيه دِيشِيه؟" }
+      ]
+    },
+    {
+      "id": "bac_3sec_u2",
+      "level": "3sec",
+      "title_fr": "Bac 3e Sec - Unité 2 : Le club des inventeurs",
+      "title_ar": "بكالوريا ثالثة ثانوي - الوحدة الثانية: نادي المبتكرين والتكنولوجيا",
+      "context_ar": "منهج الصف الثالث الثانوي الحديث - التكنولوجيا الحديثة والذكاء الاصطناعي.",
+      "speakers": [{"name": "Expert", "role_ar": "خبير تكنولوجي"}, {"name": "Étudiant", "role_ar": "طالب جامعي"}],
+      "lines": [
+        { "who": "Expert", "fr": "L'intelligence artificielle change notre vie quotidienne.", "ar": "الذكاء الاصطناعي يغير حياتنا اليومية.", "ipa": "l‿ɛtɛliʒɑ̃s aʁtisjɛl ʃɑ̃ʒ nɔtʁ vi kɔtidjɛ̃", "pron_ar": "لِيتِيلِيجَانْس آرتِيسْيِل شَانژ نُوتر ڤِي كُوتِيدْيَان." },
+        { "who": "Étudiant", "fr": "C'est formidable, mais il faut faire attention à la sécurité.", "ar": "هذا رائع، ولكن يجب الانتباه للأمان.", "ipa": "sɛ fɔʁmidal mɛ il fo fɛʁ atɛnsjɔ̃ a la syseʁte", "pron_ar": "سِيه فُورْمِدَال، مِيه إيل فُو فِيه آتَانسيون آ لَا سِيسِرْتيه." }
       ]
     }
   ]
