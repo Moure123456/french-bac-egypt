@@ -1,122 +1,126 @@
 [
   {
-    "title": "Gims & Orelsan - Piste 6",
-    "file": "gims_orelsan_6.mp3"
-  },
-  {
-    "title": "Gims & Orelsan - Piste 7",
-    "file": "gims_orelsan_7.mp3"
-  },
-  {
-    "title": "Gims & Orelsan - Piste 8",
-    "file": "gims_orelsan_8.mp3"
-  },
-  {
-    "title": "Gims & Orelsan - Piste 9",
-    "file": "gims_orelsan_9.mp3"
-  },
-  {
-    "title": "Gims & Orelsan - Piste 10",
-    "file": "gims_orelsan_10.mp3"
-  },
-  {
-    "title": "Gims & Orelsan - Piste 11",
-    "file": "gims_orelsan_11.mp3"
-  },
-  {
-    "title": "Gims & Orelsan - Piste 12",
-    "file": "gims_orelsan_12.mp3"
-  },
-  {
-    "title": "Gims & Orelsan - Piste 13",
-    "file": "gims_orelsan_13.mp3"
-  },
-  {
-    "title": "Gims & Orelsan - Piste 14",
-    "file": "gims_orelsan_14.mp3"
-  },
-  {
-    "title": "Gims & Orelsan - Piste 15",
-    "file": "gims_orelsan_15.mp3"
-  },
-  {
-    "title": "Gims & Orelsan - Piste 16",
-    "file": "gims_orelsan_16.mp3"
-  },
-  {
-    "title": "Gims & Orelsan - Piste 17",
-    "file": "gims_orelsan_17.mp3"
-  },
-  {
-    "title": "Gims & Orelsan - Piste 18",
-    "file": "gims_orelsan_18.mp3"
-  },
-  {
-    "title": "Gims & Orelsan - Piste 19",
-    "file": "gims_orelsan_19.mp3"
-  },
-  {
-    "title": "Gims & Orelsan - Piste 20",
-    "file": "gims_orelsan_20.mp3"
-  },
-  {
     "title": "Chanson - Song 1",
-    "file": "song1.mp3"
-  },
-  {
-    "title": "Chanson - Song _1",
     "file": "song_1.mp3"
   },
   {
     "title": "Chanson - Song 2",
-    "file": "song2.mp3"
-  },
-  {
-    "title": "Chanson - Song _2",
     "file": "song_2.mp3"
   },
   {
     "title": "Chanson - Song 3",
-    "file": "song3.mp3"
-  },
-  {
-    "title": "Chanson - Song _3",
     "file": "song_3.mp3"
   },
   {
     "title": "Chanson - Song 4",
-    "file": "song4.mp3"
-  },
-  {
-    "title": "Chanson - Song _4",
     "file": "song_4.mp3"
   },
   {
-    "title": "Chanson - Song 5",
-    "file": "song5.mp3"
+    "title": "Chanson - Song 24",
+    "file": "song_24.mp3"
   },
   {
-    "title": "Chanson - Song 6",
-    "file": "song6.mp3"
+    "title": "Chanson - Song 25",
+    "file": "song_25.mp3"
   },
   {
-    "title": "Chanson - Song 7",
-    "file": "song7.mp3"
+    "title": "Chanson - Song 26",
+    "file": "song_26.mp3"
   },
   {
-    "title": "Chanson - Song 8",
-    "file": "song8.mp3"
+    "title": "Chanson - Song 27",
+    "file": "song_27.mp3"
   },
   {
-    "title": "Chanson - Song 9",
-    "file": "song9.mp3"
+    "title": "Chanson - Song 28",
+    "file": "song_28.mp3"
   },
   {
-    "title": "Chanson - Song 10",
-    "file": "song10.mp3"
+    "title": "Chanson - Song 29",
+    "file": "song_29.mp3"
   },
   {
-    "title": "Chanson - Song 11",
-    "file": "song11.mp3"
+    "title": "Chanson - Song 30",
+    "file": "song_30.mp3"
+  },
+  {
+    "title": "Chanson - Song 31",
+    "file": "song_31.mp3"
+  },
+  {
+    "title": "Chanson - Song 32",
+    "file": "song_32.mp3"
+  },
+  {
+    "title": "Chanson - Song 33",
+    "file": "song_33.mp3"
+  },
+  {
+    "title": "Chanson - Song 34",
+    "file": "song_34.mp3"
+  },
+  {
+    "title": "Chanson - Song 35",
+    "file": "song_35.mp3"
+  },
+  {
+    "title": "Chanson - Song 36",
+    "file": "song_36.mp3"
+  },
+  {
+    "title": "Chanson - Song 37",
+    "file": "song_37.mp3"
+  },
+  {
+    "title": "Chanson - Song 38",
+    "file": "song_38.mp3"
+  },
+  {
+    "title": "Chanson - Song 39",
+    "file": "song_39.mp3"
+  },
+  {
+    "title": "Chanson - Song 40",
+    "file": "song_40.mp3"
+  },
+  {
+    "title": "Chanson - Song 41",
+    "file": "song_41.mp3"
+  },
+  {
+    "title": "Chanson - Song 42",
+    "file": "song_42.mp3"
+  },
+  {
+    "title": "Chanson - Song 43",
+    "file": "song_43.mp3"
+  },
+  {
+    "title": "Chanson - Song 44",
+    "file": "song_44.mp3"
+  },
+  {
+    "title": "Chanson - Song 45",
+    "file": "song_45.mp3"
+  },
+  {
+    "title": "Chanson - Song 46",
+    "file": "song_46.mp3"
+  },
+  {
+    "title": "Chanson - Song 47",
+    "file": "song_47.mp3"
+  },
+  {
+    "title": "Chanson - Song 48",
+    "file": "song_48.mp3"
+  },
+  {
+    "title": "Chanson - Song 49",
+    "file": "song_49.mp3"
+  },
+  {
+    "title": "Chanson - Song 50",
+    "file": "song_50.mp3"
   }
 ]
