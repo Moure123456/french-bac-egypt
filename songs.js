@@ -38,8 +38,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     html += `
                         <div class="song-card" style="background: #fff; border: 1px solid #e0e0e0; border-right: 5px solid #0055A5; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
                             <h4 style="color: #0055A5; font-size: 16px; margin-bottom: 10px;">🎶 ${song.title}</h4>
-                            <audio controls preload="metadata" style="width: 100%;">
-                                <source src="${song.file}" type="audio/mp3">
+                            <audio controls preload="none" style="width: 100%;">
+                                <source src="${song.file}" type="audio/mpeg">
                                 متصفحك لا يدعم تشغيل الملفات الصوتية.
                             </audio>
                         </div>
