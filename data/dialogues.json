@@ -10,8 +10,8 @@
       }
     },
     "note": {
-      "fr": "8 conversations de la vie quotidienne et 60 dialogues gradués.",
-      "ar": "8 محادثات يومية بالإضافة إلى 60 محادثة متدرجة للمستويات.",
+      "fr": "18 conversations de la vie quotidienne et dialogues gradués.",
+      "ar": "18 محادثة يومية بالإضافة إلى الحوارات المتدرجة للمستويات.",
       "phonetic": {
         "fr": "/kɔ̃vɛʁsasjɔ̃ e djalɔɡ/",
         "ar": "كونفيرساسيون إي ديالوغ"
@@ -157,7 +157,7 @@
       "context_ar": "يوسف يتصل بكريم ليدعوه إلى السينما.",
       "speakers": [{ "name": "Youssef", "role_ar": "طالب" }, { "name": "Karim", "role_ar": "طالب" }],
       "lines": [
-        { "who": "Youssef", "fr": "Allô ? Karim ? C’est Youssef.", "ar": "ألو؟ كريم؟ أنا يوسف.", "ipa": "alo kaʁim sɛ jusɛf", "pron_ar": "آلُو؟ كَرِيم؟ سِيه يُوسِf." },
+        { "who": "Youssef", "fr": "Allô ? Karim ? C’est Youssef.", "ar": "ألو؟ كريم؟ أنا يوسف.", "ipa": "alo kaʁim sɛ jusɛf", "pron_ar": "آلُو؟ كَرِيم؟ سِيه يُوسِف." },
         { "who": "Karim", "fr": "Salut Youssef ! Ça va ?", "ar": "مرحباً يوسف! كيف الحال؟", "ipa": "saly jusɛf sa va", "pron_ar": "ساليُ يُوسِف! سَا ڤَا؟" },
         { "who": "Youssef", "fr": "Ça va bien. Tu es libre samedi après-midi ?", "ar": "بخير. هل أنت متفرغ بعد ظهر السبت؟", "ipa": "sa va bjɛ̃ ty ɛ libʁ samdi apʁɛmidi", "pron_ar": "سَا ڤَا بْيَان. تيُ إِيه لِيبْر سَامْدِي آپْرِيمِيدِي؟" },
         { "who": "Karim", "fr": "Oui, pourquoi ?", "ar": "نعم، لماذا؟", "ipa": "wi puʁkwa", "pron_ar": "وي، پُورْكْوَا؟" },
@@ -201,6 +201,126 @@
       "lines": [
         {"who": "Directeur", "fr": "Quelles sont vos ambitions pour cette nouvelle année ?", "ar": "ما هي طموحاتك لهذا العام الجديد؟", "ipa": "kɛl sɔ̃ vozɑ̃bysjɔ̃ puʁ sɛt nuvɛl ane", "pron_ar": "كِيل سون ڤُوزَانْبِيسيُون پُور سِيت نُوڤِيل آنيه؟"},
         {"who": "Employé", "fr": "Je souhaite développer le département commercial et optimiser les ventes.", "ar": "أتمنى تطوير القسم التجاري وتحسين المبيعات.", "ipa": "ʒə swɛt dəvəlɔpe lə depaʁtəmɑ̃ kɔʁmasjɔ̃ e ɔptimize le vɑ̃t", "pron_ar": "جُ سْوِيت دُڤُلُوپِيه لُ دِپَارْتُمَان كُومَرسْيَان إي أُپْتِيمِيزِيه لِيه ڤَانْت."}
+      ]
+    },
+    {
+      "id": "new_1",
+      "level": "1sec",
+      "title_fr": "À la bibliothèque",
+      "title_ar": "في المكتبة المدرسية",
+      "context_ar": "طالب يستعير كتاباً من أمين المكتبة.",
+      "speakers": [{"name": "L'élève", "role_ar": "تلميذ"}, {"name": "Le bibliothécaire", "role_ar": "أمين المكتبة"}],
+      "lines": [
+        {"who": "L'élève", "fr": "Bonjour monsieur, je voudrais emprunter un roman.", "ar": "مرحباً يا أستاذ، أود استعارة رواية.", "ipa": "bɔ̃ʒuʁ məsjø ʒə vudʁɛ ɑ̃pʁœ̃te œ̃ ʁɔmɑ̃", "pron_ar": "بونجور مُسْيُو، جُ ڤُودْرِيه آنپْرُونتِيه آن رُومَان."},
+        {"who": "Le bibliothécaire", "fr": "Bien sûr, montrez-moi votre carte de bibliothèque.", "ar": "بالطبع، أظهر لي بطاقة المكتبة الخاصة بك.", "ipa": "bjɛ̃ syʁ mõtʁe mwa vɔtʁ kaʁt də bibliɔtɛk", "pron_ar": "بْيَان سِيُر، مُونْتْرِيه مْوا ڤُوتر كَارت دُ بيبليُتِيك."}
+      ]
+    },
+    {
+      "id": "new_2",
+      "level": "1sec",
+      "title_fr": "Faire les courses",
+      "title_ar": "التسوق لشراء الخضروات",
+      "context_ar": "شراء الفواكه والخضروات من السوق.",
+      "speakers": [{"name": "Le client", "role_ar": "زبون"}, {"name": "L'épicier", "role_ar": "بائع الخضار"}],
+      "lines": [
+        {"who": "Le client", "fr": "Bonjour, je voudrais un kilo de tomates, s'il vous plaît.", "ar": "مرحباً، أستريد كيلو من الطماطم من فضلك.", "ipa": "bɔ̃ʒuʁ ʒə vudʁɛ œ̃ kilo də tomat silvuplɛ", "pron_ar": "بونجور، جُ ڤُودْرِيه آن كِيلُو دُ تُمَات، سِيل ڤُو پْلِيه."},
+        {"who": "L'épicier", "fr": "Voilà, et avec ceci ?", "ar": "تفضل، وماذا أيضاً؟", "ipa": "vwala e avɛk səsi", "pron_ar": "ڤْوَالَا، إي آڤِيك سُسي؟"}
+      ]
+    },
+    {
+      "id": "new_3",
+      "level": "2sec",
+      "title_fr": "Parler de la météo",
+      "title_ar": "الحديث عن حالة الطقس",
+      "context_ar": "صديقان يتحدثان عن طقس اليوم البارد.",
+      "speakers": [{"name": "Amine", "role_ar": "أمين"}, {"name": "Hassan", "role_ar": "حسن"}],
+      "lines": [
+        {"who": "Amine", "fr": "Quel temps fait-il aujourd'hui ?", "ar": "كيف هي حالة الطقس اليوم؟", "ipa": "kɛl tɑ̃ fɛt‿il oʒuʁdɥi", "pron_ar": "كِيل تان فِيت-إيل أُوجُوردْوِي؟"},
+        {"who": "Hassan", "fr": "Il fait très froid et le cielo est couvert.", "ar": "الجو بارد جداً والسماء غائمة.", "ipa": "il fɛ tʁɛ fʁwa e lə sjɛl ɛ kuvɛʁ", "pron_ar": "إيل فِيه تْرِيه فْرْوا إي لُ سْيِيل إِيه كُوڤِير."}
+      ]
+    },
+    {
+      "id": "new_4",
+      "level": "2sec",
+      "title_fr": "À la pharmacie",
+      "title_ar": "في الصيدلية",
+      "context_ar": "شراء دواء للصداع.",
+      "speakers": [{"name": "Le pharmacien", "role_ar": "صيدلي"}, {"name": "Samir", "role_ar": "سمير"}],
+      "lines": [
+        { "who": "Samir", "fr": "Bonjour, j'ai mal à la tête. Avez-vous de l'aspirine ?", "ar": "مرحباً، أعر بألم في الرأس. هل لديك أسبرين؟", "ipa": "bɔ̃ʒuʁ ʒe mal a la tɛt avɛv vu də l‿aspiʁin", "pron_ar": "بونجور، جِيه مَال آ لَا تِيت. أڤِيزْڤُو دُ لَاسْپِيرِين؟" },
+        { "who": "Le pharmacien", "fr": "Oui, tenez. Prenez un comprimé avec un verre d'eau.", "ar": "نعم، تفضل. تناول قرصاً واحداً مع كوب ماء.", "ipa": "wi təne pʁəne œ̃ kɔ̃pʁime avɛk œ̃ vɛʁ d‿o", "pron_ar": "وي، تُونِيه. پْرُنِيه آن كُونْپْرِيمِيه آڤِيك آن ڤِير دُو." }
+      ]
+    },
+    {
+      "id": "new_5",
+      "level": "3sec",
+      "title_fr": "Préparer un voyage",
+      "title_ar": "الإعداد لرحلة سفر",
+      "context_ar": "شاب يحجز تذكرة قطار للسفر إلى الإسكندرية.",
+      "speakers": [{"name": "L'agent", "role_ar": "موظف الحجز"}, {"name": "Ramy", "role_ar": "رامي"}],
+      "lines": [
+        { "who": "Ramy", "fr": "Je voudrais un billet aller-retour pour Alexandrie.", "ar": "أريد تذكرة ذهاب وعودة إلى الإسكندرية.", "ipa": "ʒə vudʁɛ œ̃ bijɛ ale ʁətuʁ puʁ alɛksɑ̃dʁi", "pron_ar": "جُ ڤُودْرِيه آن بِيِيه آلِيه رُوتُور پُور آلِيجْزَانْدْرِي." },
+        { "who": "L'agent", "fr": "En première ou en deuxième classe ?", "ar": "الدرجة الأولى أم الثانية؟", "ipa": "ɑ̃ pʁəmɛʁ u ɑ̃ døziɛm klas", "pron_ar": "آن پْرُمِير أُو آن دُوزِييِم كْلَاس؟" }
+      ]
+    },
+    {
+      "id": "new_6",
+      "level": "1sec",
+      "title_fr": "À la gare",
+      "title_ar": "في محطة القطار",
+      "context_ar": "السؤال عن موعد مغادرة القطار.",
+      "speakers": [{"name": "Le voyageur", "role_ar": "مسافر"}, {"name": "L'agent", "role_ar": "الموظف"}],
+      "lines": [
+        { "who": "Le voyageur", "fr": "À quelle heure part le prochain train pour Le Caire ?", "ar": "في أي ساعة يغادر القطار القادم إلى القاهرة؟", "ipa": "a kɛl œʁ paʁ lə pʁɔʃɛ̃ tʁɛ̃ puʁ lə kɛʁ", "pron_ar": "آ كِيل أُور پَار لُ پْرُوشَان تْرَان پُور لُ كِير؟" },
+        { "who": "L'agent", "fr": "Il part à dix heures de la voie trois.", "ar": "يغادر في العاشرة صباحاً من الرصيف الثالث.", "ipa": "il paʁ a dis œʁ də la vwa tʁwa", "pron_ar": "إيل پَار آ دِيس أُور دُ لَا ڤْوَا تْرْوا." }
+      ]
+    },
+    {
+      "id": "new_7",
+      "level": "2sec",
+      "title_fr": "Au téléphone : fixer un rendez-vous",
+      "title_ar": "عبر الهاتف: تحديد موعد لقاء",
+      "context_ar": "صديقان يتفقان على موعد للمراجعة الدراسية.",
+      "speakers": [{"name": "Nabil", "role_ar": "نبيل"}, {"name": "Tarek", "role_ar": "طارق"}],
+      "lines": [
+        { "who": "Nabil", "fr": "On se retrouve cet après-midi pour réviser le français ?", "ar": "هل نلتقي بعد ظهر اليوم لمراجعة اللغة الفرنسية؟", "ipa": "ɔ̃ sə ʁtʁuv sɛt apʁɛmidi puʁ ʁevize lə fʁɑ̃sɛ", "pron_ar": "ون سُ رُوترُوڤ سِيت آپْرِيمِيدِي پُور رِيڤِيزِيه لُ فْرَانْسِيه؟" },
+        { "who": "Tarek", "fr": "D'accord, à dix-حuit heures chez moi.", "ar": "حسناً، في تمام السادسة مساءً عندي.", "ipa": "dakɔʁ a diɥit œʁ ʃe mwa", "pron_ar": "دَاكُور، آ دِيزْوِيت أُور شِيه مْوا." }
+      ]
+    },
+    {
+      "id": "new_8",
+      "level": "3sec",
+      "title_fr": "Un entretien d'embauche",
+      "title_ar": "مقابلة عمل شخصية",
+      "context_ar": "مسؤول التوظيف يوجه أسئلة للمتقدم للوظيفة.",
+      "speakers": [{"name": "Le recruteur", "role_ar": "مسؤول التوظيف"}, {"name": "Le candidat", "role_ar": "المتقدم للوظيفة"}],
+      "lines": [
+        { "who": "Le recruteur", "fr": "Quelles langues étrangères parlez-vous ?", "ar": "ما هي اللغات الأجنبية التي تتحدثها؟", "ipa": "kɛl lɑ̃ɡ etʁɑ̃ʒɛʁ paʁle vu", "pron_ar": "كِيل لَانɡ إيتْرَانژِيه پَارْلِيه ڤُو؟" },
+        { "who": "Le candidat", "fr": "Je parle couramment l'anglais et le français.", "ar": "أتحدث الإنجليزية والفرنسية بطلاقة.", "ipa": "ʒə paʁl kuʁamɑ̃ l‿ɑ̃ɡlɛ e lə fʁɑ̃sɛ", "pron_ar": "جُ پَارْل كُورَامَان لَأَنْɡلِيه إي لُ فْرَانْسِيه." }
+      ]
+    },
+    {
+      "id": "new_9",
+      "level": "1sec",
+      "title_fr": "Dans la salle de classe",
+      "title_ar": "داخل حجرة الدراسة",
+      "context_ar": "المعلم يطلب من التلاميذ الهدوء.",
+      "speakers": [{"name": "Le professeur", "role_ar": "المعلم"}, {"name": "Les élèves", "role_ar": "التلاميذ"}],
+      "lines": [
+        { "who": "Le professeur", "fr": "Faites attention, s'il vous plaît ! Écoutez bien.", "ar": "انتبهوا من فضلك! استمعوا جيداً.", "ipa": "fɛt atɛnsjɔ̃ silvuplɛ ekute bjɛ̃", "pron_ar": "فِيت آتَانسيون، سِيل ڤُو پْلِيه! إيكُوتِيه بْيَان." },
+        { "who": "Les élèves", "fr": "Oui, monsieur, nous écoutons.", "ar": "نعم يا استاذ، نحن نستمع.", "ipa": "wi məsjø nu zekutɔ̃", "pron_ar": "وي، مُسْيُو، نُو زِيكُوتون." }
+      ]
+    },
+    {
+      "id": "new_10",
+      "level": "2sec",
+      "title_fr": "Exprimer ses sentiments",
+      "title_ar": "التعبير عن المشاعر (السعادة)",
+      "context_ar": "طالب يعبر عن سعادته بنجاحه في الامتحان.",
+      "speakers": [{"name": "Karim", "role_ar": "كريم"}, {"name": "Mona", "role_ar": "منى"}],
+      "lines": [
+        { "who": "Karim", "fr": "Je suis très heureux ! J'ai réussi mon examen.", "ar": "أنا سعيد جداً! لقد نجحت في امتحاني.", "ipa": "ʒə sɥi tʁɛ œʁø ʒe ʁesy mɔ̃n egzamɛn", "pron_ar": "جُ سْوِي تْرِيه أُورُو! جِيه رِيسِي مون إيجْزَامَان." },
+        { "who": "Mona", "fr": "Fلicitations ! C'est une excellente nouvelle.", "ar": "مبروك! هذه أخبار ممتازة.", "ipa": "fesitasjɔ̃ sɛ yn eksɛlɑ̃t nuvɛl", "pron_ar": "فِيلِيسِيتَاسيون! سِيه يُن إِيكْسِيلَانْت نُوڤِيل." }
       ]
     }
   ]
