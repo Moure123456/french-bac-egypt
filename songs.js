@@ -1,4 +1,4 @@
-Document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
     const songsNavBtn = document.querySelector('[data-nav="soon-chansons"]');
     const songsContainer = document.getElementById("songs-content-container");
 
@@ -11,9 +11,10 @@ Document.addEventListener("DOMContentLoaded", function () {
     function loadSongsData() {
         if (!songsContainer) return;
 
-        songsContainer.innerHTML = `<div class="empty">جارٍ تحميل الأغاني والمقاطع الصوتية... 🎵</div>`;
+        songsContainer.innerHTML = `<div class="empty" style="text-align: center; padding: 20px;">جارٍ تحميل الأغاني والمقاطع الصوتية... 🎵</div>`;
 
-        fetch('data/songs.json')
+        // استخدام المسار النسبي `./data/songs.json` لضمان عمله بقوة على جيت هب باجيز
+        fetch('./data/songs.json')
             .then(response => {
                 if (!response.ok) {
                     throw new Error("تعسّر تحميل ملف songs.json");
@@ -22,7 +23,7 @@ Document.addEventListener("DOMContentLoaded", function () {
             })
             .then(songs => {
                 if (!songs || songs.length === 0) {
-                    songsContainer.innerHTML = `<div class="empty">لا توجد أغاني مضافة حالياً.</div>`;
+                    songsContainer.innerHTML = `<div class="empty" style="text-align: center; padding: 20px;">لا توجد أغاني مضافة حالياً.</div>`;
                     return;
                 }
 
@@ -38,7 +39,7 @@ Document.addEventListener("DOMContentLoaded", function () {
                     html += `
                         <div class="song-card" style="background: #fff; border: 1px solid #e0e0e0; border-right: 5px solid #0055A5; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
                             <h4 style="color: #0055A5; font-size: 16px; margin-bottom: 10px;">🎶 ${song.title}</h4>
-                            <audio controls preload="none" style="width: 100%;">
+                            <audio controls preload="metadata" style="width: 100%; outline: none;">
                                 <source src="${song.file}" type="audio/mpeg">
                                 متصفحك لا يدعم تشغيل الملفات الصوتية.
                             </audio>
@@ -51,7 +52,7 @@ Document.addEventListener("DOMContentLoaded", function () {
             })
             .catch(error => {
                 console.error("خطأ في تحميل الأغاني:", error);
-                songsContainer.innerHTML = `<p style="color: red; text-align: center;">عذراً، حدث خطأ أثناء تحميل الأغاني. تأكد من صحة مسارات الملفات.</p>`;
+                songsContainer.innerHTML = `<p style="color: red; text-align: center; padding: 20px;">عذراً، حدث خطأ أثناء تحميل الأغاني. تأكد من صحة مسارات الملفات والاتصال بالإنترنت.</p>`;
             });
     }
 });
