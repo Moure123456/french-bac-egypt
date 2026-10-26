@@ -34,7 +34,7 @@
     <nav class="sidebar" aria-label="الأقسام">
       <button data-nav="lessons" class="on" type="button">📚 دروس الكتاب والحلول</button>
       
-      <!-- الأقسام الأصلية بدون تغيير الكلاسات -->
+      <!-- الأقسام الأصلية المحمية -->
       <button data-nav="bac" type="button">🎓 منهج البكالوريا (2Sec & 3Sec)</button>
       <button data-nav="grammar" type="button">✍️ Grammaire</button>
       <button data-nav="phonetics" type="button">🗣️ Phonétique</button>
@@ -49,6 +49,9 @@
       <button data-nav="soon-geographie" type="button">🗺️ المدن والشوارع والأنهار</button>
       <button data-nav="soon-argot" type="button">😎 العامية الفرنسية</button>
       <button data-nav="chat" type="button">🤖 المساعد الذكي</button>
+
+      <!-- زر شات الطلاب والتواصل الجديد -->
+      <button data-nav="student-chat" type="button">💬 شات وتواصل الطلاب</button>
     </nav>
 
     <main class="content">
@@ -133,6 +136,17 @@
           <button type="submit">إرسال</button>
         </form>
       </section>
+
+      <!-- قسم شات الطلاب والتسجيل الصوتي المتوافق مع chat.js -->
+      <section id="student-chat" class="sec">
+        <h2>💬 شات وتواصل الطلاب</h2>
+        <div class="body">
+          <div style="background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <p style="color: #555; margin-bottom: 12px; font-size: 14px; text-align: center;">منصة المحادثة والتسجيل الصوتي المباشر بين الطلاب 🇫🇷</p>
+            <div id="chat-messages-container"></div>
+          </div>
+        </div>
+      </section>
     </main>
   </div>
 
@@ -146,12 +160,20 @@
 
   <div id="toast" class="toast" role="status"></div>
 
+  <!-- مكتبات Firebase المجانية المطلوبة لملف chat.js -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
+
   <!-- ملفات التطبيق الأساسية -->
   <script src="./app.js"></script>
   <script src="./bac.js"></script>
   <script src="./songs.js"></script>
+  
+  <!-- ملف الشات الجديد -->
+  <script src="./chat.js"></script>
 
-  <!-- سكربت التحكم الذكي (تم إزالة الأرقام السرية من النص الإرشادي تماماً لأمان تام) -->
+  <!-- سكربت التحكم الذكي بالأقفال والحماية -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const protectedSections = ['bac', 'grammar', 'phonetics', 'exams', 'soon-chansons'];
@@ -253,11 +275,11 @@
           btnElement.dispatchEvent(originalClick);
         } else if (enteredVal === closePin) {
           localStorage.setItem(`section_unlocked_${lockedId}`, "false");
+          document.getElementById('master-pyen-modal')?.remove();
           document.getElementById('master-pin-modal').remove();
           updateLockVisuals();
           alert("🔒 تم إغلاق القسم بنجاح.");
         } else {
-          document.getElementById('pin-error-msg', "❌ الرقم السري غير صحيح!");
           document.getElementById('pin-error-msg').innerText = "❌ الرقم السري غير صحيح!";
           pinInput.value = "";
           pinInput.focus();
