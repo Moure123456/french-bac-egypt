@@ -173,7 +173,7 @@
   <!-- ملف الشات الجديد -->
   <script src="./chat.js"></script>
 
-  <!-- سكريبت إضافة وإصلاح أيقونات الصوت لنطق الحوارات تلقائياً (Dialogues TTS) -->
+  <!-- سكريبت نطق الجمل الحوارية الفرنسية بدقة واحترافية في قسم Dialogues -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       function speakFrenchText(text) {
@@ -186,51 +186,66 @@
         }
       }
 
-      function injectAudioButtons() {
+      function injectDialoguesAudio() {
         const dialoguesSec = document.getElementById('dialogues');
         if (!dialoguesSec) return;
 
-        // استهداف كافة العناصر النصية داخل قسم الحوارات
-        const textNodes = dialoguesSec.querySelectorAll('p, div, span, li');
-        textNodes.forEach(node => {
-          // تجنب تكرار إضافة الزر أو التثبيت على عناصر تحتوي على عناصر فرعية معقدة
-          if (node.querySelector('.auto-tts-btn')) return;
+        // استهداف المربعات أو العناوين الكبرى داخل الحوارات التي تحمل الجمل الفرنسية الأصلية
+        const candidateElements = dialoguesSec.querySelectorAll('h3, h4, div, span');
+        candidateElements.forEach(el => {
+          if (el.querySelector('.dialogue-tts-btn')) return;
 
-          const rawText = node.innerText ? node.innerText.trim() : "";
+          const text = el.innerText ? el.innerText.trim() : "";
 
-          // التأكد من أن النص يحتوي على كلمات فرنسية وليس عنوان رئيسي أو خالي
-          if (/[a-zA-ZÀ-ÿ]/.test(rawText) && rawText.length > 2) {
-            // تصفية الكلمات والنصوص التي لا تحتاج نطقاً (مثل المعرفات أو العناوين)
-            if (!rawText.includes('context_ar') && !rawText.includes('speakers') && !rawText.includes('lines') && !rawText.includes('1sec') && !rawText.includes('2sec') && !rawText.includes('3sec')) {
-              // التأكد من تطبيق الزر فقط على العقدة المباشرة للنص
-              if (Array.from(node.childNodes).some(n => n.nodeType === Node.TEXT_NODE && n.textContent.trim().length > 0)) {
+          // شروط دقيقة للغاية: يجب أن يكون نصاً فرنسياً حوارياً طويلاً نسبياً، ويتجنب الحقول البرمجية مثل id أو المستويات أو أسماء المفاتيح
+          if (
+            /[a-zA-ZÀ-ÿ]{3,}/.test(text) &&
+            text.length > 5 &&
+            !text.includes('id') &&
+            !text.includes('presentation') &&
+            !text.includes('vetements') &&
+            !text.includes('chemin') &&
+            !text.includes('1sec') &&
+            !text.includes('2sec') &&
+            !text.includes('3sec') &&
+            !text.includes('context_ar') &&
+            !text.includes('speakers') &&
+            !text.includes('lines') &&
+            !text.includes('ipa') &&
+            !text.includes('pron_ar') &&
+            !text.includes('who') &&
+            !text.includes('رابط')
+          ) {
+            // التأكد من أن العنصر يحمل الجملة الفرنسية الأساسية (مثل Bonjour ! أو Moi, c'est...)
+            if (text.includes('?') || text.includes('!') || text.includes('.') || text.includes(',')) {
+              // التحقق من أنه العقدة النصية المباشرة لتجنب التكرار في العناصر المتداخلة
+              if (el.children.length === 0 || (el.children.length === 1 && el.children[0].tagName === 'SPAN')) {
                 const btn = document.createElement('button');
                 btn.type = 'button';
-                btn.className = 'auto-tts-btn';
+                btn.className = 'dialogue-tts-btn';
                 btn.innerHTML = '🔊';
-                btn.title = 'استمع للنطق الفرنسي';
-                btn.style.cssText = 'background: #eef5ff; border: 1px solid #b8d5ff; border-radius: 50%; width: 26px; height: 26px; line-height: 24px; font-size: 13px; margin: 0 6px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; box-shadow: 0 1px 2px rgba(0,0,0,0.1); padding: 0; color: #0055A5;';
+                btn.title = 'استمع للنطق الفرنسي الصحيح';
+                btn.style.cssText = 'background: #eef5ff; border: 1px solid #b8d5ff; border-radius: 50%; width: 28px; height: 28px; line-height: 26px; font-size: 14px; margin-right: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; box-shadow: 0 1px 3px rgba(0,0,0,0.15); padding: 0; color: #0055A5;';
                 
                 btn.addEventListener('click', function (ev) {
                   ev.preventDefault();
                   ev.stopPropagation();
-                  // تنظيف النص المعروض من الأيقونة قبل نطق الصوت
-                  const cleanText = rawText.replace('🔊', '').trim();
+                  const cleanText = text.replace('🔊', '').trim();
                   speakFrenchText(cleanText);
                 });
 
-                node.insertBefore(btn, node.firstChild);
+                el.insertBefore(btn, el.firstChild);
               }
             }
           }
         });
       }
 
-      // مراقبة المحتوى عند رندر الحوارات ديناميكياً من app.js
+      // مراقبة مستمرة لظهور الحوارات عند التنقل داخل التطبيق
       const observer = new MutationObserver(function () {
         const dialoguesSec = document.getElementById('dialogues');
         if (dialoguesSec && dialoguesSec.classList.contains('on')) {
-          injectAudioButtons();
+          setTimeout(injectDialoguesAudio, 200); // مهلة قصيرة لضمان تحميل رندر الحوارات تماماً
         }
       });
 
@@ -334,13 +349,12 @@
         if (enteredVal === openPin) {
           localStorage.setItem(`section_unlocked_${lockedId}`, "true");
           document.getElementById('master-pin-modal').remove();
-          updateLockVisuals();
+      updateLockVisuals();
           
           const originalClick = new MouseEvent('click', { bubbles: true, cancelable: true, view: window });
           btnElement.dispatchEvent(originalClick);
         } else if (enteredVal === closePin) {
           localStorage.setItem(`section_unlocked_${lockedId}`, "false");
-          document.getElementById('master-pyen-modal')?.remove();
           document.getElementById('master-pin-modal').remove();
           updateLockVisuals();
           alert("🔒 تم إغلاق القسم بنجاح.");
