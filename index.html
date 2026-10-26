@@ -151,13 +151,11 @@
   <script src="./bac.js"></script>
   <script src="./songs.js"></script>
 
-  <!-- سكربت التحكم الذكي الخارجي (يدير الأقفال والأرقام السرية دون تغيير كود التطبيق الأساسي) -->
+  <!-- سكربت التحكم الذكي الخارجي المعدل لضمان عمل التطبيق والتحكم الكامل بالفتح والإغلاق -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      // الأقسام التي تريد حمايتها (حدد الـ data-nav هنا)
       const protectedSections = ['bac', 'grammar', 'phonetics', 'exams', 'soon-chansons'];
 
-      // إضافة الأقفال برمجياً للأقسام المحددة دون تعديل الـ HTML
       protectedSections.forEach(navId => {
         const btn = document.querySelector(`[data-nav="${navId}"]`);
         if (btn) {
@@ -166,6 +164,12 @@
           if (!btn.querySelector('.lock-badge')) {
             const badge = document.createElement('span');
             badge.className = 'lock-badge';
+            // جعل الضغط على أيقونة القفل نفسه يفتح لوحة التحكم بالباسورد في أي وقت (سواء مفتوح أو مقفل)
+            badge.addEventListener('click', function (ev) {
+              ev.preventDefault();
+              ev.stopPropagation();
+              promptForPassword(navId, btn);
+            });
             btn.appendChild(badge);
           }
         }
@@ -173,17 +177,20 @@
 
       updateLockVisuals();
 
-      // مراقبة النقر على الأقسام المحمية
+      // مراقبة النقر العادي على الزر
       document.body.addEventListener("click", function (e) {
         const lockedBtn = e.target.closest('.locked-section');
-        if (lockedBtn) {
+        if (lockedBtn && !e.target.closest('.lock-badge')) {
           const lockedId = lockedBtn.getAttribute('data-locked-id');
           const isUnlocked = localStorage.getItem(`section_unlocked_${lockedId}`) === "true";
 
-          // إذا كان مغلقاً أو المستخدم يريد التحكم (يمكن فتح نافذة الباسورد دائماً للتحكم)
-          e.preventDefault();
-          e.stopPropagation();
-          promptForPassword(lockedId, lockedBtn);
+          // إذا كان القسم مغلقاً، امنع فتحه واطلب الرقم السري
+          if (!isUnlocked) {
+            e.preventDefault();
+            e.stopPropagation();
+            promptForPassword(lockedId, lockedBtn);
+          }
+          // إذا كان مفتوحاً، اتركه يعمل بشكل طبيعي جداً ويفتح مع app.js دون أي مشاكل
         }
       }, true);
     });
@@ -197,9 +204,11 @@
           if (isUnlocked) {
             badge.innerHTML = '🔓'; // أخضر مفتوح
             badge.style.color = '#28a745';
+            badge.title = 'مفتوح - اضغط هنا لإغلاقه برقم سري';
           } else {
             badge.innerHTML = '🔒'; // أحمر مغلق
             badge.style.color = '#dc3545';
+            badge.title = 'مقفل - اضغط هنا لفتحه برقم سري';
           }
         }
       });
@@ -244,7 +253,7 @@
           document.getElementById('master-pin-modal').remove();
           updateLockVisuals();
           
-          // محاكاة النقر الأصلي للسماح لملف app.js بفتح القسم وعرض محتواه
+          // فتح القسم بشكل طبيعي
           const originalClick = new MouseEvent('click', { bubbles: true, cancelable: true, view: window });
           btnElement.dispatchEvent(originalClick);
         } else if (enteredVal === closePin) {
