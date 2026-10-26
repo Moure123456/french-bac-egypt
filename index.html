@@ -173,7 +173,7 @@
   <!-- ملف الشات الجديد -->
   <script src="./chat.js"></script>
 
-  <!-- سكريبت إضافي آمن ومباشر لإظهار أيقونة النطق الصوتي في قسم Dialogues فقط -->
+  <!-- السكريبت المعدل نهائياً: يضع زر مكبر صوت منفصل وبشكل جميل ومضبوط بجانب الجملة الفرنسية -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       function speakFrenchText(text) {
@@ -186,14 +186,14 @@
         }
       }
 
-      function addSpeechButtonsDirectly() {
+      function addProperSpeechButtons() {
         const dialoguesSec = document.getElementById('dialogues');
         if (!dialoguesSec) return;
 
         const allElements = dialoguesSec.querySelectorAll('div, p, h3, span');
 
         allElements.forEach(el => {
-          if (el.querySelector('.simple-tts-btn')) return;
+          if (el.querySelector('.real-tts-btn')) return;
 
           const text = el.innerText ? el.innerText.trim() : "";
 
@@ -202,4 +202,162 @@
             /[a-zA-ZÀ-ÿ]/.test(text) &&
             !text.includes('id') &&
             !text.includes('ipa') &&
-            !text.includes('
+            !text.includes('pron_ar') &&
+            !text.includes('context_ar') &&
+            !text.includes('speakers') &&
+            !text.includes('lines') &&
+            !text.includes('1sec') &&
+            !text.includes('2sec') &&
+            !text.includes('3sec') &&
+            (text.includes('!') || text.includes('?') || text.includes('.') || text.includes(','))
+          ) {
+            if (el.children.length <= 1) {
+              // إنشاء زر مكبر صوت احترافي وواضح
+              const btn = document.createElement('button');
+              btn.type = 'button';
+              btn.className = 'real-tts-btn';
+              btn.innerHTML = '🔊';
+              btn.title = 'استمع للنطق الفرنسي';
+              btn.style.cssText = 'background: #0055A5; color: #fff; border: none; border-radius: 4px; padding: 2px 6px; font-size: 14px; margin-right: 8px; margin-left: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; box-shadow: 0 1px 3px rgba(0,0,0,0.2);';
+
+              btn.addEventListener('click', function (ev) {
+                ev.preventDefault();
+                ev.stopPropagation();
+                // تنظيف النص ونطقه بالفرنسية
+                const cleanText = text.replace('🔊', '').trim();
+                speakFrenchText(cleanText);
+              });
+
+              // إدراج الزر في نهاية أو بداية النص بحسب رغبتك ليكون واضحاً ومرئياً تماماً
+              el.appendChild(btn);
+            }
+          }
+        });
+      }
+
+      const observer = new MutationObserver(function () {
+        const dialoguesSec = document.getElementById('dialogues');
+        if (dialoguesSec && dialoguesSec.classList.contains('on')) {
+          setTimeout(addProperSpeechButtons, 300);
+        }
+      });
+
+      observer.observe(document.body, { childList: true, subtree: true });
+    });
+  </script>
+
+  <!-- سكربت التحكم الذكي بالأقفال والحماية الأصلي -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const protectedSections = ['bac', 'grammar', 'phonetics', 'exams', 'soon-chansons'];
+
+      protectedSections.forEach(navId => {
+        const btn = document.querySelector(`[data-nav="${navId}"]`);
+        if (btn) {
+          btn.classList.add('locked-section');
+          btn.setAttribute('data-locked-id', navId);
+          if (!btn.querySelector('.lock-badge')) {
+            const badge = document.createElement('span');
+            badge.className = 'lock-badge';
+            badge.addEventListener('click', function (ev) {
+              ev.preventDefault();
+              ev.stopPropagation();
+              promptForPassword(navId, btn);
+            });
+            btn.appendChild(badge);
+          }
+        }
+      });
+
+      updateLockVisuals();
+
+      document.body.addEventListener("click", function (e) {
+        const lockedBtn = e.target.closest('.locked-section');
+        if (lockedBtn && !e.target.closest('.lock-badge')) {
+          const lockedId = lockedBtn.getAttribute('data-locked-id');
+          const isUnlocked = localStorage.getItem(`section_unlocked_${lockedId}`) === "true";
+
+          if (!isUnlocked) {
+            e.preventDefault();
+            e.stopPropagation();
+            promptForPassword(lockedId, lockedBtn);
+          }
+        }
+      }, true);
+    });
+
+    function updateLockVisuals() {
+      document.querySelectorAll('.locked-section').forEach(btn => {
+        const lockedId = btn.getAttribute('data-locked-id');
+        const isUnlocked = localStorage.getItem(`section_unlocked_${lockedId}`) === "true";
+        const badge = btn.querySelector('.lock-badge');
+        if (badge) {
+          if (isUnlocked) {
+            badge.innerHTML = '🔓';
+            badge.style.color = '#28a745';
+            badge.title = 'مفتوح - اضغط هنا لإغلاقه برقم سري';
+          } else {
+            badge.innerHTML = '🔒';
+            badge.style.color = '#dc3545';
+            badge.title = 'مقفل - اضغط هنا لفتحه برقم سري';
+          }
+        }
+      });
+    }
+
+    function promptForPassword(lockedId, btnElement) {
+      const oldModal = document.getElementById('master-pin-modal');
+      if (oldModal) oldModal.remove();
+
+      const modalHTML = `
+        <div id="master-pin-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; z-index: 99999; font-family: Tahoma, sans-serif;">
+          <div style="background: #fff; padding: 25px; border-radius: 12px; width: 320px; text-align: right; direction: rtl; box-shadow: 0 5px 20px rgba(0,0,0,0.3);">
+            <h3 style="color: #0055A5; margin-top: 0; margin-bottom: 10px; font-size: 16px;">🔐 لوحة التحكم بالرقم السري</h3>
+            <p style="color: #666; font-size: 13px; margin-bottom: 15px;">أدخل الرقم السري المخصص للتحكم بالقسم:</p>
+            <input type="password" id="creator-pin-input" maxlength="4" autocomplete="new-password" inputmode="numeric" style="width: 100%; padding: 12px; font-size: 22px; text-align: center; letter-spacing: 8px; border: 2px solid #ccc; border-radius: 6px; box-sizing: border-box; margin-bottom: 15px; -webkit-text-security: disc;">
+            <div style="display: flex; gap: 10px;">
+              <button id="submit-pin-btn" style="flex: 1; background: #0055A5; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer;">تنفيذ</button>
+              <button id="cancel-pin-btn" style="background: #6c757d; color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer;">إلغاء</button>
+            </div>
+            <div id="pin-error-msg" style="color: red; font-size: 12px; margin-top: 10px; text-align: center; font-weight: bold;"></div>
+          </div>
+        </div>
+      `;
+
+      document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+      const pinInput = document.getElementById('creator-pin-input');
+      pinInput.focus();
+
+      document.getElementById('cancel-pin-btn').addEventListener('click', () => {
+        document.getElementById('master-pin-modal').remove();
+      });
+
+      const openPin = "0519";  
+      const closePin = "0510"; 
+
+      document.getElementById('submit-pin-btn').addEventListener('click', () => {
+        const enteredVal = pinInput.value.trim();
+
+        if (enteredVal === openPin) {
+          localStorage.setItem(`section_unlocked_${lockedId}`, "true");
+          document.getElementById('master-pin-modal').remove();
+          updateLockVisuals();
+          
+          const originalClick = new MouseEvent('click', { bubbles: true, cancelable: true, view: window });
+          btnElement.dispatchEvent(originalClick);
+        } else if (enteredVal === closePin) {
+          localStorage.setItem(`section_unlocked_${lockedId}`, "false");
+          document.getElementById('master-pin-modal').remove();
+          updateLockVisuals();
+          alert("🔒 تم إغلاق القسم بنجاح.");
+        } else {
+          document.getElementById('pin-error-msg').innerText = "❌ الرقم السري غير صحيح!";
+          pinInput.value = "";
+          pinInput.focus();
+        }
+      });
+    }
+  </script>
+</body>
+</html>
