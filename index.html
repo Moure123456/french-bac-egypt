@@ -7,6 +7,18 @@
   <title>Le Français Au Bac</title>
   <link rel="manifest" href="./manifest.json">
   <link rel="stylesheet" href="./styles.css">
+  <style>
+    /* تنسيقات احترافية لأيقونات الأقفال الحقيقية بجانب الأقسام */
+    .lock-status-badge {
+      display: inline-block;
+      margin-left: 8px;
+      font-size: 16px;
+      vertical-align: middle;
+    }
+    .locked-section {
+      position: relative;
+    }
+  </style>
 </head>
 <body>
   <div class="french-flag-bg"></div>
@@ -133,6 +145,108 @@
   </footer>
 
   <div id="toast" class="toast" role="status"></div>
+
+  <!-- سكربت نظام التحكم في القفل والفتح بالرقم السري مع الأقفال الحقيقية -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      initializeSectionLockers();
+
+      // مراقبة الضغط على القائمة الجانبية
+      document.body.addEventListener("click", function (e) {
+        const navBtn = e.target.closest('.sidebar button[data-nav]');
+        if (navBtn) {
+          const sectionId = navBtn.getAttribute('data-nav');
+          const isUnlocked = localStorage.getItem(`section_unlocked_${sectionId}`) === "true";
+
+          if (navBtn.classList.contains('locked-section') && !isUnlocked) {
+            e.preventDefault();
+            e.stopPropagation();
+            promptForMasterPassword(sectionId, navBtn);
+          }
+        }
+      });
+    });
+
+    function initializeSectionLockers() {
+      // الأقسام المقفلة افتراضياً (يمكنك إضافة أو إزالة أي قسم هنا بحريتك التامة)
+      const defaultLockedSections = ['exams', 'bac']; 
+
+      const navButtons = document.querySelectorAll('.sidebar button[data-nav]');
+      
+      navButtons.forEach(btn => {
+        const sectionId = btn.getAttribute('data-nav');
+        
+        if (defaultLockedSections.includes(sectionId)) {
+          const isUnlocked = localStorage.getItem(`section_unlocked_${sectionId}`) === "true";
+          
+          const existingBadge = btn.querySelector('.lock-status-badge');
+          if (existingBadge) existingBadge.remove();
+
+          const badge = document.createElement('span');
+          badge.className = 'lock-status-badge';
+
+          if (isUnlocked) {
+            btn.classList.remove('locked-section');
+            badge.innerHTML = '🔓'; // قفل حقيقي مفتوح (أخضر)
+            badge.title = "هذا القسم مفتوح بالرقم السري";
+          } else {
+            btn.classList.add('locked-section');
+            badge.innerHTML = '🔒'; // قفل حقيقي مغلق (أحمر واضح)
+            badge.title = "هذا القسم مقفل - اضغط لإدخال الرقم السري";
+          }
+          btn.appendChild(badge);
+        }
+      });
+    }
+
+    function promptForMasterPassword(sectionId, btnElement) {
+      const oldModal = document.getElementById('master-pin-modal');
+      if (oldModal) oldModal.remove();
+
+      const modalHTML = `
+        <div id="master-pin-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; z-index: 99999; font-family: Tahoma, sans-serif;">
+          <div style="background: #fff; padding: 25px; border-radius: 12px; width: 320px; text-align: right; direction: rtl; box-shadow: 0 5px 20px rgba(0,0,0,0.3);">
+            <h3 style="color: #d9534f; margin-top: 0; margin-bottom: 10px; font-size: 16px;">🔒 قسم محمي برقم سري</h3>
+            <p style="color: #666; font-size: 13px; margin-bottom: 15px;">هذا القسم يتطلب الرقم السري المكون من 4 أرقام والمخصص من قِبل منشئ المحتوى لفتحه:</p>
+            <input type="password" id="creator-pin-input" maxlength="4" placeholder="****" style="width: 100%; padding: 12px; font-size: 18px; text-align: center; letter-spacing: 5px; border: 2px solid #ccc; border-radius: 6px; box-sizing: border-box; margin-bottom: 15px;">
+            <div style="display: flex; gap: 10px;">
+              <button id="submit-pin-btn" style="flex: 1; background: #0055A5; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer;">فتح القسم</button>
+              <button id="cancel-pin-btn" style="background: #6c757d; color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer;">إلغاء</button>
+            </div>
+            <div id="pin-error-msg" style="color: red; font-size: 12px; margin-top: 10px; text-align: center; font-weight: bold;"></div>
+          </div>
+        </div>
+      `;
+
+      document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+      const pinInput = document.getElementById('creator-pin-input');
+      pinInput.focus();
+
+      document.getElementById('cancel-pin-btn').addEventListener('click', () => {
+        document.getElementById('master-pin-modal').remove();
+      });
+
+      // الرقم السري الخاص بك (يمكنك تغييره هنا في أي وقت إلى أي 4 أرقام تريدها)
+      const correctPin = "2026"; 
+
+      document.getElementById('submit-pin-btn').addEventListener('click', () => {
+        if (pinInput.value.trim() === correctPin) {
+          localStorage.setItem(`section_unlocked_${sectionId}`, "true");
+          document.getElementById('master-pin-modal').remove();
+          initializeSectionLockers();
+          
+          // فتح القسم تلقائياً بعد إدخال الرقم الصحيح
+          btnElement.click();
+        } else {
+          document.getElementById('pin-error-msg'].innerText = "❌ الرقم السري غير صحيح!";
+          pinInput.value = "";
+          pinInput.focus();
+        }
+      });
+    }
+  </script>
+
   <script src="./app.js"></script>
   <script src="./bac.js"></script>
   <script src="./songs.js"></script>
