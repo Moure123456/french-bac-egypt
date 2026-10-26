@@ -12,7 +12,7 @@
     });
   }
 
-  // نطاقات الحروف العربية (بما فيها پ وڤ)، والرموز الصوتية IPA، والحروف اللاتينية
+  // نطاقات الحروف العربية، والرموز الصوتية IPA، والحروف اللاتينية
   var ARABIC_RE = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/;
   var ARABIC_RE_G = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]+/g;
   var IPA_RE = /[\u0250-\u02AF\u0303\u02C8\u02CC\u00F8\u014B]/;
@@ -61,19 +61,13 @@
   /* ---------- تنظيف النص قبل النطق: فرنسي صافٍ فقط ---------- */
   function cleanFrench(t) {
     var s = String(t === null || t === undefined ? '' : t);
-    // وسوم HTML
     s = s.replace(/<[^>]*>/g, ' ');
-    // الرموز الصوتية المائلة بين شرطات /.../ (مع إبقاء التواريخ والكسور مثل /05/)
     s = s.replace(/\/(?=\S)[^\/\n]*?\S\//g, function (m) {
       return /^\/[\d\s]*\/$/.test(m) ? m : ' ';
     });
-    // رموز صوتية بين أقواس مربعة [..]
     s = s.replace(/\[[^\]\n]*\]/g, function (m) { return IPA_RE.test(m) ? ' ' : m; });
-    // حذف كل الحروف العربية
     s = s.replace(ARABIC_RE_G, ' ');
-    // حذف أي كلمة بقيت فيها رموز صوتية IPA
     s = s.split(/\s+/).filter(function (w) { return w && !IPA_RE.test(w); }).join(' ');
-    // الفراغات والأسهم والرموز
     s = s.replace(/_{2,}/g, ' ... ')
       .replace(/[\u2192\u2190\u2260]/g, ', ')
       .replace(/[*#~^|]/g, ' ');
@@ -81,7 +75,6 @@
     return s;
   }
 
-  // نص فرنسي صافٍ صالح للنطق، أو نص فارغ إن كان عربياً أو مختلطاً أو رموزاً صوتية
   function frText(t) {
     if (t === null || t === undefined) return '';
     var s = String(t);
@@ -90,7 +83,7 @@
     return LATIN_RE.test(c) ? c : '';
   }
 
-  /* ---------- النطق الصوتي (TTS): الفرنسية فقط fr-FR ---------- */
+  /* ---------- النطق الصوتي (TTS) ---------- */
   var synth = ('speechSynthesis' in window) ? window.speechSynthesis : null;
   var voices = [];
   var activeBtn = null;
@@ -155,7 +148,6 @@
     return list;
   }
 
-  // المعامل الثاني (lang) يُهمَل عمداً: اللغة دائماً fr-FR والنص فرنسي فقط
   function speak(text, lang, btn) {
     try {
       if (!synth || typeof SpeechSynthesisUtterance === 'undefined') {
@@ -206,25 +198,23 @@
     try { if (synth) synth.cancel(); } catch (e) {}
   });
 
-  /* ---------- جلب البيانات: الملفات الموجودة فعلياً + songs.json ---------- */
+  /* ---------- جلب البيانات ---------- */
   var DATA = {};
   var LOADLOG = [];
 
-  // مسارات بديلة للملف الواحد
   function dataCandidates(url) {
     var name = url.split('/').pop();
     var parts = location.pathname.split('/').filter(Boolean);
     var base = location.pathname.replace(/[^/]*$/, '');
     var list = [
-      url,                       // ./data/x.json
+      url,
       'data/' + name,
       '/data/' + name,
       base + 'data/' + name,
       '../data/' + name,
-      name,                      // الملف بجانب index.html
+      name,
       base + name
     ];
-    // مسار احتياطي أخير عبر jsDelivr من المستودع نفسه (يعمل إن كان الملف داخل المستودع)
     var host = location.hostname;
     if (/\.github\.io$/.test(host)) {
       var user = host.split('.')[0];
@@ -239,7 +229,6 @@
     });
   }
 
-  // جلب مع كسر الكاش وتجربة كل المسارات
   function fetchJson(url) {
     var name = url.split('/').pop();
     var cands = dataCandidates(url);
@@ -300,12 +289,10 @@
     phonetic: 'النطق الصوتي', image_alt: 'وصف الصورة'
   };
 
-  // مفاتيح لا يُنطق محتواها أبداً (معرّفات، رموز صوتية، أسماء متحدثين، صور ...)
   var NOSPEAK = ['id', 'level', 'type', 'who', 'name', 'role', 'role_ar', 'number', 'version',
     'ipa', 'phonetic', 'pron_ar', 'pron', 'letters', 'sounds', 'symbols', 'duration_min',
     'marks', 'image', 'image_alt', 'speakers'];
 
-  // مفاتيح تُستثنى من القاموس والبحث الذكي (بيانات تعريفية ورموز صوتية صرفة)
   var SKIP_KEYS = ['meta', 'phonetic'];
 
   function walkObjs(n, cb, seen, skip) {
@@ -344,16 +331,13 @@
   }
 
   /* ---------- العرض العام ---------- */
-  // زر الصوت: يظهر فقط للنص الفرنسي الصافي، ويحمل النص الفرنسي المنظّف
   function speakBtn(t) {
     var c = frText(t);
     if (!c) return '';
     return '<button class="spk" type="button" data-lang="fr-FR" data-say="' + esc(encodeURIComponent(c)) + '" aria-label="استمع بالفرنسية">🔊</button>';
   }
 
-  /* ---------- أدوات قسم الصوتيات (Phonétique): نطق الحرف/المقطع الفرنسي الصافي ---------- */
-  // تنظيف نص صوتي: يحذف الأقواس المربعة [...] والكلمات العربية الشارحة (مثل "صوت")
-  // ولا يُخفي الزر لمجرد وجود رموز IPA أو شرح عربي حول النص
+  /* ---------- الصوتيات ---------- */
   function cleanPhon(t) {
     var s = String(t === null || t === undefined ? '' : t);
     s = s.replace(/\[[^\]\n]*\]/g, ' ');
@@ -376,7 +360,6 @@
     return '<button class="spk" type="button" data-lang="fr-FR" data-say="' + esc(encodeURIComponent(c)) + '" aria-label="استمع بالفرنسية">🔊</button>';
   }
 
-  // أول حرف/مقطع من قائمة الحروف: "é, er, ez, et" ← "é"
   function phFirstToken(letters) {
     var c = cleanPhon(letters);
     if (!c) return '';
@@ -461,7 +444,6 @@
     return h + '</div></details>';
   }
 
-  // عارض قسم الصوتيات: يرجع للعارض العام تلقائياً إن حدث أي خطأ
   function renderPhoneticsNode(node, key) {
     try {
       if (key === 'groups' && Array.isArray(node)) return node.map(phGroupHTML).join('');
@@ -471,6 +453,58 @@
       try { console.error('[renderPhoneticsNode]', e); } catch (_) {}
     }
     return render(node, 0);
+  }
+
+  /* ---------- تعديلات كلود كود الخاصة بقسم الحوارات (Dialogues) ---------- */
+  var DLG_NOSPEAK = NOSPEAK.concat(['ar', 'arabic', 'translation', 'translation_ar', 'arabic_translation', 'who', 'id', 'image', 'image_alt', 'ipa', 'phonetic']);
+
+  function dlgRender(n, depth, noSpeak) {
+    depth = depth || 0;
+    if (n === null || n === undefined || n === '') return '';
+    var sp = function (t) { return noSpeak ? '' : speakBtn(t); };
+    if (typeof n !== 'object') {
+      return '<p class="line">' + esc(n) + sp(n) + '</p>';
+    }
+    if (Array.isArray(n)) {
+      var allPrim = n.every(function (x) { return typeof x !== 'object'; });
+      if (allPrim) {
+        return '<ul class="plain">' + n.map(function (x) {
+          return '<li>' + esc(x) + sp(x) + '</li>';
+        }).join('') + '</ul>';
+      }
+      return n.map(function (x) { return dlgRender(x, depth, noSpeak); }).join('');
+    }
+    var tkeys = TITLE_KEYS.filter(function (k) {
+      return typeof n[k] === 'string' && n[k].trim();
+    }).slice(0, 2);
+    var title = pickTitle(n);
+    var body = '';
+    Object.keys(n).forEach(function (k) {
+      var v = n[k];
+      if (tkeys.indexOf(k) !== -1 || v === null || v === undefined || v === '') return;
+      var label = LABELS[k] || k;
+      var ns = noSpeak || DLG_NOSPEAK.indexOf(k) !== -1;
+      if (typeof v !== 'object') {
+        if (k === 'image') {
+          var altO = (n.image_alt && typeof n.image_alt === 'object') ? n.image_alt : {};
+          body += '<img src="' + esc(v) + '" alt="' + esc(altO.fr || '') + '" loading="lazy" style="display:block;max-width:100%;border-radius:14px;margin:10px auto;" onerror="this.style.display=\'none\'">';
+        } else {
+          body += '<div class="kv" data-k="' + esc(k) + '"><b>' + esc(label) + '</b><span>' + esc(v) + '</span>' + (ns ? '' : speakBtn(v)) + '</div>';
+        }
+      } else {
+        body += '<div class="sub" data-k="' + esc(k) + '"><h5>' + esc(label) + '</h5>' + dlgRender(v, depth + 1, ns) + '</div>';
+      }
+    });
+    if (!title) return '<div class="blk">' + body + '</div>';
+    return '<details class="node d' + Math.min(depth, 3) + '"' + (depth === 0 ? ' open' : '') + '><summary>' + esc(title) + '</summary><div class="inner">' + body + '</div></details>';
+  }
+
+  function renderDialogueNode(node) {
+    try { return dlgRender(node, 0); }
+    catch (e) {
+      try { console.error('[renderDialogueNode]', e); } catch (_) {}
+      return render(node, 0);
+    }
   }
 
   function render(n, depth, noSpeak) {
@@ -553,7 +587,6 @@
     if (!el) return;
     if (!data) { emptyMsg(el, 'المحتوى غير متاح حالياً.'); return; }
     var entries = topEntries(data);
-    // تبويبات إضافية اختيارية (مثل قاموس المنهج المصغر داخل الدروس)
     if (opts.extraTabs) {
       opts.extraTabs.forEach(function (t) { if (t) entries.push(t); });
     }
@@ -614,8 +647,7 @@
     if (tg) tg.addEventListener('click', function () { el.classList.toggle('ar-hidden'); });
   }
 
-  /* ---------- قاموس المنهج المصغّر (تبويب داخل دروس الكتاب والحلول) ---------- */
-  // يجمع مفردات كل الوحدات (vocabulary) في الصفوف الأول والثاني والثالث الثانوي
+  /* ---------- قاموس المنهج المصغّر ---------- */
   function curriculumWords() {
     var map = {};
     var list = [];
@@ -654,7 +686,6 @@
     return list;
   }
 
-  // الكلمة الرئيسية للترتيب الأبجدي: نتجاهل الأداة (le/la/l’/les/un/une) وضمير الانعكاس (se/s’)
   function dictHead(it) {
     var h = it.fr.replace(/^[«"“\s\u2026]+/, '');
     if (/^noms/.test(it.cat)) h = h.replace(/^(?:l[\u2019']|(?:les|le|la|une|un|des)\s+)/i, '');
@@ -764,11 +795,10 @@
     };
   }
 
-  /* ---------- قسم الأغاني: data/songs.json ---------- */
+  /* ---------- قسم الأغاني ---------- */
   function mountSongs() {
     var sec = document.getElementById('songs') || document.getElementById('soon-chansons');
     if (!sec) return;
-    // إن لم يوجد الملف تبقى بطاقة "قيد الإعداد" كما هي
     if (!DATA.songs) return;
     var body = sec.querySelector('.body');
     if (!body) {
@@ -781,7 +811,7 @@
     mountGeneric(sec.id, DATA.songs, { arToggle: true });
   }
 
-  /* ---------- القواعد: تسطيح + تمارين + تصريف ---------- */
+  /* ---------- القواعد ---------- */
   var RULE_TITLE = ['title_fr', 'title', 'title_ar', 'rule', 'name', 'topic'];
   var RULE_BODY = ['explanation_ar', 'explanation', 'examples', 'example'];
 
@@ -808,7 +838,6 @@
           node.forEach(function (x) { visit(x, level); });
           return;
         }
-        // حاوية مستوى: كائن له id ومصفوفة rules
         var lv = node.level || node.level_ar || ((Array.isArray(node.rules) && node.id) ? node.id : '') || level;
         if (isRule(node)) {
           var copy = {};
@@ -842,7 +871,6 @@
     } catch (e) { return []; }
   }
 
-  // زر نطق فرنسي للعناوين والأمثلة والتمارين (النص الفرنسي فقط)
   function sayFr(t) {
     return speakBtn(t);
   }
@@ -889,7 +917,6 @@
     if (tFr) h += '<span class="g-fr" dir="ltr">' + esc(tFr) + '</span> ' + sayFr(tFr);
     if (r._level) h += '<em class="lvl">' + esc(r._level) + '</em>';
     h += '</h3>';
-    // الشرح العربي يبقى كما هو، بدون زر صوت (الصوت للفرنسية فقط)
     if (expl) h += '<p class="gexp">' + esc(expl) + '</p>';
     if (exs.length) h += '<h5 class="gh">أمثلة</h5>' + exs.map(exampleHTML).join('');
     if (exos.length) {
@@ -900,7 +927,6 @@
     return h;
   }
 
-  /* ---------- التصحيح التلقائي ---------- */
   function normAns(s) {
     return String(s || '').toLowerCase()
       .replace(/[\u2019\u2018`\u00B4]/g, "'")
@@ -980,7 +1006,6 @@
     updateScore(card);
   }
 
-  /* ---------- جداول التصريف ---------- */
   var PRON_D = ['je', 'tu', 'il / elle', 'nous', 'vous', 'ils / elles'];
   var PRON_S = ['je', 'tu', 'il', 'nous', 'vous', 'ils'];
 
@@ -1095,7 +1120,7 @@
     draw();
   }
 
-  /* ---------- القاموس: بدون meta ولا الرموز الصوتية ---------- */
+  /* ---------- القاموس ---------- */
   var FR_K = ['fr', 'french', 'word', 'mot', 'francais'];
   var AR_K = ['ar', 'arabic', 'meaning', 'translation', 'translation_ar', 'arabic_meaning'];
 
@@ -1108,7 +1133,6 @@
     return '';
   }
 
-  // كلمة صالحة للقاموس: فرنسية صافية (لا رموز IPA ولا عربية) ومعناها عربي
   function validWord(f, a) {
     if (!f || !a) return false;
     f = f.trim();
@@ -1119,7 +1143,6 @@
     return hasArabic(a);
   }
 
-  // أزواج الكائنات التي فيها fr وar، مع تجاهل meta وphonetic تماماً
   function pairsFrom(root) {
     var out = [];
     if (!root) return out;
@@ -1133,7 +1156,6 @@
     return out;
   }
 
-  // مفردات الوحدات: vocabulary = { فئة: [[فرنسي، عربي], ...] }
   function vocabPairs(root) {
     var out = [];
     if (!root) return out;
@@ -1249,7 +1271,7 @@
   }
 
   function localAnswer(q) {
-    if (/^(مرحبا|السلام|اهلا|أهلا|bonjour|salut|hello|hi)/i.test(q.trim())) {
+    if (/^(مرحبا|السلام|اهلا|أهلاً|bonjour|salut|hello|hi)/i.test(q.trim())) {
       return '<p>مرحباً بك! 👋 اسألني عن أي درس أو قاعدة أو نطق في منهج اللغة الفرنسية، مثل: <b>passé composé</b> أو <b>الضمائر</b>.</p>';
     }
     if (!INDEX) buildIndex();
@@ -1274,7 +1296,6 @@
     }
     return scored.map(function (x) {
       var e = x.e;
-      // الصوت للأسطر الفرنسية الصافية فقط
       var frLines = e.lines.filter(function (l) { return frText(l); }).slice(0, 3);
       var say = frLines.join('. ');
       return '<div class="ans"><div class="ans-h">📘 ' + esc(e.title) + ' <small>(' + e.src + ')</small>' + (say ? speakBtn(say) : '') + '</div><ul>' +
@@ -1328,7 +1349,7 @@
     window.scrollTo(0, 0);
   }
 
-  /* ---------- PWA: إلغاء الـ service worker القديم ومسح مخزنه ---------- */
+  /* ---------- PWA ---------- */
   var deferredPrompt = null;
   window.addEventListener('beforeinstallprompt', function (e) {
     e.preventDefault();
@@ -1406,7 +1427,7 @@
       safe('exams', function () { mountGeneric('exams', DATA.exams); });
       safe('dictionary', mountDictionary);
       safe('dialogues', function () {
-        mountGeneric('dialogues', DATA.dialogues, { arToggle: true });
+        mountGeneric('dialogues', DATA.dialogues, { arToggle: true, renderNode: renderDialogueNode });
       });
       safe('tales', function () {
         mountGeneric('tales', DATA.stories, { arToggle: true });
