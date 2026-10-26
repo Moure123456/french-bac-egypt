@@ -173,7 +173,7 @@
   <!-- ملف الشات الجديد -->
   <script src="./chat.js"></script>
 
-  <!-- السكريبت الدقيق والحصري لنطق الجمل الحوارية الفرنسية وحدها في قسم Dialogues دون أي تأثِر للأقسام الأخرى -->
+  <!-- السكريبت المعدل بدقة مذهلة: يعيد ترتيب صندوق الحوار كـ Flex ويضع زر مكبر الصوت بجانب الجملة الفرنسية مباشرة -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       function speakFrenchText(text) {
@@ -186,23 +186,22 @@
         }
       }
 
-      function injectExactDialogueTTS() {
+      function injectPerfectDialogueTTS() {
         const dialoguesSec = document.getElementById('dialogues');
         if (!dialoguesSec) return;
 
-        // استهداف العناصر الحوارية الفرنسية الأساسية (التي تظهر بخط بارز في بداية الحوار)
-        // يتم فحص العناصر داخل قسم الحوارات فقط حصرياً
+        // استهداف العناصر الحوارية الفرنسية الأساسية داخل الحوارات
         const targetElements = dialoguesSec.querySelectorAll('div, h3');
 
         targetElements.forEach(el => {
-          if (el.querySelector('.precise-tts-btn')) return;
+          if (el.querySelector('.perfect-tts-btn')) return;
 
           const text = el.innerText ? el.innerText.trim() : "";
 
-          // شروط دقيقة للغاية لضمان أن العنصر هو جملة حوارية فرنسية وليست كود أو معرف برمجي أو رمز فونيتيكى
+          // شروط صارمة جداً لضمان استهداف الجمل الفرنسية الحوارية وحدها دون أي رموز أو أكواد
           if (
             text.length > 6 &&
-            /[A-ZÀ-ÿ]/.test(text.charAt(0)) && // يجب أن تبدأ بحرف فرنسي كبير
+            /[A-ZÀ-ÿ]/.test(text.charAt(0)) &&
             !text.includes('id') &&
             !text.includes('ipa') &&
             !text.includes('pron_ar') &&
@@ -220,34 +219,38 @@
             !text.includes('Le passant') &&
             (text.includes('!') || text.includes('?') || text.includes('.') || text.includes(','))
           ) {
-            // التأكد من أن هذا العنصر هو الحاضن المباشر للجملة الفرنسية
             if (el.children.length <= 1) {
+              // تحويل الحاضن إلى Flex لترتيب الأيقونة والنص بشكل مثالي (من اليسار لليمين للجمل الفرنسية)
+              el.style.display = 'flex';
+              el.style.alignItems = 'center';
+              el.style.justifyContent = 'space-between';
+              el.style.direction = 'ltr'; // لضمان ظهور النص الفرنسي وزر الصوت بشكل منسق وطبيعي
+
               const btn = document.createElement('button');
               btn.type = 'button';
-              btn.className = 'precise-tts-btn';
+              btn.className = 'perfect-tts-btn';
               btn.innerHTML = '🔊';
               btn.title = 'استمع للنطق الفرنسي الصحيح';
-              btn.style.cssText = 'background: #eef5ff; border: 1px solid #b8d5ff; border-radius: 50%; width: 28px; height: 28px; line-height: 26px; font-size: 14px; margin-left: 8px; margin-right: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; box-shadow: 0 1px 3px rgba(0,0,0,0.15); padding: 0; color: #0055A5;';
+              btn.style.cssText = 'background: #eef5ff; border: 1px solid #b8d5ff; border-radius: 50%; width: 30px; height: 30px; min-width: 30px; font-size: 15px; margin-right: 10px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.15); padding: 0; color: #0055A5; flex-shrink: 0;';
 
               btn.addEventListener('click', function (ev) {
                 ev.preventDefault();
                 ev.stopPropagation();
-                // تنظيف النص تماماً من أي أيقونات ونطقه
                 const cleanText = text.replace('🔊', '').trim();
                 speakFrenchText(cleanText);
               });
 
+              // إدراج زر المكبر في بداية السطر الفرنسي ليظهر بشكل أنيق
               el.insertBefore(btn, el.firstChild);
             }
           }
         });
       }
 
-      // مراقبة التنقل وفتح قسم الحوارات لتفعيل الأزرار بدقة متناهية
       const observer = new MutationObserver(function () {
         const dialoguesSec = document.getElementById('dialogues');
         if (dialoguesSec && dialoguesSec.classList.contains('on')) {
-          setTimeout(injectExactDialogueTTS, 250);
+          setTimeout(injectPerfectDialogueTTS, 200);
         }
       });
 
