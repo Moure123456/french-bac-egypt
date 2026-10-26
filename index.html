@@ -173,7 +173,7 @@
   <!-- ملف الشات الجديد -->
   <script src="./chat.js"></script>
 
-  <!-- سكريبت نطق الجمل الحوارية الفرنسية بدقة واحترافية في قسم Dialogues -->
+  <!-- السكريبت الدقيق والحصري لنطق الجمل الحوارية الفرنسية وحدها في قسم Dialogues دون أي تأثِر للأقسام الأخرى -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       function speakFrenchText(text) {
@@ -186,66 +186,68 @@
         }
       }
 
-      function injectDialoguesAudio() {
+      function injectExactDialogueTTS() {
         const dialoguesSec = document.getElementById('dialogues');
         if (!dialoguesSec) return;
 
-        // استهداف المربعات أو العناوين الكبرى داخل الحوارات التي تحمل الجمل الفرنسية الأصلية
-        const candidateElements = dialoguesSec.querySelectorAll('h3, h4, div, span');
-        candidateElements.forEach(el => {
-          if (el.querySelector('.dialogue-tts-btn')) return;
+        // استهداف العناصر الحوارية الفرنسية الأساسية (التي تظهر بخط بارز في بداية الحوار)
+        // يتم فحص العناصر داخل قسم الحوارات فقط حصرياً
+        const targetElements = dialoguesSec.querySelectorAll('div, h3');
+
+        targetElements.forEach(el => {
+          if (el.querySelector('.precise-tts-btn')) return;
 
           const text = el.innerText ? el.innerText.trim() : "";
 
-          // شروط دقيقة للغاية: يجب أن يكون نصاً فرنسياً حوارياً طويلاً نسبياً، ويتجنب الحقول البرمجية مثل id أو المستويات أو أسماء المفاتيح
+          // شروط دقيقة للغاية لضمان أن العنصر هو جملة حوارية فرنسية وليست كود أو معرف برمجي أو رمز فونيتيكى
           if (
-            /[a-zA-ZÀ-ÿ]{3,}/.test(text) &&
-            text.length > 5 &&
+            text.length > 6 &&
+            /[A-ZÀ-ÿ]/.test(text.charAt(0)) && // يجب أن تبدأ بحرف فرنسي كبير
             !text.includes('id') &&
-            !text.includes('presentation') &&
-            !text.includes('vetements') &&
-            !text.includes('chemin') &&
-            !text.includes('1sec') &&
-            !text.includes('2sec') &&
-            !text.includes('3sec') &&
+            !text.includes('ipa') &&
+            !text.includes('pron_ar') &&
             !text.includes('context_ar') &&
             !text.includes('speakers') &&
             !text.includes('lines') &&
-            !text.includes('ipa') &&
-            !text.includes('pron_ar') &&
-            !text.includes('who') &&
-            !text.includes('رابط')
+            !text.includes('1sec') &&
+            !text.includes('2sec') &&
+            !text.includes('3sec') &&
+            !text.includes('Nour') &&
+            !text.includes('Thomas') &&
+            !text.includes('Sara') &&
+            !text.includes('La vendeuse') &&
+            !text.includes('Le touriste') &&
+            !text.includes('Le passant') &&
+            (text.includes('!') || text.includes('?') || text.includes('.') || text.includes(','))
           ) {
-            // التأكد من أن العنصر يحمل الجملة الفرنسية الأساسية (مثل Bonjour ! أو Moi, c'est...)
-            if (text.includes('?') || text.includes('!') || text.includes('.') || text.includes(',')) {
-              // التحقق من أنه العقدة النصية المباشرة لتجنب التكرار في العناصر المتداخلة
-              if (el.children.length === 0 || (el.children.length === 1 && el.children[0].tagName === 'SPAN')) {
-                const btn = document.createElement('button');
-                btn.type = 'button';
-                btn.className = 'dialogue-tts-btn';
-                btn.innerHTML = '🔊';
-                btn.title = 'استمع للنطق الفرنسي الصحيح';
-                btn.style.cssText = 'background: #eef5ff; border: 1px solid #b8d5ff; border-radius: 50%; width: 28px; height: 28px; line-height: 26px; font-size: 14px; margin-right: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; box-shadow: 0 1px 3px rgba(0,0,0,0.15); padding: 0; color: #0055A5;';
-                
-                btn.addEventListener('click', function (ev) {
-                  ev.preventDefault();
-                  ev.stopPropagation();
-                  const cleanText = text.replace('🔊', '').trim();
-                  speakFrenchText(cleanText);
-                });
+            // التأكد من أن هذا العنصر هو الحاضن المباشر للجملة الفرنسية
+            if (el.children.length <= 1) {
+              const btn = document.createElement('button');
+              btn.type = 'button';
+              btn.className = 'precise-tts-btn';
+              btn.innerHTML = '🔊';
+              btn.title = 'استمع للنطق الفرنسي الصحيح';
+              btn.style.cssText = 'background: #eef5ff; border: 1px solid #b8d5ff; border-radius: 50%; width: 28px; height: 28px; line-height: 26px; font-size: 14px; margin-left: 8px; margin-right: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; box-shadow: 0 1px 3px rgba(0,0,0,0.15); padding: 0; color: #0055A5;';
 
-                el.insertBefore(btn, el.firstChild);
-              }
+              btn.addEventListener('click', function (ev) {
+                ev.preventDefault();
+                ev.stopPropagation();
+                // تنظيف النص تماماً من أي أيقونات ونطقه
+                const cleanText = text.replace('🔊', '').trim();
+                speakFrenchText(cleanText);
+              });
+
+              el.insertBefore(btn, el.firstChild);
             }
           }
         });
       }
 
-      // مراقبة مستمرة لظهور الحوارات عند التنقل داخل التطبيق
+      // مراقبة التنقل وفتح قسم الحوارات لتفعيل الأزرار بدقة متناهية
       const observer = new MutationObserver(function () {
         const dialoguesSec = document.getElementById('dialogues');
         if (dialoguesSec && dialoguesSec.classList.contains('on')) {
-          setTimeout(injectDialoguesAudio, 200); // مهلة قصيرة لضمان تحميل رندر الحوارات تماماً
+          setTimeout(injectExactDialogueTTS, 250);
         }
       });
 
@@ -349,7 +351,7 @@
         if (enteredVal === openPin) {
           localStorage.setItem(`section_unlocked_${lockedId}`, "true");
           document.getElementById('master-pin-modal').remove();
-      updateLockVisuals();
+          updateLockVisuals();
           
           const originalClick = new MouseEvent('click', { bubbles: true, cancelable: true, view: window });
           btnElement.dispatchEvent(originalClick);
