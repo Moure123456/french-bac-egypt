@@ -614,61 +614,97 @@
     if (tg) tg.addEventListener('click', function () { el.classList.toggle('ar-hidden'); });
   }
 
-  /* ---------- قسم الحوارات: نطق فرنسي صريح فقط ---------- */
-  // مفاتيح لا يُنطق محتواها أبداً داخل الحوارات (عربي، ترجمة، رموز صوتية، معرّفات...)
-  var DLG_NOSPEAK = NOSPEAK.concat(['ar', 'arabic', 'translation', 'translation_ar',
-    'title_ar', 'note', 'note_ar', 'explanation_ar', 'intro_ar']);
+  /* ---------- قسم الحوارات: عرض الأسطر + نطق فرنسي صريح فقط ---------- */
+  var DLG_FR_K = ['fr', 'text_fr', 'french', 'francais', 'line_fr', 'text'];
+  var DLG_AR_K = ['ar', 'text_ar', 'arabic', 'translation_ar', 'translation'];
+  var DLG_LINE_K = ['lines', 'turns', 'dialogue', 'conversation', 'replies'];
+  var DLG_HANDLED = ['id', 'level', 'context_ar', 'context', 'speakers'].concat(DLG_LINE_K, TITLE_KEYS);
 
-  // نفس هيكل العارض العام تماماً، لكن بقائمة منع أوسع.
-  // speakBtn تمرّ عبر frText فلا يظهر الزر إلا للنص الفرنسي الصافي.
-  function dlgRender(n, depth, noSpeak) {
-    depth = depth || 0;
-    if (n === null || n === undefined || n === '') return '';
-    var sp = function (t) { return noSpeak ? '' : speakBtn(t); };
-    if (typeof n !== 'object') {
-      return '<p class="line">' + esc(n) + sp(n) + '</p>';
+  // مصفوفة أسطر الحوار (كائنات) إن وُجدت
+  function dlgLinesOf(d) {
+    var i, v;
+    if (!d || typeof d !== 'object' || Array.isArray(d)) return null;
+    for (i = 0; i < DLG_LINE_K.length; i++) {
+      v = d[DLG_LINE_K[i]];
+      if (Array.isArray(v) && v.length && v[0] && typeof v[0] === 'object') return v;
     }
-    if (Array.isArray(n)) {
-      var allPrim = n.every(function (x) { return typeof x !== 'object'; });
-      if (allPrim) {
-        return '<ul class="plain">' + n.map(function (x) {
-          return '<li>' + esc(x) + sp(x) + '</li>';
-        }).join('') + '</ul>';
-      }
-      return n.map(function (x) { return dlgRender(x, depth, noSpeak); }).join('');
-    }
-    var tkeys = TITLE_KEYS.filter(function (k) {
-      return typeof n[k] === 'string' && n[k].trim();
-    }).slice(0, 2);
-    var title = pickTitle(n);
-    var body = '';
-    Object.keys(n).forEach(function (k) {
-      var v = n[k];
-      if (tkeys.indexOf(k) !== -1 || v === null || v === undefined || v === '') return;
-      var label = LABELS[k] || k;
-      var ns = noSpeak || DLG_NOSPEAK.indexOf(k) !== -1;
-      if (typeof v !== 'object') {
-        if (k === 'image') {
-          var altO = (n.image_alt && typeof n.image_alt === 'object') ? n.image_alt : {};
-          body += '<img src="' + esc(v) + '" alt="' + esc(altO.fr || '') + '" loading="lazy" style="display:block;max-width:100%;border-radius:14px;margin:10px auto;" onerror="this.style.display=\'none\'">';
-        } else {
-          body += '<div class="kv" data-k="' + esc(k) + '"><b>' + esc(label) + '</b><span>' + esc(v) + '</span>' + (ns ? '' : speakBtn(v)) + '</div>';
-        }
-      } else {
-        body += '<div class="sub" data-k="' + esc(k) + '"><h5>' + esc(label) + '</h5>' + dlgRender(v, depth + 1, ns) + '</div>';
-      }
-    });
-    if (!title) return '<div class="blk">' + body + '</div>';
-    return '<details class="node d' + Math.min(depth, 3) + '"' + (depth === 0 ? ' open' : '') + '><summary>' + esc(title) + '</summary><div class="inner">' + body + '</div></details>';
+    return null;
   }
 
-  // عارض الحوارات: يرجع للعارض العام تلقائياً عند أي خطأ
-  function renderDialogueNode(node) {
-    try { return dlgRender(node, 0); }
-    catch (e) {
-      try { console.error('[renderDialogueNode]', e); } catch (_) {}
-      return render(node, 0);
+  // خريطة المتحدثين: id → الاسم الظاهر
+  function dlgSpeakerMap(d) {
+    var map = {};
+    var names = [];
+    (Array.isArray(d.speakers) ? d.speakers : []).forEach(function (s) {
+      if (typeof s === 'string') { map[s] = s; names.push(s); return; }
+      if (!s || typeof s !== 'object') return;
+      var nm = s.name || s.name_fr || s.id || '';
+      if (s.id) map[s.id] = nm;
+      if (s.name) map[s.name] = nm;
+      if (nm) names.push(s.role_ar ? nm + ' (' + s.role_ar + ')' : nm);
+    });
+    return { map: map, names: names };
+  }
+
+  // سطر حوار: المتحدث + الجملة الفرنسية مع زر 🔊 + الترجمة العربية (قابلة للإخفاء)
+  function dlgLineHTML(l, spk) {
+    if (!l || typeof l !== 'object') return '';
+    var fr = firstString(l, DLG_FR_K);
+    var ar = firstString(l, DLG_AR_K);
+    if (!fr && !ar) return '';
+    var who = l.who || l.speaker || '';
+    if (who && spk.map[who]) who = spk.map[who];
+    var extra = '';
+    if (typeof l.ipa === 'string' && l.ipa.trim()) {
+      extra += '<div dir="ltr" style="color:var(--muted);font-size:.85rem;">[' + esc(l.ipa) + ']</div>';
     }
+    if (typeof l.pron_ar === 'string' && l.pron_ar.trim()) {
+      extra += '<div style="color:var(--muted);font-size:.85rem;">' + esc(l.pron_ar) + '</div>';
+    }
+    return '<div class="ex dlg-line">' +
+      (who ? '<div dir="auto" style="font-weight:700;color:var(--red);font-size:.85rem;margin-bottom:2px;">' + esc(who) + '</div>' : '') +
+      (fr ? '<div class="ex-fr" dir="ltr">' + esc(fr) + ' ' + speakBtn(fr) + '</div>' : '') +
+      extra +
+      (ar ? '<div class="ex-ar" data-k="ar">' + esc(ar) + '</div>' : '') +
+      '</div>';
+  }
+
+  function dlgDialogueHTML(d) {
+    var lines = dlgLinesOf(d);
+    var spk = dlgSpeakerMap(d);
+    var title = pickTitle(d) || d.id || '';
+    var h = '<details class="node d0" open><summary>' + esc(title) + '</summary><div class="inner">';
+    if (d.level) {
+      h += '<div class="kv" data-k="level"><b>المستوى</b><span>' + esc(LEVEL_NAMES[d.level] || d.level) + '</span></div>';
+    }
+    var ctx = d.context_ar || d.context || '';
+    if (ctx) h += '<div class="kv" data-k="context_ar"><b>الموقف</b><span>' + esc(ctx) + '</span></div>';
+    if (spk.names.length) {
+      h += '<div class="kv" data-k="speakers"><b>المتحدثون</b><span dir="auto">' + esc(spk.names.join(' · ')) + '</span></div>';
+    }
+    h += '<h5 class="gh">الحوار</h5>' + lines.map(function (l) { return dlgLineHTML(l, spk); }).join('');
+    // أي حقول أخرى في الحوار (مفردات، ملاحظات...) تُعرض بالعارض العام
+    var rest = {};
+    Object.keys(d).forEach(function (k) {
+      if (DLG_HANDLED.indexOf(k) === -1 && d[k] !== null && d[k] !== undefined && d[k] !== '') rest[k] = d[k];
+    });
+    if (Object.keys(rest).length) h += render(rest, 1);
+    return h + '</div></details>';
+  }
+
+  // عارض الحوارات: يرجع للعارض العام تلقائياً عند أي خطأ أو بنية غير معروفة
+  function renderDialogueNode(node) {
+    try {
+      if (Array.isArray(node)) {
+        return node.map(function (x) {
+          return dlgLinesOf(x) ? dlgDialogueHTML(x) : render(x, 0);
+        }).join('');
+      }
+      if (dlgLinesOf(node)) return dlgDialogueHTML(node);
+    } catch (e) {
+      try { console.error('[renderDialogueNode]', e); } catch (_) {}
+    }
+    return render(node, 0);
   }
 
   /* ---------- قاموس المنهج المصغّر (تبويب داخل دروس الكتاب والحلول) ---------- */
