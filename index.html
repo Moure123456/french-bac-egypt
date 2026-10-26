@@ -151,7 +151,7 @@
   <script src="./bac.js"></script>
   <script src="./songs.js"></script>
 
-  <!-- سكربت التحكم الذكي الخارجي المعدل لضمان عمل التطبيق والتحكم الكامل بالفتح والإغلاق -->
+  <!-- سكربت التحكم الذكي (تم إزالة الأرقام السرية من النص الإرشادي تماماً لأمان تام) -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const protectedSections = ['bac', 'grammar', 'phonetics', 'exams', 'soon-chansons'];
@@ -164,7 +164,6 @@
           if (!btn.querySelector('.lock-badge')) {
             const badge = document.createElement('span');
             badge.className = 'lock-badge';
-            // جعل الضغط على أيقونة القفل نفسه يفتح لوحة التحكم بالباسورد في أي وقت (سواء مفتوح أو مقفل)
             badge.addEventListener('click', function (ev) {
               ev.preventDefault();
               ev.stopPropagation();
@@ -177,20 +176,17 @@
 
       updateLockVisuals();
 
-      // مراقبة النقر العادي على الزر
       document.body.addEventListener("click", function (e) {
         const lockedBtn = e.target.closest('.locked-section');
         if (lockedBtn && !e.target.closest('.lock-badge')) {
           const lockedId = lockedBtn.getAttribute('data-locked-id');
           const isUnlocked = localStorage.getItem(`section_unlocked_${lockedId}`) === "true";
 
-          // إذا كان القسم مغلقاً، امنع فتحه واطلب الرقم السري
           if (!isUnlocked) {
             e.preventDefault();
             e.stopPropagation();
             promptForPassword(lockedId, lockedBtn);
           }
-          // إذا كان مفتوحاً، اتركه يعمل بشكل طبيعي جداً ويفتح مع app.js دون أي مشاكل
         }
       }, true);
     });
@@ -202,11 +198,11 @@
         const badge = btn.querySelector('.lock-badge');
         if (badge) {
           if (isUnlocked) {
-            badge.innerHTML = '🔓'; // أخضر مفتوح
+            badge.innerHTML = '🔓';
             badge.style.color = '#28a745';
             badge.title = 'مفتوح - اضغط هنا لإغلاقه برقم سري';
           } else {
-            badge.innerHTML = '🔒'; // أحمر مغلق
+            badge.innerHTML = '🔒';
             badge.style.color = '#dc3545';
             badge.title = 'مقفل - اضغط هنا لفتحه برقم سري';
           }
@@ -222,7 +218,7 @@
         <div id="master-pin-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; z-index: 99999; font-family: Tahoma, sans-serif;">
           <div style="background: #fff; padding: 25px; border-radius: 12px; width: 320px; text-align: right; direction: rtl; box-shadow: 0 5px 20px rgba(0,0,0,0.3);">
             <h3 style="color: #0055A5; margin-top: 0; margin-bottom: 10px; font-size: 16px;">🔐 لوحة التحكم بالرقم السري</h3>
-            <p style="color: #666; font-size: 13px; margin-bottom: 15px;">أدخل رقم الفتح (0519) أو رقم الإغلاق (0510):</p>
+            <p style="color: #666; font-size: 13px; margin-bottom: 15px;">أدخل الرقم السري المخصص للتحكم بالقسم:</p>
             <input type="password" id="creator-pin-input" maxlength="4" autocomplete="new-password" inputmode="numeric" style="width: 100%; padding: 12px; font-size: 22px; text-align: center; letter-spacing: 8px; border: 2px solid #ccc; border-radius: 6px; box-sizing: border-box; margin-bottom: 15px; -webkit-text-security: disc;">
             <div style="display: flex; gap: 10px;">
               <button id="submit-pin-btn" style="flex: 1; background: #0055A5; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer;">تنفيذ</button>
@@ -242,8 +238,8 @@
         document.getElementById('master-pin-modal').remove();
       });
 
-      const openPin = "0519";  // رقم الفتح
-      const closePin = "0510"; // رقم الإغلاق
+      const openPin = "0519";  
+      const closePin = "0510"; 
 
       document.getElementById('submit-pin-btn').addEventListener('click', () => {
         const enteredVal = pinInput.value.trim();
@@ -253,7 +249,6 @@
           document.getElementById('master-pin-modal').remove();
           updateLockVisuals();
           
-          // فتح القسم بشكل طبيعي
           const originalClick = new MouseEvent('click', { bubbles: true, cancelable: true, view: window });
           btnElement.dispatchEvent(originalClick);
         } else if (enteredVal === closePin) {
@@ -262,6 +257,7 @@
           updateLockVisuals();
           alert("🔒 تم إغلاق القسم بنجاح.");
         } else {
+          document.getElementById('pin-error-msg', "❌ الرقم السري غير صحيح!");
           document.getElementById('pin-error-msg').innerText = "❌ الرقم السري غير صحيح!";
           pinInput.value = "";
           pinInput.focus();
