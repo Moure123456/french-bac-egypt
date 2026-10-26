@@ -1,4 +1,4 @@
-/* ===== Le Français Au Bac — styles.css (النسخة النهائية المعدلة للحوارات) ===== */
+/* ===== Le Français Au Bac — styles.css (الملف الشامل والمعدل نهائياً) ===== */
 :root {
   --blue: #0055A5; 
   --red: #EF4135; 
@@ -58,7 +58,7 @@ body {
 .install { background: var(--grad-tab-active); color: #fff; border: 0; border-radius: 20px; padding: 8px 16px; font-size: .8rem; font-weight: 800; cursor: pointer; box-shadow: 0 3px 8px rgba(239, 65, 53, 0.3); }
 .install[hidden] { display: none; }
 
-/* ===== القائمة الجانبية المنسدلة ===== */
+/* ===== القائمة الجانبية المنسدلة (بخط سميك البناء) ===== */
 .layout { flex: 1; display: flex; align-items: flex-start; gap: 16px; padding: 16px; width: 100%; max-width: 1200px; margin: 0 auto; }
 .sidebar {
   position: sticky; top: 74px; width: var(--side); flex-shrink: 0; display: flex; flex-direction: column; gap: 8px;
@@ -107,6 +107,7 @@ body {
 }
 .card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(20, 50, 90, 0.09); }
 
+/* خط سميك جداً للقوائم المنسدلة داخل الدروس <summary> */
 details.node { border: 1.5px solid var(--line); border-radius: 12px; margin: 8px 0; background: #fcfdff; transition: border-color .2s; }
 details.node[open] { border-color: var(--blue); box-shadow: 0 2px 8px rgba(0, 85, 165, 0.08); }
 details.node > summary { 
@@ -131,28 +132,22 @@ ul.plain { padding-right: 20px; margin: 6px 0; }
 .empty { text-align: center; padding: 30px 12px; color: var(--muted); background: var(--card); border-radius: var(--radius); border: 1px dashed var(--line); font-weight: 700; }
 .count { color: var(--muted); font-size: .85rem; font-weight: 700; margin-bottom: 8px; }
 
-/* ===== تنسيق قسم الحوارات (Dialogues) لتعديل محاذاة وأماكن أزرار الصوت والنصوص) ===== */
-#dialogues .kv {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-  align-items: center;
-  text-align: left;
+/* ===== تنسيق قسم الحوارات (Dialogues) السليم والصحيح 100% ===== */
+#dialogues .line, 
+#dialogues .w-fr, 
+#dialogues .ex-fr, 
+#dialogues .exo-q {
   direction: ltr;
-  gap: 10px;
+  text-align: left;
+  unicode-bidi: embed;
 }
-#dialogues .kv b {
-  display: none; /* إخفاء التسميات الزائدة مثل fr ليظهر النص والحوار بوضوح */
-}
-#dialogues .kv span {
-  font-weight: 800;
-  color: var(--blue);
-  font-size: 1.05rem;
-  flex: 1;
-}
+
 #dialogues .spk {
-  margin: 0;
-  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline-start: 8px;
+  vertical-align: middle;
 }
 
 /* ===== القوائم المنسدلة القياسية (Select) ===== */
