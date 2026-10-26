@@ -15,9 +15,6 @@
       font-size: 16px;
       vertical-align: middle;
     }
-    .locked-section {
-      position: relative;
-    }
   </style>
 </head>
 <body>
@@ -34,13 +31,23 @@
   <div class="layout">
     <nav class="sidebar" aria-label="الأقسام">
       <button data-nav="lessons" class="on" type="button">📚 دروس الكتاب والحلول</button>
-      <button data-nav="bac" type="button">🎓 منهج البكالوريا (2Sec & 3Sec)</button>
+      
+      <!-- قسم البكالوريا (مقفل افتراضياً بقفل أحمر) -->
+      <button data-nav="bac" class="locked-section" data-locked-id="bac" type="button">
+        🎓 منهج البكالوريا (2Sec & 3Sec) <span class="lock-status-badge">🔒</span>
+      </button>
+
       <button data-nav="grammar" type="button">✍️ Grammaire</button>
       <button data-nav="phonetics" type="button">🗣️ Phonétique</button>
       <button data-nav="dictionary" type="button">📖 Dictionnaire</button>
       <button data-nav="dialogues" type="button">💬 Dialogues</button>
       <button data-nav="tales" type="button">🧚 Contes</button>
-      <button data-nav="exams" type="button">📝 امتحانات الثانوية العامة</button>
+
+      <!-- قسم الامتحانات (مقفل افتراضياً بقفل أحمر) -->
+      <button data-nav="exams" class="locked-section" data-locked-id="exams" type="button">
+        📝 امتحانات الثانوية العامة <span class="lock-status-badge">🔒</span>
+      </button>
+
       <button data-nav="soon-chansons" type="button">🎵 الأغاني الفرنسية</button>
       <button data-nav="soon-contemporaine" type="button">🇫🇷 فرنسا المعاصرة</button>
       <button data-nav="soon-litterature" type="button">📜 الأدب الفرنسي العالمي</button>
@@ -146,60 +153,44 @@
 
   <div id="toast" class="toast" role="status"></div>
 
-  <!-- سكربت نظام التحكم في القفل والفتح بالرقم السري مع الأقفال الحقيقية -->
+  <!-- سكربت التحكم الفوري المضمون في التصفح العادي والمخفي -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      initializeSectionLockers();
+      checkAndUpdateLockStates();
 
-      // مراقبة الضغط على القائمة الجانبية
+      // مراقبة النقر على القائمة الجانبية
       document.body.addEventListener("click", function (e) {
-        const navBtn = e.target.closest('.sidebar button[data-nav]');
-        if (navBtn) {
-          const sectionId = navBtn.getAttribute('data-nav');
-          const isUnlocked = localStorage.getItem(`section_unlocked_${sectionId}`) === "true";
+        const lockedBtn = e.target.closest('.locked-section');
+        if (lockedBtn) {
+          const lockedId = lockedBtn.getAttribute('data-locked-id');
+          const isUnlocked = localStorage.getItem(`section_unlocked_${lockedId}`) === "true";
 
-          if (navBtn.classList.contains('locked-section') && !isUnlocked) {
+          if (!isUnlocked) {
             e.preventDefault();
             e.stopPropagation();
-            promptForMasterPassword(sectionId, navBtn);
+            promptForMasterPassword(lockedId, lockedBtn);
           }
         }
       });
     });
 
-    function initializeSectionLockers() {
-      // الأقسام المقفلة افتراضياً (يمكنك إضافة أو إزالة أي قسم هنا بحريتك التامة)
-      const defaultLockedSections = ['exams', 'bac']; 
+    function checkAndUpdateLockStates() {
+      const lockedButtons = document.querySelectorAll('.locked-section');
+      lockedButtons.forEach(btn => {
+        const lockedId = btn.getAttribute('data-locked-id');
+        const isUnlocked = localStorage.getItem(`section_unlocked_${lockedId}`) === "true";
+        const badge = btn.querySelector('.lock-status-badge');
 
-      const navButtons = document.querySelectorAll('.sidebar button[data-nav]');
-      
-      navButtons.forEach(btn => {
-        const sectionId = btn.getAttribute('data-nav');
-        
-        if (defaultLockedSections.includes(sectionId)) {
-          const isUnlocked = localStorage.getItem(`section_unlocked_${sectionId}`) === "true";
-          
-          const existingBadge = btn.querySelector('.lock-status-badge');
-          if (existingBadge) existingBadge.remove();
-
-          const badge = document.createElement('span');
-          badge.className = 'lock-status-badge';
-
-          if (isUnlocked) {
-            btn.classList.remove('locked-section');
-            badge.innerHTML = '🔓'; // قفل حقيقي مفتوح (أخضر)
-            badge.title = "هذا القسم مفتوح بالرقم السري";
-          } else {
-            btn.classList.add('locked-section');
-            badge.innerHTML = '🔒'; // قفل حقيقي مغلق (أحمر واضح)
-            badge.title = "هذا القسم مقفل - اضغط لإدخال الرقم السري";
-          }
-          btn.appendChild(badge);
+        if (isUnlocked) {
+          btn.classList.remove('locked-section');
+          if (badge) badge.innerHTML = '🔓'; // قفل أخضر مفتوح
+        } else {
+          if (badge) badge.innerHTML = '🔒'; // قفل أحمر مغلق
         }
       });
     }
 
-    function promptForMasterPassword(sectionId, btnElement) {
+    function promptForMasterPassword(lockedId, btnElement) {
       const oldModal = document.getElementById('master-pin-modal');
       if (oldModal) oldModal.remove();
 
@@ -232,14 +223,14 @@
 
       document.getElementById('submit-pin-btn').addEventListener('click', () => {
         if (pinInput.value.trim() === correctPin) {
-          localStorage.setItem(`section_unlocked_${sectionId}`, "true");
+          localStorage.setItem(`section_unlocked_${lockedId}`, "true");
           document.getElementById('master-pin-modal').remove();
-          initializeSectionLockers();
+          checkAndUpdateLockStates();
           
-          // فتح القسم تلقائياً بعد إدخال الرقم الصحيح
+          // محاكاة النقر لفتح القسم فوراً بعد إدخال الرقم الصحيح
           btnElement.click();
         } else {
-          document.getElementById('pin-error-msg'].innerText = "❌ الرقم السري غير صحيح!";
+          document.getElementById('pin-error-msg').innerText = "❌ الرقم السري غير صحيح!";
           pinInput.value = "";
           pinInput.focus();
         }
