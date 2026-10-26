@@ -173,7 +173,7 @@
   <!-- ملف الشات الجديد -->
   <script src="./chat.js"></script>
 
-  <!-- السكريبت المعدل بدقة مذهلة: يعيد ترتيب صندوق الحوار كـ Flex ويضع زر مكبر الصوت بجانب الجملة الفرنسية مباشرة -->
+  <!-- السكريبت النظيف والآمن تماماً لإضافة زر الصوت بجانب الجمل الفرنسية دون أي تأثير بصري ضار -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       function speakFrenchText(text) {
@@ -186,19 +186,17 @@
         }
       }
 
-      function injectPerfectDialogueTTS() {
+      function injectCleanDialogueTTS() {
         const dialoguesSec = document.getElementById('dialogues');
         if (!dialoguesSec) return;
 
-        // استهداف العناصر الحوارية الفرنسية الأساسية داخل الحوارات
         const targetElements = dialoguesSec.querySelectorAll('div, h3');
 
         targetElements.forEach(el => {
-          if (el.querySelector('.perfect-tts-btn')) return;
+          if (el.querySelector('.clean-tts-btn')) return;
 
           const text = el.innerText ? el.innerText.trim() : "";
 
-          // شروط صارمة جداً لضمان استهداف الجمل الفرنسية الحوارية وحدها دون أي رموز أو أكواد
           if (
             text.length > 6 &&
             /[A-ZÀ-ÿ]/.test(text.charAt(0)) &&
@@ -220,18 +218,13 @@
             (text.includes('!') || text.includes('?') || text.includes('.') || text.includes(','))
           ) {
             if (el.children.length <= 1) {
-              // تحويل الحاضن إلى Flex لترتيب الأيقونة والنص بشكل مثالي (من اليسار لليمين للجمل الفرنسية)
-              el.style.display = 'flex';
-              el.style.alignItems = 'center';
-              el.style.justifyContent = 'space-between';
-              el.style.direction = 'ltr'; // لضمان ظهور النص الفرنسي وزر الصوت بشكل منسق وطبيعي
-
               const btn = document.createElement('button');
               btn.type = 'button';
-              btn.className = 'perfect-tts-btn';
+              btn.className = 'clean-tts-btn';
               btn.innerHTML = '🔊';
               btn.title = 'استمع للنطق الفرنسي الصحيح';
-              btn.style.cssText = 'background: #eef5ff; border: 1px solid #b8d5ff; border-radius: 50%; width: 30px; height: 30px; min-width: 30px; font-size: 15px; margin-right: 10px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.15); padding: 0; color: #0055A5; flex-shrink: 0;';
+              // تصميم أنيق ومدمج يظهر بجانب النص مباشرة دون تغيير اتجاه الصندوق أو الإضرار بالشكل الأصلي
+              btn.style.cssText = 'background: #eef5ff; border: 1px solid #b8d5ff; border-radius: 50%; width: 26px; height: 26px; font-size: 13px; margin: 0 6px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; box-shadow: 0 1px 2px rgba(0,0,0,0.1); padding: 0; color: #0055A5;';
 
               btn.addEventListener('click', function (ev) {
                 ev.preventDefault();
@@ -240,7 +233,7 @@
                 speakFrenchText(cleanText);
               });
 
-              // إدراج زر المكبر في بداية السطر الفرنسي ليظهر بشكل أنيق
+              // إدراج الزر بداخل العنصر في بدايته تماماً بطريقة آمنة
               el.insertBefore(btn, el.firstChild);
             }
           }
@@ -250,7 +243,7 @@
       const observer = new MutationObserver(function () {
         const dialoguesSec = document.getElementById('dialogues');
         if (dialoguesSec && dialoguesSec.classList.contains('on')) {
-          setTimeout(injectPerfectDialogueTTS, 200);
+          setTimeout(injectCleanDialogueTTS, 200);
         }
       });
 
