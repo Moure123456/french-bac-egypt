@@ -8,11 +8,11 @@
   <link rel="manifest" href="./manifest.json">
   <link rel="stylesheet" href="./styles.css">
   <style>
-    /* تنسيقات احترافية لأيقونات الأقفال الحقيقية بجانب الأقسام */
+    /* تنسيق حجم ولون أيقونة القفل لتكون أكبر وواضحة */
     .lock-status-badge {
       display: inline-block;
       margin-left: 8px;
-      font-size: 16px;
+      font-size: 20px;
       vertical-align: middle;
     }
   </style>
@@ -34,17 +34,17 @@
       
       <!-- قسم البكالوريا -->
       <button data-nav="bac" class="locked-section" data-locked-id="bac" type="button">
-        🎓 منهج البكالوريا (2Sec & 3Sec) <span class="lock-status-badge">🔒</span>
+        🎓 منهج البكالوريا (2Sec & 3Sec) <span class="lock-status-badge">🔴</span>
       </button>
 
-      <!-- قسم الجرامير (مقفل بناءً على طلبك) -->
+      <!-- قسم الجرامير -->
       <button data-nav="grammar" class="locked-section" data-locked-id="grammar" type="button">
-        ✍️ Grammaire <span class="lock-status-badge">🔒</span>
+        ✍️ Grammaire <span class="lock-status-badge">🔴</span>
       </button>
 
-      <!-- قسم الصوتيات (مقفل بناءً على طلبك) -->
+      <!-- قسم الصوتيات -->
       <button data-nav="phonetics" class="locked-section" data-locked-id="phonetics" type="button">
-        🗣️ Phonétique <span class="lock-status-badge">🔒</span>
+        🗣️ Phonétique <span class="lock-status-badge">🔴</span>
       </button>
 
       <button data-nav="dictionary" type="button">📖 Dictionnaire</button>
@@ -53,12 +53,12 @@
 
       <!-- قسم الامتحانات -->
       <button data-nav="exams" class="locked-section" data-locked-id="exams" type="button">
-        📝 امتحانات الثانوية العامة <span class="lock-status-badge">🔒</span>
+        📝 امتحانات الثانوية العامة <span class="lock-status-badge">🔴</span>
       </button>
 
-      <!-- قسم الأغاني الفرنسية (مقفل بناءً على طلبك) -->
+      <!-- قسم الأغاني الفرنسية -->
       <button data-nav="soon-chansons" class="locked-section" data-locked-id="soon-chansons" type="button">
-        🎵 الأغاني الفرنسية <span class="lock-status-badge">🔒</span>
+        🎵 الأغاني الفرنسية <span class="lock-status-badge">🔴</span>
       </button>
 
       <button data-nav="soon-contemporaine" type="button">🇫🇷 فرنسا المعاصرة</button>
@@ -86,7 +86,7 @@
       <section id="tales" class="sec"><h2>Contes — قصص مبسطة</h2><div class="body"></div></section>
       <section id="exams" class="sec"><h2>Examens du Bac — نماذج امتحانات</h2><div class="body"></div></section>
 
-      <!-- قسم الأغاني الفرنسية المحدث -->
+      <!-- قسم الأغاني الفرنسية -->
       <section id="soon-chansons" class="sec">
         <h2>🎵 Chansons françaises — الأغاني الفرنسية</h2>
         <div id="songs-content-container" class="body">
@@ -165,7 +165,7 @@
 
   <div id="toast" class="toast" role="status"></div>
 
-  <!-- سكربت التحكم الفوري في الأقسام المقفلة -->
+  <!-- سكربت التحكم بنظام الأقفال (الفتح 0519 - الإغلاق 0510) -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       checkAndUpdateLockStates();
@@ -194,9 +194,10 @@
 
         if (isUnlocked) {
           btn.classList.remove('locked-section');
-          if (badge) badge.innerHTML = '🔓'; 
+          if (badge) badge.innerHTML = '🟢'; // قفل أخضر كبير (مفتوح)
         } else {
-          if (badge) badge.innerHTML = '🔒'; 
+          btn.classList.add('locked-section');
+          if (badge) badge.innerHTML = '🔴'; // قفل أحمر كبير (مغلق)
         }
       });
     }
@@ -208,11 +209,11 @@
       const modalHTML = `
         <div id="master-pin-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; z-index: 99999; font-family: Tahoma, sans-serif;">
           <div style="background: #fff; padding: 25px; border-radius: 12px; width: 320px; text-align: right; direction: rtl; box-shadow: 0 5px 20px rgba(0,0,0,0.3);">
-            <h3 style="color: #d9534f; margin-top: 0; margin-bottom: 10px; font-size: 16px;">🔒 قسم محمي برقم سري</h3>
-            <p style="color: #666; font-size: 13px; margin-bottom: 15px;">هذا القسم يتطلب الرقم السري المكون من 4 أرقام لفتحه:</p>
+            <h3 style="color: #d9534f; margin-top: 0; margin-bottom: 10px; font-size: 16px;">🔒 إدخال الرقم السري</h3>
+            <p style="color: #666; font-size: 13px; margin-bottom: 15px;">أدخل رقم الفتح (0519) أو رقم الإغلاق (0510):</p>
             <input type="password" id="creator-pin-input" maxlength="4" placeholder="****" style="width: 100%; padding: 12px; font-size: 18px; text-align: center; letter-spacing: 5px; border: 2px solid #ccc; border-radius: 6px; box-sizing: border-box; margin-bottom: 15px;">
             <div style="display: flex; gap: 10px;">
-              <button id="submit-pin-btn" style="flex: 1; background: #0055A5; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer;">فتح القسم</button>
+              <button id="submit-pin-btn" style="flex: 1; background: #0055A5; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer;">تنفيذ</button>
               <button id="cancel-pin-btn" style="background: #6c757d; color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer;">إلغاء</button>
             </div>
             <div id="pin-error-msg" style="color: red; font-size: 12px; margin-top: 10px; text-align: center; font-weight: bold;"></div>
@@ -229,15 +230,24 @@
         document.getElementById('master-pin-modal').remove();
       });
 
-      // الرقم السري الافتراضي (يمكنك تغييره هنا إلى أي رقم تريده)
-      const correctPin = "2026"; 
+      const openPin = "0519";  // رقم الفتح
+      const closePin = "0510"; // رقم الإغلاق
 
       document.getElementById('submit-pin-btn').addEventListener('click', () => {
-        if (pinInput.value.trim() === correctPin) {
+        const enteredVal = pinInput.value.trim();
+
+        if (enteredVal === openPin) {
+          // فتح القسم وظل مفتوحاً عند الطالب
           localStorage.setItem(`section_unlocked_${lockedId}`, "true");
           document.getElementById('master-pin-modal').remove();
           checkAndUpdateLockStates();
           btnElement.click();
+        } else if (enteredVal === closePin) {
+          // إغلاق القسم مرة أخرى من عندك
+          localStorage.setItem(`section_unlocked_${lockedId}`, "false");
+          document.getElementById('master-pin-modal').remove();
+          checkAndUpdateLockStates();
+          alert("🔒 تم إغلاق القسم بنجاح.");
         } else {
           document.getElementById('pin-error-msg').innerText = "❌ الرقم السري غير صحيح!";
           pinInput.value = "";
