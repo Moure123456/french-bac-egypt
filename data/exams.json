@@ -54,7 +54,7 @@
             {
               "type": "choice",
               "marks": 2,
-              "prompt_fr": "Quelle est la profession du père deSara ?",
+              "prompt_fr": "Quelle est la profession du père de Sara ?",
               "prompt_ar": "ما هي مهنة والد سارة؟",
               "options": ["Médecin", "Professeur", "Ingénieur", "Avocat"],
               "answer": "Médecin",
@@ -150,7 +150,7 @@
               "type": "choice",
               "marks": 2,
               "prompt_fr": "Où va Mme Nadia ?",
-              "prompt_ar": "إين تذهب السيدة نادية؟",
+              "prompt_ar": "أين تذهب السيدة نادية؟",
               "options": ["Au marché", "À la mosquée", "À l'hôpital", "Au cinéma"],
               "answer": "Au marché",
               "explanation_ar": "« Mme Nadia va au marché »."
@@ -216,7 +216,7 @@
           "title_ar": "قطعة الفهم",
           "title_fr": "Compréhension",
           "text": "En été, il fait chaud en Égypte. Nada et ses amies vont à la plage. Elles portent un maillot de bain.",
-          "text_ar": "في الصيف يكون الجو حاراً في مصر. تذهب ندى وصديقاتها إلى الشاطئ ويرتدي ملابس السباحة.",
+          "text_ar": "في الصيف يكون الجو حاراً في مصر. تذهب ندى وصديقاتها إلى الشاطئ ويرتدين ملابس السباحة.",
           "questions": [
             {
               "type": "choice",
