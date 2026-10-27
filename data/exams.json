@@ -1,504 +1,638 @@
-{
-  "meta": {
-    "version": 3,
-    "title": {
-      "fr": "Examens du baccalauréat : modèles et entraînement",
-      "ar": "امتحانات الثانوية العامة: نماذج وتدريب",
-      "phonetic": {
-        "fr": "/ɛɡzamɛ̃ dy bakalɔʁea mɔdɛl e ɑ̃tʁɛnmɑ̃/",
-        "ar": "إيغزامان دي باكالوريا: موديل إي أونترينمون"
+/* ===== exams.js — امتحانات تفاعلية لـ Le Français Au Bac =====
+   مؤقت + تصحيح فوري (أخضر/أحمر) + صوت انتهاء الوقت + 5 نماذج للصف الأول الثانوي
+   يعمل مع data/exams.json الحالي ولا يغيّر أي ملف آخر. */
+(function () {
+  'use strict';
+  try { init(); } catch (e) { try { console.error('[exams]', e); } catch (_) {} }
+
+  function init() {
+    var SEC = document.getElementById('exams');
+    if (!SEC) return;
+
+    var LV = { '1sec': 'الصف الأول الثانوي', '2sec': 'الصف الثاني الثانوي', '3sec': 'الصف الثالث الثانوي' };
+    var AR = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/;
+    var IPA = /[\u0250-\u02AF\u0303\u02C8\u02CC\u00F8\u014B]/;
+    var LAT = /[A-Za-z\u00C0-\u00FF\u0152\u0153]/;
+
+    var root = null, EX = [], filter = 'all', run = null, started = false;
+    var soundOn = store('ex_sound') !== 'off';
+
+    /* ---------- أدوات ---------- */
+    function $(s, r) { return (r || document).querySelector(s); }
+    function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+    function store(k, v) {
+      try {
+        if (v === undefined) return localStorage.getItem(k) || '';
+        localStorage.setItem(k, v);
+      } catch (e) {}
+      return '';
+    }
+    function nrm(s) {
+      return String(s == null ? '' : s).toLowerCase().replace(/[\u2019\u2018`\u00B4]/g, "'")
+        .replace(/\s+/g, ' ').replace(/\s*([?!.:,;])/g, '$1').replace(/[?!.,;:]+$/, '').trim();
+    }
+    function plain(s) { return nrm(s).normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+    function fmt(sec) {
+      sec = Math.max(0, Math.ceil(sec));
+      var m = Math.floor(sec / 60), s = sec % 60;
+      return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+    }
+    function strOf(o, keys) {
+      for (var i = 0; i < keys.length; i++) {
+        var v = o[keys[i]];
+        if (typeof v === 'string' && v.trim()) return v.trim();
       }
-    },
-    "note": {
-      "fr": "Cinq modèles d’examens originaux (40 points chacun, 60 minutes) en trois parties : compréhension de l’écrit (deux textes, quatre questions à choix multiple chacun), situations de la vie quotidienne et grammaire. Au total : 10 textes, 40 questions de lecture, 20 questions de situation et 40 questions de grammaire. Chaque question a la bonne réponse, une explication en arabe et la règle correspondante. Les points et la durée sont modifiables pour chaque examen : alignez-les sur les spécifications officielles en vigueur publiées par le ministère de l’Éducation.",
-      "ar": "خمسة نماذج امتحانات أصلية (40 درجة لكل نموذج، ومدة 60 دقيقة) من ثلاثة أجزاء: فهم المقروء (قطعتان، في كل منهما أربعة أسئلة اختيار من متعدد)، ومواقف الحياة اليومية، والقواعد. المجموع: 10 قطع، و40 سؤال قراءة، و20 سؤال مواقف، و40 سؤال قواعد. لكل سؤال الإجابة الصحيحة وشرح بالعربية والقاعدة المرتبطة به. الدرجات والمدة قابلة للتعديل لكل امتحان: طابقها مع المواصفات الرسمية الحالية الصادرة عن وزارة التربية والتعليم.",
-      "phonetic": {
-        "fr": "/sɛ̃k mɔdɛl dɛɡzamɛ̃ ɔʁiʒino kaʁɑ̃t pwɛ̃ ʃakœ̃ swasɑ̃t minyt ɑ̃ tʁwa paʁti kɔ̃pʁeɑ̃sjɔ̃ də lekʁi dø tɛkst katʁ kɛstjɔ̃ a ʃwa myltipl ʃakœ̃ sitɥasjɔ̃ də la vi kɔtidjɛn e ɡʁamɛʁ/ /o tɔtal dis tɛkst kaʁɑ̃t kɛstjɔ̃ də lɛktyʁ vɛ̃ kɛstjɔ̃ də sitɥasjɔ̃ e kaʁɑ̃t kɛstjɔ̃ də ɡʁamɛʁ/ /ʃak kɛstjɔ̃ a la bɔn ʁepɔ̃s yn ɛksplikasjɔ̃ ɑ̃ aʁab e la ʁɛɡl kɔʁɛspɔ̃dɑ̃t/ /le pwɛ̃ e la dyʁe sɔ̃ mɔdifjabl puʁ ʃak ɛɡzamɛ̃ aliɲe le syʁ le spesifikasjɔ̃ ɔfisjɛl ɑ̃ viɡœʁ pyblije paʁ lə ministɛʁ də ledykasjɔ̃/",
-        "ar": "سانك موديل ديغزامان أوريجينو كارانت بوان شاكان سواسانت مينيت أون تروا بارتي: كونبريانسيون دو ليكري (دو تيكست، كاتر كيستيون آ شوا ميلتيبل شاكان)، سيتواسيون دو لا في كوتيديين إي غرامير. أو توتال: ديس تيكست، كارانت كيستيون دو ليكتير، فان كيستيون دو سيتواسيون إي كارانت كيستيون دو غرامير. شاك كيستيون آ لا بون ريبونس، يُن إيكسبليكاسيون أون آراب إي لا ريغل كوريسبوندانت. لي بوان إي لا ديريه سون موديفيابل بور شاك إيغزامان: أليني لي سور لي سبيسيفيكاسيون أوفيسيال أون فيغور بيبليه بار لو مينيستير دو ليديكاسيون."
+      return '';
+    }
+
+    /* ---------- الأصوات (بدون ملفات: WebAudio) ---------- */
+    var AC = null;
+    function ac() {
+      try {
+        if (!AC) { var C = window.AudioContext || window.webkitAudioContext; if (C) AC = new C(); }
+        if (AC && AC.state === 'suspended') AC.resume();
+      } catch (e) {}
+      return AC;
+    }
+    function tone(f, t0, d, type, vol) {
+      var c = ac();
+      if (!c) return;
+      try {
+        var o = c.createOscillator(), g = c.createGain(), t = c.currentTime + t0;
+        o.type = type || 'sine';
+        o.frequency.value = f;
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(vol || 0.2, t + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + d);
+        o.connect(g);
+        g.connect(c.destination);
+        o.start(t);
+        o.stop(t + d + 0.05);
+      } catch (e) {}
+    }
+    function sfx(name) {
+      if (!soundOn) return;
+      var i, r;
+      if (name === 'ok') { tone(660, 0, 0.12); tone(880, 0.12, 0.2); }
+      else if (name === 'bad') { tone(220, 0, 0.3, 'sawtooth', 0.14); }
+      else if (name === 'warn') { tone(988, 0, 0.15, 'square', 0.15); tone(988, 0.25, 0.15, 'square', 0.15); }
+      else if (name === 'win') { [523, 659, 784, 1046].forEach(function (f, k) { tone(f, k * 0.14, 0.22); }); }
+      else if (name === 'lose') { [392, 330, 262].forEach(function (f, k) { tone(f, k * 0.18, 0.25, 'triangle'); }); }
+      else if (name === 'alarm') {
+        for (r = 0; r < 3; r++) for (i = 0; i < 4; i++) tone(i % 2 ? 988 : 1319, r * 1.1 + i * 0.22, 0.18, 'square', 0.22);
+        try { if (navigator.vibrate) navigator.vibrate([300, 150, 300, 150, 300]); } catch (e) {}
+        setTimeout(function () {
+          try {
+            if (window.speechSynthesis && soundOn) {
+              var u = new SpeechSynthesisUtterance('انتهى الوقت');
+              u.lang = 'ar-SA';
+              u.rate = 0.95;
+              window.speechSynthesis.speak(u);
+            }
+          } catch (e) {}
+        }, 3400);
       }
     }
-  },
-  "exams": [
-    {
-      "id": "model-1", "title_ar": "نموذج امتحان شامل (1)", "title_fr": "Modèle d’examen n° 1", "level": "3sec", "duration_min": 60,
-      "instructions_ar": "الدرجة الكاملة 40 (كل سؤال درجتان). اقرأ كل نص جيداً ثم اختر إجابة واحدة لكل سؤال.",
-      "sections": [
-        {
-          "id": "texte1", "title_ar": "قطعة الفهم الأولى", "title_fr": "Compréhension de l’écrit – Texte 1",
-          "passage_fr": "Chaque samedi, Sara va à la bibliothèque de son quartier avec sa sœur Mona. Elle y lit des romans et prépare ses devoirs. La semaine dernière, la bibliothécaire a organisé un concours de lecture pour les élèves. Sara a lu trois livres en deux semaines et elle a gagné le premier prix : un dictionnaire français-arabe. Elle était très heureuse.",
-          "questions": [
-            { "id": "e1r1", "type": "choice", "marks": 2, "prompt_fr": "Avec qui Sara va-t-elle à la bibliothèque ?", "options": ["Avec sa mère", "Avec sa sœur Mona", "Avec son amie", "Avec sa professeure"], "answer": "Avec sa sœur Mona", "explanation_ar": "النص يقول إن سارة تذهب كل سبت إلى المكتبة مع أختها منى.", "rule_ar": "استخرج الإجابة من الجملة المناسبة في النص دون تخمين." },
-            { "id": "e1r2", "type": "choice", "marks": 2, "prompt_fr": "Qu’est-ce que la bibliothécaire a organisé ?", "options": ["Une fête", "Un voyage", "Un concours de lecture", "Un cours de français"], "answer": "Un concours de lecture", "explanation_ar": "ورد في النص أن أمينة المكتبة نظمت مسابقة قراءة للتلاميذ.", "rule_ar": "استخرج الإجابة من الجملة المناسبة في النص دون تخمين." },
-            { "id": "e1r3", "type": "choice", "marks": 2, "prompt_fr": "Combien de livres Sara a-t-elle lus ?", "options": ["Deux", "Trois", "Quatre", "Cinq"], "answer": "Trois", "explanation_ar": "النص: Sara a lu trois livres، أي قرأت ثلاثة كتب.", "rule_ar": "انتبه إلى الأرقام والتواريخ في النص." },
-            { "id": "e1r4", "type": "choice", "marks": 2, "prompt_fr": "« Elle était très heureuse » signifie :", "options": ["Elle était très fatiguée", "Elle était très contente", "Elle était très inquiète", "Elle était très en retard"], "answer": "Elle était très contente", "explanation_ar": "heureuse تعني سعيدة، وهي مرادفة لـ contente.", "rule_ar": "استنتج معنى الكلمة من السياق ومن المرادفات." }
-          ]
-        },
-        {
-          "id": "texte2", "title_ar": "قطعة الفهم الثانية", "title_fr": "Compréhension de l’écrit – Texte 2",
-          "passage_fr": "Pendant les vacances, la famille de Youssef a visité Louxor. Ils ont pris le train de nuit et sont arrivés le lendemain matin. Ils ont visité les temples et le musée de la ville. Le guide parlait français, alors Youssef a pu comprendre toutes ses explications. Le soir, la famille a mangé dans un restaurant au bord du Nil. Youssef a pris beaucoup de photos et il veut y retourner un jour.",
-          "questions": [
-            { "id": "e1r5", "type": "choice", "marks": 2, "prompt_fr": "Comment la famille de Youssef a-t-elle voyagé ?", "options": ["En avion", "En voiture", "Par le train de nuit", "En bateau"], "answer": "Par le train de nuit", "explanation_ar": "النص: Ils ont pris le train de nuit، أي سافروا بقطار الليل.", "rule_ar": "استخرج الإجابة من الجملة المناسبة في النص." },
-            { "id": "e1r6", "type": "choice", "marks": 2, "prompt_fr": "Pourquoi Youssef a-t-il compris le guide ?", "options": ["Il parlait arabe", "Le guide parlait français", "Il a lu un livre", "Son père a traduit"], "answer": "Le guide parlait français", "explanation_ar": "السبب في الجملة: Le guide parlait français، alors... فالنتيجة أنه فهم الشرح.", "rule_ar": "alors تدل على النتيجة، وما قبلها هو السبب." },
-            { "id": "e1r7", "type": "choice", "marks": 2, "prompt_fr": "Où la famille a-t-elle mangé le soir ?", "options": ["Chez des amis", "Au musée", "Dans un restaurant au bord du Nil", "Dans le train"], "answer": "Dans un restaurant au bord du Nil", "explanation_ar": "النص يقول إنهم تناولوا العشاء في مطعم على ضفة النيل.", "rule_ar": "استخرج الإجابة من الجملة المناسبة في النص." },
-            { "id": "e1r8", "type": "choice", "marks": 2, "prompt_fr": "Dans « il veut y retourner », le pronom « y » remplace :", "options": ["le musée", "le train", "Louxor", "le restaurant"], "answer": "Louxor", "explanation_ar": "الضمير y يحل محل المكان المذكور سابقاً، والمكان الذي زاره يوسف هو الأقصر.", "rule_ar": "y يعود على مكان مذكور قبله." }
-          ]
-        },
-        {
-          "id": "situations", "title_ar": "المواقف", "title_fr": "Situations de communication",
-          "questions": [
-            { "id": "e1s1", "type": "choice", "marks": 2, "prompt_fr": "Vous rencontrez un ami le matin. Que dites-vous ?", "options": ["Bonjour, comment vas-tu ?", "Bonne nuit !", "À bientôt !", "Bon appétit !"], "answer": "Bonjour, comment vas-tu ?", "explanation_ar": "لقاء صديق في الصباح يحتاج تحية وسؤالاً عن حاله.", "rule_ar": "اختر العبارة المناسبة للموقف: تحية، سؤال عن الثمن، شكر، طلب إعادة." },
-            { "id": "e1s2", "type": "choice", "marks": 2, "prompt_fr": "Vous voulez demander le prix d’un livre. Vous dites :", "options": ["Combien coûte ce livre ?", "Où est ce livre ?", "Qui est ce livre ?", "Quand est ce livre ?"], "answer": "Combien coûte ce livre ?", "explanation_ar": "للسؤال عن الثمن نستخدم Combien coûte ...؟", "rule_ar": "الاستفهام بـ combien يكون للثمن والكمية." },
-            { "id": "e1s3", "type": "choice", "marks": 2, "prompt_fr": "Votre ami vous offre un cadeau. Vous répondez :", "options": ["Merci beaucoup, c’est gentil !", "Je vous en prie.", "Excusez-moi.", "Au revoir."], "answer": "Merci beaucoup, c’est gentil !", "explanation_ar": "عند تلقي هدية نشكر صاحبها. أما Je vous en prie فهي رد على الشكر.", "rule_ar": "اختر العبارة المناسبة للموقف: تحية، سؤال عن الثمن، شكر، طلب إعادة." },
-            { "id": "e1s4", "type": "choice", "marks": 2, "prompt_fr": "Vous n’avez pas compris la question du professeur. Vous dites :", "options": ["Pouvez-vous répéter, s’il vous plaît ?", "Je suis fatigué.", "J’ai faim.", "À demain."], "answer": "Pouvez-vous répéter, s’il vous plaît ?", "explanation_ar": "لطلب إعادة السؤال بأدب نقول Pouvez-vous répéter, s’il vous plaît ?", "rule_ar": "اختر العبارة المناسبة للموقف: تحية، سؤال عن الثمن، شكر، طلب إعادة." }
-          ]
-        },
-        {
-          "id": "grammar", "title_ar": "القواعد", "title_fr": "Grammaire",
-          "questions": [
-            { "id": "e1g1", "type": "choice", "marks": 2, "prompt_fr": "Hier, nous ___ au club.", "options": ["sommes allés", "avons allé", "allons", "irons"], "answer": "sommes allés", "explanation_ar": "aller من أفعال الحركة فيأخذ être في الماضي المركب، ويتفق اسم المفعول مع الفاعل الجمع.", "rule_ar": "الماضي المركب: أفعال الحركة مع être واتفاق اسم المفعول مع الفاعل." },
-            { "id": "e1g2", "type": "choice", "marks": 2, "prompt_fr": "Il faut que tu ___ tes devoirs.", "options": ["fais", "fasses", "feras", "ferais"], "answer": "fasses", "explanation_ar": "التعبير il faut que يتطلب subjonctif، وصيغة faire مع tu هي fasses.", "rule_ar": "il faut que + subjonctif." },
-            { "id": "e1g3", "type": "choice", "marks": 2, "prompt_fr": "La fille ___ parle est ma cousine.", "options": ["qui", "que", "dont", "où"], "answer": "qui", "explanation_ar": "الكلمة la fille هي فاعل الفعل parle، فنستخدم qui.", "rule_ar": "qui تحل محل الفاعل، وque تحل محل المفعول به المباشر." },
-            { "id": "e1g4", "type": "choice", "marks": 2, "prompt_fr": "Si j’avais de l’argent, j’___ un vélo.", "options": ["achèterais", "achèterai", "achète", "achetais"], "answer": "achèterais", "explanation_ar": "si + imparfait يتبعها conditionnel présent: j’achèterais.", "rule_ar": "si + imparfait ← conditionnel présent." },
-            { "id": "e1g5", "type": "text", "marks": 2, "prompt_fr": "Complétez avec l’article défini : ___ élèves sont dans la classe.", "answer": "Les", "explanation_ar": "élèves جمع، وأداة التعريف للجمع هي les.", "rule_ar": "أداة التعريف: le مذكر مفرد، la مؤنث مفرد، les جمع." },
-            { "id": "e1g6", "type": "text", "marks": 2, "prompt_fr": "Remplacez par un pronom COD : Je lis le livre. → Je ___ lis.", "answer": "le", "explanation_ar": "le livre مفعول به مباشر مذكر مفرد، فنستبدله بـ le قبل الفعل.", "rule_ar": "ضمائر COD: le, la, l’, les وتوضع قبل الفعل." },
-            { "id": "e1g7", "type": "choice", "marks": 2, "prompt_fr": "Je ___ ai ___ de frère.", "options": ["n’ ... pas", "ne ... pas", "n’ ... jamais", "ne ... plus"], "answer": "n’ ... pas", "explanation_ar": "ai يبدأ بحرف متحرك فتصبح ne ← n’، والنفي العادي pas، وبعده de.", "rule_ar": "النفي: ne (n’) + فعل + pas، وبعد النفي تتحول الأداة إلى de." },
-            { "id": "e1g8", "type": "choice", "marks": 2, "prompt_fr": "Mona est ___ grande que sa sœur. (même taille)", "options": ["plus", "moins", "aussi", "très"], "answer": "aussi", "explanation_ar": "التساوي في المقارنة يُعبَّر عنه بـ aussi ... que.", "rule_ar": "المقارنة: plus (أكثر) – moins (أقل) – aussi (مثل) + que." }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "model-2", "title_ar": "نموذج امتحان شامل (2)", "title_fr": "Modèle d’examen n° 2", "level": "3sec", "duration_min": 60,
-      "instructions_ar": "الدرجة الكاملة 40 (كل سؤال درجتان). اقرأ كل نص جيداً ثم اختر إجابة واحدة لكل سؤال.",
-      "sections": [
-        {
-          "id": "texte1", "title_ar": "قطعة الفهم الأولى", "title_fr": "Compréhension de l’écrit – Texte 1",
-          "passage_fr": "Aujourd’hui, presque tous les jeunes utilisent les réseaux sociaux. Ils les aiment parce qu’ils permettent de parler avec des amis et de partager des photos. Mais passer trop de temps devant l’écran peut fatiguer les yeux et réduire le temps consacré aux études. C’est pourquoi les experts conseillent de limiter son temps d’utilisation à une ou deux heures par jour.",
-          "questions": [
-            { "id": "e2r1", "type": "choice", "marks": 2, "prompt_fr": "Pourquoi les jeunes aiment-ils les réseaux sociaux ?", "options": ["Pour gagner de l’argent", "Pour parler avec des amis et partager des photos", "Pour étudier plus vite", "Pour acheter des vêtements"], "answer": "Pour parler avec des amis et partager des photos", "explanation_ar": "الجملة الثانية تذكر السبب بعد parce que: التحدث مع الأصدقاء ومشاركة الصور.", "rule_ar": "parce que تقدم السبب، فابحث بعدها عن الإجابة." },
-            { "id": "e2r2", "type": "choice", "marks": 2, "prompt_fr": "Quel est un danger du temps excessif devant l’écran ?", "options": ["Il fatigue les yeux et réduit le temps d’étude", "Il rend plus intelligent", "Il donne faim", "Il améliore le sommeil"], "answer": "Il fatigue les yeux et réduit le temps d’étude", "explanation_ar": "النص يقول إن الإفراط يرهق العينين ويقلل الوقت المخصص للدراسة.", "rule_ar": "استخرج الإجابة من الجملة التي تبدأ بـ Mais." },
-            { "id": "e2r3", "type": "choice", "marks": 2, "prompt_fr": "Que conseillent les experts ?", "options": ["Supprimer tous les comptes", "Utiliser les réseaux toute la journée", "Limiter l’utilisation à une ou deux heures par jour", "Utiliser les réseaux seulement la nuit"], "answer": "Limiter l’utilisation à une ou deux heures par jour", "explanation_ar": "الجملة الأخيرة تنقل نصيحة الخبراء: تحديد الاستخدام بساعة أو ساعتين يومياً.", "rule_ar": "فعل conseiller يتبعه نص النصيحة." },
-            { "id": "e2r4", "type": "choice", "marks": 2, "prompt_fr": "L’expression « C’est pourquoi » exprime :", "options": ["la conséquence", "la cause", "l’opposition", "le but"], "answer": "la conséquence", "explanation_ar": "c’est pourquoi تعني ولذلك، وتعبّر عن النتيجة المترتبة على ما سبق.", "rule_ar": "النتيجة: donc, alors, c’est pourquoi." }
-          ]
-        },
-        {
-          "id": "texte2", "title_ar": "قطعة الفهم الثانية", "title_fr": "Compréhension de l’écrit – Texte 2",
-          "passage_fr": "Il est sept heures du matin. Nour arrive à l’école avec son amie Hana. Le premier cours est un cours de français. Aujourd’hui, le professeur donne un exercice sur le passé composé. Nour a bien compris, mais Hana a un peu de mal. À la récréation, Nour lui explique la règle avec des exemples simples. Hana la remercie : « Maintenant, c’est clair ! »",
-          "questions": [
-            { "id": "e2r5", "type": "choice", "marks": 2, "prompt_fr": "À quelle heure Nour arrive-t-elle à l’école ?", "options": ["À sept heures", "À huit heures", "À neuf heures", "À midi"], "answer": "À sept heures", "explanation_ar": "النص يبدأ بـ Il est sept heures du matin ثم يقول إن نور تصل إلى المدرسة.", "rule_ar": "انتبه إلى الأوقات والأرقام في النص." },
-            { "id": "e2r6", "type": "choice", "marks": 2, "prompt_fr": "Sur quoi porte l’exercice du professeur ?", "options": ["Le futur simple", "Le passé composé", "Le subjonctif", "Le conditionnel"], "answer": "Le passé composé", "explanation_ar": "النص يقول إن المعلم يعطي تمريناً على الماضي المركب.", "rule_ar": "استخرج الإجابة من الجملة المناسبة في النص." },
-            { "id": "e2r7", "type": "choice", "marks": 2, "prompt_fr": "Qui aide Hana à comprendre la règle ?", "options": ["Le professeur", "Nour", "Sa mère", "La directrice"], "answer": "Nour", "explanation_ar": "في الاستراحة شرحت نور القاعدة لهانا بأمثلة بسيطة.", "rule_ar": "استخرج الإجابة من الجملة المناسبة في النص." },
-            { "id": "e2r8", "type": "choice", "marks": 2, "prompt_fr": "« Hana a un peu de mal » signifie :", "options": ["Hana a mal à la tête", "Hana a une petite difficulté", "Hana a peur", "Hana a faim"], "answer": "Hana a une petite difficulté", "explanation_ar": "avoir du mal تعني مواجهة صعوبة، وليست ألماً جسدياً.", "rule_ar": "استنتج معنى التعبير من السياق: صعوبة في فهم القاعدة." }
-          ]
-        },
-        {
-          "id": "situations", "title_ar": "المواقف", "title_fr": "Situations de communication",
-          "questions": [
-            { "id": "e2s1", "type": "choice", "marks": 2, "prompt_fr": "Au restaurant, vous voulez commander une soupe. Vous dites :", "options": ["Je voudrais une soupe, s’il vous plaît.", "Où est la soupe ?", "Je suis une soupe.", "La soupe est à vous."], "answer": "Je voudrais une soupe, s’il vous plaît.", "explanation_ar": "الطلب المهذب في المطعم يكون بـ Je voudrais ... s’il vous plaît.", "rule_ar": "الطلب المهذب: Je voudrais + المطلوب + s’il vous plaît." },
-            { "id": "e2s2", "type": "choice", "marks": 2, "prompt_fr": "Vous voulez savoir l’heure. Vous demandez :", "options": ["Quelle heure est-il, s’il vous plaît ?", "Quel âge avez-vous ?", "Combien coûte l’heure ?", "Où est l’heure ?"], "answer": "Quelle heure est-il, s’il vous plaît ?", "explanation_ar": "للسؤال عن الوقت نقول Quelle heure est-il ?", "rule_ar": "السؤال عن الوقت: Quelle heure est-il ?" },
-            { "id": "e2s3", "type": "choice", "marks": 2, "prompt_fr": "Vous arrivez en retard au cours. Vous dites :", "options": ["Excusez-moi, je suis en retard.", "Bon appétit !", "Félicitations !", "À la prochaine !"], "answer": "Excusez-moi, je suis en retard.", "explanation_ar": "عند التأخر نعتذر بـ Excusez-moi ونذكر السبب.", "rule_ar": "الاعتذار: Excusez-moi, Pardon, Désolé." },
-            { "id": "e2s4", "type": "choice", "marks": 2, "prompt_fr": "Un ami vous invite au cinéma et vous acceptez. Vous répondez :", "options": ["Avec plaisir, à quelle heure ?", "Je n’aime pas le cinéma.", "Merci, je suis malade.", "Non, c’est impossible."], "answer": "Avec plaisir, à quelle heure ?", "explanation_ar": "لقبول الدعوة نقول Avec plaisir ثم نسأل عن الموعد.", "rule_ar": "قبول الدعوة: Avec plaisir, D’accord, Volontiers." }
-          ]
-        },
-        {
-          "id": "grammar", "title_ar": "القواعد", "title_fr": "Grammaire",
-          "questions": [
-            { "id": "e2g1", "type": "choice", "marks": 2, "prompt_fr": "Quand j’étais enfant, nous ___ chez ma grand-mère chaque été. (aller)", "options": ["allions", "sommes allés", "irons", "allons"], "answer": "allions", "explanation_ar": "كلمة chaque été تدل على عادة في الماضي، فنستخدم imparfait: allions.", "rule_ar": "imparfait للعادة والوصف في الماضي." },
-            { "id": "e2g2", "type": "choice", "marks": 2, "prompt_fr": "Il ___ quand le téléphone a sonné. (dormir)", "options": ["dormait", "a dormi", "dormira", "dort"], "answer": "dormait", "explanation_ar": "حدث جارٍ في الماضي قاطعه حدث آخر ← imparfait.", "rule_ar": "imparfait للحدث الجاري الذي يقطعه حدث ماضٍ منتهٍ." },
-            { "id": "e2g3", "type": "choice", "marks": 2, "prompt_fr": "Je ___ téléphone demain. (à ma tante)", "options": ["lui", "la", "leur", "les"], "answer": "lui", "explanation_ar": "à ma tante شخص مفرد مسبوق بـ à، فنستبدله بـ lui.", "rule_ar": "COI: lui للمفرد وleur للجمع." },
-            { "id": "e2g4", "type": "choice", "marks": 2, "prompt_fr": "Tu veux du café ? Oui, j’___ veux.", "options": ["en", "y", "le", "lui"], "answer": "en", "explanation_ar": "du café مسبوق بأداة تبعيض، فنستبدله بـ en.", "rule_ar": "en يحل محل du/de la/des + اسم." },
-            { "id": "e2g5", "type": "text", "marks": 2, "prompt_fr": "Nous ___ demain. (finir, futur simple)", "answer": "finirons", "explanation_ar": "المصدر finir + ons مع nous في المستقبل البسيط.", "rule_ar": "المستقبل البسيط: المصدر + ai, as, a, ons, ez, ont." },
-            { "id": "e2g6", "type": "choice", "marks": 2, "prompt_fr": "___ étudiante est très sérieuse.", "options": ["Cette", "Ce", "Cet", "Ces"], "answer": "Cette", "explanation_ar": "étudiante مؤنث مفرد، فنستخدم cette.", "rule_ar": "صفات الإشارة: ce – cet – cette – ces." },
-            { "id": "e2g7", "type": "choice", "marks": 2, "prompt_fr": "Tu ___ manger plus de fruits. (devoir, conseil)", "options": ["devrais", "devras", "dois", "devais"], "answer": "devrais", "explanation_ar": "النصيحة المهذبة تُقال بالـ conditionnel: devr- + ais.", "rule_ar": "conditionnel للنصيحة والأدب." },
-            { "id": "e2g8", "type": "text", "marks": 2, "prompt_fr": "(Faire, vous) ___ vos devoirs !", "answer": "Faites", "explanation_ar": "أمر faire مع vous هو faites (شاذ).", "rule_ar": "الأمر: نحذف ضمير الفاعل، وfaire ← faites." }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "model-3", "title_ar": "نموذج امتحان شامل (3)", "title_fr": "Modèle d’examen n° 3", "level": "3sec", "duration_min": 60,
-      "instructions_ar": "الدرجة الكاملة 40 (كل سؤال درجتان). اقرأ كل نص جيداً ثم اختر إجابة واحدة لكل سؤال.",
-      "sections": [
-        {
-          "id": "texte1", "title_ar": "قطعة الفهم الأولى", "title_fr": "Compréhension de l’écrit – Texte 1",
-          "passage_fr": "Faire du sport régulièrement est excellent pour la santé. Le sport renforce le cœur, aide à mieux dormir et diminue le stress. Les médecins recommandent au moins trente minutes d’activité physique par jour. Il n’est pas nécessaire de faire du sport de haut niveau : marcher, nager ou jouer au football avec ses amis suffit. L’important est de choisir une activité que l’on aime.",
-          "questions": [
-            { "id": "e3r1", "type": "choice", "marks": 2, "prompt_fr": "Combien de minutes d’activité les médecins recommandent-ils par jour ?", "options": ["Dix minutes", "Au moins trente minutes", "Deux heures", "Une heure et demie"], "answer": "Au moins trente minutes", "explanation_ar": "النص يقول إن الأطباء يوصون بثلاثين دقيقة على الأقل من النشاط البدني يومياً.", "rule_ar": "انتبه إلى الأرقام في النص." },
-            { "id": "e3r2", "type": "choice", "marks": 2, "prompt_fr": "Quel est un bienfait du sport cité dans le texte ?", "options": ["Il aide à mieux dormir", "Il fait grossir", "Il remplace le repas", "Il donne soif"], "answer": "Il aide à mieux dormir", "explanation_ar": "من فوائد الرياضة في النص: تقوية القلب وتحسين النوم وتقليل التوتر.", "rule_ar": "استخرج الإجابة من الجملة التي تعدد الفوائد." },
-            { "id": "e3r3", "type": "choice", "marks": 2, "prompt_fr": "Faut-il faire du sport de haut niveau ?", "options": ["Oui, c’est obligatoire", "Non, marcher ou nager suffit", "Oui, tous les jours", "Seulement à l’école"], "answer": "Non, marcher ou nager suffit", "explanation_ar": "النص يقول إنه ليس من الضروري ممارسة رياضة احترافية، فالمشي أو السباحة يكفيان.", "rule_ar": "il n’est pas nécessaire de تعني ليس من الضروري." },
-            { "id": "e3r4", "type": "choice", "marks": 2, "prompt_fr": "Que faut-il choisir, d’après le texte ?", "options": ["Un sport difficile", "Une activité que l’on aime", "Un sport d’équipe seulement", "Un sport cher"], "answer": "Une activité que l’on aime", "explanation_ar": "الجملة الأخيرة تقول إن المهم هو اختيار نشاط نحبه.", "rule_ar": "الجملة الختامية غالباً تحمل الفكرة الرئيسية." }
-          ]
-        },
-        {
-          "id": "texte2", "title_ar": "قطعة الفهم الثانية", "title_fr": "Compréhension de l’écrit – Texte 2",
-          "passage_fr": "Tous les vendredis, il y a un grand marché dans le quartier de Karim. Les marchands vendent des fruits, des légumes et des vêtements. Karim accompagne sa mère pour porter les sacs. Elle achète toujours des tomates et des oranges parce qu’elles sont fraîches et moins chères qu’au supermarché. Karim aime l’ambiance du marché, car les gens discutent et rient.",
-          "questions": [
-            { "id": "e3r5", "type": "choice", "marks": 2, "prompt_fr": "Quand a lieu le marché ?", "options": ["Tous les samedis", "Tous les vendredis", "Tous les jours", "Une fois par mois"], "answer": "Tous les vendredis", "explanation_ar": "الجملة الأولى تقول: Tous les vendredis، أي كل يوم جمعة.", "rule_ar": "انتبه إلى الأزمنة والتواريخ في النص." },
-            { "id": "e3r6", "type": "choice", "marks": 2, "prompt_fr": "Pourquoi Karim accompagne-t-il sa mère ?", "options": ["Pour acheter des vêtements", "Pour porter les sacs", "Pour vendre des fruits", "Pour parler avec le marchand"], "answer": "Pour porter les sacs", "explanation_ar": "النص: Karim accompagne sa mère pour porter les sacs.", "rule_ar": "pour + مصدر تعبّر عن الهدف." },
-            { "id": "e3r7", "type": "choice", "marks": 2, "prompt_fr": "Pourquoi la mère achète-t-elle ses fruits au marché ?", "options": ["Ils sont plus gros", "Ils sont frais et moins chers", "Le marché est près de la maison", "Le supermarché est fermé"], "answer": "Ils sont frais et moins chers", "explanation_ar": "السبب بعد parce que: الفواكه طازجة وأرخص من السوبرماركت.", "rule_ar": "parce que / car تقدم السبب." },
-            { "id": "e3r8", "type": "choice", "marks": 2, "prompt_fr": "« moins chères qu’au supermarché » exprime :", "options": ["Une comparaison d’infériorité", "Une comparaison de supériorité", "Une égalité", "Une opposition"], "answer": "Une comparaison d’infériorité", "explanation_ar": "moins ... que تعني أقل من، وهي مقارنة بالنقصان.", "rule_ar": "moins ... que للنقصان، plus ... que للزيادة، aussi ... que للتساوي." }
-          ]
-        },
-        {
-          "id": "situations", "title_ar": "المواقف", "title_fr": "Situations de communication",
-          "questions": [
-            { "id": "e3s1", "type": "choice", "marks": 2, "prompt_fr": "Dans un magasin, vous cherchez une chemise de taille M. Vous demandez :", "options": ["Avez-vous cette chemise en taille M ?", "Où habitez-vous ?", "Quel âge avez-vous ?", "Quelle heure est-il ?"], "answer": "Avez-vous cette chemise en taille M ?", "explanation_ar": "السؤال عن توفر مقاس معين يكون بـ Avez-vous ... en taille ... ?", "rule_ar": "التسوق: Avez-vous...؟ Combien coûte...؟ Je prends..." },
-            { "id": "e3s2", "type": "choice", "marks": 2, "prompt_fr": "Vous cherchez la pharmacie. Vous demandez à un passant :", "options": ["Pardon, où est la pharmacie ?", "Combien coûte la pharmacie ?", "Quand est la pharmacie ?", "Qui est la pharmacie ?"], "answer": "Pardon, où est la pharmacie ?", "explanation_ar": "للسؤال عن المكان نستخدم où est ... ؟", "rule_ar": "السؤال عن الاتجاهات: Où est...؟ Pour aller à...؟" },
-            { "id": "e3s3", "type": "choice", "marks": 2, "prompt_fr": "Votre ami est malade. Vous lui dites :", "options": ["Bon rétablissement !", "Bon voyage !", "Bon appétit !", "Bonne chance !"], "answer": "Bon rétablissement !", "explanation_ar": "للمريض نقول Bon rétablissement أي الشفاء العاجل.", "rule_ar": "التمنيات: Bon voyage (سفر) – Bon appétit (طعام) – Bonne chance (حظ)." },
-            { "id": "e3s4", "type": "choice", "marks": 2, "prompt_fr": "Vous remerciez vos amis après un dîner. Vous dites :", "options": ["Merci pour cette excellente soirée !", "Bonjour tout le monde !", "Quelle heure est-il ?", "Je cherche la gare."], "answer": "Merci pour cette excellente soirée !", "explanation_ar": "للشكر على سهرة نقول Merci pour cette soirée.", "rule_ar": "الشكر: Merci pour + اسم." }
-          ]
-        },
-        {
-          "id": "grammar", "title_ar": "القواعد", "title_fr": "Grammaire",
-          "questions": [
-            { "id": "e3g1", "type": "choice", "marks": 2, "prompt_fr": "Elle ___ ses clés hier. (perdre)", "options": ["a perdu", "est perdue", "perd", "perdait"], "answer": "a perdu", "explanation_ar": "perdre يأخذ avoir في الماضي المركب، والحدث منتهٍ (hier).", "rule_ar": "passé composé مع avoir لمعظم الأفعال." },
-            { "id": "e3g2", "type": "choice", "marks": 2, "prompt_fr": "Quand je suis arrivé, elle ___ déjà partie.", "options": ["était", "a été", "serait", "sera"], "answer": "était", "explanation_ar": "الذهاب سبق الوصول، فنستخدم plus-que-parfait: était partie (être في imparfait).", "rule_ar": "plus-que-parfait: avoir/être في imparfait + participe passé." },
-            { "id": "e3g3", "type": "choice", "marks": 2, "prompt_fr": "Ce roman ___ par un écrivain célèbre. (écrire, présent)", "options": ["est écrit", "écrit", "a écrit", "était écrit"], "answer": "est écrit", "explanation_ar": "في المبني للمجهول نستخدم être + اسم المفعول، والزمن مضارع: est écrit.", "rule_ar": "passif: être (بزمن الفعل) + participe passé + par." },
-            { "id": "e3g4", "type": "choice", "marks": 2, "prompt_fr": "Le film ___ tu parles est excellent.", "options": ["dont", "que", "qui", "où"], "answer": "dont", "explanation_ar": "الفعل parler يأخذ de (parler de ce film)، فنستخدم dont.", "rule_ar": "dont تحل محل مركب بـ de." },
-            { "id": "e3g5", "type": "choice", "marks": 2, "prompt_fr": "Il est absent ___ il est malade.", "options": ["parce qu’", "donc", "bien que", "mais"], "answer": "parce qu’", "explanation_ar": "الغياب نتيجة للمرض، فنعبّر عن السبب بـ parce que، وتصبح parce qu’ قبل il.", "rule_ar": "parce que للسبب، donc للنتيجة، bien que للتعارض." },
-            { "id": "e3g6", "type": "text", "marks": 2, "prompt_fr": "Les lettres que j’ai ___ sont arrivées. (écrire)", "answer": "écrites", "explanation_ar": "المفعول به les lettres (مؤنث جمع) جاء قبل الفعل، فيتفق معه اسم المفعول: écrites.", "rule_ar": "مع avoir يتفق اسم المفعول مع المفعول به المتقدم." },
-            { "id": "e3g7", "type": "text", "marks": 2, "prompt_fr": "Tu connais Marie ? Oui, je ___ connais.", "answer": "la", "explanation_ar": "Marie مؤنث مفرد، فنستبدله بـ la (COD).", "rule_ar": "COD: le, la, l’, les." },
-            { "id": "e3g8", "type": "choice", "marks": 2, "prompt_fr": "Nous aimons ___ professeur.", "options": ["notre", "nos", "votre", "leur"], "answer": "notre", "explanation_ar": "professeur مفرد والمالك nous، فنستخدم notre.", "rule_ar": "صفات الملكية: notre/nos لـ nous." }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "model-4", "title_ar": "نموذج امتحان شامل (4)", "title_fr": "Modèle d’examen n° 4", "level": "3sec", "duration_min": 60,
-      "instructions_ar": "الدرجة الكاملة 40 (كل سؤال درجتان). اقرأ كل نص جيداً ثم اختر إجابة واحدة لكل سؤال.",
-      "sections": [
-        {
-          "id": "texte1", "title_ar": "قطعة الفهم الأولى", "title_fr": "Compréhension de l’écrit – Texte 1",
-          "passage_fr": "Dans son lycée, un groupe d’élèves a décidé de planter cinquante arbres dans la cour. Le directeur a accepté l’idée et il a offert les jeunes plantes. Chaque élève s’occupe d’un arbre : il l’arrose et le protège. Les élèves espèrent que ces arbres donneront de l’ombre et rendront l’air plus pur. Ils veulent aussi encourager les autres écoles à les imiter.",
-          "questions": [
-            { "id": "e4r1", "type": "choice", "marks": 2, "prompt_fr": "Combien d’arbres les élèves vont-ils planter ?", "options": ["Dix", "Vingt", "Cinquante", "Cent"], "answer": "Cinquante", "explanation_ar": "الجملة الأولى تقول إنهم قرروا زرع خمسين شجرة.", "rule_ar": "انتبه إلى الأرقام في النص." },
-            { "id": "e4r2", "type": "choice", "marks": 2, "prompt_fr": "Qui a offert les jeunes plantes ?", "options": ["Le directeur", "Un professeur", "Un parent", "Le ministre"], "answer": "Le directeur", "explanation_ar": "النص: Le directeur a accepté l’idée et il a offert les jeunes plantes.", "rule_ar": "استخرج الإجابة من الجملة المناسبة في النص." },
-            { "id": "e4r3", "type": "choice", "marks": 2, "prompt_fr": "Que fait chaque élève ?", "options": ["Il vend un arbre", "Il s’occupe d’un arbre", "Il coupe un arbre", "Il dessine un arbre"], "answer": "Il s’occupe d’un arbre", "explanation_ar": "الجملة الثالثة تقول إن كل تلميذ يعتني بشجرة: يسقيها ويحميها.", "rule_ar": "s’occuper de تعني يعتني بـ." },
-            { "id": "e4r4", "type": "choice", "marks": 2, "prompt_fr": "Que veulent encourager les élèves ?", "options": ["Les autres écoles à les imiter", "Les parents à acheter des arbres", "Les professeurs à voyager", "Les voisins à déménager"], "answer": "Les autres écoles à les imiter", "explanation_ar": "الجملة الأخيرة: Ils veulent aussi encourager les autres écoles à les imiter.", "rule_ar": "imiter تعني يقلّد، والضمير les يعود على التلاميذ." }
-          ]
-        },
-        {
-          "id": "texte2", "title_ar": "قطعة الفهم الثانية", "title_fr": "Compréhension de l’écrit – Texte 2",
-          "passage_fr": "Ce matin, un nouvel élève est arrivé dans la classe de Salma. Il s’appelle Adam et il vient de Marseille, en France. Il parle un peu arabe parce que sa mère est égyptienne. Au début, il était timide, mais ses camarades l’ont accueilli avec gentillesse. À midi, Salma lui a montré la cantine et ils ont déjeuné ensemble. Adam a dit qu’il se sentait déjà chez lui.",
-          "questions": [
-            { "id": "e4r5", "type": "choice", "marks": 2, "prompt_fr": "D’où vient Adam ?", "options": ["Du Caire", "De Marseille", "De Paris", "D’Alexandrie"], "answer": "De Marseille", "explanation_ar": "النص: Il vient de Marseille, en France.", "rule_ar": "venir de تدل على الأصل." },
-            { "id": "e4r6", "type": "choice", "marks": 2, "prompt_fr": "Pourquoi Adam parle-t-il un peu arabe ?", "options": ["Il a étudié à l’école", "Sa mère est égyptienne", "Il habite au Caire", "Son père est professeur"], "answer": "Sa mère est égyptienne", "explanation_ar": "السبب بعد parce que: أمه مصرية.", "rule_ar": "parce que تقدم السبب." },
-            { "id": "e4r7", "type": "choice", "marks": 2, "prompt_fr": "Comment Adam était-il au début ?", "options": ["Timide", "En colère", "Bavard", "Fatigué"], "answer": "Timide", "explanation_ar": "النص: Au début, il était timide، أي كان خجولاً في البداية.", "rule_ar": "الصفات الدالة على الشعور تُستخرج من الجملة." },
-            { "id": "e4r8", "type": "choice", "marks": 2, "prompt_fr": "Qui a montré la cantine à Adam ?", "options": ["Le directeur", "Salma", "Le professeur", "Un surveillant"], "answer": "Salma", "explanation_ar": "النص: Salma lui a montré la cantine، أي سلمى هي التي أرته المقصف.", "rule_ar": "الضمير lui يعود على Adam." }
-          ]
-        },
-        {
-          "id": "situations", "title_ar": "المواقف", "title_fr": "Situations de communication",
-          "questions": [
-            { "id": "e4s1", "type": "choice", "marks": 2, "prompt_fr": "Vous invitez un ami samedi soir. Vous lui demandez :", "options": ["Tu es libre samedi soir ?", "Tu as quel âge ?", "Tu habites où ?", "Tu travailles beaucoup ?"], "answer": "Tu es libre samedi soir ?", "explanation_ar": "قبل الدعوة نسأل عن الوقت المتاح: Tu es libre...؟", "rule_ar": "الدعوة: Tu es libre...؟ Tu veux venir...؟" },
-            { "id": "e4s2", "type": "choice", "marks": 2, "prompt_fr": "Votre ami donne son avis et vous êtes du même avis. Vous dites :", "options": ["Je suis d’accord avec toi.", "Je ne comprends pas.", "Je suis fatigué.", "Je n’ai pas faim."], "answer": "Je suis d’accord avec toi.", "explanation_ar": "للتعبير عن الموافقة نقول Je suis d’accord.", "rule_ar": "التعبير عن الرأي: Je suis d’accord / Je ne suis pas d’accord." },
-            { "id": "e4s3", "type": "choice", "marks": 2, "prompt_fr": "Au restaurant, vous voulez payer. Vous dites :", "options": ["L’addition, s’il vous plaît.", "Bon appétit !", "La carte, s’il vous plaît.", "À votre santé !"], "answer": "L’addition, s’il vous plaît.", "explanation_ar": "لطلب الحساب نقول L’addition, s’il vous plaît.", "rule_ar": "المطعم: la carte (القائمة) – l’addition (الحساب)." },
-            { "id": "e4s4", "type": "choice", "marks": 2, "prompt_fr": "Vous ne pouvez pas accepter une invitation. Vous répondez poliment :", "options": ["Merci, mais je ne peux pas.", "Non, je déteste ça.", "Ça ne m’intéresse pas du tout.", "Laisse-moi tranquille."], "answer": "Merci, mais je ne peux pas.", "explanation_ar": "الرفض المهذب يبدأ بالشكر ثم الاعتذار: Merci, mais je ne peux pas.", "rule_ar": "الرفض المهذب: Merci, mais... + سبب." }
-          ]
-        },
-        {
-          "id": "grammar", "title_ar": "القواعد", "title_fr": "Grammaire",
-          "questions": [
-            { "id": "e4g1", "type": "choice", "marks": 2, "prompt_fr": "Il faut que nous ___ à l’heure. (être)", "options": ["soyons", "sommes", "serons", "serions"], "answer": "soyons", "explanation_ar": "il faut que يتطلب subjonctif، وصيغة être مع nous هي soyons.", "rule_ar": "il faut que + subjonctif." },
-            { "id": "e4g2", "type": "choice", "marks": 2, "prompt_fr": "Je pense que tu ___ raison. (avoir)", "options": ["as", "aies", "auras", "ait"], "answer": "as", "explanation_ar": "penser que في الإثبات تتبعها indicatif وليس subjonctif.", "rule_ar": "penser que (إثبات) + indicatif." },
-            { "id": "e4g3", "type": "choice", "marks": 2, "prompt_fr": "Si tu viens, nous ___ au cinéma.", "options": ["irons", "irions", "allions", "étions allés"], "answer": "irons", "explanation_ar": "si + مضارع ← مستقبل: nous irons.", "rule_ar": "si + présent ← futur." },
-            { "id": "e4g4", "type": "choice", "marks": 2, "prompt_fr": "Il a dit : « Je suis fatigué. » → Il a dit qu’il ___ fatigué.", "options": ["était", "est", "sera", "serait"], "answer": "était", "explanation_ar": "présent يتحول إلى imparfait في الكلام غير المباشر بعد فعل في الماضي.", "rule_ar": "الكلام غير المباشر: présent ← imparfait." },
-            { "id": "e4g5", "type": "text", "marks": 2, "prompt_fr": "Elle étudie en ___ de la musique. (écouter)", "answer": "écoutant", "explanation_ar": "الجيرونديف = en + participe présent: جذر nous écoutons ← écout- + ant.", "rule_ar": "gérondif: en + verbe-ant للتزامن." },
-            { "id": "e4g6", "type": "choice", "marks": 2, "prompt_fr": "C’est ___ meilleur élève de la classe.", "options": ["le", "la", "les", "un"], "answer": "le", "explanation_ar": "صيغة التفضيل تستعمل أداة التعريف: le meilleur.", "rule_ar": "superlatif: le/la/les + meilleur أو plus/moins + صفة." },
-            { "id": "e4g7", "type": "choice", "marks": 2, "prompt_fr": "___ coûte ce stylo ? – Deux livres.", "options": ["Combien", "Comment", "Où", "Pourquoi"], "answer": "Combien", "explanation_ar": "الإجابة ثمن، فنسأل بـ combien.", "rule_ar": "combien للثمن والعدد." },
-            { "id": "e4g8", "type": "choice", "marks": 2, "prompt_fr": "Nous ___ levons à sept heures.", "options": ["nous", "me", "se", "vous"], "answer": "nous", "explanation_ar": "الفعل الانعكاسي مع nous يأخذ الضمير nous.", "rule_ar": "الأفعال الانعكاسية: me, te, se, nous, vous, se." }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "model-5", "title_ar": "نموذج امتحان شامل (5)", "title_fr": "Modèle d’examen n° 5", "level": "3sec", "duration_min": 60,
-      "instructions_ar": "الدرجة الكاملة 40 (كل سؤال درجتان). اقرأ كل نص جيداً ثم اختر إجابة واحدة لكل سؤال.",
-      "sections": [
-        {
-          "id": "texte1", "title_ar": "قطعة الفهم الأولى", "title_fr": "Compréhension de l’écrit – Texte 1",
-          "passage_fr": "Lire un livre chaque semaine améliore le vocabulaire et l’orthographe. La lecture développe aussi l’imagination et aide à mieux comprendre les autres. Beaucoup d’élèves pensent qu’ils n’ont pas assez de temps pour lire, mais quinze minutes par jour suffisent. On peut lire dans le bus, avant de dormir ou pendant la pause. Le plus difficile, c’est de commencer : une fois qu’on a trouvé un livre passionnant, on ne peut plus s’arrêter.",
-          "questions": [
-            { "id": "e5r1", "type": "choice", "marks": 2, "prompt_fr": "Qu’est-ce que la lecture améliore ?", "options": ["Le vocabulaire et l’orthographe", "La vitesse de course", "La vue", "Le poids"], "answer": "Le vocabulaire et l’orthographe", "explanation_ar": "الجملة الأولى تقول إن القراءة تحسن المفردات والإملاء.", "rule_ar": "استخرج الإجابة من الجملة المناسبة في النص." },
-            { "id": "e5r2", "type": "choice", "marks": 2, "prompt_fr": "Combien de temps par jour suffit pour lire ?", "options": ["Cinq minutes", "Quinze minutes", "Deux heures", "Une heure"], "answer": "Quinze minutes", "explanation_ar": "النص: quinze minutes par jour suffisent.", "rule_ar": "انتبه إلى الأرقام في النص." },
-            { "id": "e5r3", "type": "choice", "marks": 2, "prompt_fr": "Où peut-on lire, d’après le texte ?", "options": ["Dans le bus", "Seulement à la bibliothèque", "Seulement à l’école", "Au cinéma"], "answer": "Dans le bus", "explanation_ar": "النص يذكر أماكن للقراءة: في الحافلة وقبل النوم وأثناء الاستراحة.", "rule_ar": "استخرج الإجابة من الجملة المناسبة في النص." },
-            { "id": "e5r4", "type": "choice", "marks": 2, "prompt_fr": "Selon le texte, qu’est-ce qui est le plus difficile ?", "options": ["Commencer", "Finir", "Choisir un lieu", "Acheter un livre"], "answer": "Commencer", "explanation_ar": "النص: Le plus difficile, c’est de commencer، أي أصعب شيء هو البداية.", "rule_ar": "le plus difficile تدل على صيغة التفضيل." }
-          ]
-        },
-        {
-          "id": "texte2", "title_ar": "قطعة الفهم الثانية", "title_fr": "Compréhension de l’écrit – Texte 2",
-          "passage_fr": "Au Caire, des millions de personnes utilisent les transports en commun chaque jour. Le métro est rapide et peu cher, mais il est souvent plein à l’heure de pointe. Les bus sont moins rapides à cause des embouteillages. Pour réduire la pollution, la ville construit de nouvelles lignes de métro et encourage les habitants à marcher ou à faire du vélo.",
-          "questions": [
-            { "id": "e5r5", "type": "choice", "marks": 2, "prompt_fr": "Quel est l’avantage du métro ?", "options": ["Il est rapide et peu cher", "Il est toujours vide", "Il passe devant chez tous", "Il est gratuit"], "answer": "Il est rapide et peu cher", "explanation_ar": "النص: Le métro est rapide et peu cher.", "rule_ar": "استخرج الإجابة من الجملة المناسبة في النص." },
-            { "id": "e5r6", "type": "choice", "marks": 2, "prompt_fr": "Pourquoi les bus sont-ils moins rapides ?", "options": ["À cause des embouteillages", "Parce qu’ils sont vieux", "Parce qu’ils sont chers", "À cause de la pluie"], "answer": "À cause des embouteillages", "explanation_ar": "النص: Les bus sont moins rapides à cause des embouteillages.", "rule_ar": "à cause de تعبّر عن سبب سلبي." },
-            { "id": "e5r7", "type": "choice", "marks": 2, "prompt_fr": "Que construit la ville ?", "options": ["De nouveaux aéroports", "De nouvelles lignes de métro", "De nouvelles écoles", "De nouveaux ponts"], "answer": "De nouvelles lignes de métro", "explanation_ar": "الجملة الأخيرة تقول إن المدينة تبني خطوطاً جديدة للمترو.", "rule_ar": "استخرج الإجابة من الجملة المناسبة في النص." },
-            { "id": "e5r8", "type": "choice", "marks": 2, "prompt_fr": "« Pour réduire la pollution » exprime :", "options": ["Le but", "La cause", "L’opposition", "La comparaison"], "answer": "Le but", "explanation_ar": "pour + مصدر تعبّر عن الهدف: الهدف هنا تقليل التلوث.", "rule_ar": "pour + مصدر للهدف." }
-          ]
-        },
-        {
-          "id": "situations", "title_ar": "المواقف", "title_fr": "Situations de communication",
-          "questions": [
-            { "id": "e5s1", "type": "choice", "marks": 2, "prompt_fr": "Dans un magasin, vous cherchez un cadeau pour votre père. Vous dites :", "options": ["Je cherche un cadeau pour mon père.", "Je suis un cadeau.", "Où est mon père ?", "Mon père cherche un magasin."], "answer": "Je cherche un cadeau pour mon père.", "explanation_ar": "للتعبير عن البحث عن شيء نقول Je cherche + المطلوب.", "rule_ar": "التسوق: Je cherche... / Je voudrais... / Je prends..." },
-            { "id": "e5s2", "type": "choice", "marks": 2, "prompt_fr": "Votre ami a réussi son examen. Vous lui dites :", "options": ["Félicitations, tu as réussi !", "Quel dommage !", "Bon voyage !", "À demain !"], "answer": "Félicitations, tu as réussi !", "explanation_ar": "لتهنئة ناجح نقول Félicitations.", "rule_ar": "التهنئة: Félicitations / Bravo." },
-            { "id": "e5s3", "type": "choice", "marks": 2, "prompt_fr": "Vous quittez votre professeur à la fin du cours. Vous dites :", "options": ["Au revoir, monsieur, à demain !", "Bonjour, monsieur !", "Bon appétit !", "Pardon, monsieur."], "answer": "Au revoir, monsieur, à demain !", "explanation_ar": "عند الوداع نقول Au revoir ثم الموعد القادم.", "rule_ar": "الوداع: Au revoir, À demain, À bientôt." },
-            { "id": "e5s4", "type": "choice", "marks": 2, "prompt_fr": "Chez le médecin, vous expliquez votre problème. Vous dites :", "options": ["J’ai mal à la gorge depuis hier.", "Je suis très content.", "J’adore le football.", "J’habite au Caire."], "answer": "J’ai mal à la gorge depuis hier.", "explanation_ar": "لوصف الألم نقول J’ai mal à + العضو ونذكر المدة بـ depuis.", "rule_ar": "الصحة: J’ai mal à + العضو، depuis + مدة." }
-          ]
-        },
-        {
-          "id": "grammar", "title_ar": "القواعد", "title_fr": "Grammaire",
-          "questions": [
-            { "id": "e5g1", "type": "choice", "marks": 2, "prompt_fr": "Hier, nous ___ au parc quand il a commencé à pleuvoir. (jouer)", "options": ["jouions", "avons joué", "jouerons", "jouons"], "answer": "jouions", "explanation_ar": "حدث جارٍ في الماضي قاطعه حدث آخر (commencé à pleuvoir) ← imparfait.", "rule_ar": "imparfait للحدث الجاري، وpassé composé للحدث الذي يقطعه." },
-            { "id": "e5g2", "type": "choice", "marks": 2, "prompt_fr": "Bien qu’il ___ malade, il va à l’école. (être)", "options": ["soit", "est", "sera", "serait"], "answer": "soit", "explanation_ar": "bien que يتطلب subjonctif، وصيغة être مع il هي soit.", "rule_ar": "bien que + subjonctif." },
-            { "id": "e5g3", "type": "choice", "marks": 2, "prompt_fr": "Les copies ___ par le professeur. (corriger, présent)", "options": ["sont corrigées", "sont corrigés", "est corrigée", "ont corrigé"], "answer": "sont corrigées", "explanation_ar": "les copies مؤنث جمع، والمبني للمجهول في المضارع: sont + corrigées.", "rule_ar": "passif: être + participe passé متفقاً مع الفاعل." },
-            { "id": "e5g4", "type": "choice", "marks": 2, "prompt_fr": "Tu as vu mes clés ? Oui, je les ai ___. (voir)", "options": ["vues", "vu", "vus", "voir"], "answer": "vues", "explanation_ar": "الضمير les (مؤنث جمع) جاء قبل الفعل، فيتفق معه اسم المفعول: vues.", "rule_ar": "مع avoir يتفق اسم المفعول مع COD المتقدم." },
-            { "id": "e5g5", "type": "text", "marks": 2, "prompt_fr": "Complétez avec « dont » ou « où » : La ville ___ je suis né est grande.", "answer": "où", "explanation_ar": "ville مكان، فنستخدم où.", "rule_ar": "où للمكان والزمان، dont لـ de." },
-            { "id": "e5g6", "type": "text", "marks": 2, "prompt_fr": "Demain, il ___ beau. (faire, futur simple)", "answer": "fera", "explanation_ar": "جذر faire في المستقبل شاذ: fer- + a.", "rule_ar": "المستقبل الشاذ: faire ← fer-." },
-            { "id": "e5g7", "type": "choice", "marks": 2, "prompt_fr": "Tu vas à l’école ? Oui, j’___ vais.", "options": ["y", "en", "le", "lui"], "answer": "y", "explanation_ar": "à l’école مكان، فنستبدله بـ y.", "rule_ar": "y يحل محل مكان مسبوق بـ à أو dans." },
-            { "id": "e5g8", "type": "choice", "marks": 2, "prompt_fr": "Je ___ un café, s’il vous plaît. (vouloir, politesse)", "options": ["voudrais", "voudrai", "veux", "voulais"], "answer": "voudrais", "explanation_ar": "للطلب المهذب نستخدم conditionnel: voudr- + ais.", "rule_ar": "conditionnel للأدب." }
-          ]
-        }
-      ]
+
+    /* ---------- نطق الفرنسية (للأسئلة والنصوص الفرنسية الصريحة فقط) ---------- */
+    function frOnly(t) {
+      var s = String(t || '');
+      if (AR.test(s)) return '';
+      s = s.replace(/_{2,}/g, ' ... ').replace(/\[[^\]\n]*\]/g, ' ')
+        .split(/\s+/).filter(function (w) { return w && !IPA.test(w); }).join(' ').trim();
+      return LAT.test(s) ? s : '';
     }
-  ],
-  "grammaire": [
-    {
-      "id": "gram_1",
-      "icon": "book-open",
-      "title": "La Structure de la Phrase",
-      "title_ar": "تركيب الجملة في الفرنسية",
-      "level": "Débutant",
-      "audio_lang": "fr-FR",
-      "explanation": "La phrase simple en français se compose de trois éléments principaux : le Sujet, le Verbe et le Complément (S + V + C).",
-      "explanation_ar": "تتكون الجملة البسيطة في اللغة الفرنسية من ثلاثة عناصر أساسية: الفاعل، الفعل، والمفعول به (S + V + C).",
-      "examples": [
-        {
-          "fr": "Le professeur explique la leçon.",
-          "ar": "المعلم يشرح الدرس."
-        },
-        {
-          "fr": "Paul mange une pomme.",
-          "ar": "بول يأكل تفاحة."
-        }
-      ]
-    },
-    {
-      "id": "gram_2",
-      "icon": "map-pin",
-      "title": "Les Prépositions",
-      "title_ar": "حروف الجر (Les Prépositions)",
-      "audio_lang": "fr-FR",
-      "explanation": "Les prépositions servent à lier des mots dans la phrase. Exemples : à, de, dans, sur, sous, avec, pour.",
-      "explanation_ar": "تُستخدم حروف الجر لربط الكلمات في الجملة. أمثلة: في/إلى (à)، من/عن (de)، في/داخل (dans)، على (sur)، تحت (sous)، مع (avec)، لأجل (pour).",
-      "examples": [
-        {
-          "fr": "Je vais à l'école avec mon ami.",
-          "ar": "أنا أذهب إلى المدرسة مع صديقي."
-        },
-        {
-          "fr": "Le livre est sur la table.",
-          "ar": "الكتاب على الطاولة."
-        }
-      ]
-    },
-    {
-      "id": "gram_3",
-      "icon": "user-check",
-      "title": "Les Adjectifs Possessifs",
-      "title_ar": "أدوات الملكية (Les Adjectifs Possessifs)",
-      "audio_lang": "fr-FR",
-      "explanation": "Ils expriment la possession : (mon, ma, mes) pour 'je' ; (ton, ta, tes) pour 'tu' ; (son, sa, ses) pour 'il/elle'.",
-      "explanation_ar": "تُستخدم للتعبير عن الملكية: (mon, ma, mes) للمتكلم 'أنا'؛ (ton, ta, tes) للمخاطب 'أنت'؛ (son, sa, ses) للغائب 'هو/هي'.",
-      "examples": [
-        {
-          "fr": "Mon père aime sa voiture.",
-          "ar": "أبي يحب سيارته."
-        },
-        {
-          "fr": "J'aime mes études.",
-          "ar": "أنا أحب دراستي."
-        }
-      ]
-    },
-    {
-      "id": "gram_4",
-      "icon": "pie-chart",
-      "title": "Les Articles Partitifs",
-      "title_ar": "أدوات التجزئة (Les Articles Partitifs)",
-      "audio_lang": "fr-FR",
-      "explanation": "On utilise (du, de la, de l', des) pour désigner une quantité indéterminée d'une chose qu'on ne peut pas compter.",
-      "explanation_ar": "نستخدم (du, de la, de l', des) للتعبير عن كمية غير محدودة من شيء لا يمكن عده (الأطعمة والمشروبات والمواد).",
-      "examples": [
-        {
-          "fr": "Je bois du lait et mange de la viande.",
-          "ar": "أشرب بعض الحليب وآكل بعض اللحم."
-        },
-        {
-          "fr": "Il achète de l'eau et des fruits.",
-          "ar": "هو يشتري بعض الماء والفاكهة."
-        }
-      ]
-    },
-    {
-      "id": "gram_5",
-      "icon": "file-text",
-      "title": "Participe Présent et Participe Passé",
-      "title_ar": "اسم الفاعل واسم المفعول",
-      "audio_lang": "fr-FR",
-      "explanation": "Le participe présent finit souvent par '-ant' (parlant). Le participe passé s'utilise pour les temps composés (parlé, fini, vendu).",
-      "explanation_ar": "ينتهي اسم الفاعل (Participe Présent) غالباً بـ '-ant' (مُتحدثاً). بينما يُستخدم اسم المفعول (Participe Passé) لبناء الأزمنة المركبة.",
-      "examples": [
-        {
-          "fr": "En étudiant bien, tu réussiras.",
-          "ar": "بالدراسة الجيدة (بكونك تدرس جيداً)، ستنجح."
-        },
-        {
-          "fr": "J'ai fini mon devoir.",
-          "ar": "أنهيت واجبي."
-        }
-      ]
-    },
-    {
-      "id": "gram_6",
-      "icon": "corner-up-right",
-      "title": "Les Compléments Directs et Indirects",
-      "title_ar": "المفعول المباشر وغير المباشر (COD / COI)",
-      "audio_lang": "fr-FR",
-      "explanation": "Le COD est relié directement au verbe sans préposition. Le COI est relié au verbe par une préposition (à, de).",
-      "explanation_ar": "المفعول المباشر (COD) يرتبط بالفعل مباشرة بدون حرف جر. بينما المفعول غير المباشر (COI) يسبقه حرف جر مثل (à, de).",
-      "examples": [
-        {
-          "fr": "Je vois mon ami. (COD)",
-          "ar": "أنا أرى صديقي. (مفعول مباشر)"
-        },
-        {
-          "fr": "Je parle à mon ami. (COI)",
-          "ar": "أنا أتحدث إلى صديقي. (مفعول غير مباشر)"
-        }
-      ]
-    },
-    {
-      "id": "gram_7",
-      "icon": "repeat",
-      "title": "Voix Active et Voix Passive",
-      "title_ar": "المبني للمعلوم والمبني للمجهول",
-      "audio_lang": "fr-FR",
-      "explanation": "À la voix active, le sujet fait l'action. À la voix passive, le sujet subit l'action avec l'auxiliaire 'être' + participe passé.",
-      "explanation_ar": "في المبني للمعلوم يقوم الفاعل بالفعل. وفي المبني للمجهول يقع الفعل على الفاعل باستخدام الفعل المساعد 'être' + اسم المفعول.",
-      "examples": [
-        {
-          "fr": "Le chat mange la souris. (Active)",
-          "ar": "القط يأكل الفأر. (مبني للمعلوم)"
-        },
-        {
-          "fr": "La souris est mangée par le chat. (Passive)",
-          "ar": "الفأر يُؤكل بواسطة القط. (مبني للمجهول)"
-        }
-      ]
-    },
-    {
-      "id": "gram_8",
-      "icon": "clock",
-      "title": "Le Présent de l'Indicatif",
-      "title_ar": "زمن المضارع (Le Présent)",
-      "audio_lang": "fr-FR",
-      "explanation": "Le présent exprime une action qui se déroule au moment où l'on parle ou une habitude.",
-      "explanation_ar": "يعبر المضارع عن حدث يقع في لحظة الكلام أو يعبر عن عادة تكرارية.",
-      "examples": [
-        {
-          "fr": "Aujourd'hui, nous étudions le français.",
-          "ar": "اليوم، نحن نذكر/نتعلم اللغة الفرنسية."
-        }
-      ]
-    },
-    {
-      "id": "gram_9",
-      "icon": "fast-forward",
-      "title": "Le Futur Proche",
-      "title_ar": "المستقبل القريب (Le Futur Proche)",
-      "audio_lang": "fr-FR",
-      "explanation": "Il s'utilise pour une action imminente. Formation : Verbe Aller au présent + Verbe à l'infinitif.",
-      "explanation_ar": "يعبر عن حدث وشيك الوقوع جداً. التكوين: تصريف فعل (Aller) في المضارع + الفعل في المصدر.",
-      "examples": [
-        {
-          "fr": "Je vais visiter Paris demain.",
-          "ar": "سوف أزور باريس غداً."
-        }
-      ]
-    },
-    {
-      "id": "gram_10",
-      "icon": "calendar",
-      "title": "Le Futur Simple",
-      "title_ar": "المستقبل البسيط (Le Futur Simple)",
-      "audio_lang": "fr-FR",
-      "explanation": "Il exprime une action à venir plus lointaine. On prend l'infinitif et on ajoute : -ai, -as, -a, -ons, -ez, -ont.",
-      "explanation_ar": "يعبر عن حدث في المستقبل البعيد. التكوين: المصدر + النهايات (-ai, -as, -a, -ons, -ez, -ont).",
-      "examples": [
-        {
-          "fr": "L'année prochaine, nous voyagerons en France.",
-          "ar": "العام القادم، سننسافر إلى فرنسا."
-        }
-      ]
-    },
-    {
-      "id": "gram_11",
-      "icon": "rewind",
-      "title": "Le Passé Récent",
-      "title_ar": "الماضي القريب (Le Passé Récent)",
-      "audio_lang": "fr-FR",
-      "explanation": "Il exprime une action venant de se terminer. Formation : Venir au présent + de + Infinitif.",
-      "explanation_ar": "يعبر عن حدث انتهى لتوه قبل لحظات. التكوين: تصريف فعل (Venir) في المضارع + de + الفعل في المصدر.",
-      "examples": [
-        {
-          "fr": "Je viens de finir mon travail.",
-          "ar": "لقد انتهيت للتو من عملي."
-        }
-      ]
-    },
-    {
-      "id": "gram_12",
-      "icon": "check-circle",
-      "title": "Le Passé Composé",
-      "title_ar": "الماضي المركب (Le Passé Composé)",
-      "audio_lang": "fr-FR",
-      "explanation": "Il exprime une action ponctuelle et terminée dans le passé. Formation : Avoir ou Être au présent + Participe passé.",
-      "explanation_ar": "يعبر عن حدث محدد وانتهى تماماً في الماضي. التكوين: فعل Avoir أو Être في المضارع + اسم المفعول.",
-      "examples": [
-        {
-          "fr": "Hier, j'ai regardé un film intéressant.",
-          "ar": "أمس، شاهدتُ فيلماً ممتعاً."
-        }
-      ]
-    },
-    {
-      "id": "gram_13",
-      "icon": "history",
-      "title": "L'Imparfait",
-      "title_ar": "الماضي الناقص (L'Imparfait)",
-      "audio_lang": "fr-FR",
-      "explanation": "Il s'utilise pour la description, les habitudes du passé ou des actions longues. Endings : -ais, -ais, -ait, -ions, -iez, -aient.",
-      "explanation_ar": "يُستخدم للوصف، العادات القديمة، أو أحداث استمرت لفترة في الماضي. النهايات: (-ais, -ais, -ait, -ions, -iez, -aient).",
-      "examples": [
-        {
-          "fr": "Quand j'étais petit, j'habitais à la campagne.",
-          "ar": "عندما كنت صغيراً، كنت أعيش في الريف."
-        }
-      ]
-    },
-    {
-      "id": "gram_14",
-      "icon": "layers",
-      "title": "Le Plus-que-parfait",
-      "title_ar": "الماضي التام (Le Plus-que-parfait)",
-      "audio_lang": "fr-FR",
-      "explanation": "Il exprime une action passée qui s'est produite avant une autre action passée. Formation : Avoir/Être à l'imparfait + Participe passé.",
-      "explanation_ar": "يعبر عن حدث في الماضي تم قبل حدث آخر في الماضي أيضاً. التكوين: (Avoir/Être) في الماضي الناقص + اسم المفعول.",
-      "examples": [
-        {
-          "fr": "Quand il est arrivé, j'avais déjà mangé.",
-          "ar": "عندما وصل هو، كنتُ قد أكلتُ بالفعل."
-        }
-      ]
+    function sayBtn(t) {
+      var c = frOnly(t);
+      return c ? '<button type="button" class="ex-say" data-say="' + esc(encodeURIComponent(c)) + '" aria-label="استمع بالفرنسية">🔊</button>' : '';
     }
-  ]
-}
+    function speakFr(text) {
+      try {
+        var sy = window.speechSynthesis;
+        if (!sy || typeof SpeechSynthesisUtterance === 'undefined') return;
+        sy.cancel();
+        var u = new SpeechSynthesisUtterance(text);
+        u.lang = 'fr-FR';
+        u.rate = 0.9;
+        var v = (sy.getVoices() || []).filter(function (x) { return /^fr/i.test(x.lang); })[0];
+        if (v) u.voice = v;
+        sy.speak(u);
+      } catch (e) {}
+    }
+
+    /* ---------- النماذج الجديدة: الصف الأول الثانوي (سهلة) ---------- */
+    function C(p, o, a, x) { return { type: 'choice', marks: 2, prompt_fr: p, options: o, answer: a, explanation_ar: x }; }
+    function T(p, a, x) { return { type: 'text', marks: 2, prompt_fr: p, answer: a, explanation_ar: x }; }
+    function mk(n, ar, fr, txt, txtAr, qa, qg, qv) {
+      return {
+        id: 'easy-1sec-' + n, level: '1sec', title_ar: ar, title_fr: fr, duration_min: 30,
+        instructions_ar: 'الدرجة الكاملة 20 (كل سؤال درجتان). اقرأ النص جيداً ثم أجب. الوقت 30 دقيقة.',
+        sections: [
+          { title_ar: 'قطعة الفهم', title_fr: 'Compréhension', text: txt, text_ar: txtAr, questions: qa },
+          { title_ar: 'القواعد', title_fr: 'Grammaire', questions: qg },
+          { title_ar: 'المفردات', title_fr: 'Vocabulaire', questions: qv }
+        ]
+      };
+    }
+    var BUILTIN = [
+      mk(1, 'نموذج سهل (1): التعارف والعائلة', 'Modèle facile n° 1 : Se présenter et la famille',
+        "Bonjour ! Je m'appelle Sara. J'ai quinze ans et j'habite au Caire avec ma famille. Mon père est médecin et ma mère est professeur. J'ai un frère, Omar, et une sœur, Mona. Nous aimons passer le week-end chez notre grand-mère à Alexandrie.",
+        'مرحباً! اسمي سارة. عمري خمسة عشر عاماً وأسكن في القاهرة مع عائلتي. أبي طبيب وأمي مدرّسة. لدي أخ اسمه عمر وأخت اسمها منى. نحب قضاء عطلة نهاية الأسبوع عند جدتنا في الإسكندرية.',
+        [C('Comment s\'appelle la jeune fille ?', ['Mona', 'Sara', 'Omar', 'Nour'], 'Sara', 'النص يبدأ بـ « Je m\'appelle Sara » أي اسمها سارة.'),
+         C('Quel âge a Sara ?', ['Treize ans', 'Quatorze ans', 'Quinze ans', 'Seize ans'], 'Quinze ans', '« J\'ai quinze ans » = عمري خمسة عشر عاماً.'),
+         C('Quelle est la profession du père de Sara ?', ['Médecin', 'Professeur', 'Ingénieur', 'Avocat'], 'Médecin', '« Mon père est médecin » = أبي طبيب.'),
+         C('Où la famille passe-t-elle le week-end ?', ['Au Caire', 'Chez la grand-mère à Alexandrie', 'À la mer', 'À l\'école'], 'Chez la grand-mère à Alexandrie', '« Nous aimons passer le week-end chez notre grand-mère à Alexandrie ».')],
+        [T('Complétez avec le verbe être : Nous ____ égyptiens.', 'sommes', 'تصريف être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.'),
+         C('J\'___ un frère et une sœur.', ['ai', 'suis', 'as', 'a'], 'ai', 'avoir مع je: j\'ai (نحذف e قبل حرف متحرك).'),
+         C('Sara présente sa famille : « Voici ___ mère. »', ['ma', 'mon', 'mes', 'leur'], 'ma', 'الصفة الملكية للمؤنث المفرد (المتكلم): ma mère. وللمذكر: mon père.')],
+        [C('Le frère de ma mère est mon ___.', ['oncle', 'cousin', 'neveu', 'grand-père'], 'oncle', 'أخو الأم = oncle (خال).'),
+         T('Traduisez en français : جدّة', ['grand-mère', 'grand mère', 'la grand-mère', 'ma grand-mère'], 'جدّة = grand-mère.'),
+         C('Choisissez la bonne phrase :', ['Elle s\'appelle Mona.', 'Elle m\'appelle Mona.', 'Elle t\'appelle Mona.', 'Elle nous appelle Mona.'], 'Elle s\'appelle Mona.', 'الفعل المنعكس s\'appeler: ضمير الانعكاس يتبع الفاعل (elle → se).')]),
+      mk(2, 'نموذج سهل (2): الحياة اليومية والمدرسة', 'Modèle facile n° 2 : La vie quotidienne et l\'école',
+        "Tous les matins, Karim se réveille à sept heures. Il prend son petit déjeuner, puis il va à l'école à pied. Les cours commencent à huit heures et finissent à deux heures. À midi, Karim mange un sandwich avec ses amis. Après l'école, il fait ses devoirs et il joue au football.",
+        'كل صباح يستيقظ كريم في السابعة. يتناول إفطاره ثم يذهب إلى المدرسة سيراً على الأقدام. تبدأ الحصص في الثامنة وتنتهي في الثانية. وعند الظهر يأكل كريم شطيرة مع أصدقائه. بعد المدرسة يؤدي واجباته ويلعب كرة القدم.',
+        [C('À quelle heure Karim se réveille-t-il ?', ['À six heures', 'À sept heures', 'À huit heures', 'À deux heures'], 'À sept heures', '« Karim se réveille à sept heures ».'),
+         C('Comment Karim va-t-il à l\'école ?', ['En bus', 'À pied', 'En voiture', 'À vélo'], 'À pied', '« il va à l\'école à pied » = سيراً على الأقدام.'),
+         C('À quelle heure les cours finissent-ils ?', ['À midi', 'À une heure', 'À deux heures', 'À huit heures'], 'À deux heures', '« Les cours commencent à huit heures et finissent à deux heures ».'),
+         C('Que fait Karim après l\'école ?', ['Il dort', 'Il voyage', 'Il fait ses devoirs et joue au football', 'Il travaille'], 'Il fait ses devoirs et joue au football', '« il fait ses devoirs et il joue au football ».')],
+        [C('Tu ___ à sept heures. (se lever)', ['te lèves', 'se lève', 'me lève', 'nous levons'], 'te lèves', 'الفعل المنعكس se lever مع tu: tu te lèves.'),
+         T('Complétez avec « va » ou « vont » : Les élèves ____ à l\'école.', 'vont', 'الفاعل جمع (ils) فنقول: ils vont. aller: je vais, tu vas, il va, nous allons, vous allez, ils vont.'),
+         C('Il est huit heures et demie, c\'est :', ['8 h 15', '8 h 30', '8 h 45', '8 h 50'], '8 h 30', 'et demie = ونصف = 30 دقيقة.')],
+        [C('On écrit sur le tableau avec ___.', ['une craie', 'une fourchette', 'un oreiller', 'une chaise'], 'une craie', 'نكتب على السبورة بالطباشير (une craie).'),
+         T('Traduisez en français : كتاب', ['livre', 'un livre', 'le livre'], 'كتاب = livre (un livre).'),
+         C('Le contraire de « commencer » est :', ['finir', 'ouvrir', 'partir', 'entrer'], 'finir', 'عكس commencer (يبدأ) هو finir (ينتهي).')]),
+      mk(3, 'نموذج سهل (3): الطعام والتسوّق', 'Modèle facile n° 3 : La nourriture et les courses',
+        "Aujourd'hui, Mme Nadia va au marché. Elle achète un kilo de tomates, deux kilos de pommes de terre, une bouteille d'huile et du fromage. Elle n'achète pas de viande parce qu'elle prépare un repas végétarien. Elle paie cinquante livres.",
+        'اليوم تذهب السيدة نادية إلى السوق. تشتري كيلو من الطماطم وكيلوين من البطاطس وزجاجة زيت وبعض الجبن. لا تشتري لحماً لأنها تعدّ وجبة نباتية. تدفع خمسين جنيهاً.',
+        [C('Où va Mme Nadia ?', ['Au marché', 'À la mosquée', 'À l\'hôpital', 'Au cinéma'], 'Au marché', '« Mme Nadia va au marché ».'),
+         C('Combien de kilos de pommes de terre achète-t-elle ?', ['Un', 'Deux', 'Trois', 'Cinq'], 'Deux', '« deux kilos de pommes de terre ».'),
+         C('Pourquoi n\'achète-t-elle pas de viande ?', ['Elle n\'a pas d\'argent', 'Elle prépare un repas végétarien', 'Le boucher est fermé', 'Elle déteste le marché'], 'Elle prépare un repas végétarien', '« parce qu\'elle prépare un repas végétarien ».'),
+         C('Combien paie-t-elle ?', ['Vingt livres', 'Trente livres', 'Cinquante livres', 'Cent livres'], 'Cinquante livres', '« Elle paie cinquante livres ».')],
+        [C('Je mange ___ pain.', ['du', 'de la', 'des', 'les'], 'du', 'pain اسم مذكر مفرد: du pain (du = de + le).'),
+         C('Elle boit ___ eau.', ['de l\'', 'du', 'des', 'un'], 'de l\'', 'eau تبدأ بحرف متحرك فنستخدم de l\' : de l\'eau.'),
+         T('Il n\'y a pas ___ lait. (de / du)', ['de', 'd\''], 'بعد النفي (ne ... pas) يتحول du / de la / des إلى de أو d\' : Il n\'y a pas de lait.')],
+        [C('Un fruit :', ['une pomme', 'une carotte', 'un poulet', 'un fromage'], 'une pomme', 'التفاحة (une pomme) فاكهة، أما الجزر (une carotte) فخضار.'),
+         T('Traduisez en français : ماء', ['eau', 'l\'eau', 'de l\'eau'], 'ماء = eau.'),
+         C('Le petit déjeuner est le repas du ___.', ['matin', 'soir', 'midi', 'minuit'], 'matin', 'وجبة الإفطار petit déjeuner هي وجبة الصباح (matin).')]),
+      mk(4, 'نموذج سهل (4): المدينة والاتجاهات', 'Modèle facile n° 4 : La ville et les directions',
+        "Mariam visite Lyon. Elle cherche la pharmacie. Elle demande son chemin à une dame. La dame dit : « Allez tout droit, puis tournez à gauche. La pharmacie est à côté de la boulangerie. » Mariam dit : « Merci beaucoup, madame ! »",
+        'تزور مريم مدينة ليون. تبحث عن الصيدلية. تسأل سيدة عن الطريق. تقول السيدة: «اذهبي على الطريق مستقيماً ثم انعطفي يساراً. الصيدلية بجوار المخبز.» تقول مريم: «شكراً جزيلاً يا سيدتي!»',
+        [C('Que cherche Mariam ?', ['La gare', 'La pharmacie', 'L\'école', 'La banque'], 'La pharmacie', '« Elle cherche la pharmacie ».'),
+         C('Mariam demande son chemin à ___.', ['un policier', 'une dame', 'un enfant', 'son ami'], 'une dame', '« Elle demande son chemin à une dame ».'),
+         C('Où est la pharmacie ?', ['En face de la poste', 'À côté de la boulangerie', 'Derrière l\'école', 'Loin d\'ici'], 'À côté de la boulangerie', '« La pharmacie est à côté de la boulangerie ».'),
+         C('Pour arriver à la pharmacie, Mariam doit tourner ___.', ['à droite', 'à gauche', 'en arrière', 'deux fois'], 'à gauche', '« tournez à gauche » = انعطفي يساراً.')],
+        [C('Le musée est ___ la banque et la poste.', ['entre', 'sur', 'chez', 'vers'], 'entre', 'entre ... et ... = بين ... و ...'),
+         C('___ à droite, s\'il vous plaît. (tourner)', ['Tournez', 'Tournes', 'Tourner', 'Tournons'], 'Tournez', 'الأمر مع vous: Tournez (ينتهي بـ ez).'),
+         T('Complétez : Je vais ___ poste. (au / à la)', ['à la', 'a la'], 'poste اسم مؤنث: à + la = à la. (أما المذكر: à + le = au).')],
+        [C('On prend le train à ___.', ['la gare', 'la poste', 'l\'hôpital', 'la mosquée'], 'la gare', 'نركب القطار من المحطة (la gare).'),
+         T('Traduisez en français : شارع', ['rue', 'la rue', 'une rue'], 'شارع = rue.'),
+         C('Le contraire de « loin » est :', ['près', 'tard', 'grand', 'droit'], 'près', 'عكس loin (بعيد) هو près (قريب).')]),
+      mk(5, 'نموذج سهل (5): الهوايات والطقس والملابس', 'Modèle facile n° 5 : Les loisirs, le temps et les vêtements',
+        "En été, il fait chaud en Égypte. Nada et ses amies vont à la plage. Elles portent un maillot de bain, des lunettes de soleil et un chapeau. Elles nagent, elles jouent au volley et elles mangent des glaces. En hiver, elles préfèrent rester à la maison et lire des livres.",
+        'في الصيف يكون الجو حاراً في مصر. تذهب ندى وصديقاتها إلى الشاطئ. يرتدين ملابس السباحة ونظارات شمسية وقبعة. يسبحن ويلعبن الكرة الطائرة ويأكلن الآيس كريم. وفي الشتاء يفضلن البقاء في المنزل وقراءة الكتب.',
+        [C('Quel temps fait-il en été en Égypte ?', ['Il fait froid', 'Il pleut', 'Il fait chaud', 'Il neige'], 'Il fait chaud', '« En été, il fait chaud en Égypte ».'),
+         C('Où vont Nada et ses amies ?', ['À la montagne', 'À la plage', 'Au cinéma', 'À l\'école'], 'À la plage', '« vont à la plage » = يذهبن إلى الشاطئ.'),
+         C('Que portent-elles ?', ['Un manteau', 'Un maillot de bain, des lunettes de soleil et un chapeau', 'Un pull', 'Des bottes'], 'Un maillot de bain, des lunettes de soleil et un chapeau', 'النص: « un maillot de bain, des lunettes de soleil et un chapeau ».'),
+         C('Que font-elles en hiver ?', ['Elles nagent', 'Elles voyagent', 'Elles restent à la maison et lisent', 'Elles jouent au volley'], 'Elles restent à la maison et lisent', '« elles préfèrent rester à la maison et lire des livres ».')],
+        [C('J\'aime ___ au football.', ['jouer', 'joue', 'joues', 'jouez'], 'jouer', 'بعد الفعل aimer نستعمل المصدر: J\'aime jouer.'),
+         C('Demain, nous ___ visiter le musée. (aller)', ['allons', 'allez', 'vont', 'vais'], 'allons', 'المستقبل القريب: aller + مصدر. مع nous: nous allons.'),
+         T('Complétez : Il ___ froid en hiver. (faire)', 'fait', 'للتعبير عن الطقس: il fait froid / il fait chaud (faire مع il = fait).')],
+        [C('En hiver, on porte ___.', ['un manteau', 'un maillot de bain', 'des sandales', 'un short'], 'un manteau', 'في الشتاء نرتدي معطفاً (un manteau).'),
+         T('Traduisez en français : مطر', ['pluie', 'la pluie'], 'مطر = pluie (la pluie).'),
+         C('Un sport d\'équipe :', ['le football', 'la natation', 'le yoga', 'le ski'], 'le football', 'كرة القدم (le football) رياضة جماعية.')])
+    ];
+
+    /* ---------- قراءة الامتحانات من data/exams.json (أي بنية مألوفة) ---------- */
+    function loadExams() {
+      var c = ['./data/exams.json', 'data/exams.json', '/data/exams.json'], i = 0;
+      function next() {
+        if (i >= c.length) return Promise.resolve(null);
+        return fetch(c[i++]).then(function (r) { return r.ok ? r.text() : Promise.reject(); })
+          .then(function (t) { return JSON.parse(t.replace(/^\uFEFF/, '')); })
+          .catch(next);
+      }
+      return next();
+    }
+    function findExams(n, out, seen) {
+      if (!n || typeof n !== 'object' || seen.indexOf(n) !== -1) return;
+      seen.push(n);
+      if (Array.isArray(n)) {
+        if (n.length && n.every(function (x) { return x && typeof x === 'object' && (Array.isArray(x.sections) || Array.isArray(x.parts) || Array.isArray(x.questions)); })) {
+          n.forEach(function (x) { out.push(x); });
+          return;
+        }
+        n.forEach(function (x) { findExams(x, out, seen); });
+        return;
+      }
+      if (Array.isArray(n.sections) && !out.length && n.sections.length && n.sections[0] && Array.isArray(n.sections[0].questions) && (n.id || n.title_ar)) { out.push(n); return; }
+      Object.keys(n).forEach(function (k) { if (k !== 'meta') findExams(n[k], out, seen); });
+    }
+    function normQ(q) {
+      var opts = q.options || q.choices;
+      opts = Array.isArray(opts) ? opts.map(String) : [];
+      var ans = q.answer !== undefined ? q.answer : (q.correct !== undefined ? q.correct : q.solution);
+      var has = !(ans === undefined || ans === null || ans === '');
+      var type = opts.length ? 'choice' : (has ? 'text' : 'open');
+      if (type === 'choice' && has) {
+        if (typeof ans === 'number' && opts[ans] !== undefined) ans = opts[ans];
+        else if (typeof ans === 'string' && /^[A-Da-d]$/.test(ans.trim()) && !opts.some(function (o) { return nrm(o) === nrm(ans); })) {
+          var ix = 'abcd'.indexOf(ans.trim().toLowerCase());
+          if (opts[ix] !== undefined) ans = opts[ix];
+        }
+      }
+      var list = !has ? [] : (Array.isArray(ans) ? ans.map(String) : (type === 'text' ? String(ans).split('|').map(function (x) { return x.trim(); }) : [String(ans)]));
+      return {
+        type: type, marks: Number(q.marks) > 0 ? Number(q.marks) : 1,
+        prompt: strOf(q, ['prompt_fr', 'prompt', 'question', 'q', 'text']),
+        promptAr: strOf(q, ['prompt_ar', 'instruction_ar']),
+        opts: opts, answers: list,
+        exp: strOf(q, ['explanation_ar', 'explanation', 'why_ar', 'why', 'hint_ar', 'hint']), state: null
+      };
+    }
+    function normExam(e, i) {
+      var raw = e.sections || e.parts || [];
+      if (!raw.length && Array.isArray(e.questions)) raw = [{ questions: e.questions }];
+      var secs = raw.map(function (s) {
+        var qs = s.questions || s.items || s.exercises || [];
+        return {
+          tAr: strOf(s, ['title_ar', 'name_ar']), tFr: strOf(s, ['title_fr', 'title', 'name']),
+          text: strOf(s, ['text', 'passage', 'text_fr', 'reading', 'content', 'document']),
+          textAr: strOf(s, ['text_ar', 'translation_ar', 'passage_ar']),
+          qs: qs.filter(function (o) { return o && typeof o === 'object'; }).map(normQ)
+        };
+      }).filter(function (s) { return s.qs.length; });
+      var tAr = strOf(e, ['title_ar', 'name_ar']), tFr = strOf(e, ['title_fr', 'title', 'name']);
+      if (!tAr && AR.test(tFr)) { tAr = tFr; tFr = ''; }
+      var lvl = String(e.level || e.year || '');
+      var all = []; secs.forEach(function (s) { s.qs.forEach(function (q) { all.push(q); }); });
+      var scored = all.filter(function (q) { return q.type !== 'open'; });
+      return {
+        id: String(e.id || ('exam-' + i)), level: lvl, tAr: tAr || ('نموذج امتحان ' + (i + 1)), tFr: tFr,
+        dur: Number(e.duration_min) > 0 ? Number(e.duration_min) : 30, instr: strOf(e, ['instructions_ar', 'instructions']),
+        secs: secs, count: all.length,
+        total: scored.reduce(function (a, q) { return a + q.marks; }, 0)
+      };
+    }
+
+    /* ---------- التصميم ---------- */
+    var CSS = '' +
+      '.ex-wrap{display:flex;flex-direction:column;gap:12px}' +
+      '.ex-wrap [hidden]{display:none!important}' +
+      '.ex-intro{background:linear-gradient(135deg,#0055A5,#0a7ad6);color:#fff;border-radius:16px;padding:14px;line-height:1.9;font-size:.95rem}' +
+      '.ex-chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}' +
+      '.ex-chip{flex:0 0 auto;border:1px solid #d5deea;background:#fff;border-radius:999px;padding:7px 14px;font-family:inherit;cursor:pointer;white-space:nowrap;color:inherit}' +
+      '.ex-chip.on{background:#0055A5;color:#fff;border-color:#0055A5}' +
+      '.ex-card{background:#fff;border:1px solid #d5deea;border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:8px;box-shadow:0 2px 8px rgba(0,40,100,.06)}' +
+      '.ex-ct b{display:block;color:#0055A5;font-size:1.05rem;line-height:1.6}' +
+      '.ex-ct small{color:#667;display:block;margin-top:2px}' +
+      '.ex-meta{display:flex;flex-wrap:wrap;gap:6px}' +
+      '.ex-pill{background:#eef5ff;color:#0055A5;border-radius:999px;padding:3px 10px;font-size:.8rem}' +
+      '.ex-best{font-size:.85rem;color:#1b9e5b;font-weight:700}' +
+      '.ex-btn{border:0;background:#0055A5;color:#fff;border-radius:12px;padding:11px 16px;font-weight:700;font-family:inherit;cursor:pointer;font-size:1rem}' +
+      '.ex-btn.alt{background:#fff;color:#0055A5;border:2px solid #0055A5}' +
+      '.ex-bar{position:sticky;top:var(--ex-top,0);z-index:30;background:#fff;border:1px solid #d5deea;border-radius:14px;padding:8px 10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:space-between;box-shadow:0 3px 10px rgba(0,0,0,.12)}' +
+      '.ex-timer{font-weight:800;font-size:1.3rem;color:#0055A5;font-variant-numeric:tabular-nums}' +
+      '.ex-bar.warn .ex-timer{color:#d63a3a;animation:exbl 1s infinite}' +
+      '@keyframes exbl{50%{opacity:.45}}' +
+      '.ex-prog{font-size:.85rem;color:#556}' +
+      '.ex-small{border:1px solid #d5deea;background:#fff;border-radius:10px;padding:6px 10px;font-family:inherit;cursor:pointer;font-size:.85rem;color:inherit}' +
+      '.ex-small.red{background:#d63a3a;color:#fff;border-color:#d63a3a}' +
+      '.ex-pb{flex-basis:100%;height:6px;background:#e6ecf5;border-radius:999px;overflow:hidden}' +
+      '.ex-pb i{display:block;height:100%;width:0;background:#1b9e5b;transition:width .3s}' +
+      '.ex-title{margin:0;color:#0055A5;line-height:1.6}' +
+      '.ex-instr{background:#fff8e1;border-radius:12px;padding:10px 12px;font-size:.92rem;line-height:1.8}' +
+      '.ex-sech{margin:6px 0 0;color:#d63a3a;font-size:1.05rem}' +
+      '.ex-pass{background:#f4f9ff;border-inline-start:4px solid #0055A5;border-radius:12px;padding:12px;line-height:1.95;direction:ltr;text-align:left;font-size:1.02rem}' +
+      '.ex-tr{font-size:.9rem;color:#445;direction:rtl;text-align:right;line-height:1.9;margin-top:8px}' +
+      '.ex-tr summary{cursor:pointer;color:#0055A5;font-weight:700}' +
+      '.ex-q{background:#fff;border:2px solid #e3eaf4;border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px;transition:border-color .2s,background .2s}' +
+      '.ex-q.st-ok{border-color:#1b9e5b;background:#f1fbf5}' +
+      '.ex-q.st-bad{border-color:#d63a3a;background:#fff4f4}' +
+      '.ex-q.st-skip{border-color:#e0a800;background:#fffaf0}' +
+      '.ex-q.st-view{border-color:#0055A5}' +
+      '.ex-qh{display:flex;justify-content:space-between;align-items:center}' +
+      '.ex-num{background:#0055A5;color:#fff;border-radius:50%;width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;font-weight:700}' +
+      '.ex-mk{font-size:.78rem;background:#fff4d6;color:#8a6500;border-radius:999px;padding:2px 10px}' +
+      '.ex-prompt{font-weight:700;line-height:1.8}' +
+      '.ex-pa{color:#556;font-size:.88rem}' +
+      '.ex-say{background:#eef5ff;border:1px solid #b8d5ff;border-radius:50%;width:28px;height:28px;font-size:14px;margin-inline:8px;cursor:pointer;padding:0;vertical-align:middle}' +
+      '.ex-opts{display:flex;flex-direction:column;gap:8px}' +
+      '.ex-opt{display:flex;align-items:center;gap:10px;text-align:start;width:100%;border:2px solid #d5deea;background:#fff;border-radius:12px;padding:11px 12px;font-family:inherit;font-size:1rem;cursor:pointer;transition:.15s;color:inherit}' +
+      '.ex-opt:active{transform:scale(.98)}' +
+      '.ex-opt i{font-style:normal;flex:0 0 26px;height:26px;border-radius:50%;background:#eef5ff;color:#0055A5;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem}' +
+      '.ex-opt.ok{background:#dff5e8;border-color:#1b9e5b;color:#0d6b3b;animation:expop .35s}' +
+      '.ex-opt.bad{background:#fde3e3;border-color:#d63a3a;color:#a11d1d;animation:exsk .4s}' +
+      '.ex-opt.ok i{background:#1b9e5b;color:#fff}.ex-opt.bad i{background:#d63a3a;color:#fff}' +
+      '.ex-opt:disabled{cursor:default}' +
+      '.ex-txt{display:flex;gap:8px}' +
+      '.ex-input,.ex-area{flex:1;min-width:0;font-size:16px;padding:10px 12px;border:2px solid #d5deea;border-radius:12px;font-family:inherit;background:#fff}' +
+      '.ex-area{min-height:90px;width:100%;box-sizing:border-box}' +
+      '.ex-input.ok{border-color:#1b9e5b;background:#dff5e8}.ex-input.bad{border-color:#d63a3a;background:#fde3e3}' +
+      '.ex-fb{border-radius:12px;padding:9px 12px;line-height:1.8;font-size:.95rem}' +
+      '.ex-fb.ok{background:#dff5e8;color:#0d6b3b}.ex-fb.bad{background:#fde3e3;color:#a11d1d}.ex-fb.skip{background:#fff1cc;color:#7a5800}.ex-fb.view{background:#e6f0ff;color:#0b3d7a}' +
+      '.ex-exp{margin-top:4px;color:#334;background:rgba(255,255,255,.75);border-radius:8px;padding:6px 8px}' +
+      '.ex-res{background:#fff;border:2px solid #0055A5;border-radius:18px;padding:16px;text-align:center;display:flex;flex-direction:column;gap:10px;scroll-margin-top:calc(var(--ex-top,0px) + 80px)}' +
+      '.ex-ring{--c:#1b9e5b;--p:0;width:110px;height:110px;border-radius:50%;background:conic-gradient(var(--c) calc(var(--p)*1%),#e6ecf5 0);margin:auto;position:relative}' +
+      '.ex-ring::after{content:attr(data-t);position:absolute;inset:10px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.4rem;color:#0055A5}' +
+      '.ex-stats{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;font-weight:700}' +
+      '.ex-acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}' +
+      '.ex-ovl{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(0,0,0,.65);z-index:99998;display:flex;align-items:center;justify-content:center;padding:20px}' +
+      '.ex-ovb{background:#fff;border-radius:18px;padding:24px;text-align:center;max-width:320px;animation:expop .4s}' +
+      '.ex-bell{font-size:56px;animation:exring .6s infinite}' +
+      '@keyframes expop{0%{transform:scale(.96)}50%{transform:scale(1.04)}100%{transform:scale(1)}}' +
+      '@keyframes exsk{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}' +
+      '@keyframes exring{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(12deg)}}';
+
+    /* ---------- قائمة النماذج ---------- */
+    function bestOf(id) {
+      try { var b = JSON.parse(store('ex_best_' + id)); return b && typeof b.pct === 'number' ? b : null; } catch (e) { return null; }
+    }
+    function cardHTML(e) {
+      var b = bestOf(e.id);
+      return '<div class="ex-card"><div class="ex-ct"><b dir="auto">' + esc(e.tAr) + '</b>' + (e.tFr ? '<small dir="auto">' + esc(e.tFr) + '</small>' : '') + '</div>' +
+        '<div class="ex-meta"><span class="ex-pill">⏱ ' + e.dur + ' دقيقة</span><span class="ex-pill">📝 ' + e.count + ' سؤال</span><span class="ex-pill">🎯 ' + e.total + ' درجة</span>' +
+        (e.level ? '<span class="ex-pill">' + esc(LV[e.level] || e.level) + '</span>' : '') + '</div>' +
+        (b ? '<div class="ex-best">🏆 أفضل نتيجة: ' + b.sc + ' / ' + b.tot + ' (' + b.pct + '%)</div>' : '') +
+        '<button type="button" class="ex-btn" data-start="' + EX.indexOf(e) + '">▶ ابدأ الامتحان</button></div>';
+    }
+    function renderList() {
+      var levels = [];
+      EX.forEach(function (e) { if (e.level && levels.indexOf(e.level) === -1) levels.push(e.level); });
+      levels.sort();
+      var tabs = '<button type="button" class="ex-chip' + (filter === 'all' ? ' on' : '') + '" data-f="all">الكل (' + EX.length + ')</button>' +
+        levels.map(function (l) {
+          return '<button type="button" class="ex-chip' + (filter === l ? ' on' : '') + '" data-f="' + esc(l) + '">' + esc(LV[l] || l) + '</button>';
+        }).join('');
+      var list = EX.filter(function (e) { return filter === 'all' || e.level === filter; });
+      root.innerHTML = '<div class="ex-intro">📝 امتحانات تفاعلية بمؤقت حقيقي. أجب عن الأسئلة بنفسك، وستُصحَّح كل إجابة فوراً: <b>🟩 أخضر</b> للصحيح و<b>🟥 أحمر</b> للخطأ، مع شرح الحل للتعلّم. عند انتهاء الوقت يصدر تنبيه صوتي.</div>' +
+        '<div class="ex-chips">' + tabs + '</div>' +
+        (list.length ? list.map(cardHTML).join('') : '<div class="ex-card">لا توجد نماذج في هذا المستوى.</div>');
+    }
+
+    /* ---------- صفحة الامتحان ---------- */
+    function qHTML(q, n, gi) {
+      var h = '<div class="ex-q" data-qi="' + gi + '"><div class="ex-qh"><span class="ex-num">' + n + '</span>' +
+        (q.type !== 'open' ? '<span class="ex-mk">' + q.marks + ' درجة</span>' : '<span class="ex-mk">تدريب حر</span>') + '</div>' +
+        '<div class="ex-prompt" dir="auto">' + esc(q.prompt) + sayBtn(q.prompt) + '</div>' +
+        (q.promptAr ? '<div class="ex-pa" dir="auto">' + esc(q.promptAr) + '</div>' : '');
+      if (q.type === 'choice') {
+        h += '<div class="ex-opts">' + q.opts.map(function (o, i) {
+          return '<button type="button" class="ex-opt" data-oi="' + i + '"><i>' + 'ABCDEFGH'.charAt(i) + '</i><span dir="auto">' + esc(o) + '</span></button>';
+        }).join('') + '</div>';
+      } else if (q.type === 'text') {
+        h += '<div class="ex-txt"><input type="text" class="ex-input" dir="ltr" placeholder="اكتب إجابتك بالفرنسية" autocomplete="off" autocapitalize="off" spellcheck="false"><button type="button" class="ex-btn ex-check">تحقق</button></div>';
+      } else {
+        h += '<textarea class="ex-area" dir="auto" placeholder="اكتب إجابتك هنا..."></textarea><button type="button" class="ex-btn alt ex-show">عرض الإجابة النموذجية</button>';
+      }
+      return h + '<div class="ex-fb" hidden></div></div>';
+    }
+    function renderExam() {
+      var e = run.e, gi = 0, n = 0;
+      var body = e.secs.map(function (s) {
+        var h = '';
+        var t = (s.tAr && s.tFr) ? s.tAr + ' — ' + s.tFr : (s.tAr || s.tFr);
+        if (t) h += '<h4 class="ex-sech" dir="auto">' + esc(t) + '</h4>';
+        if (s.text) {
+          h += '<div class="ex-pass">' + esc(s.text) + sayBtn(s.text) +
+            (s.textAr ? '<details class="ex-tr"><summary>عرض الترجمة العربية</summary>' + esc(s.textAr) + '</details>' : '') + '</div>';
+        }
+        s.qs.forEach(function (q) { run.qs.push(q); h += qHTML(q, ++n, gi++); });
+        return h;
+      }).join('');
+      root.innerHTML = '<div class="ex-bar"><button type="button" class="ex-small ex-back">← القائمة</button>' +
+        '<span class="ex-timer">⏱ <span class="ex-time">' + fmt(e.dur * 60) + '</span></span>' +
+        '<span class="ex-prog">0 / ' + e.count + '</span>' +
+        '<button type="button" class="ex-small ex-snd">' + (soundOn ? '🔊' : '🔇') + '</button>' +
+        '<button type="button" class="ex-small red ex-finish">إنهاء</button>' +
+        '<div class="ex-pb"><i></i></div></div>' +
+        '<h3 class="ex-title" dir="auto">' + esc(e.tAr) + (e.tFr ? '<br><small>' + esc(e.tFr) + '</small>' : '') + '</h3>' +
+        (e.instr ? '<div class="ex-instr" dir="auto">📋 ' + esc(e.instr) + '</div>' : '') +
+        '<div class="ex-res" hidden></div>' + body;
+    }
+    function updateProg() {
+      if (!run) return;
+      var d = run.qs.filter(function (q) { return q.state; }).length;
+      var p = $('.ex-prog', root), pb = $('.ex-pb i', root);
+      if (p) p.textContent = d + ' / ' + run.qs.length;
+      if (pb) pb.style.width = (run.qs.length ? Math.round(d * 100 / run.qs.length) : 0) + '%';
+    }
+    function showFb(card, q, kind, note) {
+      var f = $('.ex-fb', card), ans = q.answers[0] || '', h;
+      if (kind === 'ok') h = '✅ أحسنت! إجابة صحيحة' + (note || '');
+      else if (kind === 'bad') h = '❌ إجابة خاطئة. الإجابة الصحيحة: <b dir="auto">' + esc(ans) + '</b>';
+      else if (kind === 'skip') h = '⏭️ لم تُجب. الإجابة الصحيحة: <b dir="auto">' + esc(ans) + '</b>';
+      else h = ans ? '📖 الإجابة النموذجية: <b dir="auto">' + esc(ans) + '</b>' : '📖 الحل:';
+      if (q.exp) h += '<div class="ex-exp" dir="auto">💡 ' + esc(q.exp) + '</div>';
+      f.className = 'ex-fb ' + kind;
+      f.innerHTML = h;
+      f.hidden = false;
+      card.classList.add('st-' + kind);
+    }
+    function lock(card) {
+      $$('button.ex-opt,input.ex-input,textarea.ex-area,button.ex-check,button.ex-show', card).forEach(function (x) { x.disabled = true; });
+    }
+    function ctx(el) {
+      var card = el.closest('.ex-q');
+      if (!card || !run || run.done) return null;
+      var q = run.qs[+card.getAttribute('data-qi')];
+      return q && !q.state ? { card: card, q: q } : null;
+    }
+    function pickOpt(btn) {
+      var c = ctx(btn);
+      if (!c) return;
+      var oi = +btn.getAttribute('data-oi');
+      var same = function (v) { return c.q.answers.some(function (a) { return nrm(a) === nrm(v); }); };
+      var ok = same(c.q.opts[oi]);
+      c.q.state = ok ? 'ok' : 'bad';
+      $$('button.ex-opt', c.card).forEach(function (b, i) {
+        b.disabled = true;
+        if (same(c.q.opts[i])) b.classList.add('ok'); else if (i === oi) b.classList.add('bad');
+      });
+      showFb(c.card, c.q, c.q.state);
+      sfx(ok ? 'ok' : 'bad');
+      updateProg();
+    }
+    function checkText(btn) {
+      var c = ctx(btn);
+      if (!c) return;
+      var inp = $('.ex-input', c.card), v = inp.value;
+      if (!v.trim()) { inp.focus(); return; }
+      var ok = c.q.answers.some(function (a) { return nrm(a) === nrm(v); }), note = '';
+      if (!ok && c.q.answers.some(function (a) { return plain(a) === plain(v); })) {
+        ok = true;
+        note = ' <small>(انتبه إلى الحروف المُعلَّمة، الكتابة الصحيحة: ' + esc(c.q.answers[0]) + ')</small>';
+      }
+      c.q.state = ok ? 'ok' : 'bad';
+      inp.classList.add(ok ? 'ok' : 'bad');
+      lock(c.card);
+      showFb(c.card, c.q, c.q.state, note);
+      sfx(ok ? 'ok' : 'bad');
+      updateProg();
+    }
+    function showOpen(btn) {
+      var c = ctx(btn);
+      if (!c) return;
+      c.q.state = 'view';
+      lock(c.card);
+      showFb(c.card, c.q, 'view');
+      updateProg();
+    }
+
+    /* ---------- المؤقت والنتيجة ---------- */
+    function clearRun() {
+      if (run && run.timer) clearInterval(run.timer);
+      run = null;
+      var o = $('.ex-ovl'); if (o && o.parentNode) o.parentNode.removeChild(o);
+    }
+    function tick() {
+      if (!run || run.done) return;
+      var left = run.deadline - Date.now(), total = run.e.dur * 60000;
+      var t = $('.ex-time', root), bar = $('.ex-bar', root);
+      if (t) t.textContent = fmt(left / 1000);
+      if (bar) { if (left <= Math.min(300000, total * 0.2)) bar.classList.add('warn'); else bar.classList.remove('warn'); }
+      if (!run.warned && left <= 60000 && total > 120000) { run.warned = true; sfx('warn'); }
+      if (left <= 0) finish(true);
+    }
+    function start(i) {
+      var e = EX[i];
+      if (!e) return;
+      ac();
+      clearRun();
+      e.secs.forEach(function (s) { s.qs.forEach(function (q) { q.state = null; }); });
+      run = { e: e, qs: [], t0: Date.now(), deadline: Date.now() + e.dur * 60000, done: false, warned: false, timer: null };
+      renderExam();
+      run.timer = setInterval(tick, 500);
+      tick();
+      try { window.scrollTo(0, 0); } catch (x) {}
+    }
+    function finish(timeout) {
+      if (!run || run.done) return;
+      run.done = true;
+      clearInterval(run.timer);
+      var ok = 0, bad = 0, skip = 0, sc = 0, tot = 0;
+      run.qs.forEach(function (q, gi) {
+        var card = $('[data-qi="' + gi + '"]', root);
+        if (!q.state) {
+          q.state = q.type === 'open' ? 'view' : 'skip';
+          if (card) { lock(card); showFb(card, q, q.state); }
+        }
+        if (q.type === 'open') return;
+        tot += q.marks;
+        if (q.state === 'ok') { ok++; sc += q.marks; } else if (q.state === 'bad') bad++; else skip++;
+      });
+      updateProg();
+      var pct = tot ? Math.round(sc * 100 / tot) : 0;
+      var el = Math.min(Date.now(), run.deadline) - run.t0;
+      var b = bestOf(run.e.id);
+      if (!b || pct > b.pct) store('ex_best_' + run.e.id, JSON.stringify({ sc: sc, tot: tot, pct: pct }));
+      var msg = pct >= 90 ? 'ممتاز! 🌟' : pct >= 75 ? 'جيد جداً 👏' : pct >= 50 ? 'جيد، واصل التقدم 👍' : 'تحتاج إلى مراجعة 📚';
+      var color = pct >= 75 ? '#1b9e5b' : pct >= 50 ? '#e0a800' : '#d63a3a';
+      var res = $('.ex-res', root);
+      if (res) {
+        res.innerHTML = '<h3 style="margin:0;color:#0055A5">' + (timeout ? '⏰ انتهى الوقت! ' : '') + 'نتيجتك</h3>' +
+          '<div class="ex-ring" style="--p:' + pct + ';--c:' + color + '" data-t="' + pct + '%"></div>' +
+          '<div style="font-size:1.1rem;font-weight:800">' + sc + ' / ' + tot + ' درجة — ' + msg + '</div>' +
+          '<div class="ex-stats"><span style="color:#1b9e5b">✅ ' + ok + '</span><span style="color:#d63a3a">❌ ' + bad + '</span><span style="color:#b07d00">⏭️ ' + skip + '</span><span style="color:#556">⏱ ' + fmt(el / 1000) + '</span></div>' +
+          '<div style="font-size:.9rem;color:#556">راجع الإجابات والشروحات بالأسفل 👇</div>' +
+          '<div class="ex-acts"><button type="button" class="ex-btn" data-again="1">🔁 أعد المحاولة</button><button type="button" class="ex-btn alt ex-back">📋 القائمة</button></div>';
+        res.hidden = false;
+      }
+      var fb = $('.ex-finish', root); if (fb) fb.disabled = true;
+      if (timeout) { sfx('alarm'); overlay(); } else { sfx(pct >= 50 ? 'win' : 'lose'); if (res && res.scrollIntoView) res.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    }
+    function overlay() {
+      var d = document.createElement('div');
+      d.className = 'ex-ovl';
+      d.innerHTML = '<div class="ex-ovb"><div class="ex-bell">⏰</div><h3 style="color:#d63a3a">انتهى الوقت!</h3><p>تم إنهاء الامتحان وعرض الحلول. شاهد نتيجتك بالأسفل.</p><button type="button" class="ex-btn ex-ovok">عرض النتيجة</button></div>';
+      document.body.appendChild(d);
+      d.addEventListener('click', function (ev) {
+        if (ev.target.closest('.ex-ovok') || ev.target === d) {
+          if (d.parentNode) d.parentNode.removeChild(d);
+          try { if (window.speechSynthesis) window.speechSynthesis.cancel(); } catch (x) {}
+          var r = $('.ex-res', root);
+          if (r && r.scrollIntoView) r.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+
+    /* ---------- الأحداث ---------- */
+    function onClick(e) {
+      var t = e.target, b;
+      if ((b = t.closest('.ex-say'))) { speakFr(decodeURIComponent(b.getAttribute('data-say') || '')); return; }
+      if ((b = t.closest('.ex-opt'))) { pickOpt(b); return; }
+      if ((b = t.closest('.ex-check'))) { checkText(b); return; }
+      if ((b = t.closest('.ex-show'))) { showOpen(b); return; }
+      if ((b = t.closest('[data-start]'))) { start(+b.getAttribute('data-start')); return; }
+      if ((b = t.closest('[data-f]'))) { filter = b.getAttribute('data-f'); renderList(); return; }
+      if ((b = t.closest('[data-again]'))) { start(EX.indexOf(run.e)); return; }
+      if ((b = t.closest('.ex-snd'))) {
+        soundOn = !soundOn;
+        store('ex_sound', soundOn ? 'on' : 'off');
+        b.textContent = soundOn ? '🔊' : '🔇';
+        return;
+      }
+      if ((b = t.closest('.ex-finish'))) {
+        if (!run || run.done) return;
+        var left = run.qs.filter(function (q) { return !q.state; }).length;
+        if (!left || confirm('لم تُجب عن ' + left + ' سؤال. هل تريد إنهاء الامتحان الآن؟')) finish(false);
+        return;
+      }
+      if ((b = t.closest('.ex-back'))) {
+        if (run && !run.done && !confirm('سيتم إلغاء الامتحان الحالي. هل أنت متأكد؟')) return;
+        clearRun();
+        renderList();
+        try { window.scrollTo(0, 0); } catch (x) {}
+      }
+    }
+
+    /* ---------- التشغيل عند فتح القسم لأول مرة ---------- */
+    function mount() {
+      if (started) return;
+      started = true;
+      if (!document.getElementById('ex-css')) {
+        var st = document.createElement('style');
+        st.id = 'ex-css';
+        st.textContent = CSS;
+        document.head.appendChild(st);
+      }
+      // إخفاء العرض القديم للقسم (بدون حذفه)
+      $$('.body', SEC).forEach(function (x) { x.style.display = 'none'; });
+      root = document.createElement('div');
+      root.className = 'ex-wrap';
+      SEC.appendChild(root);
+      try {
+        var tb = document.querySelector('.topbar');
+        var pos = tb ? window.getComputedStyle(tb).position : '';
+        root.style.setProperty('--ex-top', (pos === 'fixed' || pos === 'sticky') ? (tb.offsetHeight + 4) + 'px' : '0px');
+      } catch (x) {}
+      root.addEventListener('click', onClick);
+      root.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && e.target && e.target.classList && e.target.classList.contains('ex-input')) {
+          e.preventDefault();
+          var c = e.target.closest('.ex-q'), btn = c ? $('.ex-check', c) : null;
+          if (btn) checkText(btn);
+        }
+      });
+      root.innerHTML = '<div class="ex-intro">جاري تحميل الامتحانات...</div>';
+      loadExams().then(function (data) {
+        var found = [];
+        if (data) findExams(data, found, []);
+        EX = found.map(normExam).concat(BUILTIN.map(function (x, i) { return normExam(x, 100 + i); }))
+          .filter(function (e) { return e.count > 0; });
+        // الامتحانات الأصلية أولاً ثم النماذج الجديدة؛ ترتيب المستويات في التبويبات
+        renderList();
+      }).catch(function () {
+        EX = BUILTIN.map(function (x, i) { return normExam(x, 100 + i); });
+        renderList();
+      });
+    }
+    function check() { if (!started && SEC.classList.contains('on')) mount(); }
+    if (window.MutationObserver) new MutationObserver(check).observe(SEC, { attributes: true, attributeFilter: ['class'] });
+    check();
+  }
+})();
