@@ -1,461 +1,245 @@
 {
   "meta": {
-    "version": 6,
-    "title": {
-      "fr": "Modèles d'examens complets - Le Français Au Bac",
-      "ar": "نماذج الامتحانات الشاملة - منهج الثانوية العامة للغة الفرنسية",
-      "phonetic": {
-        "fr": "/mɔdɛl dɛɡzamɛ̃ kɔ̃plɛt/",
-        "ar": "موديل ديجزمان كومبليت"
-      }
-    },
-    "note": {
-      "fr": "Dix modèles d'examens interactifs avec grammaire complète.",
-      "ar": "عشرة نماذج امتحانات تفاعلية متكاملة مع أقسام القواعد الشاملة.",
-      "phonetic": {
-        "fr": "/dis mɔdɛl dɛɡzamɛ̃/",
-        "ar": "ديس موديل ديجزمان"
-      }
-    }
+    "version": 3,
+    "note": "Five original model exams (40 marks each, 60 minutes) built on three parts: reading comprehension (two passages, four multiple-choice questions each), everyday situations, and grammar. In total: 10 passages, 40 reading questions, 20 situation questions and 40 grammar questions. Every question has the correct answer, an Arabic explanation and the related rule. Marks and duration are editable per exam: align them with the current official specification issued by the Ministry of Education."
   },
   "exams": [
     {
-      "id": "easy-1sec-1",
-      "level": "1sec",
-      "title_ar": "نموذج امتحان شامل (1): التعارف والعائلة والقواعد",
-      "title_fr": "Modèle d'examen n° 1 : Se présenter, la famille et grammaire",
-      "duration_min": 30,
-      "instructions_ar": "الدرجة الكاملة 20. اقرأ النص جيداً ثم أجب عن أسئلة الفهم والقواعد.",
+      "id": "model-1", "title_ar": "نموذج امتحان شامل (1)", "title_fr": "Modèle d’examen n° 1", "level": "3sec", "duration_min": 60,
+      "instructions_ar": "الدرجة الكاملة 40 (كل سؤال درجتان). اقرأ كل نص جيداً ثم اختر إجابة واحدة لكل سؤال.",
       "sections": [
         {
-          "title_ar": "قطعة الفهم",
-          "title_fr": "Compréhension",
-          "text": "Bonjour ! Je m'appelle Sara. J'ai quinze ans et j'habite au Caire avec ma famille. Mon père est médecin et ma mère est professeur. J'ai un frère, Omar, et une sœur, Mona. Nous aimons passer le week-end chez notre grand-mère à Alexandrie.",
-          "text_ar": "مرحباً! اسمي سارة. عمري خمسة عشر عاماً وأسكن في القاهرة مع عائلتي. أبي طبيب وأمي مدرّسة. لدي أخ اسمه عمر وأخت اسمها منى. نحب قضاء عطلة نهاية الأسبوع عند جدتنا في الإسكندرية.",
+          "id": "texte1", "title_ar": "قطعة الفهم الأولى", "title_fr": "Compréhension de l’écrit – Texte 1",
+          "passage_fr": "Chaque samedi, Sara va à la bibliothèque de son quartier avec sa sœur Mona. Elle y lit des romans et prépare ses devoirs. La semaine dernière, la bibliothécaire a organisé un concours de lecture pour les élèves. Sara a lu trois livres en deux semaines et elle a gagné le premier prix : un dictionnaire français-arabe. Elle était très heureuse.",
           "questions": [
-            {
-              "type": "choice",
-              "marks": 2,
-              "prompt_fr": "Comment s'appelle la jeune fille ?",
-              "prompt_ar": "ما اسم الفتاة؟",
-              "options": ["Mona", "Sara", "Omar", "Nour"],
-              "answer": "Sara",
-              "explanation_ar": "النص يبدأ بـ « Je m'appelle Sara » أي اسمها سارة."
-            },
-            {
-              "type": "choice",
-              "marks": 2,
-              "prompt_fr": "Quel âge a Sara ?",
-              "prompt_ar": "كم عمر سارة؟",
-              "options": ["Treize ans", "Quatorze ans", "Quinze ans", "Seize ans"],
-              "answer": "Quinze ans",
-              "explanation_ar": "« J'ai quinze ans » = عمري خمسة عشر عاماً."
-            },
-            {
-              "type": "choice",
-              "marks": 2,
-              "prompt_fr": "Quelle est la profession du père de Sara ?",
-              "prompt_ar": "ما هي مهنة والد سارة؟",
-              "options": ["Médecin", "Professeur", "Ingénieur", "Avocat"],
-              "answer": "Médecin",
-              "explanation_ar": "« Mon père est médecin » = أبي طبيب."
-            },
-            {
-              "type": "choice",
-              "marks": 2,
-              "prompt_fr": "Où la famille passe-t-elle le week-end ?",
-              "prompt_ar": "أين تقضي العائلة عطلة نهاية الأسبوع؟",
-              "options": ["Au Caire", "Chez la grand-mère à Alexandrie", "À la mer", "À l'école"],
-              "answer": "Chez la grand-mère à Alexandrie",
-              "explanation_ar": "« Nous aimons passer le week-end chez notre grand-mère à Alexandrie »."
-            }
+            { "id": "e1r1", "type": "choice", "marks": 2, "prompt_fr": "Avec qui Sara va-t-elle à la bibliothèque ?", "options": ["Avec sa mère", "Avec sa sœur Mona", "Avec son amie", "Avec sa professeure"], "answer": "Avec sa sœur Mona", "explanation_ar": "النص يقول إن سارة تذهب كل سبت إلى المكتبة مع أختها منى.", "rule_ar": "استخرج الإجابة من الجملة المناسبة في النص دون تخمين." },
+            { "id": "e1r2", "type": "choice", "marks": 2, "prompt_fr": "Qu’est-ce que la bibliothécaire a organisé ?", "options": ["Une fête", "Un voyage", "Un concours de lecture", "Un cours de français"], "answer": "Un concours de lecture", "explanation_ar": "ورد في النص أن أمينة المكتبة نظمت مسابقة قراءة للتلاميذ.", "rule_ar": "استخرج الإجابة من الجملة المناسبة في النص دون تخمين." },
+            { "id": "e1r3", "type": "choice", "marks": 2, "prompt_fr": "Combien de livres Sara a-t-elle lus ?", "options": ["Deux", "Trois", "Quatre", "Cinq"], "answer": "Trois", "explanation_ar": "النص: Sara a lu trois livres، أي قرأت ثلاثة كتب.", "rule_ar": "انتبه إلى الأرقام والتواريخ في النص." },
+            { "id": "e1r4", "type": "choice", "marks": 2, "prompt_fr": "« Elle était très heureuse » signifie :", "options": ["Elle était très fatiguée", "Elle était très contente", "Elle était très inquiète", "Elle était très en retard"], "answer": "Elle était très contente", "explanation_ar": "heureuse تعني سعيدة، وهي مرادفة لـ contente.", "rule_ar": "استنتج معنى الكلمة من السياق ومن المرادفات." }
           ]
         },
         {
-          "title_ar": "القواعد",
-          "title_fr": "Grammaire",
+          "id": "texte2", "title_ar": "قطعة الفهم الثانية", "title_fr": "Compréhension de l’écrit – Texte 2",
+          "passage_fr": "Pendant les vacances, la famille de Youssef a visité Louxor. Ils ont pris le train de nuit et sont arrivés le lendemain matin. Ils ont visité les temples et le musée de la ville. Le guide parlait français, alors Youssef a pu comprendre toutes ses explications. Le soir, la famille a mangé dans un restaurant au bord du Nil. Youssef a pris beaucoup de photos et il veut y retourner un jour.",
           "questions": [
-            {
-              "type": "text",
-              "marks": 2,
-              "prompt_fr": "Complétez avec le verbe être : Nous ____ égyptiens.",
-              "prompt_ar": "أكمل بفعل الكينونة être",
-              "answer": "sommes",
-              "explanation_ar": "تصريف être مع nous: nous sommes."
-            },
-            {
-              "type": "choice",
-              "marks": 2,
-              "prompt_fr": "J'___ un frère et une sœur.",
-              "prompt_ar": "اختر الفعل المناسب",
-              "options": ["ai", "suis", "as", "a"],
-              "answer": "ai",
-              "explanation_ar": "avoir مع je: j'ai."
-            },
-            {
-              "type": "choice",
-              "marks": 2,
-              "prompt_fr": "Sara présente sa famille : « Voici ___ mère. »",
-              "prompt_ar": "اختر صفة الملكية المناسبة للمؤنث المفرد",
-              "options": ["ma", "mon", "mes", "leur"],
-              "answer": "ma",
-              "explanation_ar": "الصفة الملكية للمؤنث المفرد (المتكلم): ma mère."
-            }
+            { "id": "e1r5", "type": "choice", "marks": 2, "prompt_fr": "Comment la famille de Youssef a-t-elle voyagé ?", "options": ["En avion", "En voiture", "Par le train de nuit", "En bateau"], "answer": "Par le train de nuit", "explanation_ar": "النص: Ils ont pris le train de nuit، أي سافروا بقطار الليل.", "rule_ar": "استخرج الإجابة من الجملة المناسبة في النص." },
+            { "id": "e1r6", "type": "choice", "marks": 2, "prompt_fr": "Pourquoi Youssef a-t-il compris le guide ?", "options": ["Il parlait arabe", "Le guide parlait français", "Il a lu un livre", "Son père a traduit"], "answer": "Le guide parlait français", "explanation_ar": "السبب في الجملة: Le guide parlait français، alors... فالنتيجة أنه فهم الشرح.", "rule_ar": "alors تدل على النتيجة، وما قبلها هو السبب." },
+            { "id": "e1r7", "type": "choice", "marks": 2, "prompt_fr": "Où la famille a-t-elle mangé le soir ?", "options": ["Chez des amis", "Au musée", "Dans un restaurant au bord du Nil", "Dans le train"], "answer": "Dans un restaurant au bord du Nil", "explanation_ar": "النص يقول إنهم تناولوا العشاء في مطعم على ضفة النيل.", "rule_ar": "استخرج الإجابة من الجملة المناسبة في النص." },
+            { "id": "e1r8", "type": "choice", "marks": 2, "prompt_fr": "Dans « il veut y retourner », le pronom « y » remplace :", "options": ["le musée", "le train", "Louxor", "le restaurant"], "answer": "Louxor", "explanation_ar": "الضمير y يحل محل المكان المذكور سابقاً، والمكان الذي زاره يوسف هو الأقصر.", "rule_ar": "y يعود على مكان مذكور قبله." }
           ]
         },
         {
-          "title_ar": "المفردات",
-          "title_fr": "Vocabulaire",
+          "id": "situations", "title_ar": "المواقف", "title_fr": "Situations de communication",
           "questions": [
-            {
-              "type": "choice",
-              "marks": 2,
-              "prompt_fr": "Le frère de ma mère est mon ___.",
-              "prompt_ar": "أخو الأم هو الـ...",
-              "options": ["oncle", "cousin", "neveu", "grand-père"],
-              "answer": "oncle",
-              "explanation_ar": "أخو الأم = oncle (خال)."
-            },
-            {
-              "type": "text",
-              "marks": 2,
-              "prompt_fr": "Traduisez en français : جدّة",
-              "prompt_ar": "ترجم إلى الفرنسية: جدّة",
-              "answer": "grand-mère",
-              "explanation_ar": "جدّة = grand-mère."
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "easy-1sec-2",
-      "level": "1sec",
-      "title_ar": "نموذج امتحان شامل (2): الحياة اليومية والمدرسة والقواعد",
-      "title_fr": "Modèle d'examen n° 2 : La vie quotidienne, l'école et grammaire",
-      "duration_min": 30,
-      "instructions_ar": "الدرجة الكاملة 20. اقرأ النص جيداً ثم أجب.",
-      "sections": [
-        {
-          "title_ar": "قطعة الفهم",
-          "title_fr": "Compréhension",
-          "text": "Tous les matins, Karim se réveille à sept heures. Il prend son petit déjeuner, puis il va à l'école à pied. Les cours commencent à huit heures et finissent à deux heures.",
-          "text_ar": "كل صباح يستيقظ كريم في السابعة. يتناول إفطاره ثم يذهب إلى المدرسة سيراً على الأقدام. تبدأ الحصص في الثامنة وتنتهي في الثانية.",
-          "questions": [
-            {
-              "type": "choice",
-              "marks": 2,
-              "prompt_fr": "À quelle heure Karim se réveille-t-il ?",
-              "prompt_ar": "في أي ساعة يستيقظ كريم؟",
-              "options": ["À six heures", "À sept heures", "À huit heures", "À deux heures"],
-              "answer": "À sept heures",
-              "explanation_ar": "« Karim se réveille à sept heures »."
-            },
-            {
-              "type": "choice",
-              "marks": 2,
-              "prompt_fr": "Comment Karim va-t-il à l'école ?",
-              "prompt_ar": "كيف يذهب كريم إلى المدرسة؟",
-              "options": ["En bus", "À pied", "En voiture", "À vélo"],
-              "answer": "À pied",
-              "explanation_ar": "« il va à l'école à pied » = سيراً على الأقدام."
-            }
+            { "id": "e1s1", "type": "choice", "marks": 2, "prompt_fr": "Vous rencontrez un ami le matin. Que dites-vous ?", "options": ["Bonjour, comment vas-tu ?", "Bonne nuit !", "À bientôt !", "Bon appétit !"], "answer": "Bonjour, comment vas-tu ?", "explanation_ar": "لقاء صديق في الصباح يحتاج تحية وسؤالاً عن حاله.", "rule_ar": "اختر العبارة المناسبة للموقف: تحية، سؤال عن الثمن، شكر، طلب إعادة." },
+            { "id": "e1s2", "type": "choice", "marks": 2, "prompt_fr": "Vous voulez demander le prix d’un livre. Vous dites :", "options": ["Combien coûte ce livre ?", "Où est ce livre ?", "Qui est ce livre ?", "Quand est ce livre ?"], "answer": "Combien coûte ce livre ?", "explanation_ar": "للسؤال عن الثمن نستخدم Combien coûte ...؟", "rule_ar": "الاستفهام بـ combien يكون للثمن والكمية." },
+            { "id": "e1s3", "type": "choice", "marks": 2, "prompt_fr": "Votre ami vous offre un cadeau. Vous répondez :", "options": ["Merci beaucoup, c’est gentil !", "Je vous en prie.", "Excusez-moi.", "Au revoir."], "answer": "Merci beaucoup, c’est gentil !", "explanation_ar": "عند تلقي هدية نشكر صاحبها. أما Je vous en prie فهي رد على الشكر.", "rule_ar": "اختر العبارة المناسبة للموقف: تحية، سؤال عن الثمن، شكر، طلب إعادة." },
+            { "id": "e1s4", "type": "choice", "marks": 2, "prompt_fr": "Vous n’avez pas compris la question du professeur. Vous dites :", "options": ["Pouvez-vous répéter, s’il vous plaît ?", "Je suis fatigué.", "J’ai faim.", "À demain."], "answer": "Pouvez-vous répéter, s’il vous plaît ?", "explanation_ar": "لطلب إعادة السؤال بأدب نقول Pouvez-vous répéter, s’il vous plaît ?", "rule_ar": "اختر العبارة المناسبة للموقف: تحية، سؤال عن الثمن، شكر، طلب إعادة." }
           ]
         },
         {
-          "title_ar": "القواعد",
-          "title_fr": "Grammaire",
+          "id": "grammar", "title_ar": "القواعد", "title_fr": "Grammaire",
           "questions": [
-            {
-              "type": "choice",
-              "marks": 2,
-              "prompt_fr": "Tu ___ à sept heures. (se lever)",
-              "prompt_ar": "اختر التصريف الصحيح للفعل ذي الضميرين",
-              "options": ["te lèves", "se lève", "me lève", "nous levons"],
-              "answer": "te lèves",
-              "explanation_ar": "الفعل المنعكس se lever مع tu: tu te lèves."
-            },
-            {
-              "type": "text",
-              "marks": 2,
-              "prompt_fr": "Complétez avec « va » ou « vont » : Les élèves ____ à l'école.",
-              "prompt_ar": "أكمل بـ va أو vont",
-              "answer": "vont",
-              "explanation_ar": "الفاعل جمع (ils) فنقول: ils vont."
-            }
+            { "id": "e1g1", "type": "choice", "marks": 2, "prompt_fr": "Hier, nous ___ au club.", "options": ["sommes allés", "avons allé", "allons", "irons"], "answer": "sommes allés", "explanation_ar": "aller من أفعال الحركة فيأخذ être في الماضي المركب، ويتفق اسم المفعول مع الفاعل الجمع.", "rule_ar": "الماضي المركب: أفعال الحركة مع être واتفاق اسم المفعول مع الفاعل." },
+            { "id": "e1g2", "type": "choice", "marks": 2, "prompt_fr": "Il faut que tu ___ tes devoirs.", "options": ["fais", "fasses", "feras", "ferais"], "answer": "fasses", "explanation_ar": "التعبير il faut que يتطلب subjonctif، وصيغة faire مع tu هي fasses.", "rule_ar": "il faut que + subjonctif." },
+            { "id": "e1g3", "type": "choice", "marks": 2, "prompt_fr": "La fille ___ parle est ma cousine.", "options": ["qui", "que", "dont", "où"], "answer": "qui", "explanation_ar": "الكلمة la fille هي فاعل الفعل parle، فنستخدم qui.", "rule_ar": "qui تحل محل الفاعل، وque تحل محل المفعول به المباشر." },
+            { "id": "e1g4", "type": "choice", "marks": 2, "prompt_fr": "Si j’avais de l’argent, j’___ un vélo.", "options": ["achèterais", "achèterai", "achète", "achetais"], "answer": "achèterais", "explanation_ar": "si + imparfait يتبعها conditionnel présent: j’achèterais.", "rule_ar": "si + imparfait ← conditionnel présent." },
+            { "id": "e1g5", "type": "text", "marks": 2, "prompt_fr": "Complétez avec l’article défini : ___ élèves sont dans la classe.", "answer": "Les", "explanation_ar": "élèves جمع، وأداة التعريف للجمع هي les.", "rule_ar": "أداة التعريف: le مذكر مفرد، la مؤنث مفرد، les جمع." },
+            { "id": "e1g6", "type": "text", "marks": 2, "prompt_fr": "Remplacez par un pronom COD : Je lis le livre. → Je ___ lis.", "answer": "le", "explanation_ar": "le livre مفعول به مباشر مذكر مفرد، فنستبدله بـ le قبل الفعل.", "rule_ar": "ضمائر COD: le, la, l’, les وتوضع قبل الفعل." },
+            { "id": "e1g7", "type": "choice", "marks": 2, "prompt_fr": "Je ___ ai ___ de frère.", "options": ["n’ ... pas", "ne ... pas", "n’ ... jamais", "ne ... plus"], "answer": "n’ ... pas", "explanation_ar": "ai يبدأ بحرف متحرك فتصبح ne ← n’، والنفي العادي pas، وبعده de.", "rule_ar": "النفي: ne (n’) + فعل + pas، وبعد النفي تتحول الأداة إلى de." },
+            { "id": "e1g8", "type": "choice", "marks": 2, "prompt_fr": "Mona est ___ grande que sa sœur. (même taille)", "options": ["plus", "moins", "aussi", "très"], "answer": "aussi", "explanation_ar": "التساوي في المقارنة يُعبَّر عنه بـ aussi ... que.", "rule_ar": "المقارنة: plus (أكثر) – moins (أقل) – aussi (مثل) + que." }
           ]
         }
       ]
     },
     {
-      "id": "easy-1sec-3",
-      "level": "1sec",
-      "title_ar": "نموذج امتحان شامل (3): الطعام والتسوّق والقواعد",
-      "title_fr": "Modèle d'examen n° 3 : La nourriture, les courses et grammaire",
-      "duration_min": 30,
-      "instructions_ar": "الدرجة الكاملة 20.",
+      "id": "model-2", "title_ar": "نموذج امتحان شامل (2)", "title_fr": "Modèle d’examen n° 2", "level": "3sec", "duration_min": 60,
+      "instructions_ar": "الدرجة الكاملة 40 (كل سؤال درجتان). اقرأ كل نص جيداً ثم اختر إجابة واحدة لكل سؤال.",
       "sections": [
         {
-          "title_ar": "قطعة الفهم",
-          "title_fr": "Compréhension",
-          "text": "Aujourd'hui, Mme Nadia va au marché. Elle achète un kilo de tomates, deux kilos de pommes de terre, et du fromage.",
-          "text_ar": "اليوم تذهب السيدة نادية إلى السوق. تشتري كيلو من الطماطم وكيلوين من البطاطس وبعض الجبن.",
+          "id": "texte1", "title_ar": "قطعة الفهم الأولى", "title_fr": "Compréhension de l’écrit – Texte 1",
+          "passage_fr": "Aujourd’hui, presque tous les jeunes utilisent les réseaux sociaux. Ils les aiment parce qu’ils permettent de parler avec des amis et de partager des photos. Mais passer trop de temps devant l’écran peut fatiguer les yeux et réduire le temps consacré aux études. C’est pourquoi les experts conseillent de limiter son temps d’utilisation à une ou deux heures par jour.",
           "questions": [
-            {
-              "type": "choice",
-              "marks": 2,
-              "prompt_fr": "Où va Mme Nadia ?",
-              "prompt_ar": "أين تذهب السيدة نادية؟",
-              "options": ["Au marché", "À la mosquée", "À l'hôpital", "Au cinéma"],
-              "answer": "Au marché",
-              "explanation_ar": "« Mme Nadia va au marché »."
-            }
+            { "id": "e2r1", "type": "choice", "marks": 2, "prompt_fr": "Pourquoi les jeunes aiment-ils les réseaux sociaux ?", "options": ["Pour gagner de l’argent", "Pour parler avec des amis et partager des photos", "Pour étudier plus vite", "Pour acheter des vêtements"], "answer": "Pour parler avec des amis et partager des photos", "explanation_ar": "الجملة الثانية تذكر السبب بعد parce que: التحدث مع الأصدقاء ومشاركة الصور.", "rule_ar": "parce que تقدم السبب، فابحث بعدها عن الإجابة." },
+            { "id": "e2r2", "type": "choice", "marks": 2, "prompt_fr": "Quel est un danger du temps excessif devant l’écran ?", "options": ["Il fatigue les yeux et réduit le temps d’étude", "Il rend plus intelligent", "Il donne faim", "Il améliore le sommeil"], "answer": "Il fatigue les yeux et réduit le temps d’étude", "explanation_ar": "النص يقول إن الإفراط يرهق العينين ويقلل الوقت المخصص للدراسة.", "rule_ar": "استخرج الإجابة من الجملة التي تبدأ بـ Mais." },
+            { "id": "e2r3", "type": "choice", "marks": 2, "prompt_fr": "Que conseillent les experts ?", "options": ["Supprimer tous les comptes", "Utiliser les réseaux toute la journée", "Limiter l’utilisation à une ou deux heures par jour", "Utiliser les réseaux seulement la nuit"], "answer": "Limiter l’utilisation à une ou deux heures par jour", "explanation_ar": "الجملة الأخيرة تنقل نصيحة الخبراء: تحديد الاستخدام بساعة أو ساعتين يومياً.", "rule_ar": "فعل conseiller يتبعه نص النصيحة." },
+            { "id": "e2r4", "type": "choice", "marks": 2, "prompt_fr": "L’expression « C’est pourquoi » exprime :", "options": ["la conséquence", "la cause", "l’opposition", "le but"], "answer": "la conséquence", "explanation_ar": "c’est pourquoi تعني ولذلك، وتعبّر عن النتيجة المترتبة على ما سبق.", "rule_ar": "النتيجة: donc, alors, c’est pourquoi." }
           ]
         },
         {
-          "title_ar": "القواعد",
-          "title_fr": "Grammaire",
+          "id": "texte2", "title_ar": "قطعة الفهم الثانية", "title_fr": "Compréhension de l’écrit – Texte 2",
+          "passage_fr": "Il est sept heures du matin. Nour arrive à l’école avec son amie Hana. Le premier cours est un cours de français. Aujourd’hui, le professeur donne un exercice sur le passé composé. Nour a bien compris, mais Hana a un peu de mal. À la récréation, Nour lui explique la règle avec des exemples simples. Hana la remercie : « Maintenant, c’est clair ! »",
           "questions": [
-            {
-              "type": "choice",
-              "marks": 2,
-              "prompt_fr": "Je mange ___ pain.",
-              "prompt_ar": "اختر أدوات التجزئة المناسبة",
-              "options": ["du", "de la", "des", "les"],
-              "answer": "du",
-              "explanation_ar": "pain اسم مذكر مفرد: du pain."
-            },
-            {
-              "type": "text",
-              "marks": 2,
-              "prompt_fr": "Il n'y a pas ___ lait.",
-              "prompt_ar": "أكمل بعد أداة النفي",
-              "answer": "de",
-              "explanation_ar": "بعد النفي يتحول du/de la إلى de."
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "easy-1sec-4",
-      "level": "1sec",
-      "title_ar": "نموذج امتحان شامل (4): المدينة والاتجاهات والقواعد",
-      "title_fr": "Modèle d'examen n° 4 : La ville, les directions et grammaire",
-      "duration_min": 30,
-      "instructions_ar": "الدرجة الكاملة 20.",
-      "sections": [
-        {
-          "title_ar": "قطعة الفهم",
-          "title_fr": "Compréhension",
-          "text": "Mariam visite Lyon. Elle cherche la pharmacie. La dame dit : « Allez tout droit, puis tournez à gauche. »",
-          "text_ar": "تزور مريم مدينة ليون. تبحث عن الصيدلية. تقول السيدة: «اذهبي مستقيماً ثم انعطفي يساراً.»",
-          "questions": [
-            {
-              "type": "choice",
-              "marks": 2,
-              "prompt_fr": "Que cherche Mariam ?",
-              "prompt_ar": "ماذا تبحث مريم؟",
-              "options": ["La gare", "La pharmacie", "L'école", "La banque"],
-              "answer": "La pharmacie",
-              "explanation_ar": "« Elle cherche la pharmacie »."
-            }
+            { "id": "e2r5", "type": "choice", "marks": 2, "prompt_fr": "À quelle heure Nour arrive-t-elle à l’école ?", "options": ["À sept heures", "À huit heures", "À neuf heures", "À midi"], "answer": "À sept heures", "explanation_ar": "النص يبدأ بـ Il est sept heures du matin ثم يقول إن نور تصل إلى المدرسة.", "rule_ar": "انتبه إلى الأوقات والأرقام في النص." },
+            { "id": "e2r6", "type": "choice", "marks": 2, "prompt_fr": "Sur quoi porte l’exercice du professeur ?", "options": ["Le futur simple", "Le passé composé", "Le subjonctif", "Le conditionnel"], "answer": "Le passé composé", "explanation_ar": "النص يقول إن المعلم يعطي تمريناً على الماضي المركب.", "rule_ar": "استخرج الإجابة من الجملة المناسبة في النص." },
+            { "id": "e2r7", "type": "choice", "marks": 2, "prompt_fr": "Qui aide Hana à comprendre la règle ?", "options": ["Le professeur", "Nour", "Sa mère", "La directrice"], "answer": "Nour", "explanation_ar": "في الاستراحة شرحت نور القاعدة لهانا بأمثلة بسيطة.", "rule_ar": "استخرج الإجابة من الجملة المناسبة في النص." },
+            { "id": "e2r8", "type": "choice", "marks": 2, "prompt_fr": "« Hana a un peu de mal » signifie :", "options": ["Hana a mal à la tête", "Hana a une petite difficulté", "Hana a peur", "Hana a faim"], "answer": "Hana a une petite difficulté", "explanation_ar": "avoir du mal تعني مواجهة صعوبة، وليست ألماً جسدياً.", "rule_ar": "استنتج معنى التعبير من السياق: صعوبة في فهم القاعدة." }
           ]
         },
         {
-          "title_ar": "القواعد",
-          "title_fr": "Grammaire",
+          "id": "situations", "title_ar": "المواقف", "title_fr": "Situations de communication",
           "questions": [
-            {
-              "type": "choice",
-              "marks": 2,
-              "prompt_fr": "Le musée est ___ la banque et la poste.",
-              "prompt_ar": "اختر حرف الجر المناسب",
-              "options": ["entre", "sur", "chez", "vers"],
-              "answer": "entre",
-              "explanation_ar": "entre ... et ... = بين ... و ..."
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "easy-1sec-5",
-      "level": "1sec",
-      "title_ar": "نموذج امتحان شامل (5): الهوايات والطقس والقواعد",
-      "title_fr": "Modèle d'examen n° 5 : Loisirs, temps et grammaire",
-      "duration_min": 30,
-      "instructions_ar": "الدرجة الكاملة 20.",
-      "sections": [
-        {
-          "title_ar": "قطعة الفهم",
-          "title_fr": "Compréhension",
-          "text": "En été, il fait chaud en Égypte. Nada et ses amies vont à la plage.",
-          "text_ar": "في الصيف يكون الجو حاراً في مصر. تذهب ندى وصديقاتها إلى الشاطئ.",
-          "questions": [
-            {
-              "type": "choice",
-              "marks": 2,
-              "prompt_fr": "Quel temps fait-il en été en Égypte ?",
-              "prompt_ar": "كيف يكون الطقس صيفاً في مصر؟",
-              "options": ["Il fait froid", "Il pleut", "Il fait chaud", "Il neige"],
-              "answer": "Il fait chaud",
-              "explanation_ar": "« En été, il fait chaud en Égypte »."
-            }
+            { "id": "e2s1", "type": "choice", "marks": 2, "prompt_fr": "Au restaurant, vous voulez commander une soupe. Vous dites :", "options": ["Je voudrais une soupe, s’il vous plaît.", "Où est la soupe ?", "Je suis une soupe.", "La soupe est à vous."], "answer": "Je voudrais une soupe, s’il vous plaît.", "explanation_ar": "الطلب المهذب في المطعم يكون بـ Je voudrais ... s’il vous plaît.", "rule_ar": "الطلب المهذب: Je voudrais + المطلوب + s’il vous plaît." },
+            { "id": "e2s2", "type": "choice", "marks": 2, "prompt_fr": "Vous voulez savoir l’heure. Vous demandez :", "options": ["Quelle heure est-il, s’il vous plaît ?", "Quel âge avez-vous ?", "Combien coûte l’heure ?", "Où est l’heure ?"], "answer": "Quelle heure est-il, s’il vous plaît ?", "explanation_ar": "للسؤال عن الوقت نقول Quelle heure est-il ?", "rule_ar": "السؤال عن الوقت: Quelle heure est-il ?" },
+            { "id": "e2s3", "type": "choice", "marks": 2, "prompt_fr": "Vous arrivez en retard au cours. Vous dites :", "options": ["Excusez-moi, je suis en retard.", "Bon appétit !", "Félicitations !", "À la prochaine !"], "answer": "Excusez-moi, je suis en retard.", "explanation_ar": "عند التأخر نعتذر بـ Excusez-moi ونذكر السبب.", "rule_ar": "الاعتذار: Excusez-moi, Pardon, Désolé." },
+            { "id": "e2s4", "type": "choice", "marks": 2, "prompt_fr": "Un ami vous invite au cinéma et vous acceptez. Vous répondez :", "options": ["Avec plaisir, à quelle heure ?", "Je n’aime pas le cinéma.", "Merci, je suis malade.", "Non, c’est impossible."], "answer": "Avec plaisir, à quelle heure ?", "explanation_ar": "لقبول الدعوة نقول Avec plaisir ثم نسأل عن الموعد.", "rule_ar": "قبول الدعوة: Avec plaisir, D’accord, Volontiers." }
           ]
         },
         {
-          "title_ar": "القواعد",
-          "title_fr": "Grammaire",
+          "id": "grammar", "title_ar": "القواعد", "title_fr": "Grammaire",
           "questions": [
-            {
-              "type": "choice",
-              "marks": 2,
-              "prompt_fr": "J'aime ___ au football.",
-              "prompt_ar": "اختر الفعل في المصدر بعد aimer",
-              "options": ["jouer", "joue", "joues", "jouez"],
-              "answer": "jouer",
-              "explanation_ar": "بعد الفعل aimer نستعمل المصدر: J'aime jouer."
-            }
+            { "id": "e2g1", "type": "choice", "marks": 2, "prompt_fr": "Quand j’étais enfant, nous ___ chez ma grand-mère chaque été. (aller)", "options": ["allions", "sommes allés", "irons", "allons"], "answer": "allions", "explanation_ar": "كلمة chaque été تدل على عادة في الماضي، فنستخدم imparfait: allions.", "rule_ar": "imparfait للعادة والوصف في الماضي." },
+            { "id": "e2g2", "type": "choice", "marks": 2, "prompt_fr": "Il ___ quand le téléphone a sonné. (dormir)", "options": ["dormait", "a dormi", "dormira", "dort"], "answer": "dormait", "explanation_ar": "حدث جارٍ في الماضي قاطعه حدث آخر ← imparfait.", "rule_ar": "imparfait للحدث الجاري الذي يقطعه حدث ماضٍ منتهٍ." },
+            { "id": "e2g3", "type": "choice", "marks": 2, "prompt_fr": "Je ___ téléphone demain. (à ma tante)", "options": ["lui", "la", "leur", "les"], "answer": "lui", "explanation_ar": "à ma tante شخص مفرد مسبوق بـ à، فنستبدله بـ lui.", "rule_ar": "COI: lui للمفرد وleur للجمع." },
+            { "id": "e2g4", "type": "choice", "marks": 2, "prompt_fr": "Tu veux du café ? Oui, j’___ veux.", "options": ["en", "y", "le", "lui"], "answer": "en", "explanation_ar": "du café مسبوق بأداة تبعيض، فنستبدله بـ en.", "rule_ar": "en يحل محل du/de la/des + اسم." },
+            { "id": "e2g5", "type": "text", "marks": 2, "prompt_fr": "Nous ___ demain. (finir, futur simple)", "answer": "finirons", "explanation_ar": "المصدر finir + ons مع nous في المستقبل البسيط.", "rule_ar": "المستقبل البسيط: المصدر + ai, as, a, ons, ez, ont." },
+            { "id": "e2g6", "type": "choice", "marks": 2, "prompt_fr": "___ étudiante est très sérieuse.", "options": ["Cette", "Ce", "Cet", "Ces"], "answer": "Cette", "explanation_ar": "étudiante مؤنث مفرد، فنستخدم cette.", "rule_ar": "صفات الإشارة: ce – cet – cette – ces." },
+            { "id": "e2g7", "type": "choice", "marks": 2, "prompt_fr": "Tu ___ manger plus de fruits. (devoir, conseil)", "options": ["devrais", "devras", "dois", "devais"], "answer": "devrais", "explanation_ar": "النصيحة المهذبة تُقال بالـ conditionnel: devr- + ais.", "rule_ar": "conditionnel للنصيحة والأدب." },
+            { "id": "e2g8", "type": "text", "marks": 2, "prompt_fr": "(Faire, vous) ___ vos devoirs !", "answer": "Faites", "explanation_ar": "أمر faire مع vous هو faites (شاذ).", "rule_ar": "الأمر: نحذف ضمير الفاعل، وfaire ← faites." }
           ]
         }
       ]
     },
     {
-      "id": "mod-2sec-6",
-      "level": "2sec",
-      "title_ar": "نموذج امتحان شامل (6): الصف الثاني - الرياضة والقواعد",
-      "title_fr": "Modèle d'examen n° 6 : 2e Secondaire - Sports et Grammaire",
-      "duration_min": 30,
-      "instructions_ar": "نماذج مخصصة لمنهج الصف الثاني الثانوي.",
+      "id": "model-3", "title_ar": "نموذج امتحان شامل (3)", "title_fr": "Modèle d’examen n° 3", "level": "3sec", "duration_min": 60,
+      "instructions_ar": "الدرجة الكاملة 40 (كل سؤال درجتان). اقرأ كل نص جيداً ثم اختر إجابة واحدة لكل سؤال.",
       "sections": [
         {
-          "title_ar": "قطعة الفهم والقواعد",
-          "title_fr": "Compréhension et Grammaire",
-          "text": "Au marché, je cherche des fruits frais comme les pommes et les oranges pour garder la forme.",
-          "text_ar": "في السوق، أبحث عن فواكه طازجة للحفاظ على لياقتي.",
+          "id": "texte1", "title_ar": "قطعة الفهم الأولى", "title_fr": "Compréhension de l’écrit – Texte 1",
+          "passage_fr": "Faire du sport régulièrement est excellent pour la santé. Le sport renforce le cœur, aide à mieux dormir et diminue le stress. Les médecins recommandent au moins trente minutes d’activité physique par jour. Il n’est pas nécessaire de faire du sport de haut niveau : marcher, nager ou jouer au football avec ses amis suffit. L’important est de choisir une activité que l’on aime.",
           "questions": [
-            {
-              "type": "choice",
-              "marks": 2,
-              "prompt_fr": "Que cherche le client au marché ?",
-              "prompt_ar": "ماذا يبحث الزبون؟",
-              "options": ["Des fruits frais", "Des vêtements", "Des livres", "Un stylo"],
-              "answer": "Des fruits frais",
-              "explanation_ar": "النص يذكر البحث عن الفواكه الطازجة."
-            },
-            {
-              "type": "text",
-              "marks": 2,
-              "prompt_fr": "Conjuguez le verbe faire au présent : Tu ____ du sport.",
-              "prompt_ar": "صرف فعل faire",
-              "answer": "fais",
-              "explanation_ar": "تصريف فعل faire مع tu هو fais."
-            }
+            { "id": "e3r1", "type": "choice", "marks": 2, "prompt_fr": "Combien de minutes d’activité les médecins recommandent-ils par jour ?", "options": ["Dix minutes", "Au moins trente minutes", "Deux heures", "Une heure et demie"], "answer": "Au moins trente minutes", "explanation_ar": "النص يقول إن الأطباء يوصون بثلاثين دقيقة على الأقل من النشاط البدني يومياً.", "rule_ar": "انتبه إلى الأرقام في النص." },
+            { "id": "e3r2", "type": "choice", "marks": 2, "prompt_fr": "Quel est un bienfait du sport cité dans le texte ?", "options": ["Il aide à mieux dormir", "Il fait grossir", "Il remplace le repas", "Il donne soif"], "answer": "Il aide à mieux dormir", "explanation_ar": "من فوائد الرياضة في النص: تقوية القلب وتحسين النوم وتقليل التوتر.", "rule_ar": "استخرج الإجابة من الجملة التي تعدد الفوائد." },
+            { "id": "e3r3", "type": "choice", "marks": 2, "prompt_fr": "Faut-il faire du sport de haut niveau ?", "options": ["Oui, c’est obligatoire", "Non, marcher ou nager suffit", "Oui, tous les jours", "Seulement à l’école"], "answer": "Non, marcher ou nager suffit", "explanation_ar": "النص يقول إنه ليس من الضروري ممارسة رياضة احترافية، فالمشي أو السباحة يكفيان.", "rule_ar": "il n’est pas nécessaire de تعني ليس من الضروري." },
+            { "id": "e3r4", "type": "choice", "marks": 2, "prompt_fr": "Que faut-il choisir, d’après le texte ?", "options": ["Un sport difficile", "Une activité que l’on aime", "Un sport d’équipe seulement", "Un sport cher"], "answer": "Une activité que l’on aime", "explanation_ar": "الجملة الأخيرة تقول إن المهم هو اختيار نشاط نحبه.", "rule_ar": "الجملة الختامية غالباً تحمل الفكرة الرئيسية." }
+          ]
+        },
+        {
+          "id": "texte2", "title_ar": "قطعة الفهم الثانية", "title_fr": "Compréhension de l’écrit – Texte 2",
+          "passage_fr": "Tous les vendredis, il y a un grand marché dans le quartier de Karim. Les marchands vendent des fruits, des légumes et des vêtements. Karim accompagne sa mère pour porter les sacs. Elle achète toujours des tomates et des oranges parce qu’elles sont fraîches et moins chères qu’au supermarché. Karim aime l’ambiance du marché, car les gens discutent et rient.",
+          "questions": [
+            { "id": "e3r5", "type": "choice", "marks": 2, "prompt_fr": "Quand a lieu le marché ?", "options": ["Tous les samedis", "Tous les vendredis", "Tous les jours", "Une fois par mois"], "answer": "Tous les vendredis", "explanation_ar": "الجملة الأولى تقول: Tous les vendredis، أي كل يوم جمعة.", "rule_ar": "انتبه إلى الأزمنة والتواريخ في النص." },
+            { "id": "e3r6", "type": "choice", "marks": 2, "prompt_fr": "Pourquoi Karim accompagne-t-il sa mère ?", "options": ["Pour acheter des vêtements", "Pour porter les sacs", "Pour vendre des fruits", "Pour parler avec le marchand"], "answer": "Pour porter les sacs", "explanation_ar": "النص: Karim accompagne sa mère pour porter les sacs.", "rule_ar": "pour + مصدر تعبّر عن الهدف." },
+            { "id": "e3r7", "type": "choice", "marks": 2, "prompt_fr": "Pourquoi la mère achète-t-elle ses fruits au marché ?", "options": ["Ils sont plus gros", "Ils sont frais et moins chers", "Le marché est près de la maison", "Le supermarché est fermé"], "answer": "Ils sont frais et moins chers", "explanation_ar": "السبب بعد parce que: الفواكه طازجة وأرخص من السوبرماركت.", "rule_ar": "parce que / car تقدم السبب." },
+            { "id": "e3r8", "type": "choice", "marks": 2, "prompt_fr": "« moins chères qu’au supermarché » exprime :", "options": ["Une comparaison d’infériorité", "Une comparaison de supériorité", "Une égalité", "Une opposition"], "answer": "Une comparaison d’infériorité", "explanation_ar": "moins ... que تعني أقل من، وهي مقارنة بالنقصان.", "rule_ar": "moins ... que للنقصان، plus ... que للزيادة، aussi ... que للتساوي." }
+          ]
+        },
+        {
+          "id": "situations", "title_ar": "المواقف", "title_fr": "Situations de communication",
+          "questions": [
+            { "id": "e3s1", "type": "choice", "marks": 2, "prompt_fr": "Dans un magasin, vous cherchez une chemise de taille M. Vous demandez :", "options": ["Avez-vous cette chemise en taille M ?", "Où habitez-vous ?", "Quel âge avez-vous ?", "Quelle heure est-il ?"], "answer": "Avez-vous cette chemise en taille M ?", "explanation_ar": "السؤال عن توفر مقاس معين يكون بـ Avez-vous ... en taille ... ?", "rule_ar": "التسوق: Avez-vous...؟ Combien coûte...؟ Je prends..." },
+            { "id": "e3s2", "type": "choice", "marks": 2, "prompt_fr": "Vous cherchez la pharmacie. Vous demandez à un passant :", "options": ["Pardon, où est la pharmacie ?", "Combien coûte la pharmacie ?", "Quand est la pharmacie ?", "Qui est la pharmacie ?"], "answer": "Pardon, où est la pharmacie ?", "explanation_ar": "للسؤال عن المكان نستخدم où est ... ؟", "rule_ar": "السؤال عن الاتجاهات: Où est...؟ Pour aller à...؟" },
+            { "id": "e3s3", "type": "choice", "marks": 2, "prompt_fr": "Votre ami est malade. Vous lui dites :", "options": ["Bon rétablissement !", "Bon voyage !", "Bon appétit !", "Bonne chance !"], "answer": "Bon rétablissement !", "explanation_ar": "للمريض نقول Bon rétablissement أي الشفاء العاجل.", "rule_ar": "التمنيات: Bon voyage (سفر) – Bon appétit (طعام) – Bonne chance (حظ)." },
+            { "id": "e3s4", "type": "choice", "marks": 2, "prompt_fr": "Vous remerciez vos amis après un dîner. Vous dites :", "options": ["Merci pour cette excellente soirée !", "Bonjour tout le monde !", "Quelle heure est-il ?", "Je cherche la gare."], "answer": "Merci pour cette excellente soirée !", "explanation_ar": "للشكر على سهرة نقول Merci pour cette soirée.", "rule_ar": "الشكر: Merci pour + اسم." }
+          ]
+        },
+        {
+          "id": "grammar", "title_ar": "القواعد", "title_fr": "Grammaire",
+          "questions": [
+            { "id": "e3g1", "type": "choice", "marks": 2, "prompt_fr": "Elle ___ ses clés hier. (perdre)", "options": ["a perdu", "est perdue", "perd", "perdait"], "answer": "a perdu", "explanation_ar": "perdre يأخذ avoir في الماضي المركب، والحدث منتهٍ (hier).", "rule_ar": "passé composé مع avoir لمعظم الأفعال." },
+            { "id": "e3g2", "type": "choice", "marks": 2, "prompt_fr": "Quand je suis arrivé, elle ___ déjà partie.", "options": ["était", "a été", "serait", "sera"], "answer": "était", "explanation_ar": "الذهاب سبق الوصول، فنستخدم plus-que-parfait: était partie (être في imparfait).", "rule_ar": "plus-que-parfait: avoir/être في imparfait + participe passé." },
+            { "id": "e3g3", "type": "choice", "marks": 2, "prompt_fr": "Ce roman ___ par un écrivain célèbre. (écrire, présent)", "options": ["est écrit", "écrit", "a écrit", "était écrit"], "answer": "est écrit", "explanation_ar": "في المبني للمجهول نستخدم être + اسم المفعول، والزمن مضارع: est écrit.", "rule_ar": "passif: être (بزمن الفعل) + participe passé + par." },
+            { "id": "e3g4", "type": "choice", "marks": 2, "prompt_fr": "Le film ___ tu parles est excellent.", "options": ["dont", "que", "qui", "où"], "answer": "dont", "explanation_ar": "الفعل parler يأخذ de (parler de ce film)، فنستخدم dont.", "rule_ar": "dont تحل محل مركب بـ de." },
+            { "id": "e3g5", "type": "choice", "marks": 2, "prompt_fr": "Il est absent ___ il est malade.", "options": ["parce qu’", "donc", "bien que", "mais"], "answer": "parce qu’", "explanation_ar": "الغياب نتيجة للمرض، فنعبّر عن السبب بـ parce que، وتصبح parce qu’ قبل il.", "rule_ar": "parce que للسبب، donc للنتيجة، bien que للتعارض." },
+            { "id": "e3g6", "type": "text", "marks": 2, "prompt_fr": "Les lettres que j’ai ___ sont arrivées. (écrire)", "answer": "écrites", "explanation_ar": "المفعول به les lettres (مؤنث جمع) جاء قبل الفعل، فيتفق معه اسم المفعول: écrites.", "rule_ar": "مع avoir يتفق اسم المفعول مع المفعول به المتقدم." },
+            { "id": "e3g7", "type": "text", "marks": 2, "prompt_fr": "Tu connais Marie ? Oui, je ___ connais.", "answer": "la", "explanation_ar": "Marie مؤنث مفرد، فنستبدلها بـ la (COD).", "rule_ar": "COD: le, la, l’, les." },
+            { "id": "e3g8", "type": "choice", "marks": 2, "prompt_fr": "Nous aimons ___ professeur.", "options": ["notre", "nos", "votre", "leur"], "answer": "notre", "explanation_ar": "professeur مفرد والمالك nous، فنستخدم notre.", "rule_ar": "صفات الملكية: notre/nos لـ nous." }
           ]
         }
       ]
     },
     {
-      "id": "mod-2sec-7",
-      "level": "2sec",
-      "title_ar": "نموذج امتحان شامل (7): الصف الثاني - القواعد والحفلات",
-      "title_fr": "Modèle d'examen n° 7 : 2e Secondaire - Grammaire",
-      "duration_min": 30,
-      "instructions_ar": "اختبار القواعد والمفردات للصف الثاني الثانوي.",
+      "id": "model-4", "title_ar": "نموذج امتحان شامل (4)", "title_fr": "Modèle d’examen n° 4", "level": "3sec", "duration_min": 60,
+      "instructions_ar": "الدرجة الكاملة 40 (كل سؤال درجتان). اقرأ كل نص جيداً ثم اختر إجابة واحدة لكل سؤال.",
       "sections": [
         {
-          "title_ar": "أسئلة القواعد",
-          "title_fr": "Grammaire",
+          "id": "texte1", "title_ar": "قطعة الفهم الأولى", "title_fr": "Compréhension de l’écrit – Texte 1",
+          "passage_fr": "Dans son lycée, un groupe d’élèves a décidé de planter cinquante arbres dans la cour. Le directeur a accepté l’idée et il a offert les jeunes plantes. Chaque élève s’occupe d’un arbre : il l’arrose et le protège. Les élèves espèrent que ces arbres donneront de l’ombre et rendront l’air plus pur. Ils veulent aussi encourager les autres écoles à les imiter.",
           "questions": [
-            {
-              "type": "choice",
-              "marks": 2,
-              "prompt_fr": "Je vais ___ cinéma ce soir.",
-              "prompt_ar": "اختر حرف الجر المناسب",
-              "options": ["au", "à la", "à l'", "aux"],
-              "answer": "au",
-              "explanation_ar": "cinéma اسم مذكر مفرد يأخذ au."
-            }
+            { "id": "e4r1", "type": "choice", "marks": 2, "prompt_fr": "Combien d’arbres les élèves vont-ils planter ?", "options": ["Dix", "Vingt", "Cinquante", "Cent"], "answer": "Cinquante", "explanation_ar": "الجملة الأولى تقول إنهم قرروا زرع خمسين شجرة.", "rule_ar": "انتبه إلى الأرقام في النص." },
+            { "id": "e4r2", "type": "choice", "marks": 2, "prompt_fr": "Qui a offert les jeunes plantes ?", "options": ["Le directeur", "Un professeur", "Un parent", "Le ministre"], "answer": "Le directeur", "explanation_ar": "النص: Le directeur a accepté l’idée et il a offert les jeunes plantes.", "rule_ar": "استخرج الإجابة من الجملة المناسبة في النص." },
+            { "id": "e4r3", "type": "choice", "marks": 2, "prompt_fr": "Que fait chaque élève ?", "options": ["Il vend un arbre", "Il s’occupe d’un arbre", "Il coupe un arbre", "Il dessine un arbre"], "answer": "Il s’occupe d’un arbre", "explanation_ar": "الجملة الثالثة تقول إن كل تلميذ يعتني بشجرة: يسقيها ويحميها.", "rule_ar": "s’occuper de تعني يعتني بـ." },
+            { "id": "e4r4", "type": "choice", "marks": 2, "prompt_fr": "Que veulent encourager les élèves ?", "options": ["Les autres écoles à les imiter", "Les parents à acheter des arbres", "Les professeurs à voyager", "Les voisins à déménager"], "answer": "Les autres écoles à les imiter", "explanation_ar": "الجملة الأخيرة: Ils veulent aussi encourager les autres écoles à les imiter.", "rule_ar": "imiter تعني يقلّد، والضمير les يعود على التلاميذ." }
+          ]
+        },
+        {
+          "id": "texte2", "title_ar": "قطعة الفهم الثانية", "title_fr": "Compréhension de l’écrit – Texte 2",
+          "passage_fr": "Ce matin, un nouvel élève est arrivé dans la classe de Salma. Il s’appelle Adam et il vient de Marseille, en France. Il parle un peu arabe parce que sa mère est égyptienne. Au début, il était timide, mais ses camarades l’ont accueilli avec gentillesse. À midi, Salma lui a montré la cantine et ils ont déjeuné ensemble. Adam a dit qu’il se sentait déjà chez lui.",
+          "questions": [
+            { "id": "e4r5", "type": "choice", "marks": 2, "prompt_fr": "D’où vient Adam ?", "options": ["Du Caire", "De Marseille", "De Paris", "D’Alexandrie"], "answer": "De Marseille", "explanation_ar": "النص: Il vient de Marseille, en France.", "rule_ar": "venir de تدل على الأصل." },
+            { "id": "e4r6", "type": "choice", "marks": 2, "prompt_fr": "Pourquoi Adam parle-t-il un peu arabe ?", "options": ["Il a étudié à l’école", "Sa mère est égyptienne", "Il habite au Caire", "Son père est professeur"], "answer": "Sa mère est égyptienne", "explanation_ar": "السبب بعد parce que: أمه مصرية.", "rule_ar": "parce que تقدم السبب." },
+            { "id": "e4r7", "type": "choice", "marks": 2, "prompt_fr": "Comment Adam était-il au début ?", "options": ["Timide", "En colère", "Bavard", "Fatigué"], "answer": "Timide", "explanation_ar": "النص: Au début, il était timide، أي كان خجولاً في البداية.", "rule_ar": "الصفات الدالة على الشعور تُستخرج من الجملة." },
+            { "id": "e4r8", "type": "choice", "marks": 2, "prompt_fr": "Qui a montré la cantine à Adam ?", "options": ["Le directeur", "Salma", "Le professeur", "Un surveillant"], "answer": "Salma", "explanation_ar": "النص: Salma lui a montré la cantine، أي سلمى هي التي أرته المقصف.", "rule_ar": "الضمير lui يعود على Adam." }
+          ]
+        },
+        {
+          "id": "situations", "title_ar": "المواقف", "title_fr": "Situations de communication",
+          "questions": [
+            { "id": "e4s1", "type": "choice", "marks": 2, "prompt_fr": "Vous invitez un ami samedi soir. Vous lui demandez :", "options": ["Tu es libre samedi soir ?", "Tu as quel âge ?", "Tu habites où ?", "Tu travailles beaucoup ?"], "answer": "Tu es libre samedi soir ?", "explanation_ar": "قبل الدعوة نسأل عن الوقت المتاح: Tu es libre...؟", "rule_ar": "الدعوة: Tu es libre...؟ Tu veux venir...؟" },
+            { "id": "e4s2", "type": "choice", "marks": 2, "prompt_fr": "Votre ami donne son avis et vous êtes du même avis. Vous dites :", "options": ["Je suis d’accord avec toi.", "Je ne comprends pas.", "Je suis fatigué.", "Je n’ai pas faim."], "answer": "Je suis d’accord avec toi.", "explanation_ar": "للتعبير عن الموافقة نقول Je suis d’accord.", "rule_ar": "التعبير عن الرأي: Je suis d’accord / Je ne suis pas d’accord." },
+            { "id": "e4s3", "type": "choice", "marks": 2, "prompt_fr": "Au restaurant, vous voulez payer. Vous dites :", "options": ["L’addition, s’il vous plaît.", "Bon appétit !", "La carte, s’il vous plaît.", "À votre santé !"], "answer": "L’addition, s’il vous plaît.", "explanation_ar": "لطلب الحساب نقول L’addition, s’il vous plaît.", "rule_ar": "المطعم: la carte (القائمة) – l’addition (الحساب)." },
+            { "id": "e4s4", "type": "choice", "marks": 2, "prompt_fr": "Vous ne pouvez pas accepter une invitation. Vous répondez poliment :", "options": ["Merci, mais je ne peux pas.", "Non, je déteste ça.", "Ça ne m’intéresse pas du tout.", "Laisse-moi tranquille."], "answer": "Merci, mais je ne peux pas.", "explanation_ar": "الرفض المهذب يبدأ بالشكر ثم الاعتذار: Merci, mais je ne peux pas.", "rule_ar": "الرفض المهذب: Merci, mais... + سبب." }
+          ]
+        },
+        {
+          "id": "grammar", "title_ar": "القواعد", "title_fr": "Grammaire",
+          "questions": [
+            { "id": "e4g1", "type": "choice", "marks": 2, "prompt_fr": "Il faut que nous ___ à l’heure. (être)", "options": ["soyons", "sommes", "serons", "serions"], "answer": "soyons", "explanation_ar": "il faut que يتطلب subjonctif، وصيغة être مع nous هي soyons.", "rule_ar": "il faut que + subjonctif." },
+            { "id": "e4g2", "type": "choice", "marks": 2, "prompt_fr": "Je pense que tu ___ raison. (avoir)", "options": ["as", "aies", "auras", "ait"], "answer": "as", "explanation_ar": "penser que في الإثبات تتبعها indicatif وليس subjonctif.", "rule_ar": "penser que (إثبات) + indicatif." },
+            { "id": "e4g3", "type": "choice", "marks": 2, "prompt_fr": "Si tu viens, nous ___ au cinéma.", "options": ["irons", "irions", "allions", "étions allés"], "answer": "irons", "explanation_ar": "si + مضارع ← مستقبل: nous irons.", "rule_ar": "si + présent ← futur." },
+            { "id": "e4g4", "type": "choice", "marks": 2, "prompt_fr": "Il a dit : « Je suis fatigué. » → Il a dit qu’il ___ fatigué.", "options": ["était", "est", "sera", "serait"], "answer": "était", "explanation_ar": "présent يتحول إلى imparfait في الكلام غير المباشر بعد فعل في الماضي.", "rule_ar": "الكلام غير المباشر: présent ← imparfait." },
+            { "id": "e4g5", "type": "text", "marks": 2, "prompt_fr": "Elle étudie en ___ de la musique. (écouter)", "answer": "écoutant", "explanation_ar": "الجيرونديف = en + participe présent: جذر nous écoutons ← écout- + ant.", "rule_ar": "gérondif: en + verbe-ant للتزامن." },
+            { "id": "e4g6", "type": "choice", "marks": 2, "prompt_fr": "C’est ___ meilleur élève de la classe.", "options": ["le", "la", "les", "un"], "answer": "le", "explanation_ar": "صيغة التفضيل تستعمل أداة التعريف: le meilleur.", "rule_ar": "superlatif: le/la/les + meilleur أو plus/moins + صفة." },
+            { "id": "e4g7", "type": "choice", "marks": 2, "prompt_fr": "___ coûte ce stylo ? – Deux livres.", "options": ["Combien", "Comment", "Où", "Pourquoi"], "answer": "Combien", "explanation_ar": "الإجابة ثمن، فنسأل بـ combien.", "rule_ar": "combien للثمن والعدد." },
+            { "id": "e4g8", "type": "choice", "marks": 2, "prompt_fr": "Nous ___ levons à sept heures.", "options": ["nous", "me", "se", "vous"], "answer": "nous", "explanation_ar": "الفعل الانعكاسي مع nous يأخذ الضمير nous.", "rule_ar": "الأفعال الانعكاسية: me, te, se, nous, vous, se." }
           ]
         }
       ]
     },
     {
-      "id": "mod-3sec-8",
-      "level": "3sec",
-      "title_ar": "نموذج امتحان شامل (8): الصف الثالث - البيئة والقواعد",
-      "title_fr": "Modèle d'examen n° 8 : 3e Secondaire - Environnement",
-      "duration_min": 45,
-      "instructions_ar": "نموذج تدريبي متقدم لثالثة ثانوي.",
+      "id": "model-5", "title_ar": "نموذج امتحان شامل (5)", "title_fr": "Modèle d’examen n° 5", "level": "3sec", "duration_min": 60,
+      "instructions_ar": "الدرجة الكاملة 40 (كل سؤال درجتان). اقرأ كل نص جيداً ثم اختر إجابة واحدة لكل سؤال.",
       "sections": [
         {
-          "title_ar": "قطعة الفهم والقواعد",
-          "title_fr": "Compréhension et Grammaire",
-          "text": "Pour protéger l'environnement, il est nécessaire de réduire l'utilisation du plastique.",
-          "text_ar": "لحماية البيئة، من الضروري تقليل استخدام البلاستيك.",
+          "id": "texte1", "title_ar": "قطعة الفهم الأولى", "title_fr": "Compréhension de l’écrit – Texte 1",
+          "passage_fr": "Lire un livre chaque semaine améliore le vocabulaire et l’orthographe. La lecture développe aussi l’imagination et aide à mieux comprendre les autres. Beaucoup d’élèves pensent qu’ils n’ont pas assez de temps pour lire, mais quinze minutes par jour suffisent. On peut lire dans le bus, avant de dormir ou pendant la pause. Le plus difficile, c’est de commencer : une fois qu’on a trouvé un livre passionnant, on ne peut plus s’arrêter.",
           "questions": [
-            {
-              "type": "choice",
-              "marks": 2,
-              "prompt_fr": "Que faut-il réduire pour protéger la planète ?",
-              "prompt_ar": "ما الذي يجب تقليله لحماية الكوكب؟",
-              "options": ["L'utilisation du plastique", "L'eau", "L'air", "Les arbres"],
-              "answer": "L'utilisation du plastique",
-              "explanation_ar": "النص يوصي بتقليل استخدام البلاستيك."
-            }
+            { "id": "e5r1", "type": "choice", "marks": 2, "prompt_fr": "Qu’est-ce que la lecture améliore ?", "options": ["Le vocabulaire et l’orthographe", "La vitesse de course", "La vue", "Le poids"], "answer": "Le vocabulaire et l’orthographe", "explanation_ar": "الجملة الأولى تقول إن القراءة تحسن المفردات والإملاء.", "rule_ar": "استخرج الإجابة من الجملة المناسبة في النص." },
+            { "id": "e5r2", "type": "choice", "marks": 2, "prompt_fr": "Combien de temps par jour suffit pour lire ?", "options": ["Cinq minutes", "Quinze minutes", "Deux heures", "Une heure"], "answer": "Quinze minutes", "explanation_ar": "النص: quinze minutes par jour suffisent.", "rule_ar": "انتبه إلى الأرقام في النص." },
+            { "id": "e5r3", "type": "choice", "marks": 2, "prompt_fr": "Où peut-on lire, d’après le texte ?", "options": ["Dans le bus", "Seulement à la bibliothèque", "Seulement à l’école", "Au cinéma"], "answer": "Dans le bus", "explanation_ar": "النص يذكر أماكن للقراءة: في الحافلة وقبل النوم وأثناء الاستراحة.", "rule_ar": "استخرج الإجابة من الجملة المناسبة في النص." },
+            { "id": "e5r4", "type": "choice", "marks": 2, "prompt_fr": "Selon le texte, qu’est-ce qui est le plus difficile ?", "options": ["Commencer", "Finir", "Choisir un lieu", "Acheter un livre"], "answer": "Commencer", "explanation_ar": "النص: Le plus difficile, c’est de commencer، أي أصعب شيء هو البداية.", "rule_ar": "le plus difficile تدل على صيغة التفضيل." }
           ]
-        }
-      ]
-    },
-    {
-      "id": "mod-3sec-9",
-      "level": "3sec",
-      "title_ar": "نموذج امتحان شامل (9): الصف الثالث - التكنولوجيا والقواعد",
-      "title_fr": "Modèle d'examen n° 9 : 3e Secondaire - Technologie",
-      "duration_min": 45,
-      "instructions_ar": "اختبار شامل لثالثة ثانوي.",
-      "sections": [
+        },
         {
-          "title_ar": "الأسئلة العامة",
-          "title_fr": "Questions générales",
+          "id": "texte2", "title_ar": "قطعة الفهم الثانية", "title_fr": "Compréhension de l’écrit – Texte 2",
+          "passage_fr": "Au Caire, des millions de personnes utilisent les transports en commun chaque jour. Le métro est rapide et peu cher, mais il est souvent plein à l’heure de pointe. Les bus sont moins rapides à cause des embouteillages. Pour réduire la pollution, la ville construit de nouvelles lignes de métro et encourage les habitants à marcher ou à faire du vélo.",
           "questions": [
-            {
-              "type": "choice",
-              "marks": 2,
-              "prompt_fr": "L'intelligence artificielle est utile pour...",
-              "prompt_ar": "الذكاء الاصطناعي مفيد لـ...",
-              "options": ["Faciliter notre vie quotidienne", "Fatiguer les gens", "Polluer la terre", "Rien faire"],
-              "answer": "Faciliter notre vie quotidienne",
-              "explanation_ar": "الذكاء الاصطناعي يسهل الحياة اليومية."
-            }
+            { "id": "e5r5", "type": "choice", "marks": 2, "prompt_fr": "Quel est l’avantage du métro ?", "options": ["Il est rapide et peu cher", "Il est toujours vide", "Il passe devant chez tous", "Il est gratuit"], "answer": "Il est rapide et peu cher", "explanation_ar": "النص: Le métro est rapide et peu cher.", "rule_ar": "استخرج الإجابة من الجملة المناسبة في النص." },
+            { "id": "e5r6", "type": "choice", "marks": 2, "prompt_fr": "Pourquoi les bus sont-ils moins rapides ?", "options": ["À cause des embouteillages", "Parce qu’ils sont vieux", "Parce qu’ils sont chers", "À cause de la pluie"], "answer": "À cause des embouteillages", "explanation_ar": "النص: Les bus sont moins rapides à cause des embouteillages.", "rule_ar": "à cause de تعبّر عن سبب سلبي." },
+            { "id": "e5r7", "type": "choice", "marks": 2, "prompt_fr": "Que construit la ville ?", "options": ["De nouveaux aéroports", "De nouvelles lignes de métro", "De nouvelles écoles", "De nouveaux ponts"], "answer": "De nouvelles lignes de métro", "explanation_ar": "الجملة الأخيرة تقول إن المدينة تبني خطوطاً جديدة للمترو.", "rule_ar": "استخرج الإجابة من الجملة المناسبة في النص." },
+            { "id": "e5r8", "type": "choice", "marks": 2, "prompt_fr": "« Pour réduire la pollution » exprime :", "options": ["Le but", "La cause", "L’opposition", "La comparaison"], "answer": "Le but", "explanation_ar": "pour + مصدر تعبّر عن الهدف: الهدف هنا تقليل التلوث.", "rule_ar": "pour + مصدر للهدف." }
           ]
-        }
-      ]
-    },
-    {
-      "id": "mod-3sec-10",
-      "level": "3sec",
-      "title_ar": "نموذج امتحان شامل (10): التقييم النهائي والقواعد",
-      "title_fr": "Modèle d'examen n° 10 : Évaluation finale du Bac",
-      "duration_min": 60,
-      "instructions_ar": "الامتحان النهائي الشامل.",
-      "sections": [
+        },
         {
-          "title_ar": "التقييم الشامل",
-          "title_fr": "Évaluation globale",
-          "text": "Le français est une langue internationale magnifique. Apprendre une nouvelle langue ouvre l'esprit.",
-          "text_ar": "الفرنسية لغة دولية رائعة.",
+          "id": "situations", "title_ar": "المواقف", "title_fr": "Situations de communication",
           "questions": [
-            {
-              "type": "choice",
-              "marks": 5,
-              "prompt_fr": "Qu'est-ce qu'apprendre une nouvelle langue ?",
-              "prompt_ar": "ماذا يفعل تعلم لغة جديدة؟",
-              "options": ["Ouvre l'esprit", "Ferme l'esprit", "Fatigue", "Ne sert à rien"],
-              "answer": "Ouvre l'esprit",
-              "explanation_ar": "النص يؤكد أن تعلم لغة يفتح العقل."
-            }
+            { "id": "e5s1", "type": "choice", "marks": 2, "prompt_fr": "Dans un magasin, vous cherchez un cadeau pour votre père. Vous dites :", "options": ["Je cherche un cadeau pour mon père.", "Je suis un cadeau.", "Où est mon père ?", "Mon père cherche un magasin."], "answer": "Je cherche un cadeau pour mon père.", "explanation_ar": "للتعبير عن البحث عن شيء نقول Je cherche + المطلوب.", "rule_ar": "التسوق: Je cherche... / Je voudrais... / Je prends..." },
+            { "id": "e5s2", "type": "choice", "marks": 2, "prompt_fr": "Votre ami a réussi son examen. Vous lui dites :", "options": ["Félicitations, tu as réussi !", "Quel dommage !", "Bon voyage !", "À demain !"], "answer": "Félicitations, tu as réussi !", "explanation_ar": "لتهنئة ناجح نقول Félicitations.", "rule_ar": "التهنئة: Félicitations / Bravo." },
+            { "id": "e5s3", "type": "choice", "marks": 2, "prompt_fr": "Vous quittez votre professeur à la fin du cours. Vous dites :", "options": ["Au revoir, monsieur, à demain !", "Bonjour, monsieur !", "Bon appétit !", "Pardon, monsieur."], "answer": "Au revoir, monsieur, à demain !", "explanation_ar": "عند الوداع نقول Au revoir ثم الموعد القادم.", "rule_ar": "الوداع: Au revoir, À demain, À bientôt." },
+            { "id": "e5s4", "type": "choice", "marks": 2, "prompt_fr": "Chez le médecin, vous expliquez votre problème. Vous dites :", "options": ["J’ai mal à la gorge depuis hier.", "Je suis très content.", "J’adore le football.", "J’habite au Caire."], "answer": "J’ai mal à la gorge depuis hier.", "explanation_ar": "لوصف الألم نقول J’ai mal à + العضو ونذكر المدة بـ depuis.", "rule_ar": "الصحة: J’ai mal à + العضو، depuis + مدة." }
+          ]
+        },
+        {
+          "id": "grammar", "title_ar": "القواعد", "title_fr": "Grammaire",
+          "questions": [
+            { "id": "e5g1", "type": "choice", "marks": 2, "prompt_fr": "Hier, nous ___ au parc quand il a commencé à pleuvoir. (jouer)", "options": ["jouions", "avons joué", "jouerons", "jouons"], "answer": "jouions", "explanation_ar": "حدث جارٍ في الماضي قاطعه حدث آخر (commencé à pleuvoir) ← imparfait.", "rule_ar": "imparfait للحدث الجاري، وpassé composé للحدث الذي يقطعه." },
+            { "id": "e5g2", "type": "choice", "marks": 2, "prompt_fr": "Bien qu’il ___ malade, il va à l’école. (être)", "options": ["soit", "est", "sera", "serait"], "answer": "soit", "explanation_ar": "bien que يتطلب subjonctif، وصيغة être مع il هي soit.", "rule_ar": "bien que + subjonctif." },
+            { "id": "e5g3", "type": "choice", "marks": 2, "prompt_fr": "Les copies ___ par le professeur. (corriger, présent)", "options": ["sont corrigées", "sont corrigés", "est corrigée", "ont corrigé"], "answer": "sont corrigées", "explanation_ar": "les copies مؤنث جمع، والمبني للمجهول في المضارع: sont + corrigées.", "rule_ar": "passif: être + participe passé متفقاً مع الفاعل." },
+            { "id": "e5g4", "type": "choice", "marks": 2, "prompt_fr": "Tu as vu mes clés ? Oui, je les ai ___. (voir)", "options": ["vues", "vu", "vus", "voir"], "answer": "vues", "explanation_ar": "الضمير les (مؤنث جمع) جاء قبل الفعل، فيتفق معه اسم المفعول: vues.", "rule_ar": "مع avoir يتفق اسم المفعول مع COD المتقدم." },
+            { "id": "e5g5", "type": "text", "marks": 2, "prompt_fr": "Complétez avec « dont » ou « où » : La ville ___ je suis né est grande.", "answer": "où", "explanation_ar": "ville مكان، فنستخدم où.", "rule_ar": "où للمكان والزمان، dont لـ de." },
+            { "id": "e5g6", "type": "text", "marks": 2, "prompt_fr": "Demain, il ___ beau. (faire, futur simple)", "answer": "fera", "explanation_ar": "جذر faire في المستقبل شاذ: fer- + a.", "rule_ar": "المستقبل الشاذ: faire ← fer-." },
+            { "id": "e5g7", "type": "choice", "marks": 2, "prompt_fr": "Tu vas à l’école ? Oui, j’___ vais.", "options": ["y", "en", "le", "lui"], "answer": "y", "explanation_ar": "à l’école مكان، فنستبدله بـ y.", "rule_ar": "y يحل محل مكان مسبوق بـ à أو dans." },
+            { "id": "e5g8", "type": "choice", "marks": 2, "prompt_fr": "Je ___ un café, s’il vous plaît. (vouloir, politesse)", "options": ["voudrais", "voudrai", "veux", "voulais"], "answer": "voudrais", "explanation_ar": "للطلب المهذب نستخدم conditionnel: voudr- + ais.", "rule_ar": "conditionnel للأدب." }
           ]
         }
       ]
