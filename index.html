@@ -1,225 +1,273 @@
-/**
- * شات الطلاب المتطور والمصمم خصيصاً للموبايل (Le Français Au Bac)
- */
-(function() {
-    let mediaRecorder;
-    let audioChunks = [];
-    let isRecording = false;
-
-    function loadChat() {
-        const container = document.getElementById("chat-messages-container");
-        if (!container) return;
-
-        if (!firebase.apps.length) {
-            firebase.initializeApp({
-                apiKey: "AIzaSyAoFJex9rrYUgyyEUtw9TV9rhriFVyag8Y",
-                authDomain: "frenchbacchat.firebaseapp.com",
-                databaseURL: "https://frenchbacchat-default-rtdb.firebaseio.com",
-                projectId: "frenchbacchat",
-                storageBucket: "frenchbacchat.firebasestorage.app",
-                messagingSenderId: "692488273461",
-                appId: "1:692488273461:web:efa14361a054f3287d3b7c"
-            });
-        }
-
-        const db = firebase.database();
-        const storage = firebase.storage();
-
-        container.innerHTML = `
-            <div id="student-chat-box" style="display: flex; flex-direction: column; gap: 8px; margin-top: 5px; width: 100%; font-family: Tahoma, sans-serif; box-sizing: border-box;">
-                <div style="background: linear-gradient(135deg, #0055A5, #003366); color: white; padding: 8px 12px; border-radius: 6px; font-size: 13px; font-weight: bold; display: flex; justify-content: space-between; align-items: center;">
-                    <span>💬 شات الطلاب التفاعلي</span>
-                    <span style="font-size: 10px; background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 8px;">مسيو محمود</span>
-                </div>
-
-                <div id="messages-list" style="height: 250px; overflow-y: auto; background: #fdfdfd; padding: 10px; border-radius: 8px; border: 1px solid #ddd; display: flex; flex-direction: column; gap: 8px;">
-                    <div style="text-align: center; color: #888; font-size: 13px;">جاري تحميل المحادثات...</div>
-                </div>
-
-                <!-- قائمة الإيموجي -->
-                <div id="emoji-picker" style="display: none; gap: 8px; background: #fff; padding: 8px; border: 1px solid #ddd; border-radius: 8px; font-size: 20px; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                    <span style="cursor: pointer;" onclick="insertEmoji('😊')">😊</span>
-                    <span style="cursor: pointer;" onclick="insertEmoji('🇫🇷')">🇫🇷</span>
-                    <span style="cursor: pointer;" onclick="insertEmoji('👍')">👍</span>
-                    <span style="cursor: pointer;" onclick="insertEmoji('🔥')">🔥</span>
-                    <span style="cursor: pointer;" onclick="insertEmoji('❤️')">❤️</span>
-                    <span style="cursor: pointer;" onclick="insertEmoji('👏')">👏</span>
-                    <span style="cursor: pointer;" onclick="insertEmoji('💡')">💡</span>
-                    <span style="cursor: pointer;" onclick="insertEmoji('⭐')">⭐</span>
-                </div>
-
-                <!-- صندوق الإدخال المرتب للموبايل -->
-                <div style="background: #fff; padding: 8px; border-radius: 8px; border: 1px solid #ccc; display: flex; flex-direction: column; gap: 6px;">
-                    
-                    <!-- السطر الأول: الكتابة والاسم وإرسال -->
-                    <div style="display: flex; gap: 5px; align-items: center;">
-                        <input type="text" id="student-msg-input" placeholder="اكتب رسالة..." style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; outline: none;">
-                        <input type="text" id="student-name-input" placeholder="اسمك" style="width: 25%; padding: 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; outline: none; text-align: center;">
-                        <button id="send-text-btn" style="background: #0055A5; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 12px;">إرسال</button>
-                    </div>
-
-                    <!-- السطر الثاني: أزرار الميديا (إيموجي، صورة، صوت) -->
-                    <div style="display: flex; gap: 6px; justify-content: flex-start; border-top: 1px solid #eee; padding-top: 6px;">
-                        <button type="button" id="toggle-emoji-btn" style="background: #f0ad4e; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 13px;">😊 تعبيرات</button>
-                        
-                        <input type="file" id="image-file-input" accept="image/*" style="display: none;">
-                        <button type="button" id="attach-img-btn" style="background: #5bc0de; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 13px;">🖼️ صورة</button>
-                        
-                        <button type="button" id="record-audio-btn" style="background: #d9534f; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 13px;">🎙️ تسجيل صوت</button>
-                    </div>
-
-                </div>
-                <div id="record-status" style="font-size: 11px; color: #d9534f; text-align: right; display: none; font-weight: bold;">🔴 جاري التسجيل الان... اضغط ⏹️ للإيقاف والإرسال</div>
-            </div>
-        `;
-
-        const msgInput = document.getElementById("student-msg-input");
-        const nameInput = document.getElementById("student-name-input");
-        const messagesList = document.getElementById("messages-list");
-
-        // إرسال النص
-        document.getElementById("send-text-btn").onclick = function() {
-            const txt = msgInput.value.trim();
-            const usr = nameInput.value.trim() || "طالب";
-            if (!txt) return;
-
-            db.ref("chat_messages").push({
-                sender: usr,
-                text: txt,
-                type: "text",
-                timestamp: Date.now()
-            });
-            msgInput.value = "";
-        };
-
-        msgInput.onkeypress = function(e) {
-            if (e.key === "Enter") document.getElementById("send-text-btn").click();
-        };
-
-        // تبديل ظهور الإيموجي
-        document.getElementById("toggle-emoji-btn").onclick = function() {
-            const picker = document.getElementById("emoji-picker");
-            picker.style.display = picker.style.display === "flex" ? "none" : "flex";
-        };
-
-        // إرفاق الصور
-        document.getElementById("attach-img-btn").onclick = function() {
-            document.getElementById("image-file-input").click();
-        };
-
-        document.getElementById("image-file-input").onchange = function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            const usr = nameInput.value.trim() || "طالب";
-            const fileName = `img_${Date.now()}_${file.name}`;
-            const storageRef = storage.ref(`chat_images/${fileName}`);
-
-            storageRef.put(file).then(snapshot => {
-                snapshot.ref.getDownloadURL().then(downloadURL => {
-                    db.ref("chat_messages").push({
-                        sender: usr,
-                        imageUrl: downloadURL,
-                        type: "image",
-                        timestamp: Date.now()
-                    });
-                });
-            }).catch(() => alert("فشل رفع الصورة"));
-        };
-
-        // التسجيل الصوتي
-        const recordBtn = document.getElementById("record-audio-btn");
-        const recordStatus = document.getElementById("record-status");
-
-        recordBtn.onclick = async function() {
-            if (!isRecording) {
-                try {
-                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                    mediaRecorder = new MediaRecorder(stream);
-                    audioChunks = [];
-
-                    mediaRecorder.ondataavailable = ev => audioChunks.push(ev.data);
-                    mediaRecorder.onstop = async () => {
-                        const audioBlob = new Blob(audioChunks, { type: 'audio/mp3' });
-                        const usr = nameInput.value.trim() || "طالب";
-                        const fileName = `voice_${Date.now()}.mp3`;
-                        const storageRef = storage.ref(`voice_messages/${fileName}`);
-
-                        storageRef.put(audioBlob).then(snapshot => {
-                            snapshot.ref.getDownloadURL().then(downloadURL => {
-                                db.ref("chat_messages").push({
-                                    sender: usr,
-                                    audioUrl: downloadURL,
-                                    type: "audio",
-                                    timestamp: Date.now()
-                                });
-                            });
-                        });
-                    };
-
-                    mediaRecorder.start();
-                    isRecording = true;
-                    recordBtn.innerText = "⏹️ إيقاف وإرسال";
-                    recordBtn.style.background = "#28a745";
-                    recordStatus.style.display = "block";
-                } catch {
-                    alert("يرجى السماح باستخدام الميكروفون من إعدادات المتصفح.");
-                }
-            } else {
-                mediaRecorder.stop();
-                isRecording = false;
-                recordBtn.innerText = "🎙️ تسجيل صوت";
-                recordBtn.style.background = "#d9534f";
-                recordStatus.style.display = "none";
-            }
-        };
-
-        // عرض الرسائل
-        db.ref("chat_messages").limitToLast(50).on("value", snapshot => {
-            messagesList.innerHTML = "";
-            const data = snapshot.val();
-            if (!data) {
-                messagesList.innerHTML = '<div style="text-align: center; color: #888; font-size: 13px;">لا توجد رسائل بعد. كن أول من يراسل! 🇫🇷</div>';
-                return;
-            }
-
-            Object.keys(data).forEach(k => {
-                const m = data[k];
-                const div = document.createElement("div");
-                div.style.cssText = "margin-bottom: 8px; padding: 8px 12px; background: #fff; border-radius: 8px; border: 1px solid #e0e0e0; max-width: 85%; align-self: flex-start; box-shadow: 0 1px 2px rgba(0,0,0,0.05);";
-                
-                let content = `<strong style="color: #0055A5; font-size: 12px; display: block; margin-bottom: 2px;">${m.sender}</strong>`;
-                if (m.type === "text" || !m.type) {
-                    content += `<span style="font-size: 13px; color: #333; word-break: break-all;">${m.text}</span>`;
-                } else if (m.type === "image") {
-                    content += `<img src="${m.imageUrl}" style="max-width: 160px; border-radius: 6px; margin-top: 4px; display: block;">`;
-                } else if (m.type === "audio") {
-                    content += `<audio controls style="height: 30px; width: 180px; margin-top: 4px;"><source src="${m.audioUrl}" type="audio/mp3"></audio>`;
-                }
-
-                div.innerHTML = content;
-                messagesList.appendChild(div);
-            });
-            messagesList.scrollTop = messagesList.scrollHeight;
-        });
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0055A5">
+  <title>Le Français Au Bac</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" href="./styles.css">
+  <style>
+    .lock-badge {
+      display: inline-block;
+      margin-right: 6px;
+      font-size: 16px;
+      vertical-align: middle;
+      cursor: pointer;
+      padding: 2px 5px;
     }
+  </style>
+</head>
+<body>
+  <div class="french-flag-bg"></div>
 
-    window.insertEmoji = function(emoji) {
-        const msgInput = document.getElementById("student-msg-input");
-        if (msgInput) {
-            msgInput.value += emoji;
-            msgInput.focus();
-        }
+  <header class="topbar">
+    <button id="menu-btn" class="icon-btn" type="button" aria-label="القائمة">☰</button>
+    <h1>Le Français Au Bac <span>🇫🇷</span></h1>
+    <button id="install-btn" class="install" type="button" hidden>تثبيت التطبيق على الجوال</button>
+  </header>
+
+  <div id="scrim" class="scrim"></div>
+
+  <div class="layout">
+    <nav class="sidebar" aria-label="الأقسام">
+      <button data-nav="lessons" class="on" type="button">📚 دروس الكتاب والحلول</button>
+      <button data-nav="bac" type="button">🎓 منهج البكالوريا (2Sec & 3Sec)</button>
+      <button data-nav="grammar" type="button">✍️ Grammaire</button>
+      <button data-nav="phonetics" type="button">🗣️ Phonétique</button>
+      <button data-nav="dictionary" type="button">📖 Dictionnaire</button>
+      <button data-nav="dialogues" type="button">💬 Dialogues</button>
+      <button data-nav="tales" type="button">🧚 Contes</button>
+      <button data-nav="exams" type="button">📝 امتحانات الثانوية العامة</button>
+      <button data-nav="soon-chansons" type="button">🎵 الأغاني الفرنسية</button>
+      <button data-nav="soon-contemporaine" type="button">🇫🇷 فرنسا المعاصرة</button>
+      <button data-nav="soon-litterature" type="button">📜 الأدب الفرنسي العالمي</button>
+      <button data-nav="soon-geographie" type="button">🗺️ المدن والشوارع والأنهار</button>
+      <button data-nav="soon-argot" type="button">😎 العامية الفرنسية</button>
+      <button data-nav="chat" type="button">🤖 المساعد الذكي</button>
+      <button data-nav="student-chat" type="button">💬 شات وتواصل الطلاب</button>
+    </nav>
+
+    <main class="content">
+      <section id="lessons" class="sec on"><h2>دروس الكتاب المدرسي وحلول الأسئلة</h2><div class="body"><div class="empty">جارٍ التحميل…</div></div></section>
+      <section id="bac" class="sec"><h2>🎓 منهج البكالوريا</h2><div id="bac-content-container" class="body"><div class="empty">جارٍ التحميل…</div></div></section>
+      <section id="grammar" class="sec"><h2>Grammaire — القواعد</h2><div class="body"></div></section>
+      <section id="phonetics" class="sec"><h2>Phonétique — الصوتيات</h2><div class="body"></div></section>
+      <section id="dictionary" class="sec"><h2>Dictionnaire — القاموس</h2><div class="body"></div></section>
+      <section id="dialogues" class="sec"><h2>Dialogues — حوارات يومية</h2><div class="body"></div></section>
+      <section id="tales" class="sec"><h2>Contes — قصص مبسطة</h2><div class="body"></div></section>
+      <section id="exams" class="sec"><h2>Examens du Bac — نماذج امتحانات</h2><div class="body"></div></section>
+      <section id="soon-chansons" class="sec"><h2>🎵 Chansons françaises</h2><div id="songs-content-container" class="body"><div class="empty">جارٍ التحميل…</div></div></section>
+      <section id="soon-contemporaine" class="sec"><h2>La France contemporaine</h2><div class="soon-card"><div class="soon-icon">⏳</div><p class="soon-ar">المحتوى قيد الإعداد...</p></div></section>
+      <section id="soon-litterature" class="sec"><h2>Littérature française</h2><div class="soon-card"><div class="soon-icon">⏳</div><p class="soon-ar">المحتوى قيد الإعداد...</p></div></section>
+      <section id="soon-geographie" class="sec"><h2>Géographie et Villes</h2><div class="soon-card"><div class="soon-icon">⏳</div><p class="soon-ar">المحتوى قيد الإعداد...</p></div></section>
+      <section id="soon-argot" class="sec"><h2>L'Argot</h2><div class="soon-card"><div class="soon-icon">⏳</div><p class="soon-ar">المحتوى قيد الإعداد...</p></div></section>
+      <section id="chat" class="sec">
+        <h2>المساعد الذكي 🤖</h2>
+        <div class="chips">
+          <button class="chip" type="button">passé composé</button>
+          <button class="chip" type="button">الضمائر</button>
+        </div>
+        <div id="chat-log" class="chat-log" aria-live="polite"></div>
+        <form id="chat-form" class="chat-form">
+          <input id="chat-input" type="text" placeholder="اكتب سؤالك…" autocomplete="off">
+          <button type="submit">إرسال</button>
+        </form>
+      </section>
+      <section id="student-chat" class="sec"><h2>💬 شات الطلاب</h2><div class="body"><div id="chat-messages-container"></div></div></section>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <p>جميع الحقوق محفوظة © - إعداد وتطوير: مسيو/ محمود أبوبكر السويدى</p>
+    <a class="wa-btn" href="https://wa.me/201040294647" target="_blank"><span>واتساب</span></a>
+  </footer>
+
+  <div id="toast" class="toast" role="status"></div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
+
+  <!-- Firebase Initialization -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAoFJex9rrYUgyyEUtw9TV9rhriFVyag8Y",
+      authDomain: "frenchbacchat.firebaseapp.com",
+      databaseURL: "https://frenchbacchat-default-rtdb.firebaseio.com",
+      projectId: "frenchbacchat",
+      storageBucket: "frenchbacchat.firebasestorage.app",
+      messagingSenderId: "692488273461",
+      appId: "1:692488273461:web:efa14361a054f3287d3b7c",
+      measurementId: "G-RZKJ18LPS2"
     };
+    firebase.initializeApp(firebaseConfig);
+  </script>
 
-    if (document.readyState === "complete" || document.readyState === "interactive") {
-        setTimeout(loadChat, 200);
-    } else {
-        window.addEventListener("DOMContentLoaded", loadChat);
-    }
-    
-    window.addEventListener("click", function(e) {
-        if (e.target.closest('[data-nav="student-chat"]')) {
-            setTimeout(loadChat, 150);
+  <script src="./app.js"></script>
+  <script src="./bac.js"></script>
+  <script src="./songs.js"></script>
+  <script src="./chat.js"></script>
+
+  <!-- سكريبت تفعيل النطق الصوتي للنصوص الزرقاء -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      function speakFrenchText(text) {
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = 'fr-FR';
+          utterance.rate = 0.9;
+          window.speechSynthesis.speak(utterance);
         }
+      }
+
+      function addBlueTextButtons() {
+        const dialoguesSec = document.getElementById('dialogues');
+        if (!dialoguesSec) return;
+
+        const elements = dialoguesSec.querySelectorAll('div, p, h3, span');
+
+        elements.forEach(el => {
+          if (el.querySelector('.blue-tts-icon')) return;
+
+          const color = window.getComputedStyle(el).color;
+          const isBlue = color.includes('rgb(0, 85, 165)') || 
+                         color.includes('rgb(0, 68, 136)') || 
+                         color.includes('rgb(0, 55, 165)') ||
+                         el.style.color.includes('blue');
+
+          const text = el.innerText ? el.innerText.trim() : "";
+
+          if (isBlue && text.length > 3 && /[a-zA-ZÀ-ÿ]/.test(text)) {
+            if (el.children.length <= 2) {
+              const btn = document.createElement('button');
+              btn.type = 'button';
+              btn.className = 'blue-tts-icon';
+              btn.innerHTML = '🔊';
+              btn.title = 'نطق النص الفرنسي';
+              btn.style.cssText = 'background: #eef5ff; border: 1px solid #b8d5ff; border-radius: 50%; width: 28px; height: 28px; font-size: 14px; margin-inline: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; box-shadow: 0 1px 3px rgba(0,0,0,0.15); padding: 0; color: #0055A5;';
+
+              btn.addEventListener('click', function (ev) {
+                ev.preventDefault();
+                ev.stopPropagation();
+                const cleanText = text.replace('🔊', '').trim();
+                speakFrenchText(cleanText);
+              });
+
+              el.appendChild(btn);
+            }
+          }
+        });
+      }
+
+      const observer = new MutationObserver(function () {
+        const dialoguesSec = document.getElementById('dialogues');
+        if (dialoguesSec && dialoguesSec.classList.contains('on')) {
+          setTimeout(addBlueTextButtons, 300);
+        }
+      });
+
+      observer.observe(document.body, { childList: true, subtree: true });
     });
-})();
+  </script>
+
+  <!-- سكربت حماية الأقسام -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const protectedSections = ['bac', 'grammar', 'phonetics', 'exams', 'soon-chansons'];
+      protectedSections.forEach(navId => {
+        const btn = document.querySelector(`[data-nav="${navId}"]`);
+        if (btn) {
+          btn.classList.add('locked-section');
+          btn.setAttribute('data-locked-id', navId);
+          if (!btn.querySelector('.lock-badge')) {
+            const badge = document.createElement('span');
+            badge.className = 'lock-badge';
+            badge.addEventListener('click', function (ev) {
+              ev.preventDefault();
+              ev.stopPropagation();
+              promptForPassword(navId, btn);
+            });
+            btn.appendChild(badge);
+          }
+        }
+      });
+      updateLockVisuals();
+
+      document.body.addEventListener("click", function (e) {
+        const lockedBtn = e.target.closest('.locked-section');
+        if (lockedBtn && !e.target.closest('.lock-badge')) {
+          const lockedId = lockedBtn.getAttribute('data-locked-id');
+          if (localStorage.getItem(`section_unlocked_${lockedId}`) !== "true") {
+            e.preventDefault();
+            e.stopPropagation();
+            promptForPassword(lockedId, lockedBtn);
+          }
+        }
+      }, true);
+    });
+
+    function updateLockVisuals() {
+      const lockedSvg = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="vertical-align:middle"><rect x="4" y="10" width="16" height="12" rx="2" fill="currentColor"/><path d="M8 10V6.5a4 4 0 0 1 8 0V10" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>';
+      const openSvg = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="vertical-align:middle"><rect x="4" y="10" width="16" height="12" rx="2" fill="currentColor"/><path d="M8 10V6.5a4 4 0 0 1 7.6-1.7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>';
+      document.querySelectorAll('.locked-section').forEach(btn => {
+        const lockedId = btn.getAttribute('data-locked-id');
+        const isUnlocked = localStorage.getItem(`section_unlocked_${lockedId}`) === "true";
+        const badge = btn.querySelector('.lock-badge');
+        if (badge) {
+          badge.innerHTML = isUnlocked ? openSvg : lockedSvg;
+          badge.style.color = isUnlocked ? '#0055A5' : '#dc3545';
+        }
+      });
+    }
+
+    function promptForPassword(lockedId, btnElement) {
+      const oldModal = document.getElementById('master-pin-modal');
+      if (oldModal) oldModal.remove();
+
+      const modalHTML = `
+        <div id="master-pin-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; z-index: 99999; font-family: Tahoma, sans-serif;">
+          <div style="background: #fff; padding: 25px; border-radius: 12px; width: 320px; text-align: right; direction: rtl; box-shadow: 0 5px 20px rgba(0,0,0,0.3);">
+            <h3 style="color: #0055A5; margin-top: 0; margin-bottom: 10px; font-size: 16px;">🔐 لوحة التحكم بالرقم السري</h3>
+            <p style="color: #666; font-size: 13px; margin-bottom: 15px;">أدخل الرقم السري للتحكم بالقسم:</p>
+            <input type="password" id="creator-pin-input" maxlength="4" inputmode="numeric" style="width: 100%; padding: 12px; font-size: 22px; text-align: center; letter-spacing: 8px; border: 2px solid #ccc; border-radius: 6px; box-sizing: border-box; margin-bottom: 15px;">
+            <div style="display: flex; gap: 10px;">
+              <button id="submit-pin-btn" style="flex: 1; background: #0055A5; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer;">تنفيذ</button>
+              <button id="cancel-pin-btn" style="background: #6c757d; color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer;">إلغاء</button>
+            </div>
+            <div id="pin-error-msg" style="color: red; font-size: 12px; margin-top: 10px; text-align: center; font-weight: bold;"></div>
+          </div>
+        </div>
+      `;
+      document.body.insertAdjacentHTML('beforeend', modalHTML);
+      const pinInput = document.getElementById('creator-pin-input');
+      pinInput.focus();
+
+      document.getElementById('cancel-pin-btn').addEventListener('click', () => {
+        document.getElementById('master-pin-modal').remove();
+      });
+
+      document.getElementById('submit-pin-btn').addEventListener('click', () => {
+        const val = pinInput.value.trim();
+        if (val === "0519") {
+          localStorage.setItem(`section_unlocked_${lockedId}`, "true");
+          document.getElementById('master-pin-modal').remove();
+          updateLockVisuals();
+          btnElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
+        } else if (val === "0510") {
+          localStorage.setItem(`section_unlocked_${lockedId}`, "false");
+          document.getElementById('master-pin-modal').remove();
+          updateLockVisuals();
+          alert("🔒 تم إغلاق القسم بنجاح.");
+        } else {
+          document.getElementById('pin-error-msg').innerText = "❌ الرقم السري غير صحيح!";
+          pinInput.value = "";
+          pinInput.focus();
+        }
+      });
+    }
+  </script>
+</body>
+</html>
