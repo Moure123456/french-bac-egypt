@@ -31,14 +31,12 @@ document.addEventListener("DOMContentLoaded", function () {
     loadMessages();
 });
 
-// تجهيز واجهة الشات وتفعيل الأزرار الجديدة
 function setupChatUI() {
     const chatContainer = document.getElementById("chat-messages-container");
     if (!chatContainer) return;
 
     const inputAreaHTML = `
         <div id="student-chat-box" style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
-            <!-- شريط عداد الرسائل الجديدة -->
             <div id="chat-header-bar" style="display: flex; justify-content: space-between; align-items: center; background: #eef2f7; padding: 6px 12px; border-radius: 6px; font-size: 13px;">
                 <span>💬 شات الطلاب التفاعلي</span>
                 <button id="unread-badge-btn" onclick="scrollToNewMessages()" style="background: #d9534f; color: white; border: none; padding: 3px 8px; border-radius: 12px; font-size: 11px; cursor: pointer; display: none;">
@@ -46,12 +44,10 @@ function setupChatUI() {
                 </button>
             </div>
 
-            <!-- صندوق عرض الرسائل -->
             <div id="messages-list" style="height: 320px; overflow-y: auto; background: #f9f9f9; padding: 12px; border-radius: 8px; border: 1px solid #ddd; display: flex; flex-direction: column; gap: 10px;">
                 <div style="text-align: center; color: #888; font-size: 13px;">جاري تحميل المحادثات...</div>
             </div>
             
-            <!-- قائمة الإيموجي السريعة -->
             <div id="emoji-picker" style="display: none; gap: 5px; background: #fff; padding: 5px; border: 1px solid #ddd; border-radius: 6px; font-size: 16px;">
                 <span onclick="insertEmoji('😊')" style="cursor: pointer;">😊</span>
                 <span onclick="insertEmoji('🇫🇷')" style="cursor: pointer;">🇫🇷</span>
@@ -63,15 +59,12 @@ function setupChatUI() {
                 <span onclick="insertEmoji('⭐')" style="cursor: pointer;">⭐</span>
             </div>
 
-            <!-- شريط الإدخال والأزرار -->
             <div style="display: flex; gap: 6px; align-items: center; background: #fff; padding: 6px; border-radius: 8px; border: 1px solid #ccc;">
                 <input type="text" id="student-name-input" placeholder="اسمك..." style="width: 22%; padding: 7px; border: 1px solid #ddd; border-radius: 6px; font-size: 12px;">
                 <input type="text" id="student-msg-input" placeholder="اكتب رسالة..." style="flex: 1; padding: 7px; border: 1px solid #ddd; border-radius: 6px; font-size: 12px;">
                 
-                <!-- أيقونة الإيموجي -->
                 <button type="button" id="toggle-emoji-btn" style="background: #f0f0f0; border: 1px solid #ccc; padding: 6px 8px; border-radius: 6px; cursor: pointer;" title="التعبيرات">😊</button>
                 
-                <!-- أيقونة رفع الصور (Attach File) -->
                 <input type="file" id="image-file-input" accept="image/*" style="display: none;">
                 <button type="button" id="attach-img-btn" style="background: #f0f0f0; border: 1px solid #ccc; padding: 6px 8px; border-radius: 6px; cursor: pointer;" title="إرفاق صورة">🖼️</button>
 
@@ -84,17 +77,14 @@ function setupChatUI() {
 
     chatContainer.innerHTML = inputAreaHTML;
 
-    // الأحداث
     document.getElementById("send-text-btn").addEventListener("click", sendTextMessage);
     document.getElementById("record-audio-btn").addEventListener("click", toggleAudioRecording);
     
-    // تفعيل إظهار وإخفاء قائمة التعبيرات
     document.getElementById("toggle-emoji-btn").addEventListener("click", () => {
         const picker = document.getElementById("emoji-picker");
         picker.style.display = picker.style.display === "flex" ? "none" : "flex";
     });
 
-    // تفعيل زر إرفاق الصور
     document.getElementById("attach-img-btn").addEventListener("click", () => {
         document.getElementById("image-file-input").click();
     });
@@ -102,14 +92,12 @@ function setupChatUI() {
     document.getElementById("image-file-input").addEventListener("change", handleImageUpload);
 }
 
-// إدراج التعبير في خانة النص
 function insertEmoji(emoji) {
     const msgInput = document.getElementById("student-msg-input");
     msgInput.value += emoji;
     msgInput.focus();
 }
 
-// إرسال رسالة نصية
 function sendTextMessage() {
     const nameInput = document.getElementById("student-name-input").value.trim() || "طالب";
     const msgInput = document.getElementById("student-msg-input");
@@ -128,7 +116,6 @@ function sendTextMessage() {
     msgInput.value = "";
 }
 
-// رفع وإرسال صورة مرفقة
 function handleImageUpload(event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -151,7 +138,7 @@ function handleImageUpload(event) {
                 timestamp: Date.now()
             });
             recordStatus.style.display = "none";
-            event.target.value = ""; // إعادة تعيين الحقل
+            event.target.value = "";
         });
     }).catch(err => {
         alert("حدث خطأ أثناء رفع الصورة.");
@@ -159,7 +146,6 @@ function handleImageUpload(event) {
     });
 }
 
-// التسجيل الصوتي
 async function toggleAudioRecording() {
     const recordBtn = document.getElementById("record-audio-btn");
     const recordStatus = document.getElementById("record-status");
@@ -193,7 +179,6 @@ async function toggleAudioRecording() {
     }
 }
 
-// رفع الصوت
 function uploadAndSendAudio(blob) {
     const nameInput = document.getElementById("student-name-input").value.trim() || "طالب";
     const fileName = `voice_${Date.now()}.mp3`;
@@ -220,7 +205,6 @@ function uploadAndSendAudio(blob) {
     });
 }
 
-// تحميل وعرض الرسائل وتتبع الرسائل الجديدة
 function loadMessages() {
     db.ref("chat_messages").limitToLast(50).on("value", snapshot => {
         const messagesList = document.getElementById("messages-list");
@@ -243,7 +227,6 @@ function loadMessages() {
             if (isNew) totalUnreadCount++;
 
             const msgDiv = document.createElement("div");
-            // الرسائل الجديدة تظهر بلون خلفية مميز مختلف عن المقروءة
             const bgColor = isNew ? "#fffde7" : "#fff";
             const borderColor = isNew ? "2px solid #fbc02d" : "1px solid #ddd";
 
@@ -263,7 +246,6 @@ function loadMessages() {
             messagesList.appendChild(msgDiv);
         });
 
-        // تحديث عداد شريط الرسائل الجديدة
         const badgeBtn = document.getElementById("unread-badge-btn");
         const countSpan = document.getElementById("unread-count");
         if (totalUnreadCount > 0) {
@@ -277,7 +259,6 @@ function loadMessages() {
     });
 }
 
-// عند الضغط على زر العداد، يتم تحديث وقت القراءة وإزالة التمييز
 function scrollToNewMessages() {
     lastReadTimestamp = Date.now();
     localStorage.setItem("last_read_chat", lastReadTimestamp);
