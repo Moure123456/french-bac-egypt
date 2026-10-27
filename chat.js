@@ -1,11 +1,7 @@
 /**
- * شات الطلاب المتكامل والمطور (Le Français Au Bac)
+ * شات الطلاب المباشر
  */
 (function() {
-    let mediaRecorder;
-    let audioChunks = [];
-    let isRecording = false;
-
     function loadChat() {
         const container = document.getElementById("chat-messages-container");
         if (!container) return;
@@ -23,186 +19,60 @@
         }
 
         const db = firebase.database();
-        const storage = firebase.storage();
 
         container.innerHTML = `
-            <div id="student-chat-box" style="display: flex; flex-direction: column; gap: 8px; margin-top: 5px; width: 100%; font-family: Tahoma, sans-serif;">
-                <div style="background: linear-gradient(135deg, #0055A5, #003366); color: white; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                    <span>💬 شات الطلاب التفاعلي</span>
-                    <span style="font-size: 11px; background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 10px;">باشراف مسيو محمود</span>
+            <div style="background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #ccc; font-family: Tahoma, sans-serif;">
+                <h3 style="color: #0055A5; margin-top: 0; font-size: 15px;">💬 شات الطلاب المباشر</h3>
+                <div id="simple-msg-list" style="height: 220px; overflow-y: auto; background: #f9f9f9; padding: 10px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 10px;">
+                    <div style="color: #666; font-size: 13px;">جارٍ تحميل الرسائل...</div>
                 </div>
-
-                <div id="messages-list" style="height: 280px; overflow-y: auto; background: #fdfdfd; padding: 12px; border-radius: 8px; border: 1px solid #ddd; display: flex; flex-direction: column; gap: 8px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);">
-                    <div style="text-align: center; color: #888; font-size: 13px;">جاري تحميل المحادثات...</div>
+                <div style="display: flex; gap: 5px;">
+                    <input type="text" id="simple-name" placeholder="اسمك..." style="width: 25%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 12px;">
+                    <input type="text" id="simple-text" placeholder="اكتب رسالتك..." style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 12px;">
+                    <button id="simple-send" style="background: #0055A5; color: white; border: none; padding: 8px 15px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 12px;">إرسال</button>
                 </div>
-
-                <!-- قائمة الإيموجي السريعة -->
-                <div id="emoji-picker" style="display: none; gap: 6px; background: #fff; padding: 8px; border: 1px solid #ddd; border-radius: 8px; font-size: 18px; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                    <span style="cursor: pointer;" onclick="insertEmoji('😊')">😊</span>
-                    <span style="cursor: pointer;" onclick="insertEmoji('🇫🇷')">🇫🇷</span>
-                    <span style="cursor: pointer;" onclick="insertEmoji('👍')">👍</span>
-                    <span style="cursor: pointer;" onclick="insertEmoji('🔥')">🔥</span>
-                    <span style="cursor: pointer;" onclick="insertEmoji('❤️')">❤️</span>
-                    <span style="cursor: pointer;" onclick="insertEmoji('👏')">👏</span>
-                    <span style="cursor: pointer;" onclick="insertEmoji('💡')">💡</span>
-                    <span style="cursor: pointer;" onclick="insertEmoji('⭐')">⭐</span>
-                </div>
-
-                <!-- شريط الإدخال الملون والمنسق -->
-                <div style="display: flex; gap: 6px; align-items: center; background: #fff; padding: 8px; border-radius: 8px; border: 1px solid #ccc; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                    <button id="send-text-btn" style="background: #0055A5; color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 12px; transition: 0.2s;">إرسال</button>
-                    
-                    <input type="text" id="student-msg-input" placeholder="اكتب رسالة..." style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 12px; outline: none;">
-                    <input type="text" id="student-name-input" placeholder="اسمك..." style="width: 22%; padding: 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 12px; outline: none;">
-                    
-                    <button type="button" id="toggle-emoji-btn" style="background: #f0ad4e; color: white; border: none; padding: 8px 10px; border-radius: 6px; cursor: pointer; font-size: 14px;" title="إيموجي">😊</button>
-                    
-                    <input type="file" id="image-file-input" accept="image/*" style="display: none;">
-                    <button type="button" id="attach-img-btn" style="background: #5bc0de; color: white; border: none; padding: 8px 10px; border-radius: 6px; cursor: pointer; font-size: 14px;" title="صورة">🖼️</button>
-                    
-                    <button type="button" id="record-audio-btn" style="background: #d9534f; color: white; border: none; padding: 8px 10px; border-radius: 6px; cursor: pointer; font-size: 14px;" title="تسجيل صوتي">🎙️</button>
-                </div>
-                <div id="record-status" style="font-size: 11px; color: #d9534f; text-align: right; display: none; font-weight: bold;">🔴 جاري التسجيل الان... اضغط ⏹️ للإرسال</div>
             </div>
         `;
 
-        const msgInput = document.getElementById("student-msg-input");
-        const nameInput = document.getElementById("student-name-input");
-        const messagesList = document.getElementById("messages-list");
+        const textInput = document.getElementById("simple-text");
+        const nameInput = document.getElementById("simple-name");
+        const msgList = document.getElementById("simple-msg-list");
 
-        // تفعيل زر الإرسال النصي
-        document.getElementById("send-text-btn").onclick = function() {
-            const txt = msgInput.value.trim();
+        document.getElementById("simple-send").onclick = function() {
+            const txt = textInput.value.trim();
             const usr = nameInput.value.trim() || "طالب";
             if (!txt) return;
 
             db.ref("chat_messages").push({
                 sender: usr,
                 text: txt,
-                type: "text",
                 timestamp: Date.now()
             });
-            msgInput.value = "";
+            textInput.value = "";
         };
 
-        msgInput.onkeypress = function(e) {
-            if (e.key === "Enter") document.getElementById("send-text-btn").click();
+        textInput.onkeypress = function(e) {
+            if (e.key === "Enter") document.getElementById("simple-send").click();
         };
 
-        // تفعيل قائمة الإيموجي
-        document.getElementById("toggle-emoji-btn").onclick = function() {
-            const picker = document.getElementById("emoji-picker");
-            picker.style.display = picker.style.display === "flex" ? "none" : "flex";
-        };
-
-        // تفعيل إرفاق الصور
-        document.getElementById("attach-img-btn").onclick = function() {
-            document.getElementById("image-file-input").click();
-        };
-
-        document.getElementById("image-file-input").onchange = function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            const usr = nameInput.value.trim() || "طالب";
-            const fileName = `img_${Date.now()}_${file.name}`;
-            const storageRef = storage.ref(`chat_images/${fileName}`);
-
-            storageRef.put(file).then(snapshot => {
-                snapshot.ref.getDownloadURL().then(downloadURL => {
-                    db.ref("chat_messages").push({
-                        sender: usr,
-                        imageUrl: downloadURL,
-                        type: "image",
-                        timestamp: Date.now()
-                    });
-                });
-            }).catch(() => alert("فشل رفع الصورة"));
-        };
-
-        // تفعيل التسجيل الصوتي
-        const recordBtn = document.getElementById("record-audio-btn");
-        const recordStatus = document.getElementById("record-status");
-
-        recordBtn.onclick = async function() {
-            if (!isRecording) {
-                try {
-                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                    mediaRecorder = new MediaRecorder(stream);
-                    audioChunks = [];
-
-                    mediaRecorder.ondataavailable = ev => audioChunks.push(ev.data);
-                    mediaRecorder.onstop = async () => {
-                        const audioBlob = new Blob(audioChunks, { type: 'audio/mp3' });
-                        const usr = nameInput.value.trim() || "طالب";
-                        const fileName = `voice_${Date.now()}.mp3`;
-                        const storageRef = storage.ref(`voice_messages/${fileName}`);
-
-                        storageRef.put(audioBlob).then(snapshot => {
-                            snapshot.ref.getDownloadURL().then(downloadURL => {
-                                db.ref("chat_messages").push({
-                                    sender: usr,
-                                    audioUrl: downloadURL,
-                                    type: "audio",
-                                    timestamp: Date.now()
-                                });
-                            });
-                        });
-                    };
-
-                    mediaRecorder.start();
-                    isRecording = true;
-                    recordBtn.innerText = "⏹️";
-                    recordBtn.style.background = "#28a745";
-                    recordStatus.style.display = "block";
-                } catch {
-                    alert("يرجى السماح باستخدام الميكروفون.");
-                }
-            } else {
-                mediaRecorder.stop();
-                isRecording = false;
-                recordBtn.innerText = "🎙️";
-                recordBtn.style.background = "#d9534f";
-                recordStatus.style.display = "none";
-            }
-        };
-
-        // استماع للرسائل وتحديث الواجهة
-        db.ref("chat_messages").limitToLast(50).on("value", snapshot => {
-            messagesList.innerHTML = "";
+        db.ref("chat_messages").limitToLast(30).on("value", snapshot => {
+            msgList.innerHTML = "";
             const data = snapshot.val();
             if (!data) {
-                messagesList.innerHTML = '<div style="text-align: center; color: #888; font-size: 13px;">لا توجد رسائل بعد. كن أول من يراسل! 🇫🇷</div>';
+                msgList.innerHTML = '<div style="color: #888; font-size: 13px;">لا توجد رسائل بعد.</div>';
                 return;
             }
 
             Object.keys(data).forEach(k => {
                 const m = data[k];
                 const div = document.createElement("div");
-                div.style.cssText = "margin-bottom: 8px; padding: 8px 12px; background: #fff; border-radius: 8px; border: 1px solid #e0e0e0; max-width: 85%; align-self: flex-start; box-shadow: 0 1px 2px rgba(0,0,0,0.05);";
-                
-                let content = `<strong style="color: #0055A5; font-size: 12px; display: block; margin-bottom: 2px;">${m.sender}</strong>`;
-                if (m.type === "text" || !m.type) {
-                    content += `<span style="font-size: 13px; color: #333; word-break: break-all;">${m.text}</span>`;
-                } else if (m.type === "image") {
-                    content += `<img src="${m.imageUrl}" style="max-width: 160px; border-radius: 6px; margin-top: 4px; display: block;">`;
-                } else if (m.type === "audio") {
-                    content += `<audio controls style="height: 30px; width: 180px; margin-top: 4px;"><source src="${m.audioUrl}" type="audio/mp3"></audio>`;
-                }
-
-                div.innerHTML = content;
-                messagesList.appendChild(div);
+                div.style.cssText = "margin-bottom: 8px; padding: 6px 10px; background: #fff; border-radius: 4px; border: 1px solid #eee;";
+                div.innerHTML = `<strong style="color: #0055A5; font-size: 12px;">${m.sender}:</strong> <span style="font-size: 13px; color: #333;">${m.text}</span>`;
+                msgList.appendChild(div);
             });
-            messagesList.scrollTop = messagesList.scrollHeight;
+            msgList.scrollTop = msgList.scrollHeight;
         });
     }
-
-    window.insertEmoji = function(emoji) {
-        const msgInput = document.getElementById("student-msg-input");
-        if (msgInput) {
-            msgInput.value += emoji;
-            msgInput.focus();
-        }
-    };
 
     if (document.readyState === "complete" || document.readyState === "interactive") {
         setTimeout(loadChat, 200);
@@ -210,6 +80,7 @@
         window.addEventListener("DOMContentLoaded", loadChat);
     }
     
+    // محاولة تشغيل إضافية عند الضغط على زر الشات في القائمة
     window.addEventListener("click", function(e) {
         if (e.target.closest('[data-nav="student-chat"]')) {
             setTimeout(loadChat, 150);
