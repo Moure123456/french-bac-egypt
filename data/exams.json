@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": 5,
+    "version": 6,
     "title": {
       "fr": "Modèles d'examens complets - Le Français Au Bac",
       "ar": "نماذج الامتحانات الشاملة - منهج الثانوية العامة للغة الفرنسية",
@@ -10,8 +10,8 @@
       }
     },
     "note": {
-      "fr": "Dix modèles d'examens interactifs pour le niveau secondaire en Égypte.",
-      "ar": "عشرة نماذج امتحانات تفاعلية متكاملة للمرحلة الثانوية في مصر.",
+      "fr": "Dix modèles d'examens interactifs avec grammaire complète.",
+      "ar": "عشرة نماذج امتحانات تفاعلية متكاملة مع أقسام القواعد الشاملة.",
       "phonetic": {
         "fr": "/dis mɔdɛl dɛɡzamɛ̃/",
         "ar": "ديس موديل ديجزمان"
@@ -22,10 +22,10 @@
     {
       "id": "easy-1sec-1",
       "level": "1sec",
-      "title_ar": "نموذج امتحان شامل (1): التعارف والعائلة",
-      "title_fr": "Modèle d'examen n° 1 : Se présenter et la famille",
+      "title_ar": "نموذج امتحان شامل (1): التعارف والعائلة والقواعد",
+      "title_fr": "Modèle d'examen n° 1 : Se présenter, la famille et grammaire",
       "duration_min": 30,
-      "instructions_ar": "الدرجة الكاملة 20 (كل سؤال درجتان). اقرأ النص جيداً ثم أجب. الوقت 30 دقيقة.",
+      "instructions_ar": "الدرجة الكاملة 20. اقرأ النص جيداً ثم أجب عن أسئلة الفهم والقواعد.",
       "sections": [
         {
           "title_ar": "قطعة الفهم",
@@ -91,6 +91,38 @@
               "options": ["ai", "suis", "as", "a"],
               "answer": "ai",
               "explanation_ar": "avoir مع je: j'ai."
+            },
+            {
+              "type": "choice",
+              "marks": 2,
+              "prompt_fr": "Sara présente sa famille : « Voici ___ mère. »",
+              "prompt_ar": "اختر صفة الملكية المناسبة للمؤنث المفرد",
+              "options": ["ma", "mon", "mes", "leur"],
+              "answer": "ma",
+              "explanation_ar": "الصفة الملكية للمؤنث المفرد (المتكلم): ma mère."
+            }
+          ]
+        },
+        {
+          "title_ar": "المفردات",
+          "title_fr": "Vocabulaire",
+          "questions": [
+            {
+              "type": "choice",
+              "marks": 2,
+              "prompt_fr": "Le frère de ma mère est mon ___.",
+              "prompt_ar": "أخو الأم هو الـ...",
+              "options": ["oncle", "cousin", "neveu", "grand-père"],
+              "answer": "oncle",
+              "explanation_ar": "أخو الأم = oncle (خال)."
+            },
+            {
+              "type": "text",
+              "marks": 2,
+              "prompt_fr": "Traduisez en français : جدّة",
+              "prompt_ar": "ترجم إلى الفرنسية: جدّة",
+              "answer": "grand-mère",
+              "explanation_ar": "جدّة = grand-mère."
             }
           ]
         }
@@ -99,8 +131,8 @@
     {
       "id": "easy-1sec-2",
       "level": "1sec",
-      "title_ar": "نموذج امتحان شامل (2): الحياة اليومية والمدرسة",
-      "title_fr": "Modèle d'examen n° 2 : La vie quotidienne et l'école",
+      "title_ar": "نموذج امتحان شامل (2): الحياة اليومية والمدرسة والقواعد",
+      "title_fr": "Modèle d'examen n° 2 : La vie quotidienne, l'école et grammaire",
       "duration_min": 30,
       "instructions_ar": "الدرجة الكاملة 20. اقرأ النص جيداً ثم أجب.",
       "sections": [
@@ -129,16 +161,39 @@
               "explanation_ar": "« il va à l'école à pied » = سيراً على الأقدام."
             }
           ]
+        },
+        {
+          "title_ar": "القواعد",
+          "title_fr": "Grammaire",
+          "questions": [
+            {
+              "type": "choice",
+              "marks": 2,
+              "prompt_fr": "Tu ___ à sept heures. (se lever)",
+              "prompt_ar": "اختر التصريف الصحيح للفعل ذي الضميرين",
+              "options": ["te lèves", "se lève", "me lève", "nous levons"],
+              "answer": "te lèves",
+              "explanation_ar": "الفعل المنعكس se lever مع tu: tu te lèves."
+            },
+            {
+              "type": "text",
+              "marks": 2,
+              "prompt_fr": "Complétez avec « va » ou « vont » : Les élèves ____ à l'école.",
+              "prompt_ar": "أكمل بـ va أو vont",
+              "answer": "vont",
+              "explanation_ar": "الفاعل جمع (ils) فنقول: ils vont."
+            }
+          ]
         }
       ]
     },
     {
       "id": "easy-1sec-3",
       "level": "1sec",
-      "title_ar": "نموذج امتحان شامل (3): الطعام والتسوّق",
-      "title_fr": "Modèle d'examen n° 3 : La nourriture et les courses",
+      "title_ar": "نموذج امتحان شامل (3): الطعام والتسوّق والقواعد",
+      "title_fr": "Modèle d'examen n° 3 : La nourriture, les courses et grammaire",
       "duration_min": 30,
-      "instructions_ar": "الدرجة الكاملة 20. أجب عن الأسئلة التالية.",
+      "instructions_ar": "الدرجة الكاملة 20.",
       "sections": [
         {
           "title_ar": "قطعة الفهم",
@@ -154,15 +209,29 @@
               "options": ["Au marché", "À la mosquée", "À l'hôpital", "Au cinéma"],
               "answer": "Au marché",
               "explanation_ar": "« Mme Nadia va au marché »."
-            },
+            }
+          ]
+        },
+        {
+          "title_ar": "القواعد",
+          "title_fr": "Grammaire",
+          "questions": [
             {
               "type": "choice",
               "marks": 2,
-              "prompt_fr": "Combien de kilos de pommes de terre achète-t-elle ?",
-              "prompt_ar": "كم كيلو من البطاطس تشتري؟",
-              "options": ["Un", "Deux", "Trois", "Cinq"],
-              "answer": "Deux",
-              "explanation_ar": "« deux kilos de pommes de terre »."
+              "prompt_fr": "Je mange ___ pain.",
+              "prompt_ar": "اختر أدوات التجزئة المناسبة",
+              "options": ["du", "de la", "des", "les"],
+              "answer": "du",
+              "explanation_ar": "pain اسم مذكر مفرد: du pain."
+            },
+            {
+              "type": "text",
+              "marks": 2,
+              "prompt_fr": "Il n'y a pas ___ lait.",
+              "prompt_ar": "أكمل بعد أداة النفي",
+              "answer": "de",
+              "explanation_ar": "بعد النفي يتحول du/de la إلى de."
             }
           ]
         }
@@ -171,10 +240,10 @@
     {
       "id": "easy-1sec-4",
       "level": "1sec",
-      "title_ar": "نموذج امتحان شامل (4): المدينة والاتجاهات",
-      "title_fr": "Modèle d'examen n° 4 : La ville et les directions",
+      "title_ar": "نموذج امتحان شامل (4): المدينة والاتجاهات والقواعد",
+      "title_fr": "Modèle d'examen n° 4 : La ville, les directions et grammaire",
       "duration_min": 30,
-      "instructions_ar": "الدرجة الكاملة 20. اختبر معلوماتك.",
+      "instructions_ar": "الدرجة الكاملة 20.",
       "sections": [
         {
           "title_ar": "قطعة الفهم",
@@ -190,15 +259,21 @@
               "options": ["La gare", "La pharmacie", "L'école", "La banque"],
               "answer": "La pharmacie",
               "explanation_ar": "« Elle cherche la pharmacie »."
-            },
+            }
+          ]
+        },
+        {
+          "title_ar": "القواعد",
+          "title_fr": "Grammaire",
+          "questions": [
             {
               "type": "choice",
               "marks": 2,
-              "prompt_fr": "Pour arriver à la pharmacie, Mariam doit tourner...",
-              "prompt_ar": "للوصول إلى الصيدلية، يجب على مريم أن تنعطف...",
-              "options": ["à droite", "à gauche", "en arrière", "deux fois"],
-              "answer": "à gauche",
-              "explanation_ar": "« tournez à gauche » = انعطفي يساراً."
+              "prompt_fr": "Le musée est ___ la banque et la poste.",
+              "prompt_ar": "اختر حرف الجر المناسب",
+              "options": ["entre", "sur", "chez", "vers"],
+              "answer": "entre",
+              "explanation_ar": "entre ... et ... = بين ... و ..."
             }
           ]
         }
@@ -207,16 +282,16 @@
     {
       "id": "easy-1sec-5",
       "level": "1sec",
-      "title_ar": "نموذج امتحان شامل (5): الهوايات والطقس والملابس",
-      "title_fr": "Modèle d'examen n° 5 : Les loisirs, le temps et les vêtements",
+      "title_ar": "نموذج امتحان شامل (5): الهوايات والطقس والقواعد",
+      "title_fr": "Modèle d'examen n° 5 : Loisirs, temps et grammaire",
       "duration_min": 30,
-      "instructions_ar": "الدرجة الكاملة 20. أجب بدقة.",
+      "instructions_ar": "الدرجة الكاملة 20.",
       "sections": [
         {
           "title_ar": "قطعة الفهم",
           "title_fr": "Compréhension",
-          "text": "En été, il fait chaud en Égypte. Nada et ses amies vont à la plage. Elles portent un maillot de bain.",
-          "text_ar": "في الصيف يكون الجو حاراً في مصر. تذهب ندى وصديقاتها إلى الشاطئ ويرتدين ملابس السباحة.",
+          "text": "En été, il fait chaud en Égypte. Nada et ses amies vont à la plage.",
+          "text_ar": "في الصيف يكون الجو حاراً في مصر. تذهب ندى وصديقاتها إلى الشاطئ.",
           "questions": [
             {
               "type": "choice",
@@ -226,15 +301,21 @@
               "options": ["Il fait froid", "Il pleut", "Il fait chaud", "Il neige"],
               "answer": "Il fait chaud",
               "explanation_ar": "« En été, il fait chaud en Égypte »."
-            },
+            }
+          ]
+        },
+        {
+          "title_ar": "القواعد",
+          "title_fr": "Grammaire",
+          "questions": [
             {
               "type": "choice",
               "marks": 2,
-              "prompt_fr": "Où vont Nada et ses amies ?",
-              "prompt_ar": "أين تذهب ندى وصديقاتها؟",
-              "options": ["À la montagne", "À la plage", "Au cinéma", "À l'école"],
-              "answer": "À la plage",
-              "explanation_ar": "« vont à la plage »."
+              "prompt_fr": "J'aime ___ au football.",
+              "prompt_ar": "اختر الفعل في المصدر بعد aimer",
+              "options": ["jouer", "joue", "joues", "jouez"],
+              "answer": "jouer",
+              "explanation_ar": "بعد الفعل aimer نستعمل المصدر: J'aime jouer."
             }
           ]
         }
@@ -243,8 +324,8 @@
     {
       "id": "mod-2sec-6",
       "level": "2sec",
-      "title_ar": "نموذج امتحان شامل (6): الصف الثاني - الرياضة والمشتريات",
-      "title_fr": "Modèle d'examen n° 6 : 2e Secondaire - Sports et Achats",
+      "title_ar": "نموذج امتحان شامل (6): الصف الثاني - الرياضة والقواعد",
+      "title_fr": "Modèle d'examen n° 6 : 2e Secondaire - Sports et Grammaire",
       "duration_min": 30,
       "instructions_ar": "نماذج مخصصة لمنهج الصف الثاني الثانوي.",
       "sections": [
@@ -252,13 +333,13 @@
           "title_ar": "قطعة الفهم والقواعد",
           "title_fr": "Compréhension et Grammaire",
           "text": "Au marché, je cherche des fruits frais comme les pommes et les oranges pour garder la forme.",
-          "text_ar": "في السوق، أبحث عن فواكه طازجة مثل التفاح والبرتقال للحفاظ على لياقتي البدنية.",
+          "text_ar": "في السوق، أبحث عن فواكه طازجة للحفاظ على لياقتي.",
           "questions": [
             {
               "type": "choice",
               "marks": 2,
               "prompt_fr": "Que cherche le client au marché ?",
-              "prompt_ar": "ماذا يبحث الزبون في السوق؟",
+              "prompt_ar": "ماذا يبحث الزبون؟",
               "options": ["Des fruits frais", "Des vêtements", "Des livres", "Un stylo"],
               "answer": "Des fruits frais",
               "explanation_ar": "النص يذكر البحث عن الفواكه الطازجة."
@@ -267,7 +348,7 @@
               "type": "text",
               "marks": 2,
               "prompt_fr": "Conjuguez le verbe faire au présent : Tu ____ du sport.",
-              "prompt_ar": "صرف فعل faire مع ضمير Tu",
+              "prompt_ar": "صرف فعل faire",
               "answer": "fais",
               "explanation_ar": "تصريف فعل faire مع tu هو fais."
             }
@@ -278,8 +359,8 @@
     {
       "id": "mod-2sec-7",
       "level": "2sec",
-      "title_ar": "نموذج امتحان شامل (7): الصف الثاني - الدعوة والحفلات",
-      "title_fr": "Modèle d'examen n° 7 : 2e Secondaire - Fêtes et Invitations",
+      "title_ar": "نموذج امتحان شامل (7): الصف الثاني - القواعد والحفلات",
+      "title_fr": "Modèle d'examen n° 7 : 2e Secondaire - Grammaire",
       "duration_min": 30,
       "instructions_ar": "اختبار القواعد والمفردات للصف الثاني الثانوي.",
       "sections": [
@@ -294,16 +375,7 @@
               "prompt_ar": "اختر حرف الجر المناسب",
               "options": ["au", "à la", "à l'", "aux"],
               "answer": "au",
-              "explanation_ar": "cinéma اسم مذكر مفرد مبدوء بساكن يأخذ au."
-            },
-            {
-              "type": "choice",
-              "marks": 2,
-              "prompt_fr": "C'est la voiture de mon père. C'est ___ voiture.",
-              "prompt_ar": "اختر صفة الملكية الصحيحة",
-              "options": ["sa", "mon", "ton", "mes"],
-              "answer": "sa",
-              "explanation_ar": "السيارة تعود للأب (مفرد مذكر) والاسم بعدها مؤنث مبدوء بساكن فنختار sa."
+              "explanation_ar": "cinéma اسم مذكر مفرد يأخذ au."
             }
           ]
         }
@@ -312,16 +384,16 @@
     {
       "id": "mod-3sec-8",
       "level": "3sec",
-      "title_ar": "نموذج امتحان شامل (8): الصف الثالث - البيئة والطبيعة",
+      "title_ar": "نموذج امتحان شامل (8): الصف الثالث - البيئة والقواعد",
       "title_fr": "Modèle d'examen n° 8 : 3e Secondaire - Environnement",
       "duration_min": 45,
-      "instructions_ar": "نموذج تدريبي متقدم لثالثة ثانوي (نظام البكالوريا الحديث).",
+      "instructions_ar": "نموذج تدريبي متقدم لثالثة ثانوي.",
       "sections": [
         {
-          "title_ar": "قطعة الفهم البيئي",
-          "title_fr": "Compréhension écologique",
-          "text": "Pour protéger l'environnement, il est nécessaire de réduire l'utilisation du plastique et de recycler les déchets.",
-          "text_ar": "لحماية البيئة، من الضروري تقليل استخدام البلاستيك وإعادة تدوير النفايات.",
+          "title_ar": "قطعة الفهم والقواعد",
+          "title_fr": "Compréhension et Grammaire",
+          "text": "Pour protéger l'environnement, il est nécessaire de réduire l'utilisation du plastique.",
+          "text_ar": "لحماية البيئة، من الضروري تقليل استخدام البلاستيك.",
           "questions": [
             {
               "type": "choice",
@@ -331,14 +403,6 @@
               "options": ["L'utilisation du plastique", "L'eau", "L'air", "Les arbres"],
               "answer": "L'utilisation du plastique",
               "explanation_ar": "النص يوصي بتقليل استخدام البلاستيك."
-            },
-            {
-              "type": "text",
-              "marks": 2,
-              "prompt_fr": "Traduisez en arabe : Il faut protéger la nature.",
-              "prompt_ar": "ترجم إلى العربية",
-              "answer": "يجب حماية الطبيعة",
-              "explanation_ar": "Il faut = يجب، protéger = حماية، la nature = الطبيعة."
             }
           ]
         }
@@ -347,10 +411,10 @@
     {
       "id": "mod-3sec-9",
       "level": "3sec",
-      "title_ar": "نموذج امتحان شامل (9): الصف الثالث - التكنولوجيا والذكاء الاصطناعي",
+      "title_ar": "نموذج امتحان شامل (9): الصف الثالث - التكنولوجيا والقواعد",
       "title_fr": "Modèle d'examen n° 9 : 3e Secondaire - Technologie",
       "duration_min": 45,
-      "instructions_ar": "اختبار شامل على الوحدة الثانية لثالثة ثانوي.",
+      "instructions_ar": "اختبار شامل لثالثة ثانوي.",
       "sections": [
         {
           "title_ar": "الأسئلة العامة",
@@ -364,14 +428,6 @@
               "options": ["Faciliter notre vie quotidienne", "Fatiguer les gens", "Polluer la terre", "Rien faire"],
               "answer": "Faciliter notre vie quotidienne",
               "explanation_ar": "الذكاء الاصطناعي يسهل الحياة اليومية."
-            },
-            {
-              "type": "text",
-              "marks": 2,
-              "prompt_fr": "Donnez le synonyme de « intelligent ».",
-              "prompt_ar": "عط مرادف كلمة ذكي",
-              "answer": "brillant",
-              "explanation_ar": "كلمة brilliant تعني ذكي أو عبقري."
             }
           ]
         }
@@ -380,16 +436,16 @@
     {
       "id": "mod-3sec-10",
       "level": "3sec",
-      "title_ar": "نموذج امتحان شامل (10): التقييم النهائي لشهادة البكالوريا",
+      "title_ar": "نموذج امتحان شامل (10): التقييم النهائي والقواعد",
       "title_fr": "Modèle d'examen n° 10 : Évaluation finale du Bac",
       "duration_min": 60,
-      "instructions_ar": "الامتحان النهائي الشامل لقياس مستواك في جميع فروع المنهج.",
+      "instructions_ar": "الامتحان النهائي الشامل.",
       "sections": [
         {
           "title_ar": "التقييم الشامل",
           "title_fr": "Évaluation globale",
-          "text": "Le français est une langue internationale magnifique. Apprendre une nouvelle langue ouvre l'esprit et offre de grandes opportunités.",
-          "text_ar": "الفرنسية لغة دولية رائعة. تعلم لغة جديدة يفتح العقل ويقدم فرصاً كبيرة.",
+          "text": "Le français est une langue internationale magnifique. Apprendre une nouvelle langue ouvre l'esprit.",
+          "text_ar": "الفرنسية لغة دولية رائعة.",
           "questions": [
             {
               "type": "choice",
@@ -398,15 +454,7 @@
               "prompt_ar": "ماذا يفعل تعلم لغة جديدة؟",
               "options": ["Ouvre l'esprit", "Ferme l'esprit", "Fatigue", "Ne sert à rien"],
               "answer": "Ouvre l'esprit",
-              "explanation_ar": "النص يؤكد أن تعلم لغة يفتح العقل (ouvre l'esprit)."
-            },
-            {
-              "type": "text",
-              "marks": 5,
-              "prompt_fr": "Mettez au passé composé : « Je réussis mon examen. »",
-              "prompt_ar": "ضع الجملة في الماضي المركب",
-              "answer": "j'ai réussi mon examen",
-              "explanation_ar": "فعل réussir يأخذ مساعد avoir والاسم المفعول منه réussi."
+              "explanation_ar": "النص يؤكد أن تعلم لغة يفتح العقل."
             }
           ]
         }
