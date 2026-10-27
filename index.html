@@ -85,9 +85,24 @@
 
   <div id="toast" class="toast" role="status"></div>
 
+  <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
+
+  <!-- Firebase Initialization -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAoFJex9rrYUgyyEUtw9TV9rhriFVyag8Y",
+      authDomain: "frenchbacchat.firebaseapp.com",
+      projectId: "frenchbacchat",
+      storageBucket: "frenchbacchat.firebasestorage.app",
+      messagingSenderId: "692488273461",
+      appId: "1:692488273461:web:efa14361a054f3287d3b7c",
+      measurementId: "G-RZKJ18LPS2"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
 
   <script src="./app.js"></script>
   <script src="./bac.js"></script>
