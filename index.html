@@ -194,13 +194,15 @@
     });
 
     function updateLockVisuals() {
+      const lockedSvg = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="vertical-align:middle"><rect x="4" y="10" width="16" height="12" rx="2" fill="currentColor"/><path d="M8 10V6.5a4 4 0 0 1 8 0V10" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>';
+      const openSvg = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="vertical-align:middle"><rect x="4" y="10" width="16" height="12" rx="2" fill="currentColor"/><path d="M8 10V6.5a4 4 0 0 1 7.6-1.7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>';
       document.querySelectorAll('.locked-section').forEach(btn => {
         const lockedId = btn.getAttribute('data-locked-id');
         const isUnlocked = localStorage.getItem(`section_unlocked_${lockedId}`) === "true";
         const badge = btn.querySelector('.lock-badge');
         if (badge) {
-          badge.innerHTML = isUnlocked ? '🔓' : '🔒';
-          badge.style.color = isUnlocked ? '#28a745' : '#dc3545';
+          badge.innerHTML = isUnlocked ? openSvg : lockedSvg;
+          badge.style.color = isUnlocked ? '#0055A5' : '#dc3545';
         }
       });
     }
