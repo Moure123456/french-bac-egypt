@@ -50,18 +50,53 @@
 
     <main class="content">
       <section id="lessons" class="sec on"><h2>دروس الكتاب المدرسي وحلول الأسئلة</h2><div class="body"><div class="empty">جارٍ التحميل…</div></div></section>
-      <section id="bac" class="sec"><h2>🎓 منهج البكالوريا</h2><div id="bac-content-container" class="body"><div class="empty">جارٍ التحميل…</div></div></section>
+      
+      <section id="bac" class="sec">
+        <h2>🎓 منهج البكالوريا</h2>
+        <div id="bac-content-container" class="body">
+          <div class="empty">جارٍ تحميل وحدات البكالوريا…</div>
+        </div>
+      </section>
+
       <section id="grammar" class="sec"><h2>Grammaire — القواعد</h2><div class="body"></div></section>
       <section id="phonetics" class="sec"><h2>Phonétique — الصوتيات</h2><div class="body"></div></section>
       <section id="dictionary" class="sec"><h2>Dictionnaire — القاموس</h2><div class="body"></div></section>
       <section id="dialogues" class="sec"><h2>Dialogues — حوارات يومية</h2><div class="body"></div></section>
       <section id="tales" class="sec"><h2>Contes — قصص مبسطة</h2><div class="body"></div></section>
-      <section id="exams" class="sec"><h2>Examens du Bac — نماذج امتحانات</h2><div class="body"></div></section>
+
+      <!-- قسم الامتحانات المدمج معه قسم الجرامير الخاص بالامتحانات -->
+      <section id="exams" class="sec">
+        <h2>Examens du Bac — نماذج امتحانات</h2>
+        <div class="body">
+          <!-- قسم قواعد وقرامير الامتحانات المدمج -->
+          <div style="background: #f0f7ff; border: 1.5px solid #b8d5ff; border-radius: 10px; padding: 15px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.03);">
+            <h3 style="color: #0055A5; font-size: 16px; margin-top: 0; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+              <span>✍️</span> قواعد وقرامير الامتحانات (Grammaire des Examens)
+            </h3>
+            <p style="font-size: 13px; color: #444; margin-bottom: 12px; line-height: 1.5;">
+              أهم قواعد وقرامير الامتحانات والأسئلة المتكررة لطلاب الثانوية العامة والبكالوريا:
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <span style="background: #fff; border: 1px solid #0055A5; color: #0055A5; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: bold;">Le passé composé</span>
+              <span style="background: #fff; border: 1px solid #0055A5; color: #0055A5; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: bold;">Les articles définis/indéfinis</span>
+              <span style="background: #fff; border: 1px solid #0055A5; color: #0055A5; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: bold;">Les pronoms personnels</span>
+              <span style="background: #fff; border: 1px solid #0055A5; color: #0055A5; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: bold;">L'impératif</span>
+            </div>
+          </div>
+
+          <!-- محتوى الامتحانات الأساسي -->
+          <div id="exams-content-container">
+            <div class="empty">اختر نموذج الامتحانات التدريبية للثانوية العامة…</div>
+          </div>
+        </div>
+      </section>
+
       <section id="soon-chansons" class="sec"><h2>🎵 Chansons françaises</h2><div id="songs-content-container" class="body"><div class="empty">جارٍ التحميل…</div></div></section>
       <section id="soon-contemporaine" class="sec"><h2>La France contemporaine</h2><div class="soon-card"><div class="soon-icon">⏳</div><p class="soon-ar">المحتوى قيد الإعداد...</p></div></section>
       <section id="soon-litterature" class="sec"><h2>Littérature française</h2><div class="soon-card"><div class="soon-icon">⏳</div><p class="soon-ar">المحتوى قيد الإعداد...</p></div></section>
       <section id="soon-geographie" class="sec"><h2>Géographie et Villes</h2><div class="soon-card"><div class="soon-icon">⏳</div><p class="soon-ar">المحتوى قيد الإعداد...</p></div></section>
       <section id="soon-argot" class="sec"><h2>L'Argot</h2><div class="soon-card"><div class="soon-icon">⏳</div><p class="soon-ar">المحتوى قيد الإعداد...</p></div></section>
+      
       <section id="chat" class="sec">
         <h2>المساعد الذكي 🤖</h2>
         <div class="chips">
@@ -74,6 +109,7 @@
           <button type="submit">إرسال</button>
         </form>
       </section>
+
       <section id="student-chat" class="sec"><h2>💬 شات الطلاب</h2><div class="body"><div id="chat-messages-container"></div></div></section>
     </main>
   </div>
