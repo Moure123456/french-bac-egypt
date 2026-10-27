@@ -1,6 +1,5 @@
 /**
  * نظام محادثة الطلاب والتسجيل الصوتي والصور (Le Français Au Bac)
- * يدعم الكتابة، الإيموجي، إرفاق الصور، التسجيل الصوتي، وعداد الرسائل الجديدة.
  */
 
 const firebaseConfig = {
@@ -26,17 +25,29 @@ let isRecording = false;
 let lastReadTimestamp = localStorage.getItem("last_read_chat") || 0;
 let totalUnreadCount = 0;
 
+// مراقبة فتح تبويب الشات لضمان عمله في أي وقت
 document.addEventListener("DOMContentLoaded", function () {
-    setupChatUI();
-    loadMessages();
+    initChatSystem();
+    
+    // مراقبة الأزرار لتشغيل الشات فور الضغط على تبويبه
+    document.querySelectorAll('[data-nav]').forEach(btn => {
+        btn.addEventListener('click', function() {
+            if (this.getAttribute('data-nav') === 'student-chat') {
+                setTimeout(initChatSystem, 100);
+            }
+        });
+    });
 });
 
-function setupChatUI() {
+function initChatSystem() {
     const chatContainer = document.getElementById("chat-messages-container");
     if (!chatContainer) return;
+    
+    // منع إعادة بناء الشات إذا كان موجوداً بالفعل لتجنب مسح المحادثة
+    if (document.getElementById("student-chat-box")) return;
 
-    const inputAreaHTML = `
-        <div id="student-chat-box" style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
+    chatContainer.innerHTML = `
+        <div id="student-chat-box" style="display: flex; flex-direction: column; gap: 8px; margin-top: 5px;">
             <div id="chat-header-bar" style="display: flex; justify-content: space-between; align-items: center; background: #eef2f7; padding: 6px 12px; border-radius: 6px; font-size: 13px;">
                 <span>💬 شات الطلاب التفاعلي</span>
                 <button id="unread-badge-btn" onclick="scrollToNewMessages()" style="background: #d9534f; color: white; border: none; padding: 3px 8px; border-radius: 12px; font-size: 11px; cursor: pointer; display: none;">
@@ -75,27 +86,29 @@ function setupChatUI() {
         </div>
     `;
 
-    chatContainer.innerHTML = inputAreaHTML;
-
-    document.getElementById("send-text-btn").addEventListener("click", sendTextMessage);
-    document.getElementById("record-audio-btn").addEventListener("click", toggleAudioRecording);
+    document.getElementById("send-text-btn").onclick = sendTextMessage;
+    document.getElementById("record-audio-btn").onclick = toggleAudioRecording;
     
-    document.getElementById("toggle-emoji-btn").addEventListener("click", () => {
+    document.getElementById("toggle-emoji-btn").onclick = () => {
         const picker = document.getElementById("emoji-picker");
         picker.style.display = picker.style.display === "flex" ? "none" : "flex";
-    });
+    };
 
-    document.getElementById("attach-img-btn").addEventListener("click", () => {
+    document.getElementById("attach-img-btn").onclick = () => {
         document.getElementById("image-file-input").click();
-    });
+    };
 
-    document.getElementById("image-file-input").addEventListener("change", handleImageUpload);
+    document.getElementById("image-file-input").onchange = handleImageUpload;
+    
+    loadMessages();
 }
 
 function insertEmoji(emoji) {
     const msgInput = document.getElementById("student-msg-input");
-    msgInput.value += emoji;
-    msgInput.focus();
+    if(msgInput) {
+        msgInput.value += emoji;
+        msgInput.focus();
+    }
 }
 
 function sendTextMessage() {
@@ -105,8 +118,7 @@ function sendTextMessage() {
 
     if (!text) return;
 
-    const newMessageRef = db.ref("chat_messages").push();
-    newMessageRef.set({
+    db.ref("chat_messages").push({
         sender: nameInput,
         text: text,
         type: "text",
@@ -130,8 +142,7 @@ function handleImageUpload(event) {
 
     storageRef.put(file).then(snapshot => {
         snapshot.ref.getDownloadURL().then(downloadURL => {
-            const newMessageRef = db.ref("chat_messages").push();
-            newMessageRef.set({
+            db.ref("chat_messages").push({
                 sender: nameInput,
                 imageUrl: downloadURL,
                 type: "image",
@@ -140,7 +151,7 @@ function handleImageUpload(event) {
             recordStatus.style.display = "none";
             event.target.value = "";
         });
-    }).catch(err => {
+    }).catch(() => {
         alert("حدث خطأ أثناء رفع الصورة.");
         recordStatus.style.display = "none";
     });
@@ -167,7 +178,7 @@ async function toggleAudioRecording() {
             recordBtn.innerText = "⏹️";
             recordBtn.style.background = "#28a745";
             recordStatus.style.display = "block";
-        } catch (err) {
+        } catch {
             alert("يرجى السماح باستخدام الميكروفون.");
         }
     } else {
@@ -190,8 +201,7 @@ function uploadAndSendAudio(blob) {
 
     storageRef.put(blob).then(snapshot => {
         snapshot.ref.getDownloadURL().then(downloadURL => {
-            const newMessageRef = db.ref("chat_messages").push();
-            newMessageRef.set({
+            db.ref("chat_messages").push({
                 sender: nameInput,
                 audioUrl: downloadURL,
                 type: "audio",
@@ -199,7 +209,7 @@ function uploadAndSendAudio(blob) {
             });
             recordStatus.style.display = "none";
         });
-    }).catch(err => {
+    }).catch(() => {
         alert("خطأ في رفع الصوت.");
         recordStatus.style.display = "none";
     });
@@ -248,11 +258,13 @@ function loadMessages() {
 
         const badgeBtn = document.getElementById("unread-badge-btn");
         const countSpan = document.getElementById("unread-count");
-        if (totalUnreadCount > 0) {
-            countSpan.innerText = totalUnreadCount;
-            badgeBtn.style.display = "inline-block";
-        } else {
-            badgeBtn.style.display = "none";
+        if (badgeBtn && countSpan) {
+            if (totalUnreadCount > 0) {
+                countSpan.innerText = totalUnreadCount;
+                badgeBtn.style.display = "inline-block";
+            } else {
+                badgeBtn.style.display = "none";
+            }
         }
 
         messagesList.scrollTop = messagesList.scrollHeight;
