@@ -1,6 +1,6 @@
 /* ===== exams.js — امتحانات تفاعلية لـ Le Français Au Bac =====
    مؤقت + تصحيح فوري (أخضر/أحمر) + صوت انتهاء الوقت + 5 نماذج للصف الأول الثانوي
-   يعمل مع data/exams.json الحالي ولا يغيّر أي ملف آخر. */
+   يعمل مع data/exams.json الحالي (passage_fr / rule_ar) ولا يغيّر أي ملف آخر. */
 (function () {
   'use strict';
   try { init(); } catch (e) { try { console.error('[exams]', e); } catch (_) {} }
@@ -251,7 +251,8 @@
         prompt: strOf(q, ['prompt_fr', 'prompt', 'question', 'q', 'text']),
         promptAr: strOf(q, ['prompt_ar', 'instruction_ar']),
         opts: opts, answers: list,
-        exp: strOf(q, ['explanation_ar', 'explanation', 'why_ar', 'why', 'hint_ar', 'hint']), state: null
+        exp: strOf(q, ['explanation_ar', 'explanation', 'why_ar', 'why', 'hint_ar', 'hint']),
+        rule: strOf(q, ['rule_ar', 'rule']), state: null
       };
     }
     function normExam(e, i) {
@@ -261,7 +262,7 @@
         var qs = s.questions || s.items || s.exercises || [];
         return {
           tAr: strOf(s, ['title_ar', 'name_ar']), tFr: strOf(s, ['title_fr', 'title', 'name']),
-          text: strOf(s, ['text', 'passage', 'text_fr', 'reading', 'content', 'document']),
+          text: strOf(s, ['passage_fr', 'text', 'passage', 'text_fr', 'reading', 'content', 'document']),
           textAr: strOf(s, ['text_ar', 'translation_ar', 'passage_ar']),
           qs: qs.filter(function (o) { return o && typeof o === 'object'; }).map(normQ)
         };
@@ -428,6 +429,7 @@
       else if (kind === 'skip') h = '⏭️ لم تُجب. الإجابة الصحيحة: <b dir="auto">' + esc(ans) + '</b>';
       else h = ans ? '📖 الإجابة النموذجية: <b dir="auto">' + esc(ans) + '</b>' : '📖 الحل:';
       if (q.exp) h += '<div class="ex-exp" dir="auto">💡 ' + esc(q.exp) + '</div>';
+      if (q.rule) h += '<div class="ex-exp" dir="auto">📌 القاعدة: ' + esc(q.rule) + '</div>';
       f.className = 'ex-fb ' + kind;
       f.innerHTML = h;
       f.hidden = false;
