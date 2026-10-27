@@ -8,7 +8,6 @@
   <link rel="manifest" href="./manifest.json">
   <link rel="stylesheet" href="./styles.css">
   <style>
-    /* تنسيق خفيف لأيقونات الأقفال لضمان عدم تأثر التطبيق الأصلي */
     .lock-badge {
       display: inline-block;
       margin-right: 6px;
@@ -33,8 +32,6 @@
   <div class="layout">
     <nav class="sidebar" aria-label="الأقسام">
       <button data-nav="lessons" class="on" type="button">📚 دروس الكتاب والحلول</button>
-      
-      <!-- الأقسام الأصلية المحمية -->
       <button data-nav="bac" type="button">🎓 منهج البكالوريا (2Sec & 3Sec)</button>
       <button data-nav="grammar" type="button">✍️ Grammaire</button>
       <button data-nav="phonetics" type="button">🗣️ Phonétique</button>
@@ -43,137 +40,61 @@
       <button data-nav="tales" type="button">🧚 Contes</button>
       <button data-nav="exams" type="button">📝 امتحانات الثانوية العامة</button>
       <button data-nav="soon-chansons" type="button">🎵 الأغاني الفرنسية</button>
-
       <button data-nav="soon-contemporaine" type="button">🇫🇷 فرنسا المعاصرة</button>
       <button data-nav="soon-litterature" type="button">📜 الأدب الفرنسي العالمي</button>
       <button data-nav="soon-geographie" type="button">🗺️ المدن والشوارع والأنهار</button>
       <button data-nav="soon-argot" type="button">😎 العامية الفرنسية</button>
       <button data-nav="chat" type="button">🤖 المساعد الذكي</button>
-
-      <!-- زر شات الطلاب والتواصل الجديد -->
       <button data-nav="student-chat" type="button">💬 شات وتواصل الطلاب</button>
     </nav>
 
     <main class="content">
       <section id="lessons" class="sec on"><h2>دروس الكتاب المدرسي وحلول الأسئلة</h2><div class="body"><div class="empty">جارٍ التحميل…</div></div></section>
-
-      <section id="bac" class="sec">
-        <h2>🎓 منهج البكالوريا (الثانية والثالثة الثانوي)</h2>
-        <div id="bac-content-container" class="body">
-          <div class="empty">جارٍ تحميل وحدات البكالوريا وتمارين الكتاب المدرسي…</div>
-        </div>
-      </section>
-
+      <section id="bac" class="sec"><h2>🎓 منهج البكالوريا</h2><div id="bac-content-container" class="body"><div class="empty">جارٍ التحميل…</div></div></section>
       <section id="grammar" class="sec"><h2>Grammaire — القواعد</h2><div class="body"></div></section>
       <section id="phonetics" class="sec"><h2>Phonétique — الصوتيات</h2><div class="body"></div></section>
       <section id="dictionary" class="sec"><h2>Dictionnaire — القاموس</h2><div class="body"></div></section>
       <section id="dialogues" class="sec"><h2>Dialogues — حوارات يومية</h2><div class="body"></div></section>
       <section id="tales" class="sec"><h2>Contes — قصص مبسطة</h2><div class="body"></div></section>
       <section id="exams" class="sec"><h2>Examens du Bac — نماذج امتحانات</h2><div class="body"></div></section>
-
-      <section id="soon-chansons" class="sec">
-        <h2>🎵 Chansons françaises — الأغاني الفرنسية</h2>
-        <div id="songs-content-container" class="body">
-          <div class="empty">جارٍ تحميل قائمة الأغاني والمقاطع الصوتية…</div>
-        </div>
-      </section>
-
-      <section id="soon-contemporaine" class="sec">
-        <h2>La France contemporaine — فرنسا المعاصرة</h2>
-        <div class="soon-card">
-          <div class="soon-icon">⏳</div>
-          <p class="soon-ar">المحتوى قيد الإعداد وسوف يتم إدراجه قريباً... ⏳</p>
-          <div class="soon-sep"></div>
-          <p class="soon-fr" dir="ltr">Le contenu est en cours de préparation et sera ajouté bientôt... ⏳</p>
-          <button type="button" class="soon-back" data-nav="lessons">← العودة للدروس | Retour aux leçons</button>
-        </div>
-      </section>
-
-      <section id="soon-litterature" class="sec">
-        <h2>Littérature française — الأدب الفرنسي العالمي</h2>
-        <div class="soon-card">
-          <div class="soon-icon">⏳</div>
-          <p class="soon-ar">المحتوى قيد الإعداد وسوف يتم إدراجه قريباً... ⏳</p>
-          <div class="soon-sep"></div>
-          <p class="soon-fr" dir="ltr">Le contenu est en cours de préparation et sera ajouté bientôt... ⏳</p>
-          <button type="button" class="soon-back" data-nav="lessons">← العودة للدروس | Retour aux leçons</button>
-        </div>
-      </section>
-
-      <section id="soon-geographie" class="sec">
-        <h2>Géographie et Villes — المدن والشوارع والأنهار</h2>
-        <div class="soon-card">
-          <div class="soon-icon">⏳</div>
-          <p class="soon-ar">المحتوى قيد الإعداد وسوف يتم إدراجه قريباً... ⏳</p>
-          <div class="soon-sep"></div>
-          <p class="soon-fr" dir="ltr">Le contenu est en cours de préparation et sera ajouté bientôt... ⏳</p>
-          <button type="button" class="soon-back" data-nav="lessons">← العودة للدروس | Retour aux leçons</button>
-        </div>
-      </section>
-
-      <section id="soon-argot" class="sec">
-        <h2>L'Argot — العامية الفرنسية</h2>
-        <div class="soon-card">
-          <div class="soon-icon">⏳</div>
-          <p class="soon-ar">المحتوى قيد الإعداد وسوف يتم إدراجه قريباً... ⏳</p>
-          <div class="soon-sep"></div>
-          <p class="soon-fr" dir="ltr">Le contenu est en cours de préparation et sera ajouté bientôt... ⏳</p>
-          <button type="button" class="soon-back" data-nav="lessons">← العودة للدروس | Retour aux leçons</button>
-        </div>
-      </section>
-
+      <section id="soon-chansons" class="sec"><h2>🎵 Chansons françaises</h2><div id="songs-content-container" class="body"><div class="empty">جارٍ التحميل…</div></div></section>
+      <section id="soon-contemporaine" class="sec"><h2>La France contemporaine</h2><div class="soon-card"><div class="soon-icon">⏳</div><p class="soon-ar">المحتوى قيد الإعداد...</p></div></section>
+      <section id="soon-litterature" class="sec"><h2>Littérature française</h2><div class="soon-card"><div class="soon-icon">⏳</div><p class="soon-ar">المحتوى قيد الإعداد...</p></div></section>
+      <section id="soon-geographie" class="sec"><h2>Géographie et Villes</h2><div class="soon-card"><div class="soon-icon">⏳</div><p class="soon-ar">المحتوى قيد الإعداد...</p></div></section>
+      <section id="soon-argot" class="sec"><h2>L'Argot</h2><div class="soon-card"><div class="soon-icon">⏳</div><p class="soon-ar">المحتوى قيد الإعداد...</p></div></section>
       <section id="chat" class="sec">
         <h2>المساعد الذكي 🤖</h2>
         <div class="chips">
           <button class="chip" type="button">passé composé</button>
           <button class="chip" type="button">الضمائر</button>
-          <button class="chip" type="button">أحرف الأنف</button>
-          <button class="chip" type="button">les articles</button>
         </div>
         <div id="chat-log" class="chat-log" aria-live="polite"></div>
         <form id="chat-form" class="chat-form">
-          <input id="chat-input" type="text" placeholder="اكتب سؤالك بالعربية أو الفرنسية…" autocomplete="off">
+          <input id="chat-input" type="text" placeholder="اكتب سؤالك…" autocomplete="off">
           <button type="submit">إرسال</button>
         </form>
       </section>
-
-      <!-- قسم شات الطلاب والتسجيل الصوتي المتوافق مع chat.js -->
-      <section id="student-chat" class="sec">
-        <h2>💬 شات وتواصل الطلاب</h2>
-        <div class="body">
-          <div style="background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <p style="color: #555; margin-bottom: 12px; font-size: 14px; text-align: center;">منصة المحادثة والتسجيل الصوتي المباشر بين الطلاب 🇫🇷</p>
-            <div id="chat-messages-container"></div>
-          </div>
-        </div>
-      </section>
+      <section id="student-chat" class="sec"><h2>💬 شات الطلاب</h2><div class="body"><div id="chat-messages-container"></div></div></section>
     </main>
   </div>
 
   <footer class="site-footer">
-    <p>جميع الحقوق محفوظة © - إعداد وتطوير: مسيو/ محمود أبوبكر السويدى - مدرس اللغة الفرنسية</p>
-    <a class="wa-btn" href="https://wa.me/201040294647" target="_blank" rel="noopener noreferrer">
-      <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true" fill="currentColor"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.3.7 4.5 1.8 6.3L4 28l6.9-1.8A12 12 0 0 0 16 27c6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-4 1 1.1-3.9-.3-.4A9.8 9.8 0 1 1 16 24.800zm5.400-7.300c-.3-.1-1.800-.9-2-1-.3-.1-.5-.1-.7.1l-1 1.200c-.2.200-.4.200-.6.100-1.800-.9-3-1.600-4.200-3.600-.3-.5.300-.5.900-1.600.1-.2 0-.4 0-.5l-.9-2.100c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.5.100-.8.400-.3.300-1 1-1 2.400s1 2.800 1.200 3c.1.200 2 3.100 4.900 4.300 1.800.8 2.500.8 3.400.7.600-.1 1.800-.7 2-1.400.3-.7.300-1.300.2-1.400-.1-.1-.3-.2-.6-.3z"/></svg>
-      <span>للتواصل والاستفسارات التعليمية عبر الواتساب</span>
-    </a>
+    <p>جميع الحقوق محفوظة © - إعداد وتطوير: مسيو/ محمود أبوبكر السويدى</p>
+    <a class="wa-btn" href="https://wa.me/201040294647" target="_blank"><span>واتساب</span></a>
   </footer>
 
   <div id="toast" class="toast" role="status"></div>
 
-  <!-- مكتبات Firebase المجانية المطلوبة لملف chat.js -->
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
 
-  <!-- ملفات التطبيق الأساسية -->
   <script src="./app.js"></script>
   <script src="./bac.js"></script>
   <script src="./songs.js"></script>
-  
-  <!-- ملف الشات الجديد -->
   <script src="./chat.js"></script>
 
-  <!-- السكريبت المعدل بدقة مذهلة: يعيد ترتيب صندوق الحوار كـ Flex ويضع زر مكبر الصوت بجانب الجملة الفرنسية مباشرة -->
+  <!-- سكريبت تفعيل النطق الصوتي للنصوص الزرقاء -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       function speakFrenchText(text) {
@@ -186,52 +107,31 @@
         }
       }
 
-      function injectPerfectDialogueTTS() {
+      function addBlueTextButtons() {
         const dialoguesSec = document.getElementById('dialogues');
         if (!dialoguesSec) return;
 
-        // استهداف العناصر الحوارية الفرنسية الأساسية داخل الحوارات
-        const targetElements = dialoguesSec.querySelectorAll('div, h3');
+        const elements = dialoguesSec.querySelectorAll('div, p, h3, span');
 
-        targetElements.forEach(el => {
-          if (el.querySelector('.perfect-tts-btn')) return;
+        elements.forEach(el => {
+          if (el.querySelector('.blue-tts-icon')) return;
+
+          const color = window.getComputedStyle(el).color;
+          const isBlue = color.includes('rgb(0, 85, 165)') || 
+                         color.includes('rgb(0, 68, 136)') || 
+                         color.includes('rgb(0, 55, 165)') ||
+                         el.style.color.includes('blue');
 
           const text = el.innerText ? el.innerText.trim() : "";
 
-          // شروط صارمة جداً لضمان استهداف الجمل الفرنسية الحوارية وحدها دون أي رموز أو أكواد
-          if (
-            text.length > 6 &&
-            /[A-ZÀ-ÿ]/.test(text.charAt(0)) &&
-            !text.includes('id') &&
-            !text.includes('ipa') &&
-            !text.includes('pron_ar') &&
-            !text.includes('context_ar') &&
-            !text.includes('speakers') &&
-            !text.includes('lines') &&
-            !text.includes('1sec') &&
-            !text.includes('2sec') &&
-            !text.includes('3sec') &&
-            !text.includes('Nour') &&
-            !text.includes('Thomas') &&
-            !text.includes('Sara') &&
-            !text.includes('La vendeuse') &&
-            !text.includes('Le touriste') &&
-            !text.includes('Le passant') &&
-            (text.includes('!') || text.includes('?') || text.includes('.') || text.includes(','))
-          ) {
-            if (el.children.length <= 1) {
-              // تحويل الحاضن إلى Flex لترتيب الأيقونة والنص بشكل مثالي (من اليسار لليمين للجمل الفرنسية)
-              el.style.display = 'flex';
-              el.style.alignItems = 'center';
-              el.style.justifyContent = 'space-between';
-              el.style.direction = 'ltr'; // لضمان ظهور النص الفرنسي وزر الصوت بشكل منسق وطبيعي
-
+          if (isBlue && text.length > 3 && /[a-zA-ZÀ-ÿ]/.test(text)) {
+            if (el.children.length <= 2) {
               const btn = document.createElement('button');
               btn.type = 'button';
-              btn.className = 'perfect-tts-btn';
+              btn.className = 'blue-tts-icon';
               btn.innerHTML = '🔊';
-              btn.title = 'استمع للنطق الفرنسي الصحيح';
-              btn.style.cssText = 'background: #eef5ff; border: 1px solid #b8d5ff; border-radius: 50%; width: 30px; height: 30px; min-width: 30px; font-size: 15px; margin-right: 10px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.15); padding: 0; color: #0055A5; flex-shrink: 0;';
+              btn.title = 'نطق النص الفرنسي';
+              btn.style.cssText = 'background: #eef5ff; border: 1px solid #b8d5ff; border-radius: 50%; width: 28px; height: 28px; font-size: 14px; margin-inline: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; box-shadow: 0 1px 3px rgba(0,0,0,0.15); padding: 0; color: #0055A5;';
 
               btn.addEventListener('click', function (ev) {
                 ev.preventDefault();
@@ -240,8 +140,7 @@
                 speakFrenchText(cleanText);
               });
 
-              // إدراج زر المكبر في بداية السطر الفرنسي ليظهر بشكل أنيق
-              el.insertBefore(btn, el.firstChild);
+              el.appendChild(btn);
             }
           }
         });
@@ -250,7 +149,7 @@
       const observer = new MutationObserver(function () {
         const dialoguesSec = document.getElementById('dialogues');
         if (dialoguesSec && dialoguesSec.classList.contains('on')) {
-          setTimeout(injectPerfectDialogueTTS, 200);
+          setTimeout(addBlueTextButtons, 300);
         }
       });
 
@@ -258,11 +157,10 @@
     });
   </script>
 
-  <!-- سكربت التحكم الذكي بالأقفال والحماية -->
+  <!-- سكربت حماية الأقسام -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const protectedSections = ['bac', 'grammar', 'phonetics', 'exams', 'soon-chansons'];
-
       protectedSections.forEach(navId => {
         const btn = document.querySelector(`[data-nav="${navId}"]`);
         if (btn) {
@@ -280,16 +178,13 @@
           }
         }
       });
-
       updateLockVisuals();
 
       document.body.addEventListener("click", function (e) {
         const lockedBtn = e.target.closest('.locked-section');
         if (lockedBtn && !e.target.closest('.lock-badge')) {
           const lockedId = lockedBtn.getAttribute('data-locked-id');
-          const isUnlocked = localStorage.getItem(`section_unlocked_${lockedId}`) === "true";
-
-          if (!isUnlocked) {
+          if (localStorage.getItem(`section_unlocked_${lockedId}`) !== "true") {
             e.preventDefault();
             e.stopPropagation();
             promptForPassword(lockedId, lockedBtn);
@@ -299,20 +194,15 @@
     });
 
     function updateLockVisuals() {
+      const lockedSvg = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="vertical-align:middle"><rect x="4" y="10" width="16" height="12" rx="2" fill="currentColor"/><path d="M8 10V6.5a4 4 0 0 1 8 0V10" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>';
+      const openSvg = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="vertical-align:middle"><rect x="4" y="10" width="16" height="12" rx="2" fill="currentColor"/><path d="M8 10V6.5a4 4 0 0 1 7.6-1.7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>';
       document.querySelectorAll('.locked-section').forEach(btn => {
         const lockedId = btn.getAttribute('data-locked-id');
         const isUnlocked = localStorage.getItem(`section_unlocked_${lockedId}`) === "true";
         const badge = btn.querySelector('.lock-badge');
         if (badge) {
-          if (isUnlocked) {
-            badge.innerHTML = '🔓';
-            badge.style.color = '#28a745';
-            badge.title = 'مفتوح - اضغط هنا لإغلاقه برقم سري';
-          } else {
-            badge.innerHTML = '🔒';
-            badge.style.color = '#dc3545';
-            badge.title = 'مقفل - اضغط هنا لفتحه برقم سري';
-          }
+          badge.innerHTML = isUnlocked ? openSvg : lockedSvg;
+          badge.style.color = isUnlocked ? '#0055A5' : '#dc3545';
         }
       });
     }
@@ -325,8 +215,8 @@
         <div id="master-pin-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; z-index: 99999; font-family: Tahoma, sans-serif;">
           <div style="background: #fff; padding: 25px; border-radius: 12px; width: 320px; text-align: right; direction: rtl; box-shadow: 0 5px 20px rgba(0,0,0,0.3);">
             <h3 style="color: #0055A5; margin-top: 0; margin-bottom: 10px; font-size: 16px;">🔐 لوحة التحكم بالرقم السري</h3>
-            <p style="color: #666; font-size: 13px; margin-bottom: 15px;">أدخل الرقم السري المخصص للتحكم بالقسم:</p>
-            <input type="password" id="creator-pin-input" maxlength="4" autocomplete="new-password" inputmode="numeric" style="width: 100%; padding: 12px; font-size: 22px; text-align: center; letter-spacing: 8px; border: 2px solid #ccc; border-radius: 6px; box-sizing: border-box; margin-bottom: 15px; -webkit-text-security: disc;">
+            <p style="color: #666; font-size: 13px; margin-bottom: 15px;">أدخل الرقم السري للتحكم بالقسم:</p>
+            <input type="password" id="creator-pin-input" maxlength="4" inputmode="numeric" style="width: 100%; padding: 12px; font-size: 22px; text-align: center; letter-spacing: 8px; border: 2px solid #ccc; border-radius: 6px; box-sizing: border-box; margin-bottom: 15px;">
             <div style="display: flex; gap: 10px;">
               <button id="submit-pin-btn" style="flex: 1; background: #0055A5; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer;">تنفيذ</button>
               <button id="cancel-pin-btn" style="background: #6c757d; color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer;">إلغاء</button>
@@ -335,9 +225,7 @@
           </div>
         </div>
       `;
-
       document.body.insertAdjacentHTML('beforeend', modalHTML);
-
       const pinInput = document.getElementById('creator-pin-input');
       pinInput.focus();
 
@@ -345,20 +233,14 @@
         document.getElementById('master-pin-modal').remove();
       });
 
-      const openPin = "0519";  
-      const closePin = "0510"; 
-
       document.getElementById('submit-pin-btn').addEventListener('click', () => {
-        const enteredVal = pinInput.value.trim();
-
-        if (enteredVal === openPin) {
+        const val = pinInput.value.trim();
+        if (val === "0519") {
           localStorage.setItem(`section_unlocked_${lockedId}`, "true");
           document.getElementById('master-pin-modal').remove();
           updateLockVisuals();
-          
-          const originalClick = new MouseEvent('click', { bubbles: true, cancelable: true, view: window });
-          btnElement.dispatchEvent(originalClick);
-        } else if (enteredVal === closePin) {
+          btnElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
+        } else if (val === "0510") {
           localStorage.setItem(`section_unlocked_${lockedId}`, "false");
           document.getElementById('master-pin-modal').remove();
           updateLockVisuals();
