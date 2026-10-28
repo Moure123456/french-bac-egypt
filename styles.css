@@ -1,4 +1,4 @@
-/* ===== Le Français Au Bac — styles.css (النسخة النهائية الصحيحة والمصححة 100%) ===== */
+/* ===== Le Français Au Bac — styles.css (النسخة النهائية المنظفة والمصححة 100%) ===== */
 :root {
   --blue: #0055A5; 
   --red: #EF4135; 
@@ -58,7 +58,7 @@ body {
 .install { background: var(--grad-tab-active); color: #fff; border: 0; border-radius: 20px; padding: 8px 16px; font-size: .8rem; font-weight: 800; cursor: pointer; box-shadow: 0 3px 8px rgba(239, 65, 53, 0.3); }
 .install[hidden] { display: none; }
 
-/* ===== القائمة الجانبية المنسدلة ===== */
+/* ===== القائمة الجانبية وترويسة التحذير المنظفة ===== */
 .layout { flex: 1; display: flex; align-items: flex-start; gap: 16px; padding: 16px; width: 100%; max-width: 1200px; margin: 0 auto; }
 .sidebar {
   position: sticky; top: 74px; width: var(--side); flex-shrink: 0; display: flex; flex-direction: column; gap: 8px;
@@ -67,26 +67,22 @@ body {
   border-top: 4px solid var(--blue);
 }
 
-/* ===== ترويسة التحذير والحقوق في أعلى القائمة الجانبية بشكل واضح ومرتب ===== */
+/* الترويسة العليا الآمنة بدون تداخل مع الأزرار */
 .sidebar::before {
-  content: "⚠️ تنبيه هام وحقوق التطبيق\ALe Français Au Bac 🇫🇷\Aجميع الحقوق محفوظة ©\Aإعداد وتطوير: مسيو/ محمود أبوبكر السويدى";
+  content: "⚠️ تنبيه هام وحقوق التطبيق\A Le Français Au Bac 🇫🇷 \A جميع الحقوق محفوظة © \A إعداد وتطوير: مسيو/ محمود أبوبكر السويدى";
   white-space: pre-wrap;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #0055A5 0%, #0a3f7a 100%);
+  display: block;
+  background: #0055A5;
   color: #ffffff;
-  padding: 12px 10px;
+  padding: 10px 8px;
   text-align: center;
-  border-radius: 10px;
-  margin-bottom: 8px;
-  font-size: 0.82rem;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  font-size: 0.78rem;
   font-weight: 800;
-  line-height: 1.7;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-  order: -1; /* يضمن ظهور التحذير والترويسة في قمة القائمة فوق الأزرار تماماً */
+  line-height: 1.65;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  order: -1;
 }
 
 .sidebar button {
