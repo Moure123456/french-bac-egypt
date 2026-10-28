@@ -1,4 +1,4 @@
-/* ===== Le Français Au Bac — styles.css (النسخة النهائية المعتمدة والمنظفة 100%) ===== */
+/* ===== Le Français Au Bac — styles.css (النسخة النهائية المطابقة للـ Index) ===== */
 :root {
   --blue: #0055A5; 
   --red: #EF4135; 
@@ -58,7 +58,7 @@ body {
 .install { background: var(--grad-tab-active); color: #fff; border: 0; border-radius: 20px; padding: 8px 16px; font-size: .8rem; font-weight: 800; cursor: pointer; box-shadow: 0 3px 8px rgba(239, 65, 53, 0.3); }
 .install[hidden] { display: none; }
 
-/* ===== القائمة الجانبية وترويسة التحذير الهندسية الجديدة ===== */
+/* ===== القائمة الجانبية وترويسة الحقوق الحقيقية (من الـ Index) ===== */
 .layout { flex: 1; display: flex; align-items: flex-start; gap: 16px; padding: 16px; width: 100%; max-width: 1200px; margin: 0 auto; }
 .sidebar {
   position: sticky; top: 74px; width: var(--side); flex-shrink: 0; display: flex; flex-direction: column; gap: 8px;
@@ -67,41 +67,8 @@ body {
   border-top: 4px solid var(--blue);
 }
 
-/* إلغاء أي تداخل قديم وتفعيل الترويسة الآمنة */
-.sidebar::before { display: none !important; }
-
-/* تصميم صندوق التحذير والترويسة كعنصر حقيقي داخل الـ CSS ليظهر في قمة القائمة تماماً دون أي تداخل */
-.sidebar {
-  counter-reset: sidebar-init;
-}
-/* حقن الترويسة كعنصر مرن عبر الـ CSS بدون تعديل الـ HTML */
-.sidebar {
-  /* سيتم عرض الترويسة في أول القائمة تلقائياً */
-}
-
-/* حل بديل نقي 100% لتثبيت الترويسة في أول القائمة بجانب الأزرار */
-.sidebar {
-  display: flex;
-  flex-direction: column;
-}
-
-/* ترويسة التحذير الاحترافية المستقلة تماماً */
-.sidebar::after {
-  content: "⚠️ تنبيه هام وحقوق التطبيق\A Le Français Au Bac 🇫🇷 \A جميع الحقوق محفوظة © \A إعداد وتطوير: مسيو/ محمود أبوبكر السويدى";
-  white-space: pre-wrap;
-  display: block;
-  background: #0055A5;
-  color: #ffffff;
-  padding: 10px 8px;
-  text-align: center;
-  border-radius: 8px;
-  margin-bottom: 8px;
-  font-size: 0.78rem;
-  font-weight: 800;
-  line-height: 1.65;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  order: -99; /* تضمن استقرار الترويسة في قمة القائمة فوق الأزرار تماماً */
-}
+/* تنظيف كامل لأي تداخل قديم وتأكيد استقرار شريط الحقوق الأصلي */
+.sidebar::before, .sidebar::after { display: none !important; }
 
 .sidebar button {
   text-align: right; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px;
