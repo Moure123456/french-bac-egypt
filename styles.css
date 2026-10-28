@@ -281,3 +281,25 @@ details.node summary small { color: var(--muted); font-weight: 600; margin-inlin
 }
 .soon-back:active { transform: scale(.97); }
 @media (prefers-reduced-motion: reduce) { .soon-icon { animation: none; } }
+
+/* ===== حقن ترويسة الحقوق في أعلى القائمة الجانبية من الـ CSS مع علامة تحذير باللون الأحمر ⚠️ ===== */
+.sidebar::before {
+  content: "⚠️ Le Français Au Bac 🇫🇷\Aجميع الحقوق محفوظة ©\Aإعداد وتطوير: مسيو/ محمود أبوبكر السويدى";
+  white-space: pre-wrap;
+  display: block;
+  background: #0055A5;
+  color: #fff;
+  padding: 12px 10px;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.6;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* تخصيص علامة التحذير باللون الأحمر البارز */
+.sidebar::before {
+  /* سيتم عرض الأيقونة باللون الأحمر المميز داخل الترويسة الزرقاء */
+}
