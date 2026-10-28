@@ -1,1 +1,805 @@
-
+{
+ "meta": {
+  "title_ar": "فرنسا المعاصرة",
+  "title_fr": "La France moderne",
+  "version": 1,
+  "note_ar": "الصور تُحمَّل من ويكيميديا كومنز أو من ويكيبيديا تلقائياً. يمكن تغيير أي رابط في الحقل image."
+ },
+ "items": [
+  {
+   "id": "tour-eiffel",
+   "emoji": "🗼",
+   "color": "#0a7ad6",
+   "title_ar": "🗼 برج إيفل: سيدة الحديد في باريس",
+   "title_fr": "La tour Eiffel : la dame de fer de Paris",
+   "text_ar": "شُيّد برج إيفل بين عامي 1887 و1889 بمناسبة المعرض العالمي في باريس، وهو من تصميم مكتب المهندس غوستاف إيفل. يبلغ ارتفاعه نحو 330 متراً، وظلّ أعلى بناء في العالم أكثر من أربعين عاماً. يصعد إلى قمته ملايين الزوار كل سنة، وتتلألأ أضواؤه كل مساء فوق نهر السين.",
+   "text_fr": "Construite entre 1887 et 1889 pour l'Exposition universelle, la tour Eiffel est devenue le symbole de Paris et de la France. Haute d'environ 330 mètres, elle a été la plus haute construction du monde pendant plus de quarante ans. Chaque année, plusieurs millions de visiteurs montent à son sommet pour admirer la capitale, et chaque soir, ses lumières scintillent au-dessus de la Seine.",
+   "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Tour_Eiffel_Wikimedia_Commons.jpg?width=960",
+   "wiki": "Tour_Eiffel",
+   "credit": "Wikimedia Commons",
+   "facts": [
+    {
+     "ar": "ارتفاعها نحو 330 مترًا",
+     "fr": "Elle mesure environ 330 mètres de haut."
+    },
+    {
+     "ar": "افتُتحت عام 1889",
+     "fr": "Elle a été inaugurée en 1889."
+    },
+    {
+     "ar": "تُطلى بالطلاء كل سبع سنوات تقريباً",
+     "fr": "On la repeint environ tous les sept ans."
+    }
+   ],
+   "quiz": {
+    "q": "En quelle année la tour Eiffel a-t-elle été inaugurée ?",
+    "options": [
+     "1789",
+     "1889",
+     "1925",
+     "1989"
+    ],
+    "a": 1,
+    "ar": "افتُتح البرج عام 1889 بمناسبة المعرض العالمي."
+   }
+  },
+  {
+   "id": "tgv",
+   "emoji": "🚄",
+   "color": "#d63a3a",
+   "title_ar": "🚄 قطار TGV: السرعة على الطريقة الفرنسية",
+   "title_fr": "Le TGV : la grande vitesse à la française",
+   "text_ar": "TGV اختصار Train à Grande Vitesse أي القطار فائق السرعة. بدأ تشغيله عام 1981 بين باريس وليون، وهو يربط اليوم المدن الفرنسية الكبرى ببعضها وبعدة بلدان أوروبية، ويسير في الخدمة بسرعة تفوق 300 كم/س. وفي عام 2007 حقق قطار تجريبي رقماً قياسياً عالمياً للسكك الحديدية بلغ 574.8 كم/س.",
+   "text_fr": "Le TGV, ou train à grande vitesse, circule en France depuis 1981, d'abord entre Paris et Lyon. Aujourd'hui, il relie les grandes villes françaises et plusieurs pays européens à plus de trois cents kilomètres par heure. En 2007, un TGV d'essai a atteint le record du monde de vitesse sur rail avec 574,8 kilomètres par heure.",
+   "image": "",
+   "wiki": "Train_à_grande_vitesse",
+   "credit": "Wikipédia",
+   "facts": [
+    {
+     "ar": "أول خط: باريس – ليون عام 1981",
+     "fr": "La première ligne reliait Paris à Lyon en 1981."
+    },
+    {
+     "ar": "الرقم القياسي: 574.8 كم/س عام 2007",
+     "fr": "Le record est de 574,8 km/h, en 2007."
+    },
+    {
+     "ar": "تشغّله شركة السكك الحديدية SNCF",
+     "fr": "Il est exploité par la SNCF."
+    }
+   ],
+   "quiz": {
+    "q": "Que signifie TGV ?",
+    "options": [
+     "Train à grande vitesse",
+     "Transport général de voyageurs",
+     "Tramway grand voyage",
+     "Train grand vélo"
+    ],
+    "a": 0,
+    "ar": "TGV = Train à Grande Vitesse أي القطار فائق السرعة."
+   }
+  },
+  {
+   "id": "louvre",
+   "emoji": "🖼️",
+   "color": "#7b4bd1",
+   "title_ar": "🖼️ متحف اللوفر: كنوز الفن العالمي",
+   "title_fr": "Le musée du Louvre : un trésor de l'art mondial",
+   "text_ar": "كان اللوفر قلعةً ثم قصراً ملكياً، وتحوّل إلى متحف عام 1793 بعد الثورة الفرنسية. يضم روائع مثل لوحة الموناليزا (La Joconde) لليوناردو دا فينشي وتمثال فينوس دي ميلو. وأمام مدخله الهرم الزجاجي الذي افتُتح عام 1989، ويزوره ملايين الناس من أنحاء العالم كل سنة.",
+   "text_fr": "Ancienne forteresse puis palais royal, le Louvre est devenu un musée en 1793, pendant la Révolution française. Il abrite des chefs-d'œuvre comme la Joconde de Léonard de Vinci et la Vénus de Milo. Sa célèbre pyramide de verre, inaugurée en 1989, accueille chaque année des millions de visiteurs venus du monde entier : c'est l'un des musées les plus visités de la planète.",
+   "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Louvre_Museum_Wikimedia_Commons.jpg?width=960",
+   "wiki": "Musée_du_Louvre",
+   "credit": "Wikimedia Commons",
+   "facts": [
+    {
+     "ar": "تحوّل إلى متحف عام 1793",
+     "fr": "Il est devenu un musée en 1793."
+    },
+    {
+     "ar": "يضم لوحة الموناليزا",
+     "fr": "Il abrite la Joconde de Léonard de Vinci."
+    },
+    {
+     "ar": "هرمه الزجاجي افتُتح عام 1989",
+     "fr": "Sa pyramide de verre date de 1989."
+    }
+   ],
+   "quiz": {
+    "q": "Qui a peint la Joconde ?",
+    "options": [
+     "Claude Monet",
+     "Léonard de Vinci",
+     "Pablo Picasso",
+     "Vincent van Gogh"
+    ],
+    "a": 1,
+    "ar": "رسم الموناليزا ليوناردو دا فينشي."
+   }
+  },
+  {
+   "id": "football",
+   "emoji": "⚽",
+   "color": "#1b9e5b",
+   "title_ar": "⚽ كرة القدم: شغف الفرنسيين",
+   "title_fr": "Le football : la passion des Français",
+   "text_ar": "كرة القدم هي الرياضة الأكثر شعبية في فرنسا. فاز المنتخب الفرنسي، ويُلقَّب «Les Bleus»، بكأس العالم عام 1998 على أرضه في الملعب الوطني «Stade de France» ثم عام 2018 في روسيا. والدوري المحترف يُسمّى «Ligue 1». وفي عام 2024 استضافت باريس دورة الألعاب الأولمبية الصيفية.",
+   "text_fr": "Le football est le sport le plus populaire de France. L'équipe nationale, surnommée « les Bleus », a remporté la Coupe du monde en 1998, à domicile, au Stade de France, puis en 2018 en Russie. Le championnat professionnel s'appelle la Ligue 1. En 2024, Paris a aussi accueilli les Jeux olympiques d'été.",
+   "image": "",
+   "wiki": "Stade_de_France",
+   "credit": "Wikipédia",
+   "facts": [
+    {
+     "ar": "لقب المنتخب: الزرق (Les Bleus)",
+     "fr": "L'équipe de France est surnommée « les Bleus »."
+    },
+    {
+     "ar": "كأس العالم: 1998 و2018",
+     "fr": "La France a gagné la Coupe du monde en 1998 et en 2018."
+    },
+    {
+     "ar": "أولمبياد باريس عام 2024",
+     "fr": "Paris a accueilli les Jeux olympiques en 2024."
+    }
+   ],
+   "quiz": {
+    "q": "En quelle année les Bleus ont-ils gagné leur première Coupe du monde ?",
+    "options": [
+     "1982",
+     "1998",
+     "2006",
+     "2018"
+    ],
+    "a": 1,
+    "ar": "أول كأس عالم للمنتخب الفرنسي كانت عام 1998."
+   }
+  },
+  {
+   "id": "tech",
+   "emoji": "💻",
+   "color": "#00897b",
+   "title_ar": "💻 التقنية والصناعة: فرنسا المبتكِرة",
+   "title_fr": "La technologie et l'innovation en France",
+   "text_ar": "تُعدّ فرنسا قوة صناعية وتقنية كبرى. تُنتَج طائرات إيرباص في تولوز، وتُطلَق صواريخ أريان من غويانا الفرنسية، وتأتي أكثر من نصف كهربائها من الطاقة النووية. وفي باريس يحتضن «Station F» آلاف الشركات الناشئة، وهو من أكبر مراكز الشركات الناشئة في العالم.",
+   "text_fr": "La France est une grande puissance industrielle et technologique. Elle construit des avions Airbus à Toulouse, lance des fusées Ariane depuis la Guyane et produit plus de la moitié de son électricité grâce à l'énergie nucléaire. À Paris, Station F, l'un des plus grands campus de start-up du monde, accueille des milliers de jeunes entrepreneurs.",
+   "image": "",
+   "wiki": "Station_F",
+   "credit": "Wikipédia",
+   "facts": [
+    {
+     "ar": "طائرات إيرباص تُجمَّع في تولوز",
+     "fr": "Les avions Airbus sont assemblés à Toulouse."
+    },
+    {
+     "ar": "صواريخ أريان تنطلق من غويانا",
+     "fr": "Les fusées Ariane partent de Guyane."
+    },
+    {
+     "ar": "الطاقة النووية مصدر رئيسي للكهرباء",
+     "fr": "L'énergie nucléaire produit l'essentiel de l'électricité."
+    }
+   ],
+   "quiz": {
+    "q": "D'où les fusées Ariane sont-elles lancées ?",
+    "options": [
+     "De Toulouse",
+     "De la Guyane",
+     "De Marseille",
+     "De Paris"
+    ],
+    "a": 1,
+    "ar": "تُطلق أريان من مركز كورو في غويانا الفرنسية."
+   }
+  },
+  {
+   "id": "arc",
+   "emoji": "🏛️",
+   "color": "#b8860b",
+   "title_ar": "🏛️ قوس النصر: ذاكرة الأمة",
+   "title_fr": "L'Arc de triomphe : la mémoire de la nation",
+   "text_ar": "أمر نابليون الأول ببناء قوس النصر عام 1806 ليخلّد انتصارات جيوشه، وانتهى بناؤه عام 1836 في ساحة شارل ديغول في نهاية جادة الشانزليزيه. وتحت قوسه يرقد «الجندي المجهول» من الحرب العالمية الأولى، وتُشعل شعلة الذكرى كل مساء.",
+   "text_fr": "Napoléon Ier a ordonné la construction de l'Arc de triomphe en 1806 pour honorer les victoires de ses armées. Terminé en 1836, il se dresse place Charles-de-Gaulle, au bout de l'avenue des Champs-Élysées. Sous la voûte repose le Soldat inconnu de la Première Guerre mondiale, et chaque soir, on ravive la flamme du souvenir.",
+   "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Arc_de_Triomphe,_Paris_21_October_2010.jpg?width=960",
+   "wiki": "Arc_de_triomphe_de_l'Étoile",
+   "credit": "Wikimedia Commons",
+   "facts": [
+    {
+     "ar": "بدأ بناؤه عام 1806",
+     "fr": "Sa construction a commencé en 1806."
+    },
+    {
+     "ar": "اكتمل عام 1836",
+     "fr": "Il a été terminé en 1836."
+    },
+    {
+     "ar": "في نهاية جادة الشانزليزيه",
+     "fr": "Il se trouve au bout des Champs-Élysées."
+    }
+   ],
+   "quiz": {
+    "q": "Où se trouve l'Arc de triomphe ?",
+    "options": [
+     "À Lyon",
+     "À Paris",
+     "À Nice",
+     "À Lille"
+    ],
+    "a": 1,
+    "ar": "قوس النصر في باريس."
+   }
+  },
+  {
+   "id": "fleuves",
+   "emoji": "🌊",
+   "color": "#0288d1",
+   "title_ar": "🌊 أنهار فرنسا الكبرى",
+   "title_fr": "Les grands fleuves de France",
+   "text_ar": "تعبر فرنسا أنهار كبرى صنعت تاريخها ومدنها. اللوار (Loire) أطولها ويمر بوادي القصور. السين (Seine) يشق باريس ويصب في بحر المانش. الرون (Rhône) ينحدر من جبال الألب مروراً بليون نحو البحر المتوسط. أما الغارون (Garonne) فيروي تولوز وبوردو ثم يلتقي بالمحيط الأطلسي.",
+   "text_fr": "Quatre grands fleuves traversent la France. La Loire, longue d'environ mille kilomètres, est le plus long fleuve du pays. La Seine passe par Paris et se jette dans la Manche. Le Rhône descend des Alpes jusqu'à la mer Méditerranée, en passant par Lyon. La Garonne arrose Toulouse et Bordeaux avant de rejoindre l'océan Atlantique.",
+   "image": "",
+   "wiki": "Loire_(fleuve)",
+   "credit": "Wikipédia",
+   "facts": [
+    {
+     "ar": "اللوار: نحو 1006 كم، الأطول",
+     "fr": "La Loire mesure environ 1 006 kilomètres."
+    },
+    {
+     "ar": "السين: نحو 777 كم ويمر بباريس",
+     "fr": "La Seine mesure environ 777 kilomètres."
+    },
+    {
+     "ar": "الرون: يصب في المتوسط",
+     "fr": "Le Rhône se jette dans la Méditerranée."
+    }
+   ],
+   "quiz": {
+    "q": "Quel fleuve traverse Paris ?",
+    "options": [
+     "La Loire",
+     "La Seine",
+     "Le Rhône",
+     "La Garonne"
+    ],
+    "a": 1,
+    "ar": "السين هو النهر الذي يعبر باريس."
+   }
+  },
+  {
+   "id": "carte",
+   "type": "map",
+   "emoji": "🗺️",
+   "color": "#0055A5",
+   "title_ar": "🗺️ خريطة فرنسا المعاصرة",
+   "title_fr": "La carte de la France contemporaine",
+   "text_ar": "تُسمّى فرنسا الأوروبية «الهيكساغون» (L'Hexagone) لأن شكلها يشبه سداسياً. تضم فرنسا اليوم 18 منطقة: 13 في البر الأوروبي و5 ما وراء البحار. عاصمتها باريس، ويتجاوز عدد سكانها 68 مليون نسمة. يحدّها بحر المانش والمحيط الأطلسي والبحر المتوسط، وتجاورها بلجيكا ولوكسمبورغ وألمانيا وسويسرا وإيطاليا وإسبانيا وموناكو وأندورا.",
+   "text_fr": "La France métropolitaine a la forme d'un hexagone, c'est pourquoi on l'appelle « l'Hexagone ». Le pays compte dix-huit régions : treize en métropole et cinq outre-mer. Sa capitale est Paris et sa population dépasse soixante-huit millions d'habitants. La France est bordée par la Manche, l'océan Atlantique et la mer Méditerranée, et elle partage ses frontières avec la Belgique, le Luxembourg, l'Allemagne, la Suisse, l'Italie, l'Espagne, Monaco et Andorre.",
+   "image": "",
+   "wiki": "France",
+   "credit": "Wikipédia",
+   "facts": [
+    {
+     "ar": "أعلى قمة: مون بلان نحو 4805 م",
+     "fr": "Le mont Blanc culmine à 4 805 mètres."
+    },
+    {
+     "ar": "في فرنسا 101 مقاطعة (département)",
+     "fr": "La France compte cent un départements."
+    },
+    {
+     "ar": "العاصمة باريس",
+     "fr": "La capitale de la France est Paris."
+    }
+   ],
+   "quiz": {
+    "q": "Combien de régions la France compte-t-elle aujourd'hui ?",
+    "options": [
+     "Treize",
+     "Dix-huit",
+     "Vingt-deux",
+     "Cent un"
+    ],
+    "a": 1,
+    "ar": "13 منطقة في فرنسا الأوروبية + 5 ما وراء البحار = 18."
+   },
+   "outline": [
+    [
+     2.4,
+     51.05
+    ],
+    [
+     3.1,
+     50.78
+    ],
+    [
+     3.6,
+     50.4
+    ],
+    [
+     4.2,
+     50.28
+    ],
+    [
+     4.85,
+     50.15
+    ],
+    [
+     4.8,
+     49.95
+    ],
+    [
+     5.4,
+     49.55
+    ],
+    [
+     5.85,
+     49.5
+    ],
+    [
+     6.35,
+     49.45
+    ],
+    [
+     6.9,
+     49.2
+    ],
+    [
+     7.6,
+     49.05
+    ],
+    [
+     8.2,
+     48.97
+    ],
+    [
+     7.8,
+     48.5
+    ],
+    [
+     7.6,
+     48.0
+    ],
+    [
+     7.55,
+     47.6
+    ],
+    [
+     7.0,
+     47.4
+    ],
+    [
+     6.4,
+     46.9
+    ],
+    [
+     6.1,
+     46.4
+    ],
+    [
+     6.8,
+     46.0
+    ],
+    [
+     6.85,
+     45.8
+    ],
+    [
+     7.1,
+     45.3
+    ],
+    [
+     6.7,
+     44.9
+    ],
+    [
+     7.0,
+     44.2
+    ],
+    [
+     7.5,
+     43.78
+    ],
+    [
+     7.25,
+     43.65
+    ],
+    [
+     6.7,
+     43.3
+    ],
+    [
+     5.95,
+     43.1
+    ],
+    [
+     5.4,
+     43.25
+    ],
+    [
+     4.8,
+     43.4
+    ],
+    [
+     4.2,
+     43.45
+    ],
+    [
+     3.6,
+     43.3
+    ],
+    [
+     3.05,
+     42.7
+    ],
+    [
+     3.15,
+     42.43
+    ],
+    [
+     2.0,
+     42.35
+    ],
+    [
+     1.45,
+     42.6
+    ],
+    [
+     0.7,
+     42.8
+    ],
+    [
+     -0.3,
+     42.85
+    ],
+    [
+     -1.45,
+     43.05
+    ],
+    [
+     -1.55,
+     43.5
+    ],
+    [
+     -1.3,
+     44.4
+    ],
+    [
+     -1.2,
+     45.0
+    ],
+    [
+     -1.05,
+     45.55
+    ],
+    [
+     -1.2,
+     46.15
+    ],
+    [
+     -1.8,
+     46.5
+    ],
+    [
+     -2.2,
+     47.0
+    ],
+    [
+     -2.5,
+     47.3
+    ],
+    [
+     -3.0,
+     47.55
+    ],
+    [
+     -3.7,
+     47.8
+    ],
+    [
+     -4.35,
+     47.8
+    ],
+    [
+     -4.7,
+     48.05
+    ],
+    [
+     -4.75,
+     48.35
+    ],
+    [
+     -4.2,
+     48.7
+    ],
+    [
+     -3.4,
+     48.85
+    ],
+    [
+     -2.7,
+     48.6
+    ],
+    [
+     -2.0,
+     48.65
+    ],
+    [
+     -1.5,
+     48.63
+    ],
+    [
+     -1.6,
+     49.0
+    ],
+    [
+     -1.85,
+     49.65
+    ],
+    [
+     -1.3,
+     49.7
+    ],
+    [
+     -1.05,
+     49.35
+    ],
+    [
+     -0.2,
+     49.3
+    ],
+    [
+     0.15,
+     49.5
+    ],
+    [
+     0.95,
+     49.9
+    ],
+    [
+     1.6,
+     50.2
+    ],
+    [
+     1.6,
+     50.9
+    ]
+   ],
+   "cities": [
+    {
+     "n": "Paris",
+     "region": "Île-de-France",
+     "lon": 2.35,
+     "lat": 48.86,
+     "fr": "Paris, la capitale, est traversée par la Seine.",
+     "ar": "باريس العاصمة، يخترقها نهر السين."
+    },
+    {
+     "n": "Lille",
+     "region": "Hauts-de-France",
+     "lon": 3.06,
+     "lat": 50.63,
+     "fr": "Lille est une grande ville du nord, près de la Belgique.",
+     "ar": "ليل مدينة كبرى في الشمال قرب بلجيكا."
+    },
+    {
+     "n": "Rouen",
+     "region": "Normandie",
+     "lon": 1.1,
+     "lat": 49.44,
+     "fr": "Rouen est une ville de Normandie, au bord de la Seine.",
+     "ar": "روان مدينة في نورماندي على ضفة السين."
+    },
+    {
+     "n": "Strasbourg",
+     "region": "Grand Est",
+     "lon": 7.75,
+     "lat": 48.58,
+     "fr": "Strasbourg accueille le Parlement européen.",
+     "ar": "ستراسبورغ تحتضن البرلمان الأوروبي."
+    },
+    {
+     "n": "Rennes",
+     "region": "Bretagne",
+     "lon": -1.68,
+     "lat": 48.11,
+     "fr": "Rennes est la capitale de la Bretagne.",
+     "ar": "رين عاصمة منطقة بريتاني."
+    },
+    {
+     "n": "Nantes",
+     "region": "Pays de la Loire",
+     "lon": -1.55,
+     "lat": 47.22,
+     "fr": "Nantes se trouve sur la Loire, près de l'Atlantique.",
+     "ar": "نانت على نهر اللوار قرب الأطلسي."
+    },
+    {
+     "n": "Orléans",
+     "region": "Centre-Val de Loire",
+     "lon": 1.91,
+     "lat": 47.9,
+     "fr": "Orléans est liée au souvenir de Jeanne d'Arc.",
+     "ar": "أورليان ترتبط بذكرى جان دارك."
+    },
+    {
+     "n": "Dijon",
+     "region": "Bourgogne-Franche-Comté",
+     "lon": 5.04,
+     "lat": 47.32,
+     "fr": "Dijon est célèbre pour sa moutarde.",
+     "ar": "ديجون مشهورة بالخردل."
+    },
+    {
+     "n": "Lyon",
+     "region": "Auvergne-Rhône-Alpes",
+     "lon": 4.84,
+     "lat": 45.76,
+     "fr": "Lyon est située au confluent du Rhône et de la Saône.",
+     "ar": "ليون عند التقاء نهري الرون والسون."
+    },
+    {
+     "n": "Bordeaux",
+     "region": "Nouvelle-Aquitaine",
+     "lon": -0.58,
+     "lat": 44.84,
+     "fr": "Bordeaux est célèbre dans le monde entier pour ses vins.",
+     "ar": "بوردو مشهورة عالمياً بنبيذها."
+    },
+    {
+     "n": "Toulouse",
+     "region": "Occitanie",
+     "lon": 1.44,
+     "lat": 43.6,
+     "fr": "Toulouse, surnommée la ville rose, accueille Airbus.",
+     "ar": "تولوز «المدينة الوردية» ومقر إيرباص."
+    },
+    {
+     "n": "Marseille",
+     "region": "Provence-Alpes-Côte d'Azur",
+     "lon": 5.37,
+     "lat": 43.3,
+     "fr": "Marseille est le premier port de France, sur la Méditerranée.",
+     "ar": "مرسيليا أكبر موانئ فرنسا على المتوسط."
+    },
+    {
+     "n": "Nice",
+     "region": "Provence-Alpes-Côte d'Azur",
+     "lon": 7.26,
+     "lat": 43.7,
+     "fr": "Nice est la perle de la Côte d'Azur.",
+     "ar": "نيس لؤلؤة الريفييرا الفرنسية."
+    }
+   ],
+   "rivers": [
+    {
+     "n": "La Loire",
+     "color": "#c2185b",
+     "km": 1006,
+     "fr": "La Loire, longue de 1 006 kilomètres, est le plus long fleuve de France.",
+     "ar": "اللوار: 1006 كم، أطول أنهار فرنسا.",
+     "pts": [
+      [
+       4.23,
+       44.84
+      ],
+      [
+       4.07,
+       46.04
+      ],
+      [
+       3.16,
+       46.99
+      ],
+      [
+       1.91,
+       47.9
+      ],
+      [
+       0.69,
+       47.39
+      ],
+      [
+       -1.55,
+       47.22
+      ],
+      [
+       -2.2,
+       47.27
+      ]
+     ]
+    },
+    {
+     "n": "La Seine",
+     "color": "#0288d1",
+     "km": 777,
+     "fr": "La Seine traverse Paris et se jette dans la Manche, près du Havre.",
+     "ar": "السين يعبر باريس ويصب في المانش قرب لوهافر.",
+     "pts": [
+      [
+       4.72,
+       47.5
+      ],
+      [
+       4.08,
+       48.3
+      ],
+      [
+       2.35,
+       48.86
+      ],
+      [
+       1.1,
+       49.44
+      ],
+      [
+       0.1,
+       49.49
+      ]
+     ]
+    },
+    {
+     "n": "Le Rhône",
+     "color": "#e8710a",
+     "km": 813,
+     "fr": "Le Rhône descend des Alpes et se jette dans la Méditerranée.",
+     "ar": "الرون ينحدر من الألب ويصب في المتوسط.",
+     "pts": [
+      [
+       6.14,
+       46.2
+      ],
+      [
+       4.84,
+       45.76
+      ],
+      [
+       4.89,
+       44.93
+      ],
+      [
+       4.8,
+       43.95
+      ],
+      [
+       4.63,
+       43.68
+      ],
+      [
+       4.6,
+       43.35
+      ]
+     ]
+    },
+    {
+     "n": "La Garonne",
+     "color": "#1b9e5b",
+     "km": 529,
+     "fr": "La Garonne arrose Toulouse et Bordeaux avant de rejoindre l'Atlantique.",
+     "ar": "الغارون يروي تولوز وبوردو ثم يصب في الأطلسي.",
+     "pts": [
+      [
+       0.7,
+       42.8
+      ],
+      [
+       1.44,
+       43.6
+      ],
+      [
+       0.62,
+       44.2
+      ],
+      [
+       -0.58,
+       44.84
+      ],
+      [
+       -1.0,
+       45.4
+      ]
+     ]
+    }
+   ]
+  }
+ ]
+}
