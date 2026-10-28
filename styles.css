@@ -1,4 +1,4 @@
-/* ===== Le Français Au Bac — styles.css (النسخة النهائية المطابقة للـ Index) ===== */
+/* ===== Le Français Au Bac — styles.css (الكود الشامل والنهائي لتثبيت شريط الحقوق) ===== */
 :root {
   --blue: #0055A5; 
   --red: #EF4135; 
@@ -12,7 +12,6 @@
   --radius: 16px; 
   --side: 250px;
 
-  /* 🎨 تدرجات ألوان حية وجذابة */
   --grad-topbar: linear-gradient(135deg, #0055A5 0%, #0a3f7a 50%, #0d2847 100%);
   --grad-sidebar: linear-gradient(180deg, #ffffff 0%, #f4f8fd 100%);
   --grad-btn-active: linear-gradient(90deg, #0055A5 0%, #106ec2 100%);
@@ -58,7 +57,7 @@ body {
 .install { background: var(--grad-tab-active); color: #fff; border: 0; border-radius: 20px; padding: 8px 16px; font-size: .8rem; font-weight: 800; cursor: pointer; box-shadow: 0 3px 8px rgba(239, 65, 53, 0.3); }
 .install[hidden] { display: none; }
 
-/* ===== القائمة الجانبية وترويسة الحقوق الحقيقية (من الـ Index) ===== */
+/* ===== القائمة الجانبية وشريط الحقوق المعالج هندسياً ===== */
 .layout { flex: 1; display: flex; align-items: flex-start; gap: 16px; padding: 16px; width: 100%; max-width: 1200px; margin: 0 auto; }
 .sidebar {
   position: sticky; top: 74px; width: var(--side); flex-shrink: 0; display: flex; flex-direction: column; gap: 8px;
@@ -67,8 +66,33 @@ body {
   border-top: 4px solid var(--blue);
 }
 
-/* تنظيف كامل لأي تداخل قديم وتأكيد استقرار شريط الحقوق الأصلي */
+/* إلغاء أي تداخلات أو تأثيرات سابقة من أي أكواد أخرى */
 .sidebar::before, .sidebar::after { display: none !important; }
+
+/* إبطال أي إزاحة سالبة أو إخفاء قادم من السكريبت القديم وإظهار شريط الحقوق بثبات تام */
+.sidebar #side-credit {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  margin-top: 0 !important;
+  margin-bottom: 8px !important;
+  position: static !important;
+  order: -99 !important;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px 12px;
+  min-height: 48px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #0055A5, #0a3d7a);
+  border-bottom: 3px solid #2dd36f;
+  color: #ffffff;
+  font-size: .82rem;
+  line-height: 1.6;
+  font-weight: 800;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
 
 .sidebar button {
   text-align: right; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px;
