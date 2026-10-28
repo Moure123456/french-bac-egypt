@@ -1,4 +1,4 @@
-/* ===== Le Français Au Bac — styles.css (النسخة النهائية الصحيحة 100%) ===== */
+/* ===== Le Français Au Bac — styles.css (النسخة النهائية المعدلة والمصححة 100%) ===== */
 :root {
   --blue: #0055A5; 
   --red: #EF4135; 
@@ -66,6 +66,25 @@ body {
   box-shadow: 0 6px 20px rgba(0, 55, 120, 0.06);
   border-top: 4px solid var(--blue);
 }
+
+/* ===== حقن ترويسة الحقوق بالكامل وبشكل احترافي في أعلى القائمة الجانبية ===== */
+.sidebar::before {
+  content: "⚠️ Le Français Au Bac 🇫🇷\Aجميع الحقوق محفوظة ©\Aإعداد وتطوير: مسيو/ محمود أبوبكر السويدى";
+  white-space: pre-wrap;
+  display: block;
+  background: linear-gradient(135deg, #0055A5 0%, #0a3f7a 100%);
+  color: #ffffff;
+  padding: 12px 10px;
+  text-align: center;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  line-height: 1.7;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
 .sidebar button {
   text-align: right; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px;
   font-size: .98rem; font-weight: 800 !important; color: var(--text); cursor: pointer; font-family: inherit; transition: all .25s ease;
@@ -281,25 +300,3 @@ details.node summary small { color: var(--muted); font-weight: 600; margin-inlin
 }
 .soon-back:active { transform: scale(.97); }
 @media (prefers-reduced-motion: reduce) { .soon-icon { animation: none; } }
-
-/* ===== حقن ترويسة الحقوق في أعلى القائمة الجانبية من الـ CSS مع علامة تحذير باللون الأحمر ⚠️ ===== */
-.sidebar::before {
-  content: "⚠️ Le Français Au Bac 🇫🇷\Aجميع الحقوق محفوظة ©\Aإعداد وتطوير: مسيو/ محمود أبوبكر السويدى";
-  white-space: pre-wrap;
-  display: block;
-  background: #0055A5;
-  color: #fff;
-  padding: 12px 10px;
-  text-align: center;
-  border-radius: 8px;
-  margin-bottom: 12px;
-  font-size: 12px;
-  font-weight: bold;
-  line-height: 1.6;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-/* تخصيص علامة التحذير باللون الأحمر البارز */
-.sidebar::before {
-  /* سيتم عرض الأيقونة باللون الأحمر المميز داخل الترويسة الزرقاء */
-}
