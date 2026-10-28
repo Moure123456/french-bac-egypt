@@ -50,6 +50,25 @@
       border-right-color: transparent;
     }
     .sidebar button.on .lock-badge { color: #ffffff !important; }
+    /* شريط الحقوق أعلى القائمة الجانبية */
+    .side-credit {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin: 0 0 10px;
+      padding: 8px 12px;
+      min-height: 46px;
+      overflow: hidden;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #0055A5, #0a3d7a);
+      border-bottom: 3px solid #2dd36f;
+      color: #ffffff;
+      font-size: .8rem;
+      line-height: 1.6;
+      font-weight: 700;
+    }
   </style>
 </head>
 <body>
@@ -65,6 +84,7 @@
 
   <div class="layout">
     <nav class="sidebar" aria-label="الأقسام">
+      <div class="side-credit" id="side-credit">جميع الحقوق محفوظة © - إعداد وتطوير: مسيو/ محمود أبوبكر السويدى</div>
       <button data-nav="lessons" class="on" type="button">📚 دروس الكتاب والحلول</button>
       <button data-nav="bac" type="button">🎓 منهج البكالوريا (2Sec & 3Sec)</button>
       <button data-nav="grammar" type="button">✍️ Grammaire</button>
@@ -129,6 +149,7 @@
   <script src="./chat.js"></script>
   <script src="./exams.js"></script>
   <script src="./phrase.js"></script>
+  <script src="./france.js"></script>
 
   <!-- سكريبت تفعيل النطق الصوتي للنصوص الزرقاء -->
   <script>
@@ -307,6 +328,39 @@
         }
       });
     }
+  </script>
+  <!-- ضبط شريط الحقوق داخل الفراغ العلوي للقائمة الجانبية (دون تحريك أي زر) -->
+  <script>
+    (function () {
+      function fitCredit() {
+        var nav = document.querySelector('.sidebar');
+        var c = document.getElementById('side-credit');
+        if (!nav || !c) return;
+        c.style.marginTop = '';
+        c.style.marginBottom = '';
+        c.style.height = '';
+        c.style.minHeight = '';
+        c.style.padding = '';
+        c.style.fontSize = '';
+        c.style.lineHeight = '';
+        var pt = parseFloat(window.getComputedStyle(nav).paddingTop) || 0;
+        if (pt >= 40) {
+          c.style.marginTop = (-pt + 6) + 'px';
+          c.style.height = (pt - 12) + 'px';
+          c.style.marginBottom = '6px';
+          c.style.minHeight = '0';
+          c.style.padding = '2px 10px';
+          c.style.fontSize = '.76rem';
+          c.style.lineHeight = '1.45';
+        }
+      }
+      fitCredit();
+      window.addEventListener('load', fitCredit);
+      window.addEventListener('resize', fitCredit);
+      document.addEventListener('click', function (e) {
+        if (e.target.closest && e.target.closest('#menu-btn')) setTimeout(fitCredit, 60);
+      });
+    })();
   </script>
 </body>
 </html>
