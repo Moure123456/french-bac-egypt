@@ -94,6 +94,7 @@
   <script src="./songs.js"></script>
   <script src="./chat.js"></script>
   <script src="./exams.js"></script>
+  <script src="./phrase.js"></script>
 
   <!-- سكريبت تفعيل النطق الصوتي للنصوص الزرقاء -->
   <script>
@@ -195,64 +196,4 @@
     });
 
     function updateLockVisuals() {
-      const lockedSvg = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="vertical-align:middle"><rect x="4" y="10" width="16" height="12" rx="2" fill="currentColor"/><path d="M8 10V6.5a4 4 0 0 1 8 0V10" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>';
-      const openSvg = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="vertical-align:middle"><rect x="4" y="10" width="16" height="12" rx="2" fill="currentColor"/><path d="M8 10V6.5a4 4 0 0 1 7.6-1.7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>';
-      document.querySelectorAll('.locked-section').forEach(btn => {
-        const lockedId = btn.getAttribute('data-locked-id');
-        const isUnlocked = localStorage.getItem(`section_unlocked_${lockedId}`) === "true";
-        const badge = btn.querySelector('.lock-badge');
-        if (badge) {
-          badge.innerHTML = isUnlocked ? openSvg : lockedSvg;
-          badge.style.color = isUnlocked ? '#0055A5' : '#dc3545';
-        }
-      });
-    }
-
-    function promptForPassword(lockedId, btnElement) {
-      const oldModal = document.getElementById('master-pin-modal');
-      if (oldModal) oldModal.remove();
-
-      const modalHTML = `
-        <div id="master-pin-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; z-index: 99999; font-family: Tahoma, sans-serif;">
-          <div style="background: #fff; padding: 25px; border-radius: 12px; width: 320px; text-align: right; direction: rtl; box-shadow: 0 5px 20px rgba(0,0,0,0.3);">
-            <h3 style="color: #0055A5; margin-top: 0; margin-bottom: 10px; font-size: 16px;">🔐 لوحة التحكم بالرقم السري</h3>
-            <p style="color: #666; font-size: 13px; margin-bottom: 15px;">أدخل الرقم السري للتحكم بالقسم:</p>
-            <input type="password" id="creator-pin-input" maxlength="4" inputmode="numeric" style="width: 100%; padding: 12px; font-size: 22px; text-align: center; letter-spacing: 8px; border: 2px solid #ccc; border-radius: 6px; box-sizing: border-box; margin-bottom: 15px;">
-            <div style="display: flex; gap: 10px;">
-              <button id="submit-pin-btn" style="flex: 1; background: #0055A5; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer;">تنفيذ</button>
-              <button id="cancel-pin-btn" style="background: #6c757d; color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer;">إلغاء</button>
-            </div>
-            <div id="pin-error-msg" style="color: red; font-size: 12px; margin-top: 10px; text-align: center; font-weight: bold;"></div>
-          </div>
-        </div>
-      `;
-      document.body.insertAdjacentHTML('beforeend', modalHTML);
-      const pinInput = document.getElementById('creator-pin-input');
-      pinInput.focus();
-
-      document.getElementById('cancel-pin-btn').addEventListener('click', () => {
-        document.getElementById('master-pin-modal').remove();
-      });
-
-      document.getElementById('submit-pin-btn').addEventListener('click', () => {
-        const val = pinInput.value.trim();
-        if (val === "0519") {
-          localStorage.setItem(`section_unlocked_${lockedId}`, "true");
-          document.getElementById('master-pin-modal').remove();
-          updateLockVisuals();
-          btnElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
-        } else if (val === "0510") {
-          localStorage.setItem(`section_unlocked_${lockedId}`, "false");
-          document.getElementById('master-pin-modal').remove();
-          updateLockVisuals();
-          alert("🔒 تم إغلاق القسم بنجاح.");
-        } else {
-          document.getElementById('pin-error-msg').innerText = "❌ الرقم السري غير صحيح!";
-          pinInput.value = "";
-          pinInput.focus();
-        }
-      });
-    }
-  </script>
-</body>
-</html>
+      const lockedSvg = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="vertical-align:middle"><rect x="4" y="10" wid
