@@ -41,18 +41,44 @@
     function yearOf(id) { return YEARS.filter(function (y) { return y.id === id; })[0]; }
     function toast(m) { var t = document.getElementById('toast'); if (!t) return; t.textContent = m; t.classList.add('show'); setTimeout(function () { t.classList.remove('show'); }, 2200); }
 
-    /* ---------- التحميل ---------- */
+    /* ---------- التحميل (مسارات بديلة + تشخيص دقيق لسبب الفشل) ---------- */
+    function candidates(file) {
+      var parts = location.pathname.split('/').filter(Boolean);
+      var base = location.pathname.replace(/[^/]*$/, '');
+      var list = ['./data/' + file, 'data/' + file, base + 'data/' + file, '/data/' + file, '../data/' + file, './' + file, base + file];
+      var host = location.hostname;
+      if (/\.github\.io$/.test(host)) {
+        var user = host.split('.')[0];
+        var repo = (parts.length && !/\.html?$/i.test(parts[0])) ? parts[0] : (user + '.github.io');
+        list.push('https://cdn.jsdelivr.net/gh/' + user + '/' + repo + '@main/data/' + file);
+        list.push('https://raw.githubusercontent.com/' + user + '/' + repo + '/main/data/' + file);
+      }
+      var seen = {};
+      return list.filter(function (c) { if (seen[c]) return false; seen[c] = 1; return true; });
+    }
     function loadYear(y) {
-      if (D[y.id]) return Promise.resolve(D[y.id]);
-      var c = ['./data/' + y.file, 'data/' + y.file, '/data/' + y.file], i = 0;
+      if (D[y.id] && !D[y.id]._missing) return Promise.resolve(D[y.id]);
+      var c = candidates(y.file), i = 0, log = [];
       function next() {
         if (i >= c.length) return Promise.resolve(null);
-        return fetch(c[i++] + '?v=' + Date.now(), { cache: 'no-store' })
-          .then(function (r) { return r.ok ? r.text() : Promise.reject(); })
-          .then(function (t) { return JSON.parse(t.replace(/^\uFEFF/, '')); })
-          .catch(next);
+        var url = c[i++];
+        return fetch(url + (url.indexOf('?') === -1 ? '?v=' : '&v=') + Date.now(), { cache: 'no-store' })
+          .then(function (r) {
+            if (!r.ok) { log.push(url + ' → HTTP ' + r.status); return next(); }
+            return r.text().then(function (t) {
+              var obj;
+              try { obj = JSON.parse(t.replace(/^\uFEFF/, '')); }
+              catch (e) { log.push(url + ' → ملف JSON تالف أو ناقص (' + e.message + ') — أعد نسخ الملف كاملًا'); return next(); }
+              if (!obj || !Array.isArray(obj.units)) { log.push(url + ' → بنية الملف غير صحيحة (لا يوجد units)'); return next(); }
+              return obj;
+            });
+          })
+          .catch(function (e) { log.push(url + ' → ' + (e && e.message ? e.message : 'خطأ شبكة')); return next(); });
       }
-      return next().then(function (d) { D[y.id] = d || { units: [], exams: [], _missing: true }; return D[y.id]; });
+      return next().then(function (d) {
+        D[y.id] = d || { units: [], exams: [], _missing: true, _log: log };
+        return D[y.id];
+      });
     }
 
     /* ---------- التقدم ---------- */
@@ -154,7 +180,8 @@
     function yearHTML() {
       var y = yearOf(S.year), d = D[S.year] || {}, h = topBar(y.fr + ' — ' + y.ar, 'back-home');
       h += '<div class="bq-tabs"><button type="button" data-act="tab" data-t="units" class="' + (S.tab === 'units' ? 'on' : '') + '">📚 الوحدات</button><button type="button" data-act="tab" data-t="exams" class="' + (S.tab === 'exams' ? 'on' : '') + '">📝 الامتحانات (5)</button></div>';
-      if (d._missing) h += '<div class="bq-warn">تعذّر تحميل ملف data/' + y.file + ' — تأكد من رفعه في مجلد data على GitHub.</div>';
+      if (d._missing) h += '<div class="bq-warn">تعذّر تحميل ملف data/' + esc(y.file) + '<br><small>تأكد أن الملف مرفوع باسمه الصحيح داخل مجلد data في المستودع، وأنه ملصوق كاملًا.</small><br><button type="button" class="bq-btn sm" data-act="retry-year">🔄 إعادة المحاولة</button>' +
+          '<details style="margin-top:8px;text-align:left" dir="ltr"><summary>تفاصيل الخطأ</summary><div style="font-size:.72rem;word-break:break-all;line-height:1.6">' + (d._log || []).map(esc).join('<br>') + '</div></details></div>';
       if (S.tab === 'units') {
         var us = d.units || []; for (var i = us.length; i < 4; i++) us = us.concat([{ id: 'x' + i, title_fr: 'Unité ' + (i + 1), soon: true }]);
         h += '<div class="bq-grid">' + us.map(function (u) {
@@ -267,6 +294,7 @@
       var t = ev.target.closest('[data-act]'); if (!t) return;
       var a = t.dataset.act;
       if (a === 'year') { var y = yearOf(t.dataset.y); ROOT.innerHTML = '<div class="bq"><div class="bq-warn">جارٍ التحميل…</div></div>'; loadYear(y).then(function () { go('year', { year: y.id, tab: 'units' }); }); }
+      else if (a === 'retry-year') { var yy = yearOf(S.year); delete D[yy.id]; ROOT.innerHTML = '<div class="bq"><div class="bq-warn">جارٍ إعادة المحاولة…</div></div>'; loadYear(yy).then(function () { go('year', {}); }); }
       else if (a === 'back-home') go('home', {});
       else if (a === 'back-year') go('year', {});
       else if (a === 'tab') go('year', { tab: t.dataset.t });
