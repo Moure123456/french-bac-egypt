@@ -1,1 +1,1509 @@
-
+{
+ "meta": {
+  "version": 1,
+  "year": "1sec",
+  "book": "Club @dos plus"
+ },
+ "units": [
+  {
+   "id": "u1",
+   "title_fr": "Unité 1 : Se présenter",
+   "title_ar": "الوحدة 1: التعريف بالنفس",
+   "lessons": [
+    {
+     "id": "l1",
+     "title_fr": "Je me présente",
+     "title_ar": "أُعرّف بنفسي",
+     "vocab": [
+      {
+       "fr": "Bonjour",
+       "ar": "صباح الخير / مرحبًا",
+       "ex": "Bonjour, madame !"
+      },
+      {
+       "fr": "Salut",
+       "ar": "أهلًا (بين الأصدقاء)",
+       "ex": "Salut, Karim !"
+      },
+      {
+       "fr": "Je m'appelle",
+       "ar": "اسمي",
+       "ex": "Je m'appelle Sara."
+      },
+      {
+       "fr": "Enchanté(e)",
+       "ar": "تشرفت بمعرفتك",
+       "ex": "Enchanté, monsieur."
+      },
+      {
+       "fr": "avoir … ans",
+       "ar": "عمره … سنة",
+       "ex": "J'ai seize ans."
+      },
+      {
+       "fr": "habiter",
+       "ar": "يسكن",
+       "ex": "J'habite au Caire."
+      },
+      {
+       "fr": "égyptien / égyptienne",
+       "ar": "مصري / مصرية",
+       "ex": "Elle est égyptienne."
+      },
+      {
+       "fr": "un(e) élève",
+       "ar": "تلميذ / تلميذة",
+       "ex": "Je suis élève."
+      },
+      {
+       "fr": "un professeur",
+       "ar": "مدرّس",
+       "ex": "Mon professeur est gentil."
+      },
+      {
+       "fr": "Au revoir",
+       "ar": "إلى اللقاء",
+       "ex": "Au revoir, à demain !"
+      }
+     ],
+     "grammar": [
+      {
+       "title_fr": "Les verbes être et avoir",
+       "title_ar": "الفعلان être و avoir في المضارع",
+       "explanation_ar": "être = يكون: je suis, tu es, il/elle est, nous sommes, vous êtes, ils/elles sont. avoir = يملك: j'ai, tu as, il/elle a, nous avons, vous avez, ils/elles ont. نستعمل être مع الجنسية والمهنة وavoir مع العمر.",
+       "examples": [
+        "Je suis égyptien.",
+        "Tu as quinze ans.",
+        "Elle est professeure.",
+        "Nous avons un cours de français.",
+        "Ils sont élèves."
+       ]
+      }
+     ],
+     "documents": [
+      {
+       "title_fr": "Document 1 : Salut, je m'appelle Karim !",
+       "text_fr": "Salut ! Je m'appelle Karim. J'ai seize ans. Je suis égyptien et j'habite au Caire. Je suis élève au lycée.\nJ'aime le football et la musique. Et toi, comment tu t'appelles ?",
+       "text_ar": "أهلًا! اسمي كريم. عمري ستة عشر عامًا. أنا مصري وأسكن في القاهرة. أنا تلميذ في المدرسة الثانوية.\nأحب كرة القدم والموسيقى. وأنت، ما اسمك؟",
+       "questions": [
+        {
+         "type": "choice",
+         "q": "Comment s'appelle le garçon ?",
+         "options": [
+          "Karim",
+          "Omar",
+          "Ali"
+         ],
+         "answer": "Karim",
+         "explain_ar": "الاسم في أول جملة: « Je m'appelle Karim »."
+        },
+        {
+         "type": "choice",
+         "q": "Quel âge a Karim ?",
+         "options": [
+          "quinze ans",
+          "seize ans",
+          "dix-sept ans"
+         ],
+         "answer": "seize ans",
+         "explain_ar": "النص: « J'ai seize ans »."
+        },
+        {
+         "type": "text",
+         "q": "Où habite Karim ?",
+         "answer": [
+          "au Caire",
+          "Le Caire",
+          "Caire"
+         ],
+         "explain_ar": "« j'habite au Caire »."
+        },
+        {
+         "type": "choice",
+         "q": "Karim aime …",
+         "options": [
+          "le football et la musique",
+          "la natation",
+          "le cinéma"
+         ],
+         "answer": "le football et la musique",
+         "explain_ar": "في آخر النص يذكر هواياته."
+        }
+       ]
+      },
+      {
+       "title_fr": "Document 2 : La famille de Sara",
+       "text_fr": "Bonjour ! Je suis Sara. Je suis égyptienne, mais ma mère est française. J'ai un frère et une sœur.\nMon frère s'appelle Adam et ma sœur s'appelle Nour. Nous habitons à Alexandrie. Mon père est médecin.",
+       "text_ar": "مرحبًا! أنا سارة. أنا مصرية لكن أمي فرنسية. لدي أخ وأخت.\nاسم أخي آدم واسم أختي نور. نسكن في الإسكندرية. أبي طبيب.",
+       "questions": [
+        {
+         "type": "choice",
+         "q": "Quelle est la nationalité de Sara ?",
+         "options": [
+          "française",
+          "égyptienne",
+          "anglaise"
+         ],
+         "answer": "égyptienne",
+         "explain_ar": "« Je suis égyptienne »."
+        },
+        {
+         "type": "choice",
+         "q": "Combien de frères et sœurs Sara a-t-elle ?",
+         "options": [
+          "un",
+          "deux",
+          "trois"
+         ],
+         "answer": "deux",
+         "explain_ar": "un frère + une sœur = deux."
+        },
+        {
+         "type": "text",
+         "q": "Où habite la famille de Sara ?",
+         "answer": [
+          "à Alexandrie",
+          "Alexandrie"
+         ],
+         "explain_ar": "« Nous habitons à Alexandrie »."
+        },
+        {
+         "type": "choice",
+         "q": "Le père de Sara est …",
+         "options": [
+          "professeur",
+          "médecin",
+          "élève"
+         ],
+         "answer": "médecin",
+         "explain_ar": "« Mon père est médecin »."
+        }
+       ]
+      }
+     ],
+     "exercises": [
+      {
+       "type": "text",
+       "q": "Complète : Tu ___ treize ans ? (avoir)",
+       "answer": [
+        "as"
+       ],
+       "explain_ar": "tu → as."
+      },
+      {
+       "type": "text",
+       "q": "Complète : Nous ___ égyptiens. (être)",
+       "answer": [
+        "sommes"
+       ],
+       "explain_ar": "nous → sommes."
+      },
+      {
+       "type": "text",
+       "q": "Complète : Elle ___ professeure. (être)",
+       "answer": [
+        "est"
+       ],
+       "explain_ar": "elle → est."
+      },
+      {
+       "type": "text",
+       "q": "Complète : J'___ un frère. (avoir)",
+       "answer": [
+        "ai"
+       ],
+       "explain_ar": "j' → ai."
+      },
+      {
+       "type": "choice",
+       "q": "Choisis la bonne phrase :",
+       "options": [
+        "Je m'appelle Nour.",
+        "Je m'appeler Nour.",
+        "Je appelle Nour."
+       ],
+       "answer": "Je m'appelle Nour.",
+       "explain_ar": "الفعل المنعكس s'appeler يُصرَّف: je m'appelle."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "u2",
+   "title_fr": "Unité 2 : La famille et les amis",
+   "title_ar": "الوحدة 2: الأسرة والأصدقاء",
+   "lessons": [
+    {
+     "id": "l1",
+     "title_fr": "Ma famille",
+     "title_ar": "أسرتي",
+     "vocab": [
+      {
+       "fr": "la famille",
+       "ar": "الأسرة",
+       "ex": "J'aime ma famille."
+      },
+      {
+       "fr": "le père / la mère",
+       "ar": "الأب / الأم",
+       "ex": "Ma mère est professeure."
+      },
+      {
+       "fr": "le frère / la sœur",
+       "ar": "الأخ / الأخت",
+       "ex": "Mon frère a dix ans."
+      },
+      {
+       "fr": "le grand-père / la grand-mère",
+       "ar": "الجد / الجدة",
+       "ex": "Ma grand-mère habite à Tanta."
+      },
+      {
+       "fr": "un cousin / une cousine",
+       "ar": "ابن / ابنة العم أو الخال",
+       "ex": "Mon cousin joue au football."
+      },
+      {
+       "fr": "un ami / une amie",
+       "ar": "صديق / صديقة",
+       "ex": "Mon ami s'appelle Omar."
+      },
+      {
+       "fr": "grand(e) ≠ petit(e)",
+       "ar": "كبير ≠ صغير",
+       "ex": "Ma sœur est petite."
+      },
+      {
+       "fr": "sympathique",
+       "ar": "لطيف",
+       "ex": "Il est très sympathique."
+      },
+      {
+       "fr": "jeune ≠ âgé(e)",
+       "ar": "شاب ≠ مسنّ",
+       "ex": "Mon grand-père est âgé."
+      },
+      {
+       "fr": "un bébé",
+       "ar": "رضيع",
+       "ex": "Le bébé dort."
+      }
+     ],
+     "grammar": [
+      {
+       "title_fr": "Les adjectifs possessifs (un seul possesseur)",
+       "title_ar": "صفات الملكية",
+       "explanation_ar": "تتفق مع الشيء المملوك لا مع المالك: mon / ma / mes (لي)، ton / ta / tes (لك)، son / sa / ses (له أو لها). نستعمل mon / ton / son قبل مؤنث يبدأ بحرف علة: mon amie.",
+       "examples": [
+        "Mon père est médecin.",
+        "Ma mère s'appelle Nadia.",
+        "Tes frères sont grands.",
+        "Son amie habite au Caire."
+       ]
+      },
+      {
+       "title_fr": "Le féminin et le pluriel",
+       "title_ar": "المؤنث والجمع",
+       "explanation_ar": "المؤنث غالبًا بإضافة e: ami → amie, petit → petite, égyptien → égyptienne (يتضاعف n). الجمع بإضافة s: un frère → des frères. الصفة تتفق مع الاسم: une fille sympathique, des amis sympathiques.",
+       "examples": [
+        "Un ami → une amie.",
+        "Il est égyptien. Elle est égyptienne.",
+        "Mon frère est petit. Ma sœur est petite.",
+        "Mes cousins sont grands."
+       ]
+      }
+     ],
+     "documents": [
+      {
+       "title_fr": "Document 1 : Ma famille",
+       "text_fr": "Je m'appelle Hassan. J'ai une petite famille. Mon père est ingénieur et ma mère est infirmière.\nJ'ai un frère et une sœur. Mon frère s'appelle Ziad. Il a douze ans. Ma sœur s'appelle Mariam. Elle est grande et sympathique.\nLe vendredi, nous visitons ma grand-mère. Elle est âgée, mais elle est très gentille.",
+       "text_ar": "اسمي حسن. لدي أسرة صغيرة. أبي مهندس وأمي ممرضة.\nلدي أخ وأخت. اسم أخي زياد. عمره اثنا عشر عامًا. اسم أختي مريم. هي طويلة ولطيفة.\nيوم الجمعة نزور جدتي. هي مسنّة لكنها طيبة جدًا.",
+       "questions": [
+        {
+         "type": "choice",
+         "q": "Quel est le métier du père de Hassan ?",
+         "options": [
+          "ingénieur",
+          "médecin",
+          "professeur"
+         ],
+         "answer": "ingénieur",
+         "explain_ar": "« Mon père est ingénieur »."
+        },
+        {
+         "type": "text",
+         "q": "Comment s'appelle le frère de Hassan ?",
+         "answer": [
+          "Ziad"
+         ],
+         "explain_ar": "« Mon frère s'appelle Ziad »."
+        },
+        {
+         "type": "choice",
+         "q": "Quel âge a Ziad ?",
+         "options": [
+          "dix ans",
+          "douze ans",
+          "quinze ans"
+         ],
+         "answer": "douze ans",
+         "explain_ar": "« Il a douze ans »."
+        },
+        {
+         "type": "choice",
+         "q": "Comment est Mariam ?",
+         "options": [
+          "petite et timide",
+          "grande et sympathique",
+          "âgée"
+         ],
+         "answer": "grande et sympathique",
+         "explain_ar": "« Elle est grande et sympathique »."
+        },
+        {
+         "type": "choice",
+         "q": "Quand visitent-ils la grand-mère ?",
+         "options": [
+          "le vendredi",
+          "le lundi",
+          "le samedi"
+         ],
+         "answer": "le vendredi",
+         "explain_ar": "« Le vendredi, nous visitons… »."
+        }
+       ]
+      },
+      {
+       "title_fr": "Document 2 : Mon meilleur ami",
+       "text_fr": "Mon meilleur ami s'appelle Omar. Il est grand et blond. Il est égyptien, mais sa mère est italienne.\nOmar a une petite sœur. Elle s'appelle Lina et elle a six ans. Elle est très drôle.\nNous sommes dans la même classe. Après l'école, nous jouons au football avec nos cousins.",
+       "text_ar": "أعز أصدقائي اسمه عمر. هو طويل وأشقر. هو مصري لكن أمه إيطالية.\nلعمر أخت صغيرة اسمها لينا وعمرها ست سنوات. هي مرحة جدًا.\nنحن في نفس الفصل. بعد المدرسة نلعب كرة القدم مع أبناء عمومتنا.",
+       "questions": [
+        {
+         "type": "choice",
+         "q": "Comment est Omar ?",
+         "options": [
+          "petit et brun",
+          "grand et blond",
+          "âgé"
+         ],
+         "answer": "grand et blond",
+         "explain_ar": "« Il est grand et blond »."
+        },
+        {
+         "type": "choice",
+         "q": "Quelle est la nationalité de la mère d'Omar ?",
+         "options": [
+          "égyptienne",
+          "italienne",
+          "française"
+         ],
+         "answer": "italienne",
+         "explain_ar": "« sa mère est italienne »."
+        },
+        {
+         "type": "text",
+         "q": "Quel âge a Lina ?",
+         "answer": [
+          "six ans",
+          "6 ans",
+          "six"
+         ],
+         "explain_ar": "« elle a six ans »."
+        },
+        {
+         "type": "choice",
+         "q": "Que font-ils après l'école ?",
+         "options": [
+          "Ils jouent au football.",
+          "Ils étudient.",
+          "Ils dorment."
+         ],
+         "answer": "Ils jouent au football.",
+         "explain_ar": "الجملة الأخيرة."
+        },
+        {
+         "type": "choice",
+         "q": "Pourquoi écrit-on « Elle est très drôle » ?",
+         "options": [
+          "Lina est une fille.",
+          "Lina est un garçon.",
+          "C'est un pluriel."
+         ],
+         "answer": "Lina est une fille.",
+         "explain_ar": "elle = مؤنث."
+        }
+       ]
+      }
+     ],
+     "exercises": [
+      {
+       "type": "text",
+       "q": "Complète : (moi) ___ père est médecin. (mon / ma / mes)",
+       "answer": [
+        "Mon"
+       ],
+       "explain_ar": "père مذكر مفرد → mon."
+      },
+      {
+       "type": "text",
+       "q": "Complète : (moi) ___ sœur est petite. (mon / ma / mes)",
+       "answer": [
+        "Ma"
+       ],
+       "explain_ar": "sœur مؤنث → ma."
+      },
+      {
+       "type": "text",
+       "q": "Féminin : Un ami → une ___",
+       "answer": [
+        "amie"
+       ],
+       "explain_ar": "نضيف e."
+      },
+      {
+       "type": "text",
+       "q": "Féminin : Il est égyptien. → Elle est ___",
+       "answer": [
+        "égyptienne",
+        "egyptienne"
+       ],
+       "explain_ar": "-ien → -ienne."
+      },
+      {
+       "type": "choice",
+       "q": "Pluriel : Mon frère est grand. → Mes frères sont ___",
+       "options": [
+        "grands",
+        "grand",
+        "grande"
+       ],
+       "answer": "grands",
+       "explain_ar": "الجمع: نضيف s للاسم والصفة."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "u3",
+   "title_fr": "Unité 3 : À l'école",
+   "title_ar": "الوحدة 3: في المدرسة",
+   "lessons": [
+    {
+     "id": "l1",
+     "title_fr": "Ma journée à l'école",
+     "title_ar": "يومي في المدرسة",
+     "vocab": [
+      {
+       "fr": "une classe",
+       "ar": "فصل",
+       "ex": "Notre classe est grande."
+      },
+      {
+       "fr": "un cahier",
+       "ar": "كراسة",
+       "ex": "J'écris dans mon cahier."
+      },
+      {
+       "fr": "un stylo",
+       "ar": "قلم حبر",
+       "ex": "J'ai un stylo bleu."
+      },
+      {
+       "fr": "une matière",
+       "ar": "مادة دراسية",
+       "ex": "Le français est ma matière préférée."
+      },
+      {
+       "fr": "un cours",
+       "ar": "حصة",
+       "ex": "Le cours commence à huit heures."
+      },
+      {
+       "fr": "un emploi du temps",
+       "ar": "جدول الحصص",
+       "ex": "Regarde l'emploi du temps."
+      },
+      {
+       "fr": "le directeur / la directrice",
+       "ar": "مدير / مديرة",
+       "ex": "Le directeur est gentil."
+      },
+      {
+       "fr": "la cour",
+       "ar": "فناء المدرسة",
+       "ex": "Nous jouons dans la cour."
+      },
+      {
+       "fr": "la récréation",
+       "ar": "الاستراحة",
+       "ex": "La récréation dure vingt minutes."
+      },
+      {
+       "fr": "apprendre",
+       "ar": "يتعلم",
+       "ex": "J'apprends le français."
+      }
+     ],
+     "grammar": [
+      {
+       "title_fr": "Les articles définis et indéfinis",
+       "title_ar": "أدوات التعريف والتنكير",
+       "explanation_ar": "نكرة: un (مذكر)، une (مؤنث)، des (جمع). معرفة: le، la، l' (قبل حرف علة)، les. نستعمل il y a (يوجد) مع النكرة: Il y a un stylo sur la table.",
+       "examples": [
+        "Il y a un cahier sur la table.",
+        "La classe est grande.",
+        "Les élèves sont dans la cour.",
+        "L'école est près de ma maison."
+       ]
+      },
+      {
+       "title_fr": "Les verbes en -er au présent",
+       "title_ar": "أفعال المجموعة الأولى في المضارع",
+       "explanation_ar": "نحذف er ونضيف: -e, -es, -e, -ons, -ez, -ent (parler → je parle, tu parles, il parle, nous parlons, vous parlez, ils parlent). النفي: ne … pas (Je ne parle pas arabe en classe).",
+       "examples": [
+        "J'aime le français.",
+        "Tu étudies à la bibliothèque.",
+        "Nous parlons français.",
+        "Ils n'écoutent pas le professeur."
+       ]
+      }
+     ],
+     "documents": [
+      {
+       "title_fr": "Document 1 : Mon emploi du temps",
+       "text_fr": "Le dimanche, j'ai un cours de français à huit heures. Ensuite, nous avons mathématiques et sciences.\nÀ dix heures, c'est la récréation. Nous mangeons un sandwich dans la cour et nous jouons avec nos amis.\nL'après-midi, nous étudions l'anglais et l'histoire. Les cours finissent à deux heures.",
+       "text_ar": "يوم الأحد لدي حصة فرنسية في الثامنة. بعد ذلك لدينا رياضيات وعلوم.\nفي العاشرة تكون الاستراحة. نأكل شطيرة في الفناء ونلعب مع أصدقائنا.\nبعد الظهر ندرس الإنجليزية والتاريخ. تنتهي الحصص في الثانية.",
+       "questions": [
+        {
+         "type": "choice",
+         "q": "À quelle heure est le cours de français ?",
+         "options": [
+          "à huit heures",
+          "à dix heures",
+          "à deux heures"
+         ],
+         "answer": "à huit heures",
+         "explain_ar": "« à huit heures »."
+        },
+        {
+         "type": "text",
+         "q": "Que font les élèves pendant la récréation ?",
+         "answer": [
+          "ils mangent un sandwich et jouent",
+          "mangent un sandwich",
+          "ils jouent avec leurs amis",
+          "ils mangent un sandwich"
+         ],
+         "explain_ar": "« Nous mangeons un sandwich… et nous jouons »."
+        },
+        {
+         "type": "choice",
+         "q": "Quelles matières ont-ils l'après-midi ?",
+         "options": [
+          "l'anglais et l'histoire",
+          "les maths et les sciences",
+          "le sport et l'art"
+         ],
+         "answer": "l'anglais et l'histoire",
+         "explain_ar": "الجملة الأولى من الفقرة الثالثة."
+        },
+        {
+         "type": "choice",
+         "q": "À quelle heure les cours finissent-ils ?",
+         "options": [
+          "à midi",
+          "à deux heures",
+          "à quatre heures"
+         ],
+         "answer": "à deux heures",
+         "explain_ar": "« à deux heures »."
+        },
+        {
+         "type": "choice",
+         "q": "« nous mangeons » est à quelle personne ?",
+         "options": [
+          "nous",
+          "vous",
+          "ils"
+         ],
+         "answer": "nous",
+         "explain_ar": "nous + -ons."
+        }
+       ]
+      },
+      {
+       "title_fr": "Document 2 : Dans la classe",
+       "text_fr": "Voici ma classe. Il y a vingt-cinq élèves, un grand tableau et dix fenêtres. Sur la table du professeur, il y a des livres et un ordinateur.\nMon professeur de français aime les élèves sérieux. Il ne parle pas arabe pendant le cours. Il dit : « Écoutez bien et parlez français ! »\nMoi, j'adore cette matière parce que j'apprends beaucoup de mots nouveaux.",
+       "text_ar": "هذا فصلي. يوجد خمسة وعشرون تلميذًا وسبورة كبيرة وعشر نوافذ. على مكتب المدرّس كتب وحاسوب.\nيحب مدرّس الفرنسية التلاميذ الجادّين. لا يتكلم العربية أثناء الحصة. يقول: «استمعوا جيدًا وتكلموا الفرنسية!»\nأنا أعشق هذه المادة لأنني أتعلم كلمات جديدة كثيرة.",
+       "questions": [
+        {
+         "type": "text",
+         "q": "Combien d'élèves y a-t-il dans la classe ?",
+         "answer": [
+          "vingt-cinq",
+          "25",
+          "vingt cinq"
+         ],
+         "explain_ar": "« vingt-cinq élèves »."
+        },
+        {
+         "type": "choice",
+         "q": "Qu'est-ce qu'il y a sur la table du professeur ?",
+         "options": [
+          "des livres et un ordinateur",
+          "un ballon",
+          "des fleurs"
+         ],
+         "answer": "des livres et un ordinateur",
+         "explain_ar": "الجملة الأخيرة من الفقرة الأولى."
+        },
+        {
+         "type": "choice",
+         "q": "Vrai ou faux : Le professeur parle arabe pendant le cours.",
+         "options": [
+          "Vrai",
+          "Faux"
+         ],
+         "answer": "Faux",
+         "explain_ar": "« Il ne parle pas arabe »."
+        },
+        {
+         "type": "choice",
+         "q": "Pourquoi l'élève adore-t-il cette matière ?",
+         "options": [
+          "Il apprend beaucoup de mots nouveaux.",
+          "Elle est facile.",
+          "Il n'a pas de devoirs."
+         ],
+         "answer": "Il apprend beaucoup de mots nouveaux.",
+         "explain_ar": "الجملة الأخيرة."
+        },
+        {
+         "type": "choice",
+         "q": "« Il ne parle pas » est à la forme :",
+         "options": [
+          "négative",
+          "interrogative",
+          "affirmative"
+         ],
+         "answer": "négative",
+         "explain_ar": "ne … pas = نفي."
+        }
+       ]
+      }
+     ],
+     "exercises": [
+      {
+       "type": "text",
+       "q": "Complète : Il y a ___ stylo sur la table. (un / une)",
+       "answer": [
+        "un"
+       ],
+       "explain_ar": "stylo مذكر → un."
+      },
+      {
+       "type": "text",
+       "q": "Complète : ___ classe est grande. (Le / La)",
+       "answer": [
+        "La"
+       ],
+       "explain_ar": "classe مؤنث معرّف → La."
+      },
+      {
+       "type": "text",
+       "q": "Conjugue : Nous (parler) français. → Nous ___",
+       "answer": [
+        "parlons"
+       ],
+       "explain_ar": "nous + -ons."
+      },
+      {
+       "type": "text",
+       "q": "Conjugue : Tu (étudier) à la bibliothèque. → Tu ___",
+       "answer": [
+        "étudies",
+        "etudies"
+       ],
+       "explain_ar": "tu + -es."
+      },
+      {
+       "type": "text",
+       "q": "Négation : J'aime le sport. → Je n'aime ___ le sport.",
+       "answer": [
+        "pas"
+       ],
+       "explain_ar": "ne … pas."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "u4",
+   "title_fr": "Unité 4 : Ma maison, ma ville",
+   "title_ar": "الوحدة 4: بيتي ومدينتي",
+   "lessons": [
+    {
+     "id": "l1",
+     "title_fr": "Où habites-tu ?",
+     "title_ar": "أين تسكن؟",
+     "vocab": [
+      {
+       "fr": "une maison",
+       "ar": "منزل",
+       "ex": "Ma maison est grande."
+      },
+      {
+       "fr": "une chambre",
+       "ar": "غرفة نوم",
+       "ex": "Ma chambre est bleue."
+      },
+      {
+       "fr": "le salon",
+       "ar": "غرفة المعيشة",
+       "ex": "La famille est dans le salon."
+      },
+      {
+       "fr": "la cuisine",
+       "ar": "المطبخ",
+       "ex": "Maman est dans la cuisine."
+      },
+      {
+       "fr": "un quartier",
+       "ar": "حي",
+       "ex": "J'habite dans un quartier calme."
+      },
+      {
+       "fr": "une rue",
+       "ar": "شارع",
+       "ex": "La rue est large."
+      },
+      {
+       "fr": "un magasin",
+       "ar": "متجر",
+       "ex": "Il y a un magasin près d'ici."
+      },
+      {
+       "fr": "un parc",
+       "ar": "حديقة",
+       "ex": "Nous jouons au parc."
+      },
+      {
+       "fr": "à droite ≠ à gauche",
+       "ar": "يمين ≠ يسار",
+       "ex": "Tournez à droite."
+      },
+      {
+       "fr": "tout droit",
+       "ar": "على استقامة",
+       "ex": "Allez tout droit."
+      }
+     ],
+     "grammar": [
+      {
+       "title_fr": "Les prépositions de lieu",
+       "title_ar": "حروف الجر المكانية",
+       "explanation_ar": "devant (أمام)، derrière (خلف)، sur (فوق)، sous (تحت)، dans (داخل)، entre (بين)، à côté de (بجانب)، près de (قرب)، loin de (بعيد عن). de + le = du، de + les = des، à + le = au، à + les = aux.",
+       "examples": [
+        "Le livre est sur la table.",
+        "Le chat est sous le lit.",
+        "La poste est à côté de la banque.",
+        "Le parc est près du lycée."
+       ]
+      },
+      {
+       "title_fr": "Poser une question",
+       "title_ar": "طرح السؤال",
+       "explanation_ar": "ثلاث طرق: النغمة (Tu habites au Caire ?)، est-ce que (Est-ce que tu habites au Caire ?)، كلمة استفهام: où (أين)، quand (متى)، comment (كيف)، combien (كم)، qui (من). مثال: Où habites-tu ?",
+       "examples": [
+        "Où habites-tu ?",
+        "Est-ce que tu aimes ta ville ?",
+        "Comment est ta chambre ?",
+        "Combien de chambres y a-t-il ?"
+       ]
+      }
+     ],
+     "documents": [
+      {
+       "title_fr": "Document 1 : Ma chambre",
+       "text_fr": "J'habite dans une grande maison à Mansoura. Ma chambre est au premier étage. Elle est bleue et claire.\nIl y a un lit à côté de la fenêtre, un bureau devant l'armoire et des livres sur l'étagère. Mon chat dort sous le bureau.\nJ'aime beaucoup ma chambre parce que je peux étudier tranquillement.",
+       "text_ar": "أسكن في منزل كبير في المنصورة. غرفتي في الطابق الأول. هي زرقاء ومضيئة.\nيوجد سرير بجانب النافذة ومكتب أمام الخزانة وكتب على الرف. قطتي تنام تحت المكتب.\nأحب غرفتي كثيرًا لأنني أستطيع المذاكرة بهدوء.",
+       "questions": [
+        {
+         "type": "text",
+         "q": "Dans quelle ville habite le narrateur ?",
+         "answer": [
+          "à Mansoura",
+          "Mansoura"
+         ],
+         "explain_ar": "« à Mansoura »."
+        },
+        {
+         "type": "choice",
+         "q": "Où est la chambre ?",
+         "options": [
+          "au rez-de-chaussée",
+          "au premier étage",
+          "au deuxième étage"
+         ],
+         "answer": "au premier étage",
+         "explain_ar": "« au premier étage »."
+        },
+        {
+         "type": "choice",
+         "q": "Où est le lit ?",
+         "options": [
+          "à côté de la fenêtre",
+          "sous la fenêtre",
+          "derrière la porte"
+         ],
+         "answer": "à côté de la fenêtre",
+         "explain_ar": "« à côté de la fenêtre »."
+        },
+        {
+         "type": "choice",
+         "q": "Où dort le chat ?",
+         "options": [
+          "sur le lit",
+          "sous le bureau",
+          "dans l'armoire"
+         ],
+         "answer": "sous le bureau",
+         "explain_ar": "« sous le bureau »."
+        },
+        {
+         "type": "choice",
+         "q": "Pourquoi aime-t-il sa chambre ?",
+         "options": [
+          "Il peut étudier tranquillement.",
+          "Elle est très grande.",
+          "Elle est près du parc."
+         ],
+         "answer": "Il peut étudier tranquillement.",
+         "explain_ar": "الجملة الأخيرة."
+        }
+       ]
+      },
+      {
+       "title_fr": "Document 2 : Ma ville",
+       "text_fr": "Ma ville s'appelle Tanta. Elle est grande et animée. Dans mon quartier, il y a une école, une mosquée, une pharmacie et un petit parc.\nLa gare est loin de chez moi, mais le magasin de mon oncle est près de la maison.\nPour aller au parc, allez tout droit, puis tournez à gauche. Le parc est à côté de l'école.",
+       "text_ar": "اسم مدينتي طنطا. هي كبيرة ونابضة بالحياة. في حيّي توجد مدرسة ومسجد وصيدلية وحديقة صغيرة.\nالمحطة بعيدة عن بيتي لكن متجر عمي قريب من البيت.\nللذهاب إلى الحديقة، سيروا على استقامة ثم انعطفوا يسارًا. الحديقة بجانب المدرسة.",
+       "questions": [
+        {
+         "type": "choice",
+         "q": "Comment est la ville de Tanta ?",
+         "options": [
+          "petite et calme",
+          "grande et animée",
+          "vide"
+         ],
+         "answer": "grande et animée",
+         "explain_ar": "« grande et animée »."
+        },
+        {
+         "type": "choice",
+         "q": "Qu'est-ce qu'il y a dans le quartier ?",
+         "options": [
+          "une école, une mosquée, une pharmacie et un parc",
+          "un aéroport",
+          "un stade et un zoo"
+         ],
+         "answer": "une école, une mosquée, une pharmacie et un parc",
+         "explain_ar": "الجملة الثانية من الفقرة الأولى."
+        },
+        {
+         "type": "choice",
+         "q": "Où est la gare ?",
+         "options": [
+          "loin de la maison",
+          "près de la maison",
+          "devant la maison"
+         ],
+         "answer": "loin de la maison",
+         "explain_ar": "« loin de chez moi »."
+        },
+        {
+         "type": "text",
+         "q": "Où est le parc ?",
+         "answer": [
+          "à côté de l'école",
+          "a cote de l'ecole",
+          "à côté de l'école."
+         ],
+         "explain_ar": "« Le parc est à côté de l'école »."
+        },
+        {
+         "type": "choice",
+         "q": "Pour aller au parc, il faut tourner :",
+         "options": [
+          "à droite",
+          "à gauche",
+          "en arrière"
+         ],
+         "answer": "à gauche",
+         "explain_ar": "« tournez à gauche »."
+        }
+       ]
+      }
+     ],
+     "exercises": [
+      {
+       "type": "text",
+       "q": "Complète : Le livre est ___ la table. (sur / sous) (فوق)",
+       "answer": [
+        "sur"
+       ],
+       "explain_ar": "sur = فوق."
+      },
+      {
+       "type": "text",
+       "q": "Complète : Le chat dort ___ le lit. (تحت)",
+       "answer": [
+        "sous"
+       ],
+       "explain_ar": "sous = تحت."
+      },
+      {
+       "type": "text",
+       "q": "Complète : Le parc est près ___ lycée. (de le → ___)",
+       "answer": [
+        "du"
+       ],
+       "explain_ar": "de + le = du."
+      },
+      {
+       "type": "text",
+       "q": "Pose la question : ___ habites-tu ? (أين)",
+       "answer": [
+        "Où",
+        "Ou"
+       ],
+       "explain_ar": "où = أين."
+      },
+      {
+       "type": "choice",
+       "q": "Choisis la bonne question :",
+       "options": [
+        "Est-ce que tu aimes ta ville ?",
+        "Est-ce que aimes tu ta ville ?",
+        "Tu est-ce que aimes ta ville ?"
+       ],
+       "answer": "Est-ce que tu aimes ta ville ?",
+       "explain_ar": "est-ce que + فاعل + فعل."
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "exams": [
+  {
+   "id": "e1",
+   "title_fr": "Examen 1",
+   "title_ar": "امتحان 1 — Mon école",
+   "duration_min": 30,
+   "passage_title": "Mon école",
+   "passage_fr": "Je m'appelle Yasmine. J'ai quinze ans et je suis élève en première secondaire. Mon école est grande et moderne. Il y a vingt classes, une bibliothèque et un terrain de sport.\nMon professeur de français s'appelle Monsieur Samir. Il est très gentil. Le lundi, nous avons un cours de français à huit heures.",
+   "questions": [
+    {
+     "type": "choice",
+     "q": "Quel âge a Yasmine ?",
+     "options": [
+      "treize ans",
+      "quinze ans",
+      "seize ans"
+     ],
+     "answer": "quinze ans",
+     "explain_ar": "« J'ai quinze ans ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "choice",
+     "q": "Comment est l'école de Yasmine ?",
+     "options": [
+      "petite et vieille",
+      "grande et moderne",
+      "fermée"
+     ],
+     "answer": "grande et moderne",
+     "explain_ar": "الوصف في الجملة الثانية.",
+     "section": "Compréhension"
+    },
+    {
+     "type": "text",
+     "q": "Comment s'appelle le professeur de français ?",
+     "answer": [
+      "Monsieur Samir",
+      "M. Samir",
+      "Samir"
+     ],
+     "explain_ar": "« Monsieur Samir ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "choice",
+     "q": "Quand est le cours de français ?",
+     "options": [
+      "le lundi",
+      "le mardi",
+      "le dimanche"
+     ],
+     "answer": "le lundi",
+     "explain_ar": "« Le lundi, nous avons un cours… ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "text",
+     "q": "Complète : Nous ___ un cours. (avoir)",
+     "answer": [
+      "avons"
+     ],
+     "explain_ar": "nous → avons.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "text",
+     "q": "Complète : Ils ___ élèves. (être)",
+     "answer": [
+      "sont"
+     ],
+     "explain_ar": "ils → sont.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "choice",
+     "q": "« Au revoir » signifie :",
+     "options": [
+      "إلى اللقاء",
+      "صباح الخير",
+      "شكرًا"
+     ],
+     "answer": "إلى اللقاء",
+     "explain_ar": "تحية الوداع.",
+     "section": "Vocabulaire"
+    },
+    {
+     "type": "open",
+     "q": "Présente-toi en 3 phrases (nom, âge, ville).",
+     "answer": "Je m'appelle Ali. J'ai seize ans. J'habite à Tanta.",
+     "explain_ar": "استخدم je m'appelle / j'ai … ans / j'habite à …",
+     "section": "Expression écrite"
+    }
+   ]
+  },
+  {
+   "id": "e2",
+   "title_fr": "Examen 2",
+   "title_ar": "امتحان 2 — Ma famille",
+   "duration_min": 35,
+   "passage_title": "Ma famille",
+   "passage_fr": "Je m'appelle Nour. J'ai quatorze ans. Ma famille est petite : mon père, ma mère, mon frère Karim et moi. Mon père est professeur et ma mère est dentiste.\nMon frère est grand, mais il est très timide. Mes cousins habitent à côté de chez nous. Le week-end, nous mangeons tous ensemble chez ma grand-mère.",
+   "questions": [
+    {
+     "type": "choice",
+     "q": "Quel âge a Nour ?",
+     "options": [
+      "douze ans",
+      "quatorze ans",
+      "seize ans"
+     ],
+     "answer": "quatorze ans",
+     "explain_ar": "« J'ai quatorze ans ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "text",
+     "q": "Quel est le métier de la mère de Nour ?",
+     "answer": [
+      "dentiste",
+      "elle est dentiste"
+     ],
+     "explain_ar": "« ma mère est dentiste ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "choice",
+     "q": "Comment est Karim ?",
+     "options": [
+      "petit et drôle",
+      "grand et timide",
+      "âgé"
+     ],
+     "answer": "grand et timide",
+     "explain_ar": "« grand, mais… timide ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "choice",
+     "q": "Où mangent-ils le week-end ?",
+     "options": [
+      "chez la grand-mère",
+      "au restaurant",
+      "à l'école"
+     ],
+     "answer": "chez la grand-mère",
+     "explain_ar": "الجملة الأخيرة.",
+     "section": "Compréhension"
+    },
+    {
+     "type": "text",
+     "q": "Complète : (moi) ___ frère s'appelle Karim. (mon / ma)",
+     "answer": [
+      "Mon"
+     ],
+     "explain_ar": "frère مذكر → mon.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "text",
+     "q": "Féminin : Un cousin → une ___",
+     "answer": [
+      "cousine"
+     ],
+     "explain_ar": "نضيف e.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "text",
+     "q": "Complète : Mes cousins ___ sympathiques. (être)",
+     "answer": [
+      "sont"
+     ],
+     "explain_ar": "ils/mes cousins → sont.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "choice",
+     "q": "« une grand-mère » signifie :",
+     "options": [
+      "جدة",
+      "عمة",
+      "أخت"
+     ],
+     "answer": "جدة",
+     "explain_ar": "grand-mère = جدة.",
+     "section": "Vocabulaire"
+    },
+    {
+     "type": "open",
+     "q": "Présente ta famille en 4 phrases.",
+     "answer": "J'ai une famille de cinq personnes. Mon père est médecin et ma mère est professeure. J'ai un frère et une sœur. Nous habitons au Caire.",
+     "explain_ar": "استخدم mon / ma / mes و avoir / être.",
+     "section": "Expression écrite"
+    }
+   ]
+  },
+  {
+   "id": "e3",
+   "title_fr": "Examen 3",
+   "title_ar": "امتحان 3 — À l'école",
+   "duration_min": 35,
+   "passage_title": "À l'école",
+   "passage_fr": "Il est huit heures. Les élèves entrent dans la cour du lycée. Dans la classe de Salma, il y a trente élèves. Le professeur de français arrive et dit : « Bonjour, ouvrez vos cahiers ! »\nSalma aime le français et les sciences, mais elle n'aime pas les mathématiques. À dix heures, c'est la récréation. Elle parle avec ses amies dans la cour et elles mangent un fruit.",
+   "questions": [
+    {
+     "type": "choice",
+     "q": "À quelle heure les élèves entrent-ils dans la cour ?",
+     "options": [
+      "à sept heures",
+      "à huit heures",
+      "à dix heures"
+     ],
+     "answer": "à huit heures",
+     "explain_ar": "« Il est huit heures ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "text",
+     "q": "Combien d'élèves y a-t-il dans la classe de Salma ?",
+     "answer": [
+      "trente",
+      "30",
+      "trente élèves"
+     ],
+     "explain_ar": "« trente élèves ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "choice",
+     "q": "Quelle matière Salma n'aime pas ?",
+     "options": [
+      "le français",
+      "les sciences",
+      "les mathématiques"
+     ],
+     "answer": "les mathématiques",
+     "explain_ar": "« elle n'aime pas les mathématiques ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "choice",
+     "q": "Que font les filles pendant la récréation ?",
+     "options": [
+      "Elles parlent et mangent un fruit.",
+      "Elles étudient.",
+      "Elles jouent au basket."
+     ],
+     "answer": "Elles parlent et mangent un fruit.",
+     "explain_ar": "الجملة الأخيرة.",
+     "section": "Compréhension"
+    },
+    {
+     "type": "text",
+     "q": "Complète : Il y a ___ cahier sur la table. (un / une)",
+     "answer": [
+      "un"
+     ],
+     "explain_ar": "cahier مذكر → un.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "text",
+     "q": "Conjugue : Les élèves (entrer) dans la cour. → Les élèves ___",
+     "answer": [
+      "entrent"
+     ],
+     "explain_ar": "ils + -ent.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "text",
+     "q": "Négation : Elle aime les maths. → Elle n'aime ___ les maths.",
+     "answer": [
+      "pas"
+     ],
+     "explain_ar": "ne … pas.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "choice",
+     "q": "« la récréation » est :",
+     "options": [
+      "الاستراحة",
+      "الامتحان",
+      "الواجب"
+     ],
+     "answer": "الاستراحة",
+     "explain_ar": "récréation = استراحة.",
+     "section": "Vocabulaire"
+    },
+    {
+     "type": "open",
+     "q": "Décris ta classe en 4 phrases (il y a …).",
+     "answer": "Dans ma classe, il y a vingt élèves. Il y a un grand tableau et dix tables. Mon professeur de français est gentil. J'aime ma classe.",
+     "explain_ar": "استخدم il y a + أدوات التنكير.",
+     "section": "Expression écrite"
+    }
+   ]
+  },
+  {
+   "id": "e4",
+   "title_fr": "Examen 4",
+   "title_ar": "امتحان 4 — Ma ville",
+   "duration_min": 35,
+   "passage_title": "Ma ville",
+   "passage_fr": "Ahmed habite à Alexandrie, une belle ville près de la mer. Sa maison est dans un quartier calme. Devant la maison, il y a un petit jardin et derrière la maison, il y a un parking.\nLe lycée d'Ahmed est loin de chez lui. Pour y aller, il prend le bus. Le samedi, il va au parc avec ses amis. Le parc est à côté d'une grande bibliothèque.",
+   "questions": [
+    {
+     "type": "choice",
+     "q": "Où se trouve Alexandrie ?",
+     "options": [
+      "près de la mer",
+      "dans le désert",
+      "près de la montagne"
+     ],
+     "answer": "près de la mer",
+     "explain_ar": "« près de la mer ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "text",
+     "q": "Qu'est-ce qu'il y a devant la maison d'Ahmed ?",
+     "answer": [
+      "un petit jardin",
+      "un jardin",
+      "un petit jardin."
+     ],
+     "explain_ar": "« devant la maison, il y a un petit jardin ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "choice",
+     "q": "Comment Ahmed va-t-il au lycée ?",
+     "options": [
+      "en bus",
+      "à pied",
+      "en train"
+     ],
+     "answer": "en bus",
+     "explain_ar": "« il prend le bus ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "choice",
+     "q": "Où est le parc ?",
+     "options": [
+      "à côté d'une bibliothèque",
+      "loin de la ville",
+      "derrière le lycée"
+     ],
+     "answer": "à côté d'une bibliothèque",
+     "explain_ar": "الجملة الأخيرة.",
+     "section": "Compréhension"
+    },
+    {
+     "type": "text",
+     "q": "Complète : Le jardin est ___ la maison. (devant / derrière) (أمام)",
+     "answer": [
+      "devant"
+     ],
+     "explain_ar": "devant = أمام.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "text",
+     "q": "Complète : Le parc est près ___ lycée. (de le → ___)",
+     "answer": [
+      "du"
+     ],
+     "explain_ar": "de + le = du.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "text",
+     "q": "Question : ___ habite Ahmed ? (أين)",
+     "answer": [
+      "Où",
+      "Ou"
+     ],
+     "explain_ar": "où = أين.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "choice",
+     "q": "« un quartier » signifie :",
+     "options": [
+      "حي",
+      "شارع",
+      "ميدان"
+     ],
+     "answer": "حي",
+     "explain_ar": "quartier = حي.",
+     "section": "Vocabulaire"
+    },
+    {
+     "type": "open",
+     "q": "Décris ta ville ou ton quartier en 4 phrases.",
+     "answer": "J'habite à Tanta. C'est une grande ville. Dans mon quartier, il y a une école et un parc. Le parc est à côté de ma maison.",
+     "explain_ar": "استخدم il y a وحروف الجر المكانية.",
+     "section": "Expression écrite"
+    }
+   ]
+  },
+  {
+   "id": "e5",
+   "title_fr": "Examen 5",
+   "title_ar": "امتحان 5 — شامل: Une journée de Mariam",
+   "duration_min": 40,
+   "passage_title": "Une journée de Mariam",
+   "passage_fr": "Mariam a quinze ans. Elle est égyptienne et elle habite au Caire avec sa famille. Chaque matin, elle prend le petit-déjeuner avec sa mère, puis elle va à l'école avec son frère.\nÀ l'école, elle étudie le français, les sciences et l'histoire. Elle n'aime pas beaucoup le sport, mais elle adore la lecture. Après les cours, elle rentre à la maison et elle fait ses devoirs dans sa chambre.\nLe soir, toute la famille regarde la télévision dans le salon.",
+   "questions": [
+    {
+     "type": "choice",
+     "q": "Où habite Mariam ?",
+     "options": [
+      "à Alexandrie",
+      "au Caire",
+      "à Tanta"
+     ],
+     "answer": "au Caire",
+     "explain_ar": "« elle habite au Caire ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "text",
+     "q": "Avec qui Mariam va-t-elle à l'école ?",
+     "answer": [
+      "avec son frère",
+      "son frère"
+     ],
+     "explain_ar": "« avec son frère ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "choice",
+     "q": "Qu'est-ce que Mariam adore ?",
+     "options": [
+      "la lecture",
+      "le sport",
+      "la cuisine"
+     ],
+     "answer": "la lecture",
+     "explain_ar": "« elle adore la lecture ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "choice",
+     "q": "Où fait-elle ses devoirs ?",
+     "options": [
+      "dans le salon",
+      "dans sa chambre",
+      "à la bibliothèque"
+     ],
+     "answer": "dans sa chambre",
+     "explain_ar": "« dans sa chambre ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "text",
+     "q": "Complète : Mariam ___ quinze ans. (avoir)",
+     "answer": [
+      "a"
+     ],
+     "explain_ar": "elle → a.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "text",
+     "q": "Conjugue : Elle (étudier) le français. → Elle ___",
+     "answer": [
+      "étudie",
+      "etudie"
+     ],
+     "explain_ar": "elle + -e.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "text",
+     "q": "Complète : (elle) ___ mère est gentille. (son / sa)",
+     "answer": [
+      "Sa"
+     ],
+     "explain_ar": "mère مؤنث → sa.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "choice",
+     "q": "« rentrer » signifie :",
+     "options": [
+      "يعود",
+      "يخرج",
+      "يبدأ"
+     ],
+     "answer": "يعود",
+     "explain_ar": "rentrer = يعود.",
+     "section": "Vocabulaire"
+    },
+    {
+     "type": "open",
+     "q": "Raconte ta journée en 5 phrases (le matin, à l'école, le soir).",
+     "answer": "Le matin, je prends le petit-déjeuner avec ma famille. Je vais à l'école à sept heures. J'étudie le français et les maths. L'après-midi, je fais mes devoirs. Le soir, je regarde la télévision.",
+     "explain_ar": "استخدم الأفعال -er وتعبيرات الوقت.",
+     "section": "Expression écrite"
+    }
+   ]
+  }
+ ]
+}
