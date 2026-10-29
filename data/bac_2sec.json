@@ -1,1 +1,1525 @@
-
+{
+ "meta": {
+  "version": 1,
+  "year": "2sec",
+  "book": "Club @dos plus"
+ },
+ "units": [
+  {
+   "id": "u1",
+   "title_fr": "Unité 1 : Le club des sportifs",
+   "title_ar": "الوحدة 1: نادي الرياضيين",
+   "lessons": [
+    {
+     "id": "l1",
+     "title_fr": "Faire du sport",
+     "title_ar": "ممارسة الرياضة",
+     "vocab": [
+      {
+       "fr": "un entraîneur",
+       "ar": "مدرّب",
+       "ex": "L'entraîneur est sévère."
+      },
+      {
+       "fr": "une équipe",
+       "ar": "فريق",
+       "ex": "Notre équipe est forte."
+      },
+      {
+       "fr": "un match",
+       "ar": "مباراة",
+       "ex": "Le match commence à six heures."
+      },
+      {
+       "fr": "un champion / une championne",
+       "ar": "بطل / بطلة",
+       "ex": "Nour est championne."
+      },
+      {
+       "fr": "s'entraîner",
+       "ar": "يتدرّب",
+       "ex": "Je m'entraîne chaque matin."
+      },
+      {
+       "fr": "gagner",
+       "ar": "يفوز",
+       "ex": "Nous avons gagné."
+      },
+      {
+       "fr": "perdre",
+       "ar": "يخسر",
+       "ex": "Ils ont perdu le match."
+      },
+      {
+       "fr": "un stade",
+       "ar": "ملعب",
+       "ex": "Le stade est plein."
+      },
+      {
+       "fr": "la natation",
+       "ar": "السباحة",
+       "ex": "Elle fait de la natation."
+      },
+      {
+       "fr": "une médaille",
+       "ar": "ميدالية",
+       "ex": "Une médaille d'or."
+      }
+     ],
+     "grammar": [
+      {
+       "title_fr": "Faire du / jouer au",
+       "title_ar": "faire مع الرياضات الفردية و jouer مع الجماعية",
+       "explanation_ar": "نقول faire + du / de la / de l' / des + الرياضة (faire du judo, faire de la natation). ونقول jouer + au / à la / aux + اللعبة (jouer au football, jouer au tennis).",
+       "examples": [
+        "Je fais de la natation.",
+        "Il joue au tennis.",
+        "Nous faisons du judo.",
+        "Tu joues au basket."
+       ]
+      },
+      {
+       "title_fr": "Le passé composé avec avoir",
+       "title_ar": "الماضي المركّب مع avoir",
+       "explanation_ar": "التركيب: avoir في المضارع + اسم المفعول. مع أفعال المجموعة الأولى: -er → -é (gagner → gagné). غير المنتظم: perdre → perdu.",
+       "examples": [
+        "J'ai gagné le match.",
+        "Elle a perdu la course.",
+        "Nous avons joué hier.",
+        "Ils ont fini l'entraînement."
+       ]
+      }
+     ],
+     "documents": [
+      {
+       "title_fr": "Document 1 : Le club sportif du lycée",
+       "text_fr": "Chaque mercredi, le club sportif du lycée organise des activités pour les élèves. Les garçons jouent au football et les filles font de la natation.\nL'entraîneur, Monsieur Hassan, est très sévère mais gentil. Dimanche prochain, l'équipe du lycée joue un match contre le lycée voisin.",
+       "text_ar": "كل أربعاء ينظّم النادي الرياضي بالمدرسة أنشطة للتلاميذ. الأولاد يلعبون كرة القدم والبنات يمارسن السباحة.\nالمدرّب السيد حسن صارم جدًا لكنه لطيف. يوم الأحد القادم يلعب فريق المدرسة مباراة ضد المدرسة المجاورة.",
+       "questions": [
+        {
+         "type": "choice",
+         "q": "Quel jour le club organise-t-il des activités ?",
+         "options": [
+          "le mercredi",
+          "le jeudi",
+          "le samedi"
+         ],
+         "answer": "le mercredi",
+         "explain_ar": "« Chaque mercredi »."
+        },
+        {
+         "type": "text",
+         "q": "Que font les filles ?",
+         "answer": [
+          "de la natation",
+          "elles font de la natation",
+          "la natation"
+         ],
+         "explain_ar": "« les filles font de la natation »."
+        },
+        {
+         "type": "choice",
+         "q": "Comment est l'entraîneur ?",
+         "options": [
+          "paresseux",
+          "sévère mais gentil",
+          "triste"
+         ],
+         "answer": "sévère mais gentil",
+         "explain_ar": "وصفه في الجملة الأولى من الفقرة الثانية."
+        },
+        {
+         "type": "choice",
+         "q": "Quand a lieu le match ?",
+         "options": [
+          "dimanche prochain",
+          "hier",
+          "chaque mercredi"
+         ],
+         "answer": "dimanche prochain",
+         "explain_ar": "« Dimanche prochain… »."
+        }
+       ]
+      },
+      {
+       "title_fr": "Document 2 : Une championne égyptienne",
+       "text_fr": "Nour a dix-sept ans. Elle s'entraîne tous les matins à six heures. L'année dernière, elle a gagné la médaille d'or au championnat de natation.\nElle a aussi perdu une course, mais elle n'a pas abandonné. Pour elle, le sport apprend la patience.",
+       "text_ar": "عمر نور سبعة عشر عامًا. تتدرّب كل صباح في السادسة. في العام الماضي فازت بالميدالية الذهبية في بطولة السباحة.\nوخسرت أيضًا سباقًا لكنها لم تستسلم. بالنسبة لها الرياضة تعلّم الصبر.",
+       "questions": [
+        {
+         "type": "choice",
+         "q": "À quelle heure Nour s'entraîne-t-elle ?",
+         "options": [
+          "à six heures",
+          "à huit heures",
+          "à midi"
+         ],
+         "answer": "à six heures",
+         "explain_ar": "« tous les matins à six heures »."
+        },
+        {
+         "type": "text",
+         "q": "Qu'est-ce qu'elle a gagné ?",
+         "answer": [
+          "la médaille d'or",
+          "médaille d'or",
+          "une médaille d'or"
+         ],
+         "explain_ar": "« elle a gagné la médaille d'or »."
+        },
+        {
+         "type": "choice",
+         "q": "Nour a-t-elle abandonné après sa défaite ?",
+         "options": [
+          "Oui",
+          "Non"
+         ],
+         "answer": "Non",
+         "explain_ar": "« elle n'a pas abandonné »."
+        },
+        {
+         "type": "choice",
+         "q": "Pour Nour, le sport apprend …",
+         "options": [
+          "la patience",
+          "la paresse",
+          "la colère"
+         ],
+         "answer": "la patience",
+         "explain_ar": "الجملة الأخيرة."
+        }
+       ]
+      }
+     ],
+     "exercises": [
+      {
+       "type": "text",
+       "q": "Complète : Il ___ football. (jouer)",
+       "answer": [
+        "joue au"
+       ],
+       "explain_ar": "jouer + au + football."
+      },
+      {
+       "type": "text",
+       "q": "Complète : Je ___ natation. (faire)",
+       "answer": [
+        "fais de la"
+       ],
+       "explain_ar": "faire de la natation."
+      },
+      {
+       "type": "text",
+       "q": "Mets au passé composé : Nous (gagner) le match. → Nous avons ___ le match.",
+       "answer": [
+        "gagné"
+       ],
+       "explain_ar": "gagner → gagné."
+      },
+      {
+       "type": "choice",
+       "q": "Elles ___ perdu hier.",
+       "options": [
+        "ont",
+        "sont",
+        "avons"
+       ],
+       "answer": "ont",
+       "explain_ar": "elles → ont + perdu."
+      },
+      {
+       "type": "choice",
+       "q": "Choisis : Tu ___ judo ?",
+       "options": [
+        "joues au",
+        "fais du",
+        "fais au"
+       ],
+       "answer": "fais du",
+       "explain_ar": "judo رياضة فردية: faire du judo."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "u2",
+   "title_fr": "Unité 2 : Le club des gourmands",
+   "title_ar": "الوحدة 2: نادي الطعام",
+   "lessons": [
+    {
+     "id": "l1",
+     "title_fr": "À table !",
+     "title_ar": "إلى المائدة",
+     "vocab": [
+      {
+       "fr": "la nourriture",
+       "ar": "الطعام",
+       "ex": "La nourriture est fraîche."
+      },
+      {
+       "fr": "un fruit",
+       "ar": "فاكهة",
+       "ex": "Je mange un fruit."
+      },
+      {
+       "fr": "un légume",
+       "ar": "خضار",
+       "ex": "Les légumes sont bons pour la santé."
+      },
+      {
+       "fr": "avoir faim / soif",
+       "ar": "يشعر بالجوع / العطش",
+       "ex": "J'ai faim !"
+      },
+      {
+       "fr": "un kilo de",
+       "ar": "كيلو من",
+       "ex": "Un kilo de tomates."
+      },
+      {
+       "fr": "un litre de",
+       "ar": "لتر من",
+       "ex": "Un litre de lait."
+      },
+      {
+       "fr": "le petit-déjeuner",
+       "ar": "الفطور",
+       "ex": "Le petit-déjeuner est important."
+      },
+      {
+       "fr": "une recette",
+       "ar": "وصفة",
+       "ex": "Voici la recette du koshari."
+      },
+      {
+       "fr": "délicieux",
+       "ar": "لذيذ",
+       "ex": "Ce gâteau est délicieux."
+      },
+      {
+       "fr": "une boisson",
+       "ar": "مشروب",
+       "ex": "Le thé est une boisson chaude."
+      }
+     ],
+     "grammar": [
+      {
+       "title_fr": "Les articles partitifs",
+       "title_ar": "أداة التبعيض",
+       "explanation_ar": "نستعملها مع ما لا يُعدّ: du (مذكر)، de la (مؤنث)، de l' (قبل حرف علة)، des (جمع). في النفي تتحول كلها إلى de / d' (Je ne mange pas de pain).",
+       "examples": [
+        "Je mange du pain.",
+        "Elle boit de la limonade.",
+        "Nous achetons de l'eau.",
+        "Il ne mange pas de viande."
+       ]
+      },
+      {
+       "title_fr": "L'expression de la quantité",
+       "title_ar": "التعبير عن الكمية",
+       "explanation_ar": "بعد تعبير الكمية نستعمل de دون أداة: un peu de, beaucoup de, assez de, trop de, un kilo de, une bouteille de, un litre de. النفي: ne … pas de.",
+       "examples": [
+        "Je bois un peu de lait.",
+        "Il mange beaucoup de fruits.",
+        "Achète un kilo de tomates.",
+        "Nous n'avons pas assez de sucre."
+       ]
+      }
+     ],
+     "documents": [
+      {
+       "title_fr": "Document 1 : Au marché",
+       "text_fr": "Chaque vendredi, maman va au marché. Elle achète un kilo de tomates, deux kilos de pommes de terre et un litre d'huile.\nElle prend aussi beaucoup de fruits : des oranges, des bananes et du raisin. Le vendeur est très gentil et il lui donne un peu de menthe gratuitement.\nÀ midi, la famille a faim et mange avec plaisir.",
+       "text_ar": "كل جمعة تذهب أمي إلى السوق. تشتري كيلو من الطماطم وكيلوين من البطاطس ولترًا من الزيت.\nوتأخذ كذلك كثيرًا من الفاكهة: برتقالًا وموزًا وعنبًا. البائع لطيف جدًا ويعطيها قليلًا من النعناع مجانًا.\nعند الظهر تكون الأسرة جائعة وتأكل بسرور.",
+       "questions": [
+        {
+         "type": "choice",
+         "q": "Quand maman va-t-elle au marché ?",
+         "options": [
+          "le vendredi",
+          "le dimanche",
+          "le mardi"
+         ],
+         "answer": "le vendredi",
+         "explain_ar": "« Chaque vendredi »."
+        },
+        {
+         "type": "text",
+         "q": "Combien de kilos de pommes de terre achète-t-elle ?",
+         "answer": [
+          "deux kilos",
+          "deux",
+          "2 kilos",
+          "2"
+         ],
+         "explain_ar": "« deux kilos de pommes de terre »."
+        },
+        {
+         "type": "choice",
+         "q": "Que lui donne le vendeur gratuitement ?",
+         "options": [
+          "un peu de menthe",
+          "un kilo d'oranges",
+          "un litre d'huile"
+         ],
+         "answer": "un peu de menthe",
+         "explain_ar": "الجملة الثانية من الفقرة الثانية."
+        },
+        {
+         "type": "choice",
+         "q": "Vrai ou faux : Maman n'achète pas de fruits.",
+         "options": [
+          "Vrai",
+          "Faux"
+         ],
+         "answer": "Faux",
+         "explain_ar": "النص: beaucoup de fruits."
+        },
+        {
+         "type": "choice",
+         "q": "« beaucoup de fruits » exprime :",
+         "options": [
+          "la quantité",
+          "le temps",
+          "le lieu"
+         ],
+         "answer": "la quantité",
+         "explain_ar": "beaucoup de = كمية."
+        }
+       ]
+      },
+      {
+       "title_fr": "Document 2 : Le petit-déjeuner d'Ahmed",
+       "text_fr": "Le matin, Ahmed prend du pain, du fromage et du foul. Il boit du thé avec un peu de sucre.\nSon frère Omar ne mange pas de fromage : il préfère de la confiture. Il boit du lait.\nLe dimanche, toute la famille mange ensemble et prend aussi des œufs.",
+       "text_ar": "في الصباح يتناول أحمد خبزًا وجبنًا وفولًا. ويشرب شايًا مع قليل من السكر.\nأخوه عمر لا يأكل الجبن: يفضّل المربى. ويشرب الحليب.\nيوم الأحد تأكل الأسرة كلها معًا وتتناول البيض أيضًا.",
+       "questions": [
+        {
+         "type": "text",
+         "q": "Qu'est-ce qu'Ahmed boit le matin ?",
+         "answer": [
+          "du thé",
+          "thé"
+         ],
+         "explain_ar": "« Il boit du thé »."
+        },
+        {
+         "type": "choice",
+         "q": "Pourquoi Omar ne mange-t-il pas de fromage ?",
+         "options": [
+          "Il préfère la confiture.",
+          "Il est malade.",
+          "Il n'a pas faim."
+         ],
+         "answer": "Il préfère la confiture.",
+         "explain_ar": "« il préfère de la confiture »."
+        },
+        {
+         "type": "choice",
+         "q": "Que boit Omar ?",
+         "options": [
+          "du thé",
+          "du lait",
+          "de l'eau"
+         ],
+         "answer": "du lait",
+         "explain_ar": "« Il boit du lait »."
+        },
+        {
+         "type": "choice",
+         "q": "Que mange la famille le dimanche en plus ?",
+         "options": [
+          "des œufs",
+          "du riz",
+          "des fruits"
+         ],
+         "answer": "des œufs",
+         "explain_ar": "« prend aussi des œufs »."
+        },
+        {
+         "type": "choice",
+         "q": "Pourquoi dit-on « ne mange pas de fromage » ?",
+         "options": [
+          "Après la négation, du devient de.",
+          "C'est une erreur.",
+          "On supprime le verbe."
+         ],
+         "answer": "Après la négation, du devient de.",
+         "explain_ar": "في النفي: du → de."
+        }
+       ]
+      }
+     ],
+     "exercises": [
+      {
+       "type": "text",
+       "q": "Complète : Je mange ___ pain. (du / de la)",
+       "answer": [
+        "du"
+       ],
+       "explain_ar": "pain مذكر → du."
+      },
+      {
+       "type": "text",
+       "q": "Complète : Elle boit ___ eau. (de l' / de la)",
+       "answer": [
+        "de l'"
+       ],
+       "explain_ar": "eau تبدأ بحرف علة → de l'."
+      },
+      {
+       "type": "text",
+       "q": "Négation : Il mange du riz. → Il ne mange pas ___ riz.",
+       "answer": [
+        "de"
+       ],
+       "explain_ar": "النفي: du → de."
+      },
+      {
+       "type": "choice",
+       "q": "Choisis : J'achète ___ lait. (كمية)",
+       "options": [
+        "un litre de",
+        "un litre du",
+        "un litre des"
+       ],
+       "answer": "un litre de",
+       "explain_ar": "بعد تعبير الكمية: de."
+      },
+      {
+       "type": "text",
+       "q": "Complète : Nous avons ___ sucre. (كثير من)",
+       "answer": [
+        "beaucoup de"
+       ],
+       "explain_ar": "beaucoup de + اسم."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "u3",
+   "title_fr": "Unité 3 : Le club des voyageurs",
+   "title_ar": "الوحدة 3: نادي المسافرين",
+   "lessons": [
+    {
+     "id": "l1",
+     "title_fr": "Un séjour inoubliable",
+     "title_ar": "إقامة لا تُنسى",
+     "vocab": [
+      {
+       "fr": "un touriste",
+       "ar": "سائح",
+       "ex": "Les touristes visitent les pyramides."
+      },
+      {
+       "fr": "un hôtel",
+       "ar": "فندق",
+       "ex": "Nous logeons dans un hôtel."
+      },
+      {
+       "fr": "une chambre",
+       "ar": "غرفة",
+       "ex": "La chambre donne sur le Nil."
+      },
+      {
+       "fr": "un guide",
+       "ar": "مرشد",
+       "ex": "Le guide explique l'histoire."
+      },
+      {
+       "fr": "une visite",
+       "ar": "زيارة",
+       "ex": "La visite dure deux heures."
+      },
+      {
+       "fr": "un monument",
+       "ar": "أثر / معلم",
+       "ex": "C'est un monument ancien."
+      },
+      {
+       "fr": "une carte",
+       "ar": "خريطة",
+       "ex": "Regarde la carte !"
+      },
+      {
+       "fr": "la plage",
+       "ar": "الشاطئ",
+       "ex": "Nous allons à la plage."
+      },
+      {
+       "fr": "visiter",
+       "ar": "يزور",
+       "ex": "Je visite le musée."
+      },
+      {
+       "fr": "arriver",
+       "ar": "يصل",
+       "ex": "Nous arrivons demain."
+      }
+     ],
+     "grammar": [
+      {
+       "title_fr": "Le passé composé avec être",
+       "title_ar": "الماضي المركّب مع être",
+       "explanation_ar": "أفعال الحركة والتحوّل (aller, venir, arriver, partir, entrer, sortir, monter, descendre, rester, tomber, naître, mourir) والأفعال المنعكسة تأخذ être، ويتفق اسم المفعول مع الفاعل: Elle est allée / Ils sont partis / Elles sont arrivées.",
+       "examples": [
+        "Elle est allée à Louxor.",
+        "Nous sommes arrivés samedi.",
+        "Ils sont partis tôt.",
+        "Elles sont restées à l'hôtel."
+       ]
+      },
+      {
+       "title_fr": "Les prépositions avec les villes et les pays",
+       "title_ar": "حروف الجر مع المدن والدول",
+       "explanation_ar": "à + مدينة (à Paris). en + دولة مؤنثة أو تبدأ بحرف علة (en France, en Égypte). au + دولة مذكرة (au Maroc). aux + دولة جمع (aux États-Unis).",
+       "examples": [
+        "J'habite à Alexandrie.",
+        "Elle va en France.",
+        "Nous voyageons au Maroc.",
+        "Ils vivent aux États-Unis."
+       ]
+      }
+     ],
+     "documents": [
+      {
+       "title_fr": "Document 1 : Une visite à Louxor",
+       "text_fr": "Samedi dernier, nous sommes allés à Louxor avec notre école. Nous sommes partis du Caire à six heures du matin.\nNous sommes arrivés à l'hôtel à midi et nous sommes restés une heure pour nous reposer.\nL'après-midi, le guide nous a montré le temple de Karnak. Les élèves sont rentrés très fatigués mais heureux.",
+       "text_ar": "السبت الماضي ذهبنا إلى الأقصر مع مدرستنا. غادرنا القاهرة في السادسة صباحًا.\nوصلنا إلى الفندق عند الظهر وبقينا ساعة لنرتاح.\nبعد الظهر أرانا المرشد معبد الكرنك. وعاد التلاميذ متعبين جدًا لكن سعداء.",
+       "questions": [
+        {
+         "type": "text",
+         "q": "Où les élèves sont-ils allés ?",
+         "answer": [
+          "à Louxor",
+          "Louxor"
+         ],
+         "explain_ar": "« nous sommes allés à Louxor »."
+        },
+        {
+         "type": "choice",
+         "q": "À quelle heure sont-ils partis du Caire ?",
+         "options": [
+          "à six heures",
+          "à midi",
+          "à huit heures"
+         ],
+         "answer": "à six heures",
+         "explain_ar": "« à six heures du matin »."
+        },
+        {
+         "type": "choice",
+         "q": "Que leur a montré le guide ?",
+         "options": [
+          "le temple de Karnak",
+          "la plage",
+          "un musée de peinture"
+         ],
+         "answer": "le temple de Karnak",
+         "explain_ar": "الجملة الأولى من الفقرة الثالثة."
+        },
+        {
+         "type": "choice",
+         "q": "Comment étaient les élèves au retour ?",
+         "options": [
+          "tristes",
+          "fatigués mais heureux",
+          "en colère"
+         ],
+         "answer": "fatigués mais heureux",
+         "explain_ar": "« très fatigués mais heureux »."
+        },
+        {
+         "type": "choice",
+         "q": "Pourquoi écrit-on « sommes arrivés » ?",
+         "options": [
+          "arriver se conjugue avec être",
+          "arriver se conjugue avec avoir",
+          "c'est le futur"
+         ],
+         "answer": "arriver se conjugue avec être",
+         "explain_ar": "arriver من أفعال الحركة."
+        }
+       ]
+      },
+      {
+       "title_fr": "Document 2 : Une lettre de Paris",
+       "text_fr": "Chère Sara,\nNous sommes arrivés à Paris hier soir. Nous avons laissé nos valises à l'hôtel, puis nous sommes sortis dans la rue.\nCe matin, ma sœur et moi, nous sommes montées à la tour Eiffel. La vue est magnifique !\nDemain, nous irons en Belgique en train. Je t'écrirai de là-bas. Grosses bises, Mariam",
+       "text_ar": "عزيزتي سارة،\nوصلنا إلى باريس مساء أمس. تركنا حقائبنا في الفندق ثم خرجنا إلى الشارع.\nهذا الصباح صعدنا أنا وأختي إلى برج إيفل. المنظر رائع!\nغدًا سنذهب إلى بلجيكا بالقطار. سأكتب لك من هناك. قبلاتي، مريم",
+       "questions": [
+        {
+         "type": "choice",
+         "q": "Quand Mariam est-elle arrivée à Paris ?",
+         "options": [
+          "hier soir",
+          "ce matin",
+          "demain"
+         ],
+         "answer": "hier soir",
+         "explain_ar": "« hier soir »."
+        },
+        {
+         "type": "text",
+         "q": "Où sont-elles montées ce matin ?",
+         "answer": [
+          "à la tour Eiffel",
+          "tour Eiffel",
+          "la tour Eiffel"
+         ],
+         "explain_ar": "« montées à la tour Eiffel »."
+        },
+        {
+         "type": "choice",
+         "q": "Comment vont-elles aller en Belgique ?",
+         "options": [
+          "en avion",
+          "en train",
+          "en bateau"
+         ],
+         "answer": "en train",
+         "explain_ar": "« en train »."
+        },
+        {
+         "type": "choice",
+         "q": "Pourquoi écrit-on « montées » ?",
+         "options": [
+          "le sujet est féminin pluriel",
+          "le sujet est masculin",
+          "c'est un infinitif"
+         ],
+         "answer": "le sujet est féminin pluriel",
+         "explain_ar": "ma sœur et moi = بنات → montées."
+        },
+        {
+         "type": "choice",
+         "q": "Qui est l'auteur de la lettre ?",
+         "options": [
+          "Sara",
+          "Mariam",
+          "le guide"
+         ],
+         "answer": "Mariam",
+         "explain_ar": "التوقيع في آخر الرسالة."
+        }
+       ]
+      }
+     ],
+     "exercises": [
+      {
+       "type": "text",
+       "q": "Passé composé : Elle (aller) à Louxor. → Elle est ___ à Louxor.",
+       "answer": [
+        "allée"
+       ],
+       "explain_ar": "الفاعل مؤنث → allée."
+      },
+      {
+       "type": "text",
+       "q": "Passé composé : Nous (partir) hier. → Nous sommes ___",
+       "answer": [
+        "partis"
+       ],
+       "explain_ar": "nous (مذكر/مختلط) → partis."
+      },
+      {
+       "type": "text",
+       "q": "Passé composé : Ils (arriver) tôt. → Ils sont ___",
+       "answer": [
+        "arrivés"
+       ],
+       "explain_ar": "ils → arrivés."
+      },
+      {
+       "type": "choice",
+       "q": "Choisis : Elle va ___ Paris.",
+       "options": [
+        "à",
+        "en",
+        "au"
+       ],
+       "answer": "à",
+       "explain_ar": "مدينة → à."
+      },
+      {
+       "type": "choice",
+       "q": "Choisis : Il habite ___ Égypte.",
+       "options": [
+        "en",
+        "à",
+        "au"
+       ],
+       "answer": "en",
+       "explain_ar": "Égypte مؤنثة وتبدأ بحرف علة → en."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "u4",
+   "title_fr": "Unité 4 : Le club des artistes",
+   "title_ar": "الوحدة 4: نادي الفنانين",
+   "lessons": [
+    {
+     "id": "l1",
+     "title_fr": "Des artistes parmi nous",
+     "title_ar": "فنانون بيننا",
+     "vocab": [
+      {
+       "fr": "un artiste",
+       "ar": "فنان",
+       "ex": "Cet artiste est célèbre."
+      },
+      {
+       "fr": "un peintre",
+       "ar": "رسّام",
+       "ex": "Le peintre expose ses tableaux."
+      },
+      {
+       "fr": "un chanteur / une chanteuse",
+       "ar": "مغنٍّ / مغنية",
+       "ex": "Cette chanteuse a une belle voix."
+      },
+      {
+       "fr": "un musée",
+       "ar": "متحف",
+       "ex": "Nous visitons un musée."
+      },
+      {
+       "fr": "un tableau",
+       "ar": "لوحة",
+       "ex": "Ce tableau est magnifique."
+      },
+      {
+       "fr": "un spectacle",
+       "ar": "عرض",
+       "ex": "Le spectacle commence à huit heures."
+      },
+      {
+       "fr": "dessiner",
+       "ar": "يرسم",
+       "ex": "Il dessine des portraits."
+      },
+      {
+       "fr": "un concert",
+       "ar": "حفل موسيقي",
+       "ex": "Le concert était formidable."
+      },
+      {
+       "fr": "un théâtre",
+       "ar": "مسرح",
+       "ex": "Elle joue au théâtre."
+      },
+      {
+       "fr": "talentueux",
+       "ar": "موهوب",
+       "ex": "C'est un enfant talentueux."
+      }
+     ],
+     "grammar": [
+      {
+       "title_fr": "Les adjectifs possessifs et démonstratifs",
+       "title_ar": "صفات الملكية والإشارة",
+       "explanation_ar": "الملكية: mon/ma/mes, ton/ta/tes, son/sa/ses, notre/nos, votre/vos, leur/leurs. الإشارة: ce (مذكر)، cet (مذكر + حرف علة)، cette (مؤنث)، ces (جمع). نستعمل mon قبل مؤنث يبدأ بحرف علة (mon amie).",
+       "examples": [
+        "Mon frère dessine bien.",
+        "Ce tableau est beau.",
+        "Cet artiste est célèbre.",
+        "Cette chanteuse a perdu sa voix."
+       ]
+      },
+      {
+       "title_fr": "L'imparfait",
+       "title_ar": "الماضي الناقص",
+       "explanation_ar": "يُصاغ من جذر nous في المضارع + النهايات: -ais, -ais, -ait, -ions, -iez, -aient (nous chantons → je chantais). شاذ: être → j'étais. نستعمله للعادة والوصف في الماضي: Quand j'étais petit, je dessinais.",
+       "examples": [
+        "Quand j'étais petit, je dessinais.",
+        "Il chantait tous les soirs.",
+        "Nous allions au théâtre.",
+        "Elles jouaient du piano."
+       ]
+      }
+     ],
+     "documents": [
+      {
+       "title_fr": "Document 1 : Un jeune peintre",
+       "text_fr": "Quand Adam était petit, il dessinait sur tous les murs de la maison. Ses parents n'étaient pas contents au début.\nPuis sa mère lui a acheté du papier et des crayons. Adam dessinait chaque jour pendant des heures.\nAujourd'hui, il a quinze ans et ses tableaux sont exposés au centre culturel de sa ville. Il rêve de devenir un grand peintre.",
+       "text_ar": "عندما كان آدم صغيرًا كان يرسم على جميع جدران البيت. لم يكن أبواه راضيين في البداية.\nثم اشترت له أمه ورقًا وأقلامًا. كان آدم يرسم كل يوم لساعات.\nاليوم عمره خمس عشرة سنة وتُعرض لوحاته في المركز الثقافي بمدينته. يحلم بأن يصبح رسّامًا كبيرًا.",
+       "questions": [
+        {
+         "type": "choice",
+         "q": "Où Adam dessinait-il quand il était petit ?",
+         "options": [
+          "sur les murs",
+          "sur des cahiers",
+          "sur le sable"
+         ],
+         "answer": "sur les murs",
+         "explain_ar": "« sur tous les murs de la maison »."
+        },
+        {
+         "type": "choice",
+         "q": "Que lui a acheté sa mère ?",
+         "options": [
+          "des crayons et du papier",
+          "un piano",
+          "un ordinateur"
+         ],
+         "answer": "des crayons et du papier",
+         "explain_ar": "الفقرة الثانية."
+        },
+        {
+         "type": "text",
+         "q": "Quel âge a Adam aujourd'hui ?",
+         "answer": [
+          "quinze ans",
+          "15 ans",
+          "quinze"
+         ],
+         "explain_ar": "« il a quinze ans »."
+        },
+        {
+         "type": "choice",
+         "q": "« dessinait » est à quel temps ?",
+         "options": [
+          "l'imparfait",
+          "le futur",
+          "le présent"
+         ],
+         "answer": "l'imparfait",
+         "explain_ar": "النهاية -ait تدل على الماضي الناقص."
+        },
+        {
+         "type": "choice",
+         "q": "Où ses tableaux sont-ils exposés ?",
+         "options": [
+          "au centre culturel",
+          "à l'école",
+          "au stade"
+         ],
+         "answer": "au centre culturel",
+         "explain_ar": "الجملة الأخيرة."
+        }
+       ]
+      },
+      {
+       "title_fr": "Document 2 : Une visite au musée",
+       "text_fr": "Ce samedi, ma classe a visité un grand musée d'art. Notre guide nous a expliqué l'histoire de ces tableaux et de ces statues.\nDans cette salle, il y avait des statues de pharaons. Dans l'autre, des peintres célèbres exposaient leurs œuvres.\nJ'ai beaucoup aimé cette sortie, parce que mes camarades et moi, nous avons appris beaucoup de choses.",
+       "text_ar": "هذا السبت زار فصلي متحفًا فنيًا كبيرًا. شرح لنا مرشدنا تاريخ هذه اللوحات وهذه التماثيل.\nفي هذه القاعة كانت هناك تماثيل لفراعنة. وفي القاعة الأخرى كان رسامون مشهورون يعرضون أعمالهم.\nأعجبتني هذه الرحلة كثيرًا لأنني وزملائي تعلمنا أشياء كثيرة.",
+       "questions": [
+        {
+         "type": "choice",
+         "q": "Qui a visité le musée ?",
+         "options": [
+          "la classe du narrateur",
+          "les parents",
+          "les professeurs seulement"
+         ],
+         "answer": "la classe du narrateur",
+         "explain_ar": "« ma classe a visité »."
+        },
+        {
+         "type": "text",
+         "q": "Qu'est-ce qu'il y avait dans la première salle ?",
+         "answer": [
+          "des statues de pharaons",
+          "statues de pharaons",
+          "des statues"
+         ],
+         "explain_ar": "« des statues de pharaons »."
+        },
+        {
+         "type": "choice",
+         "q": "« ces tableaux » est un adjectif :",
+         "options": [
+          "démonstratif",
+          "possessif",
+          "interrogatif"
+         ],
+         "answer": "démonstratif",
+         "explain_ar": "ces = صفة إشارة."
+        },
+        {
+         "type": "choice",
+         "q": "Pourquoi le narrateur a-t-il aimé la sortie ?",
+         "options": [
+          "Ils ont appris beaucoup de choses.",
+          "Il n'y avait pas de guide.",
+          "Le musée était fermé."
+         ],
+         "answer": "Ils ont appris beaucoup de choses.",
+         "explain_ar": "الجملة الأخيرة."
+        },
+        {
+         "type": "choice",
+         "q": "« il y avait » est :",
+         "options": [
+          "à l'imparfait",
+          "au futur",
+          "à l'impératif"
+         ],
+         "answer": "à l'imparfait",
+         "explain_ar": "avait = imparfait de avoir."
+        }
+       ]
+      }
+     ],
+     "exercises": [
+      {
+       "type": "text",
+       "q": "Complète : (nous) ___ professeur est gentil. (notre / nos)",
+       "answer": [
+        "Notre"
+       ],
+       "explain_ar": "professeur مفرد → notre."
+      },
+      {
+       "type": "text",
+       "q": "Complète : ___ artiste est célèbre. (ce / cet / cette)",
+       "answer": [
+        "Cet"
+       ],
+       "explain_ar": "artiste يبدأ بحرف علة ومذكر → cet."
+      },
+      {
+       "type": "text",
+       "q": "Imparfait : Quand j'étais petit, je (chanter) souvent. → je ___",
+       "answer": [
+        "chantais"
+       ],
+       "explain_ar": "je + -ais."
+      },
+      {
+       "type": "text",
+       "q": "Imparfait : Nous (aller) au théâtre. → Nous ___ au théâtre.",
+       "answer": [
+        "allions"
+       ],
+       "explain_ar": "nous + -ions."
+      },
+      {
+       "type": "choice",
+       "q": "Choisis : Elle a perdu ___ voix.",
+       "options": [
+        "son",
+        "sa",
+        "ses"
+       ],
+       "answer": "sa",
+       "explain_ar": "voix مؤنث مفرد → sa."
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "exams": [
+  {
+   "id": "e1",
+   "title_fr": "Examen 1",
+   "title_ar": "امتحان 1 — Le sport au lycée",
+   "duration_min": 35,
+   "passage_title": "Le sport au lycée",
+   "passage_fr": "Au lycée Ibn Sina, le sport est très important. Chaque semaine, les élèves ont deux séances d'éducation physique. Hier, Ahmed a joué au volley-ball avec ses amis et son équipe a gagné.\nLe professeur dit que le sport est bon pour la santé. Ahmed s'entraîne aussi à la maison et il fait de la natation le week-end.",
+   "questions": [
+    {
+     "type": "choice",
+     "q": "Combien de séances de sport les élèves ont-ils par semaine ?",
+     "options": [
+      "une",
+      "deux",
+      "trois"
+     ],
+     "answer": "deux",
+     "explain_ar": "« deux séances ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "choice",
+     "q": "Qu'est-ce qu'Ahmed a fait hier ?",
+     "options": [
+      "Il a joué au volley-ball.",
+      "Il a fait de la natation.",
+      "Il a perdu le match."
+     ],
+     "answer": "Il a joué au volley-ball.",
+     "explain_ar": "النص: « Hier, Ahmed a joué au volley-ball ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "choice",
+     "q": "L'équipe d'Ahmed a …",
+     "options": [
+      "gagné",
+      "perdu",
+      "abandonné"
+     ],
+     "answer": "gagné",
+     "explain_ar": "« son équipe a gagné ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "text",
+     "q": "Que fait Ahmed le week-end ?",
+     "answer": [
+      "de la natation",
+      "il fait de la natation"
+     ],
+     "explain_ar": "« il fait de la natation le week-end ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "text",
+     "q": "Complète : Je ___ du judo. (faire)",
+     "answer": [
+      "fais"
+     ],
+     "explain_ar": "je → fais.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "text",
+     "q": "Passé composé : Elle (perdre) → Elle a ___",
+     "answer": [
+      "perdu"
+     ],
+     "explain_ar": "perdre → perdu.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "choice",
+     "q": "« un entraîneur » signifie :",
+     "options": [
+      "مدرّب",
+      "لاعب",
+      "حكم"
+     ],
+     "answer": "مدرّب",
+     "explain_ar": "entraîneur = مدرّب.",
+     "section": "Vocabulaire"
+    },
+    {
+     "type": "open",
+     "q": "Écris 3 phrases sur ton sport préféré.",
+     "answer": "Mon sport préféré est le football. Je joue au football chaque samedi. J'ai gagné un match hier.",
+     "explain_ar": "استخدم jouer au / faire du + passé composé.",
+     "section": "Expression écrite"
+    }
+   ]
+  },
+  {
+   "id": "e2",
+   "title_fr": "Examen 2",
+   "title_ar": "امتحان 2 — Au restaurant",
+   "duration_min": 40,
+   "passage_title": "Au restaurant",
+   "passage_fr": "Samedi soir, la famille de Youssef est allée au restaurant pour fêter l'anniversaire de son père. Ils ont commandé du poulet, du riz et de la salade. Youssef a pris un jus d'orange et sa sœur a bu de l'eau.\nLe serveur était très aimable. À la fin du repas, il a apporté un gâteau avec des bougies. Tout le monde a chanté et le père était très content.",
+   "questions": [
+    {
+     "type": "choice",
+     "q": "Pourquoi la famille est-elle allée au restaurant ?",
+     "options": [
+      "pour fêter l'anniversaire du père",
+      "pour acheter des légumes",
+      "pour voir un match"
+     ],
+     "answer": "pour fêter l'anniversaire du père",
+     "explain_ar": "الجملة الأولى.",
+     "section": "Compréhension"
+    },
+    {
+     "type": "text",
+     "q": "Qu'est-ce que Youssef a pris comme boisson ?",
+     "answer": [
+      "un jus d'orange",
+      "jus d'orange"
+     ],
+     "explain_ar": "« Youssef a pris un jus d'orange ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "choice",
+     "q": "Comment était le serveur ?",
+     "options": [
+      "aimable",
+      "impoli",
+      "fatigué"
+     ],
+     "answer": "aimable",
+     "explain_ar": "« très aimable ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "choice",
+     "q": "Vrai ou faux : À la fin du repas, le serveur a apporté un gâteau.",
+     "options": [
+      "Vrai",
+      "Faux"
+     ],
+     "answer": "Vrai",
+     "explain_ar": "الجملة الثانية من الفقرة الثانية.",
+     "section": "Compréhension"
+    },
+    {
+     "type": "text",
+     "q": "Complète : Ils ont commandé ___ poulet. (du / de la)",
+     "answer": [
+      "du"
+     ],
+     "explain_ar": "poulet مذكر → du.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "text",
+     "q": "Passé composé : La famille (aller) au restaurant. → La famille est ___",
+     "answer": [
+      "allée"
+     ],
+     "explain_ar": "famille مؤنث → allée.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "text",
+     "q": "Négation : Il boit du lait. → Il ne boit pas ___ lait.",
+     "answer": [
+      "de"
+     ],
+     "explain_ar": "النفي: du → de.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "choice",
+     "q": "« un serveur » travaille :",
+     "options": [
+      "au restaurant",
+      "à l'école",
+      "à l'hôpital"
+     ],
+     "answer": "au restaurant",
+     "explain_ar": "serveur = نادل.",
+     "section": "Vocabulaire"
+    },
+    {
+     "type": "open",
+     "q": "Décris ton repas préféré en 4 phrases (partitifs et quantités).",
+     "answer": "Mon repas préféré est le koshari. Je mange du riz, des lentilles et des pâtes. J'ajoute un peu de sauce tomate. Je bois de l'eau fraîche.",
+     "explain_ar": "استخدم du / de la / des و un peu de / beaucoup de.",
+     "section": "Expression écrite"
+    }
+   ]
+  },
+  {
+   "id": "e3",
+   "title_fr": "Examen 3",
+   "title_ar": "امتحان 3 — Un voyage à Alexandrie",
+   "duration_min": 40,
+   "passage_title": "Un voyage à Alexandrie",
+   "passage_fr": "L'été dernier, Hana et sa famille sont partis en voiture à Alexandrie. Ils sont arrivés l'après-midi et ils ont loué un appartement près de la plage.\nLe lendemain, ils sont allés à la Bibliothèque d'Alexandrie, puis ils sont montés dans le fort de Qaitbay. Hana a pris beaucoup de photos.\nLe soir, tout le monde est resté sur la corniche pour manger des glaces. Demain, Hana racontera son voyage à ses amis.",
+   "questions": [
+    {
+     "type": "choice",
+     "q": "Comment la famille est-elle partie à Alexandrie ?",
+     "options": [
+      "en train",
+      "en voiture",
+      "en avion"
+     ],
+     "answer": "en voiture",
+     "explain_ar": "« en voiture ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "text",
+     "q": "Où ont-ils loué un appartement ?",
+     "answer": [
+      "près de la plage",
+      "pres de la plage",
+      "près de la mer"
+     ],
+     "explain_ar": "« près de la plage ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "choice",
+     "q": "Qu'ont-ils visité le lendemain ?",
+     "options": [
+      "la Bibliothèque et le fort de Qaitbay",
+      "un musée de peinture",
+      "un stade"
+     ],
+     "answer": "la Bibliothèque et le fort de Qaitbay",
+     "explain_ar": "الفقرة الثانية.",
+     "section": "Compréhension"
+    },
+    {
+     "type": "choice",
+     "q": "Que mangent-ils le soir sur la corniche ?",
+     "options": [
+      "des glaces",
+      "du poisson",
+      "des pizzas"
+     ],
+     "answer": "des glaces",
+     "explain_ar": "« manger des glaces ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "text",
+     "q": "Passé composé : Ils (arriver) l'après-midi. → Ils sont ___",
+     "answer": [
+      "arrivés"
+     ],
+     "explain_ar": "ils → arrivés.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "text",
+     "q": "Complète : Elle habite ___ Alexandrie. (à / en / au)",
+     "answer": [
+      "à"
+     ],
+     "explain_ar": "مدينة → à.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "text",
+     "q": "Complète : Ils voyagent ___ France. (à / en / au)",
+     "answer": [
+      "en"
+     ],
+     "explain_ar": "France مؤنثة → en.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "choice",
+     "q": "« louer » signifie :",
+     "options": [
+      "يستأجر",
+      "يشتري",
+      "يبيع"
+     ],
+     "answer": "يستأجر",
+     "explain_ar": "louer = يستأجر.",
+     "section": "Vocabulaire"
+    },
+    {
+     "type": "open",
+     "q": "Raconte un voyage que tu as fait (4 phrases, passé composé).",
+     "answer": "L'année dernière, je suis allé au Caire avec ma famille. Nous sommes partis en train. Nous avons visité les pyramides. Nous sommes rentrés très heureux.",
+     "explain_ar": "استخدم être مع aller / partir / rentrer.",
+     "section": "Expression écrite"
+    }
+   ]
+  },
+  {
+   "id": "e4",
+   "title_fr": "Examen 4",
+   "title_ar": "امتحان 4 — Mon artiste préféré",
+   "duration_min": 40,
+   "passage_title": "Mon artiste préféré",
+   "passage_fr": "Mon artiste préféré est un chanteur égyptien. Quand j'étais petit, mon père écoutait ses chansons tous les matins. Cette musique me plaisait beaucoup.\nSamedi dernier, j'ai assisté à son concert avec mes amis. Cette soirée était inoubliable : la salle était pleine et nous chantions tous ensemble.\nPlus tard, j'aimerais apprendre la guitare pour jouer ses chansons à mes enfants.",
+   "questions": [
+    {
+     "type": "choice",
+     "q": "Quand le père écoutait-il les chansons ?",
+     "options": [
+      "tous les matins",
+      "tous les soirs",
+      "le week-end"
+     ],
+     "answer": "tous les matins",
+     "explain_ar": "« tous les matins ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "text",
+     "q": "Avec qui le narrateur a-t-il assisté au concert ?",
+     "answer": [
+      "avec ses amis",
+      "avec mes amis",
+      "ses amis",
+      "mes amis"
+     ],
+     "explain_ar": "« avec mes amis ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "choice",
+     "q": "Comment était la salle ?",
+     "options": [
+      "vide",
+      "pleine",
+      "petite"
+     ],
+     "answer": "pleine",
+     "explain_ar": "« la salle était pleine ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "choice",
+     "q": "Quel instrument veut-il apprendre ?",
+     "options": [
+      "la guitare",
+      "le piano",
+      "la flûte"
+     ],
+     "answer": "la guitare",
+     "explain_ar": "الجملة الأخيرة.",
+     "section": "Compréhension"
+    },
+    {
+     "type": "text",
+     "q": "Imparfait : Mon père (écouter) ses chansons. → Mon père ___ ses chansons.",
+     "answer": [
+      "écoutait",
+      "ecoutait"
+     ],
+     "explain_ar": "il + -ait.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "text",
+     "q": "Complète : ___ soirée était inoubliable. (ce / cet / cette)",
+     "answer": [
+      "Cette"
+     ],
+     "explain_ar": "soirée مؤنث → cette.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "text",
+     "q": "Complète : Il joue avec ___ amis. (son / sa / ses)",
+     "answer": [
+      "ses"
+     ],
+     "explain_ar": "amis جمع → ses.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "choice",
+     "q": "« un concert » est un événement :",
+     "options": [
+      "musical",
+      "sportif",
+      "scolaire"
+     ],
+     "answer": "musical",
+     "explain_ar": "concert = حفل موسيقي.",
+     "section": "Vocabulaire"
+    },
+    {
+     "type": "open",
+     "q": "Parle de ton artiste préféré (4 phrases : qui, ce qu'il fait, pourquoi tu l'aimes).",
+     "answer": "Mon artiste préféré est un peintre. Il dessine de beaux paysages. J'aime ses tableaux parce qu'ils sont colorés. Quand j'étais petit, je dessinais comme lui.",
+     "explain_ar": "استخدم adjectifs possessifs و imparfait.",
+     "section": "Expression écrite"
+    }
+   ]
+  },
+  {
+   "id": "e5",
+   "title_fr": "Examen 5",
+   "title_ar": "امتحان 5 — شامل: La vie d'un lycéen",
+   "duration_min": 45,
+   "passage_title": "La vie d'un lycéen",
+   "passage_fr": "Salma est lycéenne. Chaque matin, elle prend du lait et du pain, puis elle part à l'école. Le mercredi, elle fait de la natation et son frère joue au football.\nHier, après les cours, elle est allée à la bibliothèque et elle a lu un roman. Quand elle était petite, elle détestait lire, mais maintenant ses livres sont ses meilleurs amis.\nL'été prochain, Salma partira en France avec sa classe.",
+   "questions": [
+    {
+     "type": "choice",
+     "q": "Que prend Salma le matin ?",
+     "options": [
+      "du lait et du pain",
+      "du poisson",
+      "du riz"
+     ],
+     "answer": "du lait et du pain",
+     "explain_ar": "« du lait et du pain ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "text",
+     "q": "Que fait Salma le mercredi ?",
+     "answer": [
+      "de la natation",
+      "elle fait de la natation",
+      "la natation"
+     ],
+     "explain_ar": "« elle fait de la natation ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "choice",
+     "q": "Où est-elle allée hier après les cours ?",
+     "options": [
+      "à la bibliothèque",
+      "à la plage",
+      "au marché"
+     ],
+     "answer": "à la bibliothèque",
+     "explain_ar": "« est allée à la bibliothèque ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "choice",
+     "q": "Vrai ou faux : Quand elle était petite, Salma aimait lire.",
+     "options": [
+      "Vrai",
+      "Faux"
+     ],
+     "answer": "Faux",
+     "explain_ar": "« elle détestait lire ».",
+     "section": "Compréhension"
+    },
+    {
+     "type": "text",
+     "q": "Complète : Son frère ___ au football. (jouer, présent)",
+     "answer": [
+      "joue"
+     ],
+     "explain_ar": "il → joue (jouer au football).",
+     "section": "Grammaire"
+    },
+    {
+     "type": "text",
+     "q": "Passé composé : Hier, elle (aller) à la bibliothèque. → elle est ___",
+     "answer": [
+      "allée"
+     ],
+     "explain_ar": "الفاعل مؤنث → allée.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "text",
+     "q": "Imparfait : Quand j'étais petit, je (détester) lire. → je ___ lire",
+     "answer": [
+      "détestais",
+      "detestais"
+     ],
+     "explain_ar": "je + -ais.",
+     "section": "Grammaire"
+    },
+    {
+     "type": "choice",
+     "q": "« détester » est le contraire de :",
+     "options": [
+      "aimer",
+      "lire",
+      "partir"
+     ],
+     "answer": "aimer",
+     "explain_ar": "détester ≠ aimer.",
+     "section": "Vocabulaire"
+    },
+    {
+     "type": "open",
+     "q": "Décris ta journée d'hier en 5 phrases (passé composé et imparfait).",
+     "answer": "Hier, je me suis réveillé à sept heures. J'ai pris du lait et du pain. Je suis allé à l'école. Après les cours, j'ai joué au football. Le soir, il faisait beau et je suis sorti avec mes amis.",
+     "explain_ar": "اجمع بين الأزمنة والأدوات التي درستها.",
+     "section": "Expression écrite"
+    }
+   ]
+  }
+ ]
+}
