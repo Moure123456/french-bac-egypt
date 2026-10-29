@@ -57,7 +57,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      margin: 0 0 10px;
+      margin: 0 0 6px;
       padding: 8px 12px;
       min-height: 46px;
       overflow: hidden;
@@ -68,6 +68,22 @@
       font-size: .8rem;
       line-height: 1.6;
       font-weight: 700;
+    }
+    /* على الجوال: يوضع الشريط داخل الفراغ العلوي للقائمة (فوق كل العناصر) دون أن يتداخل مع أي عنصر آخر */
+    @media (max-width: 800px) {
+      .side-credit {
+        position: absolute;
+        top: 8px;
+        right: 12px;
+        left: 12px;
+        z-index: 2;
+        margin: 0;
+        height: 54px;
+        min-height: 0;
+        padding: 4px 10px;
+        font-size: .76rem;
+        line-height: 1.45;
+      }
     }
   </style>
 </head>
@@ -328,39 +344,6 @@
         }
       });
     }
-  </script>
-  <!-- ضبط شريط الحقوق داخل الفراغ العلوي للقائمة الجانبية (دون تحريك أي زر) -->
-  <script>
-    (function () {
-      function fitCredit() {
-        var nav = document.querySelector('.sidebar');
-        var c = document.getElementById('side-credit');
-        if (!nav || !c) return;
-        c.style.marginTop = '';
-        c.style.marginBottom = '';
-        c.style.height = '';
-        c.style.minHeight = '';
-        c.style.padding = '';
-        c.style.fontSize = '';
-        c.style.lineHeight = '';
-        var pt = parseFloat(window.getComputedStyle(nav).paddingTop) || 0;
-        if (pt >= 40) {
-          c.style.marginTop = (-pt + 6) + 'px';
-          c.style.height = (pt - 12) + 'px';
-          c.style.marginBottom = '6px';
-          c.style.minHeight = '0';
-          c.style.padding = '2px 10px';
-          c.style.fontSize = '.76rem';
-          c.style.lineHeight = '1.45';
-        }
-      }
-      fitCredit();
-      window.addEventListener('load', fitCredit);
-      window.addEventListener('resize', fitCredit);
-      document.addEventListener('click', function (e) {
-        if (e.target.closest && e.target.closest('#menu-btn')) setTimeout(fitCredit, 60);
-      });
-    })();
   </script>
 </body>
 </html>
