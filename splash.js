@@ -255,6 +255,6 @@
       var p = PR.filter(function (x) { return x.id === c.dataset.id; })[0]; gal.classList.remove('on'); ac(); show(p);
     });
     document.addEventListener('visibilitychange', function () { last = performance.now(); });
-    window.__bqSplash = { elapsed: function () { return elapsed; }, prizes: PR.length };
+    window.__bqSplash = { elapsed: function () { return elapsed; }, prizes: PR.length, boost: function (ms) { elapsed += Math.max(0, +ms || 0); } };
   }
 })();
