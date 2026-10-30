@@ -1,1 +1,558 @@
-
+{
+ "meta": {
+  "version": 1,
+  "note": "قاموس الكلمات المنطوقة: [فرنسي، عربي، جملة، ترجمة الجملة]"
+ },
+ "categories": [
+  {
+   "id": "greet",
+   "ic": "👋",
+   "ar": "التحيات والتعارف",
+   "words": [
+    [
+     "Bonjour",
+     "صباح الخير / مرحبًا",
+     "Bonjour, madame !",
+     "صباح الخير يا سيدتي!"
+    ],
+    [
+     "Bonsoir",
+     "مساء الخير",
+     "Bonsoir, tout le monde !",
+     "مساء الخير للجميع!"
+    ],
+    [
+     "Salut",
+     "أهلًا (بين الأصدقاء)",
+     "Salut, Karim !",
+     "أهلًا يا كريم!"
+    ],
+    [
+     "Merci",
+     "شكرًا",
+     "Merci beaucoup !",
+     "شكرًا جزيلًا!"
+    ],
+    [
+     "S'il vous plaît",
+     "من فضلك",
+     "Un café, s'il vous plaît.",
+     "قهوة من فضلك."
+    ],
+    [
+     "Au revoir",
+     "إلى اللقاء",
+     "Au revoir, à demain !",
+     "إلى اللقاء، إلى الغد!"
+    ],
+    [
+     "Bienvenue",
+     "أهلًا وسهلًا",
+     "Bienvenue en Égypte !",
+     "أهلًا بك في مصر!"
+    ],
+    [
+     "Excusez-moi",
+     "عذرًا",
+     "Excusez-moi, où est la gare ?",
+     "عذرًا، أين المحطة؟"
+    ]
+   ]
+  },
+  {
+   "id": "family",
+   "ic": "👨‍👩‍👧",
+   "ar": "الأسرة",
+   "words": [
+    [
+     "le père",
+     "الأب",
+     "Mon père travaille.",
+     "أبي يعمل."
+    ],
+    [
+     "la mère",
+     "الأم",
+     "Ma mère cuisine bien.",
+     "أمي تطبخ جيدًا."
+    ],
+    [
+     "le frère",
+     "الأخ",
+     "Mon frère a douze ans.",
+     "عمر أخي اثنا عشر عامًا."
+    ],
+    [
+     "la sœur",
+     "الأخت",
+     "Ma sœur lit un livre.",
+     "أختي تقرأ كتابًا."
+    ],
+    [
+     "le grand-père",
+     "الجد",
+     "Mon grand-père raconte des histoires.",
+     "جدي يحكي قصصًا."
+    ],
+    [
+     "la grand-mère",
+     "الجدة",
+     "Ma grand-mère habite à Tanta.",
+     "جدتي تسكن في طنطا."
+    ],
+    [
+     "l'oncle",
+     "العم / الخال",
+     "Mon oncle est médecin.",
+     "عمي طبيب."
+    ],
+    [
+     "la tante",
+     "العمة / الخالة",
+     "Ma tante vient dimanche.",
+     "خالتي تأتي يوم الأحد."
+    ]
+   ]
+  },
+  {
+   "id": "food",
+   "ic": "🍽️",
+   "ar": "الطعام والشراب",
+   "words": [
+    [
+     "le pain",
+     "الخبز",
+     "Je mange du pain.",
+     "أنا آكل خبزًا."
+    ],
+    [
+     "le lait",
+     "الحليب",
+     "Il boit du lait.",
+     "هو يشرب الحليب."
+    ],
+    [
+     "l'eau",
+     "الماء",
+     "Je bois de l'eau.",
+     "أنا أشرب ماءً."
+    ],
+    [
+     "la pomme",
+     "التفاحة",
+     "Elle mange une pomme.",
+     "هي تأكل تفاحة."
+    ],
+    [
+     "le fromage",
+     "الجبن",
+     "Le fromage est délicieux.",
+     "الجبن لذيذ."
+    ],
+    [
+     "le riz",
+     "الأرز",
+     "Nous mangeons du riz.",
+     "نحن نأكل الأرز."
+    ],
+    [
+     "le poulet",
+     "الدجاج",
+     "Le poulet est cuit.",
+     "الدجاج مطبوخ."
+    ],
+    [
+     "le gâteau",
+     "الكعكة",
+     "Le gâteau est pour toi.",
+     "الكعكة من أجلك."
+    ]
+   ]
+  },
+  {
+   "id": "school",
+   "ic": "🏫",
+   "ar": "المدرسة",
+   "words": [
+    [
+     "le cahier",
+     "الكراسة",
+     "J'écris dans mon cahier.",
+     "أكتب في كراستي."
+    ],
+    [
+     "le stylo",
+     "القلم",
+     "J'ai un stylo bleu.",
+     "لدي قلم أزرق."
+    ],
+    [
+     "le livre",
+     "الكتاب",
+     "Ce livre est intéressant.",
+     "هذا الكتاب مشوّق."
+    ],
+    [
+     "la classe",
+     "الفصل",
+     "Ma classe est grande.",
+     "فصلي كبير."
+    ],
+    [
+     "le professeur",
+     "المدرّس",
+     "Le professeur explique la leçon.",
+     "المدرّس يشرح الدرس."
+    ],
+    [
+     "l'élève",
+     "التلميذ",
+     "L'élève écoute bien.",
+     "التلميذ يستمع جيدًا."
+    ],
+    [
+     "le tableau",
+     "السبورة",
+     "Le tableau est noir.",
+     "السبورة سوداء."
+    ],
+    [
+     "l'examen",
+     "الامتحان",
+     "L'examen commence demain.",
+     "الامتحان يبدأ غدًا."
+    ]
+   ]
+  },
+  {
+   "id": "colors",
+   "ic": "🎨",
+   "ar": "الألوان",
+   "words": [
+    [
+     "rouge",
+     "أحمر",
+     "La pomme est rouge.",
+     "التفاحة حمراء."
+    ],
+    [
+     "bleu",
+     "أزرق",
+     "Le ciel est bleu.",
+     "السماء زرقاء."
+    ],
+    [
+     "vert",
+     "أخضر",
+     "L'herbe est verte.",
+     "العشب أخضر."
+    ],
+    [
+     "jaune",
+     "أصفر",
+     "Le soleil est jaune.",
+     "الشمس صفراء."
+    ],
+    [
+     "noir",
+     "أسود",
+     "Le chat est noir.",
+     "القط أسود."
+    ],
+    [
+     "blanc",
+     "أبيض",
+     "La neige est blanche.",
+     "الثلج أبيض."
+    ],
+    [
+     "orange",
+     "برتقالي",
+     "Elle porte une robe orange.",
+     "هي ترتدي فستانًا برتقاليًا."
+    ],
+    [
+     "gris",
+     "رمادي",
+     "Le nuage est gris.",
+     "السحابة رمادية."
+    ]
+   ]
+  },
+  {
+   "id": "time",
+   "ic": "⏰",
+   "ar": "الزمن",
+   "words": [
+    [
+     "aujourd'hui",
+     "اليوم",
+     "Aujourd'hui, il fait beau.",
+     "الطقس جميل اليوم."
+    ],
+    [
+     "demain",
+     "غدًا",
+     "Demain, j'ai un examen.",
+     "غدًا لدي امتحان."
+    ],
+    [
+     "hier",
+     "أمس",
+     "Hier, nous sommes allés au parc.",
+     "أمس ذهبنا إلى الحديقة."
+    ],
+    [
+     "la semaine",
+     "الأسبوع",
+     "La semaine a sept jours.",
+     "الأسبوع سبعة أيام."
+    ],
+    [
+     "le mois",
+     "الشهر",
+     "Ce mois est court.",
+     "هذا الشهر قصير."
+    ],
+    [
+     "l'année",
+     "السنة",
+     "Bonne année !",
+     "سنة سعيدة!"
+    ],
+    [
+     "le matin",
+     "الصباح",
+     "Le matin, je prends du thé.",
+     "في الصباح أشرب الشاي."
+    ],
+    [
+     "le soir",
+     "المساء",
+     "Le soir, je regarde la télé.",
+     "في المساء أشاهد التلفاز."
+    ]
+   ]
+  },
+  {
+   "id": "animals",
+   "ic": "🐾",
+   "ar": "الحيوانات",
+   "words": [
+    [
+     "le chat",
+     "القط",
+     "Le chat dort.",
+     "القط ينام."
+    ],
+    [
+     "le chien",
+     "الكلب",
+     "Le chien aboie.",
+     "الكلب ينبح."
+    ],
+    [
+     "le cheval",
+     "الحصان",
+     "Le cheval court vite.",
+     "الحصان يركض بسرعة."
+    ],
+    [
+     "l'oiseau",
+     "الطائر",
+     "L'oiseau chante.",
+     "الطائر يغرّد."
+    ],
+    [
+     "le poisson",
+     "السمكة",
+     "Le poisson nage.",
+     "السمكة تسبح."
+    ],
+    [
+     "le lion",
+     "الأسد",
+     "Le lion est fort.",
+     "الأسد قوي."
+    ],
+    [
+     "l'éléphant",
+     "الفيل",
+     "L'éléphant est énorme.",
+     "الفيل ضخم."
+    ],
+    [
+     "la vache",
+     "البقرة",
+     "La vache donne du lait.",
+     "البقرة تعطي الحليب."
+    ]
+   ]
+  },
+  {
+   "id": "city",
+   "ic": "🏙️",
+   "ar": "المدينة والأماكن",
+   "words": [
+    [
+     "la ville",
+     "المدينة",
+     "J'habite dans une grande ville.",
+     "أسكن في مدينة كبيرة."
+    ],
+    [
+     "la rue",
+     "الشارع",
+     "La rue est calme.",
+     "الشارع هادئ."
+    ],
+    [
+     "la gare",
+     "المحطة",
+     "La gare est près d'ici.",
+     "المحطة قريبة من هنا."
+    ],
+    [
+     "l'hôpital",
+     "المستشفى",
+     "Mon oncle travaille à l'hôpital.",
+     "عمي يعمل في المستشفى."
+    ],
+    [
+     "le marché",
+     "السوق",
+     "Maman va au marché.",
+     "أمي تذهب إلى السوق."
+    ],
+    [
+     "la pharmacie",
+     "الصيدلية",
+     "La pharmacie est ouverte.",
+     "الصيدلية مفتوحة."
+    ],
+    [
+     "le musée",
+     "المتحف",
+     "Nous visitons le musée.",
+     "نزور المتحف."
+    ],
+    [
+     "la plage",
+     "الشاطئ",
+     "Nous allons à la plage.",
+     "نذهب إلى الشاطئ."
+    ]
+   ]
+  },
+  {
+   "id": "verbs",
+   "ic": "🏃",
+   "ar": "أفعال شائعة",
+   "words": [
+    [
+     "manger",
+     "يأكل",
+     "Nous mangeons à midi.",
+     "نأكل عند الظهر."
+    ],
+    [
+     "boire",
+     "يشرب",
+     "Je veux boire de l'eau.",
+     "أريد أن أشرب ماءً."
+    ],
+    [
+     "parler",
+     "يتكلم",
+     "Il parle français.",
+     "هو يتكلم الفرنسية."
+    ],
+    [
+     "aller",
+     "يذهب",
+     "Je vais à l'école.",
+     "أذهب إلى المدرسة."
+    ],
+    [
+     "venir",
+     "يأتي",
+     "Tu viens demain ?",
+     "هل ستأتي غدًا؟"
+    ],
+    [
+     "lire",
+     "يقرأ",
+     "Elle aime lire.",
+     "هي تحب القراءة."
+    ],
+    [
+     "écrire",
+     "يكتب",
+     "J'écris une lettre.",
+     "أكتب رسالة."
+    ],
+    [
+     "dormir",
+     "ينام",
+     "Le bébé dort.",
+     "الرضيع ينام."
+    ]
+   ]
+  },
+  {
+   "id": "feel",
+   "ic": "😊",
+   "ar": "المشاعر والصفات",
+   "words": [
+    [
+     "content",
+     "سعيد",
+     "Je suis content.",
+     "أنا سعيد."
+    ],
+    [
+     "triste",
+     "حزين",
+     "Elle est triste.",
+     "هي حزينة."
+    ],
+    [
+     "fatigué",
+     "متعب",
+     "Il est fatigué.",
+     "هو متعب."
+    ],
+    [
+     "grand",
+     "كبير / طويل",
+     "Le mur est grand.",
+     "الجدار كبير."
+    ],
+    [
+     "petit",
+     "صغير",
+     "C'est un petit chat.",
+     "هذا قط صغير."
+    ],
+    [
+     "beau",
+     "جميل",
+     "Quel beau jour !",
+     "يا له من يوم جميل!"
+    ],
+    [
+     "rapide",
+     "سريع",
+     "Ce train est rapide.",
+     "هذا القطار سريع."
+    ],
+    [
+     "difficile",
+     "صعب",
+     "L'examen est difficile.",
+     "الامتحان صعب."
+    ]
+   ]
+  }
+ ]
+}
