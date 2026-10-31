@@ -26,7 +26,7 @@
     function buzz(n) { try { if (navigator.vibrate) navigator.vibrate(n); } catch (e) {} }
 
     /* ---------- تحميل الكلمات ---------- */
-    var W = [], CATS = [], P = null;
+    var W = [], CATS = [], P = null, LX = [], LCATS = [], LP = null;
     var FB = [['Bonjour', 'صباح الخير', 'Bonjour !', 'صباح الخير!'], ['Merci', 'شكرًا', 'Merci !', 'شكرًا!'], ['le livre', 'الكتاب', '', ''], ['le stylo', 'القلم', '', ''], ['la classe', 'الفصل', '', ''], ['le pain', 'الخبز', '', ''], ['l\'eau', 'الماء', '', ''], ['la maison', 'المنزل', '', '']];
     function cands(file) {
       var base = location.pathname.replace(/[^/]*$/, '');
@@ -55,7 +55,7 @@
       return P;
     }
     function favs() { return store('bq_fav') || []; }
-    function icOf(id) { var c = CATS.filter(function (x) { return x.id === id; })[0]; return c ? c.ic : '🌟'; }
+    function icOf(id) { var c = CATS.concat(LCATS).filter(function (x) { return x.id === id; })[0]; return c ? c.ic : '🌟'; }
 
     /* ---------- التنسيق ---------- */
     var st = document.createElement('style');
@@ -86,6 +86,11 @@
       '.lx-msg{min-height:44px;text-align:center;font-weight:800;margin-top:12px;font-size:.95rem}.lx-fl{position:fixed;z-index:100004;pointer-events:none;font-weight:900;font-size:1.3rem;color:#fde047;text-shadow:0 2px 8px #000;animation:lxFl 1.1s forwards}@keyframes lxFl{to{transform:translateY(-70px);opacity:0}}' +
       '.lx-end{text-align:center;padding:10px}.lx-end .stars{font-size:2.6rem;letter-spacing:6px}.lx-end .sc{font-size:2.4rem;font-weight:900;color:#fde047}.lx-end p{margin:6px 0}.lx-btn{border:0;border-radius:24px;padding:12px 22px;margin:6px;font-weight:900;background:linear-gradient(135deg,#fde047,#fb923c);color:#7c2d12}.lx-btn.g{background:rgba(255,255,255,.18);color:#fff}' +
       '.lx-pool{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}.lx-pool button{flex:none;border:0;border-radius:20px;padding:7px 12px;background:#fff;border:1px solid #d6e2f0;font-weight:700;font-size:.8rem}.lx-pool button.on{background:#4338ca;color:#fff;border-color:#4338ca}';
+    st.textContent += '.lx-lh{background:linear-gradient(135deg,#065f46,#0d9488 50%,#2563eb)}.lx-lh h3{margin:0;font-size:1.3rem}.lx-prog{height:12px;border-radius:8px;background:rgba(255,255,255,.25);overflow:hidden;margin:10px 0 4px}.lx-prog i{display:block;height:100%;background:linear-gradient(90deg,#fde047,#fb923c,#f43f5e);border-radius:8px;transition:width .5s}.lx-hb{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.lx-hb button{border:0;border-radius:14px;padding:10px 4px;font-weight:800;font-size:.85rem;background:rgba(255,255,255,.2);color:#fff;transition:.15s}.lx-hb button:active{transform:scale(.95)}' +
+      '.lx-letters{display:flex;gap:5px;overflow-x:auto;padding-bottom:6px;margin-bottom:4px}.lx-letters button{flex:none;min-width:34px;height:34px;border-radius:10px;border:1px solid #d6e2f0;background:#fff;font-weight:800;color:#0055A5}.lx-letters button.on{background:#0055A5;color:#fff}' +
+      '.lx-cgrid{display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,auto);gap:8px;overflow-x:auto;padding:4px 2px 10px;margin-bottom:4px}.lx-ct{width:96px;border:0;border-radius:16px;padding:8px 4px;background:#fff;border:2px solid #e2e8f0;text-align:center;transition:.15s}.lx-ct i{display:block;font-style:normal;font-size:1.5rem}.lx-ct b{display:block;font-size:.72rem;color:#1b2a3a;line-height:1.3;min-height:2.2em}.lx-ct small{font-size:.66rem;color:#5d6b7a}.lx-ct.on{border-color:var(--c);background:var(--c);box-shadow:0 6px 14px rgba(0,0,0,.2)}.lx-ct.on b,.lx-ct.on small{color:#fff}' +
+      '.lx-row{background:#fff;border:1px solid #e2e8f0;border-right:5px solid #cbd5e1;border-radius:14px;padding:8px 10px;margin-bottom:8px;transition:.2s}.lx-row.kn{border-right-color:#16a34a;background:#f0fdf4}.lx-row.pl{border-right-color:#f59e0b;background:#fffbeb;transform:scale(1.02);box-shadow:0 6px 16px rgba(245,158,11,.35)}.lx-row .rw{display:flex;align-items:center;justify-content:space-between;gap:8px}.lx-row .t b{display:block;color:#0055A5;font-size:1.05rem;direction:ltr;text-align:left}.lx-row .t span{color:#5d6b7a;font-size:.88rem}.lx-row .b{display:flex;gap:4px;flex:none}.lx-row .b button{width:34px;height:34px;border-radius:50%;border:0;background:#eef2ff;font-size:.95rem}.lx-row .b button.rec{background:#fecaca;animation:lxPulse 1s infinite}.lx-row .b button.on{background:#bbf7d0}' +
+      '.lx-fcbox{background:linear-gradient(135deg,#312e81,#6d28d9);border-radius:22px;padding:14px;color:#fff;text-align:center;margin-top:10px;box-shadow:0 10px 28px rgba(49,46,129,.45)}.lx-fch{display:flex;justify-content:space-between;font-weight:800;margin-bottom:10px}.lx-fcw{perspective:900px;height:210px;margin-bottom:12px}.lx-fc{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .55s;cursor:pointer}.lx-fc.flip{transform:rotateY(180deg)}.lx-fcf{position:absolute;inset:0;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:10px}.lx-fcf.f{background:linear-gradient(135deg,#fde047,#fb923c);color:#7c2d12}.lx-fcf.b{background:linear-gradient(135deg,#34d399,#0ea5e9);color:#064e3b;transform:rotateY(180deg)}.lx-fcf .big{font-size:2rem;font-weight:900;word-break:break-word}.lx-fcf small{opacity:.8}.lx-fcf button{border:0;border-radius:50%;width:48px;height:48px;font-size:1.3rem;background:rgba(255,255,255,.55)}';
     document.head.appendChild(st);
 
     /* =================== القاموس: تبويب كلمات =================== */
@@ -163,27 +168,28 @@
       { id: 'listen', ic: '🎧', t: 'اسمع واختر', s: 'تدريب الاستماع', c: 'linear-gradient(135deg,#f59e0b,#ea580c)' },
       { id: 'type', ic: '✍️', t: 'اكتب الكلمة', s: 'تحدّي الإملاء', c: 'linear-gradient(135deg,#10b981,#047857)' }];
     var RANKS = [[0, '🌱 مبتدئ'], [200, '📘 متعلّم'], [600, '⭐ ماهر'], [1200, '🔥 محترف'], [2500, '👑 خبير'], [5000, '🏆 أسطورة']];
-    var G = null, tmr = null, pool = 'all', GR = null;
+    var G = null, tmr = null, pool = 'all', GR = null, LR = null, lexBuilt = false, FC = null, LST = null, LS = { cat: 'all', q: '', l: '', n: 50 };
     function stats() { return store('bq_quiz') || { pts: 0, best: 0, played: 0 }; }
     function rank(p) { var r = RANKS[0][1]; RANKS.forEach(function (x) { if (p >= x[0]) r = x[1]; }); return r; }
+    function QA() { var seen = {}, out = []; W.concat(LX).forEach(function (w) { if (!seen[w.id]) { seen[w.id] = 1; out.push(w); } }); return out; }
     function stopT() { clearInterval(tmr); tmr = null; }
-    function poolList() { var f = favs(); var l = W.filter(function (w) { return pool === 'all' || (pool === 'fav' ? f.indexOf(w.id) > -1 : w.cat === pool); }); return l; }
+    function poolList() { var f = favs(); var l = QA().filter(function (w) { return pool === 'all' || (pool === 'fav' ? f.indexOf(w.id) > -1 : w.cat === pool); }); return l; }
     function home() {
       stopT(); G = null; var s = stats(), el = window.__bqSplash && window.__bqSplash.elapsed ? Math.floor(window.__bqSplash.elapsed() / 60000) : null;
       GR.innerHTML = '<div class="lx"><div class="lx-hero"><div style="font-size:2.6rem">🎮</div><h3>اختبر نفسك · Le Défi</h3><div style="opacity:.9;font-size:.9rem;margin-top:4px">كل إجابة صحيحة تكسبك نقاطًا وتسرّع جوائزك ⚡🐓🦁🐋</div>' +
         '<div class="lx-stats"><span>' + rank(s.pts) + '</span><span>🏅 ' + s.pts + ' نقطة</span><span>🔥 أفضل سلسلة ' + s.best + '</span>' + (el != null ? '<span>⏱ جلستك ' + el + ' د</span>' : '') + '</div></div>' +
         '<div style="font-weight:800;margin:6px 0 4px">اختر مجموعة الكلمات:</div><div class="lx-pool" id="lx-pool"><span style="font-size:.8rem;color:#5d6b7a">⏳ جارٍ التحميل…</span></div>' +
         '<div class="lx-modes">' + MODES.map(function (m) { return '<button type="button" class="lx-mode" data-m="' + m.id + '" style="background:' + m.c + '"><i>' + m.ic + '</i>' + m.t + '<small>' + m.s + '</small></button>'; }).join('') + '</div></div>';
-      loadWords().then(function () { var f = favs().length; var el2 = $('#lx-pool'); if (!el2) return; el2.innerHTML = '<button type="button" data-p="all" class="' + (pool === 'all' ? 'on' : '') + '">🌍 الكل (' + W.length + ')</button>' + (f ? '<button type="button" data-p="fav" class="' + (pool === 'fav' ? 'on' : '') + '">⭐ مفضلتي (' + f + ')</button>' : '') + CATS.map(function (c) { return '<button type="button" data-p="' + c.id + '" class="' + (pool === c.id ? 'on' : '') + '">' + c.ic + ' ' + esc(c.ar) + '</button>'; }).join(''); });
+      Promise.all([loadWords(), loadLex()]).then(function () { var f = favs().length; var el2 = $('#lx-pool'); if (!el2) return; el2.innerHTML = '<button type="button" data-p="all" class="' + (pool === 'all' ? 'on' : '') + '">🌍 الكل (' + QA().length + ')</button>' + (f ? '<button type="button" data-p="fav" class="' + (pool === 'fav' ? 'on' : '') + '">⭐ مفضلتي (' + f + ')</button>' : '') + CATS.concat(LCATS).map(function (c) { return '<button type="button" data-p="' + c.id + '" class="' + (pool === c.id ? 'on' : '') + '">' + c.ic + ' ' + esc(c.ar) + '</button>'; }).join(''); });
     }
     function mkQ(w, mode, list) {
       var key = mode === 'ar2fr' || mode === 'listen' ? 'fr' : 'ar', others = shuffle(list.filter(function (x) { return x.id !== w.id && x[key] !== w[key]; }));
-      if (others.length < 3) others = shuffle(W.filter(function (x) { return x.id !== w.id && x[key] !== w[key]; }));
+      if (others.length < 3) others = shuffle(QA().filter(function (x) { return x.id !== w.id && x[key] !== w[key]; }));
       var opts = shuffle([w[key]].concat(others.slice(0, 3).map(function (x) { return x[key]; })));
       return { w: w, opts: opts, key: key };
     }
     function start(mode) {
-      var list = poolList(); if (list.length < 4) list = W; if (W.length < 4) { GR.innerHTML = '<div class="lx"><div class="lx-hero">لا توجد كلمات كافية بعد.</div></div>'; return; }
+      var list = poolList(); if (list.length < 4) list = QA(); if (QA().length < 4) { GR.innerHTML = '<div class="lx"><div class="lx-hero">لا توجد كلمات كافية بعد.</div></div>'; return; }
       var qs = shuffle(list).slice(0, 10).map(function (w) { return mkQ(w, mode, list); });
       G = { mode: mode, qs: qs, i: 0, pts: 0, ok: 0, streak: 0, best: 0, boost: 0, locked: false };
       GR.innerHTML = '<div class="lx"><div class="lx-play" id="lx-play"></div></div>'; ask();
@@ -242,11 +248,11 @@
     }
     function qInit() {
       if (!QS || !QR) return;
-      QR.innerHTML = '<div class="lx"><div class="lx-tabs"><button type="button" class="on" data-qt="game">🎮 اختبر نفسك</button><button type="button" data-qt="dict">📖 قاموس المنهج</button></div><div id="lx-game"></div></div>';
-      GR = $('#lx-game', QR);
+      QR.innerHTML = '<div class="lx"><div class="lx-tabs"><button type="button" class="on" data-qt="game">🎮 اختبر نفسك</button><button type="button" data-qt="dict">📖 قاموس المنهج</button></div><div id="lx-game"></div><div id="lx-lex" style="display:none"></div></div>';
+      GR = $('#lx-game', QR); LR = $('#lx-lex', QR);
       QR.addEventListener('click', function (e) {
         var qt = e.target.closest('[data-qt]');
-        if (qt) { var dm = qt.dataset.qt === 'dict', body = $('.body', QS); $$('.lx-tabs button', QR).forEach(function (b) { b.classList.toggle('on', b === qt); }); GR.style.display = dm ? 'none' : ''; if (body) body.style.display = dm ? '' : 'none'; if (dm) showDict(0); return; }
+        if (qt) { var dm = qt.dataset.qt === 'dict', body = $('.body', QS); $$('.lx-tabs button', QR).forEach(function (b) { b.classList.toggle('on', b === qt); }); GR.style.display = dm ? 'none' : ''; $('#lx-lex').style.display = 'none'; if (body) body.style.display = 'none'; stopListen(); if (dm) openLex(body); return; }
         var m = e.target.closest('[data-m]'), p = e.target.closest('[data-p]'), o = e.target.closest('[data-o]'), sp = e.target.closest('[data-s]');
         if (m) { start(m.dataset.m); return; }
         if (p) { pool = p.dataset.p; $$('#lx-pool button').forEach(function (b) { b.classList.toggle('on', b === p); }); return; }
@@ -261,9 +267,110 @@
         var v = norm($('#lx-ti').value), t = norm(clean(G.qs[G.i].w.fr)); if (!v) return;
         answer(v === t || v === norm(noArt(t)), false);
       }
-      new MutationObserver(function () { if (!QS.classList.contains('on')) { stopT(); if (G) home(); } else if (!G) home(); }).observe(QS, { attributes: true, attributeFilter: ['class'] });
+      new MutationObserver(function () { if (!QS.classList.contains('on')) { stopT(); stopListen(); if (G) home(); } else if (!G) home(); }).observe(QS, { attributes: true, attributeFilter: ['class'] });
       home();
     }
-    dictInit(); qInit();
+
+    /* =================== قاموس الحياة (1000+ كلمة): بحث، فئات، بطاقات، استماع، تتبّع التعلّم =================== */
+    var PAL = ['#0055A5', '#7c3aed', '#db2777', '#ea580c', '#16a34a', '#0891b2', '#ca8a04', '#4f46e5', '#dc2626', '#0d9488'];
+    function known() { return store('bq_known') || []; }
+    function lw(id) { for (var i = 0; i < LX.length; i++) if (LX[i].id === id) return LX[i]; return null; }
+    function loadLex() {
+      if (LP) return LP;
+      LP = getJson('lexicon.json').then(function (d) {
+        if (!d || !d.categories) return LX; var seen = {};
+        d.categories.forEach(function (c) { LCATS.push({ id: 'x_' + c.id, ic: c.ic, ar: c.ar }); c.words.forEach(function (w) { var k = norm(clean(w[0])); if (seen[k] && seen[k] !== w[0].toLowerCase()) k += '_2'; seen[k] = w[0].toLowerCase(); LX.push({ id: k, fr: w[0], ar: w[1], ex: '', exAr: '', cat: 'x_' + c.id }); }); });
+        return LX;
+      });
+      return LP;
+    }
+    function letterOf(w) { return norm(noArt(clean(w.fr))).charAt(0).toUpperCase(); }
+    function lxList() {
+      var k = known(), f = favs(), q = norm(LS.q);
+      return LX.filter(function (w) {
+        var ok = LS.cat === 'all' || (LS.cat === 'fav' ? f.indexOf(w.id) > -1 : LS.cat === 'known' ? k.indexOf(w.id) > -1 : LS.cat === 'todo' ? k.indexOf(w.id) < 0 : w.cat === LS.cat);
+        if (!ok) return false; if (LS.l && letterOf(w) !== LS.l) return false;
+        return !q || norm(w.fr).indexOf(q) > -1 || w.ar.indexOf(LS.q) > -1;
+      });
+    }
+    function lxHero() {
+      var kn = known().filter(function (id) { return !!lw(id); }).length, n = LX.length, p = n ? Math.round(kn * 100 / n) : 0;
+      var lv = p >= 90 ? '🏆 أسطورة' : p >= 60 ? '👑 خبير' : p >= 30 ? '⭐ ماهر' : p >= 10 ? '📘 متعلّم' : '🌱 مبتدئ';
+      $('#lx-lh', LR).innerHTML = '<div class="lx-hero lx-lh"><div style="font-size:2.3rem">📖</div><h3>قاموس الحياة · ' + n + ' كلمة</h3><div style="font-size:.85rem;opacity:.95">كلمات فرنسية بترجمتها العربية ونطقها الصوتي في ' + LCATS.length + ' مجالًا</div>' +
+        '<div class="lx-prog"><i style="width:' + p + '%"></i></div><div style="font-weight:800;font-size:.9rem">✅ تعلّمت ' + kn + ' من ' + n + ' (' + p + '%) · ' + lv + '</div>' +
+        '<div class="lx-hb"><button type="button" data-lx="rand">🎲 تحدّي 10 كلمات</button><button type="button" data-lx="cards">🃏 بطاقات الحفظ</button><button type="button" data-lx="listen">🎧 استماع</button><button type="button" data-lx="play">🎮 اختبرني</button></div></div>';
+    }
+    function lxCats() {
+      var k = known(), f = favs(), cnt = {}, kc = {};
+      LX.forEach(function (w) { cnt[w.cat] = (cnt[w.cat] || 0) + 1; if (k.indexOf(w.id) > -1) kc[w.cat] = (kc[w.cat] || 0) + 1; });
+      var kn = LX.filter(function (w) { return k.indexOf(w.id) > -1; }).length, fv = LX.filter(function (w) { return f.indexOf(w.id) > -1; }).length;
+      var tiles = [['all', '🌍', 'الكل', LX.length + ' كلمة'], ['fav', '⭐', 'المفضلة', fv + ' كلمة'], ['known', '✅', 'تعلّمتها', kn + ' كلمة'], ['todo', '📌', 'لم أتعلمها', (LX.length - kn) + ' كلمة']].concat(LCATS.map(function (c) { return [c.id, c.ic, c.ar, (kc[c.id] || 0) + ' / ' + (cnt[c.id] || 0)]; }));
+      $('#lx-cg', LR).innerHTML = tiles.map(function (t, i) { return '<button type="button" class="lx-ct' + (LS.cat === t[0] ? ' on' : '') + '" data-c2="' + t[0] + '" style="--c:' + PAL[i % PAL.length] + '"><i>' + t[1] + '</i><b>' + esc(t[2]) + '</b><small>' + t[3] + '</small></button>'; }).join('');
+    }
+    function rowHTML(w) {
+      var kn = known().indexOf(w.id) > -1, fv = favs().indexOf(w.id) > -1;
+      return '<div class="lx-row' + (kn ? ' kn' : '') + '" data-id="' + esc(w.id) + '"><div class="rw"><div class="t"><b>' + esc(w.fr) + '</b><span>' + esc(w.ar) + '</span></div><div class="b"><button type="button" data-a="say" title="نطق">🔊</button><button type="button" data-a="slow" title="نطق بطيء">🐢</button><button type="button" data-a="mic" title="جرّب نطقك">🎤</button><button type="button" data-a="kn" class="' + (kn ? 'on' : '') + '" title="تعلّمتها">✅</button><button type="button" data-a="fav">' + (fv ? '⭐' : '☆') + '</button></div></div><div class="lx-fb"></div></div>';
+    }
+    function lxRows() {
+      var l = lxList(); $('#lx-lc', LR).textContent = l.length + ' كلمة' + (LS.cat === 'fav' && !l.length ? ' — اضغط ☆ لإضافة كلمات' : '');
+      $('#lx-rows', LR).innerHTML = l.slice(0, LS.n).map(rowHTML).join(''); $('#lx-lm', LR).style.display = l.length > LS.n ? 'block' : 'none';
+    }
+    function lxAll() { lxHero(); lxCats(); lxRows(); }
+    function buildLex() {
+      var ls = {}; LX.forEach(function (w) { ls[letterOf(w)] = 1; });
+      LR.innerHTML = '<div id="lx-lh"></div><input class="lx-in" type="search" id="lx-lq" placeholder="🔎 ابحث بالفرنسية أو العربية في ' + LX.length + ' كلمة…"><div class="lx-letters" id="lx-lt"><button type="button" class="on" data-l="">الكل</button>' +
+        Object.keys(ls).filter(function (x) { return /[A-Z]/.test(x); }).sort().map(function (x) { return '<button type="button" data-l="' + x + '">' + x + '</button>'; }).join('') + '</div><div class="lx-cgrid" id="lx-cg"></div><div class="lx-count" id="lx-lc"></div><div id="lx-rows"></div><button type="button" class="lx-more" id="lx-lm">عرض المزيد ⬇</button><div id="lx-fcw"></div>';
+      lexBuilt = true; lxAll();
+    }
+    function openLex(body) {
+      LR.style.display = ''; if (lexBuilt) return; LR.innerHTML = '<div class="lx-count">⏳ جارٍ تحميل القاموس…</div>';
+      loadLex().then(function () { if (!LX.length) { LR.style.display = 'none'; if (body) body.style.display = ''; showDict(0); return; } buildLex(); });
+    }
+    function newKnown(id) { var k = known(); if (k.indexOf(id) > -1) return false; k.push(id); store('bq_known', k); if (window.__bqSplash && window.__bqSplash.boost) window.__bqSplash.boost(10000); return true; }
+    function stopListen() { LST = null; try { if (window.speechSynthesis) speechSynthesis.cancel(); } catch (e) {} if (LR) { var b = $('[data-lx="listen"]', LR); if (b) b.textContent = '🎧 استماع'; $$('.lx-row.pl', LR).forEach(function (x) { x.classList.remove('pl'); }); } }
+    function listen() {
+      if (LST) { stopListen(); return; } var list = lxList().slice(0, LS.n); if (!list.length) return; LST = { on: 1 }; $('[data-lx="listen"]', LR).textContent = '⏹ إيقاف'; var i = 0;
+      (function step() {
+        if (!LST || i >= list.length) { stopListen(); return; } var w = list[i++], r = $('.lx-row[data-id="' + w.id + '"]', LR);
+        $$('.lx-row.pl', LR).forEach(function (x) { x.classList.remove('pl'); }); if (r) { r.classList.add('pl'); try { r.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch (e) {} }
+        try { speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(clean(w.fr)); u.lang = 'fr-FR'; u.rate = 0.85; u.onend = u.onerror = function () { setTimeout(step, 700); }; speechSynthesis.speak(u); } catch (e) { stopListen(); }
+      })();
+    }
+    function fcStart(list, n) {
+      var k = known(); var deck = shuffle(list).sort(function (a, b) { return (k.indexOf(a.id) > -1) - (k.indexOf(b.id) > -1); }).slice(0, n); if (!deck.length) return;
+      FC = { deck: deck, i: 0, ok: 0, later: 0 }; stopListen(); fcShow();
+    }
+    function fcShow() {
+      var box = $('#lx-fcw', LR); if (!FC) { box.innerHTML = ''; return; }
+      if (FC.i >= FC.deck.length) { box.innerHTML = '<div class="lx-fcbox"><div style="font-size:2.4rem">🎉</div><h3 style="margin:4px 0">أحسنت!</h3><p>✅ حفظت ' + FC.ok + ' · 🔁 للمراجعة ' + FC.later + '</p><button type="button" class="lx-btn" data-fc="exit">إغلاق</button></div>'; sWin(); return; }
+      var w = FC.deck[FC.i];
+      box.innerHTML = '<div class="lx-fcbox"><div class="lx-fch"><span>' + (FC.i + 1) + ' / ' + FC.deck.length + '</span><span>✅ ' + FC.ok + '</span></div><div class="lx-fcw"><div class="lx-fc" id="lx-fc" data-fc="flip"><div class="lx-fcf f"><div class="big" dir="ltr">' + esc(w.fr) + '</div><button type="button" data-fc="say">🔊</button><small>اضغط على البطاقة لرؤية المعنى 👆</small></div><div class="lx-fcf b"><div class="big">' + esc(w.ar) + '</div><div dir="ltr" style="font-weight:800">' + esc(w.fr) + '</div></div></div></div><div><button type="button" class="lx-btn g" data-fc="later">🔁 لاحقًا</button><button type="button" class="lx-btn" data-fc="know">✅ عرفتها</button></div><button type="button" class="lx-btn g" data-fc="exit" style="font-size:.8rem;padding:6px 14px">خروج</button></div>';
+      box.scrollIntoView({ block: 'center', behavior: 'smooth' }); setTimeout(function () { if (FC) say(w.fr); }, 350);
+    }
+    function lexInit() {
+      if (!LR) return;
+      LR.addEventListener('click', function (e) {
+        var fcb = e.target.closest('[data-fc]');
+        if (fcb && FC) { var a = fcb.dataset.fc, w = FC.deck[FC.i];
+          if (a === 'flip') $('#lx-fc', LR).classList.toggle('flip'); else if (a === 'say') { e.stopPropagation(); say(w.fr); }
+          else if (a === 'know') { newKnown(w.id); FC.ok++; FC.i++; sOk(2); fcShow(); lxHero(); lxCats(); } else if (a === 'later') { FC.later++; FC.i++; fcShow(); }
+          else if (a === 'exit') { FC = null; fcShow(); lxAll(); } return; }
+        var lxb = e.target.closest('[data-lx]');
+        if (lxb) { var m = lxb.dataset.lx;
+          if (m === 'rand') fcStart(LX, 10); else if (m === 'cards') fcStart(lxList(), 20); else if (m === 'listen') listen();
+          else if (m === 'play') { pool = (LS.cat === 'all' || LS.cat === 'fav' || /^x_/.test(LS.cat)) ? LS.cat : 'all'; var gt = $('[data-qt="game"]', QR); if (gt) gt.click(); home(); }
+          return; }
+        var c2 = e.target.closest('[data-c2]'); if (c2) { stopListen(); LS.cat = c2.dataset.c2; LS.n = 50; lxCats(); lxRows(); return; }
+        var lt = e.target.closest('[data-l]'); if (lt) { stopListen(); LS.l = lt.dataset.l; LS.n = 50; $$('#lx-lt button', LR).forEach(function (b) { b.classList.toggle('on', b === lt); }); lxRows(); return; }
+        if (e.target.closest('#lx-lm')) { LS.n += 50; lxRows(); return; }
+        var bt = e.target.closest('.lx-row [data-a]'); if (!bt) return; var row = bt.closest('.lx-row'), w2 = lw(row.dataset.id); if (!w2) return; var ac2 = bt.dataset.a;
+        if (ac2 === 'say') say(w2.fr); else if (ac2 === 'slow') say(w2.fr, 0.5); else if (ac2 === 'mic') mic(row, w2);
+        else if (ac2 === 'kn') { var k = known(), i = k.indexOf(w2.id); if (i > -1) { k.splice(i, 1); store('bq_known', k); } else { newKnown(w2.id); sOk(1); } row.classList.toggle('kn', i < 0); bt.classList.toggle('on', i < 0); lxHero(); lxCats(); }
+        else if (ac2 === 'fav') { var f = favs(), j = f.indexOf(w2.id); if (j > -1) f.splice(j, 1); else f.push(w2.id); store('bq_fav', f); bt.textContent = j > -1 ? '☆' : '⭐'; lxCats(); if (LS.cat === 'fav') lxRows(); }
+      });
+      LR.addEventListener('input', function (e) { if (e.target.id === 'lx-lq') { LS.q = e.target.value; LS.n = 50; lxRows(); } });
+    }
+
+    dictInit(); qInit(); lexInit();
   }
 })();
