@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0055A5">
-  <title>french-bac-egypt</title>
+  <title>Le Français Au Bac</title>
   <link rel="manifest" href="./manifest.json">
   <link rel="stylesheet" href="./styles.css">
   <style>
@@ -88,14 +88,14 @@
   </style>
 </head>
 <body>
-  <!-- واجهة الترحيب + عدّاد الجلسة + الجوائز التفاعلية (تعتمد على ملف splash.js الخارجي) -->
+  <!-- واجهة الترحيب + عدّاد الجلسة + الجوائز التفاعلية -->
   <script src="./splash.js"></script>
 
   <div class="french-flag-bg"></div>
 
   <header class="topbar">
     <button id="menu-btn" class="icon-btn" type="button" aria-label="القائمة">☰</button>
-    <h1>french-bac-egypt <span>🇫🇷</span></h1>
+    <h1>Le Français Au Bac <span>🇫🇷</span></h1>
     <button id="install-btn" class="install" type="button" hidden>تثبيت التطبيق على الجوال</button>
   </header>
 
@@ -115,7 +115,7 @@
       <button data-nav="soon-chansons" type="button">🎵 الأغاني الفرنسية</button>
       <button data-nav="soon-contemporaine" type="button">🇫🇷 فرنسا المعاصرة</button>
       <button data-nav="soon-litterature" type="button">📜 الأدب الفرنسي العالمي</button>
-      <button data-nav="soon-geographie" type="button">💰 إختبر نفسك واكسب فلوس</button>
+      <button data-nav="soon-geographie" type="button">🗺️ المدن والشوارع والأنهار</button>
       <button data-nav="soon-argot" type="button">😎 العامية الفرنسية</button>
       <button data-nav="chat" type="button">🤖 المساعد الذكي</button>
       <button data-nav="student-chat" type="button">💬 شات وتواصل الطلاب</button>
@@ -125,7 +125,7 @@
       <section id="lessons" class="sec on"><h2>🎮 اختبر نفسك — Testez-vous / Le Défi</h2><div id="quiz-root"><div class="empty">جارٍ التحميل…</div></div><div class="body" style="display:none"><div class="empty">جارٍ التحميل…</div></div></section>
       <section id="bac" class="sec"><h2>🎓 منهج البكالوريا</h2><div id="bac-content-container" class="body"><div class="empty">جارٍ التحميل…</div></div></section>
       <section id="grammar" class="sec"><h2>Grammaire — القواعد</h2><div class="body"></div></section>
-      <section id="phonetics" class="sec"><h2>Phonétique — الصوتيات</h2><div class="body"></div></section>
+      <section id="phonetics" class="sec"><h2>Phonétique — الصوتيات</h2><div id="phon-root"></div><div class="body" style="display:none"></div></section>
       <section id="dictionary" class="sec"><h2>Dictionnaire — القاموس</h2><div id="dict-root"></div><div class="body"></div></section>
       <section id="dialogues" class="sec"><h2>Dialogues — حوارات يومية</h2><div class="body"></div></section>
       <section id="tales" class="sec"><h2>Contes — قصص مبسطة</h2><div class="body"></div></section>
@@ -170,6 +170,7 @@
   <script src="./phrase.js"></script>
   <script src="./france.js"></script>
   <script src="./lexique.js"></script>
+  <script src="./phonetique.js"></script>
 
   <!-- سكريبت تفعيل النطق الصوتي للنصوص الزرقاء -->
   <script>
