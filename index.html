@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0055A5">
-  <title>Le Français Au Bac</title>
+  <title>french-bac-egypt</title>
   <link rel="manifest" href="./manifest.json">
   <link rel="stylesheet" href="./styles.css">
   <style>
@@ -95,7 +95,7 @@
 
   <header class="topbar">
     <button id="menu-btn" class="icon-btn" type="button" aria-label="القائمة">☰</button>
-    <h1>Le Français Au Bac <span>🇫🇷</span></h1>
+    <h1>french-bac-egypt <span>🇫🇷</span></h1>
     <button id="install-btn" class="install" type="button" hidden>تثبيت التطبيق على الجوال</button>
   </header>
 
@@ -342,7 +342,7 @@
           updateLockVisuals();
           alert("🔒 تم إغلاق القسم بنجاح.");
         } else {
-          document.getElementById('pin-error-msg', "❌ الرقم السري غير صحيح!");
+          document.getElementById('pin-error-msg').innerText = "❌ الرقم السري غير صحيح!";
           pinInput.value = "";
           pinInput.focus();
         }
