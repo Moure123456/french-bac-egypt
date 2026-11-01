@@ -27,7 +27,7 @@
     function stopSpeech() { TOK++; try { if (window.speechSynthesis) speechSynthesis.cancel(); } catch (e) {} }
     // نطق فرنسي مع طبقة صوت مختلفة لكل متحدّث؛ يستدعي done مرة واحدة فقط
     function speak(text, rate, pitch, done) {
-      var fin = false; function end() { if (!fin) { fin = true; if (done) done(); } }
+      var fin = false, t0 = Date.now(), min = 800 + String(text).length * 40; function end() { if (fin) return; fin = true; var w = min - (Date.now() - t0); if (done) { if (w > 0) setTimeout(done, w); else done(); } }
       try {
         if (!window.speechSynthesis) { setTimeout(end, 600); return; } speechSynthesis.cancel();
         var u = new SpeechSynthesisUtterance(String(text)); u.lang = 'fr-FR'; u.rate = rate || 0.9; u.pitch = pitch || 1; u.onend = u.onerror = end; speechSynthesis.speak(u);
