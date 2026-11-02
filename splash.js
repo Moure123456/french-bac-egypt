@@ -8,6 +8,7 @@
 
   function boot() {
     if (document.getElementById('bqs-root')) return;
+    var APP_TITLE = 'Le Français Au Bac'; // عنوان واجهة الترحيب (عدّله هنا إن أردت)
     var SPEED = Math.max(1, +(new URLSearchParams(location.search).get('speed')) || 1), MIN = 60000;
     var $ = function (s, r) { return (r || document).querySelector(s); };
     var pad = function (n) { return (n < 10 ? '0' : '') + n; };
@@ -141,15 +142,15 @@
     var st = document.createElement('style');
     st.textContent = '#bqs-cv{position:fixed;inset:0;z-index:100003;pointer-events:none}' +
       '#bqs-root,#bqs-root *,#bqs-rew,#bqs-rew *,#bqs-gal,#bqs-gal *,#bqs-chip{box-sizing:border-box}' +
-      '#bqs-root{position:fixed;inset:0;z-index:100000;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;font-family:inherit;background:linear-gradient(135deg,#0b1f5c,#1d4ed8 35%,#7c3aed 65%,#be123c);background-size:300% 300%;animation:bqsBg 14s ease infinite;transition:opacity .7s,transform .7s}' +
+      '#bqs-root{position:fixed;inset:0;z-index:100000;overflow-x:hidden;overflow-y:auto;display:flex;flex-direction:column;align-items:center;text-align:center;color:#fff;font-family:inherit;background:linear-gradient(135deg,#0b1f5c,#1d4ed8 35%,#7c3aed 65%,#be123c);background-size:300% 300%;animation:bqsBg 14s ease infinite;transition:opacity .7s,transform .7s}' +
       '#bqs-root.out{opacity:0;transform:scale(1.35);pointer-events:none}@keyframes bqsBg{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}' +
       '.bqs-orb{position:absolute;border-radius:50%;filter:blur(40px);opacity:.55;animation:bqsF 9s ease-in-out infinite}.bqs-orb.a{width:260px;height:260px;background:#22d3ee;top:-60px;left:-60px}.bqs-orb.b{width:300px;height:300px;background:#f43f5e;bottom:-90px;right:-70px;animation-delay:-4s}.bqs-orb.c{width:200px;height:200px;background:#facc15;top:40%;left:55%;animation-delay:-2s}' +
       '@keyframes bqsF{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-40px) scale(1.2)}}' +
       '.bqs-scene{position:absolute;bottom:0;left:0;right:0;height:34%;pointer-events:none}.bqs-scene svg{position:absolute;bottom:0;width:100%;height:100%;transition:transform .2s}' +
-      '.bqs-in{position:relative;z-index:2;padding:18px;width:100%;max-width:440px}.bqs-logo{font-size:64px;animation:bqsPop 2.4s ease-in-out infinite;filter:drop-shadow(0 6px 14px rgba(0,0,0,.4))}@keyframes bqsPop{0%,100%{transform:scale(1) rotate(-4deg)}50%{transform:scale(1.15) rotate(5deg)}}' +
-      '.bqs-h1{margin:6px 0 2px;font-size:2.1rem;font-weight:900;background:linear-gradient(90deg,#fff,#fde047,#fb7185,#67e8f9,#fff);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:bqsShine 4s linear infinite}@keyframes bqsShine{to{background-position:300% 0}}' +
-      '.bqs-h2{font-size:1.25rem;font-weight:800;margin:2px 0 8px;min-height:1.7em}.bqs-sub{white-space:pre-line;font-size:.95rem;opacity:.95;line-height:1.7;margin-bottom:12px}' +
-      '.bqs-clock{display:inline-flex;gap:8px;direction:ltr;margin:6px 0 10px}.bqs-clock div{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);backdrop-filter:blur(8px);border-radius:14px;padding:8px 12px;min-width:70px;box-shadow:0 0 22px rgba(255,255,255,.2)}.bqs-clock b{display:block;font-size:2rem;font-variant-numeric:tabular-nums;text-shadow:0 0 14px #fde047}.bqs-clock small{font-size:.65rem;opacity:.85}' +
+      '.bqs-in{position:relative;z-index:2;padding:18px;width:100%;max-width:440px;margin:auto;overflow-wrap:anywhere}#bqs-root.hasz .bqs-in{padding-top:142px}.bqs-logo{font-size:64px;animation:bqsPop 2.4s ease-in-out infinite;filter:drop-shadow(0 6px 14px rgba(0,0,0,.4))}@keyframes bqsPop{0%,100%{transform:scale(1) rotate(-4deg)}50%{transform:scale(1.15) rotate(5deg)}}' +
+      '.bqs-h1{margin:6px 0 2px;font-size:clamp(1.55rem,8vw,2.1rem);line-height:1.25;font-weight:900;background:linear-gradient(90deg,#fff,#fde047,#fb7185,#67e8f9,#fff);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:bqsShine 4s linear infinite}@keyframes bqsShine{to{background-position:300% 0}}' +
+      '.bqs-h2{font-size:clamp(1rem,5vw,1.25rem);font-weight:800;margin:2px 0 8px;min-height:3.4em;white-space:pre-line;line-height:1.7}.bqs-sub{white-space:pre-line;font-size:.95rem;opacity:.95;line-height:1.7;margin-bottom:12px}' +
+      '.bqs-clock{display:flex;gap:6px;direction:ltr;margin:6px 0 10px;width:100%}.bqs-clock div{flex:1;min-width:0;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);backdrop-filter:blur(8px);border-radius:14px;padding:8px 4px;box-shadow:0 0 22px rgba(255,255,255,.2)}.bqs-clock b{display:block;font-size:clamp(1.5rem,8.5vw,2rem);font-variant-numeric:tabular-nums;text-shadow:0 0 14px #fde047}.bqs-clock small{font-size:.65rem;opacity:.85}' +
       '.bqs-bar{height:12px;background:rgba(255,255,255,.2);border-radius:8px;overflow:hidden;margin:4px 0}.bqs-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#fde047,#fb923c,#f43f5e);border-radius:8px;box-shadow:0 0 12px #fde047;transition:width .4s}.bqs-nx{font-size:.85rem;margin-bottom:8px}' +
       '.bqs-road{display:flex;justify-content:center;gap:6px;margin:6px 0 14px;direction:ltr}.bqs-road span{width:46px;padding:5px 0;border-radius:12px;background:rgba(255,255,255,.14);font-size:1.4rem;line-height:1.1;filter:grayscale(1);opacity:.7}.bqs-road span small{display:block;font-size:.58rem}.bqs-road span.on{filter:none;opacity:1;background:rgba(253,224,71,.35);box-shadow:0 0 14px #fde047}' +
       '.bqs-go{border:0;border-radius:40px;padding:15px 34px;font-size:1.15rem;font-weight:900;font-family:inherit;color:#7c2d12;background:linear-gradient(135deg,#fde047,#fb923c);cursor:pointer;box-shadow:0 8px 28px rgba(251,146,60,.6);animation:bqsPulse 1.6s ease-in-out infinite}@keyframes bqsPulse{50%{transform:scale(1.07);box-shadow:0 8px 40px rgba(253,224,71,.9)}}' +
@@ -168,17 +169,17 @@
 
     /* ---------- واجهة الترحيب ---------- */
     var root = document.createElement('div'); root.id = 'bqs-root';
-    root.innerHTML = '<i class="bqs-orb a"></i><i class="bqs-orb b"></i><i class="bqs-orb c"></i>' +
+    root.innerHTML = '<div id="bqs-zoza" class="bqs-zoza"></div><i class="bqs-orb a"></i><i class="bqs-orb b"></i><i class="bqs-orb c"></i>' +
       '<div class="bqs-scene"><svg id="bqs-s1" viewBox="0 0 400 140" preserveAspectRatio="xMidYMax slice"><path d="M0 140L90 78 170 140Z" fill="#fbbf24" opacity=".55"/><path d="M110 140L215 50 320 140Z" fill="#f59e0b" opacity=".7"/><path d="M270 140L340 90 410 140Z" fill="#fbbf24" opacity=".5"/><rect y="132" width="400" height="8" fill="#92400e" opacity=".6"/></svg>' +
       '<svg id="bqs-s2" viewBox="0 0 400 140" preserveAspectRatio="xMidYMax slice"><path d="M52 140L58 88 62 56 64 30 66 56 70 88 76 140Z" fill="#0f172a" opacity=".85"/><path d="M58 88h12M62 56h6" stroke="#fde047" stroke-width="1.6"/><circle cx="64" cy="26" r="2.4" fill="#fde047"/></svg></div>' +
-      '<div class="bqs-in"><div class="bqs-logo">🇫🇷</div><div class="bqs-h1">french-bac-egypt</div><div class="bqs-h2" id="bqs-ty"></div>' +
+      '<div class="bqs-in"><div class="bqs-logo">🇫🇷</div><div class="bqs-h1">' + APP_TITLE + '</div><div class="bqs-h2" id="bqs-ty"></div>' +
       '<div class="bqs-sub" id="bqs-tip"></div><div class="bqs-clock"><div><b id="bqs-h">00</b><small>heures · ساعة</small></div><div><b id="bqs-m">00</b><small>minutes · دقيقة</small></div><div><b id="bqs-s">00</b><small>secondes · ثانية</small></div></div>' +
       '<div class="bqs-bar"><i id="bqs-pb"></i></div><div class="bqs-nx" id="bqs-nx"></div><div class="bqs-road" id="bqs-road"></div>' +
       '<button class="bqs-go" id="bqs-go" type="button">Commencer ✨ ابدأ الرحلة</button></div>';
     document.body.appendChild(root);
     var road = $('#bqs-road'); road.innerHTML = PR.map(function (p) { return '<span data-id="' + p.id + '">' + p.ic + '<small>' + p.at + 'د</small></span>'; }).join('');
 
-    var greet = 'Bienvenue, champion ! أهلًا بك يا بطل الفرنسية', gi = 0, tipI = 0;
+    var greet = 'Bienvenue, champion !\nأهلًا بك يا بطل الفرنسية', gi = 0, tipI = 0;
     var tips = ['كل دقيقة تقضيها هنا تقرّبك من جائزة 🎁\nChaque minute compte !', 'ابقَ 30 دقيقة لتكسب الديك الزاهي 🐓\nReste 30 minutes !', 'تعلّم بمتعة\nApprends en t\'amusant !', 'المجسّمات تتحرك — المسها واسحبها ✨\nTouche et fais tourner !'];
     var tyT = setInterval(function () { $('#bqs-ty').textContent = greet.slice(0, ++gi); if (gi >= greet.length) clearInterval(tyT); }, 55);
     function tip() { $('#bqs-tip').textContent = tips[tipI++ % tips.length]; } tip(); setInterval(tip, 4200);
