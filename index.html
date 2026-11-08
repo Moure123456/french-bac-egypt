@@ -9,8 +9,10 @@
   <!-- كود تفعيل Google AdSense الأساسي -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2276591955617869" crossorigin="anonymous"></script>
 
+  <!-- إعدادات تطبيق الـ PWA -->
   <link rel="manifest" href="./manifest.json">
   <link rel="stylesheet" href="./styles.css">
+  
   <style>
     /* قفل مرسوم بـ CSS فقط (بدون SVG أو إيموجي) ليأخذ لونه دائماً: أحمر = مغلق، أزرق = مفتوح */
     .lock-badge {
@@ -162,6 +164,17 @@
 
   <div id="toast" class="toast" role="status"></div>
 
+  <!-- سكربت تسجيل الـ Service Worker بشكل آمن ومنفصل تماماً ليعمل في الخلفية دون تعطيل الوظائف -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('Service Worker registered successfully!', reg.scope))
+          .catch(err => console.log('Service Worker registration failed: ', err));
+      });
+    }
+  </script>
+
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
@@ -242,7 +255,7 @@
     });
   </script>
 
-  <!-- سكربت حماية الأقسام -->
+  <!-- سكربت حماية الأقسام والأقفال -->
   <script>
     const protectedSections = ['bac', 'grammar', 'phonetics', 'exams', 'soon-chansons'];
 
@@ -350,7 +363,7 @@
           updateLockVisuals();
           alert("🔒 تم إغلاق القسم بنجاح.");
         } else {
-          document.getElementById('pin-error-msg').innerText = "❌ الرقم السري غير صحيح!";
+          document.getElementById('pin-error-msg'].innerText = "❌ الرقم السري غير صحيح!";
           pinInput.value = "";
           pinInput.focus();
         }
