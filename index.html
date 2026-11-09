@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+  <!-- كود التحقق من تسجيل الدخول (حماية التطبيق بالرمز السري) -->
+  <script>
+    if (localStorage.getItem('app_unlocked') !== 'true') {
+      document.write('<style>body { display: none !important; }</style>');
+      window.location.href = 'login.html';
+    }
+  </script>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0055A5">
