@@ -281,3 +281,23 @@ details.node summary small { color: var(--muted); font-weight: 600; margin-inlin
 }
 .soon-back:active { transform: scale(.97); }
 @media (prefers-reduced-motion: reduce) { .soon-icon { animation: none; } }
+
+/* ===== التكيف الخفيف المخصص لشاشات الكمبيوتر والأجهزة الكبيرة (دون مساس بالموبايل) ===== */
+@media (min-width: 801px) {
+  .layout {
+    padding: 24px 20px;
+    gap: 24px;
+  }
+  .sidebar {
+    width: 270px;
+    padding: 16px;
+  }
+  .card {
+    padding: 22px;
+    margin-bottom: 18px;
+  }
+  .dict-list {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+}
