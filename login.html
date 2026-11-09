@@ -1,1 +1,98 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - Le Français Au Bac</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        h2 {
+            color: #0055A5;
+            margin-bottom: 1rem;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            text-align: center;
+            letter-spacing: 5px;
+            font-size: 18px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0055A5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #004488;
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 1rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Le Français Au Bac 🇫🇷</h2>
+        <p>يرجى إدخال رمز الدخول:</p>
+        <input type="password" id="pinInput" placeholder="••••••" maxlength="6" inputmode="numeric">
+        <button onclick="checkPin()">دخول</button>
+        <div id="errorMsg" class="error-message">الرمز غير صحيح!</div>
+    </div>
 
+    <script>
+        // الرمز السري
+        var correctPin = "051510"; 
+
+        function checkPin() {
+            var userPin = document.getElementById('pinInput').value;
+            var errorMsg = document.getElementById('errorMsg');
+
+            if (userPin === correctPin) {
+                localStorage.setItem('app_unlocked', 'true');
+                errorMsg.style.display = 'none';
+                window.location.href = 'index.html';
+            } else {
+                errorMsg.style.display = 'block';
+                document.getElementById('pinInput').value = '';
+                document.getElementById('pinInput').focus();
+            }
+        }
+
+        // السماح بالضغط على زر Enter للبحث
+        document.getElementById('pinInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                checkPin();
+            }
+        });
+    </script>
+</body>
+</html>
