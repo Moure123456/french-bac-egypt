@@ -255,7 +255,7 @@
     });
   </script>
 
-  <!-- سكربت حماية الأقسام والأقفال -->
+  <!-- سكربت حماية الأقسام والأقفال (مصحح بالكامل) -->
   <script>
     const protectedSections = ['bac', 'grammar', 'phonetics', 'exams', 'soon-chansons'];
 
@@ -363,7 +363,7 @@
           updateLockVisuals();
           alert("🔒 تم إغلاق القسم بنجاح.");
         } else {
-          document.getElementById('pin-error-msg'].innerText = "❌ الرقم السري غير صحيح!";
+          document.getElementById('pin-error-msg').innerText = "❌ الرقم السري غير صحيح!";
           pinInput.value = "";
           pinInput.focus();
         }
