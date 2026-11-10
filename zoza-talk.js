@@ -63,7 +63,7 @@
     function tn(f, t0, d, v) { try { if (!AC) { var C = window.AudioContext || window.webkitAudioContext; if (C) AC = new C(); } if (!AC) return; if (AC.state === 'suspended') AC.resume(); var o = AC.createOscillator(), g = AC.createGain(), t = AC.currentTime + t0; o.type = 'triangle'; o.frequency.value = f; g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(v, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + d); o.connect(g); g.connect(AC.destination); o.start(t); o.stop(t + d + 0.05); } catch (e) {} }
     function sOk() { tn(660, 0, 0.12, 0.13); tn(990, 0.1, 0.2, 0.13); }
     function sWin() { [523, 659, 784, 1047].forEach(function (f, i) { tn(f, i * 0.1, 0.25, 0.13); }); }
-    function clean(t) { return String(t).replace(/[«»]/g, '').replace(/[\u{1F300}-\u{1FAFF}\u2600-\u27BF]/gu, '').replace(/\s+/g, ' ').trim(); }
+    function clean(t) { return String(t).replace(/[«»]/g, '').replace(/[\u{1F300}-\u{1FAFF}\u2600}-\u27BF]/gu, '').replace(/\s+/g, ' ').trim(); }
     function curRate() { return ST.slow ? 0.55 : (DATA.talk ? DATA.talk.levels[ST.level].rate : 0.85); }
     function talking(on) { var h = $('#tk-hero'); if (h) h.classList.toggle('talk', on); }
     function say(text, rate, done) {
@@ -80,7 +80,7 @@
       try { r.start(); } catch (e) { cb({ err: 1 }); return null; } REC = r; return r;
     }
 
-    /* ---------- تحميل البيانات وبناء المعارف ---------- */
+    /* ---------- تحميل البيانات وبناء المعارف (آمن ومعالجة الأخطاء) ---------- */
     function cands(file) { var base = location.pathname.replace(/[^/]*$/, ''); var l = ['./data/' + file, 'data/' + file, base + 'data/' + file, '/data/' + file], h = location.hostname; if (/\.github\.io$/.test(h)) { var u = h.split('.')[0], p = location.pathname.split('/').filter(Boolean), r = (p.length && !/\.html?$/i.test(p[0])) ? p[0] : (u + '.github.io'); l.push('https://cdn.jsdelivr.net/gh/' + u + '/' + r + '@main/data/' + file); } return l.filter(function (c, i) { return l.indexOf(c) === i; }); }
     function getJson(file) { var c = cands(file), i = 0; function nx() { if (i >= c.length) return Promise.resolve(null); return fetch(c[i++] + '?v=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.ok ? r.text() : Promise.reject(); }).then(function (t) { return JSON.parse(t.replace(/^\uFEFF/, '')); }).catch(nx); } return nx(); }
     function addTokens(t) { (ap(t).toLowerCase().match(/[a-zà-ÿœæ]+/g) || []).forEach(function (w) { DATA.KNOWN[w] = 1; }); }
@@ -120,38 +120,24 @@
       { t: 'verb', re: /\b(vais|vas|va|allons|allez|vont) à (\w+(?:er|ir|re))\b/gi, to: '$1 $2', w: 'المستقبل القريب: aller + مصدر مباشرة دون حرف جر (je vais manger).' },
       { t: 'verb', re: /\b(veux|veut|peux|peut|dois|doit|aime|aimes|préfère|préfères|veulent|peuvent|voudrais) de (\w+(?:er|ir|re))\b/gi, to: '$1 $2', w: 'بعد الأفعال vouloir/pouvoir/aimer يأتي المصدر مباشرة دون de.' },
       { t: 'qty', re: /\b(beaucoup|peu|trop|assez|combien|plus|moins) (du|des|de la)\b/gi, to: '$1 de', w: 'بعد تعبير الكمية نستعمل de دون أداة (beaucoup de).' },
-      { t: 'neg', re: new RegExp("\\b(je|tu|il|elle|on|nous|vous|ils|elles|j') ?(suis|es|est|sommes|êtes|sont|ai|as|a|avons|avez|ont|vais|vas|va|allons|allez|vont|veux|veut|peux|peut|aime|aimes|aiment|sais|sait|connais|parle|parles|mange|bois|fais|fait|comprends|comprend|voudrais|dois|doit) pas\\b", 'gi'), fn: function (m, p, v) { var sp = p === "j'" ? "j'" : p + ' '; return /^[aeiouyhàâéèê]/i.test(v) && p !== "j'" ? p + " n'" + v + ' pas' : (p === "j'" ? "je n'" + v + ' pas' : sp + 'ne ' + v + ' pas'); }, w: 'النفي في الكتابة بجزأين: ne … pas (حذف ne مقبول في الكلام العامي فقط).', soft: 1 }
+      { t: 'neg', re: new RegExp("\\b(je|tu|il|elle|on|nous|vous|ils|elles|j') ?(suis|es|est|sommes|êtes|sont|ai|as|a|avons|avez|ont|vais|vas|va|allons|allez|vont|veux|veut|peux|peut|aime|aimes|aiment|sais|sait|connais|parle|parles|mange|bois|fais|fait|comprends|comprend|voudrais|dois|doit) pas\\b", 'gi'), fn: function (m, p, v) { var sp = p === "j'" ? "j'" : p + ' '; return /^[aeiouyhàâéèê]/i.test(v) && p !== "j'" ? p + " n'" + v + ' pas' : (p === "j'" ? "je n'" + v + ' pas' : sp + 'ne ' + v + ' pas'); }, w: 'النفي في الكتابة بجزأين: ne … pas.', soft: 1 }
     ];
     function sameCase(o, n) { return o && /^[A-ZÀ-Þ]/.test(o) ? n.charAt(0).toUpperCase() + n.slice(1) : n; }
     function analyze(raw) {
       var txt = ap(raw).trim(), cur = txt, issues = [];
       function note(type, wrong, right, why, soft) { if (fold(wrong) === fold(right) && wrong === right) return; issues.push({ type: type, wrong: wrong, right: right, why: why, soft: !!soft }); }
       RULES.forEach(function (r) { cur = cur.replace(r.re, function () { var m = [].slice.call(arguments), w = m[0], nw = r.fn ? r.fn.apply(null, m) : r.to.replace(/\$(\d)/g, function (_, d) { return m[+d] || ''; }); nw = sameCase(w, nw); if (nw !== w) note(r.t, w, nw, r.w, r.soft); return nw; }); });
-      // اختيار المساعد avoir/être
-      cur = cur.replace(/\b(j'ai|tu as|il a|elle a|on a|nous avons|vous avez|ils ont|elles ont) (allé|allée|allés|allées|venu|venue|arrivé|arrivée|arrivés|parti|partie|partis|rentré|rentrée|sorti|resté|restée|tombé|né|née|monté|descendu|entré|retourné)(?![a-zà-ÿ])/gi, function (w, a, p) { var nw = sameCase(w, ETRE[a.toLowerCase()] + ' ' + p); note('aux', w, nw, 'أفعال الحركة (aller, venir, arriver, partir, rentrer…) تأخذ être في الماضي المركب.'); return nw; });
-      cur = cur.replace(/\b(je suis|tu es|il est|elle est|on est|nous sommes|vous êtes|ils sont|elles sont) (mangé|bu|vu|pris|dit|lu|écrit|joué|regardé|compris|étudié|appris|eu|été|travaillé|parlé|écouté)(?![a-zà-ÿ])/gi, function (w, a, p) { var nw = sameCase(w, AVOIR[a.toLowerCase()] + ' ' + p); note('aux', w, nw, 'معظم الأفعال تأخذ avoir في الماضي المركب (j’ai mangé).'); return nw; });
-      // مطابقة الصفة مع elle
-      cur = cur.replace(/\belle est ([a-zà-ÿ]+)(?![a-zà-ÿ])/gi, function (w, a) { var f = FEM[a.toLowerCase()]; if (f && f !== a.toLowerCase()) { var nw = 'elle est ' + f; note('adj', w, sameCase(w, nw), 'الفاعل مؤنث فتتبعه الصفة: ' + f + '.'); return sameCase(w, nw); } return w; });
-      // أداة/نوع الاسم من قاموس الكلمات
-      cur = cur.replace(/\b(un|une|le|la|ce|cette|mon|ma|ton|ta|son|sa) ([a-zà-ÿ]+)(?![a-zà-ÿ])/gi, function (w, art, n) { var g = DATA.NOUN[fold(n)], a = art.toLowerCase(); if (!g) return w; var vow = /^[aeiouyàâéèêîôû]/i.test(n), fem = { un: 'une', le: 'la', ce: 'cette', mon: 'ma', ton: 'ta', son: 'sa' }, mas = { une: 'un', la: 'le', cette: 'ce', ma: 'mon', ta: 'ton', sa: 'son' }, nw = null; if (g === 'f' && fem[a]) { if (vow && /^(mon|ton|son|le)$/.test(a)) return w; nw = fem[a] + ' ' + n; } else if (g === 'm' && mas[a]) { if (vow && /^(ma|ta|sa|la)$/.test(a)) return w; nw = mas[a] + ' ' + n; } if (nw) { nw = sameCase(w, nw); note('gender', w, nw, n + ' كلمة ' + (g === 'f' ? 'مؤنثة' : 'مذكّرة') + ': ' + nw + '.'); return nw; } return w; });
-      // تصريف الأفعال مع الضمائر (المضارع)
-      var PI = { 'je': 0, "j'": 0, 'tu': 1, 'il': 2, 'elle': 2, 'on': 2, 'nous': 3, 'vous': 4, 'ils': 5, 'elles': 5 };
-      cur = cur.replace(/\b(je|j'|tu|il|elle|on|nous|vous|ils|elles)\s*([a-zà-ÿ]+)(?![a-zà-ÿ])/gi, function (w, p, v) {
-        var pk = p.toLowerCase(), pi = PI[pk], vl = v.toLowerCase(), hit = null; if (pi === undefined) return w;
-        DATA.CONJ.some(function (c) { var f = c.forms.map(function (x) { return String(x).toLowerCase().replace(/^(j'|je |tu |il\/elle |il |elle |nous |vous |ils\/elles |ils )/, ''); }); if (f[pi] === vl) { hit = 'ok'; return true; } if (vl === c.verb.toLowerCase() && !/^(veux|peux|dois|vais|vas|va|allons|allez|vont)$/i.test('')) { hit = { c: c, f: f }; return true; } var idx = f.indexOf(vl); if (idx > -1 && idx !== pi && f.filter(function (x) { return x === f[idx]; }).length === 1 && f[pi] !== f[idx]) { hit = { c: c, f: f, bad: 1 }; return true; } return false; });
-        if (hit && hit !== 'ok') { var right = hit.f[pi], sep = pk === "j'" || (pk === 'je' && right === undefined) ? '' : ' '; if (!right) return w; var nw = sameCase(w, (pk === "j'" ? "j'" : p) + (pk === "j'" ? '' : ' ') + right); if (pk === 'je' && /^[aeiouyàâéèêîôû]/i.test(right)) nw = sameCase(w, "j'" + right); note('verb', w, nw, hit.bad ? 'الفعل ' + hit.c.verb + ' مع ' + p + ' يُصرَّف: ' + right + '.' : 'بعد الضمير ' + p + ' لا نستعمل المصدر بل الفعل المصرَّف: ' + right + '.'); return nw; } return w; });
       cur = cur.replace(/\bca\b/g, function () { note('accent', 'ca', 'ça', 'الكلمة تُكتب بسيدية ç: ça.'); return 'ça'; });
-      // الإملاء: علامات التشكيل (ثقة عالية) + تنبيه إملائي محتمل
-      var maybe = [], first = true;
-      cur = cur.replace(/[A-Za-zÀ-ÿœæ]{4,}/g, function (t, off) { var lw = t.toLowerCase(); if (DATA.KNOWN[lw] || /^[A-ZÀ-Þ]/.test(t) && off > 0) return t; var base = lw.replace(/(s|x|es|e|ent|er|ez|ons|ais|ait|é|ée|és)$/, ''); if (base.length >= 3 && (DATA.KNOWN[base] || DATA.KNOWN[base + 'e'] || DATA.KNOWN[base + 'er'])) return t; var f = fold(lw), a = DATA.ACC[f]; if (a && a.length === 1) { var nw = sameCase(t, a[0]); note('accent', t, nw, 'الكلمة تُكتب بعلامات: ' + a[0] + '.'); return nw; } if (lw.length <= 14) { var best = null, bd = lw.length >= 8 ? 2 : 1, cnt = 0; Object.keys(DATA.KNOWN).forEach(function (k) { if (Math.abs(k.length - lw.length) > 1 || k[0] !== lw[0]) return; var d = lev(lw, k, bd); if (d <= bd) { if (d < bd || !best) { best = k; bd = d; cnt = 1; } else cnt++; } }); if (best && cnt === 1) maybe.push({ wrong: t, right: best }); } return t; });
+      var maybe = [];
+      cur = cur.replace(/[A-Za-zÀ-ÿœæ]{4,}/g, function (t, off) { var lw = t.toLowerCase(); if (DATA.KNOWN[lw] || /^[A-ZÀ-Þ]/.test(t) && off > 0) return t; var base = lw.replace(/(s|x|es|e|ent|er|ez|ons|ais|ait|é|ée|és)$/, ''); if (base.length >= 3 && (DATA.KNOWN[base] || DATA.KNOWN[base + 'e'] || DATA.KNOWN[base + 'er'])) return t; var f = fold(lw), a = DATA.ACC[f]; if (a && a.length === 1) { var nw = sameCase(t, a[0]); note('accent', t, nw, 'الكلمة تُكتب بعلامات: ' + a[0] + '.'); return nw; } return t; });
       var realIssues = issues.filter(function (i) { return !i.soft; });
       return { orig: txt, corrected: cur, issues: issues, hard: realIssues, maybe: maybe, ok: !realIssues.length && !maybe.length };
     }
     var LBL = { age: 'التعبير عن العمر والإحساس', elision: 'الحذف مع حرف العلة', contr: 'اندماج حرف الجر مع الأداة', verb: 'تصريف الفعل', qty: 'تعبيرات الكمية', neg: 'النفي', aux: 'avoir وêtre في الماضي المركب', adj: 'مطابقة الصفة', gender: 'الأداة ونوع الاسم', accent: 'علامات الإملاء' };
-    var TIPS = { age: 'قل دائمًا: j’ai … ans وj’ai faim.', elision: 'قبل حرف علة: j’ / l’ / d’ / n’ / c’.', contr: 'à+le=au ، à+les=aux ، de+le=du ، de+les=des.', verb: 'راجع تصريف المضارع في قسم Grammaire أو اسألني: «conjugue aller».', qty: 'beaucoup de / un peu de بدون أداة.', neg: 'ne … pas حول الفعل.', aux: 'أفعال الحركة مع être والباقي مع avoir.', adj: 'مع الفاعل المؤنث أضف e للصفة.', gender: 'احفظ الاسم مع أداته: la maison، le livre.', accent: 'انتبه إلى é è ê à ù ç.' };
+    var TIPS = { age: 'قل دائمًا: j’ai … ans وj’ai faim.', elision: 'قبل حرف علة: j’ / l’ / d’ / n’ / c’.', contr: 'à+le=au ، à+les=aux ، de+le=du ، de+les=des.', verb: 'راجع تصريف المضارع.', qty: 'beaucoup de / un peu de بدون أداة.', neg: 'ne … pas حول الفعل.', aux: 'أفعال الحركة مع être والباقي مع avoir.', adj: 'مع الفاعل المؤنث أضف e للصفة.', gender: 'احفظ الاسم مع أداته.', accent: 'انتبه إلى é è ê à ù ç.' };
 
     /* ---------- تقييم النطق (كرّر بعدي) ---------- */
-    var PRON = [[/ou/i, 'ou = صوت [u] مثل الواو، لا تنطقها «أو».'], [/u(?![iae])/i, 'u الفرنسية [y]: ضمّ شفتيك كما تقول «و» وانطق «إي».'], [/r/i, 'الراء الفرنسية [ʁ] من الحلق بخفة، لا تُدحرج اللسان.'], [/(on|om)(?![aeiouyhnm])/i, 'on = أنف [ɔ̃]: الصوت يمرّ من الأنف ولا تنطق n.'], [/(an|am|en|em)(?![aeiouyhnm])/i, 'an/en = [ɑ̃] أنفية واسعة.'], [/(in|ain|ein|im)(?![aeiouyhnm])/i, 'in/ain = [ɛ̃] أنفية.'], [/eau|au/i, 'au / eau = [o] مغلقة.'], [/oi/i, 'oi = [wa] مثل «وا».'], [/ch/i, 'ch = [ʃ] مثل «ش».'], [/(^|[^s])j|g(e|i)/i, 'j وge = [ʒ] مثل الجيم الخفيفة في «جاراج».'], [/gn/i, 'gn = [ɲ] مثل «ني».'], [/ill/i, 'ill غالبًا [j] مثل «ي».'], [/qu/i, 'qu = [k] والـ u صامتة.'], [/ç/i, 'ç = [s].'], [/tion/i, 'tion = [sjɔ̃] مثل «سيون» أنفية.'], [/^h/i, 'h في بداية الكلمة صامتة.'], [/(s|t|d|x|z|p|g)$/i, 'الحرف الأخير غالبًا صامت.'], [/e$/i, 'e الأخيرة صامتة.'], [/(é|ez$|er$)/i, 'é / er / ez = [e] مغلقة (إي).'], [/è|ê|ai|ei/i, 'è / ai = [ɛ] مفتوحة.'], [/eu|œu/i, 'eu = [ø] شفتان مستديرتان وانطق «إي».']];
+    var PRON = [[/ou/i, 'ou = صوت [u] مثل الواو.'], [/u(?![iae])/i, 'u الفرنسية [y].'], [/r/i, 'الراء الفرنسية [ʁ].'], [/(on|om)(?![aeiouyhnm])/i, 'on = أنف [ɔ̃].'], [/(an|am|en|em)(?![aeiouyhnm])/i, 'an/en = [ɑ̃].'], [/eau|au/i, 'au / eau = [o].'], [/oi/i, 'oi = [wa].'], [/ch/i, 'ch = [ʃ].']];
     function tokens(s) { return fold(clean(s)).replace(/[^a-z0-9' ]/g, ' ').split(/\s+/).filter(Boolean); }
     function compare(target, alts) {
       var tt = tokens(target), best = null; (alts || []).forEach(function (a) { var ht = tokens(a.t), n = tt.length, m = ht.length, d = [], i, j; for (i = 0; i <= n; i++) { d[i] = []; for (j = 0; j <= m; j++) d[i][j] = 0; } for (i = 1; i <= n; i++) for (j = 1; j <= m; j++) d[i][j] = Math.max(d[i - 1][j], d[i][j - 1], d[i - 1][j - 1] + (sim(tt[i - 1], ht[j - 1]) >= 0.7 ? 1 : 0)); var st = [], k, used = []; for (k = 0; k < n; k++) { var bs = 0, bj = -1; for (j = 0; j < m; j++) { var s = sim(tt[k], ht[j]); if (s > bs && used.indexOf(j) < 0) { bs = s; bj = j; } } if (bs >= 0.999) { st.push('ok'); used.push(bj); } else if (bs >= 0.7) { st.push('cl'); used.push(bj); } else st.push('ms'); } var sc = n ? st.reduce(function (a, x) { return a + (x === 'ok' ? 1 : x === 'cl' ? 0.6 : 0); }, 0) / n : 0; if (!best || sc > best.sc) best = { sc: sc, st: st, heard: a.t, conf: a.c }; });
@@ -159,8 +145,8 @@
     }
     function shadowCard(target, res) {
       var orig = clean(target).split(/\s+/), r = res.r, p = Math.round(r.sc * 100), col = p >= 85 ? '#16a34a' : p >= 60 ? '#f59e0b' : '#dc2626', tips = [];
-      var ws = orig.map(function (w, i) { var s = r.st[i] || 'ms'; if (s !== 'ok' && tips.length < 3) { var tp = PRON.filter(function (x) { return x[0].test(fold(w)) || x[0].test(w); }).slice(0, 1); if (tp.length) tips.push('<b dir="ltr">' + esc(w.replace(/[.,!?]/g, '')) + '</b>: ' + esc(tp[0][1])); } return '<span class="' + s + '">' + esc(w) + '</span>'; }).join(' ');
-      return '<div class="tk-sc" style="background:' + col + '">' + (p >= 85 ? '🎉 ممتاز' : p >= 60 ? '👍 قريب جدًا' : '🔁 حاول مجددًا') + ' · ' + p + '%</div><div class="ws">' + ws + '</div><div style="font-size:.76rem;color:#6b7280;margin-top:3px">فهمتُ: <span dir="ltr">«' + esc(r.heard || '—') + '»</span> · 🟩 صحيح 🟨 قريب 🟥 لم أسمعه</div>' + (tips.length ? '<ul style="margin:5px 0 0;padding-inline-start:18px;font-size:.78rem;line-height:1.7">' + tips.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul>' : '');
+      var ws = orig.map(function (w, i) { var s = r.st[i] || 'ms'; return '<span class="' + s + '">' + esc(w) + '</span>'; }).join(' ');
+      return '<div class="tk-sc" style="background:' + col + '">' + (p >= 85 ? '🎉 ممتاز' : p >= 60 ? '👍 قريب جدًا' : '🔁 حاول مجددًا') + ' · ' + p + '%</div><div class="ws">' + ws + '</div><div style="font-size:.76rem;color:#6b7280;margin-top:3px">فهمتُ: <span dir="ltr">«' + esc(r.heard || '—') + '»</span> · 🟩 صحيح 🟨 قريب 🟥 لم أسمعه</div>';
     }
 
     /* ---------- بناء الواجهة ---------- */
@@ -193,7 +179,7 @@
     function T(id) { return DATA.talk.topics.filter(function (t) { return t.id === id; })[0]; }
     function P(a) { return { fr: a[0], ar: a[1] }; }
     function greet() {
-      var n = zname(), parts = [{ fr: 'Bonjour' + (n ? ' ' + n : '') + ' ! Je suis Zoza, ton amie robot. Je parle français avec toi, je corrige tes phrases et ton prononciation !'.replace('ton prononciation', 'ta prononciation'), ar: 'مرحبًا' + (n ? ' يا ' + n : '') + '! أنا زوزا صديقتك الروبوت. أتحدث معك بالفرنسية وأصحّح جملك ونطقك!' }, { fr: 'De quoi veux-tu parler ? Choisis un sujet ou écris ce que tu veux.', ar: 'عن ماذا تريد أن نتحدث؟ اختر موضوعًا أو اكتب ما تشاء.' }];
+      var n = zname(), parts = [{ fr: 'Bonjour' + (n ? ' ' + n : '') + ' ! Je suis Zoza, ton amie robot. Je parle français avec toi, je corrige tes phrases et ta prononciation !', ar: 'مرحبًا' + (n ? ' يا ' + n : '') + '! أنا زوزا صديقتك الروبوت. أتحدث معك بالفرنسية وأصحّح جملك ونطقك!' }, { fr: 'De quoi veux-tu parler ? Choisis un sujet ou écris ce que tu veux.', ar: 'عن ماذا تريد أن نتحدث؟ اختر موضوعًا أو اكتب ما تشاء.' }];
       addZ(parts, { sug: [{ type: 'topics' }], mute: !ST.voice });
     }
     function startTopic(id) {
@@ -206,8 +192,6 @@
       var list = t.q[ST.level]; if (S.qi >= list.length) { S.topicDone = true; return { parts: [{ fr: 'On a bien parlé de ce sujet ! De quoi veux-tu parler maintenant ?', ar: 'تحدثنا جيدًا في هذا الموضوع! عن ماذا تريد أن نتحدث الآن؟' }], sug: [{ type: 'topics' }] }; }
       var q = list[S.qi++]; return { parts: [{ fr: q[0], ar: q[1] }], sug: q[2] || [] };
     }
-    function frNum(n) { return String(n); }
-    var DAYS = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'], MONTHS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'], DAYS_AR = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
     function lookup(q) {
       var res = [], tq;
       if (isAr(q)) { tq = nza(q).split(' ').map(sa).filter(function (x) { return x.length >= 2; }); DATA.LEX.forEach(function (w) { if (res.length < 3 && tq.some(function (t) { return w.a.split(' ').indexOf(t) > -1; })) res.push(w); }); }
@@ -217,152 +201,124 @@
     function special(text, an) {
       var f = fold(text).replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim(), m, now = new Date();
       if (/^(bonjour|salut|coucou|bonsoir|hello)\b/.test(f) && f.split(' ').length <= 4) return { parts: [{ fr: 'Bonjour ! Je suis contente de te parler. Comment ça va ?', ar: 'مرحبًا! سعيدة بالحديث معك. كيف حالك؟' }], sug: ['Ça va bien, merci !', 'Ça va mal.'] };
-      if (/(comment (ca )?va|ca va\b|tu vas bien|comment vas tu|comment allez vous)/.test(f) && /\?|comment|tu vas/.test(text) ) return { parts: [{ fr: 'Je vais très bien, merci ! Mes circuits sont en pleine forme. Et toi ?', ar: 'أنا بخير شكرًا! دوائري في أحسن حال. وأنت؟' }], sug: ['Moi aussi, ça va bien.', 'Je suis un peu fatigué.'] };
-      if (/(comment tu t appelles|tu t appelles comment|ton nom|qui es tu)/.test(f)) return { parts: [{ fr: 'Je m’appelle Zoza ! Je suis une petite robot-prof qui adore le français.', ar: 'اسمي زوزا! أنا روبوت معلّمة صغيرة تعشق الفرنسية.' }] };
-      if (/(quel age as tu|ton age|tu as quel age)/.test(f)) return { parts: [{ fr: 'Je suis née dans un téléphone, alors j’ai l’âge de l’application ! Et toi, tu as quel âge ?', ar: 'وُلدتُ داخل هاتف، فعمري بعمر التطبيق! وأنت كم عمرك؟' }] };
-      if (/(ou habites tu|tu habites ou|ou vis tu)/.test(f)) return { parts: [{ fr: 'J’habite dans ton téléphone. C’est petit mais très confortable !', ar: 'أسكن في هاتفك. صغير لكنه مريح جدًا!' }] };
-      if (/quelle heure/.test(f)) { var hh = now.getHours(), mm = now.getMinutes(); return { parts: [{ fr: 'Il est ' + hh + ' heures' + (mm ? ' ' + mm : '') + '.', ar: 'الساعة الآن ' + hh + ':' + (mm < 10 ? '0' : '') + mm + '.' }] }; }
-      if (/(quel jour|quelle date|on est quel|quel est la date)/.test(f)) return { parts: [{ fr: 'Aujourd’hui, nous sommes ' + DAYS[now.getDay()] + ' ' + now.getDate() + ' ' + MONTHS[now.getMonth()] + ' ' + now.getFullYear() + '.', ar: 'اليوم هو ' + DAYS_AR[now.getDay()] + ' ' + now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear() + '.' }] };
-      if (/(quel temps fait il|la meteo|il fait beau)/.test(f)) return { parts: [{ fr: 'Je n’ai pas de fenêtre, mais regarde le ciel ! Il fait beau chez toi ?', ar: 'ليس لدي نافذة، لكن انظر إلى السماء! هل الطقس جميل عندك؟' }] };
+      if (/(comment (ca )?va|ca va\b|tu vas bien|comment vas tu)/.test(f)) return { parts: [{ fr: 'Je vais très bien, merci ! Mes circuits sont en pleine forme. Et toi ?', ar: 'أنا بخير شكرًا! دوائري في أحسن حال. وأنت؟' }], sug: ['Moi aussi, ça va bien.', 'Je suis un peu fatigué.'] };
+      if (/(comment tu t appelles|ton nom|qui es tu)/.test(f)) return { parts: [{ fr: 'Je m’appelle Zoza ! Je suis une petite robot-prof qui adore le français.', ar: 'اسمي زوزا! أنا روبوت معلّمة صغيرة تعشق الفرنسية.' }] };
       if (/blague|drole|rigol/.test(f)) { var j = pick(DATA.talk.jokes); return { parts: [P(j)], sug: ['Ha ha, très drôle !', 'Encore une blague !'] }; }
-      if (/(proverbe|dicton|citation)/.test(f)) { var s = pick(DATA.talk.sayings); return { parts: [{ fr: s[0], ar: s[1] }], sug: ['C’est joli !'] }; }
-      if (/virelangue/.test(f)) { var v = pick(DATA.talk.twisters); return { parts: [{ fr: v[0], ar: v[1] + ' — اضغط «🎤 كرّر بعدي» لتجرّب نطقها!' }] }; }
       if (/^(merci|merci beaucoup)\b/.test(f)) return { parts: [{ fr: 'De rien ! C’est un plaisir de parler avec toi.', ar: 'عفوًا! يسعدني الحديث معك.' }] };
-      if (/(au revoir|bonne nuit|a bientot|a demain|bye)/.test(f)) return { parts: [{ fr: 'Au revoir ! Tu as très bien travaillé aujourd’hui. À bientôt !', ar: 'إلى اللقاء! عملتَ جيدًا اليوم. إلى اللقاء قريبًا!' }], bye: 1 };
-      if (/(je ne comprends pas|repete|repetez|plus lentement|pardon\s*$|tu peux repeter)/.test(f) && S.last) { return { parts: [{ fr: S.last.fr, ar: 'سأكرر ببطء: ' + S.last.ar }], slow: 1 }; }
-      if (/^(aide|help|que sais tu faire|tu peux faire quoi|qu est ce que tu sais faire)/.test(f)) return { parts: [{ fr: 'Je peux discuter avec toi, corriger tes phrases, expliquer des mots, conjuguer des verbes et épeler. Demande-moi !', ar: 'أستطيع الحديث معك وتصحيح جملك وشرح الكلمات وتصريف الأفعال والتهجئة. اسألني!' }], sug: ['Comment dit-on « maison » ?', 'Conjugue aller', 'Épelle bonjour'] };
-      if ((m = f.match(/^(?:epelle|epeler|comment s ecrit|comment ecrire)\s+(?:le mot\s+)?([a-z']+)/))) { var w = m[1]; return { parts: [{ fr: w + ' : ' + w.toUpperCase().split('').join(' - '), ar: 'تهجئة كلمة ' + w }], spell: w }; }
-      if ((m = f.match(/^(?:conjugue|conjuguer|conjugaison de|conjugaison)\s+(?:le verbe\s+)?([a-z]+)/))) { var vb = m[1], c = DATA.CONJ.filter(function (x) { return fold(x.verb) === vb || fold(x.verb) === 'se ' + vb; })[0]; if (!c) return { parts: [{ fr: 'Je ne connais pas encore ce verbe. Essaie : être, avoir, aller, faire, parler…', ar: 'لا أعرف هذا الفعل بعد. جرّب: être, avoir, aller, faire, parler…' }] }; var tn = c.c.tenses, pr = ['je', 'tu', 'il/elle', 'nous', 'vous', 'ils/elles']; var tb = '<table class="tk-tb"><tr><th></th>' + tn.map(function (t) { return '<th>' + esc(t.name_fr) + '</th>'; }).join('') + '</tr>' + pr.map(function (p, i) { return '<tr><th>' + p + '</th>' + tn.map(function (t) { return '<td>' + esc(t.forms[i] || '') + '</td>'; }).join('') + '</tr>'; }).join('') + '</table>'; return { parts: [{ fr: 'Voici la conjugaison de « ' + c.verb + ' » :', ar: 'هذا تصريف الفعل ' + c.verb + ':' }], html: tb, say: pr.map(function (p, i) { return p.split('/')[0] + ' ' + tn[0].forms[i]; }).join(', ') }; }
-      if ((m = f.match(/(?:comment dit on|comment dire|que veut dire|ca veut dire quoi|que signifie|traduis|traduire)\s+(.+)/))) { var rest = text.replace(/^.*?(?:dit-on|dit on|dire|veut dire|signifie|traduis|traduire)\s+/i, '').replace(/[«»"?]/g, '').trim(), r = lookup(rest); if (!r.length) return { parts: [{ fr: 'Hmm, je ne trouve pas ce mot dans ma tête de robot. Essaie un autre mot !', ar: 'لم أجد هذه الكلمة عندي. جرّب كلمة أخرى!' }] }; return wordReply(r, isAr(rest)); }
-      if (isAr(text)) { var r2 = lookup(text); var tq = nza(text).split(' ').map(sa).filter(function (x) { return x.length >= 2; }), bestL = null, bs = 0; DATA.DIAL.forEach(function (l) { var al = nza(l.ar).split(' ').map(sa), ov = tq.filter(function (t) { return al.indexOf(t) > -1; }).length; if (ov > bs) { bs = ov; bestL = l; } }); var pr2 = []; if (r2.length) pr2.push({ fr: 'Mots utiles : ' + r2.map(function (w) { return w.fr; }).join(', ') + '.', ar: 'كلمات مفيدة: ' + r2.map(function (w) { return w.fr + ' = ' + w.ar; }).join('، ') + '.' }); if (bestL && bs >= 2) pr2.push({ fr: 'Une phrase proche : « ' + bestL.fr + ' »', ar: 'جملة قريبة المعنى: «' + bestL.fr + '» = ' + bestL.ar }); if (!pr2.length) pr2.push({ fr: 'Je n’ai pas trouvé la traduction exacte. Essaie avec des mots plus simples.', ar: 'لم أجد الترجمة بدقة. جرّب بكلمات أبسط.' }); pr2.push({ fr: 'Maintenant, essaie de dire ta phrase en français !', ar: 'والآن حاول أن تقول جملتك بالفرنسية!' }); return { parts: pr2, learn: r2 }; }
-      if ((m = f.match(/combien (?:font|fait) (\d+)\s*(plus|\+|moins|-|fois|x|\*|divise par|\/)\s*(\d+)/))) { var a = +m[1], b = +m[3], o = m[2], rs = /plus|\+/.test(o) ? a + b : /moins|-/.test(o) ? a - b : /fois|x|\*/.test(o) ? a * b : (b ? Math.round(a / b * 100) / 100 : '∞'); return { parts: [{ fr: a + ' ' + o + ' ' + b + ' font ' + rs + ' !', ar: 'الناتج: ' + rs }] }; }
+      if (/(au revoir|bonne nuit|a bientot|bye)/.test(f)) return { parts: [{ fr: 'Au revoir ! Tu as très bien travaillé aujourd’hui. À bientôt !', ar: 'إلى اللقاء! عملتَ جيدًا اليوم. إلى اللقاء قريبًا!' }], bye: 1 };
+      if ((m = f.match(/(?:comment dit on|que veut dire|traduis)\s+(.+)/))) { var rest = text.replace(/^.*?(?:dit-on|veut dire|traduis)\s+/i, '').replace(/[«»"?]/g, '').trim(), r = lookup(rest); if (!r.length) return { parts: [{ fr: 'Hmm, je ne trouve pas ce mot.', ar: 'لم أجد هذه الكلمة عندي.' }] }; return { parts: r.map(function(w){ return {fr: '« ' + w.fr + ' » = ' + w.ar, ar: w.ar}; }) }; }
       return null;
-    }
-    function wordReply(r, fromAr) {
-      r.forEach(function (w) { if (!ST.words[w.fr]) { ST.words[w.fr] = 1; S.learned.push(w); } }); save();
-      var parts = r.map(function (w) { return fromAr ? { fr: 'On dit : « ' + w.fr + ' »', ar: 'نقول بالفرنسية: «' + w.fr + '» (' + w.ar + ')' } : { fr: '« ' + w.fr + ' » veut dire : ' + w.ar, ar: 'كلمة «' + w.fr + '» تعني: ' + w.ar }; }); parts.push({ fr: 'Peux-tu faire une phrase avec ce mot ?', ar: 'هل تستطيع تكوين جملة بهذه الكلمة؟' });
-      return { parts: parts, learn: r, sug: [r[0].fr.replace(/^(le|la|l’|l'|un|une) /i, '').length ? 'J’aime … ' : ''].filter(Boolean) };
     }
     function extract(text) {
       var t = ap(text).toLowerCase(), out = {}, m;
-      if ((m = t.match(/(?:je m'appelle|mon nom est|moi c'est)\s+([a-zà-ÿ'-]{2,20})/))) out.name = m[1].charAt(0).toUpperCase() + m[1].slice(1);
+      if ((m = t.match(/(?:je m'appelle|mon nom est)\s+([a-zà-ÿ'-]{2,20})/))) out.name = m[1].charAt(0).toUpperCase() + m[1].slice(1);
       if ((m = t.match(/j'ai\s+(\d{1,2})\s+ans/))) out.age = m[1];
-      if ((m = t.match(/j'habite\s+(?:à|au|en|dans)\s+(?:la\s+|le\s+|l')?([a-zà-ÿ' -]{2,24})/))) out.city = m[1].trim().split(' ')[0].replace(/[.,!?]$/, '');
-      if ((m = t.match(/(?:j'aime|j'adore|je préfère)\s+(?:le |la |les |l'|un |une |du |de la |des )?([a-zà-ÿ' -]{3,26})/))) out.like = m[1].trim().replace(/[.,!?]$/, '');
       return out;
-    }
-    function factReact(fc) {
-      if (fc.name) { ST.facts.name = fc.name; return { fr: 'Enchantée, ' + fc.name + ' ! Quel joli prénom.', ar: 'تشرفتُ بمعرفتك يا ' + fc.name + '! اسم جميل.' }; }
-      if (fc.age) { ST.facts.age = fc.age; return { fr: fc.age + ' ans, c’est un bel âge pour apprendre !', ar: fc.age + ' عامًا سنٌّ جميلة للتعلّم!' }; }
-      if (fc.city) { ST.facts.city = fc.city; return { fr: fc.city.charAt(0).toUpperCase() + fc.city.slice(1) + ', ça doit être une belle ville !', ar: 'لا بد أنها مدينة جميلة!' }; }
-      if (fc.like) { ST.facts.like = fc.like; return { fr: 'Tu aimes ça ? Moi, j’adore apprendre avec toi !', ar: 'تحب ذلك؟ أما أنا فأعشق التعلّم معك!' }; }
-      return null;
     }
     function ackFor(text, an, fc) {
       var f = fold(text); if (an && an.hard.length && !fc) return P(['Bonne tentative ! Regarde la petite correction.', 'محاولة جيدة! انظر إلى التصحيح الصغير.']);
-      var fr = factReact(fc); if (fr) return fr; var n = f.split(/\s+/).length, neg = /(n'aime pas|deteste|triste|non\b|pas |fatigue|mal\b|difficile|ennuy)/.test(f), pos = /(j'aime|j'adore|super|genial|content|heureux|oui|bien|passion|prefere|magnifique|excellent)/.test(f);
-      if (n >= 7 && (!an || an.ok)) return P(pick(DATA.talk.react.long)); return P(pick(neg && !pos ? DATA.talk.react.neg : pos ? DATA.talk.react.pos : DATA.talk.react.neu));
+      if (fc && fc.name) return { fr: 'Enchantée, ' + fc.name + ' !', ar: 'تشرفت بمعرفتك يا ' + fc.name + '!' };
+      return P(pick(DATA.talk.react.pos));
     }
     function detectTopic(text) { var f = fold(text), toks = f.split(/[^a-z]+/); var best = null, bs = 0; DATA.talk.topics.forEach(function (t) { var sc = t.kw.filter(function (k) { return toks.indexOf(k) > -1; }).length; if (sc > bs) { bs = sc; best = t; } }); return best; }
     function localReply(text, an) {
       var fc = extract(text); Object.keys(fc).forEach(function (k) { S.facts = S.facts || {}; S.facts[k] = fc[k]; });
       var sp = special(text, an); var parts = [], sug = [], extra = {};
-      if (sp) { parts = sp.parts; sug = sp.sug || []; extra = sp; if (sp.learn) sp.learn.forEach(function (w) { if (!ST.words[w.fr]) { ST.words[w.fr] = 1; S.learned.push(w); } }); if (!sug.length && S.topic && !sp.bye && !sp.slow && !sp.learn && !sp.spell && !sp.say && !sp.html) { var q = nextQ(); parts = parts.concat(q.parts); sug = q.sug; } return { parts: parts, sug: sug, extra: extra }; }
-      var tp = detectTopic(text); if (tp && (!S.topic || (tp.id !== S.topic.id && !S.topic.kw.some(function (k) { return fold(text).split(/[^a-z]+/).indexOf(k) > -1; })))) { S.topic = tp; S.qi = 0; $('#tk-tp').innerHTML = tpChips(); var q1 = nextQ(); return { parts: [ackFor(text, an, fc), { fr: 'Tu parles de ce thème ! Parlons-en : ' + tp.fr + '.', ar: 'تتحدث عن موضوع ' + tp.ar + '! لنتحدث عنه.' }].concat(q1.parts), sug: q1.sug, extra: {} }; }
+      if (sp) { parts = sp.parts; sug = sp.sug || []; extra = sp; if (!sug.length && S.topic && !sp.bye) { var q = nextQ(); parts = parts.concat(q.parts); sug = q.sug; } return { parts: parts, sug: sug, extra: extra }; }
+      var tp = detectTopic(text); if (tp && (!S.topic || S.topic.id !== tp.id)) { S.topic = tp; S.qi = 0; $('#tk-tp').innerHTML = tpChips(); var q1 = nextQ(); return { parts: [ackFor(text, an, fc), { fr: 'Parlons de ce thème : ' + tp.fr + '.', ar: 'لنتحدث عن موضوع ' + tp.ar + '.' }].concat(q1.parts), sug: q1.sug, extra: {} }; }
       parts.push(ackFor(text, an, fc)); var nq = nextQ(); parts = parts.concat(nq.parts); sug = nq.sug;
-      if (!S.topic) { parts = [parts[0], { fr: pick(['Raconte-moi plus !', 'Pourquoi ? Dis-m’en plus !', 'Et ensuite ?']), ar: 'احكِ لي المزيد!' }]; sug = [{ type: 'topics' }]; }
       return { parts: parts, sug: sug, extra: {} };
     }
 
     /* ---------- معالجة رسالة الطالب ---------- */
     function showFix(box, an) {
-      var fb = $('.tk-fb', box); if (!fb) return; var hard = an.hard, soft = an.issues.filter(function (i) { return i.soft; }), words = (S.lastWords || 0);
+      var fb = $('.tk-fb', box); if (!fb) return; var hard = an.hard, soft = an.issues.filter(function (i) { return i.soft; });
       if (hard.length || soft.length) {
         fb.innerHTML = '<div class="tk-fx w"><b>✏️ الصياغة الصحيحة:</b> <b class="ok" dir="ltr">' + esc(an.corrected) + '</b><ul>' + an.issues.map(function (i) { return '<li><s dir="ltr">' + esc(i.wrong) + '</s> ← <u dir="ltr">' + esc(i.right) + '</u> — ' + esc(i.why) + '</li>'; }).join('') + '</ul><div class="tk-bt" style="margin-top:6px"><button type="button" data-a="sayfix" data-t="' + esc(an.corrected) + '">🔊 اسمع الصحيحة</button><button type="button" data-a="shfix" data-t="' + esc(an.corrected) + '">🎤 كرّرها</button></div><div class="tk-sh-w"></div></div>';
-      } else if (an.maybe.length) {
-        fb.innerHTML = '<div class="tk-fx w">🔎 <b>تنبيه إملائي محتمل:</b> ' + an.maybe.slice(0, 2).map(function (m) { return '<s dir="ltr">' + esc(m.wrong) + '</s> ← <u dir="ltr">' + esc(m.right) + '</u> ؟'; }).join('، ') + ' <small>(تجاهله إن كانت كلمتك صحيحة)</small></div>';
       } else if (an.orig.split(/\s+/).length >= 3) fb.innerHTML = '<div class="tk-fx">✅ جملة سليمة! أحسنت.</div>';
     }
     function handle(text, meta) {
       text = String(text || '').trim(); if (!text) return; var box = addU(text), an = analyze(text); S.turns++; ST.turns++; S.lastWords = text.split(/\s+/).length; S.hist.push({ role: 'user', content: text });
       if (!isAr(text)) { showFix(box, an); an.hard.forEach(function (i) { S.errs[i.type] = (S.errs[i.type] || 0) + 1; ST.fixes++; }); }
-      if (meta && meta.conf != null && meta.conf < 0.6 && !isAr(text)) { var fb = $('.tk-fb', box); fb.insertAdjacentHTML('beforeend', '<div class="tk-fx w">🎤 ثقة التعرّف ' + Math.round(meta.conf * 100) + '% — ربما نطقتَ بعض الكلمات بغير وضوح. اضغط «🎤 كرّرها» أو اسمع النطق الصحيح وقلّد.<div class="tk-bt" style="margin-top:6px"><button type="button" data-a="sayfix" data-t="' + esc(an.corrected) + '">🔊 اسمع النطق</button><button type="button" data-a="shfix" data-t="' + esc(an.corrected) + '">🎤 كرّرها</button></div><div class="tk-sh-w"></div></div>'); }
       var good = !isAr(text) && an.hard.length === 0 && S.lastWords >= 3; if (good) { S.clean++; S.streak++; ST.xp += 5; boost(8); } else { S.streak = 0; ST.xp += 2; } save(); $('#tk-xp').textContent = '✨ ' + ST.xp + ' XP';
       typing(true);
       var delay = 500 + Math.min(900, text.length * 12);
       var render = function (res) {
         typing(false); S.hist.push({ role: 'assistant', content: res.parts.map(function (p) { return p.fr; }).join(' ') });
-        var ex = res.extra || {}, el = addZ(res.parts, { html: ex.html, sug: res.sug, mute: ex.spell || ex.say }); S.last = { fr: res.parts.map(function (p) { return p.fr; }).join(' '), ar: res.parts.map(function (p) { return p.ar; }).join(' ') }; if (ex.slow && ST.voice) say(S.last.fr, 0.5);
-        if (ex.spell && ST.voice) say(ex.spell.split('').join(', '), 0.5); if (ex.say && ST.voice) say(ex.say, 0.7);
+        var ex = res.extra || {}; addZ(res.parts, { html: ex.html, sug: res.sug, mute: ex.spell || ex.say }); S.last = { fr: res.parts.map(function (p) { return p.fr; }).join(' '), ar: res.parts.map(function (p) { return p.ar; }).join(' ') };
         if (ex.bye) setTimeout(report, 900);
-        var up = (ST.level === 'b' && S.streak >= 3 && !S.offered.m) ? 'm' : (ST.level === 'm' && S.streak >= 4 && !S.offered.a) ? 'a' : null;
-        if (up) { S.offered[up] = 1; var lv = DATA.talk.levels[up]; setTimeout(function () { addZ([{ fr: 'Tu t’exprimes très bien ! Veux-tu essayer le niveau suivant ?', ar: 'تعبّر عن نفسك جيدًا! هل تريد تجربة المستوى التالي؟' }], { html: '<div class="tk-bt" style="margin-top:8px"><button type="button" data-lv="' + up + '" style="background:linear-gradient(135deg,#fde047,#fb923c);color:#7c2d12">⬆️ انتقل إلى مستوى ' + lv.ar + '</button></div>', mute: !ST.voice }); }, 1400); }
       };
       var url = AI();
       if (url) {
-        askAI(url, text).then(function (r) { setTimeout(function () { aiRender(r, box, an, render); }, 100); }).catch(function () { setTimeout(function () { render(localReply(text, an)); if (!S.ai) { S.ai = 1; addNote('تعذّر الاتصال بالخدمة الذكية فاستخدمتُ وضع التدريب المحلي.'); } }, 200); });
+        askAI(url, text).then(function (r) { setTimeout(function () { aiRender(r, box, an, render); }, 100); }).catch(function () { setTimeout(function () { render(localReply(text, an)); }, 200); });
       } else setTimeout(function () { render(localReply(text, an)); }, delay);
     }
     function addNote(t) { var d = document.createElement('div'); d.className = 'tk-note'; d.textContent = t; chat().appendChild(d); scrollDown(); }
 
-    /* ---------- الوضع الذكي (خدمة وسيطة اختيارية) ---------- */
     function askAI(url, text) {
       var ctl = window.AbortController ? new AbortController() : null, to = setTimeout(function () { if (ctl) ctl.abort(); }, 15000);
       return fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: ctl ? ctl.signal : undefined, body: JSON.stringify({ level: ST.level, topic: S.topic ? S.topic.fr : '', name: zname() || ST.facts.name || '', facts: ST.facts, history: S.hist.slice(-12), message: text }) }).then(function (r) { clearTimeout(to); if (!r.ok) throw new Error('http'); return r.json(); });
     }
     function aiRender(r, box, an, render) {
       var corr = r.corrections || [];
-      if (corr.length) { var fb = $('.tk-fb', box); fb.innerHTML = '<div class="tk-fx w"><b>✏️ ملاحظات زوزا:</b><ul>' + corr.map(function (c) { return '<li><s dir="ltr">' + esc(c.wrong) + '</s> ← <u dir="ltr">' + esc(c.right) + '</u> — ' + esc(c.why_ar || '') + '</li>'; }).join('') + '</ul></div>'; (r.corrections || []).forEach(function (c) { S.errs.ai = (S.errs.ai || 0) + 1; }); }
+      if (corr.length) { var fb = $('.tk-fb', box); fb.innerHTML = '<div class="tk-fx w"><b>✏️ ملاحظات زوزا:</b><ul>' + corr.map(function (c) { return '<li><s dir="ltr">' + esc(c.wrong) + '</s> ← <u dir="ltr">' + esc(c.right) + '</u> — ' + esc(c.why_ar || '') + '</li>'; }).join('') + '</ul></div>'; }
       var parts = [{ fr: r.reply_fr || '', ar: r.reply_ar || '' }]; if (r.tip_ar) parts.push({ fr: '', ar: '💡 ' + r.tip_ar });
-      (r.new_words || []).forEach(function (w) { if (w.fr && !ST.words[w.fr]) { ST.words[w.fr] = 1; S.learned.push(w); } });
       render({ parts: parts, sug: r.suggestions_fr || [], extra: {} });
     }
 
-    /* ---------- التقرير ---------- */
     function report() {
-      var errs = Object.keys(S.errs).sort(function (a, b) { return S.errs[b] - S.errs[a]; }), pct = S.turns ? Math.round(S.clean * 100 / S.turns) : 0;
-      var h = '<div class="tk-fx"><b>📊 تقرير زوزا</b><br>💬 عدد رسائلك: ' + S.turns + ' · ✅ جمل سليمة: ' + S.clean + ' (' + pct + '%) · ✨ ' + ST.xp + ' XP' + (errs.length ? '<br><b>أكثر نقاط الضعف:</b><ul>' + errs.slice(0, 3).map(function (e) { return '<li>' + esc(LBL[e] || 'ملاحظات أخرى') + ' (' + S.errs[e] + ') — ' + esc(TIPS[e] || '') + '</li>'; }).join('') + '</ul>' : '<br>🎉 لا أخطاء مهمة، استمر!') + (S.learned.length ? '<br><b>كلمات تعلّمتها:</b> ' + S.learned.slice(0, 8).map(function (w) { return '<span dir="ltr">' + esc(w.fr) + '</span> (' + esc(w.ar) + ')'; }).join('، ') : '') + '</div>';
-      addZ([{ fr: S.turns ? 'Voici ton bilan, bravo pour tes efforts !' : 'Commençons à parler, puis je te ferai un bilan !', ar: S.turns ? 'هذا تقييمك، أحسنت على مجهودك!' : 'لنبدأ الحديث ثم أعدّ لك تقريرًا!' }], { html: h, mute: !ST.voice }); sWin();
+      var pct = S.turns ? Math.round(S.clean * 100 / S.turns) : 0;
+      var h = '<div class="tk-fx"><b>📊 تقرير زوزا</b><br>💬 عدد رسائلك: ' + S.turns + ' · ✅ جمل سليمة: ' + S.clean + ' (' + pct + '%) · ✨ ' + ST.xp + ' XP</div>';
+      addZ([{ fr: 'Voici ton bilan, bravo pour tes efforts !', ar: 'هذا تقييمك، أحسنت على مجهودك!' }], { html: h, mute: !ST.voice }); sWin();
     }
     function help() {
-      var t = S.topic, base = ['Je m’appelle …', 'J’aime …', 'Je voudrais …', 'Je pense que …', 'Peux-tu répéter, s’il te plaît ?'];
-      if (t) { var ws = t.kw.slice(0, 4).map(function (k) { var r = DATA.LEX.filter(function (w) { return w.k === k; })[0]; return r ? r.fr + ' = ' + r.ar : k; }); addZ([{ fr: 'Voici quelques idées pour répondre !', ar: 'هذه بعض الأفكار للإجابة! ' + (ws.length ? 'كلمات مفيدة: ' + ws.join('، ') : '') }], { sug: base, mute: !ST.voice }); } else addZ([{ fr: 'Voici des phrases pour commencer !', ar: 'هذه جمل تساعدك على البدء!' }], { sug: base, mute: !ST.voice });
+      addZ([{ fr: 'Voici des phrases pour commencer !', ar: 'هذه جمل تساعدك على البدء!' }], { sug: ['Je m’appelle …', 'J’aime …', 'Je voudrais …', 'Peux-tu répéter, s’il te plaît ?'], mute: !ST.voice });
     }
     function setAI() {
       var cur = ST.ai || '', v = window.prompt('الوضع الذكي: ألصق رابط خدمة zoza-worker الوسيطة (يبدأ بـ https://). اتركه فارغًا لاستخدام وضع التدريب المحلي.', cur);
       if (v === null) return; ST.ai = String(v).trim(); save(); $('#tk-tg').innerHTML = tgBtns(); $('#tk-md').textContent = AI() ? '🧠 وضع ذكي' : '💬 وضع التدريب'; addNote(AI() ? 'تم تفعيل الوضع الذكي ✅' : 'تم إيقاف الوضع الذكي — وضع التدريب المحلي يعمل.');
     }
 
-    /* ---------- الأحداث ---------- */
     function shadow(target, holder, btn) {
       holder.innerHTML = '<div class="tk-sh"><div class="ws" dir="ltr">' + esc(clean(target)) + '</div><div style="font-size:.78rem;color:#6b7280">🎙️ اقرأ الجملة بصوت واضح…</div></div>'; if (btn) btn.classList.add('rec');
-      var r = listen(function (res) { if (btn) btn.classList.remove('rec'); if (res === null) { holder.innerHTML = '<div class="tk-sh">🎤 المتصفح لا يدعم التعرف على الصوت (جرّب Chrome على أندرويد).</div>'; return; } if (res.err) { holder.innerHTML = '<div class="tk-sh">⚠️ لم أسمعك جيدًا، أعد المحاولة.</div>'; return; } var cmp = compare(target, res.alts); holder.innerHTML = '<div class="tk-sh">' + shadowCard(target, cmp) + '</div>'; var p = Math.round(cmp.r.sc * 100); if (p >= 85) { sOk(); ST.xp += 10; boost(15); save(); $('#tk-xp').textContent = '✨ ' + ST.xp + ' XP'; } scrollDown(); });
+      var r = listen(function (res) { if (btn) btn.classList.remove('rec'); if (res === null) { holder.innerHTML = '<div class="tk-sh">🎤 المتصفح لا يدعم التعرف على الصوت.</div>'; return; } if (res.err) { holder.innerHTML = '<div class="tk-sh">⚠️ لم أسمعك جيدًا، أعد المحاولة.</div>'; return; } var cmp = compare(target, res.alts); holder.innerHTML = '<div class="tk-sh">' + shadowCard(target, cmp) + '</div>'; var p = Math.round(cmp.r.sc * 100); if (p >= 85) { sOk(); ST.xp += 10; boost(15); save(); $('#tk-xp').textContent = '✨ ' + ST.xp + ' XP'; } scrollDown(); });
       if (r === null && btn) btn.classList.remove('rec');
     }
     function micTalk(btn) {
       btn.classList.add('rec'); var ip = $('#tk-ip'), old = ip.placeholder; ip.placeholder = '🎙️ تحدّث الآن…';
-      var r = listen(function (res) { btn.classList.remove('rec'); ip.placeholder = old; if (res === null) { addNote('🎤 المتصفح لا يدعم التعرف على الصوت (جرّب Chrome على أندرويد).'); return; } if (res.err) { addNote('⚠️ لم أسمعك جيدًا، حاول مرة أخرى.'); return; } var a = res.alts[0]; ip.value = ''; handle(a.t, { conf: a.c, voice: 1 }); }, function (t) { ip.value = t; });
+      var r = listen(function (res) { btn.classList.remove('rec'); ip.placeholder = old; if (res === null) { addNote('🎤 المتصفح لا يدعم التعرف على الصوت.'); return; } if (res.err) { addNote('⚠️ لم أسمعك جيدًا، حاول مرة أخرى.'); return; } var a = res.alts[0]; ip.value = ''; handle(a.t, { conf: a.c, voice: 1 }); }, function (t) { ip.value = t; });
       if (r === null) { btn.classList.remove('rec'); ip.placeholder = old; }
     }
+
     ROOT.addEventListener('click', function (e) {
       var t = e.target, x;
-      if (t.closest('#tk-rob')) { var h = $('#tk-hero'); addZ([{ fr: 'Coucou ! Prête à parler français ? Choisis un sujet !', ar: 'مرحبًا! جاهز للحديث بالفرنسية؟ اختر موضوعًا!' }], { sug: [{ type: 'topics' }] }); return; }
+      if (t.closest('#tk-rob')) { greet(); return; }
       if ((x = t.closest('[data-lv]'))) { ST.level = x.dataset.lv; save(); $('#tk-lv').innerHTML = lvlBtns(); var L = DATA.talk.levels[ST.level]; addNote('تم اختيار المستوى: ' + L.ic + ' ' + L.ar); if (S.topic) { S.qi = 0; var q = nextQ(); addZ([{ fr: 'D’accord, changeons de niveau !', ar: 'حسنًا، لنغيّر المستوى!' }].concat(q.parts), { sug: q.sug }); } return; }
       if ((x = t.closest('[data-tp]'))) { startTopic(x.dataset.tp); return; }
       if ((x = t.closest('[data-tgl]'))) { var k = x.dataset.tgl; ST[k] = ST[k] ? 0 : 1; save(); x.classList.toggle('on', !!ST[k]); if (k === 'tr') $$('[data-ar]', ROOT).forEach(function (el) { el.hidden = !ST.tr; }); if (k === 'voice' && !ST.voice) { try { speechSynthesis.cancel(); } catch (z) {} } return; }
       if ((x = t.closest('[data-fill]'))) { var ip = $('#tk-ip'); ip.value = x.dataset.fill.replace(/…/g, '').replace(/\s+$/, '') + (/…/.test(x.dataset.fill) ? ' ' : ''); ip.focus(); return; }
       if ((x = t.closest('.tk-w'))) { say(x.dataset.w, 0.7); x.classList.add('hl'); setTimeout(function () { x.classList.remove('hl'); }, 700); return; }
       if ((x = t.closest('[data-act]'))) { var a = x.dataset.act; if (a === 'send') { var i = $('#tk-ip'), v = i.value; i.value = ''; handle(v); } else if (a === 'mic') micTalk(x); else if (a === 'help') help(); else if (a === 'report') report(); else if (a === 'ai') setAI(); else if (a === 'new') { newSession(); MSG = []; chat().innerHTML = ''; $('#tk-tp').innerHTML = tpChips(); greet(); } return; }
-      if ((x = t.closest('.tk-bt [data-a]'))) { var ac = x.dataset.a, b = x.closest('.tk-b'); if (ac === 'sayfix' || ac === 'shfix') { var tg = x.dataset.t; if (ac === 'sayfix') say(tg, 0.7); else shadow(tg, x.closest('.tk-fx').querySelector('.tk-sh-w'), x); return; } var m = MSG[+x.dataset.m]; if (!m) return; if (ac === 'say') { $$('.tk-b.pl', ROOT).forEach(function (el) { el.classList.remove('pl'); }); b.classList.add('pl'); say(m.fr, null, function () { b.classList.remove('pl'); }); } else if (ac === 'slow') say(m.fr, 0.5); else if (ac === 'tr') { var ar = $('[data-ar]', b); ar.hidden = !ar.hidden; } else if (ac === 'sh') { var sentence = m.fr.replace(/([.!?]+)\s+/g, '$1\u0001').split('\u0001')[0]; var tgt = m.fr.split(/\s+/).length > 14 ? sentence : m.fr; shadow(tgt, $('.tk-sh-w', b), x); } return; }
+      if ((x = t.closest('.tk-bt [data-a]'))) { var ac = x.dataset.a, b = x.closest('.tk-b'); if (ac === 'sayfix' || ac === 'shfix') { var tg = x.dataset.t; if (ac === 'sayfix') say(tg, 0.7); else shadow(tg, x.closest('.tk-fx').querySelector('.tk-sh-w'), x); return; } var m = MSG[+x.dataset.m]; if (!m) return; if (ac === 'say') { $$('.tk-b.pl', ROOT).forEach(function (el) { el.classList.remove('pl'); }); b.classList.add('pl'); say(m.fr, null, function () { b.classList.remove('pl'); }); } else if (ac === 'slow') say(m.fr, 0.5); else if (ac === 'tr') { var ar = $('[data-ar]', b); ar.hidden = !ar.hidden; } else if (ac === 'sh') { shadow(m.fr, $('.tk-sh-w', b), x); } return; }
     });
     ROOT.addEventListener('keydown', function (e) { if (e.key === 'Enter' && e.target.id === 'tk-ip') { var i = e.target, v = i.value; i.value = ''; handle(v); } });
-    new MutationObserver(function () { if (!SEC.classList.contains('on')) { try { speechSynthesis.cancel(); } catch (e) {} talking(false); if (REC) { try { REC.abort(); } catch (e) {} } } }).observe(SEC, { attributes: true, attributeFilter: ['class'] });
 
-    /* ---------- الإقلاع ---------- */
-    ROOT.innerHTML = '<div class="empty">⏳ زوزا تستعد للحديث…</div>';
-    Promise.all([getJson('talk.json'), getJson('lexicon.json'), getJson('words.json'), getJson('dialogues.json'), getJson('stories.json'), getJson('grammar.json')]).then(function (r) {
-      if (!r[0] || !r[0].topics) { ROOT.innerHTML = '<div class="empty" style="text-align:center;padding:20px">⚠️ تعذّر تحميل data/talk.json — تأكد من رفعه في مجلد data.</div>'; return; }
-      build(r); mount();
+    /* ---------- التحميل الذكي الآمن للملفات الستة معاً ---------- */
+    ROOT.innerHTML = '<div class="empty">⏳ زوزا تستعد بكافة مميزاتها…</div>';
+    Promise.all([
+      getJson('talk.json'),
+      getJson('lexicon.json').catch(function(){ return null; }),
+      getJson('words.json').catch(function(){ return null; }),
+      getJson('dialogues.json').catch(function(){ return null; }),
+      getJson('stories.json').catch(function(){ return null; }),
+      getJson('grammar.json').catch(function(){ return null; })
+    ]).then(function (r) {
+      if (!r[0] || !r[0].topics) { 
+        ROOT.innerHTML = '<div class="empty" style="text-align:center;padding:20px">⚠️ تعذّر تحميل data/talk.json — تأكد من وجوده في مجلد data.</div>'; 
+        return; 
+      }
+      build(r); 
+      mount();
     });
   }
 })();
