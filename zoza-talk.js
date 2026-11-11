@@ -1,10 +1,22 @@
-/* ===== zoza-talk.js — النسخة التفاعلية المطورة ===== */
+/* ===== zoza-talk.js — النسخة الشاملة المتكاملة مع dialogues-db.json ===== */
 (function () {
   'use strict';
   var AI_URL = 'https://zoza-worker.moure123456.workers.dev';
+  var DB_URL = './data/dialogues-db.json';
+  var dialoguesData = null;
 
   function ready(f) { if (document.readyState !== 'loading') f(); else document.addEventListener('DOMContentLoaded', f); }
-  ready(function () { try { boot(); } catch (e) { console.error('[zoza-talk]', e); } });
+  ready(function () { 
+    loadDialoguesDB();
+    try { boot(); } catch (e) { console.error('[zoza-talk]', e); } 
+  });
+
+  function loadDialoguesDB() {
+    fetch(DB_URL)
+      .then(function(res) { return res.json(); })
+      .then(function(data) { dialoguesData = data; console.log('Dialogues DB loaded:', data); })
+      .catch(function(err) { console.warn('Could not load dialogues-db.json:', err); });
+  }
 
   function boot() {
     var SEC = document.getElementById('soon-geographie'), ROOT = document.getElementById('talk-root'); if (!SEC || !ROOT) return;
@@ -44,10 +56,11 @@
       '.tk-hero{position:relative;border-radius:24px;padding:16px;color:#fff;text-align:center;background:linear-gradient(135deg,#be185d,#7c3aed 55%,#4338ca);box-shadow:0 8px 20px rgba(124,58,237,.3);margin-bottom:12px}' +
       '@keyframes zozaMove{0%,100%{transform:translate(0,0) rotate(0deg) scale(1);} 25%{transform:translate(-5px,-4px) rotate(-3deg) scale(1.03);} 50%{transform:translate(5px,4px) rotate(3deg) scale(0.98);} 75%{transform:translate(-3px,4px) rotate(-2deg) scale(1.02);}}' +
       '.tk-chip{display:inline-block;background:rgba(255,255,255,.25);border-radius:12px;padding:4px 10px;font-size:.75rem;font-weight:800;margin:2px}' +
-      '.tk-chat{background:linear-gradient(180deg,#fdf2f8,#eef2ff);border:1px solid #e9d5ff;border-radius:20px;padding:10px;height:min(50vh,400px);overflow-y:auto;display:flex;flex-direction:column;gap:10px}' +
+      '.tk-chat{background:linear-gradient(180deg,#fdf2f8,#eef2ff);border:1px solid #e9d5ff;border-radius:20px;padding:10px;height:min(55vh,420px);overflow-y:auto;display:flex;flex-direction:column;gap:10px}' +
       '.tk-m{display:flex;gap:7px;align-items:flex-end}.tk-m.u{flex-direction:row-reverse}.tk-av{width:34px;height:34px;flex:none;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #f9a8d4;font-size:1.1rem}' +
-      '.tk-b{max-width:84%;background:#fff;border-radius:16px;padding:10px;box-shadow:0 2px 6px rgba(0,0,0,.06)}.tk-m.u .tk-b{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff}' +
+      '.tk-b{max-width:86%;background:#fff;border-radius:16px;padding:10px;box-shadow:0 2px 6px rgba(0,0,0,.06)}.tk-m.u .tk-b{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff}' +
       '.tk-fr{font-size:.98rem;font-weight:700;direction:ltr;text-align:left}.tk-m.u .tk-fr{color:#fff}.tk-ar{margin-top:4px;padding-top:4px;border-top:1px dashed #e5e7eb;font-size:.84rem;color:#4b5563}' +
+      '.tk-pr{margin-top:2px;font-size:.78rem;color:#7c3aed;font-style:italic}' +
       '.tk-bt{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap}.tk-bt button{border:0;border-radius:12px;background:#f3e8ff;color:#6b21a8;font-weight:800;font-size:.72rem;padding:5px 9px}' +
       '.tk-fx{margin-top:6px;border-radius:12px;padding:6px 8px;font-size:.78rem;color:#047857;background:#ecfdf5;border:1px solid #6ee7b7}' +
       '.tk-in{display:flex;gap:6px;margin-top:6px}.tk-in input{flex:1;min-width:0;border:2px solid #e9d5ff;border-radius:14px;padding:10px;font-size:.95rem;direction:ltr}.tk-in input:focus{outline:0;border-color:#7c3aed}' +
@@ -64,13 +77,13 @@
       ROOT.innerHTML = '<div class="tk">' +
         '<div class="tk-hero">' +
           head('') +
-          '<h3>حوار مع صديقتي Zoza</h3><small>Discute avec Zoza (Mode IA)</small><br>' +
-          '<span class="tk-chip">🧠 حوار ذكي متفاعل</span><span class="tk-chip">✨ ' + ST.xp + ' XP</span>' +
+          '<h3>معلمة الفرنسية الذكية Zoza</h3><small>Programme du Bac & Conversations</small><br>' +
+          '<span class="tk-chip">📚 حوارات المنهج (1، 2، 3 ثانوي)</span><span class="tk-chip">✨ ' + ST.xp + ' XP</span>' +
         '</div>' +
         '<div class="tk-chat" id="tk-chat"></div>' +
         '<div class="tk-in">' +
           '<button type="button" class="mic" id="tk-mic" data-act="mic" title="تحدث بالميكروفون">🎤</button>' +
-          '<input id="tk-ip" type="text" placeholder="تحدث مع زوزا عن المدرسة، المطار، أو أي موضوع…">' +
+          '<input id="tk-ip" type="text5" placeholder="اكتب موضوعاً (مدرسة، مطار، مستشفى) أو سؤالاً…">' +
           '<button type="button" data-act="send">➤</button>' +
         '</div>' +
         '<div class="tk-ft"><button type="button" data-act="new">🔄 حوار جديد</button></div>' +
@@ -81,12 +94,13 @@
     function chat() { return $('#tk-chat'); }
     function scrollDown() { var c = chat(); if (c) c.scrollTop = c.scrollHeight; }
 
-    function addZ(fr, ar, opt) {
+    function addZ(fr, ar, pron, opt) {
       opt = opt || {};
       var id = MSG.push({ fr: fr, ar: ar }) - 1;
       var d = document.createElement('div'); d.className = 'tk-m z';
+      var pronHtml = pron ? '<div class="tk-pr">🔊 النطق: ' + esc(pron) + '</div>' : '';
       var fixHtml = opt.fix ? '<div class="tk-fx"><b>✏️ تصحيح:</b> <span dir="ltr">' + esc(opt.fix.wrong) + '</span> ← <b dir="ltr">' + esc(opt.fix.right) + '</b><br>' + esc(opt.fix.why_ar) + '</div>' : '';
-      d.innerHTML = '<div class="tk-av">🤖</div><div class="tk-b"><div class="tk-fr">' + esc(fr) + '</div><div class="tk-ar">' + esc(ar) + '</div>' + fixHtml + '<div class="tk-bt"><button type="button" data-a="say" data-m="' + id + '">🔊 اسمع</button></div></div>';
+      d.innerHTML = '<div class="tk-av">🤖</div><div class="tk-b"><div class="tk-fr">' + esc(fr) + '</div>' + pronHtml + '<div class="tk-ar">' + esc(ar) + '</div>' + fixHtml + '<div class="tk-bt"><button type="button" data-a="say" data-m="' + id + '">🔊 اسمع</button></div></div>';
       chat().appendChild(d); scrollDown(); if (ST.voice) say(fr);
     }
 
@@ -97,17 +111,45 @@
     }
 
     function greet() {
-      addZ('Bonjour ! Je suis Zoza. Choisis un sujet ou parle-moi de ce que tu veux (à l’école, à l’hôpital, à l’aéroport...). Comment ça va ?', 'مرحبًا! أنا زوزا. اختاري موضوعاً أو تحدثي معي عن أي شئ (في المدرسة، المستشفى، المطار...). كيف حالك؟');
+      addZ('Bonjour ! Je suis Zoza, ton professeur de français. Je connais tous les dialogues du Bac (1ère, 2ème, 3ème secondaire). Quel sujet veux-tu réviser ? (ex: le médecin, le train, le sport, la classe...)', 'مرحباً! أنا زوزا، معلمة الفرنسية. أعفظ كل حوارات المنهج (أول، ثانی، ثالث ثانوي). أي موضوع تريدين مراجعته؟');
     }
 
-    function getFallbackReply(text) {
-      return {
-        fr: 'C’est intéressant : « ' + text + ' ». Rنcononde-moi, qu’est-ce que tu penses de ça ?',
-        ar: 'هذا مثير لاهتمام: « ' + text + ' ». أخبريني، ما رأيك في هذا؟'
-      };
+    // البحث داخل ملف الحوارات المحلي dialogues-db.json أولاً
+    function searchLocalDatabase(query) {
+      if (!dialoguesData || !dialoguesData.dialogues) return null;
+      var q = query.toLowerCase();
+      for (var i = 0; i < dialoguesData.dialogues.length; i++) {
+        var d = dialoguesData.dialogues[i];
+        if (d.title_ar.toLowerCase().includes(q) || d.title_fr.toLowerCase().includes(q) || d.id.toLowerCase().includes(q) || (d.context_ar && d.context_ar.toLowerCase().includes(q))) {
+          return d;
+        }
+      }
+      return null;
+    }
+
+    function handleLocalDialogue(dialogue) {
+      addZ('Voici le dialogue : ' + dialogue.title_fr + ' (' + dialogue.title_ar + ')', 'إليك الحوار من المنهج: ' + dialogue.title_ar);
+      setTimeout(function() {
+        dialogue.lines.forEach(function(line, idx) {
+          setTimeout(function() {
+            var textFr = line.who + ' : ' + line.fr;
+            var textAr = line.who + ' : ' + line.ar;
+            addZ(textFr, textAr, line.pron_ar);
+          }, idx * 600);
+        });
+      }, 500);
+      ST.xp += 10; save();
     }
 
     function askAI(text) {
+      // 1. فحص القاعدة المحلية أولاً
+      var localMatch = searchLocalDatabase(text);
+      if (localMatch) {
+        handleLocalDialogue(localMatch);
+        return;
+      }
+
+      // 2. إذا لم يوجد مطابقة محلية، الاتصال بالـ Worker الذكي مع تمرير سياق الحوار
       S.hist.push({ role: 'user', content: text });
       
       fetch(AI_URL, {
@@ -123,17 +165,15 @@
         if (data.reply_fr) {
           S.hist.push({ role: 'assistant', content: data.reply_fr });
           var correction = (data.corrections && data.corrections[0]) ? data.corrections[0] : null;
-          addZ(data.reply_fr, data.reply_ar, { fix: correction });
+          addZ(data.reply_fr, data.reply_ar, data.pron_ar || '', { fix: correction });
           ST.xp += 5; save();
         } else {
-          var fb = getFallbackReply(text);
-          addZ(fb.fr, fb.ar);
+          addZ('C’est intéressant ! Que penses-tu de ça ?', 'هذا ممتع! ما رأيك في ذلك؟');
         }
       })
       .catch(function(err) {
-        console.warn('Fallback active:', err);
-        var fb = getFallbackReply(text);
-        addZ(fb.fr, fb.ar);
+        console.warn('AI Error / Fallback:', err);
+        addZ('C’est noté : « ' + text + ' ». Continuons notre conversation !', 'تم تسجيل ذلك: « ' + text + ' ». لنتابع محادثتنا!');
       });
     }
 
@@ -164,7 +204,7 @@
       if ((x = t.closest('[data-act="send"]'))) { var i = $('#tk-ip'); if(i) { handle(i.value); i.value = ''; } return; }
       if ((x = t.closest('[data-act="mic"]'))) { listenSpeech(x); return; }
       if ((x = t.closest('[data-act="new"]'))) { S.hist = []; MSG = []; chat().innerHTML = ''; greet(); return; }
-      if ((x = t.exports || t.closest('[data-a="say"]'))) { var m = MSG[+x.dataset.m]; if (m) say(m.fr); return; }
+      if ((x = t.closest('[data-a="say"]'))) { var m = MSG[+x.dataset.m]; if (m) say(m.fr); return; }
     });
 
     ROOT.addEventListener('keydown', function (e) { if (e.key === 'Enter' && e.target.id === 'tk-ip') { var i = e.target; handle(i.value); i.value = ''; } });
