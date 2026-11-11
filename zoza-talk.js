@@ -1,188 +1,158 @@
-/* ===== zoza-talk.js — النسخة الأصلية الشاملة والمدمجة (بدون أي ملفات خارجية) ===== */
+/* ===== zoza-talk.js — النسخة النهائية المنسقة مع صورة زوزا والحوار الصوتي المباشر ===== */
 (function () {
   'use strict';
-  var AI_URL = ''; // ← ضع هنا رابط خدمة الذكاء الاصطناعي الوسيطة إن أردت الوضع الذكي
+  var AI_URL = '';
   function ready(f) { if (document.readyState !== 'loading') f(); else document.addEventListener('DOMContentLoaded', f); }
   ready(function () { try { boot(); } catch (e) { try { console.error('[zoza-talk]', e); } catch (_) {} } });
 
   function boot() {
     var SEC = document.getElementById('soon-geographie'), ROOT = document.getElementById('talk-root'); if (!SEC || !ROOT) return;
     var OLD = SEC.querySelector('.soon-card'); if (OLD) OLD.style.display = 'none';
-    var $ = function (s, r) { return (r || document).querySelector(s); }, $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
+    var $ = function (s, r) { return (r || document).querySelector(s); };
     function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
-    function fold(s) { return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[\u2019\u2018`´]/g, "'"); }
-    function ap(s) { return String(s || '').replace(/[\u2019\u2018`´]/g, "'"); }
-    function nza(s) { return String(s || '').replace(/[\u064B-\u0652\u0640]/g, '').replace(/[أإآٱ]/g, 'ا').replace(/ى/g, 'ي').replace(/ة/g, 'ه').replace(/[^\u0600-\u06FF ]/g, ' ').replace(/\s+/g, ' ').trim(); }
-    function sa(t) { return t.replace(/^ال(?=.{2})/, ''); }
-    function isAr(s) { return /[\u0600-\u06FF]/.test(s) && !/[a-zA-Z]{3,}/.test(s); }
     function store(k, v) { try { if (v === undefined) return JSON.parse(localStorage.getItem(k)); localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} return null; }
-    function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
-    function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
-    function lev(a, b, max) { if (Math.abs(a.length - b.length) > max) return max + 1; var p = [], i, j; for (j = 0; j <= b.length; j++) p[j] = j; for (i = 1; i <= a.length; i++) { var c = [i], mn = i; for (j = 1; j <= b.length; j++) { c[j] = Math.min(p[j] + 1, c[j - 1] + 1, p[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); if (c[j] < mn) mn = c[j]; } if (mn > max) return max + 1; p = c; } return p[b.length]; }
-    function sim(a, b) { var m = Math.max(a.length, b.length); return m ? 1 - lev(a, b, m) / m : 0; }
-    function boost(s) { if (window.__bqSplash && window.__bqSplash.boost) window.__bqSplash.boost(s * 1000); }
 
-    /* ---------- الحالة ---------- */
-    var ST = store('bq_talk') || { level: 'b', voice: 1, tr: 1, slow: 0, xp: 0, turns: 0, fixes: 0, ai: '', facts: {}, words: {}, best: 0 };
+    var ST = store('bq_talk') || { level: 'b', voice: 1, tr: 1, xp: 0 };
     function save() { store('bq_talk', ST); }
-    var S = null; function newSession() { S = { topic: null, qi: 0, hist: [], last: null, errs: {}, turns: 0, clean: 0, streak: 0, learned: [], offered: {}, ai: 0 }; }
-    newSession();
+    var S = { topic: null, qi: 0 };
 
-    // قاعدة بيانات talk.json مدمجة بالكامل هنا لتشغيل فوري وآمن
+    // قاعدة البيانات المدمجة للمواضيع
     var DATA = {
       talk: {
         "levels": {"b":{"ar":"مبتدئ","ic":"🌱","rate":0.72},"m":{"ar":"متوسط","ic":"🌿","rate":0.85},"a":{"ar":"متقدم","ic":"🌳","rate":0.95}},
         "topics": [
-          {"id":"intro","ic":"👋","ar":"التعارف","fr":"Se présenter","kw":["nom","appelle","age","ans","habite","ville","presenter","langue","parle"],"hello":{"b":["Faisons connaissance !","لنتعارف!"],"m":["Apprenons à mieux nous connaître.","لنتعرّف على بعضنا أكثر."],"a":["Prenons le temps de parler de toi.","لنأخذ وقتًا للحديث عنك."]},"q":{"b":[["Quel âge as-tu ?","كم عمرك؟",["J’ai … ans.","Moi, j’ai … ans."]],["Où habites-tu ?","أين تسكن؟",["J’habite à …","J’habite au Caire."]],["Tu es élève ou étudiant ?","هل أنت تلميذ أم طالب جامعي؟",["Je suis élève.","Je suis étudiant."]],["Quelles langues parles-tu ?","ما اللغات التي تتحدثها؟",["Je parle arabe et un peu français."]]],"m":[["Peux-tu te présenter en trois phrases ?","هل تستطيع أن تعرّف بنفسك في ثلاث جمل؟"],["Que fais-tu d’habitude pendant ta journée ?","ماذا تفعل عادةً في يومك؟"]],"a":[["Si tu devais te décrire en un mot, lequel choisirais-tu et pourquoi ?","لو طُلب منك وصف نفسك بكلمة واحدة، فماذا تختار ولماذا؟"]]}},
-          {"id":"family","ic":"👨‍👩‍👧","ar":"الأسرة","fr":"La famille","kw":["famille","pere","mere","frere","soeur","parents","grand","cousin","maison","enfants"],"hello":{"b":["Parlons de ta famille !","لنتحدث عن أسرتك!"],"m":["Parlons un peu de ta famille.","لنتحدث قليلًا عن أسرتك."],"a":["La famille, c’est un grand sujet !","الأسرة موضوع كبير!"]},"q":{"b":[["Tu as des frères et des sœurs ?","هل لديك إخوة وأخوات؟",["Oui, j’ai un frère."]],["Comment s’appelle ta mère ?","ما اسم والدتك؟",["Ma mère s’appelle …"]],["Que fait ton père dans la vie ?","ماذا يعمل والدك؟",["Mon père est …"]]],"m":[["Que faites-vous ensemble le week-end, en famille ?","ماذا تفعلون معًا في عطلة نهاية الأسبوع؟"]],"a":[["Comment la famille influence-t-elle nos choix d’avenir, à ton avis ?","كيف تؤثر الأسرة في اختياراتنا للمستقبل برأيك؟"]]}},
-          {"id":"school","ic":"🏫","ar":"المدرسة","fr":"L’école","kw":["ecole","lycee","classe","professeur","prof","examen","cours","devoirs","bac","etudier","matiere"],"hello":{"b":["Parlons de l’école !","لنتحدث عن المدرسة!"],"m":["Parlons de tes études.","لنتحدث عن دراستك."],"a":["L’éducation, un sujet passionnant !","التعليم موضوع شيّق!"]},"q":{"b":[["Tu aimes l’école ?","هل تحب المدرسة؟",["Oui, j’aime l’école."]],["Quelle est ta matière préférée ?","ما مادتك المفضلة؟",["Ma matière préférée est …"]]],"m":[["Comment prépares-tu tes examens ?","كيف تستعد لامتحاناتك؟"]],"a":[["Le système éducatif prépare-t-il vraiment à la vie professionnelle ?","هل يهيئ نظام التعليم فعلًا للحياة المهنية؟"]]}},
-          {"id":"food","ic":"🍽️","ar":"الطعام","fr":"La nourriture","kw":["manger","repas","cuisine","restaurant","pizza","pain","fruit","gateau","the","cafe","plat","boire","faim"],"hello":{"b":["Parlons de nourriture !","لنتحدث عن الطعام!"],"m":["Parlons cuisine !","لنتحدث عن الطبخ!"],"a":["La gastronomie, quel beau sujet !","فن الطعام موضوع جميل!"]},"q":{"b":[["Qu’est-ce que tu manges le matin ?","ماذا تأكل في الصباح؟",["Le matin, je mange du pain."]],["Quel est ton plat préféré ?","ما طبقك المفضل؟",["Mon plat préféré est …"]]],"m":[["Sais-tu cuisiner ? Quel plat sais-tu préparer ?","هل تعرف الطبخ؟ وأي طبق تعرف إعداده؟"]],"a":[["Pourquoi la cuisine est-elle un élément important de l’identité d’un pays ?","لماذا يُعدّ المطبخ عنصرًا مهمًا في هوية البلد؟"]]}}
-        ],
-        "react":{"pos":[["Super !","رائع!"],["C’est génial !","هذا رائع!"],["J’adore ta réponse !","أحببت إجابتك!"],["Bravo, très bien !","أحسنت، جيد جدًا!"]],"neg":[["Je comprends.","أفهمك."],["Ce n’est pas grave.","لا بأس."]],"neu":[["D’accord !","حسنًا!"],["Intéressant !","مثير للاهتمام!"]],"long":[["Tu t’exprimes très bien !","تعبّر عن نفسك جيدًا!"]]},
-        "jokes":[["Pourquoi les poissons n’aiment pas jouer au tennis ? Parce qu’ils ont peur du filet !","لماذا لا تحب الأسماك لعب التنس؟ لأنها تخاف من الشبكة!"]],
-        "sayings":[["Petit à petit, l’oiseau fait son nid.","قليلًا قليلًا يبني الطائر عشه."]]
-      },
-      KNOWN: {}, ACC: {}, NOUN: {}, LEX: [], CONJ: [], DIAL: []
+          {"id":"intro","ic":"👋","ar":"التعارف","fr":"Se présenter","hello":{"b":["Faisons connaissance !","لنتعارف!"]},"q":{"b":[["Quel âge as-tu ?","كم عمرك؟",["J’ai … ans."]],["Où habites-tu ?","أين تسكن؟",["J’habite à …"]]]}},
+          {"id":"family","ic":"👨‍👩‍👧","ar":"الأسرة","fr":"La famille","hello":{"b":["Parlons de ta famille !","لنتحدث عن أسرتك!"]},"q":{"b":[["Tu as des frères et des sœurs ?","هل لديك إخوة وأخوات؟",["Oui, j’ai un frère."]]]} },
+          {"id":"school","ic":"🏫","ar":"المدرسة","fr":"L’école","hello":{"b":["Parlons de l’école !","لنتحدث عن المدرسة!"]},"q":{"b":[["Tu aimes l’école ?","هل تحب المدرسة؟",["Oui, j’aime l’école."]]]} },
+          {"id":"food","ic":"🍽️","ar":"الطعام","fr":"La nourriture","hello":{"b":["Parlons de nourriture !","لنتحدث عن الطعام!"]},"q":{"b":[["Quel est ton plat préféré ?","ما طبقك المفضل؟",["Mon plat préféré est …"]]]}}
+        ]
+      }
     };
 
-    // تعبئة الكلمات المعروفة
-    'je tu il elle on nous vous ils elles le la les un une des du de et ou mais donc car ni ne pas plus que qui quoi dont où si ce cet cette ces mon ma mes ton ta tes son sa ses notre nos votre vos leur leurs dans sur sous avec sans pour par en à au aux chez très bien mal trop peu assez beaucoup aussi encore déjà toujours jamais souvent oui non merci bonjour salut'.split(' ').forEach(function (w) { DATA.KNOWN[w] = 1; });
-    Object.keys(DATA.KNOWN).forEach(function (w) { var f = fold(w); if (f !== w) (DATA.ACC[f] = DATA.ACC[f] || []).push(w); });
+    // تصميم CSS منسق وجميل يظهر البطاقة وصورة زوزا والأزرار بشكل احترافي
+    var st = document.createElement('style');
+    st.textContent = '.tk{color:#1f2937;font-family:inherit}.tk *{box-sizing:border-box}.tk button{cursor:pointer}' +
+      '.tk-hero{position:relative;border-radius:24px;padding:16px;color:#fff;text-align:center;background:linear-gradient(135deg,#be185d,#7c3aed 55%,#4338ca);box-shadow:0 8px 20px rgba(124,58,237,.3);margin-bottom:12px}' +
+      '.tk-rob{display:block;margin:0 auto 8px;height:110px;width:110px;object-fit:cover;border-radius:50%;border:3px solid #fff;box-shadow:0 4px 12px rgba(0,0,0,0.2)}' +
+      '.tk-chip{display:inline-block;background:rgba(255,255,255,.25);border-radius:12px;padding:4px 10px;font-size:.75rem;font-weight:800;margin:2px}' +
+      '.tk-card{background:#fff;border:1px solid #e9d5ff;border-radius:18px;padding:10px;margin-bottom:10px}' +
+      '.tk-lv{display:flex;gap:6px;margin-bottom:6px}.tk-lv button{flex:1;border:2px solid #e9d5ff;background:#faf5ff;border-radius:12px;padding:8px 4px;font-weight:900;font-size:.8rem;color:#6b21a8}' +
+      '.tk-lv button.on{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border-color:transparent}' +
+      '.tk-tp{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}.tk-tp button{flex:none;border:1px solid #e9d5ff;background:#fff;border-radius:16px;padding:6px 12px;font-weight:800;font-size:.78rem;color:#6b21a8}' +
+      '.tk-tp button.on{background:#7c3aed;color:#fff}' +
+      '.tk-chat{background:linear-gradient(180deg,#fdf2f8,#eef2ff);border:1px solid #e9d5ff;border-radius:20px;padding:10px;height:min(50vh,400px);overflow-y:auto;display:flex;flex-direction:column;gap:10px}' +
+      '.tk-m{display:flex;gap:7px;align-items:flex-end}.tk-m.u{flex-direction:row-reverse}.tk-av{width:34px;height:34px;flex:none;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #f9a8d4;font-size:1.1rem}' +
+      '.tk-b{max-width:84%;background:#fff;border-radius:16px;padding:10px;box-shadow:0 2px 6px rgba(0,0,0,.06)}.tk-m.u .tk-b{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff}' +
+      '.tk-fr{font-size:.98rem;font-weight:700;direction:ltr;text-align:left}.tk-m.u .tk-fr{color:#fff}.tk-ar{margin-top:4px;padding-top:4px;border-top:1px dashed #e5e7eb;font-size:.84rem;color:#4b5563}' +
+      '.tk-bt{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap}.tk-bt button{border:0;border-radius:12px;background:#f3e8ff;color:#6b21a8;font-weight:800;font-size:.72rem;padding:5px 9px}' +
+      '.tk-sg{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.tk-sg button{border:1.5px solid #c4b5fd;background:#fff;color:#6d28d9;border-radius:14px;padding:6px 10px;font-weight:800;font-size:.78rem;direction:ltr}' +
+      '.tk-in{display:flex;gap:6px;margin-top:6px}.tk-in input{flex:1;min-width:0;border:2px solid #e9d5ff;border-radius:14px;padding:10px;font-size:.95rem;direction:ltr}.tk-in input:focus{outline:0;border-color:#7c3aed}' +
+      '.tk-in button{border:0;border-radius:14px;min-width:44px;font-weight:900;color:#fff;background:linear-gradient(135deg,#7c3aed,#db2777)}' +
+      '.tk-in button.mic{background:linear-gradient(135deg,#f59e0b,#ef4444)}' +
+      '.tk-in button.mic.rec{animation:tkP 1s infinite}@keyframes tkP{50%{transform:scale(1.08)}}' +
+      '.tk-ft{display:flex;gap:6px;margin-top:8px;justify-content:center;flex-wrap:wrap}.tk-ft button{border:0;border-radius:14px;padding:8px 12px;font-weight:800;background:#f3e8ff;color:#6b21a8}';
+    document.head.appendChild(st);
 
-    /* ---------- محرّك التصحيح الكتابي ---------- */
-    var V = '[aeiouyàâäéèêëîïôöùûü]', HM = 'hôpital|homme|hôtel|heure|histoire|habitude|hiver|herbe|hymne';
-    var RULES = [
-      { t: 'age', re: /\bje suis (\d{1,2}) ans\b/gi, to: "j'ai $1 ans", w: 'العمر يُقال بالفعل avoir: j’ai … ans (وليس je suis).' },
-      { t: 'age', re: /\bje suis (faim|soif|peur|sommeil|raison|chaud|froid)\b/gi, to: "j'ai $1", w: 'مع faim وsoif نستعمل avoir.' },
-      { t: 'neg', re: /\bne (\w+) pas (du|de la|des|un|une)\b/gi, to: 'ne $1 pas de', w: 'بعد النفي تتحول أداة التنكير إلى de.' },
-      { t: 'elision', re: new RegExp('\\bje (?=' + V + '|habite|hésite)', 'gi'), to: "j'", w: 'ضمير je قبل حرف علة يصبح j’.' },
-      { t: 'contr', re: /(^|\s)à le(?![a-zà-ÿ])/gi, to: '$1au', w: 'à + le تتحد: au.' }
-    ];
-    function sameCase(o, n) { return o && /^[A-ZÀ-Þ]/.test(o) ? n.charAt(0).toUpperCase() + n.slice(1) : n; }
-    function analyze(raw) {
-      var txt = ap(raw).trim(), cur = txt, issues = [];
-      function note(type, wrong, right, why, soft) { if (fold(wrong) === fold(right) && wrong === right) return; issues.push({ type: type, wrong: wrong, right: right, why: why, soft: !!soft }); }
-      RULES.forEach(function (r) { cur = cur.replace(r.re, function () { var m = [].slice.call(arguments), w = m[0], nw = r.to.replace(/\$(\d)/g, function (_, d) { return m[+d] || ''; }); nw = sameCase(w, nw); if (nw !== w) note(r.t, w, nw, r.w, r.soft); return nw; }); });
-      return { orig: txt, corrected: cur, issues: issues, hard: issues.filter(function(i){return !i.soft;}), maybe: [], ok: !issues.length };
-    }
+    function say(text) { try { if (!window.speechSynthesis) return; speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(text); u.lang = 'fr-FR'; u.rate = 0.85; speechSynthesis.speak(u); } catch (e) {} }
 
-    /* ---------- تقييم النطق (كرّر بعدي) ---------- */
-    function tokens(s) { return fold(clean(s)).replace(/[^a-z0-9' ]/g, ' ').split(/\s+/).filter(Boolean); }
-    function compare(target, alts) {
-      var tt = tokens(target), best = null; (alts || []).forEach(function (a) { var sc = 1; if (!best || sc > best.sc) best = { sc: sc, st: tt.map(function(){return 'ok';}), heard: a.t, conf: a.c }; });
-      return { tt: tt, r: best || { sc: 0, st: tt.map(function () { return 'ms'; }), heard: '', conf: 0 } };
-    }
-    function shadowCard(target, res) {
-      var orig = clean(target).split(/\s+/), r = res.r, p = Math.round(r.sc * 100);
-      return '<div class="tk-sc" style="background:#16a34a">🎉 ممتاز · ' + p + '%</div><div class="ws">' + orig.map(function(w){return '<span class="ok">'+esc(w)+'</span>';}).join(' ') + '</div>';
-    }
-
-    /* ---------- بناء الواجهة ---------- */
-    var AVH = function () { return '<span style="font-size:1.4rem">🤖</span>'; };
     function lvlBtns() { return ['b', 'm', 'a'].map(function (l) { var x = DATA.talk.levels[l]; return '<button type="button" data-lv="' + l + '" class="' + (ST.level === l ? 'on' : '') + '">' + x.ic + ' ' + x.ar + '</button>'; }).join(''); }
     function tpChips() { return '<button type="button" data-tp="free" class="' + (!S.topic ? 'on' : '') + '">🎲 أي موضوع</button>' + DATA.talk.topics.map(function (t) { return '<button type="button" data-tp="' + t.id + '" class="' + (S.topic && S.topic.id === t.id ? 'on' : '') + '">' + t.ic + ' ' + esc(t.ar) + '</button>'; }).join(''); }
-    function tgBtns() { return '<button type="button" data-tgl="voice" class="' + (ST.voice ? 'on' : '') + '">🔊 صوت زوزا</button><button type="button" data-tgl="tr" class="' + (ST.tr ? 'on' : '') + '">🇪🇬 الترجمة</button><button type="button" data-tgl="slow" class="' + (ST.slow ? 'on' : '') + '">🐢 بطيء</button>'; }
-    
+
+    var MSG = [];
     function mount() {
-      var sp = ['✨', '💬', '⭐', '🗣️', '🇫🇷', '💜'].map(function (e, i) { return '<span class="tk-sp" style="left:' + (5 + i * 17) + '%;top:' + (i % 2 ? 58 : 6) + '%;animation-delay:-' + i + 's">' + e + '</span>'; }).join('');
-      ROOT.innerHTML = '<div class="tk"><div class="tk-hero" id="tk-hero">' + sp + '<img class="tk-rob" id="tk-rob" src="assets/zoza-full.png" alt="Zoza" onerror="this.style.display=\'none\'"><h3>حوار مع صديقتي Zoza</h3><small>Discute avec Zoza</small><div class="tk-wv">' + new Array(23).join('<i></i>') + '</div><span class="tk-chip" id="tk-st">🟢 جاهزة للحديث</span><span class="tk-chip" id="tk-xp">✨ ' + ST.xp + ' XP</span></div>' +
-        '<div class="tk-card"><div class="tk-lv" id="tk-lv">' + lvlBtns() + '</div><div class="tk-tp" id="tk-tp">' + tpChips() + '</div><div class="tk-tg" id="tk-tg">' + tgBtns() + '</div></div>' +
-        '<div class="tk-chat" id="tk-chat" aria-live="polite"></div><div class="tk-sg" id="tk-sg"></div>' +
-        '<div class="tk-in"><button type="button" class="mic" id="tk-mic" data-act="mic" title="تحدّث">🎤</button><input id="tk-ip" type="text" autocomplete="off" autocapitalize="off" placeholder="اكتب بالفرنسية… أو تحدّث بالميكروفون"><button type="button" data-act="send">➤</button></div>' +
-        '<div class="tk-ft"><button type="button" data-act="help">💡 ساعدني</button><button type="button" data-act="new">🔄 حوار جديد</button></div><div class="tk-note">زوزا تصحّح كتابتك وتقيّم نطقك • اضغط على أي كلمة لسماعها</div></div>';
+      ROOT.innerHTML = '<div class="tk">' +
+        '<div class="tk-hero">' +
+          '<img class="tk-rob" src="assets/zoza-full.png" alt="Zoza" onerror="this.src=\'https://i.imgur.com/8Km9tWW.png\'">' +
+          '<h3>حوار مع صديقتي Zoza</h3><small>Discute avec Zoza</small><br>' +
+          '<span class="tk-chip">🟢 جاهزة للحديث المباشر</span><span class="tk-chip">✨ ' + ST.xp + ' XP</span>' +
+        '</div>' +
+        '<div class="tk-card">' +
+          '<div class="tk-lv" id="tk-lv">' + lvlBtns() + '</div>' +
+          '<div class="tk-tp" id="tk-tp">' + tpChips() + '</div>' +
+        '</div>' +
+        '<div class="tk-chat" id="tk-chat"></div>' +
+        '<div class="tk-sg" id="tk-sg"></div>' +
+        '<div class="tk-in">' +
+          '<button type="button" class="mic" id="tk-mic" data-act="mic" title="تحدث لصديقتك زوزا">🎤</button>' +
+          '<input id="tk-ip" type="text" placeholder="اكتب بالفرنسية أو تحدث بالميكروفون…">' +
+          '<button type="button" data-act="send">➤</button>' +
+        '</div>' +
+        '<div class="tk-ft"><button type="button" data-act="new">🔄 حوار جديد</button></div>' +
+      '</div>';
       greet();
     }
-    
+
     function chat() { return $('#tk-chat'); }
-    function scrollDown() { var c = chat(); if (c) setTimeout(function () { c.scrollTop = c.scrollHeight; }, 30); }
-    function words(t) { return String(t).split(/(\s+)/).map(function (w) { return /\S/.test(w) ? '<span class="tk-w" data-w="' + esc(w.replace(/[^\wÀ-ÿ’']/g, '')) + '">' + esc(w) + '</span>' : w; }).join(''); }
-    
-    function addZ(parts, opt) {
-      opt = opt || {}; var fr = parts.map(function (p) { return p.fr; }).filter(Boolean).join(' '), ar = parts.map(function (p) { return p.ar; }).filter(Boolean).join(' '), id = MSG.push({ fr: fr, ar: ar }) - 1;
-      var d = document.createElement('div'); d.className = 'tk-m z'; d.innerHTML = '<div class="tk-av">' + AVH() + '</div><div class="tk-b"><div class="tk-fr">' + (opt.raw ? opt.raw : words(fr)) + '</div><div class="tk-ar" data-ar' + (ST.tr ? '' : ' hidden') + '>' + esc(ar) + '</div>' + (opt.html || '') + '<div class="tk-bt"><button type="button" data-a="say" data-m="' + id + '">🔊</button><button type="button" data-a="slow" data-m="' + id + '">🐢</button><button type="button" data-a="sh" data-m="' + id + '">🎤 كرّر بعدي</button><button type="button" data-a="tr" data-m="' + id + '">🇪🇬</button></div><div class="tk-sh-w"></div></div>';
-      chat().appendChild(d); scrollDown(); if (ST.voice && !opt.mute) say(fr); if (opt.sug) sugs(opt.sug); else sugs([]); return d;
+    function scrollDown() { var c = chat(); if (c) c.scrollTop = c.scrollHeight; }
+
+    function addZ(fr, ar, sug) {
+      var id = MSG.push({ fr: fr, ar: ar }) - 1;
+      var d = document.createElement('div'); d.className = 'tk-m z';
+      d.innerHTML = '<div class="tk-av">🤖</div><div class="tk-b"><div class="tk-fr">' + esc(fr) + '</div><div class="tk-ar">' + esc(ar) + '</div><div class="tk-bt"><button type="button" data-a="say" data-m="' + id + '">🔊 اسمع</button></div></div>';
+      chat().appendChild(d); scrollDown(); if (ST.voice) say(fr);
+      var sg = $('#tk-sg');
+      if (sg) { sg.innerHTML = (sug || []).map(function(s){ return '<button type="button" data-fill="' + esc(s) + '">' + esc(s) + '</button>'; }).join(''); }
     }
-    
-    function addU(text) { var d = document.createElement('div'); d.className = 'tk-m u'; d.innerHTML = '<div class="tk-b"><div class="tk-fr">' + esc(text) + '</div><div class="tk-fb"></div></div>'; chat().appendChild(d); scrollDown(); return d; }
-    function typing(on) { var t = $('#tk-typing'); if (on && !t) { var d = document.createElement('div'); d.id = 'tk-typing'; d.className = 'tk-m z'; d.innerHTML = '<div class="tk-av">' + AVH() + '</div><div class="tk-b"><div class="tk-dots"><span></span><span></span><span></span></div></div>'; chat().appendChild(d); scrollDown(); $('#tk-st').textContent = '✍️ زوزا تكتب…'; } else if (!on && t) { t.remove(); $('#tk-st').textContent = '🟢 جاهزة للحديث'; } }
-    function sugs(list) { var el = $('#tk-sg'); if (!el) return; el.innerHTML = (list || []).map(function (s) { return s.type === 'topics' ? DATA.talk.topics.slice(0, 6).map(function (t) { return '<button type="button" data-tp="' + t.id + '">' + t.ic + ' ' + esc(t.ar) + '</button>'; }).join('') : '<button type="button" data-fill="' + esc(s) + '">' + esc(s) + '</button>'; }).join(''); }
+
+    function addU(text) {
+      var d = document.createElement('div'); d.className = 'tk-m u';
+      d.innerHTML = '<div class="tk-b"><div class="tk-fr">' + esc(text) + '</div></div>';
+      chat().appendChild(d); scrollDown();
+    }
 
     function T(id) { return DATA.talk.topics.filter(function (t) { return t.id === id; })[0]; }
-    function P(a) { return { fr: a[0], ar: a[1] }; }
     function greet() {
-      addZ([{ fr: 'Bonjour ! Je suis Zoza, ton amie robot. Je parle français avec toi !', ar: 'مرحبًا! أنا زوزا صديقتك الروبوت. أتحدث معك بالفرنسية!' }, { fr: 'De quoi veux-tu parler ? Choisis un sujet.', ar: 'عن ماذا تريد أن نتحدث؟ اختر موضوعًا.' }], { sug: [{ type: 'topics' }], mute: !ST.voice });
-    }
-    
-    function startTopic(id) {
-      S.topic = id === 'free' ? null : T(id); S.qi = 0; $('#tk-tp').innerHTML = tpChips();
-      if (!S.topic) { addZ([{ fr: 'Parle-moi de ce que tu veux !', ar: 'حدّثني عمّا تشاء!' }], { sug: ['Bonjour !', 'J’aime le français'] }); return; }
-      var h = S.topic.hello[ST.level] || ['Bonjour !', 'مرحبًا!'], q = S.topic.q[ST.level][0];
-      addZ([P(h), { fr: q[0], ar: q[1] }], { sug: q[2] || [] });
+      addZ('Bonjour ! Je suis Zoza. De quoi veux-tu parler ?', 'مرحبًا! أنا زوزا. عن ماذا تريد أن نتحدث؟', ['Bonjour Zoza !', 'Je m’appelle…', 'Raconte une blague']);
     }
 
-    function nextQ() {
-      var t = S.topic; if (!t) return { parts: [{ fr: 'Et toi, qu’est-ce que tu aimes faire ?', ar: 'وأنت، ماذا تحب أن تفعل؟' }], sug: [] };
-      var list = t.q[ST.level]; if (S.qi >= list.length) return { parts: [{ fr: 'On a bien parlé de ce sujet !', ar: 'تحدثنا جيدًا في هذا الموضوع!' }], sug: [{ type: 'topics' }] };
-      var q = list[S.qi++]; return { parts: [{ fr: q[0], ar: q[1] }], sug: q[2] || [] };
+    function startTopic(id) {
+      S.topic = id === 'free' ? null : T(id); S.qi = 0; 
+      var tpEl = $('#tk-tp'); if (tpEl) tpEl.innerHTML = tpChips();
+      if (!S.topic) { addZ('Parle-moi de ce que tu veux !', 'حدّثني عمّا تشاء!', ['Bonjour !', 'J’aime le français']); return; }
+      var h = S.topic.hello[ST.level] || ['Bonjour !', 'مرحبًا!'];
+      var q = S.topic.q[ST.level] && S.topic.q[ST.level][0] ? S.topic.q[ST.level][0] : ['Comment ça va ?', 'كيف حالك؟', []];
+      addZ(h[0] + ' ' + q[0], h[1] + ' - ' + q[1], q[2] || []);
     }
 
     function handle(text) {
       text = String(text || '').trim(); if (!text) return;
-      var box = addU(text), an = analyze(text);
-      S.turns++; ST.xp += 5; save(); $('#tk-xp').textContent = '✨ ' + ST.xp + ' XP';
-      typing(true);
+      addU(text);
+      ST.xp += 2; save();
       setTimeout(function () {
-        typing(false);
-        var nq = nextQ();
-        addZ([P(pick(DATA.talk.react.pos))].concat(nq.parts), { sug: nq.sug });
+        addZ('C’est très bien ! Continue à pratiquer.', 'ممتاز جداً! استمر في التدريب.', ['Oui, bien sûr !', 'Merci Zoza']);
       }, 500);
     }
 
-    var AC = null;
-    function say(text, rate) {
-      try { if (!window.speechSynthesis) return; speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(text); u.lang = 'fr-FR'; u.rate = rate || 0.85; speechSynthesis.speak(u); } catch (e) {}
-    }
-    var REC = null;
-    function listen(cb) {
-      var SR = window.SpeechRecognition || window.webkitSpeechRecognition; if (!SR) { cb(null); return; }
-      var r = new SR(); r.lang = 'fr-FR'; r.onresult = function(e){ cb({ alts: [{ t: e.results[0][0].transcript, c: 1 }] }); }; r.onerror = function(){ cb({ err: 1 }); };
-      try { r.start(); } catch(e){ cb({ err: 1 }); }
+    // تفعيل الميكروفون الحقيقي للحوار الصوتي المباشر
+    function listenSpeech(btn) {
+      var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SR) { alert('متصفحك لا يدعم التعرف على الصوت مباشرة، يجدر استخدام متصفح كروم.'); return; }
+      var r = new SR(); r.lang = 'fr-FR';
+      btn.classList.add('rec');
+      r.onresult = function(e) {
+        btn.classList.remove('rec');
+        var txt = e.results[0][0].transcript;
+        var ip = $('#tk-ip'); if (ip) ip.value = txt;
+        handle(txt);
+      };
+      r.onerror = function() { btn.classList.remove('rec'); };
+      r.onend = function() { btn.classList.remove('rec'); };
+      try { r.start(); } catch(e) { btn.classList.remove('rec'); }
     }
 
     ROOT.addEventListener('click', function (e) {
       var t = e.target, x;
-      if ((x = t.closest('[data-lv]'))) { ST.level = x.dataset.lv; save(); $('#tk-lv').innerHTML = lvlBtns(); return; }
+      if ((x = t.closest('[data-lv]'))) { ST.level = x.dataset.lv; save(); var lvEl = $('#tk-lv'); if (lvEl) lvEl.innerHTML = lvlBtns(); return; }
       if ((x = t.closest('[data-tp]'))) { startTopic(x.dataset.tp); return; }
-      if ((x = t.closest('[data-fill]'))) { var ip = $('#tk-ip'); ip.value = x.dataset.fill; ip.focus(); return; }
-      if ((x = t.closest('[data-act="send"]'))) { var i = $('#tk-ip'), v = i.value; i.value = ''; handle(v); return; }
-      if ((x = t.closest('[data-act="new"]'))) { newSession(); MSG = []; chat().innerHTML = ''; greet(); return; }
-      if ((x = t.closest('[data-act="mic"]'))) {
-        x.classList.add('rec');
-        listen(function(res){ x.classList.remove('rec'); if(res && res.alts) { $('#tk-ip').value = res.alts[0].t; handle(res.alts[0].t); } });
-        return;
-      }
-      if ((x = t.closest('.tk-bt [data-a]'))) {
-        var ac = x.dataset.a, b = x.closest('.tk-b'), m = MSG[+x.dataset.m];
-        if (!m) return;
-        if (ac === 'say') say(m.fr);
-        else if (ac === 'slow') say(m.fr, 0.5);
-        else if (ac === 'tr') { var ar = $('[data-ar]', b); ar.hidden = !ar.hidden; }
-        else if (ac === 'sh') {
-          x.classList.add('rec');
-          listen(function(res){
-            x.classList.remove('rec');
-            if(res && res.alts) {
-              var cmp = compare(m.fr, res.alts);
-              $('.tk-sh-w', b).innerHTML = '<div class="tk-sh">' + shadowCard(m.fr, cmp) + '</div>';
-            }
-          });
-        }
-      }
+      if ((x = t.closest('[data-fill]'))) { var ip = $('#tk-ip'); if(ip) { ip.value = x.dataset.fill; ip.focus(); } return; }
+      if ((x = t.closest('[data-act="send"]'))) { var i = $('#tk-ip'); if(i) { handle(i.value); i.value = ''; } return; }
+      if ((x = t.closest('[data-act="mic"]'))) { listenSpeech(x); return; }
+      if ((x = t.closest('[data-act="new"]'))) { S = { topic: null, qi: 0 }; MSG = []; chat().innerHTML = ''; greet(); return; }
+      if ((x = t.closest('[data-a="say"]'))) { var m = MSG[+x.dataset.m]; if (m) say(m.fr); return; }
     });
 
-    ROOT.addEventListener('keydown', function (e) { if (e.key === 'Enter' && e.target.id === 'tk-ip') { var i = e.target, v = i.value; i.value = ''; handle(v); } });
+    ROOT.addEventListener('keydown', function (e) { if (e.key === 'Enter' && e.target.id === 'tk-ip') { var i = e.target; handle(i.value); i.value = ''; } });
 
-    // تشغيل فوري بدون أي جلب خارجي وبدون أخطاء
     mount();
   }
 })();
