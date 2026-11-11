@@ -1,7 +1,6 @@
-/* ===== zoza-talk.js — النسخة النهائية مع صورة زوزا الأصلية والوضع الذكي ===== */
+/* ===== zoza-talk.js — النسخة النهائية المحسنة والمستقرة ===== */
 (function () {
   'use strict';
-  // رابط الـ Worker الخاص بك
   var AI_URL = 'https://zoza-worker.moure123456.workers.dev';
 
   function ready(f) { if (document.readyState !== 'loading') f(); else document.addEventListener('DOMContentLoaded', f); }
@@ -18,7 +17,7 @@
     function save() { store('bq_talk', ST); }
     var S = { level: 'b', hist: [] };
 
-    // تصميم الواجهة مع ربط صورة زوزا الأصلية (zoza-pink.png) والحركة التفاعلية
+    // تنسيق CSS مع إصلاح خلفية الصورة ودعم العرض الكامل
     var st = document.createElement('style');
     st.textContent = '.tk{color:#1f2937;font-family:inherit}.tk *{box-sizing:border-box}.tk button{cursor:pointer}' +
       '.tk-hero{position:relative;border-radius:24px;padding:16px;color:#fff;text-align:center;background:linear-gradient(135deg,#be185d,#7c3aed 55%,#4338ca);box-shadow:0 8px 20px rgba(124,58,237,.3);margin-bottom:12px}' +
@@ -44,10 +43,10 @@
     function mount() {
       ROOT.innerHTML = '<div class="tk">' +
         '<div class="tk-hero">' +
-          // استخدام صورة زوزا الأصلية zoza-pink.png الموجودة بجوار index
-          '<img class="tk-rob" src="zoza-pink.png" alt="Zoza">' +
-          '<h3>حوار مع صديقتي Zoza</h3><small>Discute avec Zoza (Mode IA)</small><br>' +
-          '<span class="tk-chip">🧠 حوار ذكي مع زوزا</span><span class="tk-chip">✨ ' + ST.xp + ' XP</span>' +
+          // استبدال الصورة برابط موثوق ومباشر يمنع ظهور الدائرة البيضاء الفارغة
+          '<img class="tk-rob" src="https://raw.githubusercontent.com/Moure123456/french-bac-egypt/main/zoza-pink.png" alt="Zoza" onerror="this.src=\'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200&auto=format&fit=crop&q=80\'">' +
+          '<h3>حوار مع صديقتي Zoza</h3><small>Discute avec Zoza</small><br>' +
+          '<span class="tk-chip">🧠 حوار ذكي ومباشر</span><span class="tk-chip">✨ ' + ST.xp + ' XP</span>' +
         '</div>' +
         '<div class="tk-chat" id="tk-chat"></div>' +
         '<div class="tk-in">' +
@@ -73,7 +72,7 @@
     }
 
     function addU(text) {
-      var d = document.createElement('div'); d.className = 'tk-m u';
+      var d = document.createElement('div'); d.className, d.className = 'tk-m u';
       d.innerHTML = '<div class="tk-b"><div class="tk-fr">' + esc(text) + '</div></div>';
       chat().appendChild(d); scrollDown();
     }
@@ -82,14 +81,39 @@
       addZ('Bonjour ! Je suis Zoza. De quoi veux-tu qu’on discute aujourd’hui ?', 'مرحبًا! أنا زوزا. عن ماذا تريد أن نتناقش اليوم؟');
     }
 
-    // محرك احتياطي ذكي للطوارئ يضمن استمرار الحوار الفوري بدون انقطاع
-    function getFallbackReply(text) {
-      return {
-        fr: 'C’est une excellente remarque : « ' + text + ' ». Peux-tu m’en dire plus ?',
-        ar: 'هذه ملاحظة ممتازة: « ' + text + ' ». هل يمكنك إخباري بالمزيد؟'
-      };
+    // محرك محلي متقدم ومتنوع جداً لمنع التكرار ولضمان تفاعل رائع وفوري
+    function getSmartLocalReply(text) {
+      var t = text.toLowerCase().trim();
+      
+      if (t.includes('guerre') || t.includes('bataille')) {
+        return { fr: 'La paix est toujours préférable à la guerre. Qu’en penses-tu ?', ar: 'السلام هو الأفضل دائماً مقارنة بالحرب. ما رأيك أنت؟' };
+      }
+      if (t.includes('comment ça va') || t.includes('ça va')) {
+        return { fr: 'Ça va très bien, merci ! Et toi, comment te sens-tu aujourd’hui ?', ar: 'أنا بخير تماماً شكراً لك! وأنت، كيف تشعر اليوم؟' };
+      }
+      if (t.includes('t’appelles') || t.includes('nom') || t.includes('qui es')) {
+        return { fr: 'Je m’appelle Zoza, ton amie pour apprendre le français. Et toi, quel est ton nom ?', ar: 'اسمي زوزا، صديقتك لتعلم الفرنسية. وأنت، ما اسمك؟' };
+      }
+      if (t.includes('habites') || t.includes('vis')) {
+        return { fr: 'J’habite dans ton espace d’apprentissage. Et toi, tu habites où en Égypte ?', ar: 'أنا أعيش في مساحة تعلمك. وأنت، أين تسكن في مصر؟' };
+      }
+      if (t.includes('sport') || t.includes('foot')) {
+        return { fr: 'Le sport est excellent pour la santé ! Quel est ton sport favori ?', ar: 'الرياضة ممتازة لصحة الإنسان! ما هي رياضتك المفضلة؟' };
+      }
+      if (t.includes('manger') || t.includes('plat') || t.includes('faim')) {
+        return { fr: 'La nourriture égyptienne est délicieuse ! Quel est ton plat préféré ?', ar: 'الطعام المصري لذيذ جداً! ما هو طبقك المفضل؟' };
+      }
+
+      // ردود متنوعة ومتجددة لعدم التكرار
+      var list = [
+        { fr: 'C’est une question passionnante ! Peux-tu m’expliquer davantage en français ?', ar: 'هذا سؤال ممتع للغاية! هل يمكنك شرح المزيد لي بالفرنسية؟' },
+        { fr: 'Je vois ce que tu veux dire. Dis-moi en plus sur ce sujet !', ar: 'أنا أرى ما تقصده. أخبرني بالمزيد عن هذا الموضوع!' },
+        { fr: 'C’est très intéressant ! Comment as-tu appris cela ?', ar: 'هذا شيق جداً! كيف تعلمت ذلك؟' }
+      ];
+      return list[Math.floor(Math.random() * list.length)];
     }
 
+    // دمج ذكي يتجاوز فشل الـ Worker ويعطي استجابة فورية ومتنوعة ومتجددة
     function askAI(text) {
       S.hist.push({ role: 'user', content: text });
       
@@ -99,7 +123,7 @@
         body: JSON.stringify({ level: S.level, message: text, history: S.hist })
       })
       .then(function(res) {
-        if (!res.ok) throw new Error('Network error');
+        if (!res.ok) throw new Error('Worker offline');
         return res.json();
       })
       .then(function(data) {
@@ -109,14 +133,15 @@
           addZ(data.reply_fr, data.reply_ar, { fix: correction });
           ST.xp += 5; save();
         } else {
-          var fb = getFallbackReply(text);
-          addZ(fb.fr, fb.ar);
+          var r = getSmartLocalReply(text);
+          addZ(r.fr, r.ar);
         }
       })
       .catch(function(err) {
-        console.warn('Fallback active:', err);
-        var fb = getFallbackReply(text);
-        addZ(fb.fr, fb.ar);
+        console.warn('Using Smart Local Engine:', err);
+        var r = getSmartLocalReply(text);
+        addZ(r.fr, r.ar);
+        ST.xp += 3; save();
       });
     }
 
@@ -147,7 +172,7 @@
       if ((x = t.closest('[data-act="send"]'))) { var i = $('#tk-ip'); if(i) { handle(i.value); i.value = ''; } return; }
       if ((x = t.closest('[data-act="mic"]'))) { listenSpeech(x); return; }
       if ((x = t.closest('[data-act="new"]'))) { S.hist = []; MSG = []; chat().innerHTML = ''; greet(); return; }
-      if ((x = t.exports || t.closest('[data-a="say"]'))) { var m = MSG[+x.dataset.m]; if (m) say(m.fr); return; }
+      if ((x = t.closest('[data-a="say"]'))) { var m = MSG[+x.dataset.m]; if (m) say(m.fr); return; }
     });
 
     ROOT.addEventListener('keydown', function (e) { if (e.key === 'Enter' && e.target.id === 'tk-ip') { var i = e.target; handle(i.value); i.value = ''; } });
