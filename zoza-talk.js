@@ -1,4 +1,4 @@
-/* ===== zoza-talk.js — النسخة النهائية المعدلة لضمان ظهور صورة زوزا الأصلية ===== */
+/* ===== zoza-talk.js — النسخة المعدلة برمجياً لضمان ظهور زوزا بدون مشاكل صور ===== */
 (function () {
   'use strict';
   // رابط الـ Worker الخاص بك
@@ -18,11 +18,32 @@
     function save() { store('bq_talk', ST); }
     var S = { level: 'b', hist: [] };
 
-    // تصميم الواجهة مع ربط الرابط المباشر (Raw) لصورة زوزا لضمان عملها 100%
+    // دالة رسم رأس زوزا بالـ SVG البرمجي النقي لتجنب مشاكل الصور الخارجية
+    var HID = 0;
+    function head(cls) {
+      var k = ++HID;
+      return '<svg class="zz-head ' + (cls || '') + ' mood-smile" viewBox="0 0 200 184" aria-hidden="true" style="width:110px;height:110px;margin:0 auto 8px;display:block;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.3));animation:zozaMove 3.5s ease-in-out infinite;"><defs>' +
+        '<linearGradient id="zs' + k + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#dbe7f6"/></linearGradient>' +
+        '<linearGradient id="zv' + k + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e293b"/><stop offset="1" stop-color="#05070f"/></linearGradient>' +
+        '<radialGradient id="ze' + k + '" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#cffafe"/><stop offset=".45" stop-color="#22d3ee"/><stop offset="1" stop-color="#06b6d4"/></radialGradient>' +
+        '<filter id="zg' + k + '" x="-80%" y="-300%" width="260%" height="700%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>' +
+        '<ellipse cx="100" cy="176" rx="52" ry="6" fill="rgba(0,0,0,.18)"/>' +
+        '<g class="zz-ant"><rect x="96.5" y="12" width="7" height="22" rx="3.5" fill="#cbd5e1"/><circle cx="100" cy="10" r="10" fill="#7c3aed" filter="url(#zg' + k + ')"/><circle cx="96.5" cy="6.5" r="3.2" fill="#fff" opacity=".8"/></g>' +
+        '<ellipse cx="21" cy="104" rx="19" ry="33" fill="#7c3aed"/><ellipse cx="25" cy="104" rx="11" ry="23" fill="#c084fc"/><path d="M14 86 Q12 100 17 114" stroke="#fff" stroke-width="3" fill="none" opacity=".5" stroke-linecap="round"/>' +
+        '<ellipse cx="179" cy="104" rx="19" ry="33" fill="#7c3aed"/><ellipse cx="175" cy="104" rx="11" ry="23" fill="#c084fc"/><path d="M186 86 Q188 100 183 114" stroke="#fff" stroke-width="3" fill="none" opacity=".5" stroke-linecap="round"/>' +
+        '<rect x="24" y="26" width="152" height="144" rx="68" fill="url(#zs' + k + ')" stroke="#c9d6ea" stroke-width="2.5"/>' +
+        '<path d="M52 40 Q100 22 148 40" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round" opacity=".9"/>' +
+        '<rect x="38" y="46" width="124" height="98" rx="46" fill="url(#zv' + k + ')"/>' +
+        '<path d="M54 64 Q72 52 98 54" stroke="rgba(255,255,255,.4)" stroke-width="5.5" fill="none" stroke-linecap="round"/>' +
+        '<g class="zz-eyes"><g class="zz-eye"><ellipse cx="74" cy="88" rx="14" ry="18" fill="url(#ze' + k + ')" filter="url(#zg' + k + ')"/><ellipse cx="69" cy="80" rx="4.5" ry="6" fill="#fff" opacity=".95"/></g>' +
+        '<g class="zz-eye"><ellipse cx="126" cy="88" rx="14" ry="18" fill="url(#ze' + k + ')" filter="url(#zg' + k + ')"/><ellipse cx="121" cy="80" rx="4.5" ry="6" fill="#fff" opacity=".95"/></g></g>' +
+        '<ellipse cx="58" cy="116" rx="9" ry="5" fill="#f9a8d4" opacity=".5"/><ellipse cx="142" cy="116" rx="9" ry="5" fill="#f9a8d4" opacity=".5"/>' +
+        '<g class="zz-m"><path class="m-smile" d="M86 114 Q100 128 114 114" stroke="#22d3ee" stroke-width="5.5" fill="none" stroke-linecap="round" filter="url(#zg' + k + ')"/></g></svg>';
+    }
+
     var st = document.createElement('style');
     st.textContent = '.tk{color:#1f2937;font-family:inherit}.tk *{box-sizing:border-box}.tk button{cursor:pointer}' +
       '.tk-hero{position:relative;border-radius:24px;padding:16px;color:#fff;text-align:center;background:linear-gradient(135deg,#be185d,#7c3aed 55%,#4338ca);box-shadow:0 8px 20px rgba(124,58,237,.3);margin-bottom:12px}' +
-      '.tk-rob{display:block;margin:0 auto 8px;height:110px;width:110px;object-fit:cover;border-radius:50%;border:3px solid #fff;box-shadow:0 4px 12px rgba(0,0,0,0.3);animation:zozaMove 3.5s ease-in-out infinite;background:#fff}' +
       '@keyframes zozaMove{0%,100%{transform:translate(0,0) rotate(0deg) scale(1);} 25%{transform:translate(-5px,-4px) rotate(-3deg) scale(1.03);} 50%{transform:translate(5px,4px) rotate(3deg) scale(0.98);} 75%{transform:translate(-3px,4px) rotate(-2deg) scale(1.02);}}' +
       '.tk-chip{display:inline-block;background:rgba(255,255,255,.25);border-radius:12px;padding:4px 10px;font-size:.75rem;font-weight:800;margin:2px}' +
       '.tk-chat{background:linear-gradient(180deg,#fdf2f8,#eef2ff);border:1px solid #e9d5ff;border-radius:20px;padding:10px;height:min(50vh,400px);overflow-y:auto;display:flex;flex-direction:column;gap:10px}' +
@@ -44,8 +65,7 @@
     function mount() {
       ROOT.innerHTML = '<div class="tk">' +
         '<div class="tk-hero">' +
-          // استخدام الرابط المباشر الصحيح من مستودعك على جيت هب
-          '<img class="tk-rob" src="https://raw.githubusercontent.com/Moure123456/french-bac-egypt/main/zoza-pink.png" alt="Zoza">' +
+          head('') +
           '<h3>حوار مع صديقتي Zoza</h3><small>Discute avec Zoza (Mode IA)</small><br>' +
           '<span class="tk-chip">🧠 حوار ذكي مع زوزا</span><span class="tk-chip">✨ ' + ST.xp + ' XP</span>' +
         '</div>' +
