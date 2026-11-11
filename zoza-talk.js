@@ -1,7 +1,6 @@
-/* ===== zoza-talk.js — النسخة المعدلة برمجياً لضمان ظهور زوزا بدون مشاكل صور ===== */
+/* ===== zoza-talk.js — النسخة التفاعلية المطورة ===== */
 (function () {
   'use strict';
-  // رابط الـ Worker الخاص بك
   var AI_URL = 'https://zoza-worker.moure123456.workers.dev';
 
   function ready(f) { if (document.readyState !== 'loading') f(); else document.addEventListener('DOMContentLoaded', f); }
@@ -18,7 +17,6 @@
     function save() { store('bq_talk', ST); }
     var S = { level: 'b', hist: [] };
 
-    // دالة رسم رأس زوزا بالـ SVG البرمجي النقي لتجنب مشاكل الصور الخارجية
     var HID = 0;
     function head(cls) {
       var k = ++HID;
@@ -67,12 +65,12 @@
         '<div class="tk-hero">' +
           head('') +
           '<h3>حوار مع صديقتي Zoza</h3><small>Discute avec Zoza (Mode IA)</small><br>' +
-          '<span class="tk-chip">🧠 حوار ذكي مع زوزا</span><span class="tk-chip">✨ ' + ST.xp + ' XP</span>' +
+          '<span class="tk-chip">🧠 حوار ذكي متفاعل</span><span class="tk-chip">✨ ' + ST.xp + ' XP</span>' +
         '</div>' +
         '<div class="tk-chat" id="tk-chat"></div>' +
         '<div class="tk-in">' +
           '<button type="button" class="mic" id="tk-mic" data-act="mic" title="تحدث بالميكروفون">🎤</button>' +
-          '<input id="tk-ip" type="text" placeholder="تحدث مع زوزا في أي موضوع بالفرنسية…">' +
+          '<input id="tk-ip" type="text" placeholder="تحدث مع زوزا عن المدرسة، المطار، أو أي موضوع…">' +
           '<button type="button" data-act="send">➤</button>' +
         '</div>' +
         '<div class="tk-ft"><button type="button" data-act="new">🔄 حوار جديد</button></div>' +
@@ -99,13 +97,13 @@
     }
 
     function greet() {
-      addZ('Bonjour ! Je suis Zoza. De quoi veux-tu qu’on discute aujourd’hui ?', 'مرحبًا! أنا زوزا. عن ماذا تريد أن نتناقش اليوم؟');
+      addZ('Bonjour ! Je suis Zoza. Choisis un sujet ou parle-moi de ce que tu veux (à l’école, à l’hôpital, à l’aéroport...). Comment ça va ?', 'مرحبًا! أنا زوزا. اختاري موضوعاً أو تحدثي معي عن أي شئ (في المدرسة، المستشفى، المطار...). كيف حالك؟');
     }
 
     function getFallbackReply(text) {
       return {
-        fr: 'C’est une excellente remarque : « ' + text + ' ». Peux-tu m’en dire plus ?',
-        ar: 'هذه ملاحظة ممتازة: « ' + text + ' ». هل يمكنك إخباري بالمزيد؟'
+        fr: 'C’est intéressant : « ' + text + ' ». Rنcononde-moi, qu’est-ce que tu penses de ça ?',
+        ar: 'هذا مثير لاهتمام: « ' + text + ' ». أخبريني، ما رأيك في هذا؟'
       };
     }
 
