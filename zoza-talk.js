@@ -1,4 +1,4 @@
-/* ===== zoza-talk.js — النسخة النهائية مع صورة زوزا الأصلية والوضع الذكي ===== */
+/* ===== zoza-talk.js — النسخة النهائية المعدلة لضمان ظهور صورة زوزا الأصلية ===== */
 (function () {
   'use strict';
   // رابط الـ Worker الخاص بك
@@ -18,7 +18,7 @@
     function save() { store('bq_talk', ST); }
     var S = { level: 'b', hist: [] };
 
-    // تصميم الواجهة مع ربط صورة زوزا الأصلية (zoza-pink.png) والحركة التفاعلية
+    // تصميم الواجهة مع ربط الرابط المباشر (Raw) لصورة زوزا لضمان عملها 100%
     var st = document.createElement('style');
     st.textContent = '.tk{color:#1f2937;font-family:inherit}.tk *{box-sizing:border-box}.tk button{cursor:pointer}' +
       '.tk-hero{position:relative;border-radius:24px;padding:16px;color:#fff;text-align:center;background:linear-gradient(135deg,#be185d,#7c3aed 55%,#4338ca);box-shadow:0 8px 20px rgba(124,58,237,.3);margin-bottom:12px}' +
@@ -44,8 +44,8 @@
     function mount() {
       ROOT.innerHTML = '<div class="tk">' +
         '<div class="tk-hero">' +
-          // استخدام صورة زوزا الأصلية zoza-pink.png الموجودة بجوار index
-          '<img class="tk-rob" src="zoza-pink.png" alt="Zoza">' +
+          // استخدام الرابط المباشر الصحيح من مستودعك على جيت هب
+          '<img class="tk-rob" src="https://raw.githubusercontent.com/Moure123456/french-bac-egypt/main/zoza-pink.png" alt="Zoza">' +
           '<h3>حوار مع صديقتي Zoza</h3><small>Discute avec Zoza (Mode IA)</small><br>' +
           '<span class="tk-chip">🧠 حوار ذكي مع زوزا</span><span class="tk-chip">✨ ' + ST.xp + ' XP</span>' +
         '</div>' +
@@ -82,7 +82,6 @@
       addZ('Bonjour ! Je suis Zoza. De quoi veux-tu qu’on discute aujourd’hui ?', 'مرحبًا! أنا زوزا. عن ماذا تريد أن نتناقش اليوم؟');
     }
 
-    // محرك احتياطي ذكي للطوارئ يضمن استمرار الحوار الفوري بدون انقطاع
     function getFallbackReply(text) {
       return {
         fr: 'C’est une excellente remarque : « ' + text + ' ». Peux-tu m’en dire plus ?',
