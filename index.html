@@ -65,28 +65,13 @@
     }
     .sidebar button.on .lock-badge { color: #ffffff !important; }
     
-    /* تنسيق شريط العنوان العلوي لاستيعاب الأيقونات وزر الإخفاء بجانب العنوان */
+    /* تنسيق زر الإخفاء المؤقت للأيقونتين الموجودتين */
     .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 10px;
       flex-wrap: wrap;
-    }
-    .header-widgets-container {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .header-widget-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #fff;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-      cursor: pointer;
-      background: #fff;
     }
     #toggle-hide-widgets-btn {
       background: rgba(255, 255, 255, 0.2);
@@ -121,6 +106,7 @@
       line-height: 1.6;
       font-weight: 700;
     }
+    /* على الجوال: يوضع الشريط داخل الفراغ العلوي للقائمة (فوق كل العناصر) دون أن يتداخل مع أي عنصر آخر */
     @media (max-width: 800px) {
       .side-credit {
         position: absolute;
@@ -146,20 +132,9 @@
 
   <header class="topbar">
     <button id="menu-btn" class="icon-btn" type="button" aria-label="القائمة">☰</button>
-    
-    <!-- الأيقونات الأصلية (الديك وزوزا) بجانب العنوان -->
-    <div class="header-widgets-container" id="header-widgets-box">
-      <!-- أيقونة الديك الأصلية -->
-      <img src="./rooster.png" class="header-widget-icon" alt="Rooster" title="الديك الزاهي" onerror="this.src='https://raw.githubusercontent.com/Moure123456/french-bac-egypt/main/rooster.png'">
-      
-      <!-- أيقونة زوزا الأصلية -->
-      <img src="./zoza.png" class="header-widget-icon" alt="Zoza" title="صديقتي زوزا" onerror="this.src='https://raw.githubusercontent.com/Moure123456/french-bac-egypt/main/zoza.png'">
-
-      <!-- زر الإخفاء المؤقت -->
-      <button type="button" id="toggle-hide-widgets-btn" title="إخفاء مؤقت لمدة 10 دقائق">⏳ إخفاء</button>
-    </div>
-
     <h1>Le Français Au Bac <span>🇫🇷</span></h1>
+    <!-- زر الإخفاء المؤقت المضاف بجانب الأيقونتين الموجودتين في التطبيق -->
+    <button type="button" id="toggle-hide-widgets-btn" title="إخفاء الأيقونتين لمدة 10 دقائق">⏳ إخفاء الأيقونات</button>
     <button id="install-btn" class="install" type="button" hidden>تثبيت التطبيق على الجوال</button>
   </header>
 
@@ -217,38 +192,50 @@
 
   <footer class="site-footer">
     <p>جميع الحقوق محفوظة © - إعداد وتطوير: مسيو/ محمود أبوبكر السويدى</p>
-    <a class="wa-btn" href="https://wa.me/201040294647" target="_blank"><span>واتساب</span></a>
+    <a class="wa-btn" href="https://wa.me/201040294647" target="_blank"><span>واتساب</span>`</a>
   </footer>
 
   <div id="toast" class="toast" role="status"></div>
 
-  <!-- سكربت إدارة إخفاء وإظهار الأيقونات مؤقتاً لمدة 10 دقائق -->
+  <!-- سكربت إخفاء الأيقونتين الموجودتين في التطبيق (زوزا والديك) لمدة 10 دقائق -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const box = document.getElementById('header-widgets-box');
       const btn = document.getElementById('toggle-hide-widgets-btn');
       const TEN_MINUTES = 10 * 60 * 1000;
 
-      const hiddenUntil = localStorage.getItem('widgets_hidden_until');
+      // ابحث عن الأيقونتين بناءً على الفئات أو العناصر العائمة الحالية لديك (مثل zoza و rooster أو الحاويات الخاصة بهما)
+      function getFloatingIcons() {
+        // يمكنك تعديل هذا المختار حسب الكลาส أو الـ ID الفعلي للأيقونتين في مشروعك
+        return document.querySelectorAll('.zoza-icon, .rooster-icon, img[src*="zoza"], img[src*="rooster"]');
+      }
+
+      const hiddenUntil = localStorage.getItem('app_icons_hidden_until');
       if (hiddenUntil && Date.now() < parseInt(hiddenUntil)) {
-        box.classList.add('widgets-hidden-mode');
+        toggleIconsDisplay(true);
         btn.innerText = '⏳ مخفية';
         startCountdown(parseInt(hiddenUntil) - Date.now());
       }
 
       btn.addEventListener('click', function () {
         const targetTime = Date.now() + TEN_MINUTES;
-        localStorage.setItem('widgets_hidden_until', targetTime);
-        box.classList.add('widgets-hidden-mode');
+        localStorage.setItem('app_icons_hidden_until', targetTime);
+        toggleIconsDisplay(true);
         btn.innerText = '⏳ مخفية';
         startCountdown(TEN_MINUTES);
       });
 
+      function toggleIconsDisplay(hide) {
+        const icons = getFloatingIcons();
+        icons.forEach(el => {
+          el.style.display = hide ? 'none' : '';
+        });
+      }
+
       function startCountdown(duration) {
         setTimeout(function () {
-          box.classList.remove('widgets-hidden-mode');
-          btn.innerText = '⏳ إخفاء';
-          localStorage.removeItem('widgets_hidden_until');
+          toggleIconsDisplay(false);
+          btn.innerText = '⏳ إخفاء الأيقونات';
+          localStorage.removeItem('app_icons_hidden_until');
         }, duration);
       }
     });
@@ -335,4 +322,130 @@
         });
       }
 
-      const observer = new MutationObserver(function
+      const observer = new MutationObserver(function () {
+        const dialoguesSec = document.getElementById('dialogues');
+        if (dialoguesSec && dialoguesSec.classList.contains('on')) {
+          setTimeout(addBlueTextButtons, 300);
+        }
+      });
+
+      observer.observe(document.body, { childList: true, subtree: true });
+    });
+  </script>
+
+  <!-- سكربت حماية الأقسام والأقفال (مصحح بالكامل) -->
+  <script>
+    const protectedSections = ['bac', 'grammar', 'phonetics', 'exams', 'soon-chansons'];
+
+    function ensureLocks() {
+      protectedSections.forEach(navId => {
+        const btn = document.querySelector(`[data-nav="${navId}"]`);
+        if (!btn) return;
+        if (!btn.classList.contains('locked-section')) {
+          btn.classList.add('locked-section');
+          btn.setAttribute('data-locked-id', navId);
+        }
+        if (!btn.querySelector('.lock-badge')) {
+          const badge = document.createElement('span');
+          badge.className = 'lock-badge';
+          badge.setAttribute('role', 'button');
+          badge.addEventListener('click', function (ev) {
+            ev.preventDefault();
+            ev.stopPropagation();
+            promptForPassword(navId, btn);
+          });
+          btn.appendChild(badge);
+        }
+      });
+      updateLockVisuals();
+    }
+
+    function initLocks() {
+      ensureLocks();
+
+      document.body.addEventListener("click", function (e) {
+        const lockedBtn = e.target.closest('.locked-section');
+        if (lockedBtn && !e.target.closest('.lock-badge')) {
+          const lockedId = lockedBtn.getAttribute('data-locked-id');
+          if (localStorage.getItem(`section_unlocked_${lockedId}`) !== "true") {
+            e.preventDefault();
+            e.stopPropagation();
+            promptForPassword(lockedId, lockedBtn);
+          }
+        }
+      }, true);
+
+      const nav = document.querySelector('.sidebar');
+      if (nav && window.MutationObserver) {
+        new MutationObserver(function () { ensureLocks(); }).observe(nav, { childList: true, subtree: true });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener("DOMContentLoaded", initLocks);
+    } else {
+      initLocks();
+    }
+    window.addEventListener("load", ensureLocks);
+
+    function updateLockVisuals() {
+      document.querySelectorAll('.locked-section').forEach(btn => {
+        const lockedId = btn.getAttribute('data-locked-id');
+        const isUnlocked = localStorage.getItem(`section_unlocked_${lockedId}`) === "true";
+        const badge = btn.querySelector('.lock-badge');
+        if (badge) {
+          badge.classList.toggle('is-open', isUnlocked);
+          badge.style.color = isUnlocked ? '#0055A5' : '#dc3545';
+          badge.setAttribute('aria-label', isUnlocked ? 'القسم مفتوح' : 'القسم مغلق');
+        }
+      });
+    }
+
+    function promptForPassword(lockedId, btnElement) {
+      const oldModal = document.getElementById('master-pin-modal');
+      if (oldModal) oldModal.remove();
+
+      const modalHTML = `
+        <div id="master-pin-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; z-index: 99999; font-family: Tahoma, sans-serif;">
+          <div style="background: #fff; padding: 25px; border-radius: 12px; width: 320px; text-align: right; direction: rtl; box-shadow: 0 5px 20px rgba(0,0,0,0.3);">
+            <h3 style="color: #0055A5; margin-top: 0; margin-bottom: 10px; font-size: 16px;">🔐 لوحة التحكم بالرقم السري</h3>
+            <p style="color: #666; font-size: 13px; margin-bottom: 15px;">أدخل الرقم السري للتحكم بالقسم:</p>
+            <input type="password" id="creator-pin-input" maxlength="4" inputmode="numeric" style="width: 100%; padding: 12px; font-size: 22px; text-align: center; letter-spacing: 8px; border: 2px solid #ccc; border-radius: 6px; box-sizing: border-box; margin-bottom: 15px;">
+            <div style="display: flex; gap: 10px;">
+              <button id="submit-pin-btn" style="flex: 1; background: #0055A5; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer;">تنفيذ</button>
+              <button id="cancel-pin-btn" style="background: #6c757d; color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer;">إلغاء</button>
+            </div>
+            <div id="pin-error-msg" style="color: red; font-size: 12px; margin-top: 10px; text-align: center; font-weight: bold;"></div>
+          </div>
+        </div>
+      `;
+      document.body.insertAdjacentHTML('beforeend', modalHTML);
+      const pinInput = document.getElementById('creator-pin-input');
+      pinInput.focus();
+
+      document.getElementById('cancel-pin-btn').addEventListener('click', () => {
+        document.getElementById('master-pin-modal').remove();
+      });
+
+      document.getElementById('submit-pin-btn').addEventListener('click', () => {
+        const val = pinInput.value.trim();
+        if (val === "0519") {
+          localStorage.setItem(`section_unlocked_${lockedId}`, "true");
+          document.getElementById('master-pin-modal').remove();
+          updateLockVisuals();
+          btnElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
+        } else if (val === "0510") {
+          localStorage.setItem(`section_unlocked_${lockedId}`, "false");
+          document.getElementById('master-pin-modal', remove());
+          updateLockVisuals();
+          alert("🔒 تم إغلاق القسم بنجاح.");
+        } else {
+          document.getElementById('pin-error-msg').innerText = "❌ الرقم السري غير صحيح!";
+          pinInput.value = "";
+          pinInput.focus();
+        }
+      });
+    }
+  </script>
+</body>
+</html>
