@@ -1,4 +1,4 @@
-/* ===== zoza-talk.js — الكود النهائي المستقر لقسم زوزا ===== */
+/* ===== zoza-talk.js — النسخة الذاتية المدمجة (لا تحتاج ملفات خارجية) ===== */
 (function () {
   'use strict';
   function ready(f) { if (document.readyState !== 'loading') f(); else document.addEventListener('DOMContentLoaded', f); }
@@ -15,7 +15,62 @@
     var ST = store('bq_talk') || { level: 'b', voice: 1, xp: 0 };
     function save() { store('bq_talk', ST); }
     var S = { topic: null, qi: 0 };
-    var DATA = { talk: null }, MSG = [];
+    var MSG = [];
+
+    // بيانات زوزا مدمجة بالكامل لضمان التشغيل الفوري بدون مشاكل جلب
+    var DATA = {
+      talk: {
+        levels: {
+          b: { ic: '🌱', ar: 'مبتدئ' },
+          m: { ic: '🌿', ar: 'متوسط' },
+          a: { ic: '🌳', ar: 'متقدم' }
+        },
+        topics: [
+          {
+            id: 'school',
+            ic: '🏫',
+            ar: 'المدرسة والاصدقاء',
+            hello: {
+              b: ['Bonjour ! Parlons de l’école.', 'مرحبًا! لنتحدث عن المدرسة.'],
+              m: ['Salut ! Comment se passe ta vie scolaire ?', 'أهلاً! كيف تسير حياتك المدرسية؟'],
+              a: ['Bonjour cher ami, parlons de notre système éducatif.', 'مرحبًا صديقي العزيز، لنتحدث عن نظامنا التعليمي.']
+            },
+            q: {
+              b: [
+                ['Quelle est ta matière préférée ?', 'ما هي مادتك المفضلة؟', ['J’aime le français', 'J’adore les maths']]
+              ],
+              m: [
+                ['Comment trouves-tu ton professeur de français ?', 'كيف تجد معلم اللغة الفرنسية الخاص بك؟', ['Il est très gentil', 'Il explique bien']]
+              ],
+              a: [
+                ['Quels sont tes objectifs pour le baccalauréat ?', 'ما هي أهدافك لشهادة الثانوية العامة؟', ['Je veux réussir avec mention', 'Je vise l’excellence']]
+              ]
+            }
+          },
+          {
+            id: 'hobbies',
+            ic: '⚽',
+            ar: 'الهوايات والرياضة',
+            hello: {
+              b: ['Salut ! Parlons de nos loisirs.', 'أهلاً! لنتحدث عن هواياتنا.'],
+              m: ['Bonjour ! Qu’aimes-tu faire pendant ton temps libre ?', 'مرحبًا! ماذا تحب أن تفعل في وقت فراغك؟'],
+              a: ['Le loisir façonne la personnalité, qu’en penses-tu ?', 'الهواية تشكل الشخصية، ما رأيك؟']
+            },
+            q: {
+              b: [
+                ['Aimes-tu le football ?', 'هل تحب كرة القدم؟', ['Oui, j’adore le foot', 'Non, je préfère la lecture']]
+              ],
+              m: [
+                ['Qu’as-tu fait le weekend dernier ?', 'ماذا فعلت في عطلة نهاية الأسبوع الماضية؟', ['Je suis sorti avec des amis', 'Je suis resté à la maison']]
+              ],
+              a: [
+                ['Comment le sport influence-t-il la santé ?', 'كيف تؤثر الرياضة على الصحة؟', ['Le sport est essentiel', 'Il donne de l’énergie']]
+              ]
+            }
+          }
+        ]
+      }
+    };
 
     var st = document.createElement('style');
     st.textContent = '.tk{color:#1f2937}.tk *{box-sizing:border-box}.tk button,.tk input{font-family:inherit}.tk button{cursor:pointer}' +
@@ -38,29 +93,16 @@
       try { if (!window.speechSynthesis) return; speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(text); u.lang = 'fr-FR'; u.rate = 0.85; speechSynthesis.speak(u); } catch (e) {}
     }
 
-    // مسارات آمنة ومتعددة لجلب talk.json حتى لا يفشل أبداً
-    function getJson() {
-      var paths = ['./data/talk.json', 'data/talk.json', '/french-bac-egypt/data/talk.json'];
-      var idx = 0;
-      function tryNext() {
-        if (idx >= paths.length) return Promise.resolve(null);
-        var p = paths[idx++];
-        return fetch(p + '?v=' + Date.now()).then(function(r) { return r.ok ? r.json() : Promise.reject(); }).catch(tryNext);
-      }
-      return tryNext();
-    }
-
-    var LEVEL_NAMES = { b: { ic: '🌱', ar: 'مبتدئ' }, m: { ic: '🌿', ar: 'متوسط' }, a: { ic: '🌳', ar: 'متقدم' } };
     function lvlBtns() { 
       return ['b', 'm', 'a'].map(function (l) { 
-        var x = LEVEL_NAMES[l]; 
+        var x = DATA.talk.levels[l]; 
         return '<button type="button" data-lv="' + l + '" class="' + (ST.level === l ? 'on' : '') + '">' + x.ic + ' ' + x.ar + '</button>'; 
       }).join(''); 
     }
     
     function tpChips() { 
       return '<button type="button" data-tp="free" class="' + (!S.topic ? 'on' : '') + '">🎲 أي موضوع</button>' + 
-        (DATA.talk.topics || []).map(function (t) { return '<button type="button" data-tp="' + t.id + '" class="' + (S.topic && S.topic.id === t.id ? 'on' : '') + '">' + (t.ic || '💬') + ' ' + esc(t.ar) + '</button>'; }).join(''); 
+        DATA.talk.topics.map(function (t) { return '<button type="button" data-tp="' + t.id + '" class="' + (S.topic && S.topic.id === t.id ? 'on' : '') + '">' + t.ic + ' ' + esc(t.ar) + '</button>'; }).join(''); 
     }
     
     function mount() {
@@ -94,7 +136,7 @@
       chat().appendChild(d); scrollDown();
     }
 
-    function T(id) { return (DATA.talk.topics || []).filter(function (t) { return t.id === id; })[0]; }
+    function T(id) { return DATA.talk.topics.filter(function (t) { return t.id === id; })[0]; }
     function greet() {
       addZ('Bonjour ! Je suis Zoza. De quoi veux-tu parler ?', 'مرحبًا! أنا زوزا. عن ماذا تريد أن نتحدث؟', ['Bonjour Zoza !', 'Je m’appelle…', 'Raconte une blague']);
     }
@@ -103,8 +145,7 @@
       S.topic = id === 'free' ? null : T(id); S.qi = 0; 
       var tpEl = $('#tk-tp'); if (tpEl) tpEl.innerHTML = tpChips();
       if (!S.topic) { addZ('Parle-moi de ce que tu veux !', 'حدّثني عمّا تشاء!', ['Bonjour !', 'J’aime le français']); return; }
-      var h = S.topic.hello && S.topic.hello[ST.level] ? S.topic.hello[ST.level] : ['Bonjour !', 'مرحبًا!'];
-      var q = S.topic.q && S.topic.q[ST.level] && S.topic.q[ST.level][0] ? S.topic.q[ST.level][0] : ['Comment ça va ?', 'كيف حالك؟', []];
+      var h = S.topic.hello[ST.level], q = S.topic.q[ST.level][0];
       addZ(h[0] + ' ' + q[0], h[1] + ' - ' + q[1], q[2] || []);
     }
 
@@ -129,17 +170,7 @@
 
     ROOT.addEventListener('keydown', function (e) { if (e.key === 'Enter' && e.target.id === 'tk-ip') { var i = e.target; handle(i.value); i.value = ''; } });
 
-    ROOT.innerHTML = '<div style="text-align:center;padding:20px;color:#7c3aed">⏳ جاري تحميل زوزا...</div>';
-    
-    getJson().then(function (talkData) {
-      if (!talkData || !talkData.topics) {
-        ROOT.innerHTML = '<div style="text-align:center;padding:20px;color:red">⚠️ تعذّر تحميل talk.json — تأكد من وجوده داخل مجلد data ومساره الصحيح.</div>';
-        return;
-      }
-      DATA.talk = talkData;
-      mount();
-    }).catch(function() {
-      ROOT.innerHTML = '<div style="text-align:center;padding:20px;color:red">⚠️ حدث خطأ أثناء الاتصال وجلب الملفات.</div>';
-    });
+    // تشغيل فوري بدون انتظار أي ملفات خارجية
+    mount();
   }
 })();
