@@ -65,7 +65,7 @@
     }
     .sidebar button.on .lock-badge { color: #ffffff !important; }
     
-    /* تنسيق زر الإخفاء المؤقت للأيقونتين الموجودتين */
+    /* تنسيق زر الإخفاء في الشريط العلوي */
     .topbar {
       display: flex;
       align-items: center;
@@ -77,14 +77,11 @@
       background: rgba(255, 255, 255, 0.2);
       border: 1px solid rgba(255, 255, 255, 0.5);
       color: #fff;
-      padding: 4px 8px;
+      padding: 4px 10px;
       border-radius: 6px;
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       cursor: pointer;
       font-weight: bold;
-    }
-    .widgets-hidden-mode {
-      display: none !important;
     }
 
     /* شريط الحقوق أعلى القائمة الجانبية */
@@ -133,8 +130,8 @@
   <header class="topbar">
     <button id="menu-btn" class="icon-btn" type="button" aria-label="القائمة">☰</button>
     <h1>Le Français Au Bac <span>🇫🇷</span></h1>
-    <!-- زر الإخفاء المؤقت المضاف بجانب الأيقونتين الموجودتين في التطبيق -->
-    <button type="button" id="toggle-hide-widgets-btn" title="إخفاء الأيقونتين لمدة 10 دقائق">⏳ إخفاء الأيقونات</button>
+    <!-- زر إخفاء الأيقونات العائمة المضاف بعناية -->
+    <button type="button" id="toggle-hide-widgets-btn" title="إخفاء الأيقونات العائمة لمدة 10 دقائق">⏳ إخفاء الأيقونات</button>
     <button id="install-btn" class="install" type="button" hidden>تثبيت التطبيق على الجوال</button>
   </header>
 
@@ -192,50 +189,54 @@
 
   <footer class="site-footer">
     <p>جميع الحقوق محفوظة © - إعداد وتطوير: مسيو/ محمود أبوبكر السويدى</p>
-    <a class="wa-btn" href="https://wa.me/201040294647" target="_blank"><span>واتساب</span>`</a>
+    <a class="wa-be" href="https://wa.me/201040294647" target="_blank"><span>واتساب</span></a>
   </footer>
 
   <div id="toast" class="toast" role="status"></div>
 
-  <!-- سكربت إخفاء الأيقونتين الموجودتين في التطبيق (زوزا والديك) لمدة 10 دقائق -->
+  <!-- سكربت التحكم الفعال لإخفاء العناصر العائمة (زوزا، الديك، والجوائز) لمدة 10 دقائق -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const btn = document.getElementById('toggle-hide-widgets-btn');
       const TEN_MINUTES = 10 * 60 * 1000;
 
-      // ابحث عن الأيقونتين بناءً على الفئات أو العناصر العائمة الحالية لديك (مثل zoza و rooster أو الحاويات الخاصة بهما)
-      function getFloatingIcons() {
-        // يمكنك تعديل هذا المختار حسب الكลาส أو الـ ID الفعلي للأيقونتين في مشروعك
-        return document.querySelectorAll('.zoza-icon, .rooster-icon, img[src*="zoza"], img[src*="rooster"]');
+      if (!btn) return;
+
+      function setWidgetsVisibility(hide) {
+        let styleTag = document.getElementById('hide-floating-style');
+        if (hide) {
+          if (!styleTag) {
+            styleTag = document.createElement('style');
+            styleTag.id = 'hide-floating-style';
+            /* يغطي زر زوزا العائم، فقاعتها، لوحتها، أيقونة الديك العائمة، وأي جائزة تظهر على الشاشة */
+            styleTag.textContent = '#zz-fab, #zz-bub, #zz-pn, .floating-rooster, .splash-floating-icon, [id*="rooster"], [class*="rooster"], [id*="reward"], [class*="reward"] { display: none !important; }';
+            document.head.appendChild(styleTag);
+          }
+        } else {
+          if (styleTag) styleTag.remove();
+        }
       }
 
-      const hiddenUntil = localStorage.getItem('app_icons_hidden_until');
+      const hiddenUntil = localStorage.getItem('floating_widgets_hidden_until');
       if (hiddenUntil && Date.now() < parseInt(hiddenUntil)) {
-        toggleIconsDisplay(true);
+        setWidgetsVisibility(true);
         btn.innerText = '⏳ مخفية';
         startCountdown(parseInt(hiddenUntil) - Date.now());
       }
 
       btn.addEventListener('click', function () {
         const targetTime = Date.now() + TEN_MINUTES;
-        localStorage.setItem('app_icons_hidden_until', targetTime);
-        toggleIconsDisplay(true);
+        localStorage.setItem('floating_widgets_hidden_until', targetTime);
+        setWidgetsVisibility(true);
         btn.innerText = '⏳ مخفية';
         startCountdown(TEN_MINUTES);
       });
 
-      function toggleIconsDisplay(hide) {
-        const icons = getFloatingIcons();
-        icons.forEach(el => {
-          el.style.display = hide ? 'none' : '';
-        });
-      }
-
       function startCountdown(duration) {
         setTimeout(function () {
-          toggleIconsDisplay(false);
+          setWidgetsVisibility(false);
           btn.innerText = '⏳ إخفاء الأيقونات';
-          localStorage.removeItem('app_icons_hidden_until');
+          localStorage.removeItem('floating_widgets_hidden_until');
         }, duration);
       }
     });
@@ -436,7 +437,7 @@
           btnElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
         } else if (val === "0510") {
           localStorage.setItem(`section_unlocked_${lockedId}`, "false");
-          document.getElementById('master-pin-modal', remove());
+          document.getElementById('master-pin-modal').remove();
           updateLockVisuals();
           alert("🔒 تم إغلاق القسم بنجاح.");
         } else {
