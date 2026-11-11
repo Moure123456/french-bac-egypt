@@ -1,4 +1,4 @@
-/* ===== zoza-talk.js — النسخة الشاملة والمحدثة للبحث الذكي في dialogues-db.json ===== */
+/* ===== zoza-talk.js — النسخة الشاملة المتكاملة مع dialogues-db.json ===== */
 (function () {
   'use strict';
   var AI_URL = 'https://zoza-worker.moure123456.workers.dev';
@@ -83,7 +83,7 @@
         '<div class="tk-chat" id="tk-chat"></div>' +
         '<div class="tk-in">' +
           '<button type="button" class="mic" id="tk-mic" data-act="mic" title="تحدث بالميكروفون">🎤</button>' +
-          '<input id="tk-ip" type="text" placeholder="اكتب موضوعاً (مدرسة، مطار، مستشفى) أو سؤالاً…">' +
+          '<input id="tk-ip" type="text5" placeholder="اكتب موضوعاً (مدرسة، مطار، مستشفى) أو سؤالاً…">' +
           '<button type="button" data-act="send">➤</button>' +
         '</div>' +
         '<div class="tk-ft"><button type="button" data-act="new">🔄 حوار جديد</button></div>' +
@@ -111,42 +111,17 @@
     }
 
     function greet() {
-      addZ('Bonjour ! Je suis Zoza, ton professeur de français. Je connais tous les dialogues du Bac (1ère, 2ème, 3ème secondaire). Quel sujet veux-tu réviser ? (ex: le médecin, le train, le sport, la classe...)', 'مرحباً! أنا زوزا، معلمة الفرنسية. أعفظ كل حوارات المنهج (أول، ثان, ثالث ثانوي). أي موضوع تريدين مراجعته؟');
+      addZ('Bonjour ! Je suis Zoza, ton professeur de français. Je connais tous les dialogues du Bac (1ère, 2ème, 3ème secondaire). Quel sujet veux-tu réviser ? (ex: le médecin, le train, le sport, la classe...)', 'مرحباً! أنا زوزا، معلمة الفرنسية. أعفظ كل حوارات المنهج (أول، ثانی، ثالث ثانوي). أي موضوع تريدين مراجعته؟');
     }
 
-    // دالة البحث المحدثة والذكية داخل ملف dialogues-db.json المحلي
+    // البحث داخل ملف الحوارات المحلي dialogues-db.json أولاً
     function searchLocalDatabase(query) {
       if (!dialoguesData || !dialoguesData.dialogues) return null;
-      var q = query.toLowerCase().trim();
-      var words = q.split(/\s+/);
-      
+      var q = query.toLowerCase();
       for (var i = 0; i < dialoguesData.dialogues.length; i++) {
         var d = dialoguesData.dialogues[i];
-        
-        // 1. مطابقة العنوان أو المعرف أو السياق العربي
         if (d.title_ar.toLowerCase().includes(q) || d.title_fr.toLowerCase().includes(q) || d.id.toLowerCase().includes(q) || (d.context_ar && d.context_ar.toLowerCase().includes(q))) {
           return d;
-        }
-        
-        // 2. البحث الدقيق داخل أسطر الحوار وجملها
-        for (var j = 0; j < d.lines.length; j++) {
-          var line = d.lines[j];
-          var lineFr = line.fr.toLowerCase();
-          var lineAr = line.ar.toLowerCase();
-          
-          if (lineFr.includes(q) || lineAr.includes(q)) {
-            return d;
-          }
-          
-          var matchCount = 0;
-          for (var w = 0; w < words.length; w++) {
-            if (words[w].length > 2 && (lineFr.includes(words[w]) || lineAr.includes(words[w]))) {
-              matchCount++;
-            }
-          }
-          if (matchCount > 0) {
-            return d;
-          }
         }
       }
       return null;
