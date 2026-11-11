@@ -64,6 +64,44 @@
       border-right-color: transparent;
     }
     .sidebar button.on .lock-badge { color: #ffffff !important; }
+    
+    /* تنسيق شريط العنوان العلوي لاستيعاب الأيقونات وزر الإخفاء بجانب العنوان */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .header-widgets-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header-widget-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      cursor: pointer;
+      background: #fff;
+    }
+    #toggle-hide-widgets-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .widgets-hidden-mode {
+      display: none !important;
+    }
+
     /* شريط الحقوق أعلى القائمة الجانبية */
     .side-credit {
       box-sizing: border-box;
@@ -83,7 +121,6 @@
       line-height: 1.6;
       font-weight: 700;
     }
-    /* على الجوال: يوضع الشريط داخل الفراغ العلوي للقائمة (فوق كل العناصر) دون أن يتداخل مع أي عنصر آخر */
     @media (max-width: 800px) {
       .side-credit {
         position: absolute;
@@ -109,6 +146,19 @@
 
   <header class="topbar">
     <button id="menu-btn" class="icon-btn" type="button" aria-label="القائمة">☰</button>
+    
+    <!-- الحاوية العلوية الجديدة للأيقونات وزر الإخفاء بجانب العنوان -->
+    <div class="header-widgets-container" id="header-widgets-box">
+      <!-- أيقونة الديك -->
+      <img src="https://raw.githubusercontent.com/Moure123456/french-bac-egypt/main/rooster.png" class="header-widget-icon" alt="Rooster" title="الديك الزاهي" onerror="this.src='https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=100&auto=format&fit=crop&q=80'">
+      
+      <!-- أيقونة زوزا -->
+      <img src="https://raw.githubusercontent.com/Moure123456/french-bac-egypt/main/zoza-pink.png" class="header-widget-icon" alt="Zoza" title="صديقتي زوزا" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100&auto=format&fit=crop&q=80'">
+
+      <!-- زر الإخفاء المؤقت -->
+      <button type="button" id="toggle-hide-widgets-btn" title="إخفاء مؤقت لمدة 10 دقائق">⏳ إخفاء</button>
+    </div>
+
     <h1>Le Français Au Bac <span>🇫🇷</span></h1>
     <button id="install-btn" class="install" type="button" hidden>تثبيت التطبيق على الجوال</button>
   </header>
@@ -171,6 +221,39 @@
   </footer>
 
   <div id="toast" class="toast" role="status"></div>
+
+  <!-- سكربت إدارة إخفاء وإظهار الأيقونات مؤقتاً لمدة 10 دقائق -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const box = document.getElementById('header-widgets-box');
+      const btn = document.getElementById('toggle-hide-widgets-btn');
+      const TEN_MINUTES = 10 * 60 * 1000;
+
+      // التحقق من حالة الإخفاء المحفوظة مسبقاً
+      const hiddenUntil = localStorage.getItem('widgets_hidden_until');
+      if (hiddenUntil && Date.now() < parseInt(hiddenUntil)) {
+        box.classList.add('widgets-hidden-mode');
+        btn.innerText = '⏳ مخفية';
+        startCountdown(parseInt(hiddenUntil) - Date.now());
+      }
+
+      btn.addEventListener('click', function () {
+        const targetTime = Date.now() + TEN_MINUTES;
+        localStorage.setItem('widgets_hidden_until', targetTime);
+        box.classList.add('widgets-hidden-mode');
+        btn.innerText = '⏳ مخفية';
+        startCountdown(TEN_MINUTES);
+      });
+
+      function startCountdown(duration) {
+        setTimeout(function () {
+          box.classList.remove('widgets-hidden-mode');
+          btn.innerText = '⏳ إخفاء';
+          localStorage.removeItem('widgets_hidden_until');
+        }, duration);
+      }
+    });
+  </script>
 
   <!-- سكربت تسجيل الـ Service Worker بشكل آمن ومنفصل تماماً ليعمل في الخلفية دون تعطيل الوظائف -->
   <script>
@@ -306,7 +389,6 @@
         }
       }, true);
 
-      // إعادة إضافة الأقفال تلقائياً إن أُعيد بناء القائمة الجانبية
       const nav = document.querySelector('.sidebar');
       if (nav && window.MutationObserver) {
         new MutationObserver(function () { ensureLocks(); }).observe(nav, { childList: true, subtree: true });
@@ -353,31 +435,4 @@
       `;
       document.body.insertAdjacentHTML('beforeend', modalHTML);
       const pinInput = document.getElementById('creator-pin-input');
-      pinInput.focus();
-
-      document.getElementById('cancel-pin-btn').addEventListener('click', () => {
-        document.getElementById('master-pin-modal').remove();
-      });
-
-      document.getElementById('submit-pin-btn').addEventListener('click', () => {
-        const val = pinInput.value.trim();
-        if (val === "0519") {
-          localStorage.setItem(`section_unlocked_${lockedId}`, "true");
-          document.getElementById('master-pin-modal').remove();
-          updateLockVisuals();
-          btnElement.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
-        } else if (val === "0510") {
-          localStorage.setItem(`section_unlocked_${lockedId}`, "false");
-          document.getElementById('master-pin-modal').remove();
-          updateLockVisuals();
-          alert("🔒 تم إغلاق القسم بنجاح.");
-        } else {
-          document.getElementById('pin-error-msg').innerText = "❌ الرقم السري غير صحيح!";
-          pinInput.value = "";
-          pinInput.focus();
-        }
-      });
-    }
-  </script>
-</body>
-</html>
+      
