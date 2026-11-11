@@ -1,102 +1,219 @@
-/* ===== zoza-talk.js — الملف الشامل والضخم والذكي لزوزا (شامل الديالوجات والقصص والمنهج) ===== */
+/* ==========================================================================
+   zoza-talk.js — النسخة الشاملة والجاهزة للنسخ (Le Français Au Bac)
+   ========================================================================== */
 (function () {
   'use strict';
   var AI_URL = 'https://zoza-worker.moure123456.workers.dev';
 
-  // القاعدة المعرفية الكاملة والمدمجة (مأخوذة مباشرة من الديالوجات والقصص التي أرسلتها)
-  var KNOWLEDGE_BASE = {
+  var MASTER_KNOWLEDGE = {
+    meta: { version: "5.1.0", author: "محمود السويدى (مسيو محمود)", project: "Le français au bac" },
     dialogues: [
-      { id: "presentation", topic: "Se présenter (التعارف)", fr: "Bonjour ! Je m’appelle Nour/Thomas. J’habite à Paris ou en Égypte.", ar: "التعارف: اسمي نور أو توما، أسكن في باريس أو مصر." },
-      { id: "chemin", topic: "Demander son chemin (الاتجاهات)", fr: "Où est la gare ? Allez tout droit, puis tournez à gauche.", ar: "الاتجاهات: أين المحطة؟ اذهب مباشرة ثم انعطف يساراً." },
-      { id: "vetements", topic: "Acheter des vêtements (الملابس)", fr: "Je cherche une robe pour une fête. Quelle taille faites-vous ?", ar: "الملابس: أبحث عن فستان لحفلة، ما هو مقاسك؟" },
-      { id: "restaurant", topic: "Au restaurant (المطعم)", fr: "Je voudrais un poulet avec du riz et une bouteille d’eau.", ar: "المطعم: أريد دجاجاً مع أرز وزجاجة ماء." },
-      { id: "sport", topic: "Le sport (الرياضة)", fr: "Je joue au basket deux fois par semaine. J’adore le football.", ar: "الرياضة: ألعب كرة السلة مرتين أسبوعياً وأعشق كرة القدم." },
-      { id: "classe", topic: "En classe (الفصل)", fr: "Je n’ai pas compris l’exercice. Il faut mettre le verbe au passé composé.", ar: "في الفصل: لم أفهم التمرين، يجب وضع الفعل في الماضي المركب." },
-      { id: "medecin", topic: "Chez le médecin (عند الطبيب)", fr: "J’ai mal à la gorge et je tousse beaucoup.", ar: "عند الطبيب: أشعر بألم في الحلق وأسعل كثيراً." },
-      { id: "bac_ecolo", topic: "Bac - Unité 1 : Environnement", fr: "Il faut protéger notre planète contre la pollution et recycler les déchets.", ar: "بكالوريا - حماية البيئة: يجب حماية كوكبنا ضد التلوث وإعادة تدوير النفايات." },
-      { id: "bac_tech", topic: "Bac - Unité 2 : Technologie", fr: "L'intelligence artificielle change notre vie quotidienne.", ar: "بكالوريا - التكنولوجيا: الذكاء الاصطناعي يغير حياتنا اليومية." }
+      { id: "presentation", level: "1sec", title: "Se présenter", fr: "Bonjour ! Je m’appelle Nour. Et toi ? - Moi, c’est Thomas. Je suis français et j'habite à Paris.", ar: "التعارف: مرحباً! اسمي نور. وأنت؟ - أنا توما. أنا فرنسي وأسكن في باريس." },
+      { id: "chemin", level: "1sec", title: "Demander son chemin", fr: "Excusez-moi, où est la gare ? - Allez tout droit, puis tournez à gauche. C'est à cinq minutes à pied.", ar: "الاتجاهات: عفواً، أين المحطة؟ - اذهب مباشرة ثم انعطف يساراً. تبعد خمس دقائق سيراً." },
+      { id: "vetements", level: "2sec", title: "Acheter des vêtements", fr: "Je cherche une robe pour une fête. Quelle taille faites-vous ? - Je fais du 38. Vous l'avez en bleu ?", ar: "الملابس: أبحث عن فستان لحفلة. ما مقاسك؟ - مقاسي 38. هل لديكم باللون الأزرق؟" },
+      { id: "restaurant", level: "2sec", title: "Au restaurant", fr: "Voici la carte. - Pour moi, un poulet avec du riz et une bouteille d’eau, s’il vous plaît.", ar: "المطعم: تفضلوا القائمة. - بالنسبة لي دجاج مع أرز وزجاجة ماء من فضلك." },
+      { id: "sport", level: "2sec", title: "Parler du sport", fr: "Tu fais du sport ? - Oui, je joue au basket deux fois par semaine et j'adore le football.", ar: "الرياضة: هل تمارس الرياضة؟ - نعم، ألعب السلة مرتين أسبوعياً وأعشق كرة القدم." },
+      { id: "classe", level: "3sec", title: "En classe", fr: "Je n’ai pas compris l’exercice. Il faut mettre le verbe au passé composé.", ar: "في الفصل: لم أفهم التمرين. يجب وضع الفعل في الماضي المركب." },
+      { id: "medecin", level: "3sec", title: "Chez le médecin", fr: "Qu'est-ce qui ne va pas ? - J’ai mal à la gorge, je tousse et j'ai de la fièvre.", ar: "عند الطبيب: ما المشكلة؟ - أشعر بألم في الحلق، أسعل ولدي حمى." }
     ],
     stories: [
-      { title: "Le Petit Chat Charly", fr: "Charly aime jouer dans le jardin et boire du lait chaud.", ar: "القط تشارلي: يحب اللعب في الحديقة وشرب الحليب الدافيء." },
-      { title: "La Tortue Rapide", fr: "Une petite tortue marche dans la forêt et mange une pomme rouge.", ar: "السلحفاة السريعة: سلحفاة تمشي في الغابة وتأكل تفاحة حمراء." },
-      { title: "Le Livre Magique", fr: "Chaque page raconte une aventure extraordinaire dans des pays lointains.", ar: "الكتاب السحري: كل صفحة تحكي مغامرة استثنائية في بلاد بعيدة." },
-      { title: "Un Voyage en Train", fr: "Claire observait les paysages magnifiques vers les Alpes.", ar: "رحلة بالقطار: كلير تتأمل المناظر الخلابة نحو جبال الألب." },
-      { title: "Le Petit Garçon", fr: "Lucas aime aller à l'école, dessiner et apprendre le français avec passion.", ar: "الولد الصغير: لوكاس يحب الذهاب للمدرسة وتعلم الفرنسية بشغف." }
+      { id: "s1", title: "Le Petit Chat Charly", level: "Débutant", fr: "C'est l'histoire d'un petit chat noir. Il s'appelle Charly. Charly aime jouer dans le jardin et boire du lait chaud.", ar: "القط تشارلي: قصة قط أسود صغير يحب اللعب في الحديقة وشرب الحليب الدافيء." },
+      { id: "s2", title: "La Tortue Rapide", level: "Débutant", fr: "Une petite tortue marche dans la forêt. Elle voit une pomme rouge sur l'herbe et la mange avec joie.", ar: "السلحفاة: سلحفاة صغيرة تمشي في الغابة وتأكل تفاحة حمراء بسعادة." },
+      { id: "s3", title: "Le Livre Magique", level: "Intermédiaire", fr: "Thomas ouvre un vieux livre sur son bureau. Chaque page raconte une aventure extraordinaire dans des pays lointains.", ar: "الكتاب السحري: توماس يفتح كتاباً قديماً، وكل صفحة تحكي مغامرة في بلاد بعيدة." },
+      { id: "s4", title: "Un Voyage en Train", level: "Intermédiaire", fr: "Le train quitte la gare avec un grand sifflement. Il traverse les champs verts et les tunnels sombres à toute vitesse.", ar: "رحلة بالقطار: يغادر القطار المحطة بصفير عالٍ، يعبر الحقول والأنفاق بسرعة فائقة." },
+      { id: "s5", title: "L'Importance des Forêts", level: "Avancé", fr: "Les forêts jouent un rôle crucial dans le maintien de l'équilibre écologique de notre planète.", ar: "أهمية الغابات: تلعب الغابات دوراً حيوياً في الحفاظ على التوازن البيئي لكوكبنا." }
+    ],
+    dictionary: [
+      { fr: "le livre", ar: "الكتاب" }, { fr: "le stylo", ar: "القلم" }, { fr: "la classe", ar: "الفصل" },
+      { fr: "la maison", ar: "المنزل" }, { fr: "l'eau", ar: "الماء" }, { fr: "le pain", ar: "الخبز" },
+      { fr: "la gare", ar: "المحطة" }, { fr: "la pharmacie", ar: "الصيدلية" }, { fr: "le sport", ar: "الرياضة" }
     ]
   };
 
-  function ready(f) { if (document.readyState !== 'loading') f(); else document.addEventListener('DOMContentLoaded', f); }
-  ready(function () { try { boot(); } catch (e) { console.error('[zoza-talk]', e); } });
+  function ready(fn) {
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
 
-  function boot() {
-    var SEC = document.getElementById('soon-geographie'), ROOT = document.getElementById('talk-root'); if (!SEC || !ROOT) return;
-    var OLD = SEC.querySelector('.soon-card'); if (OLD) OLD.style.display = 'none';
-    var $ = function (s, r) { return (r || document).querySelector(s); };
-    function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
-    function store(k, v) { try { if (v === undefined) return JSON.parse(localStorage.getItem(k)); localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} return null; }
+  ready(function () {
+    var ROOT = document.getElementById('talk-root') || document.getElementById('soon-geographie');
+    if (!ROOT) {
+      ROOT = document.createElement('div');
+      ROOT.id = 'talk-root';
+      var main = document.querySelector('main') || document.body;
+      main.insertBefore(ROOT, main.firstChild);
+    }
+    ROOT.style.display = 'block';
 
-    var ST = store('bq_talk') || { level: 'b', voice: 1, tr: 1, xp: 0 };
-    function save() { store('bq_talk', ST); }
-    var S = { level: 'b', hist: [] };
+    var oldCard = ROOT.querySelector('.soon-card');
+    if (oldCard) oldCard.style.display = 'none';
 
-    // التصميم والأنيميشن الخاص بـ زوزا
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+
     var st = document.createElement('style');
-    st.textContent = '.tk{color:#1f2937;font-family:inherit}.tk *{box-sizing:border-box}.tk button{cursor:pointer}' +
-      '.tk-hero{position:relative;border-radius:24px;padding:16px;color:#fff;text-align:center;background:linear-gradient(135deg,#be185d,#7c3aed 55%,#4338ca);box-shadow:0 8px 20px rgba(124,58,237,.3);margin-bottom:12px}' +
-      '.tk-rob{display:block;margin:0 auto 8px;height:110px;width:110px;object-fit:cover;border-radius:50%;border:3px solid #fff;box-shadow:0 4px 12px rgba(0,0,0,0.3);animation:zozaMove 3.5s ease-in-out infinite;background:#fff}' +
-      '@keyframes zozaMove{0%,100%{transform:translate(0,0) rotate(0deg) scale(1);} 25%{transform:translate(-5px,-4px) rotate(-3deg) scale(1.03);} 50%{transform:translate(5px,4px) rotate(3deg) scale(0.98);} 75%{transform:translate(-3px,4px) rotate(-2deg) scale(1.02);}}' +
+    st.textContent = '.tk{color:#1f2937;font-family:inherit;padding:4px}.tk *{box-sizing:border-box}.tk button{cursor:pointer}' +
+      '.tk-hero{position:relative;border-radius:24px;padding:18px;color:#fff;text-align:center;background:linear-gradient(135deg,#1e1b4b,#4338ca 50%,#be185d);box-shadow:0 10px 25px rgba(67,56,202,.4);margin-bottom:12px}' +
+      '.tk-rob{display:block;margin:0 auto 8px;height:110px;width:110px;object-fit:cover;border-radius:50%;border:4px solid #fff;box-shadow:0 6px 16px rgba(0,0,0,0.3);animation:zozaPulse 3s infinite;background:#fff}' +
+      '@keyframes zozaPulse{0%,100%{transform:scale(1);} 50%{transform:scale(1.04);}}' +
       '.tk-chip{display:inline-block;background:rgba(255,255,255,.25);border-radius:12px;padding:4px 10px;font-size:.75rem;font-weight:800;margin:2px}' +
-      '.tk-chat{background:linear-gradient(180deg,#fdf2f8,#eef2ff);border:1px solid #e9d5ff;border-radius:20px;padding:10px;height:min(50vh,400px);overflow-y:auto;display:flex;flex-direction:column;gap:10px}' +
-      '.tk-m{display:flex;gap:7px;align-items:flex-end}.tk-m.u{flex-direction:row-reverse}.tk-av{width:34px;height:34px;flex:none;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #f9a8d4;font-size:1.1rem}' +
-      '.tk-b{max-width:84%;background:#fff;border-radius:16px;padding:10px;box-shadow:0 2px 6px rgba(0,0,0,.06)}.tk-m.u .tk-b{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff}' +
-      '.tk-fr{font-size:.98rem;font-weight:700;direction:ltr;text-align:left}.tk-m.u .tk-fr{color:#fff}.tk-ar{margin-top:4px;padding-top:4px;border-top:1px dashed #e5e7eb;font-size:.84rem;color:#4b5563}' +
-      '.tk-bt{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap}.tk-bt button{border:0;border-radius:12px;background:#f3e8ff;color:#6b21a8;font-weight:800;font-size:.72rem;padding:5px 9px}' +
-      '.tk-fx{margin-top:6px;border-radius:12px;padding:6px 8px;font-size:.78rem;color:#047857;background:#ecfdf5;border:1px solid #6ee7b7}' +
-      '.tk-in{display:flex;gap:6px;margin-top:6px}.tk-in input{flex:1;min-width:0;border:2px solid #e9d5ff;border-radius:14px;padding:10px;font-size:.95rem;direction:ltr}.tk-in input:focus{outline:0;border-color:#7c3aed}' +
-      '.tk-in button{border:0;border-radius:14px;min-width:44px;font-weight:900;color:#fff;background:linear-gradient(135deg,#7c3aed,#db2777)}' +
+      '.tk-chat{background:linear-gradient(180deg,#fdf2f8,#eef2ff);border:1px solid #e9d5ff;border-radius:20px;padding:12px;height:400px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;margin-bottom:10px}' +
+      '.tk-m{display:flex;gap:8px;align-items:flex-end}.tk-m.u{flex-direction:row-reverse}.tk-av{width:36px;height:36px;flex:none;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #f9a8d4;font-size:1.2rem}' +
+      '.tk-b{max-width:85%;background:#fff;border-radius:16px;padding:12px;box-shadow:0 3px 8px rgba(0,0,0,.06)}.tk-m.u .tk-b{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff}' +
+      '.tk-fr{font-size:1rem;font-weight:700;direction:ltr;text-align:left}.tk-m.u .tk-fr{color:#fff}.tk-ar{margin-top:6px;padding-top:6px;border-top:1px dashed #e5e7eb;font-size:.86rem;color:#4b5563}' +
+      '.tk-bt{margin-top:6px}.tk-bt button{border:0;border-radius:10px;background:#f3e8ff;color:#6b21a8;font-weight:800;font-size:.72rem;padding:5px 10px}' +
+      '.tk-in{display:flex;gap:6px}.tk-in input{flex:1;border:2px solid #e9d5ff;border-radius:14px;padding:12px;font-size:1rem;direction:ltr}.tk-in input:focus{outline:0;border-color:#7c3aed}' +
+      '.tk-in button{border:0;border-radius:14px;padding:0 20px;font-weight:900;color:#fff;background:linear-gradient(135deg,#7c3aed,#db2777)}' +
       '.tk-in button.mic{background:linear-gradient(135deg,#f59e0b,#ef4444)}' +
-      '.tk-in button.mic.rec{animation:tkP 1s infinite}@keyframes tkP{50%{transform:scale(1.08)}}' +
-      '.tk-ft{display:flex;gap:6px;margin-top:8px;justify-content:center;flex-wrap:wrap}.tk-ft button{border:0;border-radius:14px;padding:8px 12px;font-weight:800;background:#f3e8ff;color:#6b21a8}';
+      '.tk-ft{display:flex;justify-content:center;gap:6px;margin-top:8px;flex-wrap:wrap}.tk-ft button{border:0;border-radius:12px;padding:8px 14px;font-weight:800;background:#f3e8ff;color:#6b21a8;font-size:.8rem}';
     document.head.appendChild(st);
 
-    function say(text) { try { if (!window.speechSynthesis) return; speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(text); u.lang = 'fr-FR'; u.rate = 0.85; speechSynthesis.speak(u); } catch (e) {} }
+    function say(text) {
+      try {
+        if (!window.speechSynthesis) return;
+        speechSynthesis.cancel();
+        var u = new SpeechSynthesisUtterance(text);
+        u.lang = 'fr-FR';
+        u.rate = 0.85;
+        speechSynthesis.speak(u);
+      } catch (e) {}
+    }
 
     var MSG = [];
-    function mount() {
-      ROOT.innerHTML = '<div class="tk">' +
-        '<div class="tk-hero">' +
-          '<img class="tk-rob" src="https://raw.githubusercontent.com/Moure123456/french-bac-egypt/main/zoza-pink.png" alt="Zoza" onerror="this.src=\'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200&auto=format&fit=crop&q=80\'">' +
-          '<h3>حوار مع زوزا الحية</h3><small>Discute avec Zoza (Moteur Complet)</small><br>' +
-          '<span class="tk-chip">🧠 ذاكرة المنهج والقصص</span><span class="tk-chip">✨ ' + ST.xp + ' XP</span>' +
-        '</div>' +
-        '<div class="tk-chat" id="tk-chat"></div>' +
-        '<div class="tk-in">' +
-          '<button type="button" class="mic" id="tk-mic" data-act="mic" title="تحدث بالميكروفون">🎤</button>' +
-          '<input id="tk-ip" type="text" placeholder="اسأل زوزا عن المطعم، الرياضة، أو احكِ لي قصة…">' +
-          '<button type="button" data-act="send">➤</button>' +
-        '</div>' +
-        '<div class="tk-ft"><button type="button" data-act="new">🔄 حوار جديد</button></div>' +
-      '</div>';
-      greet();
-    }
+    ROOT.innerHTML = '<div class="tk">' +
+      '<div class="tk-hero">' +
+        '<img class="tk-rob" src="https://raw.githubusercontent.com/Moure123456/french-bac-egypt/main/zoza-pink.png" alt="Zoza" onerror="this.src=\'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200&auto=format&fit=crop&q=80\'">' +
+        '<h3>زوزا المعلمة الشاملة الحية</h3><small>Le Moteur Master de Zoza (Baccalauréat)</small><br>' +
+        '<span class="tk-chip">🧠 قاعدة بيانات متكاملة مدمجة</span>' +
+      '</div>' +
+      '<div class="tk-chat" id="tk-chat"></div>' +
+      '<div class="tk-in">' +
+        '<button type="button" class="mic" id="tk-mic" title="تحدث بالميكروفون">🎤</button>' +
+        '<input id="tk-ip" type="text" placeholder="اسأل زوزا عن أي قاعدة، قصة، أو حوار…">' +
+        '<button type="button" id="tk-send">➤</button>' +
+      '</div>' +
+      '<div class="tk-ft">' +
+        '<button type="button" id="tk-new">🔄 بدء محادثة جديدة</button>' +
+        '<button type="button" id="tk-story">📖 قصة منهجية</button>' +
+        '<button type="button" id="tk-dialog">💬 حوار وزارى</button>' +
+        '<button type="button" id="tk-dict">📚 بنك الكلمات</button>' +
+      '</div>' +
+    '</div>';
 
-    function chat() { return $('#tk-chat'); }
-    function scrollDown() { var c = chat(); if (c) c.scrollTop = c.scrollHeight; }
+    var chatBox = document.getElementById('tk-chat');
 
-    function addZ(fr, ar, opt) {
-      opt = opt || {};
+    function addMsg(fr, ar, isUser) {
       var id = MSG.push({ fr: fr, ar: ar }) - 1;
-      var d = document.createElement('div'); d.className = 'tk-m z';
-      var fixHtml = opt.fix ? '<div class="tk-fx"><b>✏️ تصحيح:</b> <span dir="ltr">' + esc(opt.fix.wrong) + '</span> ← <b dir="ltr">' + esc(opt.fix.right) + '</b><br>' + esc(opt.fix.why_ar) + '</div>' : '';
-      d.innerHTML = '<div class="tk-av">🤖</div><div class="tk-b"><div class="tk-fr">' + esc(fr) + '</div><div class="tk-ar">' + esc(ar) + '</div>' + fixHtml + '<div class="tk-bt"><button type="button" data-a="say" data-m="' + id + '">🔊 اسمع</button></div></div>';
-      chat().appendChild(d); scrollDown(); if (ST.voice) say(fr);
+      var d = document.createElement('div');
+      d.className = 'tk-m ' + (isUser ? 'u' : 'z');
+      if (isUser) {
+        d.innerHTML = '<div class="tk-b"><div class="tk-fr">' + esc(fr) + '</div></div>';
+      } else {
+        d.innerHTML = '<div class="tk-av">🤖</div><div class="tk-b"><div class="tk-fr">' + esc(fr) + '</div><div class="tk-ar">' + esc(ar) + '</div><div class="tk-bt"><button type="button" data-say="' + id + '">🔊 اسمع النطق</button></div></div>';
+        say(fr);
+      }
+      chatBox.appendChild(d);
+      chatBox.scrollTop = chatBox.scrollHeight;
     }
 
-    function addU(text) {
-      var d = document.createElement('div'); d.className = 'tk-m u';
-      d.innerHTML = '<div class="tk-b"><div class="tk-fr">' + esc(text) + '</div></div>';
-      chat().appendChild(d); scrollDown();
+    addMsg('Bonjour ! Je suis Zoza, ton système intelligent et complet du Bac. Je suis prête à t\'enseigner.', 'مرحباً! أنا زوزا، نظامك الذكي والشامل للبكالوريا. أنا مستعدة لتدريبك بكل احترافية.', false);
+
+    function masterEngine(text) {
+      var t = text.toLowerCase();
+      if (t.includes('restaurant') || t.includes('manger') || t.includes('طعام')) {
+        var d = MASTER_KNOWLEDGE.dialogues[3];
+        return { fr: d.fr, ar: 'قاعدة المطعم: ' + d.ar };
+      }
+      if (t.includes('sport') || t.includes('رياضة')) {
+        var d = MASTER_KNOWLEDGE.dialogues[4];
+        return { fr: d.fr, ar: 'قاعدة الرياضة: ' + d.ar };
+      }
+      if (t.includes('chat') || t.includes('tortue') || t.includes('story') || t.includes('قصة') || t.includes('قط')) {
+        var s = MASTER_KNOWLEDGE.stories[Math.floor(Math.random() * MASTER_KNOWLEDGE.stories.length)];
+        return { fr: '📖 ' + s.title + ' : ' + s.fr, ar: s.ar };
+      }
+      if (t.includes('chemin') || t.includes('gare') || t.includes('اتجاهات')) {
+        var d = MASTER_KNOWLEDGE.dialogues[1];
+        return { fr: d.fr, ar: 'قاعدة الاتجاهات: ' + d.ar };
+      }
+      return { fr: 'C’est une question pertinente sur « ' + text + ' ». Appliquons-la au programme du Bac !', ar: 'هذه مسألة رائعة حول « ' + text + ' ». دعنا نطبقها بقواعد البكالوريا!' };
     }
 
-    function greet() {
-      addZ('Bonjour ! Je suis Zoza. Je connais tous nos dialogues et nos histoires du Bac. De quoi veux-tu qu’on discute ?', 'مرحبًا! أنا زوزا الحية. أنا على إطلاع بكافة حوارات وقصص المنهج. عن ماذا تريد أن نتحدث
+    function handleSend() {
+      var inp = document.getElementById('tk-ip');
+      var val = (inp.value || '').trim();
+      if (!val) return;
+      inp.value = '';
+      addMsg(val, '', true);
+
+      fetch(AI_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: val })
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if (data.reply_fr) {
+          addMsg(data.reply_fr, data.reply_ar, false);
+        } else {
+          var r = masterEngine(val);
+          addMsg(r.fr, r.ar, false);
+        }
+      })
+      .catch(function() {
+        var r = masterEngine(val);
+        addMsg(r.fr, r.ar, false);
+      });
+    }
+
+    document.getElementById('tk-send').addEventListener('click', handleSend);
+    document.getElementById('tk-ip').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') handleSend();
+    });
+
+    document.getElementById('tk-new').addEventListener('click', function() {
+      chatBox.innerHTML = '';
+      MSG = [];
+      addMsg('Nouveau système initialisé ! Que souhaites-tu étudier ?', 'تم تهيئة النظام الجديد! ماذا تريد أن ندرس الآن؟', false);
+    });
+
+    document.getElementById('tk-story').addEventListener('click', function() {
+      var s = MASTER_KNOWLEDGE.stories[Math.floor(Math.random() * MASTER_KNOWLEDGE.stories.length)];
+      addMsg('📖 ' + s.title + ' :\n' + s.fr, s.ar, false);
+    });
+
+    document.getElementById('tk-dialog').addEventListener('click', function() {
+      var d = MASTER_KNOWLEDGE.dialogues[Math.floor(Math.random() * MASTER_KNOWLEDGE.dialogues.length)];
+      addMsg('💬 ' + d.title + ' :\n' + d.fr, d.ar, false);
+    });
+
+    document.getElementById('tk-dict').addEventListener('click', function() {
+      var w = MASTER_KNOWLEDGE.dictionary[Math.floor(Math.random() * MASTER_KNOWLEDGE.dictionary.length)];
+      addMsg('📚 Lexique Master : ' + w.fr, 'المعنى بالعربية: ' + w.ar, false);
+    });
+
+    chatBox.addEventListener('click', function(e) {
+      var btn = e.target.closest('[data-say]');
+      if (btn) {
+        var m = MSG[+btn.dataset.say];
+        if (m) say(m.fr);
+      }
+    });
+
+    document.getElementById('tk-mic').addEventListener('click', function() {
+      var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SR) { alert('المتصفح لا يدعم الميكروفون المباشر'); return; }
+      var r = new SR();
+      r.lang = 'fr-FR';
+      r.onresult = function(e) {
+        var txt = e.results[0][0].transcript;
+        document.getElementById('tk-ip').value = txt;
+        handleSend();
+      };
+      r.start();
+    });
+  });
+})();
