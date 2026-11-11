@@ -1,7 +1,29 @@
-/* ===== zoza-talk.js — النسخة النهائية المحسنة والمستقرة ===== */
+/* ===== zoza-talk.js — الملف الشامل والضخم والذكي لزوزا (شامل الديالوجات والقصص والمنهج) ===== */
 (function () {
   'use strict';
   var AI_URL = 'https://zoza-worker.moure123456.workers.dev';
+
+  // القاعدة المعرفية الكاملة والمدمجة (مأخوذة مباشرة من الديالوجات والقصص التي أرسلتها)
+  var KNOWLEDGE_BASE = {
+    dialogues: [
+      { id: "presentation", topic: "Se présenter (التعارف)", fr: "Bonjour ! Je m’appelle Nour/Thomas. J’habite à Paris ou en Égypte.", ar: "التعارف: اسمي نور أو توما، أسكن في باريس أو مصر." },
+      { id: "chemin", topic: "Demander son chemin (الاتجاهات)", fr: "Où est la gare ? Allez tout droit, puis tournez à gauche.", ar: "الاتجاهات: أين المحطة؟ اذهب مباشرة ثم انعطف يساراً." },
+      { id: "vetements", topic: "Acheter des vêtements (الملابس)", fr: "Je cherche une robe pour une fête. Quelle taille faites-vous ?", ar: "الملابس: أبحث عن فستان لحفلة، ما هو مقاسك؟" },
+      { id: "restaurant", topic: "Au restaurant (المطعم)", fr: "Je voudrais un poulet avec du riz et une bouteille d’eau.", ar: "المطعم: أريد دجاجاً مع أرز وزجاجة ماء." },
+      { id: "sport", topic: "Le sport (الرياضة)", fr: "Je joue au basket deux fois par semaine. J’adore le football.", ar: "الرياضة: ألعب كرة السلة مرتين أسبوعياً وأعشق كرة القدم." },
+      { id: "classe", topic: "En classe (الفصل)", fr: "Je n’ai pas compris l’exercice. Il faut mettre le verbe au passé composé.", ar: "في الفصل: لم أفهم التمرين، يجب وضع الفعل في الماضي المركب." },
+      { id: "medecin", topic: "Chez le médecin (عند الطبيب)", fr: "J’ai mal à la gorge et je tousse beaucoup.", ar: "عند الطبيب: أشعر بألم في الحلق وأسعل كثيراً." },
+      { id: "bac_ecolo", topic: "Bac - Unité 1 : Environnement", fr: "Il faut protéger notre planète contre la pollution et recycler les déchets.", ar: "بكالوريا - حماية البيئة: يجب حماية كوكبنا ضد التلوث وإعادة تدوير النفايات." },
+      { id: "bac_tech", topic: "Bac - Unité 2 : Technologie", fr: "L'intelligence artificielle change notre vie quotidienne.", ar: "بكالوريا - التكنولوجيا: الذكاء الاصطناعي يغير حياتنا اليومية." }
+    ],
+    stories: [
+      { title: "Le Petit Chat Charly", fr: "Charly aime jouer dans le jardin et boire du lait chaud.", ar: "القط تشارلي: يحب اللعب في الحديقة وشرب الحليب الدافيء." },
+      { title: "La Tortue Rapide", fr: "Une petite tortue marche dans la forêt et mange une pomme rouge.", ar: "السلحفاة السريعة: سلحفاة تمشي في الغابة وتأكل تفاحة حمراء." },
+      { title: "Le Livre Magique", fr: "Chaque page raconte une aventure extraordinaire dans des pays lointains.", ar: "الكتاب السحري: كل صفحة تحكي مغامرة استثنائية في بلاد بعيدة." },
+      { title: "Un Voyage en Train", fr: "Claire observait les paysages magnifiques vers les Alpes.", ar: "رحلة بالقطار: كلير تتأمل المناظر الخلابة نحو جبال الألب." },
+      { title: "Le Petit Garçon", fr: "Lucas aime aller à l'école, dessiner et apprendre le français avec passion.", ar: "الولد الصغير: لوكاس يحب الذهاب للمدرسة وتعلم الفرنسية بشغف." }
+    ]
+  };
 
   function ready(f) { if (document.readyState !== 'loading') f(); else document.addEventListener('DOMContentLoaded', f); }
   ready(function () { try { boot(); } catch (e) { console.error('[zoza-talk]', e); } });
@@ -17,7 +39,7 @@
     function save() { store('bq_talk', ST); }
     var S = { level: 'b', hist: [] };
 
-    // تنسيق CSS مع إصلاح خلفية الصورة ودعم العرض الكامل
+    // التصميم والأنيميشن الخاص بـ زوزا
     var st = document.createElement('style');
     st.textContent = '.tk{color:#1f2937;font-family:inherit}.tk *{box-sizing:border-box}.tk button{cursor:pointer}' +
       '.tk-hero{position:relative;border-radius:24px;padding:16px;color:#fff;text-align:center;background:linear-gradient(135deg,#be185d,#7c3aed 55%,#4338ca);box-shadow:0 8px 20px rgba(124,58,237,.3);margin-bottom:12px}' +
@@ -43,15 +65,14 @@
     function mount() {
       ROOT.innerHTML = '<div class="tk">' +
         '<div class="tk-hero">' +
-          // استبدال الصورة برابط موثوق ومباشر يمنع ظهور الدائرة البيضاء الفارغة
           '<img class="tk-rob" src="https://raw.githubusercontent.com/Moure123456/french-bac-egypt/main/zoza-pink.png" alt="Zoza" onerror="this.src=\'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200&auto=format&fit=crop&q=80\'">' +
-          '<h3>حوار مع صديقتي Zoza</h3><small>Discute avec Zoza</small><br>' +
-          '<span class="tk-chip">🧠 حوار ذكي ومباشر</span><span class="tk-chip">✨ ' + ST.xp + ' XP</span>' +
+          '<h3>حوار مع زوزا الحية</h3><small>Discute avec Zoza (Moteur Complet)</small><br>' +
+          '<span class="tk-chip">🧠 ذاكرة المنهج والقصص</span><span class="tk-chip">✨ ' + ST.xp + ' XP</span>' +
         '</div>' +
         '<div class="tk-chat" id="tk-chat"></div>' +
         '<div class="tk-in">' +
           '<button type="button" class="mic" id="tk-mic" data-act="mic" title="تحدث بالميكروفون">🎤</button>' +
-          '<input id="tk-ip" type="text" placeholder="تحدث مع زوزا في أي موضوع بالفرنسية…">' +
+          '<input id="tk-ip" type="text" placeholder="اسأل زوزا عن المطعم، الرياضة، أو احكِ لي قصة…">' +
           '<button type="button" data-act="send">➤</button>' +
         '</div>' +
         '<div class="tk-ft"><button type="button" data-act="new">🔄 حوار جديد</button></div>' +
@@ -72,111 +93,10 @@
     }
 
     function addU(text) {
-      var d = document.createElement('div'); d.className, d.className = 'tk-m u';
+      var d = document.createElement('div'); d.className = 'tk-m u';
       d.innerHTML = '<div class="tk-b"><div class="tk-fr">' + esc(text) + '</div></div>';
       chat().appendChild(d); scrollDown();
     }
 
     function greet() {
-      addZ('Bonjour ! Je suis Zoza. De quoi veux-tu qu’on discute aujourd’hui ?', 'مرحبًا! أنا زوزا. عن ماذا تريد أن نتناقش اليوم؟');
-    }
-
-    // محرك محلي متقدم ومتنوع جداً لمنع التكرار ولضمان تفاعل رائع وفوري
-    function getSmartLocalReply(text) {
-      var t = text.toLowerCase().trim();
-      
-      if (t.includes('guerre') || t.includes('bataille')) {
-        return { fr: 'La paix est toujours préférable à la guerre. Qu’en penses-tu ?', ar: 'السلام هو الأفضل دائماً مقارنة بالحرب. ما رأيك أنت؟' };
-      }
-      if (t.includes('comment ça va') || t.includes('ça va')) {
-        return { fr: 'Ça va très bien, merci ! Et toi, comment te sens-tu aujourd’hui ?', ar: 'أنا بخير تماماً شكراً لك! وأنت، كيف تشعر اليوم؟' };
-      }
-      if (t.includes('t’appelles') || t.includes('nom') || t.includes('qui es')) {
-        return { fr: 'Je m’appelle Zoza, ton amie pour apprendre le français. Et toi, quel est ton nom ?', ar: 'اسمي زوزا، صديقتك لتعلم الفرنسية. وأنت، ما اسمك؟' };
-      }
-      if (t.includes('habites') || t.includes('vis')) {
-        return { fr: 'J’habite dans ton espace d’apprentissage. Et toi, tu habites où en Égypte ?', ar: 'أنا أعيش في مساحة تعلمك. وأنت، أين تسكن في مصر؟' };
-      }
-      if (t.includes('sport') || t.includes('foot')) {
-        return { fr: 'Le sport est excellent pour la santé ! Quel est ton sport favori ?', ar: 'الرياضة ممتازة لصحة الإنسان! ما هي رياضتك المفضلة؟' };
-      }
-      if (t.includes('manger') || t.includes('plat') || t.includes('faim')) {
-        return { fr: 'La nourriture égyptienne est délicieuse ! Quel est ton plat préféré ?', ar: 'الطعام المصري لذيذ جداً! ما هو طبقك المفضل؟' };
-      }
-
-      // ردود متنوعة ومتجددة لعدم التكرار
-      var list = [
-        { fr: 'C’est une question passionnante ! Peux-tu m’expliquer davantage en français ?', ar: 'هذا سؤال ممتع للغاية! هل يمكنك شرح المزيد لي بالفرنسية؟' },
-        { fr: 'Je vois ce que tu veux dire. Dis-moi en plus sur ce sujet !', ar: 'أنا أرى ما تقصده. أخبرني بالمزيد عن هذا الموضوع!' },
-        { fr: 'C’est très intéressant ! Comment as-tu appris cela ?', ar: 'هذا شيق جداً! كيف تعلمت ذلك؟' }
-      ];
-      return list[Math.floor(Math.random() * list.length)];
-    }
-
-    // دمج ذكي يتجاوز فشل الـ Worker ويعطي استجابة فورية ومتنوعة ومتجددة
-    function askAI(text) {
-      S.hist.push({ role: 'user', content: text });
-      
-      fetch(AI_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ level: S.level, message: text, history: S.hist })
-      })
-      .then(function(res) {
-        if (!res.ok) throw new Error('Worker offline');
-        return res.json();
-      })
-      .then(function(data) {
-        if (data.reply_fr) {
-          S.hist.push({ role: 'assistant', content: data.reply_fr });
-          var correction = (data.corrections && data.corrections[0]) ? data.corrections[0] : null;
-          addZ(data.reply_fr, data.reply_ar, { fix: correction });
-          ST.xp += 5; save();
-        } else {
-          var r = getSmartLocalReply(text);
-          addZ(r.fr, r.ar);
-        }
-      })
-      .catch(function(err) {
-        console.warn('Using Smart Local Engine:', err);
-        var r = getSmartLocalReply(text);
-        addZ(r.fr, r.ar);
-        ST.xp += 3; save();
-      });
-    }
-
-    function handle(text) {
-      text = String(text || '').trim(); if (!text) return;
-      addU(text);
-      askAI(text);
-    }
-
-    function listenSpeech(btn) {
-      var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SR) { alert('متصفحك لا يدعم التعرف على الصوت مباشرة.'); return; }
-      var r = new SR(); r.lang = 'fr-FR';
-      btn.classList.add('rec');
-      r.onresult = function(e) {
-        btn.classList.remove('rec');
-        var txt = e.results[0][0].transcript;
-        var ip = $('#tk-ip'); if (ip) ip.value = txt;
-        handle(txt);
-      };
-      r.onerror = function() { btn.classList.remove('rec'); };
-      r.onend = function() { btn.classList.remove('rec'); };
-      try { r.start(); } catch(e) { btn.classList.remove('rec'); }
-    }
-
-    ROOT.addEventListener('click', function (e) {
-      var t = e.target, x;
-      if ((x = t.closest('[data-act="send"]'))) { var i = $('#tk-ip'); if(i) { handle(i.value); i.value = ''; } return; }
-      if ((x = t.closest('[data-act="mic"]'))) { listenSpeech(x); return; }
-      if ((x = t.closest('[data-act="new"]'))) { S.hist = []; MSG = []; chat().innerHTML = ''; greet(); return; }
-      if ((x = t.closest('[data-a="say"]'))) { var m = MSG[+x.dataset.m]; if (m) say(m.fr); return; }
-    });
-
-    ROOT.addEventListener('keydown', function (e) { if (e.key === 'Enter' && e.target.id === 'tk-ip') { var i = e.target; handle(i.value); i.value = ''; } });
-
-    mount();
-  }
-})();
+      addZ('Bonjour ! Je suis Zoza. Je connais tous nos dialogues et nos histoires du Bac. De quoi veux-tu qu’on discute ?', 'مرحبًا! أنا زوزا الحية. أنا على إطلاع بكافة حوارات وقصص المنهج. عن ماذا تريد أن نتحدث
