@@ -64,26 +64,6 @@
       border-right-color: transparent;
     }
     .sidebar button.on .lock-badge { color: #ffffff !important; }
-    
-    /* تنسيق زر الإخفاء في الشريط العلوي */
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    #toggle-hide-widgets-btn {
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      color: #fff;
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-size: 0.78rem;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
     /* شريط الحقوق أعلى القائمة الجانبية */
     .side-credit {
       box-sizing: border-box;
@@ -130,8 +110,6 @@
   <header class="topbar">
     <button id="menu-btn" class="icon-btn" type="button" aria-label="القائمة">☰</button>
     <h1>Le Français Au Bac <span>🇫🇷</span></h1>
-    <!-- زر إخفاء الأيقونات العائمة المضاف بعناية -->
-    <button type="button" id="toggle-hide-widgets-btn" title="إخفاء الأيقونات العائمة لمدة 10 دقائق">⏳ إخفاء الأيقونات</button>
     <button id="install-btn" class="install" type="button" hidden>تثبيت التطبيق على الجوال</button>
   </header>
 
@@ -189,58 +167,10 @@
 
   <footer class="site-footer">
     <p>جميع الحقوق محفوظة © - إعداد وتطوير: مسيو/ محمود أبوبكر السويدى</p>
-    <a class="wa-be" href="https://wa.me/201040294647" target="_blank"><span>واتساب</span></a>
+    <a class="wa-btn" href="https://wa.me/201040294647" target="_blank"><span>واتساب</span></a>
   </footer>
 
   <div id="toast" class="toast" role="status"></div>
-
-  <!-- سكربت التحكم الفعال لإخفاء العناصر العائمة (زوزا، الديك، والجوائز) لمدة 10 دقائق -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const btn = document.getElementById('toggle-hide-widgets-btn');
-      const TEN_MINUTES = 10 * 60 * 1000;
-
-      if (!btn) return;
-
-      function setWidgetsVisibility(hide) {
-        let styleTag = document.getElementById('hide-floating-style');
-        if (hide) {
-          if (!styleTag) {
-            styleTag = document.createElement('style');
-            styleTag.id = 'hide-floating-style';
-            /* يغطي زر زوزا العائم، فقاعتها، لوحتها، أيقونة الديك العائمة، وأي جائزة تظهر على الشاشة */
-            styleTag.textContent = '#zz-fab, #zz-bub, #zz-pn, .floating-rooster, .splash-floating-icon, [id*="rooster"], [class*="rooster"], [id*="reward"], [class*="reward"] { display: none !important; }';
-            document.head.appendChild(styleTag);
-          }
-        } else {
-          if (styleTag) styleTag.remove();
-        }
-      }
-
-      const hiddenUntil = localStorage.getItem('floating_widgets_hidden_until');
-      if (hiddenUntil && Date.now() < parseInt(hiddenUntil)) {
-        setWidgetsVisibility(true);
-        btn.innerText = '⏳ مخفية';
-        startCountdown(parseInt(hiddenUntil) - Date.now());
-      }
-
-      btn.addEventListener('click', function () {
-        const targetTime = Date.now() + TEN_MINUTES;
-        localStorage.setItem('floating_widgets_hidden_until', targetTime);
-        setWidgetsVisibility(true);
-        btn.innerText = '⏳ مخفية';
-        startCountdown(TEN_MINUTES);
-      });
-
-      function startCountdown(duration) {
-        setTimeout(function () {
-          setWidgetsVisibility(false);
-          btn.innerText = '⏳ إخفاء الأيقونات';
-          localStorage.removeItem('floating_widgets_hidden_until');
-        }, duration);
-      }
-    });
-  </script>
 
   <!-- سكربت تسجيل الـ Service Worker بشكل آمن ومنفصل تماماً ليعمل في الخلفية دون تعطيل الوظائف -->
   <script>
@@ -268,8 +198,8 @@
   <script src="./phonetique.js"></script>
   <script src="./dialogues.js"></script>
   <script src="./contes.js"></script>
-  <script src="./zoza.js"></script>
-  <script src="./zoza-talk.js"></script>
+  <script src="./zoza.js?v=20261104"></script>
+  <script src="./zoza-talk.js?v=20261104"></script>
 
   <!-- سكريبت تفعيل النطق الصوتي للنصوص الزرقاء -->
   <script>
@@ -376,6 +306,7 @@
         }
       }, true);
 
+      // إعادة إضافة الأقفال تلقائياً إن أُعيد بناء القائمة الجانبية
       const nav = document.querySelector('.sidebar');
       if (nav && window.MutationObserver) {
         new MutationObserver(function () { ensureLocks(); }).observe(nav, { childList: true, subtree: true });
