@@ -1,1 +1,21 @@
-
+name: Move songs to data/songs
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  move:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Move files and fix paths
+        run: |
+          mkdir -p data/songs
+          git mv song_*.mp3 data/songs/
+          for f in songs.js chansons.js sw.js; do
+            [ -f "$f" ] && perl -pi -e 's{(?<!songs/)song_(\d+)\.mp3}{data/songs/song_$1.mp3}g' "$f"
+          done
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "Move song mp3 files to data/songs" || echo "nothing to commit"
+          git push
