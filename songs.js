@@ -13,45 +13,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
         songsContainer.innerHTML = `<div class="empty" style="text-align: center; padding: 20px;">جارٍ تحميل الأغاني والمقاطع الصوتية... 🎵</div>`;
 
-        fetch('./data/songs.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("تعسّر تحميل ملف songs.json");
-                }
-                return response.json();
-            })
-            .then(songs => {
-                if (!songs || songs.length === 0) {
-                    songsContainer.innerHTML = `<div class="empty" style="text-align: center; padding: 20px;">لا توجد أغاني مضافة حالياً.</div>`;
-                    return;
-                }
+        // قائمة الأغاني مباشرة من الجذر بدون الحاجة لملف songs.json أو مجلد data
+        const songs = [
+            { title: "Chanson 1", file: "song_1.mp3" },
+            { title: "Chanson 2", file: "song_2.mp3" },
+            { title: "Chanson 3", file: "song_3.mp3" },
+            { title: "Chanson 4", file: "song_4.mp3" },
+            { title: "Chanson 5", file: "song_5.mp3" }
+            // يمكنك إضافة باقي الأغاني بنفس الطريقة هنا حتى song_50.mp3
+        ];
 
-                let html = `
-                    <div class="songs-wrapper" style="padding: 10px;">
-                        <p style="text-align: center; color: #555; margin-bottom: 20px; font-weight: bold;">
-                            استمع إلى الأغاني والمقاطع الصوتية الفرنسية لتحسين مهارة الاستماع والنطق 🎧🇫🇷
-                        </p>
-                        <div class="songs-list" style="display: flex; flex-direction: column; gap: 15px;">
-                `;
+        let html = `
+            <div class="songs-wrapper" style="padding: 10px;">
+                <p style="text-align: center; color: #555; margin-bottom: 20px; font-weight: bold;">
+                    استمع إلى الأغاني والمقاطع الصوتية الفرنسية لتحسين مهارة الاستماع والنطق 🎧🇫🇷
+                </p>
+                <div class="songs-list" style="display: flex; flex-direction: column; gap: 15px;">
+        `;
 
-                songs.forEach((song) => {
-                    html += `
-                        <div class="song-card" style="background: #fff; border: 1px solid #e0e0e0; border-right: 5px solid #0055A5; padding: 15px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                            <h4 style="color: #0055A5; font-size: 16px; margin-bottom: 10px;">🎶 ${song.title}</h4>
-                            <audio controls style="width: 100%; height: 40px;">
-                                <source src="${song.file}" type="audio/mpeg">
-                                متصفحك لا يدعم تشغيل الملفات الصوتية.
-                            </audio>
-                        </div>
-                    `;
-                });
+        songs.forEach((song) => {
+            html += `
+                <div class="song-card" style="background: #fff; border: 1px solid #e0e0e0; border-right: 5px solid #0055A5; padding: 15px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                    <h4 style="color: #0055A5; font-size: 16px; margin-bottom: 10px;">🎶 ${song.title}</h4>
+                    <audio controls style="width: 100%; height: 40px;">
+                        <source src="${song.file}" type="audio/mpeg">
+                        متصفحك لا يدعم تشغيل الملفات الصوتية.
+                    </audio>
+                </div>
+            `;
+        });
 
-                html += `</div></div>`;
-                songsContainer.innerHTML = html;
-            })
-            .catch(error => {
-                console.error("خطأ في تحميل الأغاني:", error);
-                songsContainer.innerHTML = `<p style="color: red; text-align: center; padding: 20px;">عذراً، حدث خطأ أثناء تحميل الأغاني. تأكد من صحة مسارات الملفات والاتصال بالإنترنت.</p>`;
-            });
+        html += `</div></div>`;
+        songsContainer.innerHTML = html;
     }
 });
