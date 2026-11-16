@@ -3,6 +3,7 @@
    • الأغاني تُقرأ دائمًا من:  data/songs/song_N.mp3
    • القائمة من data/songs.json (اختياري) — وإن غاب تُنشأ تلقائيًا من 1 إلى 50.
    • الكلمات (فرنسي + عربي) من data/lyrics.json (اختياري) — تظهر تحت المشغّل وتتلوّن مع الوقت.
+   • أغاني الأطفال (tts:true) بلا ملف صوتي: يقرأ التطبيق كل سطر بصوت فرنسي ويلوّنه، ويتحول تلقائيًا للـ mp3 إن أضفت الملف وحذفت tts.
    يعمل داخل #chn-root فقط. */
 (function () {
   'use strict';
@@ -64,6 +65,47 @@
     var A = new Audio(), AC = null, AN = null, SRC = null, cur = -1, shuf = false, rep = 0, V = { f: 'all', q: '' }, raf = 0, tmpSec = 0;
     var SPD = [1, 0.75, 1.25, 1.5], spi = 0;
     A.preload = 'none';
+
+    /* ---------- وضع القراءة الصوتية (للأغاني التي لا يوجد لها ملف mp3): صوت فرنسي يقرأ السطور واحدًا واحدًا ---------- */
+    var TT = { on: false, i: 0, tok: 0 }, frV = null;
+    function pickV() { try { var vs = window.speechSynthesis ? speechSynthesis.getVoices() : []; frV = vs.filter(function (v) { return /^fr(-|_)FR/i.test(v.lang); })[0] || vs.filter(function (v) { return /^fr/i.test(v.lang); })[0] || null; } catch (e) {} }
+    try { if (window.speechSynthesis) { pickV(); speechSynthesis.onvoiceschanged = pickV; } } catch (e) {}
+    function isTts() { var s = SONGS[cur]; return !!(s && s.tts); }
+    function isPlaying() { return TT.on || !A.paused; }
+    function setPlayUI(on) { var pl = $('#chn-pl'), pp = $('#chn-pp'); if (pl) pl.classList.toggle('play', on); if (pp) pp.textContent = on ? '⏸' : '▶️'; }
+    function hiLine(k) {
+      var box = $('#chn-ly'); if (!box) return; lyIdx = k; $$('.chn-ln.on', box).forEach(function (e) { e.classList.remove('on'); });
+      var el = $('.chn-ln[data-k="' + k + '"]', box); if (el) { el.classList.add('on'); box.scrollTop = Math.max(0, el.offsetTop - box.clientHeight / 2 + el.clientHeight / 2 - box.offsetTop); }
+    }
+    function ttsProg() { if (!lines.length) return; var rg = $('#chn-rg'); if (rg) rg.value = Math.round(TT.i * 1000 / lines.length); var a = $('#chn-t0'), b = $('#chn-t1'); if (a) a.textContent = Math.min(TT.i + 1, lines.length); if (b) b.textContent = '/ ' + lines.length; }
+    function ttsStop(keep) { TT.on = false; TT.tok++; try { if (window.speechSynthesis) speechSynthesis.cancel(); } catch (e) {} if (!keep) TT.i = 0; setPlayUI(false); grid(); }
+    function ttsEnd() {
+      var s = SONGS[cur]; TT.on = false; TT.tok++; TT.i = 0; setPlayUI(false);
+      if (s && !ST.done[s.file]) { ST.done[s.file] = 1; ST.xp += 5; save(); boost(10); hero(); }
+      if (rep === 2) ttsPlay(); else if (rep === 1 || shuf || cur < SONGS.length - 1) select(nextIdx(1), true); else grid();
+    }
+    function ttsPlay() {
+      if (!window.speechSynthesis) { toast('⚠️ المتصفح لا يدعم النطق الصوتي'); return; }
+      if (!lines.length) { toast('لا توجد كلمات لهذه الأغنية بعد'); return; }
+      try { A.pause(); } catch (e) {}
+      try { speechSynthesis.cancel(); } catch (e) {}
+      if (TT.i >= lines.length) TT.i = 0;
+      TT.on = true; var tok = ++TT.tok; setPlayUI(true); grid();
+      (function step() {
+        if (!TT.on || tok !== TT.tok) return;
+        if (TT.i >= lines.length) { ttsEnd(); return; }
+        var k = TT.i, txt = lines[k].fr, done = false; hiLine(k); ttsProg();
+        function nxt() { if (done || !TT.on || tok !== TT.tok) return; done = true; TT.i = k + 1; setTimeout(step, 500); }
+        try { var u = new SpeechSynthesisUtterance(txt); u.lang = 'fr-FR'; if (frV) u.voice = frV; u.rate = 0.8 * SPD[spi]; u.pitch = 1.2; u.onend = nxt; u.onerror = nxt; speechSynthesis.speak(u); } catch (e) { nxt(); }
+        setTimeout(nxt, 2500 + txt.length * 140);
+      })();
+    }
+    function ttsJump(k) {
+      if (!lines.length) return; k = Math.max(0, Math.min(lines.length - 1, k)); var was = TT.on; TT.on = false; TT.tok++; try { speechSynthesis.cancel(); } catch (e) {}
+      TT.i = k; if (was) ttsPlay(); else { hiLine(k); ttsProg(); }
+    }
+    function pauseAny() { if (TT.on) ttsStop(true); else A.pause(); }
+    function togglePlay() { if (isPlaying()) pauseAny(); else play(); }
     function setupAnalyser() { if (AN) return; try { var C = window.AudioContext || window.webkitAudioContext; if (!C) return; AC = new C(); SRC = AC.createMediaElementSource(A); AN = AC.createAnalyser(); AN.fftSize = 128; SRC.connect(AN); AN.connect(AC.destination); } catch (e) { AN = null; } }
     function hero() {
       var h = $('#chn-hd'); if (!h) return; var d = dayState(), p = Math.min(100, Math.round(d.s * 100 / GOAL)), nts = ['🎵', '🎶', '🎼', '🎤', '🎸', '🥁'];
@@ -80,12 +122,12 @@
     function mount() {
       ROOT.innerHTML = '<div class="chn"><div id="chn-hd"></div>' + playerHTML() + '<input class="chn-in" id="chn-q" type="search" placeholder="🔎 ابحث برقم الأغنية أو اسمها…"><div class="chn-fl" id="chn-fl"></div><div class="chn-nt2" id="chn-nt"></div><div class="chn-gr" id="chn-gr"></div></div>'; hero(); filters(); grid(); drawLoop();
     }
-    function filters() { var fs = [['all', '🌍 الكل'], ['fav', '❤️ المفضلة'], ['done', '✅ استمعت'], ['new', '🆕 جديدة']]; $('#chn-fl').innerHTML = fs.map(function (f) { return '<button type="button" data-f="' + f[0] + '" class="' + (V.f === f[0] ? 'on' : '') + '">' + f[1] + '</button>'; }).join(''); }
-    function list() { var q = V.q.trim().toLowerCase(); return SONGS.map(function (s, i) { return { s: s, i: i }; }).filter(function (x) { var ok = V.f === 'all' || (V.f === 'fav' ? ST.fav.indexOf(x.s.file) > -1 : V.f === 'done' ? !!ST.done[x.s.file] : !ST.done[x.s.file]); return ok && (!q || String(numOf(x.s)).indexOf(q) > -1 || titleFr(x.s).toLowerCase().indexOf(q) > -1 || titleAr(x.s).indexOf(V.q.trim()) > -1); }); }
+    function filters() { var fs = [['all', '🌍 الكل'], ['fav', '❤️ المفضلة'], ['done', '✅ استمعت'], ['new', '🆕 جديدة'], ['kids', '🧒 أغاني الأطفال']]; $('#chn-fl').innerHTML = fs.map(function (f) { return '<button type="button" data-f="' + f[0] + '" class="' + (V.f === f[0] ? 'on' : '') + '">' + f[1] + '</button>'; }).join(''); }
+    function list() { var q = V.q.trim().toLowerCase(); return SONGS.map(function (s, i) { return { s: s, i: i }; }).filter(function (x) { var ok = V.f === 'all' || (V.f === 'fav' ? ST.fav.indexOf(x.s.file) > -1 : V.f === 'done' ? !!ST.done[x.s.file] : V.f === 'kids' ? !!x.s.kids : !ST.done[x.s.file]); return ok && (!q || String(numOf(x.s)).indexOf(q) > -1 || titleFr(x.s).toLowerCase().indexOf(q) > -1 || titleAr(x.s).indexOf(V.q.trim()) > -1); }); }
     function grid() {
       var l = list(); $('#chn-nt').textContent = l.length + ' أغنية'; $('#chn-gr').innerHTML = l.map(function (x, k) {
         var p = pal(x.i), n = numOf(x.s), fv = ST.fav.indexOf(x.s.file) > -1, dn = ST.done[x.s.file], rt = ST.rate[x.s.file];
-        return '<button type="button" class="chn-tk' + (x.i === cur ? ' cur' + (!A.paused ? ' play' : '') : '') + '" data-i="' + x.i + '" style="--a:' + p[0] + ';--b:' + p[1] + ';animation-delay:' + Math.min(k, 10) * 40 + 'ms">' + (dn ? '<em>✅</em>' : '') + (fv ? '<em style="left:auto;right:8px">❤️</em>' : '') + '<i>' + EMO[x.i % EMO.length] + '</i><b>' + esc(titleFr(x.s)) + '</b><span>' + (rt ? '⭐'.repeat(rt) : (titleAr(x.s) ? esc(titleAr(x.s)) : 'Song ' + n)) + '</span><div class="chn-eq"><u></u><u></u><u></u></div></button>';
+        return '<button type="button" class="chn-tk' + (x.i === cur ? ' cur' + (isPlaying() ? ' play' : '') : '') + '" data-i="' + x.i + '" style="--a:' + p[0] + ';--b:' + p[1] + ';animation-delay:' + Math.min(k, 10) * 40 + 'ms">' + (dn ? '<em>✅</em>' : '') + (fv ? '<em style="left:auto;right:8px">❤️</em>' : '') + '<i>' + EMO[x.i % EMO.length] + '</i><b>' + esc(titleFr(x.s)) + '</b><span>' + (rt ? '⭐'.repeat(rt) : (titleAr(x.s) ? esc(titleAr(x.s)) : 'Song ' + n)) + '</span><div class="chn-eq"><u></u><u></u><u></u></div></button>';
       }).join('');
     }
     function stars() { var s = SONGS[cur], r = s ? ST.rate[s.file] || 0 : 0; $('#chn-sr').innerHTML = [1, 2, 3, 4, 5].map(function (n) { return '<button type="button" data-r="' + n + '">' + (n <= r ? '⭐' : '☆') + '</button>'; }).join(''); }
@@ -112,17 +154,17 @@
     }
 
     function select(i, autoplay) {
-      var s = SONGS[i]; if (!s) return; cur = i; var p = pal(i), n = numOf(s), pl = $('#chn-pl');
+      var s = SONGS[i]; if (!s) return; ttsStop(false); cur = i; var p = pal(i), n = numOf(s), pl = $('#chn-pl');
       pl.style.setProperty('--a', p[0]); pl.style.setProperty('--b', p[1]); $('#chn-lb').innerHTML = EMO[i % EMO.length] + '<small>' + n + '</small>'; $('#chn-ti').textContent = titleFr(s); $('#chn-su').textContent = titleAr(s) || ('Song ' + n + ' · Le Français Au Bac');
-      A.src = new URL(srcOf(s.file), document.baseURI).href; A.playbackRate = SPD[spi]; $('#chn-fv').textContent = ST.fav.indexOf(s.file) > -1 ? '❤️' : '🤍'; stars(); renderLy(); grid();
+      if (s.tts) { try { A.pause(); A.removeAttribute('src'); } catch (e) {} } else { A.src = new URL(srcOf(s.file), document.baseURI).href; A.playbackRate = SPD[spi]; } $('#chn-fv').textContent = ST.fav.indexOf(s.file) > -1 ? '❤️' : '🤍'; stars(); renderLy(); if (s.tts) { TT.i = 0; ttsProg(); } grid();
       try { if (navigator.mediaSession) { navigator.mediaSession.metadata = new MediaMetadata({ title: titleFr(s), artist: 'Le Français Au Bac' }); } } catch (e) {}
       if (autoplay) play(); try { pl.scrollIntoView({ block: 'start', behavior: 'smooth' }); } catch (e) {}
     }
-    function play() { setupAnalyser(); try { if (AC && AC.state === 'suspended') AC.resume(); } catch (e) {} var pr = A.play(); if (pr && pr.catch) pr.catch(function () { /* الخطأ يعالجه حدث error */ }); }
+    function play() { if (isTts()) { ttsPlay(); return; } setupAnalyser(); try { if (AC && AC.state === 'suspended') AC.resume(); } catch (e) {} var pr = A.play(); if (pr && pr.catch) pr.catch(function () { /* الخطأ يعالجه حدث error */ }); }
     function nextIdx(d) { if (!SONGS.length) return -1; if (shuf) { var o = shuffle(SONGS.map(function (s, i) { return i; }).filter(function (i) { return i !== cur; })); return o.length ? o[0] : cur; } return (cur + d + SONGS.length) % SONGS.length; }
     A.addEventListener('play', function () { $('#chn-pl').classList.add('play'); $('#chn-pp').textContent = '⏸'; grid(); });
-    A.addEventListener('pause', function () { $('#chn-pl').classList.remove('play'); $('#chn-pp').textContent = '▶️'; grid(); });
-    A.addEventListener('error', function () { var s = SONGS[cur]; if (s) toast('⚠️ تعذّر تحميل الملف: ' + srcOf(s.file), 3500); $('#chn-pl').classList.remove('play'); $('#chn-pp').textContent = '▶️'; });
+    A.addEventListener('pause', function () { if (TT.on) return; $('#chn-pl').classList.remove('play'); $('#chn-pp').textContent = '▶️'; grid(); });
+    A.addEventListener('error', function () { var s = SONGS[cur]; if (s && A.getAttribute('src') && linesOf(s).length) { s.tts = true; toast('🔊 ملف الصوت غير متوفر — سيُقرأ النص بصوت فرنسي', 3000); ttsPlay(); return; } if (s) toast('⚠️ تعذّر تحميل الملف: ' + srcOf(s.file), 3500); $('#chn-pl').classList.remove('play'); $('#chn-pp').textContent = '▶️'; });
     A.addEventListener('loadedmetadata', function () { $('#chn-t1').textContent = fmt(A.duration); });
     A.addEventListener('timeupdate', function () {
       if (!A.duration) return; $('#chn-rg').value = Math.round(A.currentTime * 1000 / A.duration); $('#chn-t0').textContent = fmt(A.currentTime); $('#chn-t1').textContent = fmt(A.duration); syncLy();
@@ -133,7 +175,7 @@
     });
     // احتساب وقت الاستماع الفعلي: كل 30 ثانية = نقاط + تسريع للجوائز
     setInterval(function () {
-      if (A.paused || A.ended || !SEC.classList.contains('on')) return; var d = dayState(); d.s++; ST.sec++; tmpSec++;
+      if (!isPlaying() || A.ended || !SEC.classList.contains('on')) return; var d = dayState(); d.s++; ST.sec++; tmpSec++;
       if (tmpSec >= 30) { tmpSec = 0; ST.xp += 2; boost(10); }
       if (!d.g && d.s >= GOAL) { d.g = 1; ST.xp += 40; boost(60); toast('🎉 حققت هدف اليوم! +40 XP', 2600); }
       save(); if (d.s % 5 === 0 || d.g === 1 && d.s === GOAL) hero();
@@ -146,20 +188,21 @@
         var n = 32, bw = w / n, data = null, p = pal(Math.max(cur, 0)), t = Date.now() / 260;
         if (AN && !A.paused) { data = new Uint8Array(AN.frequencyBinCount); AN.getByteFrequencyData(data); }
         var grd = g.createLinearGradient(0, h, 0, 0); grd.addColorStop(0, p[0]); grd.addColorStop(1, '#fde047'); g.fillStyle = grd;
-        for (var i = 0; i < n; i++) { var v; if (data) v = data[Math.floor(i * data.length / n * 0.8)] / 255; else if (!A.paused) v = 0.25 + 0.5 * Math.abs(Math.sin(t + i * 0.55)) * (0.6 + 0.4 * Math.sin(t * 0.7 + i)); else v = 0.06 + 0.04 * Math.sin(t * 0.5 + i); var bh = Math.max(3, v * h); g.fillRect(i * bw + 2, h - bh, bw - 4, bh); }
+        for (var i = 0; i < n; i++) { var v; if (data) v = data[Math.floor(i * data.length / n * 0.8)] / 255; else if (isPlaying()) v = 0.25 + 0.5 * Math.abs(Math.sin(t + i * 0.55)) * (0.6 + 0.4 * Math.sin(t * 0.7 + i)); else v = 0.06 + 0.04 * Math.sin(t * 0.5 + i); var bh = Math.max(3, v * h); g.fillRect(i * bw + 2, h - bh, bw - 4, bh); }
       })();
     }
     /* ---------- الأحداث ---------- */
     ROOT.addEventListener('click', function (e) {
       var t = e.target, x;
+      if (isTts() && (x = t.closest('.chn-ln[data-k]'))) { ttsJump(+x.dataset.k); if (!TT.on) ttsPlay(); return; }
       if ((x = t.closest('.chn-ln[data-t]'))) { A.currentTime = +x.dataset.t; if (A.paused) play(); return; }
-      if ((x = t.closest('[data-i]'))) { var i = +x.dataset.i; if (i === cur) { if (A.paused) play(); else A.pause(); } else select(i, true); return; }
+      if ((x = t.closest('[data-i]'))) { var i = +x.dataset.i; if (i === cur) togglePlay(); else select(i, true); return; }
       if ((x = t.closest('[data-f]'))) { V.f = x.dataset.f; filters(); grid(); return; }
       if ((x = t.closest('[data-r]'))) { var s = SONGS[cur]; if (!s) return; var first = !ST.rate[s.file]; ST.rate[s.file] = +x.dataset.r; if (first) { ST.xp += 3; } save(); stars(); grid(); hero(); return; }
       if ((x = t.closest('[data-c]'))) { var c = x.dataset.c;
-        if (c === 'play') { if (cur < 0) select(0, true); else if (A.paused) play(); else A.pause(); }
+        if (c === 'play') { if (cur < 0) select(0, true); else togglePlay(); }
         else if (c === 'next') select(nextIdx(1), true); else if (c === 'prev') { if (A.currentTime > 4) A.currentTime = 0; else select(nextIdx(-1), true); }
-        else if (c === 'b10') A.currentTime = Math.max(0, A.currentTime - 10); else if (c === 'f10') A.currentTime = Math.min(A.duration || 1e9, A.currentTime + 10);
+        else if (c === 'b10') { if (isTts()) ttsJump(TT.i - 1); else A.currentTime = Math.max(0, A.currentTime - 10); } else if (c === 'f10') { if (isTts()) ttsJump(TT.i + 1); else A.currentTime = Math.min(A.duration || 1e9, A.currentTime + 10); }
         else if (c === 'shuf') { shuf = !shuf; x.classList.toggle('on', shuf); }
         else if (c === 'rep') { rep = (rep + 1) % 3; x.classList.toggle('on', rep > 0); x.textContent = rep === 2 ? '🔂' : '🔁'; }
         else if (c === 'spd') { spi = (spi + 1) % SPD.length; A.playbackRate = SPD[spi]; x.textContent = '⚡ ' + SPD[spi] + '×'; x.classList.toggle('on', spi > 0); }
@@ -167,9 +210,9 @@
         else if (c === 'fav') { var sg = SONGS[cur]; if (!sg) return; var k = ST.fav.indexOf(sg.file); if (k > -1) ST.fav.splice(k, 1); else ST.fav.push(sg.file); save(); x.textContent = k > -1 ? '🤍' : '❤️'; grid(); }
       }
     });
-    ROOT.addEventListener('input', function (e) { if (e.target.id === 'chn-rg') { if (A.duration) A.currentTime = e.target.value / 1000 * A.duration; } else if (e.target.id === 'chn-q') { V.q = e.target.value; grid(); } });
-    new MutationObserver(function () { if (!SEC.classList.contains('on') && !A.paused) A.pause(); }).observe(SEC, { attributes: true, attributeFilter: ['class'] });
-    try { if (navigator.mediaSession) { navigator.mediaSession.setActionHandler('play', function () { play(); }); navigator.mediaSession.setActionHandler('pause', function () { A.pause(); }); navigator.mediaSession.setActionHandler('nexttrack', function () { select(nextIdx(1), true); }); navigator.mediaSession.setActionHandler('previoustrack', function () { select(nextIdx(-1), true); }); } } catch (e) {}
+    ROOT.addEventListener('input', function (e) { if (e.target.id === 'chn-rg') { if (isTts()) { if (lines.length) ttsJump(Math.floor(e.target.value / 1000 * lines.length)); } else if (A.duration) A.currentTime = e.target.value / 1000 * A.duration; } else if (e.target.id === 'chn-q') { V.q = e.target.value; grid(); } });
+    new MutationObserver(function () { if (!SEC.classList.contains('on') && isPlaying()) pauseAny(); }).observe(SEC, { attributes: true, attributeFilter: ['class'] });
+    try { if (navigator.mediaSession) { navigator.mediaSession.setActionHandler('play', function () { play(); }); navigator.mediaSession.setActionHandler('pause', function () { pauseAny(); }); navigator.mediaSession.setActionHandler('nexttrack', function () { select(nextIdx(1), true); }); navigator.mediaSession.setActionHandler('previoustrack', function () { select(nextIdx(-1), true); }); } } catch (e) {}
 
     /* ---------- التحميل ---------- */
     function cands(file) { var b = location.pathname.replace(/[^/]*$/, ''); var l = ['./data/' + file, 'data/' + file, b + 'data/' + file, '/data/' + file], h = location.hostname; if (/\.github\.io$/.test(h)) { var u = h.split('.')[0], p = location.pathname.split('/').filter(Boolean), r = (p.length && !/\.html?$/i.test(p[0])) ? p[0] : (u + '.github.io'); l.push('https://cdn.jsdelivr.net/gh/' + u + '/' + r + '@main/data/' + file); } return l.filter(function (c, i) { return l.indexOf(c) === i; }); }
