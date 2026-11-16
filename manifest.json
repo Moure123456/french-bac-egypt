@@ -1,21 +1,19 @@
 {
+  "id": "/french-bac-egypt/",
+  "name": "Le Français Au Bac",
   "short_name": "Français Bac",
-  "name": "Le français au bac",
-  "icons": [
-    {
-      "src": "icon-192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "icon-512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ],
+  "description": "تعلّم الفرنسية لطلاب الثانوية العامة: قواعد وصوتيات وحوارات وأغانٍ وامتحانات",
+  "lang": "ar",
+  "dir": "rtl",
   "start_url": "./index.html",
-  "background_color": "#ffffff",
-  "theme_color": "#0055a5",
+  "scope": "./",
   "display": "standalone",
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#0055A5",
+  "categories": ["education"],
+  "icons": [
+    { "src": "icon-192.png", "type": "image/png", "sizes": "192x192", "purpose": "any" },
+    { "src": "icon-512.png", "type": "image/png", "sizes": "512x512", "purpose": "any" }
+  ]
 }
