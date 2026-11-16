@@ -382,6 +382,12 @@
   /* ====================== التركيب في التبويب ====================== */
   var RE_TITLE = /litt[ée]rature\s+fran[çc]aise/i;
   function mount() {
+    var host = document.getElementById('lit-root');
+    if (host) {
+      if (!root) build();
+      if (root.parentElement !== host) { host.innerHTML = ''; host.appendChild(root); }
+      return;
+    }
     var nodes = document.querySelectorAll('h1,h2,h3,h4,div,span,p');
     var title = null;
     for (var i = 0; i < nodes.length; i++) {
