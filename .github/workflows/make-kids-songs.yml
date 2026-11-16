@@ -1,1 +1,81 @@
-make-kids-songs-yml-code.txt
+name: Make kids songs audio
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install edge-tts
+        run: pip install --upgrade edge-tts
+      - name: Generate mp3 files for the kids songs
+        run: |
+          python - <<'PY'
+          import asyncio, json, os, re, subprocess
+          import edge_tts
+
+          VOICE = "fr-FR-DeniseNeural"   # صوت فرنسي أنثوي دافئ مناسب للأطفال
+          RATE, PITCH, GAP = "-12%", "+8Hz", 0.7
+          SONGS = "data/songs.json"
+
+          os.makedirs("data/songs", exist_ok=True)
+          os.makedirs("tmp", exist_ok=True)
+
+          def dur(p):
+              return float(subprocess.check_output(
+                  ["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", p]).decode().strip())
+
+          async def speak(text, path):
+              for a in range(5):
+                  try:
+                      await edge_tts.Communicate(text, VOICE, rate=RATE, pitch=PITCH).save(path)
+                      if os.path.getsize(path) > 500:
+                          return
+                  except Exception as e:
+                      print("retry:", e)
+                  await asyncio.sleep(2 + a * 2)
+              raise SystemExit("failed: " + text)
+
+          def build(n, parts):
+              cmd = ["ffmpeg", "-y", "-loglevel", "error"]
+              for p in parts:
+                  cmd += ["-i", p]
+              chain = "".join("[%d:a]aresample=24000,aformat=channel_layouts=mono[a%d];" % (i, i) for i in range(len(parts)))
+              chain += "".join("[a%d]" % i for i in range(len(parts))) + "concat=n=%d:v=0:a=1[o]" % len(parts)
+              cmd += ["-filter_complex", chain, "-map", "[o]", "-c:a", "libmp3lame", "-q:a", "4", "data/songs/song_%s.mp3" % n]
+              subprocess.run(cmd, check=True)
+
+          async def main():
+              subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", "anullsrc=r=24000:cl=mono",
+                              "-t", str(GAP), "-c:a", "libmp3lame", "-q:a", "9", "tmp/sil.mp3"], check=True)
+              data = json.load(open(SONGS, encoding="utf-8"))
+              for s in data["songs"]:
+                  if not s.get("kids") or not s.get("lines") or not s.get("tts"):
+                      continue
+                  n = re.search(r"\d+", s["file"]).group()
+                  parts, t = [], 0.0
+                  for i, l in enumerate(s["lines"]):
+                      p = "tmp/%s_%d.mp3" % (n, i)
+                      await speak(l["fr"], p)
+                      l["t"] = round(t, 2)
+                      t += dur(p) + GAP
+                      parts += [p, "tmp/sil.mp3"]
+                  build(n, parts)
+                  s.pop("tts", None)
+                  json.dump(data, open(SONGS, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+                  print("done song", n, round(t), "sec")
+
+          asyncio.run(main())
+          PY
+      - name: Commit results
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add data/songs data/songs.json
+          git commit -m "Add kids songs audio (mp3) with timed lyrics" || echo "nothing to commit"
+          git push
