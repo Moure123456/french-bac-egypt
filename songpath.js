@@ -1,4 +1,4 @@
-/* ===== songpath.js — يوجّه أي طلب لملف song_N.mp3 إلى المجلد data/songs/ تلقائيًا =====
+/* ===== songpath.js — يوجّه ملفات song_N.mp3 إلى data/songs/ + ينشئ قائمة الأغاني إن غاب data/songs.json =====
    يوضع قبل chansons.js. لا يغيّر أي ملف آخر، ويعمل مهما كانت طريقة كتابة المسار في الكود. */
 (function () {
   'use strict';
@@ -24,9 +24,23 @@
     var A = window.Audio;
     if (A) { window.Audio = function (u) { var a = new A(); if (u !== undefined) a.src = fix(u); return a; }; window.Audio.prototype = A.prototype; }
   } catch (e) {}
+  /* قائمة الأغاني الاحتياطية: إن لم يوجد data/songs.json يُنشأ تلقائيًا (song_1 … song_N) */
+  var TOTAL = 50;
+  function fallbackList() { var a = []; for (var i = 1; i <= TOTAL; i++) a.push({ file: 'song_' + i + '.mp3', title: 'Chanson ' + i }); return a; }
+  function isList(u) { return typeof u === 'string' && /(^|\/)songs\.json(\?|#|$)/i.test(u); }
   try {
     var f = window.fetch;
-    if (f) window.fetch = function (i, o) { return f.call(this, typeof i === 'string' ? fix(i) : i, o); };
+    if (f) window.fetch = function (i, o) {
+      var u = typeof i === 'string' ? fix(i) : i, self = this;
+      var p = f.call(self, u, o);
+      if (!isList(u)) return p;
+      return p.then(function (r) {
+        if (r && r.ok) return r;
+        return new Response(JSON.stringify(fallbackList()), { status: 200, headers: { 'Content-Type': 'application/json' } });
+      }, function () {
+        return new Response(JSON.stringify(fallbackList()), { status: 200, headers: { 'Content-Type': 'application/json' } });
+      });
+    };
   } catch (e) {}
   try {
     function scan(n) {
