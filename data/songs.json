@@ -199,6 +199,1656 @@
   {
    "file": "song_50.mp3",
    "title": "Chanson 50"
+  },
+  {
+   "file": "song_51.mp3",
+   "title_fr": "L'alphabet",
+   "title_ar": "أغنية الحروف",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "A, B, C, D, E, F, G",
+     "ar": "آ، بي، سي، دي، إي، إف، جي"
+    },
+    {
+     "fr": "H, I, J, K, L, M, N",
+     "ar": "آش، إي، جي، كا، إل، إم، إن"
+    },
+    {
+     "fr": "O, P, Q, R, S, T",
+     "ar": "أو، بي، كي، إير، إس، تي"
+    },
+    {
+     "fr": "U, V, W, X, Y, Z",
+     "ar": "يو، في، دوبل في، إكس، إيغريك، زد"
+    },
+    {
+     "fr": "Voilà l'alphabet !",
+     "ar": "هذه هي الأبجدية!"
+    },
+    {
+     "fr": "Chantons-le ensemble !",
+     "ar": "لنغنّها معًا!"
+    }
+   ]
+  },
+  {
+   "file": "song_52.mp3",
+   "title_fr": "Les nombres de 1 à 10",
+   "title_ar": "الأرقام من 1 إلى 10",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Un, deux, trois, je compte avec toi",
+     "ar": "واحد، اثنان، ثلاثة، أعدّ معك"
+    },
+    {
+     "fr": "Quatre, cinq, six, c'est facile, tu vois",
+     "ar": "أربعة، خمسة، ستة، الأمر سهل كما ترى"
+    },
+    {
+     "fr": "Sept, huit, neuf, je lève mon doigt",
+     "ar": "سبعة، ثمانية، تسعة، أرفع إصبعي"
+    },
+    {
+     "fr": "Dix ! J'ai fini, bravo pour moi !",
+     "ar": "عشرة! انتهيت، أحسنت لنفسي!"
+    },
+    {
+     "fr": "Un, deux, trois, quatre, cinq",
+     "ar": "واحد، اثنان، ثلاثة، أربعة، خمسة"
+    },
+    {
+     "fr": "Six, sept, huit, neuf, dix !",
+     "ar": "ستة، سبعة، ثمانية، تسعة، عشرة!"
+    }
+   ]
+  },
+  {
+   "file": "song_53.mp3",
+   "title_fr": "Les nombres de 11 à 20",
+   "title_ar": "الأرقام من 11 إلى 20",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Onze, douze, treize, quatorze",
+     "ar": "أحد عشر، اثنا عشر، ثلاثة عشر، أربعة عشر"
+    },
+    {
+     "fr": "Quinze, seize, c'est un jeu",
+     "ar": "خمسة عشر، ستة عشر، إنها لعبة"
+    },
+    {
+     "fr": "Dix-sept, dix-huit, dix-neuf",
+     "ar": "سبعة عشر، ثمانية عشر، تسعة عشر"
+    },
+    {
+     "fr": "Vingt ! Nous comptons très bien",
+     "ar": "عشرون! نحن نعدّ جيدًا"
+    },
+    {
+     "fr": "Compte avec moi jusqu'à vingt",
+     "ar": "عدّ معي حتى العشرين"
+    },
+    {
+     "fr": "Hourra, nous savons compter !",
+     "ar": "هيه، نحن نعرف العدّ!"
+    }
+   ]
+  },
+  {
+   "file": "song_54.mp3",
+   "title_fr": "Les couleurs",
+   "title_ar": "الألوان",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Le rouge, c'est la fraise",
+     "ar": "الأحمر هو الفراولة"
+    },
+    {
+     "fr": "Le jaune, c'est le soleil",
+     "ar": "الأصفر هو الشمس"
+    },
+    {
+     "fr": "Le bleu, c'est la mer",
+     "ar": "الأزرق هو البحر"
+    },
+    {
+     "fr": "Le vert, c'est l'herbe",
+     "ar": "الأخضر هو العشب"
+    },
+    {
+     "fr": "Le blanc, c'est la neige",
+     "ar": "الأبيض هو الثلج"
+    },
+    {
+     "fr": "J'aime toutes les couleurs !",
+     "ar": "أحب كل الألوان!"
+    }
+   ]
+  },
+  {
+   "file": "song_55.mp3",
+   "title_fr": "Les jours de la semaine",
+   "title_ar": "أيام الأسبوع",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Lundi, mardi, mercredi",
+     "ar": "الاثنين، الثلاثاء، الأربعاء"
+    },
+    {
+     "fr": "Jeudi, vendredi",
+     "ar": "الخميس، الجمعة"
+    },
+    {
+     "fr": "Samedi et dimanche",
+     "ar": "السبت والأحد"
+    },
+    {
+     "fr": "Sept jours dans la semaine",
+     "ar": "سبعة أيام في الأسبوع"
+    },
+    {
+     "fr": "Aujourd'hui, c'est un beau jour",
+     "ar": "اليوم هو يوم جميل"
+    },
+    {
+     "fr": "Je chante toute la semaine !",
+     "ar": "أغنّي طوال الأسبوع!"
+    }
+   ]
+  },
+  {
+   "file": "song_56.mp3",
+   "title_fr": "Les mois de l'année",
+   "title_ar": "شهور السنة",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Janvier, février, mars",
+     "ar": "يناير، فبراير، مارس"
+    },
+    {
+     "fr": "Avril, mai, juin",
+     "ar": "أبريل، مايو، يونيو"
+    },
+    {
+     "fr": "Juillet, août, septembre",
+     "ar": "يوليو، أغسطس، سبتمبر"
+    },
+    {
+     "fr": "Octobre, novembre, décembre",
+     "ar": "أكتوبر، نوفمبر، ديسمبر"
+    },
+    {
+     "fr": "Douze mois dans l'année",
+     "ar": "اثنا عشر شهرًا في السنة"
+    },
+    {
+     "fr": "Quel mois est ton anniversaire ?",
+     "ar": "في أي شهر عيد ميلادك؟"
+    }
+   ]
+  },
+  {
+   "file": "song_57.mp3",
+   "title_fr": "Les saisons",
+   "title_ar": "فصول السنة",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Au printemps, les fleurs sont belles",
+     "ar": "في الربيع الأزهار جميلة"
+    },
+    {
+     "fr": "En été, le soleil brille",
+     "ar": "في الصيف الشمس تلمع"
+    },
+    {
+     "fr": "En automne, les feuilles tombent",
+     "ar": "في الخريف الأوراق تتساقط"
+    },
+    {
+     "fr": "En hiver, il fait froid",
+     "ar": "في الشتاء الجو بارد"
+    },
+    {
+     "fr": "Quatre saisons dans l'année",
+     "ar": "أربعة فصول في السنة"
+    },
+    {
+     "fr": "Quelle est ta saison préférée ?",
+     "ar": "ما فصلك المفضل؟"
+    }
+   ]
+  },
+  {
+   "file": "song_58.mp3",
+   "title_fr": "Bonjour !",
+   "title_ar": "صباح الخير",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Bonjour, bonjour, comment ça va ?",
+     "ar": "صباح الخير، كيف حالك؟"
+    },
+    {
+     "fr": "Ça va très bien, merci, et toi ?",
+     "ar": "أنا بخير جدًا، شكرًا، وأنت؟"
+    },
+    {
+     "fr": "Bonjour, bonjour, je suis content",
+     "ar": "صباح الخير، أنا سعيد"
+    },
+    {
+     "fr": "De te voir ce matin",
+     "ar": "برؤيتك هذا الصباح"
+    },
+    {
+     "fr": "Bonjour mes amis, bonjour !",
+     "ar": "صباح الخير يا أصدقائي!"
+    },
+    {
+     "fr": "Bonne journée à tous !",
+     "ar": "يومًا سعيدًا للجميع!"
+    }
+   ]
+  },
+  {
+   "file": "song_59.mp3",
+   "title_fr": "Au revoir",
+   "title_ar": "مع السلامة",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Au revoir, au revoir, à demain",
+     "ar": "مع السلامة، إلى الغد"
+    },
+    {
+     "fr": "Au revoir, mon ami, à bientôt",
+     "ar": "مع السلامة يا صديقي، إلى اللقاء قريبًا"
+    },
+    {
+     "fr": "Je te fais un grand signe de la main",
+     "ar": "ألوّح لك بيدي"
+    },
+    {
+     "fr": "Salut, salut, à la prochaine !",
+     "ar": "وداعًا، وداعًا، إلى المرة القادمة!"
+    },
+    {
+     "fr": "Bonne soirée, bonne nuit",
+     "ar": "مساء سعيد، ليلة سعيدة"
+    },
+    {
+     "fr": "Au revoir et à demain !",
+     "ar": "مع السلامة وإلى الغد!"
+    }
+   ]
+  },
+  {
+   "file": "song_60.mp3",
+   "title_fr": "Merci et s'il vous plaît",
+   "title_ar": "شكرًا ومن فضلك",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Merci, merci, c'est gentil",
+     "ar": "شكرًا، شكرًا، هذا لطيف"
+    },
+    {
+     "fr": "S'il vous plaît, s'il vous plaît",
+     "ar": "من فضلك، من فضلك"
+    },
+    {
+     "fr": "Je dis merci quand on m'aide",
+     "ar": "أقول شكرًا عندما يساعدونني"
+    },
+    {
+     "fr": "Je dis pardon si je me trompe",
+     "ar": "أقول عفوًا إذا أخطأت"
+    },
+    {
+     "fr": "De rien, de rien, avec plaisir",
+     "ar": "عفوًا، بكل سرور"
+    },
+    {
+     "fr": "Les mots magiques sont si beaux",
+     "ar": "الكلمات السحرية جميلة جدًا"
+    }
+   ]
+  },
+  {
+   "file": "song_61.mp3",
+   "title_fr": "Comment tu t'appelles ?",
+   "title_ar": "ما اسمك؟",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Comment tu t'appelles ?",
+     "ar": "ما اسمك؟"
+    },
+    {
+     "fr": "Je m'appelle Sami",
+     "ar": "اسمي سامي"
+    },
+    {
+     "fr": "Et toi, comment tu t'appelles ?",
+     "ar": "وأنت، ما اسمك؟"
+    },
+    {
+     "fr": "Je m'appelle Nour",
+     "ar": "اسمي نور"
+    },
+    {
+     "fr": "Enchanté, enchantée !",
+     "ar": "تشرّفت بمعرفتك!"
+    },
+    {
+     "fr": "Nous sommes amis maintenant",
+     "ar": "نحن أصدقاء الآن"
+    }
+   ]
+  },
+  {
+   "file": "song_62.mp3",
+   "title_fr": "Ma famille",
+   "title_ar": "عائلتي",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Voici mon papa, il est fort",
+     "ar": "هذا أبي، إنه قوي"
+    },
+    {
+     "fr": "Voici ma maman, elle est douce",
+     "ar": "هذه أمي، إنها حنونة"
+    },
+    {
+     "fr": "Voici mon frère et ma sœur",
+     "ar": "هذا أخي وهذه أختي"
+    },
+    {
+     "fr": "Voici mon grand-père et ma grand-mère",
+     "ar": "هذا جدي وهذه جدتي"
+    },
+    {
+     "fr": "Dans ma famille, on s'aime",
+     "ar": "في عائلتي نحب بعضنا"
+    },
+    {
+     "fr": "Je les aime de tout mon cœur",
+     "ar": "أحبهم من كل قلبي"
+    }
+   ]
+  },
+  {
+   "file": "song_63.mp3",
+   "title_fr": "Mon corps",
+   "title_ar": "جسمي",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "La tête, les épaules",
+     "ar": "الرأس والكتفان"
+    },
+    {
+     "fr": "Les genoux et les pieds",
+     "ar": "والركبتان والقدمان"
+    },
+    {
+     "fr": "Les mains, les bras, le dos",
+     "ar": "اليدان والذراعان والظهر"
+    },
+    {
+     "fr": "Je bouge tout mon corps",
+     "ar": "أحرّك جسمي كله"
+    },
+    {
+     "fr": "Je saute, je tourne, je danse",
+     "ar": "أقفز، أدور، أرقص"
+    },
+    {
+     "fr": "Mon corps est mon ami",
+     "ar": "جسمي هو صديقي"
+    }
+   ]
+  },
+  {
+   "file": "song_64.mp3",
+   "title_fr": "Mon visage",
+   "title_ar": "وجهي",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "J'ai deux yeux pour regarder",
+     "ar": "عندي عينان لأنظر"
+    },
+    {
+     "fr": "J'ai un nez pour sentir",
+     "ar": "عندي أنف لأشمّ"
+    },
+    {
+     "fr": "J'ai une bouche pour sourire",
+     "ar": "عندي فم لأبتسم"
+    },
+    {
+     "fr": "J'ai deux oreilles pour écouter",
+     "ar": "عندي أذنان لأسمع"
+    },
+    {
+     "fr": "Je souris à tout le monde",
+     "ar": "أبتسم للجميع"
+    },
+    {
+     "fr": "Mon visage est joyeux",
+     "ar": "وجهي مبتهج"
+    }
+   ]
+  },
+  {
+   "file": "song_65.mp3",
+   "title_fr": "Les animaux de la ferme",
+   "title_ar": "حيوانات المزرعة",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "La vache dit meuh, meuh",
+     "ar": "البقرة تقول موو موو"
+    },
+    {
+     "fr": "Le mouton dit bêê, bêê",
+     "ar": "الخروف يقول ميي ميي"
+    },
+    {
+     "fr": "Le cheval court dans le pré",
+     "ar": "الحصان يركض في المرج"
+    },
+    {
+     "fr": "Le coq dit cocorico",
+     "ar": "الديك يقول كوكوريكو"
+    },
+    {
+     "fr": "La poule pond un œuf",
+     "ar": "الدجاجة تبيض بيضة"
+    },
+    {
+     "fr": "À la ferme, c'est la fête",
+     "ar": "في المزرعة إنها حفلة"
+    }
+   ]
+  },
+  {
+   "file": "song_66.mp3",
+   "title_fr": "Les animaux sauvages",
+   "title_ar": "الحيوانات البرية",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Le lion est le roi",
+     "ar": "الأسد هو الملك"
+    },
+    {
+     "fr": "L'éléphant est très grand",
+     "ar": "الفيل كبير جدًا"
+    },
+    {
+     "fr": "Le singe saute dans l'arbre",
+     "ar": "القرد يقفز في الشجرة"
+    },
+    {
+     "fr": "La girafe a un long cou",
+     "ar": "الزرافة لها رقبة طويلة"
+    },
+    {
+     "fr": "Le tigre est rapide",
+     "ar": "النمر سريع"
+    },
+    {
+     "fr": "J'aime les animaux sauvages",
+     "ar": "أحب الحيوانات البرية"
+    }
+   ]
+  },
+  {
+   "file": "song_67.mp3",
+   "title_fr": "Les animaux de la mer",
+   "title_ar": "حيوانات البحر",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Le poisson nage dans l'eau",
+     "ar": "السمكة تسبح في الماء"
+    },
+    {
+     "fr": "La baleine est énorme",
+     "ar": "الحوت ضخم"
+    },
+    {
+     "fr": "Le dauphin saute et rit",
+     "ar": "الدلفين يقفز ويضحك"
+    },
+    {
+     "fr": "La tortue avance doucement",
+     "ar": "السلحفاة تتقدّم ببطء"
+    },
+    {
+     "fr": "Le crabe marche sur le côté",
+     "ar": "السرطان يمشي جانبيًا"
+    },
+    {
+     "fr": "La mer est pleine de vie",
+     "ar": "البحر مليء بالحياة"
+    }
+   ]
+  },
+  {
+   "file": "song_68.mp3",
+   "title_fr": "Les oiseaux",
+   "title_ar": "الطيور",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "L'oiseau chante dans l'arbre",
+     "ar": "العصفور يغرّد في الشجرة"
+    },
+    {
+     "fr": "Le pigeon vole dans le ciel",
+     "ar": "الحمامة تطير في السماء"
+    },
+    {
+     "fr": "Le hibou dort le jour",
+     "ar": "البومة تنام نهارًا"
+    },
+    {
+     "fr": "Le canard nage sur l'étang",
+     "ar": "البطة تسبح في البركة"
+    },
+    {
+     "fr": "Le perroquet parle beaucoup",
+     "ar": "الببغاء يتكلم كثيرًا"
+    },
+    {
+     "fr": "Les oiseaux sont mes amis",
+     "ar": "الطيور أصدقائي"
+    }
+   ]
+  },
+  {
+   "file": "song_69.mp3",
+   "title_fr": "Les fruits",
+   "title_ar": "الفواكه",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "La pomme est rouge et ronde",
+     "ar": "التفاحة حمراء ومستديرة"
+    },
+    {
+     "fr": "La banane est jaune",
+     "ar": "الموزة صفراء"
+    },
+    {
+     "fr": "L'orange est pleine de jus",
+     "ar": "البرتقالة مليئة بالعصير"
+    },
+    {
+     "fr": "La fraise est sucrée",
+     "ar": "الفراولة حلوة"
+    },
+    {
+     "fr": "Le raisin est violet",
+     "ar": "العنب بنفسجي"
+    },
+    {
+     "fr": "Miam, miam, j'aime les fruits !",
+     "ar": "ياميّ، أحب الفواكه!"
+    }
+   ]
+  },
+  {
+   "file": "song_70.mp3",
+   "title_fr": "Les légumes",
+   "title_ar": "الخضروات",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "La carotte est orange",
+     "ar": "الجزرة برتقالية"
+    },
+    {
+     "fr": "La tomate est rouge",
+     "ar": "الطماطم حمراء"
+    },
+    {
+     "fr": "La pomme de terre est ronde",
+     "ar": "البطاطس مستديرة"
+    },
+    {
+     "fr": "Le concombre est vert",
+     "ar": "الخيار أخضر"
+    },
+    {
+     "fr": "Les légumes sont bons pour la santé",
+     "ar": "الخضروات مفيدة للصحة"
+    },
+    {
+     "fr": "Pour être fort, je les mange",
+     "ar": "لأكون قويًا آكلها"
+    }
+   ]
+  },
+  {
+   "file": "song_71.mp3",
+   "title_fr": "Mon petit déjeuner",
+   "title_ar": "فطوري",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Le matin, je mange du pain",
+     "ar": "في الصباح آكل الخبز"
+    },
+    {
+     "fr": "Avec du fromage et du miel",
+     "ar": "مع الجبن والعسل"
+    },
+    {
+     "fr": "Je bois du lait chaud",
+     "ar": "أشرب حليبًا ساخنًا"
+    },
+    {
+     "fr": "Je mange un œuf et une olive",
+     "ar": "آكل بيضة وزيتونة"
+    },
+    {
+     "fr": "Le petit déjeuner est important",
+     "ar": "الفطور مهم"
+    },
+    {
+     "fr": "Il me donne de l'énergie",
+     "ar": "يعطيني الطاقة"
+    }
+   ]
+  },
+  {
+   "file": "song_72.mp3",
+   "title_fr": "Les boissons",
+   "title_ar": "المشروبات",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "De l'eau, de l'eau, c'est la vie",
+     "ar": "ماء، ماء، إنه الحياة"
+    },
+    {
+     "fr": "Du lait pour mes os",
+     "ar": "حليب لعظامي"
+    },
+    {
+     "fr": "Du jus d'orange le matin",
+     "ar": "عصير برتقال في الصباح"
+    },
+    {
+     "fr": "Du thé chaud quand il fait froid",
+     "ar": "شاي ساخن عندما يكون الجو باردًا"
+    },
+    {
+     "fr": "Je bois beaucoup d'eau",
+     "ar": "أشرب ماءً كثيرًا"
+    },
+    {
+     "fr": "Pour rester en bonne santé",
+     "ar": "لأبقى بصحة جيدة"
+    }
+   ]
+  },
+  {
+   "file": "song_73.mp3",
+   "title_fr": "Mes vêtements",
+   "title_ar": "ملابسي",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Je mets mon pantalon",
+     "ar": "ألبس بنطالي"
+    },
+    {
+     "fr": "Je mets ma chemise",
+     "ar": "ألبس قميصي"
+    },
+    {
+     "fr": "Je mets mes chaussures",
+     "ar": "ألبس حذائي"
+    },
+    {
+     "fr": "En hiver, mon manteau",
+     "ar": "في الشتاء معطفي"
+    },
+    {
+     "fr": "En été, mon chapeau",
+     "ar": "في الصيف قبعتي"
+    },
+    {
+     "fr": "Je suis prêt, je suis beau",
+     "ar": "أنا جاهز وأنا جميل"
+    }
+   ]
+  },
+  {
+   "file": "song_74.mp3",
+   "title_fr": "Mon cartable",
+   "title_ar": "حقيبتي المدرسية",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Dans mon cartable, il y a un livre",
+     "ar": "في حقيبتي كتاب"
+    },
+    {
+     "fr": "Il y a un cahier et un stylo",
+     "ar": "وفيها دفتر وقلم"
+    },
+    {
+     "fr": "Il y a une règle et une gomme",
+     "ar": "وفيها مسطرة وممحاة"
+    },
+    {
+     "fr": "Il y a une trousse colorée",
+     "ar": "وفيها مقلمة ملوّنة"
+    },
+    {
+     "fr": "Mon cartable est bien rangé",
+     "ar": "حقيبتي مرتبة جيدًا"
+    },
+    {
+     "fr": "Je suis prêt pour l'école",
+     "ar": "أنا جاهز للمدرسة"
+    }
+   ]
+  },
+  {
+   "file": "song_75.mp3",
+   "title_fr": "La classe",
+   "title_ar": "الفصل الدراسي",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Dans la classe, il y a un tableau",
+     "ar": "في الفصل سبورة"
+    },
+    {
+     "fr": "Il y a une table et une chaise",
+     "ar": "هناك طاولة وكرسي"
+    },
+    {
+     "fr": "La maîtresse écrit des mots",
+     "ar": "المعلمة تكتب كلمات"
+    },
+    {
+     "fr": "Les élèves écoutent bien",
+     "ar": "التلاميذ يستمعون جيدًا"
+    },
+    {
+     "fr": "Je lève la main pour parler",
+     "ar": "أرفع يدي لأتكلم"
+    },
+    {
+     "fr": "J'aime ma classe",
+     "ar": "أحب فصلي"
+    }
+   ]
+  },
+  {
+   "file": "song_76.mp3",
+   "title_fr": "Les formes",
+   "title_ar": "الأشكال",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Le cercle est rond",
+     "ar": "الدائرة مستديرة"
+    },
+    {
+     "fr": "Le carré a quatre côtés",
+     "ar": "المربع له أربعة أضلاع"
+    },
+    {
+     "fr": "Le triangle a trois pointes",
+     "ar": "المثلث له ثلاث رؤوس"
+    },
+    {
+     "fr": "Le rectangle est long",
+     "ar": "المستطيل طويل"
+    },
+    {
+     "fr": "L'étoile brille la nuit",
+     "ar": "النجمة تلمع ليلًا"
+    },
+    {
+     "fr": "Les formes sont partout",
+     "ar": "الأشكال في كل مكان"
+    }
+   ]
+  },
+  {
+   "file": "song_77.mp3",
+   "title_fr": "Le temps qu'il fait",
+   "title_ar": "حالة الطقس",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Il fait beau, il y a du soleil",
+     "ar": "الجو جميل، هناك شمس"
+    },
+    {
+     "fr": "Il pleut, j'ouvre mon parapluie",
+     "ar": "تمطر، أفتح مظلتي"
+    },
+    {
+     "fr": "Il y a du vent, mon cerf-volant vole",
+     "ar": "هناك رياح، طائرتي الورقية تطير"
+    },
+    {
+     "fr": "Il neige, je fais un bonhomme",
+     "ar": "تثلج، أصنع رجل ثلج"
+    },
+    {
+     "fr": "Il fait chaud, je bois de l'eau",
+     "ar": "الجو حار، أشرب ماء"
+    },
+    {
+     "fr": "Quel temps fait-il aujourd'hui ?",
+     "ar": "كيف الطقس اليوم؟"
+    }
+   ]
+  },
+  {
+   "file": "song_78.mp3",
+   "title_fr": "Ma maison",
+   "title_ar": "بيتي",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Ma maison est petite et jolie",
+     "ar": "بيتي صغير وجميل"
+    },
+    {
+     "fr": "Elle a une porte bleue",
+     "ar": "له باب أزرق"
+    },
+    {
+     "fr": "Elle a des fenêtres brillantes",
+     "ar": "له نوافذ لامعة"
+    },
+    {
+     "fr": "Elle a un toit rouge",
+     "ar": "له سقف أحمر"
+    },
+    {
+     "fr": "Dans ma maison, il y a de l'amour",
+     "ar": "في بيتي حب"
+    },
+    {
+     "fr": "Chez moi, c'est le meilleur endroit",
+     "ar": "بيتي أفضل مكان"
+    }
+   ]
+  },
+  {
+   "file": "song_79.mp3",
+   "title_fr": "Les pièces de la maison",
+   "title_ar": "غرف البيت",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Je dors dans ma chambre",
+     "ar": "أنام في غرفتي"
+    },
+    {
+     "fr": "Je mange dans la cuisine",
+     "ar": "آكل في المطبخ"
+    },
+    {
+     "fr": "Je me lave dans la salle de bain",
+     "ar": "أغتسل في الحمّام"
+    },
+    {
+     "fr": "Je regarde la télé au salon",
+     "ar": "أشاهد التلفاز في الصالون"
+    },
+    {
+     "fr": "Je joue dans le jardin",
+     "ar": "ألعب في الحديقة"
+    },
+    {
+     "fr": "Chaque pièce a son rôle",
+     "ar": "لكل غرفة دورها"
+    }
+   ]
+  },
+  {
+   "file": "song_80.mp3",
+   "title_fr": "Les transports",
+   "title_ar": "وسائل المواصلات",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "La voiture roule vite",
+     "ar": "السيارة تسير بسرعة"
+    },
+    {
+     "fr": "Le bus emmène les enfants",
+     "ar": "الحافلة تقلّ الأطفال"
+    },
+    {
+     "fr": "Le train va sur les rails",
+     "ar": "القطار يسير على القضبان"
+    },
+    {
+     "fr": "L'avion vole dans le ciel",
+     "ar": "الطائرة تطير في السماء"
+    },
+    {
+     "fr": "Le bateau flotte sur la mer",
+     "ar": "السفينة تطفو على البحر"
+    },
+    {
+     "fr": "Je voyage avec mes rêves",
+     "ar": "أسافر مع أحلامي"
+    }
+   ]
+  },
+  {
+   "file": "song_81.mp3",
+   "title_fr": "Les métiers",
+   "title_ar": "المهن",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Le médecin soigne les malades",
+     "ar": "الطبيب يعالج المرضى"
+    },
+    {
+     "fr": "Le professeur enseigne",
+     "ar": "المعلم يعلّم"
+    },
+    {
+     "fr": "Le pompier éteint le feu",
+     "ar": "رجل الإطفاء يطفئ النار"
+    },
+    {
+     "fr": "Le boulanger fait le pain",
+     "ar": "الخباز يصنع الخبز"
+    },
+    {
+     "fr": "Le policier protège les gens",
+     "ar": "الشرطي يحمي الناس"
+    },
+    {
+     "fr": "Plus tard, je serai... un héros !",
+     "ar": "عندما أكبر سأكون... بطلًا!"
+    }
+   ]
+  },
+  {
+   "file": "song_82.mp3",
+   "title_fr": "Les sports",
+   "title_ar": "الرياضات",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Je joue au football",
+     "ar": "ألعب كرة القدم"
+    },
+    {
+     "fr": "Je nage dans la piscine",
+     "ar": "أسبح في المسبح"
+    },
+    {
+     "fr": "Je cours dans le parc",
+     "ar": "أركض في الحديقة"
+    },
+    {
+     "fr": "Je fais du vélo",
+     "ar": "أركب الدراجة"
+    },
+    {
+     "fr": "Le sport est bon pour la santé",
+     "ar": "الرياضة مفيدة للصحة"
+    },
+    {
+     "fr": "Bougeons, bougeons tous les jours !",
+     "ar": "لنتحرك كل يوم!"
+    }
+   ]
+  },
+  {
+   "file": "song_83.mp3",
+   "title_fr": "Mes jouets",
+   "title_ar": "ألعابي",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "J'ai une balle rouge",
+     "ar": "عندي كرة حمراء"
+    },
+    {
+     "fr": "J'ai une poupée jolie",
+     "ar": "عندي دمية جميلة"
+    },
+    {
+     "fr": "J'ai un train et un robot",
+     "ar": "عندي قطار وروبوت"
+    },
+    {
+     "fr": "Je joue avec mes amis",
+     "ar": "ألعب مع أصدقائي"
+    },
+    {
+     "fr": "Je partage mes jouets",
+     "ar": "أتشارك ألعابي"
+    },
+    {
+     "fr": "Partager, c'est gentil",
+     "ar": "المشاركة لطيفة"
+    }
+   ]
+  },
+  {
+   "file": "song_84.mp3",
+   "title_fr": "Joyeux anniversaire",
+   "title_ar": "عيد ميلاد سعيد",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Joyeux anniversaire !",
+     "ar": "عيد ميلاد سعيد!"
+    },
+    {
+     "fr": "Souffle les bougies",
+     "ar": "أطفئ الشموع"
+    },
+    {
+     "fr": "Mange un bon gâteau",
+     "ar": "كُل كعكة لذيذة"
+    },
+    {
+     "fr": "Tous tes amis sont là",
+     "ar": "كل أصدقائك هنا"
+    },
+    {
+     "fr": "Tu as un an de plus",
+     "ar": "أصبحت أكبر بسنة"
+    },
+    {
+     "fr": "Joyeux anniversaire à toi !",
+     "ar": "عيد ميلاد سعيد لك!"
+    }
+   ]
+  },
+  {
+   "file": "song_85.mp3",
+   "title_fr": "Les émotions",
+   "title_ar": "المشاعر",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Je suis content, je souris",
+     "ar": "أنا سعيد، أبتسم"
+    },
+    {
+     "fr": "Je suis triste, je pleure",
+     "ar": "أنا حزين، أبكي"
+    },
+    {
+     "fr": "Je suis fâché, je crie",
+     "ar": "أنا غاضب، أصرخ"
+    },
+    {
+     "fr": "J'ai peur du noir",
+     "ar": "أخاف من الظلام"
+    },
+    {
+     "fr": "Je suis surpris, oh là là !",
+     "ar": "أنا متفاجئ، يا للعجب!"
+    },
+    {
+     "fr": "Toutes les émotions sont normales",
+     "ar": "كل المشاعر طبيعية"
+    }
+   ]
+  },
+  {
+   "file": "song_86.mp3",
+   "title_fr": "Je me lave les mains",
+   "title_ar": "أغسل يديّ",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Avec de l'eau et du savon",
+     "ar": "بالماء والصابون"
+    },
+    {
+     "fr": "Je me lave les mains",
+     "ar": "أغسل يديّ"
+    },
+    {
+     "fr": "Je frotte, je frotte bien",
+     "ar": "أفرك، أفرك جيدًا"
+    },
+    {
+     "fr": "Avant de manger, je me lave",
+     "ar": "قبل الأكل أغسل"
+    },
+    {
+     "fr": "Après le jeu, je me lave",
+     "ar": "بعد اللعب أغسل"
+    },
+    {
+     "fr": "Mes mains sont propres",
+     "ar": "يداي نظيفتان"
+    }
+   ]
+  },
+  {
+   "file": "song_87.mp3",
+   "title_fr": "Je me brosse les dents",
+   "title_ar": "أنظّف أسناني",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Le matin, je me brosse les dents",
+     "ar": "في الصباح أنظّف أسناني"
+    },
+    {
+     "fr": "Le soir, je me brosse les dents",
+     "ar": "في المساء أنظّف أسناني"
+    },
+    {
+     "fr": "Haut, bas, droite, gauche",
+     "ar": "أعلى، أسفل، يمين، يسار"
+    },
+    {
+     "fr": "Je brosse bien partout",
+     "ar": "أنظّف جيدًا في كل مكان"
+    },
+    {
+     "fr": "Mes dents sont blanches",
+     "ar": "أسناني بيضاء"
+    },
+    {
+     "fr": "Je souris avec joie",
+     "ar": "أبتسم بفرح"
+    }
+   ]
+  },
+  {
+   "file": "song_88.mp3",
+   "title_fr": "Ma journée",
+   "title_ar": "يومي",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Le matin, je me lève",
+     "ar": "في الصباح أستيقظ"
+    },
+    {
+     "fr": "Je prends mon petit déjeuner",
+     "ar": "أتناول فطوري"
+    },
+    {
+     "fr": "Je vais à l'école",
+     "ar": "أذهب إلى المدرسة"
+    },
+    {
+     "fr": "L'après-midi, je fais mes devoirs",
+     "ar": "بعد الظهر أحلّ واجباتي"
+    },
+    {
+     "fr": "Le soir, je dîne en famille",
+     "ar": "في المساء أتعشى مع عائلتي"
+    },
+    {
+     "fr": "La nuit, je dors bien",
+     "ar": "في الليل أنام جيدًا"
+    }
+   ]
+  },
+  {
+   "file": "song_89.mp3",
+   "title_fr": "Les contraires",
+   "title_ar": "الأضداد",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Grand, petit",
+     "ar": "كبير، صغير"
+    },
+    {
+     "fr": "Chaud, froid",
+     "ar": "ساخن، بارد"
+    },
+    {
+     "fr": "Jour, nuit",
+     "ar": "نهار، ليل"
+    },
+    {
+     "fr": "Haut, bas",
+     "ar": "أعلى، أسفل"
+    },
+    {
+     "fr": "Joyeux, triste",
+     "ar": "مبتهج، حزين"
+    },
+    {
+     "fr": "Les contraires sont amusants",
+     "ar": "الأضداد ممتعة"
+    }
+   ]
+  },
+  {
+   "file": "song_90.mp3",
+   "title_fr": "J'ai, tu as (avoir)",
+   "title_ar": "عندي وعندك",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "J'ai un chat",
+     "ar": "عندي قطة"
+    },
+    {
+     "fr": "Tu as un chien",
+     "ar": "عندك كلب"
+    },
+    {
+     "fr": "Il a un livre",
+     "ar": "عنده كتاب"
+    },
+    {
+     "fr": "Nous avons une maison",
+     "ar": "عندنا بيت"
+    },
+    {
+     "fr": "Vous avez un jardin",
+     "ar": "عندكم حديقة"
+    },
+    {
+     "fr": "Ils ont des amis",
+     "ar": "عندهم أصدقاء"
+    }
+   ]
+  },
+  {
+   "file": "song_91.mp3",
+   "title_fr": "Je suis, tu es (être)",
+   "title_ar": "أنا وأنت",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Je suis un enfant",
+     "ar": "أنا طفل"
+    },
+    {
+     "fr": "Tu es mon ami",
+     "ar": "أنت صديقي"
+    },
+    {
+     "fr": "Il est grand",
+     "ar": "هو طويل"
+    },
+    {
+     "fr": "Nous sommes ensemble",
+     "ar": "نحن معًا"
+    },
+    {
+     "fr": "Vous êtes gentils",
+     "ar": "أنتم لطفاء"
+    },
+    {
+     "fr": "Ils sont contents",
+     "ar": "هم سعداء"
+    }
+   ]
+  },
+  {
+   "file": "song_92.mp3",
+   "title_fr": "Je vais, tu vas (aller)",
+   "title_ar": "أذهب وتذهب",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Je vais à l'école",
+     "ar": "أذهب إلى المدرسة"
+    },
+    {
+     "fr": "Tu vas au parc",
+     "ar": "تذهب إلى الحديقة"
+    },
+    {
+     "fr": "Il va au marché",
+     "ar": "هو يذهب إلى السوق"
+    },
+    {
+     "fr": "Nous allons à la plage",
+     "ar": "نذهب إلى الشاطئ"
+    },
+    {
+     "fr": "Vous allez au cinéma",
+     "ar": "تذهبون إلى السينما"
+    },
+    {
+     "fr": "Ils vont chez grand-mère",
+     "ar": "يذهبون إلى بيت الجدة"
+    }
+   ]
+  },
+  {
+   "file": "song_93.mp3",
+   "title_fr": "Dans, sur, sous",
+   "title_ar": "في وعلى وتحت",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Le chat est dans la boîte",
+     "ar": "القطة داخل الصندوق"
+    },
+    {
+     "fr": "Le livre est sur la table",
+     "ar": "الكتاب على الطاولة"
+    },
+    {
+     "fr": "La balle est sous le lit",
+     "ar": "الكرة تحت السرير"
+    },
+    {
+     "fr": "Le chien est devant la porte",
+     "ar": "الكلب أمام الباب"
+    },
+    {
+     "fr": "L'oiseau est derrière l'arbre",
+     "ar": "العصفور خلف الشجرة"
+    },
+    {
+     "fr": "Dans, sur, sous, c'est facile !",
+     "ar": "في، على، تحت، الأمر سهل!"
+    }
+   ]
+  },
+  {
+   "file": "song_94.mp3",
+   "title_fr": "Le jardin",
+   "title_ar": "الحديقة",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Dans le jardin, il y a des fleurs",
+     "ar": "في الحديقة ورود"
+    },
+    {
+     "fr": "Il y a un grand arbre",
+     "ar": "هناك شجرة كبيرة"
+    },
+    {
+     "fr": "Il y a de l'herbe verte",
+     "ar": "هناك عشب أخضر"
+    },
+    {
+     "fr": "Le papillon vole doucement",
+     "ar": "الفراشة تطير بهدوء"
+    },
+    {
+     "fr": "Je joue sur la balançoire",
+     "ar": "ألعب على الأرجوحة"
+    },
+    {
+     "fr": "J'aime mon jardin",
+     "ar": "أحب حديقتي"
+    }
+   ]
+  },
+  {
+   "file": "song_95.mp3",
+   "title_fr": "Les insectes",
+   "title_ar": "الحشرات",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "La fourmi porte une graine",
+     "ar": "النملة تحمل حبة"
+    },
+    {
+     "fr": "L'abeille fait du miel",
+     "ar": "النحلة تصنع العسل"
+    },
+    {
+     "fr": "Le papillon a de belles ailes",
+     "ar": "للفراشة أجنحة جميلة"
+    },
+    {
+     "fr": "La coccinelle est rouge",
+     "ar": "الدعسوقة حمراء"
+    },
+    {
+     "fr": "Le ver de terre est sous la terre",
+     "ar": "دودة الأرض تحت التراب"
+    },
+    {
+     "fr": "Les petits animaux sont utiles",
+     "ar": "الحيوانات الصغيرة مفيدة"
+    }
+   ]
+  },
+  {
+   "file": "song_96.mp3",
+   "title_fr": "La lune et les étoiles",
+   "title_ar": "القمر والنجوم",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "La lune brille la nuit",
+     "ar": "القمر يلمع ليلًا"
+    },
+    {
+     "fr": "Les étoiles sont des lumières",
+     "ar": "النجوم أضواء"
+    },
+    {
+     "fr": "Le soleil donne la chaleur",
+     "ar": "الشمس تعطي الدفء"
+    },
+    {
+     "fr": "La Terre est notre maison",
+     "ar": "الأرض هي بيتنا"
+    },
+    {
+     "fr": "Je rêve de voler dans l'espace",
+     "ar": "أحلم بالطيران في الفضاء"
+    },
+    {
+     "fr": "Bonne nuit, petite lune",
+     "ar": "تصبح على خير أيها القمر الصغير"
+    }
+   ]
+  },
+  {
+   "file": "song_97.mp3",
+   "title_fr": "Au marché",
+   "title_ar": "في السوق",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Au marché, j'achète des pommes",
+     "ar": "في السوق أشتري تفاحًا"
+    },
+    {
+     "fr": "J'achète du pain et du lait",
+     "ar": "أشتري الخبز والحليب"
+    },
+    {
+     "fr": "Combien ça coûte, s'il vous plaît ?",
+     "ar": "بكم هذا من فضلك؟"
+    },
+    {
+     "fr": "Voilà ton argent, merci",
+     "ar": "تفضّل نقودك، شكرًا"
+    },
+    {
+     "fr": "Le vendeur est gentil",
+     "ar": "البائع لطيف"
+    },
+    {
+     "fr": "Au revoir, bonne journée",
+     "ar": "مع السلامة، يومًا سعيدًا"
+    }
+   ]
+  },
+  {
+   "file": "song_98.mp3",
+   "title_fr": "À l'école",
+   "title_ar": "في المدرسة",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "À l'école, j'apprends à lire",
+     "ar": "في المدرسة أتعلم القراءة"
+    },
+    {
+     "fr": "J'apprends à écrire et à compter",
+     "ar": "أتعلم الكتابة والعدّ"
+    },
+    {
+     "fr": "Je dessine avec mes crayons",
+     "ar": "أرسم بأقلامي"
+    },
+    {
+     "fr": "Je chante avec mes amis",
+     "ar": "أغنّي مع أصدقائي"
+    },
+    {
+     "fr": "La récréation est amusante",
+     "ar": "الاستراحة ممتعة"
+    },
+    {
+     "fr": "J'aime apprendre chaque jour",
+     "ar": "أحب التعلّم كل يوم"
+    }
+   ]
+  },
+  {
+   "file": "song_99.mp3",
+   "title_fr": "La politesse",
+   "title_ar": "الأدب",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Bonjour, madame, bonjour, monsieur",
+     "ar": "صباح الخير سيدتي، صباح الخير سيدي"
+    },
+    {
+     "fr": "Je dis s'il vous plaît",
+     "ar": "أقول من فضلك"
+    },
+    {
+     "fr": "Je dis merci",
+     "ar": "أقول شكرًا"
+    },
+    {
+     "fr": "Je dis pardon et excusez-moi",
+     "ar": "أقول آسف وعذرًا"
+    },
+    {
+     "fr": "Je ne coupe pas la parole",
+     "ar": "لا أقاطع الحديث"
+    },
+    {
+     "fr": "Être poli, c'est être beau",
+     "ar": "الأدب جمال"
+    }
+   ]
+  },
+  {
+   "file": "song_100.mp3",
+   "title_fr": "Bonne nuit",
+   "title_ar": "تصبح على خير",
+   "tts": true,
+   "kids": true,
+   "lines": [
+    {
+     "fr": "Il est tard, la lune est là",
+     "ar": "الوقت متأخر، القمر هنا"
+    },
+    {
+     "fr": "Je mets mon pyjama",
+     "ar": "ألبس بيجامتي"
+    },
+    {
+     "fr": "Je me brosse les dents",
+     "ar": "أنظّف أسناني"
+    },
+    {
+     "fr": "Maman me lit une histoire",
+     "ar": "أمي تقرأ لي قصة"
+    },
+    {
+     "fr": "Je ferme les yeux doucement",
+     "ar": "أغمض عينيّ بهدوء"
+    },
+    {
+     "fr": "Bonne nuit, à demain",
+     "ar": "تصبح على خير، إلى الغد"
+    }
+   ]
   }
  ]
 }
