@@ -1,6 +1,7 @@
 /* ===== lexique.js — «اختبر نفسك» (Le Défi) + تبويب «كلمات» في القاموس =====
    يعمل داخل #quiz-root (قسم lessons) و #dict-root (قسم dictionary) فقط.
-   يقرأ data/words.json + مفردات data/bac_*.json. كل إجابة صحيحة تسرّع عدّاد جوائز splash.js. */
+   يقرأ data/words.json + مفردات data/bac_*.json. كل إجابة صحيحة تسرّع عدّاد جوائز splash.js.
+   كل إجابة تُسجَّل في «رحلتي» (دفتر الأخطاء) عبر window.__bqProgress إن وُجد. */
 (function () {
   'use strict';
   function ready(f) { if (document.readyState !== 'loading') f(); else document.addEventListener('DOMContentLoaded', f); }
@@ -220,6 +221,8 @@
     function answer(ok, timeout, idx) {
       if (!G || G.locked) return; G.locked = true; stopT();
       var q = G.qs[G.i], w = q.w, msg = $('#lx-msg'), play = $('#lx-play');
+      /* «رحلتي»: تسجيل الخطأ في دفتر الأخطاء أو احتساب إجابة صحيحة على كلمة مسجّلة فيه */
+      try { if (window.__bqProgress) window.__bqProgress[ok ? 'correct' : 'mistake']({ fr: clean(w.fr), ar: w.ar }); } catch (e) {}
       $$('.lx-opt', play).forEach(function (b, i) { if (q.opts[i] === w[q.key]) b.classList.add('ok'); else if (i === idx) b.classList.add('no'); b.disabled = true; });
       if (ok) {
         G.streak++; G.best = Math.max(G.best, G.streak); G.ok++;
