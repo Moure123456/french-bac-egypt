@@ -1,6 +1,8 @@
 /* ===== chat.js — شات الطلاب المباشر (نسخة متقدمة) =====
    نص + رسائل صوتية + صور + إيموجي + تفاعلات + رد على رسالة + مؤشر الكتابة
-   + عدد المتصلين + إشعارات. يعمل على Firebase Realtime Database الحالية. */
+   + عدد المتصلين + إشعارات + دعوة لقاء فيديو مباشر (Jitsi) من المعلم.
+   يعمل على Firebase Realtime Database الحالية. دعوة اللقاء تُرسل كرسالة عادية في chat_messages
+   فلا تحتاج أي تعديل في قواعد Firebase. */
 (function () {
   'use strict';
   if (window.__cxStarted) return;
@@ -23,6 +25,10 @@
     ['📚', '📚 📖 ✏️ 📝 🎓 🇫🇷 🥐 🥖 🧀 🍷 🗼 🚆 ☕ 🌍 🕐 🏫']
   ];
   var MAX_B64 = 400000, MAX_REC = 90;
+  /* لقاء الفيديو المباشر */
+  var JITSI = 'https://meet.jit.si/';
+  var LIVE_RE = /https:\/\/meet\.jit\.si\/(FrBac-[A-Za-z0-9_-]{4,40})/;
+  var LIVE_MAX = 3 * 3600 * 1000;   /* الدعوة تُعتبر منتهية بعد 3 ساعات */
 
   function ready(fn) {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn); else fn();
@@ -86,6 +92,40 @@
     var msgs = {}, voices = {}, imgCache = {};
     var lastDay = '', ready0 = false, unread = 0, newCount = 0, reply = null, lastSend = 0, rec = null;
 
+    /* ---------- لقاء الفيديو: أدوات ---------- */
+    function liveRoom(t) { var m = LIVE_RE.exec(String(t || '')); return m ? m[1] : ''; }
+    function rnd(n) {
+      var a = 'abcdefghjkmnpqrstuvwxyz23456789', o = '', i;
+      try { var u = new Uint8Array(n); crypto.getRandomValues(u); for (i = 0; i < n; i++) o += a[u[i] % a.length]; }
+      catch (e) { for (i = 0; i < n; i++) o += a[Math.floor(Math.random() * a.length)]; }
+      return o;
+    }
+    function openLive(room) {
+      var url = JITSI + room + '#config.subject=' + encodeURIComponent(JSON.stringify('Le Français Au Bac')) +
+        (ME.name ? '&userInfo.displayName=' + encodeURIComponent(JSON.stringify(ME.name)) : '');
+      var a = document.createElement('a');
+      a.href = url; a.target = '_blank'; a.rel = 'noopener'; a.style.display = 'none';
+      document.body.appendChild(a); a.click();
+      setTimeout(function () { if (a.parentNode) a.parentNode.removeChild(a); }, 500);
+    }
+    function copyLink(t) {
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(t).then(function () { toast('✅ تم نسخ الرابط'); }, function () { prompt('انسخ الرابط:', t); });
+          return;
+        }
+      } catch (e) {}
+      prompt('انسخ الرابط:', t);
+    }
+    function liveCard(room, ts, m) {
+      var ended = (Date.now() - ts) > LIVE_MAX, first = String(m.text || '').split('\n')[0];
+      return '<div class="cx-live' + (ended ? ' end' : '') + '"><div class="cx-lvt">' +
+        (ended ? '⏹ انتهى هذا اللقاء' : '<span class="cx-lvd"></span>🎥 لقاء فيديو مباشر') + '</div>' +
+        '<div class="cx-lvn" dir="auto">' + esc(first) + '</div>' +
+        (ended ? '' : '<div class="cx-lvb2"><button type="button" data-a="live" data-room="' + esc(room) + '">▶ انضم الآن</button>' +
+          '<button type="button" data-a="livecopy" data-room="' + esc(room) + '">📋 نسخ الرابط</button></div>') + '</div>';
+    }
+
     /* ---------- الواجهة ---------- */
     var CSS = '' +
       '.cx{display:flex;flex-direction:column;background:#fff;border:1px solid #d5deea;border-radius:18px;overflow:hidden;box-shadow:0 4px 18px rgba(0,40,100,.1);position:relative;font-family:inherit}' +
@@ -137,7 +177,12 @@
       '.cx-lv{flex:1;display:flex;align-items:center;gap:2px;height:34px}.cx-lv i{flex:1;background:#0a7ad6;border-radius:2px;height:12%;min-width:2px;transition:height .08s}' +
       '.cx-down{position:absolute;bottom:72px;left:50%;transform:translateX(-50%);background:#0055A5;color:#fff;border:0;border-radius:999px;padding:6px 14px;font-family:inherit;cursor:pointer;box-shadow:0 3px 10px rgba(0,0,0,.25);z-index:5}' +
       '.cx-toast{position:absolute;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(20,30,50,.92);color:#fff;border-radius:12px;padding:8px 14px;font-size:.85rem;z-index:6;max-width:90%;text-align:center}' +
-      '.cx-lb{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(0,0,0,.85);z-index:99997;display:flex;align-items:center;justify-content:center;padding:12px}.cx-lb img{max-width:100%;max-height:100%;border-radius:10px}';
+      '.cx-lb{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(0,0,0,.85);z-index:99997;display:flex;align-items:center;justify-content:center;padding:12px}.cx-lb img{max-width:100%;max-height:100%;border-radius:10px}' +
+      /* بطاقة دعوة اللقاء المباشر */
+      '.cx-live{border-radius:14px;padding:10px;color:#fff;background:linear-gradient(135deg,#7f1d1d,#be123c 50%,#7c3aed);min-width:210px}.cx-live.end{background:#64748b}' +
+      '.cx-lvt{font-weight:800;font-size:.9rem;display:flex;align-items:center;gap:6px}.cx-lvd{width:9px;height:9px;border-radius:50%;background:#fde047;display:inline-block;animation:cxbl 1s infinite}' +
+      '.cx-lvn{font-size:.82rem;margin:4px 0 8px;opacity:.95}' +
+      '.cx-lvb2{display:flex;gap:6px;flex-wrap:wrap}.cx-lvb2 button{border:0;border-radius:12px;padding:7px 12px;font-weight:800;font-family:inherit;font-size:.82rem;cursor:pointer;background:linear-gradient(135deg,#fde047,#fb923c);color:#7c2d12}.cx-lvb2 button:last-child{background:rgba(255,255,255,.22);color:#fff}';
 
     if (!document.getElementById('cx-css')) {
       var st = document.createElement('style');
@@ -159,6 +204,7 @@
       '<div class="cx-name" hidden><input type="text" class="cx-nin" maxlength="20" placeholder="اكتب اسمك لتبدأ المشاركة" autocomplete="nickname"><button type="button" class="cx-nok">ابدأ</button></div>' +
       '<div class="cx-comp" hidden><button type="button" class="cx-ic cx-emb" aria-label="إيموجي">😊</button>' +
       '<input type="text" class="cx-in" maxlength="500" placeholder="اكتب رسالة..." autocomplete="off" enterkeyhint="send">' +
+      '<button type="button" class="cx-ic cx-lvb" aria-label="بدء لقاء مباشر" title="بدء لقاء فيديو مباشر (للمعلم)" hidden>🎥</button>' +
       '<button type="button" class="cx-ic cx-imb" aria-label="إرسال صورة">📷</button><input type="file" class="cx-file" accept="image/*" hidden>' +
       '<button type="button" class="cx-main" aria-label="إرسال">🎙️</button></div>' +
       '<div class="cx-rec" hidden><button type="button" class="cx-rc cx-rcancel" aria-label="إلغاء">🗑</button><span class="cx-dot">●</span><span class="cx-rt">0:00</span>' +
@@ -183,11 +229,13 @@
     function chatVisible() { return !!(sec && sec.classList.contains('on') && !document.hidden); }
 
     /* ---------- الاسم ---------- */
+    function syncHost() { var b = $('.cx-lvb', root); if (b) b.hidden = !isAdmin(); }   /* زر 🎥 يظهر للمعلم فقط */
     function applyName() {
       var has = !!ME.name;
       $('.cx-name', root).hidden = has;
       $('.cx-comp', root).hidden = !has || !!rec;
       $('.cx-me', root).textContent = has ? '👤 ' + ME.name : '👤';
+      syncHost();
     }
     function showName() {
       $('.cx-nin', root).value = ME.name;
@@ -203,6 +251,7 @@
       try { db.ref('chat_presence/' + ME.uid).set({ n: ME.name }); } catch (e) {}
     }
     applyName();
+    setInterval(syncHost, 4000);
 
     /* ---------- بناء الرسائل ---------- */
     function rxHTML(m) {
@@ -221,7 +270,8 @@
     function buildMsg(id, m) {
       var mine = !!(m.uid && m.uid === ME.uid);
       var type = m.type || 'text';
-      var big = type === 'text' && isBig(m.text);
+      var lv = type === 'text' ? liveRoom(m.text) : '';
+      var big = type === 'text' && !lv && isBig(m.text);
       var ts = Number(m.timestamp) || Date.now();
       var row = document.createElement('div');
       row.className = 'cx-row ' + (mine ? 'mine' : 'other');
@@ -238,6 +288,8 @@
         h += '<div class="cx-voice"><button type="button" class="cx-pl" data-a="play" aria-label="تشغيل">▶</button><div class="cx-wave">' + waveHTML(id) + '</div><span class="cx-vt">' + fmtT(m.dur) + '</span><button type="button" class="cx-sp" data-a="speed">1×</button></div>';
       } else if (type === 'image') {
         h += '<div class="cx-imgw" data-i="' + esc(id) + '">⏳</div>';
+      } else if (lv) {
+        h += liveCard(lv, ts, m);
       } else {
         h += '<div class="cx-text" dir="auto">' + linkify(esc(m.text)) + '</div>';
       }
@@ -310,6 +362,7 @@
       unread = 0;
       setBadge();
       newCount = 0;
+      syncHost();
       $('.cx-down', root).hidden = true;
       setTimeout(function () { toBottom(false); }, 60);
     }
@@ -391,6 +444,18 @@
       send({ msg: { type: 'text', text: t } }).then(function (ok) { if (ok) { inp.value = ''; updateMain(); stopTyping(); } });
     }
     function updateMain() { mainBtn.textContent = inp.value.trim() ? '➤' : '🎙️'; }
+
+    /* ---------- بدء لقاء مباشر (للمعلم) ---------- */
+    function startLive() {
+      if (!ME.name) { showName(); return; }
+      if (!isAdmin()) { toast('بدء اللقاء المباشر للمعلم فقط'); return; }
+      var room = 'FrBac-' + rnd(8);
+      openLive(room);   /* نفتح الغرفة فورًا مع لمسة المستخدم حتى لا يحجبها المتصفح */
+      reply = null; $('.cx-reply', root).hidden = true;
+      send({ msg: { type: 'text', text: 'لقاء مباشر الآن — ' + ME.name + '\n' + JITSI + room } }).then(function (ok) {
+        if (ok) toast('✅ أُرسلت دعوة اللقاء للطلاب');
+      });
+    }
 
     function setReply(id) {
       var m = msgs[id];
@@ -628,6 +693,8 @@
         else if (a === 'del') delMsg(id);
         else if (a === 'play') playVoice(id, row);
         else if (a === 'speed') cycleSpeed(id, b);
+        else if (a === 'live') openLive(b.getAttribute('data-room'));
+        else if (a === 'livecopy') copyLink(JITSI + b.getAttribute('data-room'));
         return;
       }
       if ((b = t.closest('[data-r]')) && id) {
@@ -647,6 +714,7 @@
       if ((b = t.closest('.cx-emb'))) { var em = $('.cx-emo', root); em.hidden = !em.hidden; return; }
       if ((b = t.closest('[data-t]')) && b.closest('.cx-etabs')) { drawEmo(+b.getAttribute('data-t')); return; }
       if ((b = t.closest('[data-e]'))) { insertEmo(b.getAttribute('data-e')); return; }
+      if ((b = t.closest('.cx-lvb'))) { startLive(); return; }
       if ((b = t.closest('.cx-imb'))) { if (!ME.name) { showName(); return; } $('.cx-file', root).click(); return; }
       if ((b = t.closest('.cx-rcl'))) { clearReply(); return; }
       if ((b = t.closest('.cx-nok'))) { saveName(); return; }
