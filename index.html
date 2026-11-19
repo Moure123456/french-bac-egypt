@@ -119,6 +119,7 @@
     <nav class="sidebar" aria-label="الأقسام">
       <div class="side-credit" id="side-credit">جميع الحقوق محفوظة © - إعداد وتطوير: مسيو/ محمود أبوبكر السويدى</div>
       <button data-nav="lessons" class="on" type="button">🎮 اختبر نفسك (Le Défi)</button>
+      <button data-nav="progress" type="button">🏅 رحلتي (تقدّمي)</button>
       <button data-nav="bac" type="button">🎓 منهج الثانوية (1Sec • 2Sec • 3Sec)</button>
       <button data-nav="grammar" type="button">✍️ Grammaire</button>
       <button data-nav="phonetics" type="button">🗣️ Phonétique</button>
@@ -137,6 +138,7 @@
 
     <main class="content">
       <section id="lessons" class="sec on"><h2>🎮 اختبر نفسك — Testez-vous / Le Défi</h2><div id="quiz-root"><div class="empty">جارٍ التحميل…</div></div><div class="body" style="display:none"><div class="empty">جارٍ التحميل…</div></div></section>
+      <section id="progress" class="sec"><h2>🏅 رحلتي — تقدّمي</h2><div id="progress-root"><div class="empty">جارٍ التحميل…</div></div></section>
       <section id="bac" class="sec"><h2>🎓 منهج البكالوريا</h2><div id="bac-content-container" class="body"><div class="empty">جارٍ التحميل…</div></div></section>
       <section id="grammar" class="sec"><h2>Grammaire — القواعد</h2><div class="body"></div></section>
       <section id="phonetics" class="sec"><h2>Phonétique — الصوتيات</h2><div id="phon-root"></div><div class="body" style="display:none"></div></section>
@@ -206,9 +208,9 @@
   <!-- قسم الأدب الفرنسي العالمي والمكتبة الثقافية -->
   <script src="./literature.js?v=20261116"></script>
   <!-- زر إخفاء/إظهار الأيقونات العائمة (زوزا + الجائزة) -->
+  <!-- رحلتي: التقدّم الموحّد والسلسلة اليومية والشارات ودفتر الأخطاء -->
+  <script src="./progress.js?v=20261118"></script>
   <script src="./floaters.js"></script>
-  <!-- لقاء فيديو مباشر داخل شات الطلاب (يجب أن يأتي بعد سكربتات Firebase و chat.js) -->
-  <script src="./live.js?v=20261117"></script>
 
   <!-- سكريبت تفعيل النطق الصوتي للنصوص الزرقاء -->
   <script>
