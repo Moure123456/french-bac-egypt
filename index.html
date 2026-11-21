@@ -99,6 +99,108 @@
         line-height: 1.45;
       }
     }
+
+    /* واجهة تفاعلية للشات والفيديو داخل قسم شات الطلاب */
+    .student-chat-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(0, 85, 165, 0.09), rgba(45, 211, 111, 0.08));
+      border: 1px solid rgba(0, 85, 165, 0.18);
+    }
+
+    .student-chat-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #0a3d7a;
+    }
+
+    .live-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #2dd36f;
+      box-shadow: 0 0 0 4px rgba(45, 211, 111, 0.22);
+    }
+
+    .student-chat-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chat-ui-btn {
+      border: 0;
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .chat-ui-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .chat-ui-btn.video-btn {
+      background: linear-gradient(135deg, #0055A5, #0d6efd);
+      color: #fff;
+      box-shadow: 0 3px 10px rgba(0, 85, 165, 0.25);
+    }
+
+    .chat-ui-btn.soft-btn {
+      background: #ffffff;
+      color: #0055A5;
+      border: 1px solid rgba(0, 85, 165, 0.25);
+    }
+
+    #video-stage-panel {
+      margin-bottom: 14px;
+      padding: 12px;
+      border-radius: 14px;
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    #video-stage-panel[hidden] {
+      display: none;
+    }
+
+    .video-stage-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .video-tile {
+      position: relative;
+      min-height: 170px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-tile video {
+      width: 100%;
+      height: 100%;
+      min-height: 170px;
+      object-fit: cover;
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -163,7 +265,38 @@
           <button type="submit">إرسال</button>
         </form>
       </section>
-      <section id="student-chat" class="sec"><h2>💬 شات الطلاب</h2><div class="body"><div id="chat-messages-container"></div></div></section>
+      <section id="student-chat" class="sec">
+        <h2>💬 شات الطلاب</h2>
+        <div class="body">
+          <div class="student-chat-toolbar">
+            <div class="student-chat-status">
+              <span class="live-dot" aria-hidden="true"></span>
+              <span>شات وتواصل الطلاب — فيديو وتفاعل مباشر</span>
+            </div>
+            <div class="student-chat-actions">
+              <button id="toggle-video-room-btn" class="chat-ui-btn video-btn" type="button">🎥 الفيديو المباشر</button>
+              <button id="toggle-camera-btn" class="chat-ui-btn soft-btn" type="button">📹 الكاميرا</button>
+            </div>
+          </div>
+
+          <div id="video-stage-panel" hidden>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:0.85rem;">
+              <strong>🎬 فئة الفيديو التفاعلية</strong>
+              <span id="video-room-status">جاهز للتشغيل</span>
+            </div>
+            <div id="live-video-container" class="video-stage-grid">
+              <div class="video-tile" id="local-video-tile">
+                <video id="student-local-video" autoplay playsinline muted></video>
+              </div>
+              <div class="video-tile" id="remote-video-container">
+                <span style="font-size:0.82rem;color:#cbd5e1;">بانتظار بث المشاركين...</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="chat-messages-container"></div>
+        </div>
+      </section>
     </main>
   </div>
 
@@ -211,6 +344,7 @@
   <!-- رحلتي: التقدّم الموحّد والسلسلة اليومية والشارات ودفتر الأخطاء -->
   <script src="./progress.js?v=20261118"></script>
   <script src="./floaters.js"></script>
+  <script src="./live.js?v=20261118"></script>
 
   <!-- سكريبت تفعيل النطق الصوتي للنصوص الزرقاء -->
   <script>
@@ -272,6 +406,68 @@
       });
 
       observer.observe(document.body, { childList: true, subtree: true });
+    });
+  </script>
+
+  <!-- سكربت تفاعل واجهة الفيديو داخل شات الطلاب -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggleRoomBtn = document.getElementById("toggle-video-room-btn");
+      const toggleCamBtn = document.getElementById("toggle-camera-btn");
+      const stagePanel = document.getElementById("video-stage-panel");
+      const localVideo = document.getElementById("student-local-video");
+      const statusLabel = document.getElementById("video-room-status");
+
+      let localStream = null;
+
+      async function toggleCamera() {
+        try {
+          if (localStream) {
+            localStream.getTracks().forEach(track => track.stop());
+            localStream = null;
+            if (localVideo) localVideo.srcObject = null;
+            if (statusLabel) statusLabel.textContent = "الكاميرا متوقفة";
+            return;
+          }
+
+          if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+            if (statusLabel) statusLabel.textContent = "المتصفح لا يدعم الكاميرا المباشرة";
+            return;
+          }
+
+          localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+          if (localVideo) {
+            localVideo.srcObject = localStream;
+          }
+          if (statusLabel) statusLabel.textContent = "الكاميرا والصوت نشطان";
+        } catch (err) {
+          if (statusLabel) statusLabel.textContent = "تعذر تشغيل الكاميرا أو تم رفض الإذن";
+        }
+      }
+
+      if (toggleRoomBtn && stagePanel) {
+        toggleRoomBtn.addEventListener("click", function () {
+          const willShow = stagePanel.hasAttribute("hidden");
+          if (willShow) {
+            stagePanel.removeAttribute("hidden");
+            if (statusLabel) statusLabel.textContent = "فئة الفيديو مفتوحة";
+          } else {
+            stagePanel.setAttribute("hidden", "");
+            if (localStream) {
+              localStream.getTracks().forEach(track => track.stop());
+              localStream = null;
+              if (localVideo) localVideo.srcObject = null;
+            }
+          }
+        });
+      }
+
+      if (toggleCamBtn && stagePanel) {
+        toggleCamBtn.addEventListener("click", async function () {
+          stagePanel.removeAttribute("hidden");
+          await toggleCamera();
+        });
+      }
     });
   </script>
 
