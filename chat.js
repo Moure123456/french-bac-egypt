@@ -204,7 +204,7 @@
       '<div class="cx-name" hidden><input type="text" class="cx-nin" maxlength="20" placeholder="اكتب اسمك لتبدأ المشاركة" autocomplete="nickname"><button type="button" class="cx-nok">ابدأ</button></div>' +
       '<div class="cx-comp" hidden><button type="button" class="cx-ic cx-emb" aria-label="إيموجي">😊</button>' +
       '<input type="text" class="cx-in" maxlength="500" placeholder="اكتب رسالة..." autocomplete="off" enterkeyhint="send">' +
-      '<button type="button" class="cx-ic cx-lvb" aria-label="بدء لقاء مباشر" title="بدء لقاء فيديو مباشر (للمعلم)" hidden>🎥</button>' +
+      '<button type="button" class="cx-ic cx-lvb" aria-label="بدء لقاء مباشر" title="بدء لقاء فيديو مباشر (للمعلم)">🎥</button>' +
       '<button type="button" class="cx-ic cx-imb" aria-label="إرسال صورة">📷</button><input type="file" class="cx-file" accept="image/*" hidden>' +
       '<button type="button" class="cx-main" aria-label="إرسال">🎙️</button></div>' +
       '<div class="cx-rec" hidden><button type="button" class="cx-rc cx-rcancel" aria-label="إلغاء">🗑</button><span class="cx-dot">●</span><span class="cx-rt">0:00</span>' +
@@ -229,7 +229,7 @@
     function chatVisible() { return !!(sec && sec.classList.contains('on') && !document.hidden); }
 
     /* ---------- الاسم ---------- */
-    function syncHost() { var b = $('.cx-lvb', root); if (b) b.hidden = !isAdmin(); }   /* زر 🎥 يظهر للمعلم فقط */
+    function syncHost() { var b = $('.cx-lvb', root); if (b) b.hidden = false; }   /* زر 🎥 ظاهر للجميع؛ البدء بعد رمز المعلم */
     function applyName() {
       var has = !!ME.name;
       $('.cx-name', root).hidden = has;
@@ -448,7 +448,12 @@
     /* ---------- بدء لقاء مباشر (للمعلم) ---------- */
     function startLive() {
       if (!ME.name) { showName(); return; }
-      if (!isAdmin()) { toast('بدء اللقاء المباشر للمعلم فقط'); return; }
+      var teacher = isAdmin() || !!(window.__bqPremium && window.__bqPremium.admin && window.__bqPremium.admin());
+      if (!teacher) {
+        var pin = prompt('🔐 أدخل رمز المعلم لبدء لقاء مباشر');
+        if (pin === null) return;
+        if (String(pin).trim() !== '0519') { toast('❌ الرمز غير صحيح'); return; }
+      }
       var room = 'FrBac-' + rnd(8);
       openLive(room);   /* نفتح الغرفة فورًا مع لمسة المستخدم حتى لا يحجبها المتصفح */
       reply = null; $('.cx-reply', root).hidden = true;
